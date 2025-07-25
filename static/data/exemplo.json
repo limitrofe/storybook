@@ -1,0 +1,22 @@
+{
+  "title": "Sistema Funcionando!",
+  "subtitle": "Primeira matéria com Svelte 5",
+  "author": "João Testador",
+  "date": "2025-07-23",
+  "slug": "exemplo",
+  "intro": {
+    "text": "Esta é uma matéria de exemplo para testar o sistema. Tudo funcionando perfeitamente!"
+  },
+  "paragraphs": [
+    {
+      "type": "paragraph",
+      "text": "O sistema está funcionando com Svelte 5 limpo e moderno."
+    },
+    {
+      "type": "quote",
+      "text": "Simplicidade é a chave do sucesso!",
+      "author": "Steve Jobs",
+      "role": "CEO Apple"
+    }
+  ]
+}

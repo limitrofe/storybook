@@ -1,0 +1,223 @@
+<!-- src/lib/components/story/BeforeAfter.svelte -->
+<script>
+  import { onMount } from 'svelte';
+  
+  export let beforeImage = '';
+  export let afterImage = '';
+  export let beforeLabel = 'Antes';
+  export let afterLabel = 'Depois';
+  export let orientation = 'vertical'; // 'vertical' or 'horizontal'
+  
+  let containerElement;
+  let sliderPosition = 50;
+  let isDragging = false;
+
+  onMount(() => {
+    const handleMouseMove = (e) => {
+      if (!isDragging || !containerElement) return;
+      updateSliderPosition(e);
+    };
+
+    const handleMouseUp = () => {
+      isDragging = false;
+    };
+
+    const handleTouchMove = (e) => {
+      if (!isDragging || !containerElement) return;
+      e.preventDefault();
+      updateSliderPosition(e.touches[0]);
+    };
+
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+    document.addEventListener('touchmove', handleTouchMove, { passive: false });
+    document.addEventListener('touchend', handleMouseUp);
+
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+      document.removeEventListener('touchmove', handleTouchMove);
+      document.removeEventListener('touchend', handleMouseUp);
+    };
+  });
+
+  function updateSliderPosition(event) {
+    if (!containerElement) return;
+    
+    const rect = containerElement.getBoundingClientRect();
+    
+    if (orientation === 'vertical') {
+      const x = event.clientX - rect.left;
+      sliderPosition = Math.max(0, Math.min(100, (x / rect.width) * 100));
+    } else {
+      const y = event.clientY - rect.top;
+      sliderPosition = Math.max(0, Math.min(100, (y / rect.height) * 100));
+    }
+  }
+
+  function handleSliderStart(event) {
+    isDragging = true;
+    updateSliderPosition(event.type === 'touchstart' ? event.touches[0] : event);
+  }
+</script>
+
+<div 
+  class="before-after before-after--{orientation}" 
+  bind:this={containerElement}
+>
+  <!-- Before Image -->
+  <div class="before-after__before">
+    <img src={beforeImage} alt={beforeLabel} />
+    <div class="before-after__label before-after__label--before">
+      {beforeLabel}
+    </div>
+  </div>
+
+  <!-- After Image -->
+  <div 
+    class="before-after__after"
+    style={orientation === 'vertical' 
+      ? `clip-path: inset(0 0 0 ${sliderPosition}%)` 
+      : `clip-path: inset(${sliderPosition}% 0 0 0)`
+    }
+  >
+    <img src={afterImage} alt={afterLabel} />
+    <div class="before-after__label before-after__label--after">
+      {afterLabel}
+    </div>
+  </div>
+
+  <!-- Slider -->
+  <div 
+    class="before-after__slider"
+    style={orientation === 'vertical' 
+      ? `left: ${sliderPosition}%` 
+      : `top: ${sliderPosition}%`
+    }
+    on:mousedown={handleSliderStart}
+    on:touchstart={handleSliderStart}
+  >
+    <div class="before-after__handle">
+      {#if orientation === 'vertical'}
+        <span>‹›</span>
+      {:else}
+        <span>⇅</span>
+      {/if}
+    </div>
+  </div>
+</div>
+
+<style>
+  .before-after {
+    position: relative;
+    width: 100%;
+    margin: 2rem auto;
+    border-radius: 12px;
+    overflow: hidden;
+    user-select: none;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .before-after__before,
+  .before-after__after {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .before-after__after {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .before-after img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .before-after__label {
+    position: absolute;
+    top: 1rem;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: var(--font-size-40);
+    font-weight: 600;
+    z-index: 10;
+  }
+
+  .before-after__label--before {
+    left: 1rem;
+  }
+
+  .before-after__label--after {
+    right: 1rem;
+  }
+
+  .before-after__slider {
+    position: absolute;
+    z-index: 20;
+    cursor: pointer;
+  }
+
+  .before-after--vertical .before-after__slider {
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background: white;
+    transform: translateX(-50%);
+    cursor: ew-resize;
+  }
+
+  .before-after--horizontal .before-after__slider {
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: white;
+    transform: translateY(-50%);
+    cursor: ns-resize;
+  }
+
+  .before-after__handle {
+    position: absolute;
+    background: white;
+    border: 2px solid var(--color-primary);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: var(--color-primary);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+  }
+
+  .before-after--vertical .before-after__handle {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .before-after--horizontal .before-after__handle {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .before-after__handle:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+
+  @media (max-width: 768px) {
+    .before-after__handle {
+      width: 35px;
+      height: 35px;
+      font-size: 0.9rem;
+    }
+  }
+</style>
