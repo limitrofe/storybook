@@ -14,9 +14,11 @@
 
   export let storyData = {};
 
-  // Mapeia os tipos que vêm do ArchieML para os componentes
+  // 🔧 FUNÇÃO MELHORADA: Mapeia os tipos que vêm do ArchieML para os componentes
   function getComponentType(paragraph) {
     const type = paragraph.type?.toLowerCase();
+    
+    console.log(`🔍 Mapeando tipo: "${type}" para componente`);
     
     switch (type) {
       case 'header':
@@ -38,7 +40,6 @@
       case 'video':
       case 'mp4':
         return 'video';
-      // 🆕 ADICIONADOS NOVOS TIPOS PARA GLOBOPLAYER
       case 'globovideo':
       case 'globo-video':
       case 'globoplayer':
@@ -51,7 +52,9 @@
       case 'carrossel':
       case 'carousel':
         return 'carousel';
+      // 🔧 CORREÇÃO PRINCIPAL: Garantir que parallax seja mapeado
       case 'parallax':
+        console.log(`✅ Parallax detectado!`, paragraph);
         return 'parallax';
       case 'antes-depois':
       case 'before-after':
@@ -60,6 +63,7 @@
       case 'scrolly':
         return 'scrolly';
       default:
+        console.warn(`⚠️ Tipo desconhecido: "${type}" - usando 'text' como fallback`);
         return 'text';
     }
   }
@@ -92,6 +96,16 @@
   {#if storyData.paragraphs}
     {#each storyData.paragraphs as paragraph, index}
       {@const componentType = getComponentType(paragraph)}
+      
+      <!-- 🔧 DEBUG: Log de cada componente sendo renderizado -->
+      {#if import.meta.env.DEV}
+        <!-- <div style="background: #f0f0f0; padding: 0.5rem; margin: 0.5rem 0; font-size: 0.8rem; border-left: 4px solid #007acc;">
+          <strong>Debug #{index}:</strong> type="{paragraph.type}" → component="{componentType}"
+          {#if componentType === 'parallax'}
+            <br><strong>Parallax props:</strong> image={paragraph.image}, height={paragraph.height}, speed={paragraph.speed}
+          {/if}
+        </div> -->
+      {/if}
       
       {#if componentType === 'text'}
         <StoryText 
@@ -153,7 +167,6 @@
           alignment={paragraph.alignment || 'center'}
         />
       
-      <!-- 🆕 NOVO COMPONENTE GLOBOPLAYER -->
       {:else if componentType === 'globo-player'}
         <GloboPlayer 
           videosIDs={paragraph.videoId || paragraph.videosIDs || paragraph.id}
@@ -208,7 +221,19 @@
           showArrows={paragraph.showArrows !== 'false'}
         />
       
+      <!-- 🔧 CORREÇÃO PRINCIPAL: Componente Parallax -->
       {:else if componentType === 'parallax'}
+        {#if import.meta.env.DEV}
+          <div style="background: #e8f5e8; padding: 1rem; margin: 1rem 0; border-left: 4px solid #28a745;">
+            <strong>🚀 Renderizando Parallax:</strong><br>
+            Image: {paragraph.image}<br>
+            Height: {paragraph.height}<br>
+            Speed: {paragraph.speed}<br>
+            Overlay: {paragraph.overlay}<br>
+            Content: {paragraph.content ? 'Sim' : 'Não'}
+          </div>
+        {/if}
+        
         <Parallax 
           image={paragraph.image}
           height={paragraph.height || '80vh'}
@@ -236,6 +261,26 @@
           stickyHeight={paragraph.stickyHeight || '100vh'}
         />
       
+      <!-- 🔧 FALLBACK MELHORADO: Para tipos não reconhecidos -->
+      {:else}
+        {#if import.meta.env.DEV}
+          <div style="background: #ffe6e6; padding: 1rem; margin: 1rem 0; border-left: 4px solid #dc3545;">
+            <strong>⚠️ Componente não implementado:</strong><br>
+            Tipo original: "{paragraph.type}"<br>
+            Tipo mapeado: "{componentType}"<br>
+            <details>
+              <summary>Props disponíveis:</summary>
+              <pre>{JSON.stringify(paragraph, null, 2)}</pre>
+            </details>
+          </div>
+        {/if}
+        
+        <!-- Fallback para texto -->
+        <StoryText 
+          content={paragraph.text || 'Conteúdo não disponível'}
+          variant="body"
+          maxWidth="700px"
+        />
       {/if}
     {/each}
   {/if}
@@ -248,7 +293,7 @@
     min-height: 100vh;
   }
 
-  /* 🆕 ESTILOS PARA CAPTION DO GLOBOPLAYER */
+  /* Estilos para caption do globoplayer */
   .component-caption {
     max-width: 800px;
     margin: 1rem auto 2rem auto;
