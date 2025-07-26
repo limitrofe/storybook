@@ -142,21 +142,51 @@ function parseHTMLFormat(html) {
   return data;
 }
 
+// 🔧 FUNÇÃO EXPANDIDA: Agora com mais entidades HTML
 function decodeHTMLEntities(text) {
+  if (!text) return text;
+  
   const entities = {
-    '&amp;': '&', '&lt;': '<', '&gt;': '>', '&quot;': '"', '&#39;': "'",
+    // Básicas
+    '&amp;': '&', '&lt;': '<', '&gt;': '>', '&quot;': '"', '&#39;': "'", '&nbsp;': ' ',
+    
+    // Acentos portugueses/brasileiros - minúsculas
     '&aacute;': 'á', '&agrave;': 'à', '&acirc;': 'â', '&atilde;': 'ã', '&auml;': 'ä',
     '&eacute;': 'é', '&egrave;': 'è', '&ecirc;': 'ê', '&euml;': 'ë',
     '&iacute;': 'í', '&igrave;': 'ì', '&icirc;': 'î', '&iuml;': 'ï',
     '&oacute;': 'ó', '&ograve;': 'ò', '&ocirc;': 'ô', '&otilde;': 'õ', '&ouml;': 'ö',
     '&uacute;': 'ú', '&ugrave;': 'ù', '&ucirc;': 'û', '&uuml;': 'ü',
-    '&ccedil;': 'ç', '&ntilde;': 'ñ', '&nbsp;': ' '
+    '&ccedil;': 'ç', '&ntilde;': 'ñ',
+    
+    // Acentos portugueses/brasileiros - maiúsculas
+    '&Aacute;': 'Á', '&Agrave;': 'À', '&Acirc;': 'Â', '&Atilde;': 'Ã', '&Auml;': 'Ä',
+    '&Eacute;': 'É', '&Egrave;': 'È', '&Ecirc;': 'Ê', '&Euml;': 'Ë',
+    '&Iacute;': 'Í', '&Igrave;': 'Ì', '&Icirc;': 'Î', '&Iuml;': 'Ï',
+    '&Oacute;': 'Ó', '&Ograve;': 'Ò', '&Ocirc;': 'Ô', '&Otilde;': 'Õ', '&Ouml;': 'Ö',
+    '&Uacute;': 'Ú', '&Ugrave;': 'Ù', '&Ucirc;': 'Û', '&Uuml;': 'Ü',
+    '&Ccedil;': 'Ç', '&Ntilde;': 'Ñ'
   };
   
   return text.replace(/&[a-zA-Z0-9#]+;/g, (entity) => entities[entity] || entity);
 }
 
-// 🔧 FUNÇÃO REVOLUCIONÁRIA - LIMPA HTML DOS ARRAYS JSON
+// 🔧 FUNÇÃO NOVA: Decodifica entidades HTML recursivamente em objetos/arrays
+function deepDecodeEntities(obj) {
+  if (typeof obj === 'string') {
+    return decodeHTMLEntities(obj);
+  } else if (Array.isArray(obj)) {
+    return obj.map(item => deepDecodeEntities(item));
+  } else if (obj && typeof obj === 'object') {
+    const decoded = {};
+    for (const [key, value] of Object.entries(obj)) {
+      decoded[key] = deepDecodeEntities(value);
+    }
+    return decoded;
+  }
+  return obj;
+}
+
+// 🔧 SUA FUNÇÃO ORIGINAL + 3 LINHAS PARA DECODIFICAR ENTIDADES
 function extractCleanJSONArray(text, fieldName) {
   console.log(`\n🔍 Extraindo array '${fieldName}' do bloco`);
   
@@ -231,7 +261,12 @@ function extractCleanJSONArray(text, fieldName) {
     
     if (Array.isArray(parsed) && parsed.length > 0) {
       console.log(`   ✅ SUCCESS! ${parsed.length} itens parseados com sucesso!`);
-      return parsed;
+      
+      // 🔧 NOVA ADIÇÃO: Decodifica entidades HTML nas strings do array
+      const decodedArray = deepDecodeEntities(parsed);
+      console.log(`   🔧 Entidades HTML decodificadas nos textos!`);
+      
+      return decodedArray; // 🔧 MUDANÇA: retorna o array decodificado
     } else {
       console.log(`   ⚠️ Array vazio ou inválido`);
       return [];
