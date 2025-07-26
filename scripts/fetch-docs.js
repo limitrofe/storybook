@@ -52,7 +52,7 @@ async function fetchGoogleDoc(docId) {
     console.log(`📊 Intro: ${data.intro ? 'OK' : 'Vazio'}`);
     console.log(`📊 Paragraphs: ${data.paragraphs ? data.paragraphs.length : 0} itens`);
     
-    // 🔍 VALIDAÇÃO PARA BACKGROUND IMAGES
+    // 🔍 NOVA VALIDAÇÃO PARA BACKGROUND IMAGES
     const withBackgrounds = data.paragraphs?.filter(p => 
       p.backgroundImage || p.backgroundImageMobile
     ) || [];
@@ -82,22 +82,21 @@ async function fetchGoogleDoc(docId) {
         }
       });
     }
-    
+
     // 🔧 NOVA VALIDAÇÃO PARA PARALLAX
     const parallaxComponents = data.paragraphs?.filter(p => 
       p.type?.toLowerCase() === 'parallax'
     ) || [];
     
     if (parallaxComponents.length > 0) {
-      console.log(`🌄 Parallax encontrados: ${parallaxComponents.length}`);
+      console.log(`🌄 Componentes Parallax encontrados: ${parallaxComponents.length}`);
       parallaxComponents.forEach((parallax, index) => {
-        console.log(`  ${index + 1}. Image: ${parallax.image || 'SEM IMAGEM'}`);
-        console.log(`     Height: ${parallax.height || 'SEM HEIGHT ⚠️'}`);
-        console.log(`     Speed: ${parallax.speed || 'SEM SPEED'}`);
-        console.log(`     Content: ${parallax.content ? 'OK' : 'VAZIO'}`);
-        if (parallax.content && parallax.content.includes('"')) {
-          console.warn(`     ⚠️ Content com aspas problemáticas detectado`);
-        }
+        console.log(`  ${index + 1}. Parallax:`);
+        console.log(`     🖼️ Image: ${parallax.image || 'FALTANDO!'}`);
+        console.log(`     📏 Height: ${parallax.height || 'FALTANDO!'}`);
+        console.log(`     ⚡ Speed: ${parallax.speed || 'FALTANDO!'}`);
+        console.log(`     📝 Content: ${parallax.content ? `"${parallax.content.substring(0, 50)}..."` : 'FALTANDO!'}`);
+        console.log(`     🎭 Overlay: ${parallax.overlay !== undefined ? parallax.overlay : 'FALTANDO!'}`);
       });
     }
     
@@ -255,38 +254,84 @@ function parseParagraphsHTML(html) {
     if (backgroundVideoMobileMatch) {
       paragraph.backgroundVideoMobile = backgroundVideoMobileMatch[1].trim();
     }
-    
-    // 🔧 CORREÇÃO CRÍTICA: Parse do campo 'content' para parallax
-    const contentMatch = block.match(/content:\s*(.*?)(?=\s*(?:overlay|height|speed|image|type:|$))/s);
-    if (contentMatch) {
-      let content = contentMatch[1].trim();
+
+    // 🔧 CORREÇÃO ESPECIAL PARA PARALLAX: Parse de content mais robusto
+    if (paragraph.type?.toLowerCase() === 'parallax') {
+      console.log(`🌄 PROCESSANDO PARALLAX - Block completo:`, block.substring(0, 500));
       
-      // 🔥 CORREÇÃO TOTAL: Remove todas as aspas problemáticas
-      // Remove aspas no início e fim
-      content = content.replace(/^["']+/, '').replace(/["']+$/, '');
+      // 1. CONTENT - múltiplas tentativas de parsing
+      let contentFound = false;
       
-      // Remove aspas duplas que envolvem o conteúdo HTML
-      if (content.startsWith('"') && content.endsWith('"')) {
-        content = content.slice(1, -1);
+      // Tentativa 1: content com aspas duplas
+      const contentMatch1 = block.match(/content:\s*"([^"]*(?:"[^"]*"[^"]*)*[^"]*)"/s);
+      if (contentMatch1) {
+        paragraph.content = decodeHTMLEntities(contentMatch1[1]);
+        console.log(`🌄 Content (aspas duplas): ${paragraph.content}`);
+        contentFound = true;
       }
       
-      // Remove escape de aspas internas
-      content = content.replace(/\\"/g, '"').replace(/\\'/g, "'");
+      // Tentativa 2: content com aspas simples
+      if (!contentFound) {
+        const contentMatch2 = block.match(/content:\s*'([^']*(?:'[^']*'[^']*)*[^']*)'/s);
+        if (contentMatch2) {
+          paragraph.content = decodeHTMLEntities(contentMatch2[1]);
+          console.log(`🌄 Content (aspas simples): ${paragraph.content}`);
+          contentFound = true;
+        }
+      }
       
-      // Remove aspas extras que podem ter ficado
-      content = content.replace(/^"(.+)"$/, '$1');
+      // Tentativa 3: content sem aspas até próximo campo
+      if (!contentFound) {
+        const contentMatch3 = block.match(/content:\s*(.*?)(?=\s*(?:type:|$))/s);
+        if (contentMatch3) {
+          paragraph.content = decodeHTMLEntities(contentMatch3[1].trim());
+          console.log(`🌄 Content (sem aspas): ${paragraph.content}`);
+          contentFound = true;
+        }
+      }
       
-      // Decodifica entidades HTML
-      content = decodeHTMLEntities(content);
+      if (!contentFound) {
+        console.warn(`⚠️ PARALLAX: Content não encontrado no block`);
+      }
       
-      paragraph.content = content;
-      
-      // 🔧 Verificação final
-      if (content.includes('"<') || content.includes('>"')) {
-        console.warn(`⚠️ Aspas ainda detectadas no content: ${content.substring(0, 50)}...`);
+      // 2. IMAGE
+      const imageMatch = block.match(/image:\s*(https?:\/\/[^\s\n<]+)/);
+      if (imageMatch) {
+        paragraph.image = decodeHTMLEntities(imageMatch[1].trim());
+        console.log(`🖼️ Image: ${paragraph.image}`);
       } else {
-        console.log(`✅ Content limpo para ${paragraph.type}: ${content.substring(0, 50)}...`);
+        console.warn(`⚠️ PARALLAX: Image não encontrada`);
       }
+      
+      // 3. HEIGHT
+      const heightMatch = block.match(/height:\s*([^\n<]+)/);
+      if (heightMatch) {
+        paragraph.height = heightMatch[1].trim();
+        console.log(`📏 Height: ${paragraph.height}`);
+      }
+      
+      // 4. SPEED
+      const speedMatch = block.match(/speed:\s*([0-9.]+)/);
+      if (speedMatch) {
+        paragraph.speed = speedMatch[1];
+        console.log(`⚡ Speed: ${paragraph.speed}`);
+      }
+      
+      // 5. OVERLAY
+      const overlayMatch = block.match(/overlay:\s*(true|false)/);
+      if (overlayMatch) {
+        paragraph.overlay = overlayMatch[1];
+        console.log(`🎭 Overlay: ${paragraph.overlay}`);
+      }
+      
+      console.log(`✅ PARALLAX FINAL:`, {
+        type: paragraph.type,
+        image: paragraph.image,
+        height: paragraph.height,
+        speed: paragraph.speed,
+        content: paragraph.content ? `"${paragraph.content.substring(0, 100)}..."` : 'VAZIO',
+        overlay: paragraph.overlay
+      });
     }
     
     // NOVIDADE: Parse de arrays JSON para componentes avançados
@@ -359,6 +404,7 @@ function parseParagraphsHTML(html) {
       afterLabel: 'afterLabel',
       image: 'image',
       speed: 'speed',
+      content: 'content',
       
       // Campos específicos do GloboPlayer
       videoId: 'videoId',
@@ -387,31 +433,44 @@ function parseParagraphsHTML(html) {
       loop: 'loop'
     };
     
-    for (const [field, prop] of Object.entries(fieldMappings)) {
-      // 🔧 CORREÇÃO ESPECÍFICA PARA PARALLAX HEIGHT
-      // Se for parallax e estamos procurando por height, usa regex mais específica
-      let match;
-      if (paragraph.type?.toLowerCase() === 'parallax' && field === 'height') {
-        match = block.match(new RegExp(`height:\\s*([^\\n\\r]+)`, 'i'));
+    // Parse campos regulares (exceto parallax que já foi processado especialmente)
+    if (paragraph.type?.toLowerCase() !== 'parallax') {
+      for (const [field, prop] of Object.entries(fieldMappings)) {
+        const match = block.match(new RegExp(`${field}:\\s*([^\\n<]+)`));
         if (match) {
-          console.log(`🌄 PARALLAX HEIGHT encontrado: "${match[1].trim()}" no bloco`);
+          let value = decodeHTMLEntities(match[1].trim());
+          
+          // 🔧 CONVERSÃO DE TIPOS
+          if (['height', 'heightMobile', 'width', 'columns', 'interval', 'stickyHeight'].includes(field)) {
+            const numValue = parseInt(value);
+            if (!isNaN(numValue)) {
+              value = numValue.toString();
+            }
+          }
+          
+          paragraph[prop] = value;
         }
-      } else {
-        match = block.match(new RegExp(`${field}:\\s*([^\\n<]+)`));
       }
-      
-      if (match) {
-        let value = decodeHTMLEntities(match[1].trim());
-        
-        // 🔧 CONVERSÃO DE TIPOS
-        if (['height', 'heightMobile', 'width', 'columns', 'interval', 'stickyHeight'].includes(field)) {
-          const numValue = parseInt(value);
-          if (!isNaN(numValue)) {
-            value = numValue.toString();
+    } else {
+      // Para parallax, só processa campos que não foram processados especialmente
+      const parallaxExcludeFields = ['content', 'image', 'height', 'speed', 'overlay'];
+      for (const [field, prop] of Object.entries(fieldMappings)) {
+        if (!parallaxExcludeFields.includes(field)) {
+          const match = block.match(new RegExp(`${field}:\\s*([^\\n<]+)`));
+          if (match) {
+            let value = decodeHTMLEntities(match[1].trim());
+            
+            // 🔧 CONVERSÃO DE TIPOS
+            if (['heightMobile', 'width', 'columns', 'interval', 'stickyHeight'].includes(field)) {
+              const numValue = parseInt(value);
+              if (!isNaN(numValue)) {
+                value = numValue.toString();
+              }
+            }
+            
+            paragraph[prop] = value;
           }
         }
-        
-        paragraph[prop] = value;
       }
     }
     

@@ -185,16 +185,6 @@
         {/if}
       
       {:else if componentType === 'gallery'}
-        <!-- 🔧 DEBUG: Log das imagens da galeria -->
-        {#if import.meta.env.DEV}
-          <div class="debug-gallery">
-            <p>🖼️ Debug Galeria:</p>
-            <p>Images array: {JSON.stringify(paragraph.images || [], null, 2)}</p>
-            <p>Layout: {paragraph.layout || 'grid'}</p>
-            <p>Columns: {paragraph.columns || 3}</p>
-          </div>
-        {/if}
-
         <PhotoGallery 
           images={paragraph.images && Array.isArray(paragraph.images) && paragraph.images.length > 0 
             ? paragraph.images 
@@ -209,15 +199,6 @@
         />
       
       {:else if componentType === 'carousel'}
-        <!-- 🔧 DEBUG: Log dos items do carousel -->
-        {#if import.meta.env.DEV}
-          <div class="debug-carousel">
-            <p>🎠 Debug Carousel:</p>
-            <p>Items array: {JSON.stringify(paragraph.items || [], null, 2)}</p>
-            <p>Autoplay: {paragraph.autoplay}</p>
-          </div>
-        {/if}
-
         <Carousel 
           items={paragraph.items && Array.isArray(paragraph.items) && paragraph.items.length > 0 
             ? paragraph.items 
@@ -234,17 +215,6 @@
         />
       
       {:else if componentType === 'parallax'}
-        <!-- 🔧 DEBUG: Log do parallax -->
-        {#if import.meta.env.DEV}
-          <div class="debug-parallax">
-            <p>🌄 Debug Parallax:</p>
-            <p>Image: {paragraph.image || 'NÃO FORNECIDA'}</p>
-            <p>Content: {paragraph.content || 'VAZIO'}</p>
-            <p>Height: {paragraph.height || '80vh'}</p>
-            <p>Speed: {paragraph.speed || 0.5}</p>
-          </div>
-        {/if}
-
         <Parallax 
           image={paragraph.image || 'https://cdn.pixabay.com/photo/2023/10/21/11/46/sunset-8331285_1280.jpg'}
           height={paragraph.height || '80vh'}
@@ -305,35 +275,9 @@
     display: block;
   }
 
-  /* 🔧 DEBUG STYLES */
-  .debug-gallery,
-  .debug-carousel,
-  .debug-parallax {
-    background: #ff6b35;
-    color: white;
-    padding: 1rem;
-    margin: 1rem 0;
-    border-radius: 4px;
-    font-family: monospace;
-    font-size: 0.8rem;
-  }
-
-  .debug-gallery p,
-  .debug-carousel p,
-  .debug-parallax p {
-    margin: 0.25rem 0;
-  }
-
   @media (max-width: 768px) {
     .component-caption {
       padding: 0 1rem;
-    }
-
-    .debug-gallery,
-    .debug-carousel, 
-    .debug-parallax {
-      font-size: 0.7rem;
-      padding: 0.75rem;
     }
   }
 </style>
