@@ -14,11 +14,9 @@
 
   export let storyData = {};
 
-  // 🔧 FUNÇÃO MELHORADA: Mapeia os tipos que vêm do ArchieML para os componentes
+  // Mapeia os tipos que vêm do ArchieML para os componentes
   function getComponentType(paragraph) {
     const type = paragraph.type?.toLowerCase();
-    
-    console.log(`🔍 Mapeando tipo: "${type}" para componente`);
     
     switch (type) {
       case 'header':
@@ -40,6 +38,7 @@
       case 'video':
       case 'mp4':
         return 'video';
+      // 🆕 ADICIONADOS NOVOS TIPOS PARA GLOBOPLAYER
       case 'globovideo':
       case 'globo-video':
       case 'globoplayer':
@@ -52,9 +51,7 @@
       case 'carrossel':
       case 'carousel':
         return 'carousel';
-      // 🔧 CORREÇÃO PRINCIPAL: Garantir que parallax seja mapeado
       case 'parallax':
-        console.log(`✅ Parallax detectado!`, paragraph);
         return 'parallax';
       case 'antes-depois':
       case 'before-after':
@@ -63,7 +60,6 @@
       case 'scrolly':
         return 'scrolly';
       default:
-        console.warn(`⚠️ Tipo desconhecido: "${type}" - usando 'text' como fallback`);
         return 'text';
     }
   }
@@ -96,16 +92,6 @@
   {#if storyData.paragraphs}
     {#each storyData.paragraphs as paragraph, index}
       {@const componentType = getComponentType(paragraph)}
-      
-      <!-- 🔧 DEBUG: Log de cada componente sendo renderizado -->
-      {#if import.meta.env.DEV}
-        <!-- <div style="background: #f0f0f0; padding: 0.5rem; margin: 0.5rem 0; font-size: 0.8rem; border-left: 4px solid #007acc;">
-          <strong>Debug #{index}:</strong> type="{paragraph.type}" → component="{componentType}"
-          {#if componentType === 'parallax'}
-            <br><strong>Parallax props:</strong> image={paragraph.image}, height={paragraph.height}, speed={paragraph.speed}
-          {/if}
-        </div> -->
-      {/if}
       
       {#if componentType === 'text'}
         <StoryText 
@@ -167,6 +153,7 @@
           alignment={paragraph.alignment || 'center'}
         />
       
+      <!-- 🆕 NOVO COMPONENTE GLOBOPLAYER -->
       {:else if componentType === 'globo-player'}
         <GloboPlayer 
           videosIDs={paragraph.videoId || paragraph.videosIDs || paragraph.id}
@@ -198,47 +185,71 @@
         {/if}
       
       {:else if componentType === 'gallery'}
+        <!-- 🔧 DEBUG: Log das imagens da galeria -->
+        {#if import.meta.env.DEV}
+          <div class="debug-gallery">
+            <p>🖼️ Debug Galeria:</p>
+            <p>Images array: {JSON.stringify(paragraph.images || [], null, 2)}</p>
+            <p>Layout: {paragraph.layout || 'grid'}</p>
+            <p>Columns: {paragraph.columns || 3}</p>
+          </div>
+        {/if}
+
         <PhotoGallery 
-          images={paragraph.images && paragraph.images.length > 0 ? paragraph.images : [
-            {src: "https://images.unsplash.com/photo-1593941707874-ef36c1e51e84?w=800&q=80", alt: "Fallback 1", caption: "Imagem de fallback 1"},
-            {src: "https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=800&q=80", alt: "Fallback 2", caption: "Imagem de fallback 2"},
-            {src: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800&q=80", alt: "Fallback 3", caption: "Imagem de fallback 3"}
-          ]}
+          images={paragraph.images && Array.isArray(paragraph.images) && paragraph.images.length > 0 
+            ? paragraph.images 
+            : [
+              {src: "https://cdn.pixabay.com/photo/2015/09/09/07/05/sea-931164_1280.jpg", alt: "Fallback 1", caption: "Imagem de fallback 1"},
+              {src: "https://cdn.pixabay.com/photo/2017/05/22/19/50/surfer-2335088_1280.jpg", alt: "Fallback 2", caption: "Imagem de fallback 2"},
+              {src: "https://cdn.pixabay.com/photo/2016/11/29/03/27/action-1867052_1280.jpg", alt: "Fallback 3", caption: "Imagem de fallback 3"}
+            ]
+          }
           layout={paragraph.layout || 'grid'}
           columns={parseInt(paragraph.columns) || 3}
         />
       
       {:else if componentType === 'carousel'}
+        <!-- 🔧 DEBUG: Log dos items do carousel -->
+        {#if import.meta.env.DEV}
+          <div class="debug-carousel">
+            <p>🎠 Debug Carousel:</p>
+            <p>Items array: {JSON.stringify(paragraph.items || [], null, 2)}</p>
+            <p>Autoplay: {paragraph.autoplay}</p>
+          </div>
+        {/if}
+
         <Carousel 
-          items={paragraph.items && paragraph.items.length > 0 ? paragraph.items : [
-            {type: "image", src: "https://images.unsplash.com/photo-1593941707874-ef36c1e51e84?w=1200&q=80", caption: "Slide de fallback 1"},
-            {type: "image", src: "https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=1200&q=80", caption: "Slide de fallback 2"},
-            {type: "content", content: "<h2>Fallback Content</h2><p>Conteúdo de teste para carousel</p>"}
-          ]}
+          items={paragraph.items && Array.isArray(paragraph.items) && paragraph.items.length > 0 
+            ? paragraph.items 
+            : [
+              {type: "image", src: "https://cdn.pixabay.com/photo/2023/05/30/15/34/silver-gull-8028946_1280.jpg", caption: "Slide de fallback 1"},
+              {type: "image", src: "https://cdn.pixabay.com/photo/2023/04/14/10/27/seagull-7924729_1280.jpg", caption: "Slide de fallback 2"},
+              {type: "content", content: "<h2>Fallback Content</h2><p>Conteúdo de teste para carousel</p>"}
+            ]
+          }
           autoplay={paragraph.autoplay === 'true'}
           interval={parseInt(paragraph.interval) || 5000}
           showDots={paragraph.showDots !== 'false'}
           showArrows={paragraph.showArrows !== 'false'}
         />
       
-      <!-- 🔧 CORREÇÃO PRINCIPAL: Componente Parallax -->
       {:else if componentType === 'parallax'}
+        <!-- 🔧 DEBUG: Log do parallax -->
         {#if import.meta.env.DEV}
-          <div style="background: #e8f5e8; padding: 1rem; margin: 1rem 0; border-left: 4px solid #28a745;">
-            <strong>🚀 Renderizando Parallax:</strong><br>
-            Image: {paragraph.image}<br>
-            Height: {paragraph.height}<br>
-            Speed: {paragraph.speed}<br>
-            Overlay: {paragraph.overlay}<br>
-            Content: {paragraph.content ? 'Sim' : 'Não'}
+          <div class="debug-parallax">
+            <p>🌄 Debug Parallax:</p>
+            <p>Image: {paragraph.image || 'NÃO FORNECIDA'}</p>
+            <p>Content: {paragraph.content || 'VAZIO'}</p>
+            <p>Height: {paragraph.height || '80vh'}</p>
+            <p>Speed: {paragraph.speed || 0.5}</p>
           </div>
         {/if}
-        
+
         <Parallax 
-          image={paragraph.image}
+          image={paragraph.image || 'https://cdn.pixabay.com/photo/2023/10/21/11/46/sunset-8331285_1280.jpg'}
           height={paragraph.height || '80vh'}
           speed={parseFloat(paragraph.speed) || 0.5}
-          content={paragraph.content || ''}
+          content={paragraph.content || '<h2>Parallax sem conteúdo</h2><p>Configure o campo content no Google Docs</p>'}
           overlay={paragraph.overlay !== 'false'}
         />
       
@@ -261,26 +272,6 @@
           stickyHeight={paragraph.stickyHeight || '100vh'}
         />
       
-      <!-- 🔧 FALLBACK MELHORADO: Para tipos não reconhecidos -->
-      {:else}
-        {#if import.meta.env.DEV}
-          <div style="background: #ffe6e6; padding: 1rem; margin: 1rem 0; border-left: 4px solid #dc3545;">
-            <strong>⚠️ Componente não implementado:</strong><br>
-            Tipo original: "{paragraph.type}"<br>
-            Tipo mapeado: "{componentType}"<br>
-            <details>
-              <summary>Props disponíveis:</summary>
-              <pre>{JSON.stringify(paragraph, null, 2)}</pre>
-            </details>
-          </div>
-        {/if}
-        
-        <!-- Fallback para texto -->
-        <StoryText 
-          content={paragraph.text || 'Conteúdo não disponível'}
-          variant="body"
-          maxWidth="700px"
-        />
       {/if}
     {/each}
   {/if}
@@ -293,7 +284,7 @@
     min-height: 100vh;
   }
 
-  /* Estilos para caption do globoplayer */
+  /* 🆕 ESTILOS PARA CAPTION DO GLOBOPLAYER */
   .component-caption {
     max-width: 800px;
     margin: 1rem auto 2rem auto;
@@ -314,9 +305,35 @@
     display: block;
   }
 
+  /* 🔧 DEBUG STYLES */
+  .debug-gallery,
+  .debug-carousel,
+  .debug-parallax {
+    background: #ff6b35;
+    color: white;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 0.8rem;
+  }
+
+  .debug-gallery p,
+  .debug-carousel p,
+  .debug-parallax p {
+    margin: 0.25rem 0;
+  }
+
   @media (max-width: 768px) {
     .component-caption {
       padding: 0 1rem;
+    }
+
+    .debug-gallery,
+    .debug-carousel, 
+    .debug-parallax {
+      font-size: 0.7rem;
+      padding: 0.75rem;
     }
   }
 </style>

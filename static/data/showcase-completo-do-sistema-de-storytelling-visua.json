@@ -17,13 +17,12 @@
     },
     {
       "type": "texto",
-      "text": "Este é um <strong>parágrafo de texto normal</strong> (",
-      "variant": "body) que demonstra a formatação básica. Aqui temos <em>texto em itálico</em>, <u>texto sublinhado</u>, e <a href=\"https://example.com\">links funcionais</a>. O objetivo é mostrar como o texto flui naturalmente na página."
+      "text": "Este é um <strong>parágrafo de texto normal</strong> que demonstra a formatação básica. Aqui temos <em>texto em itálico</em>, <u>texto sublinhado</u>, e <a href=\"https://example.com\">links funcionais</a>. O objetivo é mostrar como o texto flui naturalmente na página."
     },
     {
       "type": "texto",
-      "text": "Este é um <strong>parágrafo de destaque</strong> (",
-      "variant": "lead) que serve como introdução ou destaque de seção. A fonte é ligeiramente maior e possui mais peso visual para chamar atenção do leitor."
+      "text": "Este é um <strong>parágrafo de destaque</strong> que serve como introdução ou destaque de seção. A fonte é ligeiramente maior e possui mais peso visual para chamar atenção do leitor.",
+      "variant": "lead"
     },
     {
       "type": "frase",
@@ -108,7 +107,7 @@
     },
     {
       "type": "texto",
-      "text": "Aqui o texto fica no <strong>topo da imagem</strong>, alinhado à esquerda. Útil para designs mais dinâmicos."
+      "text": "Aqui o texto fica no <strong>topo da imagem</strong>, alinhado à esquerda. &Uacute;til para designs mais dinâmicos."
     },
     {
       "type": "intertitulo",
@@ -212,7 +211,11 @@
       "controls": "true",
       "videoId": "12777862",
       "skipDFP": "false",
-      "showCaption": "true"
+      "showCaption": "true",
+      "width": "100%",
+      "height": "450",
+      "startMuted": "true",
+      "maxQuality": "high"
     },
     {
       "type": "globovideo",
@@ -223,7 +226,11 @@
       "controls": "true",
       "videoId": "13786052",
       "skipDFP": "true",
-      "showCaption": "true"
+      "showCaption": "true",
+      "width": "100%",
+      "height": "450",
+      "startMuted": "true",
+      "maxQuality": "high"
     },
     {
       "type": "globovideo",
@@ -234,7 +241,11 @@
       "controls": "true",
       "videoId": "13784829",
       "skipDFP": "false",
-      "showCaption": "false"
+      "showCaption": "false",
+      "width": "100%",
+      "height": "450",
+      "startMuted": "true",
+      "maxQuality": "high"
     },
     {
       "type": "intertitulo",
@@ -299,7 +310,11 @@
       "autoplay": "false",
       "controls": "true",
       "videoId": "4372653",
-      "showCaption": "true"
+      "showCaption": "true",
+      "width": "100%",
+      "height": "450",
+      "startMuted": "true",
+      "maxQuality": "high"
     },
     {
       "type": "intertitulo",
@@ -378,44 +393,7 @@
     },
     {
       "type": "galeria",
-      "images": [
-        {
-          "src": "https://cdn.pixabay.com/photo/2015/09/09/07/05/sea-931164_1280.jpg",
-          "alt": "Carro elétrico 1",
-          "caption": "Tesla Model S na estrada",
-          "credit": "Foto: Picsum"
-        },
-        {
-          "src": "https://cdn.pixabay.com/photo/2017/05/22/19/50/surfer-2335088_1280.jpg",
-          "alt": "Posto de recarga",
-          "caption": "Estação de recarga rápida",
-          "credit": "Foto: Picsum"
-        },
-        {
-          "src": "https://cdn.pixabay.com/photo/2016/11/29/03/27/action-1867052_1280.jpg",
-          "alt": "Carros elétricos",
-          "caption": "Lineup de veículos elétricos",
-          "credit": "Foto: Picsum"
-        },
-        {
-          "src": "https://cdn.pixabay.com/photo/2017/08/07/10/08/sea-2602227_1280.jpg",
-          "alt": "Fábrica",
-          "caption": "Produção de carros elétricos",
-          "credit": "Foto: Picsum"
-        },
-        {
-          "src": "https://cdn.pixabay.com/photo/2016/11/29/05/25/sharks-1867523_1280.jpg",
-          "alt": "Tecnologia",
-          "caption": "Tecnologia embarcada",
-          "credit": "Foto: Picsum"
-        },
-        {
-          "src": "https://cdn.pixabay.com/photo/2022/08/09/13/38/fish-7375042_1280.jpg",
-          "alt": "Natureza",
-          "caption": "Impacto ambiental positivo",
-          "credit": "Foto: Picsum"
-        }
-      ],
+      "images": [],
       "layout": "grid",
       "columns": "3"
     },
@@ -425,32 +403,7 @@
     },
     {
       "type": "galeria",
-      "images": [
-        {
-          "src": "https://cdn.pixabay.com/photo/2022/03/30/13/18/betta-7101168_1280.jpg",
-          "alt": "Paisagem vertical",
-          "caption": "Imagem em formato portrait",
-          "credit": "Teste masonry"
-        },
-        {
-          "src": "https://cdn.pixabay.com/photo/2021/08/13/07/11/siamese-fighting-fish-6542427_1280.jpg",
-          "alt": "Paisagem horizontal",
-          "caption": "Imagem em formato landscape",
-          "credit": "Layout masonry"
-        },
-        {
-          "src": "https://cdn.pixabay.com/photo/2019/06/10/10/20/betta-fish-nemo-4263848_1280.jpg",
-          "alt": "Vertical 2",
-          "caption": "Outra imagem vertical para testar o layout masonry",
-          "credit": "Masonry test"
-        },
-        {
-          "src": "https://cdn.pixabay.com/photo/2017/08/06/00/26/fish-2587058_1280.jpg",
-          "alt": "Horizontal 2",
-          "caption": "Imagem horizontal no layout masonry",
-          "credit": "Grid masonry"
-        }
-      ],
+      "images": [],
       "layout": "masonry",
       "columns": "2"
     },
@@ -466,34 +419,7 @@
     },
     {
       "type": "carrossel",
-      "items": [
-        {
-          "type": "image",
-          "src": "https://cdn.pixabay.com/photo/2023/05/30/15/34/silver-gull-8028946_1280.jpg",
-          "alt": "Slide 1",
-          "caption": "Primeiro slide do carrossel - Carro elétrico moderno",
-          "credit": "Carousel test 1"
-        },
-        {
-          "type": "image",
-          "src": "https://cdn.pixabay.com/photo/2023/04/14/10/27/seagull-7924729_1280.jpg",
-          "alt": "Slide 2",
-          "caption": "Segundo slide - Infraestrutura de recarga",
-          "credit": "Carousel test 2"
-        },
-        {
-          "type": "content",
-          "content": "<h2 style='color: var(--color-primary);'>Slide de Conteúdo</h2><p>Este é um slide com <strong>conteúdo HTML</strong> personalizado ao invés de imagem.</p>",
-          "caption": "Slide com conteúdo customizado"
-        },
-        {
-          "type": "image",
-          "src": "https://cdn.pixabay.com/photo/2022/08/18/10/41/herring-gull-7394570_1280.jpg",
-          "alt": "Slide 4",
-          "caption": "Quarto slide - Imagem ao invés de vídeo",
-          "credit": "Image carousel test"
-        }
-      ],
+      "items": [],
       "autoplay": "false",
       "interval": "3000",
       "showDots": "true",
@@ -505,29 +431,7 @@
     },
     {
       "type": "carrossel",
-      "items": [
-        {
-          "type": "image",
-          "src": "https://cdn.pixabay.com/photo/2023/04/10/12/43/bird-7913707_1280.jpg",
-          "alt": "Auto slide 1",
-          "caption": "Carousel com autoplay ativado",
-          "credit": "Auto carousel 1"
-        },
-        {
-          "type": "image",
-          "src": "https://cdn.pixabay.com/photo/2022/08/26/00/07/bird-7411459_1280.jpg",
-          "alt": "Auto slide 2",
-          "caption": "Sem setas, apenas dots para navegação",
-          "credit": "Auto carousel 2"
-        },
-        {
-          "type": "image",
-          "src": "https://cdn.pixabay.com/photo/2013/02/09/10/57/seagull-79658_1280.jpg",
-          "alt": "Auto slide 3",
-          "caption": "Mudança automática a cada 4 segundos",
-          "credit": "Auto carousel 3"
-        }
-      ],
+      "items": [],
       "autoplay": "true",
       "interval": "4000",
       "showDots": "true",
@@ -545,11 +449,11 @@
     },
     {
       "type": "parallax",
+      "content": "\"<h2>Efeito Parallax Suave</h2><p>A",
       "height": "100",
       "overlay": "true",
       "image": "https://cdn.pixabay.com/photo/2023/10/21/11/46/sunset-8331285_1280.jpg",
-      "speed": "0.5",
-      "content": "\"<h2>Efeito Parallax Suave</h2><p>A imagem se move mais devagar que o scroll, criando profundidade visual. Speed: 0.5</p>\""
+      "speed": "0.5"
     },
     {
       "type": "texto",
@@ -557,11 +461,11 @@
     },
     {
       "type": "parallax",
+      "content": "\"<h2>Parallax Mais Rápido</h2><p>Com",
       "height": "100",
       "overlay": "true",
       "image": "https://cdn.pixabay.com/photo/2016/07/15/22/26/sunset-1520615_1280.jpg",
-      "speed": "0.8",
-      "content": "\"<h2>Parallax Mais Rápido</h2><p>Com speed 0.8, o movimento é mais pronunciado e dramático.</p>\""
+      "speed": "0.8"
     },
     {
       "type": "texto",
@@ -569,11 +473,11 @@
     },
     {
       "type": "parallax",
+      "content": "\"<h2 style='text-shadow: 2px 2px 4px rgba(0,0,0,0.8);'>Sem Overlay</h2><p style='text-shadow: 1px 1px 2px rgba(0,0,0,0.8);'>Parallax sem",
       "height": "100",
       "overlay": "false",
       "image": "https://cdn.pixabay.com/photo/2016/07/15/22/26/sunset-1520615_1280.jpg",
-      "speed": "0.3",
-      "content": "\"<h2 style='text-shadow: 2px 2px 4px rgba(0,0,0,0.8);'>Sem Overlay</h2><p style='text-shadow: 1px 1px 2px rgba(0,0,0,0.8);'>Parallax sem overlay escuro, texto com sombra para legibilidade.</p>\""
+      "speed": "0.3"
     },
     {
       "type": "texto",
@@ -629,39 +533,8 @@
     },
     {
       "type": "scrollytelling",
-      "steps": [
-        {
-          "title": "O Início da Revolução",
-          "text": "Em 2008, a Tesla lançou o primeiro Roadster, marcando o início da era dos carros elétricos modernos.",
-          "image": "https://cdn.pixabay.com/photo/2017/03/27/16/50/beach-2179624_1280.jpg0",
-          "alt": "Tesla Roadster"
-        },
-        {
-          "title": "Expansão da Infraestrutura",
-          "text": "A rede de recarga cresceu exponencialmente, tornando viagens longas viáveis para veículos elétricos.",
-          "image": "https://cdn.pixabay.com/photo/2018/10/05/14/39/sunset-3726030_1280.jpg",
-          "alt": "Rede de recarga"
-        },
-        {
-          "title": "Diversificação do Mercado",
-          "text": "Múltiplas marcas entraram no mercado, oferecendo opções para todos os segmentos e necessidades.",
-          "image": "https://cdn.pixabay.com/photo/2023/09/14/16/17/wave-8253292_1280.jpg",
-          "alt": "Diversos modelos"
-        },
-        {
-          "title": "Produção em Massa",
-          "text": "Fábricas se adaptaram para produção em larga escala, reduzindo custos e aumentando acessibilidade.",
-          "image": "https://cdn.pixabay.com/photo/2018/05/07/22/08/opera-house-3381786_1280.jpg",
-          "alt": "Linha de produção"
-        },
-        {
-          "title": "O Futuro Sustentável",
-          "text": "Hoje, carros elétricos representam o futuro da mobilidade urbana e rural, com benefícios ambientais claros.",
-          "image": "https://cdn.pixabay.com/photo/2025/07/19/01/54/eastern-grey-kangaroo-9722203_1280.jpg",
-          "alt": "Futuro sustentável"
-        }
-      ],
       "backgroundImage": "https://cdn.pixabay.com/photo/2016/11/29/04/19/ocean-1867285_1280.jpg",
+      "steps": [],
       "stickyHeight": "100"
     },
     {
@@ -670,21 +543,8 @@
     },
     {
       "type": "scrollytelling",
-      "steps": [
-        {
-          "title": "Tecnologia Embarcada",
-          "text": "Sistemas inteligentes de assistência ao motorista tornaram a condução mais segura e eficiente.",
-          "image": "https://cdn.pixabay.com/photo/2017/11/03/12/10/dolomites-2914157_1280.jpg",
-          "alt": "Tecnologia"
-        },
-        {
-          "title": "Conectividade Total",
-          "text": "Carros elétricos são verdadeiros computadores sobre rodas, conectados à internet 24/7.",
-          "image": "https://cdn.pixabay.com/photo/2023/11/14/14/59/mountains-8387889_1280.jpg",
-          "alt": "Conectividade"
-        }
-      ],
       "backgroundImage": "https://cdn.pixabay.com/photo/2025/07/20/15/47/mountain-9724688_1280.jpg",
+      "steps": [],
       "stickyHeight": "80"
     },
     {
@@ -730,40 +590,23 @@
       "controls": "true",
       "videoId": "13786292",
       "skipDFP": "true",
-      "showCaption": "true"
+      "showCaption": "true",
+      "width": "100%",
+      "height": "450",
+      "startMuted": "true",
+      "maxQuality": "high"
     },
     {
       "type": "parallax",
+      "content": "\"<h2>Combinação de Componentes</h2><p>Parallax seguido de galeria para testar fluxo visual complexo.</p>\"</span></p><p class=\"c0 c2\"><span class=\"c1\"></span></p><p class=\"c0\"><span class=\"c1\">",
       "height": "100",
       "overlay": "true",
       "image": "https://cdn.pixabay.com/photo/2021/12/12/18/04/mountains-6865752_1280.jpg",
-      "speed": "0.6",
-      "content": "\"<h2>Combinação de Componentes</h2><p>Parallax seguido de galeria para testar fluxo visual complexo.</p>\""
+      "speed": "0.6"
     },
     {
       "type": "galeria",
-      "images": [
-        {
-          "src": "https://cdn.pixabay.com/photo/2023/03/16/20/56/mountains-7857522_1280.jpg",
-          "alt": "Mini 1",
-          "caption": "Grid 4 colunas"
-        },
-        {
-          "src": "https://cdn.pixabay.com/photo/2021/06/04/15/51/coast-6310250_1280.jpg",
-          "alt": "Mini 2",
-          "caption": "Após parallax"
-        },
-        {
-          "src": "https://cdn.pixabay.com/photo/2023/05/20/13/25/sea-8006539_1280.jpg",
-          "alt": "Mini 3",
-          "caption": "Teste de fluxo"
-        },
-        {
-          "src": "https://cdn.pixabay.com/photo/2025/06/25/21/53/siberia-9680842_1280.jpg",
-          "alt": "Mini 4",
-          "caption": "Combinação complexa"
-        }
-      ],
+      "images": [],
       "layout": "grid",
       "columns": "4"
     },
@@ -777,17 +620,7 @@
     },
     {
       "type": "carrossel",
-      "items": [
-        {
-          "type": "content",
-          "content": "<div style='background: linear-gradient(45deg, var(--color-primary), var(--color-secondary)); padding: 3rem; color: white; text-align: center;'><h2>Carousel Final</h2><p>Teste de carousel após before/after</p></div>"
-        },
-        {
-          "type": "image",
-          "src": "https://cdn.pixabay.com/photo/2020/02/02/23/50/beach-4814418_1280.jpg",
-          "caption": "Sequência de componentes avançados funcionando perfeitamente"
-        }
-      ],
+      "items": [],
       "autoplay": "true",
       "interval": "5000",
       "showDots": "false",

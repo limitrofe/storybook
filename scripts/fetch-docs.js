@@ -22,6 +22,9 @@ async function fetchGoogleDoc(docId) {
     // Parse HTML mantendo formatação
     const data = parseHTMLFormat(rawHtml);
     
+    console.log('\n🔍 Dados processados:');
+    console.log(JSON.stringify(data, null, 2));
+    
     if (!data.title) {
       throw new Error('Documento deve ter "title:"');
     }
@@ -49,39 +52,51 @@ async function fetchGoogleDoc(docId) {
     console.log(`📊 Intro: ${data.intro ? 'OK' : 'Vazio'}`);
     console.log(`📊 Paragraphs: ${data.paragraphs ? data.paragraphs.length : 0} itens`);
     
-    // Validações
-    const galleries = data.paragraphs?.filter(p => 
-      ['galeria', 'gallery'].includes(p.type?.toLowerCase())
+    // 🔍 VALIDAÇÃO PARA BACKGROUND IMAGES
+    const withBackgrounds = data.paragraphs?.filter(p => 
+      p.backgroundImage || p.backgroundImageMobile
     ) || [];
     
-    if (galleries.length > 0) {
-      console.log(`🖼️ Galerias encontradas: ${galleries.length}`);
-      galleries.forEach((gallery, index) => {
-        const imagesCount = gallery.images?.length || 0;
-        console.log(`  ${index + 1}. Layout: ${gallery.layout} | Colunas: ${gallery.columns} | Imagens: ${imagesCount}`);
+    if (withBackgrounds.length > 0) {
+      console.log(`🖼️ Componentes com background encontrados: ${withBackgrounds.length}`);
+      withBackgrounds.forEach((comp, index) => {
+        console.log(`  ${index + 1}. ${comp.type}: ${comp.text?.substring(0, 30)}...`);
+        if (comp.backgroundImage) console.log(`     🖥️ Desktop: ${comp.backgroundImage}`);
+        if (comp.backgroundImageMobile) console.log(`     📱 Mobile: ${comp.backgroundImageMobile}`);
+      });
+    }
+    
+    // 🆕 NOVA VALIDAÇÃO PARA GLOBOPLAYER
+    const globoPlayers = data.paragraphs?.filter(p => 
+      ['globovideo', 'globo-video', 'globoplayer', 'globo-player', 'globo'].includes(p.type?.toLowerCase())
+    ) || [];
+    
+    if (globoPlayers.length > 0) {
+      console.log(`🎬 GloboPlayers encontrados: ${globoPlayers.length}`);
+      globoPlayers.forEach((player, index) => {
+        const videoId = player.videoId || player.videosIDs || player.id;
+        console.log(`  ${index + 1}. ID: ${videoId || 'FALTANDO ID!'} - Tipo: ${player.type}`);
         
-        if (imagesCount === 0) {
-          console.warn(`⚠️ Galeria sem imagens:`, gallery);
-        } else {
-          console.log(`   ✅ Galeria funcionando! ${imagesCount} imagens encontradas`);
+        if (!videoId) {
+          console.warn(`⚠️ GloboPlayer sem videoId: ${JSON.stringify(player)}`);
         }
       });
     }
-
-    const carousels = data.paragraphs?.filter(p => 
-      ['carrossel', 'carousel'].includes(p.type?.toLowerCase())
+    
+    // 🔧 NOVA VALIDAÇÃO PARA PARALLAX
+    const parallaxComponents = data.paragraphs?.filter(p => 
+      p.type?.toLowerCase() === 'parallax'
     ) || [];
     
-    if (carousels.length > 0) {
-      console.log(`🎠 Carousels encontrados: ${carousels.length}`);
-      carousels.forEach((carousel, index) => {
-        const itemsCount = carousel.items?.length || 0;
-        console.log(`  ${index + 1}. Autoplay: ${carousel.autoplay} | Items: ${itemsCount}`);
-        
-        if (itemsCount === 0) {
-          console.warn(`⚠️ Carousel sem items:`, carousel);
-        } else {
-          console.log(`   ✅ Carousel funcionando! ${itemsCount} items encontrados`);
+    if (parallaxComponents.length > 0) {
+      console.log(`🌄 Parallax encontrados: ${parallaxComponents.length}`);
+      parallaxComponents.forEach((parallax, index) => {
+        console.log(`  ${index + 1}. Image: ${parallax.image || 'SEM IMAGEM'}`);
+        console.log(`     Height: ${parallax.height || 'SEM HEIGHT ⚠️'}`);
+        console.log(`     Speed: ${parallax.speed || 'SEM SPEED'}`);
+        console.log(`     Content: ${parallax.content ? 'OK' : 'VAZIO'}`);
+        if (parallax.content && parallax.content.includes('"')) {
+          console.warn(`     ⚠️ Content com aspas problemáticas detectado`);
         }
       });
     }
@@ -102,7 +117,7 @@ function parseHTMLFormat(html) {
   
   const data = {};
   
-  // Extrai campos básicos
+  // Primeiro tenta extrair campos básicos do HTML
   const titleMatch = html.match(/title:\s*([^<\n]+)/i);
   if (titleMatch) data.title = decodeHTMLEntities(titleMatch[1].trim());
   
@@ -118,7 +133,20 @@ function parseHTMLFormat(html) {
   const themeMatch = html.match(/theme:\s*([^<\n]+)/i);
   if (themeMatch) data.theme = decodeHTMLEntities(themeMatch[1].trim());
   
-  // Parse intro
+  // Se não encontrou title no HTML, tenta no texto plano
+  if (!data.title) {
+    const textContent = html.replace(/<[^>]*>/g, '\n');
+    const lines = textContent.split('\n').map(line => line.trim()).filter(line => line);
+    
+    for (const line of lines) {
+      if (line.toLowerCase().startsWith('title:')) {
+        data.title = decodeHTMLEntities(line.replace(/^title:\s*/i, '').trim());
+        break;
+      }
+    }
+  }
+  
+  // Parse intro mantendo formatação HTML
   const introMatch = html.match(/\[(?:\+)?intro\](.*?)\[intro\]/s);
   if (introMatch) {
     const introHtml = introMatch[1];
@@ -130,7 +158,7 @@ function parseHTMLFormat(html) {
     }
   }
   
-  // Parse paragraphs
+  // Parse paragraphs mantendo formatação HTML
   const paragraphsMatch = html.match(/\[(?:\+)?paragraphs\](.*?)\[paragraphs\]/s);
   if (paragraphsMatch) {
     const paragraphsHtml = paragraphsMatch[1];
@@ -142,146 +170,46 @@ function parseHTMLFormat(html) {
   return data;
 }
 
-// 🔧 FUNÇÃO EXPANDIDA: Agora com mais entidades HTML
 function decodeHTMLEntities(text) {
-  if (!text) return text;
-  
   const entities = {
-    // Básicas
-    '&amp;': '&', '&lt;': '<', '&gt;': '>', '&quot;': '"', '&#39;': "'", '&nbsp;': ' ',
-    
-    // Acentos portugueses/brasileiros - minúsculas
-    '&aacute;': 'á', '&agrave;': 'à', '&acirc;': 'â', '&atilde;': 'ã', '&auml;': 'ä',
-    '&eacute;': 'é', '&egrave;': 'è', '&ecirc;': 'ê', '&euml;': 'ë',
-    '&iacute;': 'í', '&igrave;': 'ì', '&icirc;': 'î', '&iuml;': 'ï',
-    '&oacute;': 'ó', '&ograve;': 'ò', '&ocirc;': 'ô', '&otilde;': 'õ', '&ouml;': 'ö',
-    '&uacute;': 'ú', '&ugrave;': 'ù', '&ucirc;': 'û', '&uuml;': 'ü',
-    '&ccedil;': 'ç', '&ntilde;': 'ñ',
-    
-    // Acentos portugueses/brasileiros - maiúsculas
-    '&Aacute;': 'Á', '&Agrave;': 'À', '&Acirc;': 'Â', '&Atilde;': 'Ã', '&Auml;': 'Ä',
-    '&Eacute;': 'É', '&Egrave;': 'È', '&Ecirc;': 'Ê', '&Euml;': 'Ë',
-    '&Iacute;': 'Í', '&Igrave;': 'Ì', '&Icirc;': 'Î', '&Iuml;': 'Ï',
-    '&Oacute;': 'Ó', '&Ograve;': 'Ò', '&Ocirc;': 'Ô', '&Otilde;': 'Õ', '&Ouml;': 'Ö',
-    '&Uacute;': 'Ú', '&Ugrave;': 'Ù', '&Ucirc;': 'Û', '&Uuml;': 'Ü',
-    '&Ccedil;': 'Ç', '&Ntilde;': 'Ñ'
+    '&amp;': '&',
+    '&lt;': '<',
+    '&gt;': '>',
+    '&quot;': '"',
+    '&#39;': "'",
+    '&aacute;': 'á',
+    '&agrave;': 'à',
+    '&acirc;': 'â',
+    '&atilde;': 'ã',
+    '&auml;': 'ä',
+    '&eacute;': 'é',
+    '&egrave;': 'è',
+    '&ecirc;': 'ê',
+    '&euml;': 'ë',
+    '&iacute;': 'í',
+    '&igrave;': 'ì',
+    '&icirc;': 'î',
+    '&iuml;': 'ï',
+    '&oacute;': 'ó',
+    '&ograve;': 'ò',
+    '&ocirc;': 'ô',
+    '&otilde;': 'õ',
+    '&ouml;': 'ö',
+    '&uacute;': 'ú',
+    '&ugrave;': 'ù',
+    '&ucirc;': 'û',
+    '&uuml;': 'ü',
+    '&ccedil;': 'ç',
+    '&ntilde;': 'ñ'
   };
   
   return text.replace(/&[a-zA-Z0-9#]+;/g, (entity) => entities[entity] || entity);
 }
 
-// 🔧 FUNÇÃO NOVA: Decodifica entidades HTML recursivamente em objetos/arrays
-function deepDecodeEntities(obj) {
-  if (typeof obj === 'string') {
-    return decodeHTMLEntities(obj);
-  } else if (Array.isArray(obj)) {
-    return obj.map(item => deepDecodeEntities(item));
-  } else if (obj && typeof obj === 'object') {
-    const decoded = {};
-    for (const [key, value] of Object.entries(obj)) {
-      decoded[key] = deepDecodeEntities(value);
-    }
-    return decoded;
-  }
-  return obj;
-}
-
-// 🔧 SUA FUNÇÃO ORIGINAL + 3 LINHAS PARA DECODIFICAR ENTIDADES
-function extractCleanJSONArray(text, fieldName) {
-  console.log(`\n🔍 Extraindo array '${fieldName}' do bloco`);
-  
-  // 🔧 PASSO 1: Encontra onde começa o array
-  const fieldRegex = new RegExp(`${fieldName}:\\s*\\[`, 'i');
-  const fieldMatch = text.match(fieldRegex);
-  
-  if (!fieldMatch) {
-    console.log(`   ❌ Campo '${fieldName}:' não encontrado`);
-    return [];
-  }
-  
-  const startIndex = fieldMatch.index + fieldMatch[0].length - 1; // Posição do '['
-  console.log(`   📍 Encontrado '${fieldName}:' na posição ${startIndex}`);
-  
-  // 🔧 PASSO 2: Extrai tudo até o próximo 'type:' ou fim
-  const remainingText = text.substring(startIndex);
-  const nextTypeIndex = remainingText.search(/type:\s*[a-zA-Z]/);
-  
-  let arraySection;
-  if (nextTypeIndex !== -1) {
-    arraySection = remainingText.substring(0, nextTypeIndex);
-  } else {
-    arraySection = remainingText;
-  }
-  
-  console.log(`   📝 Seção do array (${arraySection.length} chars):`, arraySection.substring(0, 200) + '...');
-  
-  // 🔧 PASSO 3: REMOVE TODAS AS TAGS HTML E LIMPA
-  let cleanedArray = arraySection
-    // Remove todas as tags HTML
-    .replace(/<[^>]*>/g, '')
-    // Remove entidades HTML
-    .replace(/&nbsp;/g, ' ')
-    .replace(/&quot;/g, '"')
-    .replace(/&amp;/g, '&')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    // Normaliza espaços
-    .replace(/\s+/g, ' ')
-    .trim();
-  
-  console.log(`   🧹 Array limpo:`, cleanedArray.substring(0, 200) + '...');
-  
-  // 🔧 PASSO 4: Encontra o final correto do array contando []
-  let bracketCount = 0;
-  let endIndex = -1;
-  
-  for (let i = 0; i < cleanedArray.length; i++) {
-    if (cleanedArray[i] === '[') {
-      bracketCount++;
-    } else if (cleanedArray[i] === ']') {
-      bracketCount--;
-      if (bracketCount === 0) {
-        endIndex = i + 1;
-        break;
-      }
-    }
-  }
-  
-  if (endIndex === -1) {
-    console.log(`   ❌ Não encontrou fechamento do array`);
-    return [];
-  }
-  
-  const finalArrayString = cleanedArray.substring(0, endIndex);
-  console.log(`   ✂️ Array final (${finalArrayString.length} chars):`, finalArrayString);
-  
-  // 🔧 PASSO 5: Tenta fazer o parsing
-  try {
-    const parsed = JSON.parse(finalArrayString);
-    
-    if (Array.isArray(parsed) && parsed.length > 0) {
-      console.log(`   ✅ SUCCESS! ${parsed.length} itens parseados com sucesso!`);
-      
-      // 🔧 NOVA ADIÇÃO: Decodifica entidades HTML nas strings do array
-      const decodedArray = deepDecodeEntities(parsed);
-      console.log(`   🔧 Entidades HTML decodificadas nos textos!`);
-      
-      return decodedArray; // 🔧 MUDANÇA: retorna o array decodificado
-    } else {
-      console.log(`   ⚠️ Array vazio ou inválido`);
-      return [];
-    }
-  } catch (e) {
-    console.log(`   ❌ Erro no parsing JSON: ${e.message}`);
-    console.log(`   🔧 String problemática:`, finalArrayString.substring(0, 100));
-    return [];
-  }
-}
-
 function parseParagraphsHTML(html) {
   const paragraphs = [];
   
-  // Divide por type:
+  // 🔧 CORREÇÃO: Divide por type: de forma mais robusta
   const typeBlocks = html.split(/(?=type:\s*)/);
   
   for (const block of typeBlocks) {
@@ -295,42 +223,106 @@ function parseParagraphsHTML(html) {
       paragraph.type = decodeHTMLEntities(typeMatch[1].trim());
     }
     
-    // Extrai text
-    const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:backgroundImage|backgroundImageMobile|author|role|src|caption|credit|alt|fullWidth|variant|size|orientation|autoplay|controls|poster|images|items|steps|beforeImage|afterImage|beforeLabel|afterLabel|image|height|heightMobile|speed|content|overlay|layout|columns|interval|showDots|showArrows|stickyHeight|videoId|videosIDs|id|skipDFP|skipdfp|autoPlay|startMuted|maxQuality|quality|chromeless|isLive|live|allowRestrictedContent|preventBlackBars|globoId|token|adAccountId|adCmsId|siteName|width|textPosition|textPositionMobile|textAlign|textAlignMobile):|type:|$)/s);
+    // 🔧 CORREÇÃO: Extrai text de forma mais específica
+    const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:backgroundImage|backgroundImageMobile|backgroundVideo|backgroundVideoMobile|backgroundPosition|backgroundPositionMobile|author|role|src|caption|credit|alt|fullWidth|variant|size|orientation|autoplay|controls|poster|images|items|steps|beforeImage|afterImage|beforeLabel|afterLabel|image|height|heightMobile|speed|content|overlay|layout|columns|interval|showDots|showArrows|stickyHeight|videoId|videosIDs|id|skipDFP|skipdfp|autoPlay|startMuted|maxQuality|quality|chromeless|isLive|live|allowRestrictedContent|preventBlackBars|globoId|token|adAccountId|adCmsId|siteName|width|textPosition|textPositionMobile|textAlign|textAlignMobile):|type:|$)/s);
     if (textMatch) {
       paragraph.text = cleanAndFormatHTML(textMatch[1].trim());
     }
     
-    // 🔧 NOVA EXTRAÇÃO DE ARRAYS COM LIMPEZA HTML
-    
-    // Images para galerias
-    if (block.toLowerCase().includes('images:')) {
-      paragraph.images = extractCleanJSONArray(block, 'images');
-    }
-    
-    // Items para carousels
-    if (block.toLowerCase().includes('items:')) {
-      paragraph.items = extractCleanJSONArray(block, 'items');
-    }
-    
-    // Steps para ScrollyTelling
-    if (block.toLowerCase().includes('steps:')) {
-      paragraph.steps = extractCleanJSONArray(block, 'steps');
-    }
-    
-    // Extrai URLs de imagem de fundo
+    // 🔧 CORREÇÃO PRINCIPAL: Parse de backgroundImage mais robusto
+    // 🆕 REGEX MELHORADA: Aceita URLs da Globo (glbimg.com) e outras
     const backgroundImageMatch = block.match(/backgroundImage:\s*(https?:\/\/[^\s\n<]+)/);
     if (backgroundImageMatch) {
+      // 🔧 NOVA CORREÇÃO: Decodificar entidades HTML na URL
       paragraph.backgroundImage = decodeHTMLEntities(backgroundImageMatch[1].trim());
+      console.log(`🖼️ Background encontrado: ${paragraph.backgroundImage}`);
     }
     
     const backgroundImageMobileMatch = block.match(/backgroundImageMobile:\s*(https?:\/\/[^\s\n<]+)/);
     if (backgroundImageMobileMatch) {
+      // 🔧 NOVA CORREÇÃO: Decodificar entidades HTML na URL mobile
       paragraph.backgroundImageMobile = decodeHTMLEntities(backgroundImageMobileMatch[1].trim());
+      console.log(`📱 Background mobile encontrado: ${paragraph.backgroundImageMobile}`);
     }
     
-    // Extrai outros campos
+    // Background videos
+    const backgroundVideoMatch = block.match(/backgroundVideo:\s*(https?:\/\/[^\s\n<]+)/);
+    if (backgroundVideoMatch) {
+      paragraph.backgroundVideo = backgroundVideoMatch[1].trim();
+    }
+    
+    const backgroundVideoMobileMatch = block.match(/backgroundVideoMobile:\s*(https?:\/\/[^\s\n<]+)/);
+    if (backgroundVideoMobileMatch) {
+      paragraph.backgroundVideoMobile = backgroundVideoMobileMatch[1].trim();
+    }
+    
+    // 🔧 CORREÇÃO CRÍTICA: Parse do campo 'content' para parallax
+    const contentMatch = block.match(/content:\s*(.*?)(?=\s*(?:overlay|height|speed|image|type:|$))/s);
+    if (contentMatch) {
+      let content = contentMatch[1].trim();
+      
+      // 🔥 CORREÇÃO TOTAL: Remove todas as aspas problemáticas
+      // Remove aspas no início e fim
+      content = content.replace(/^["']+/, '').replace(/["']+$/, '');
+      
+      // Remove aspas duplas que envolvem o conteúdo HTML
+      if (content.startsWith('"') && content.endsWith('"')) {
+        content = content.slice(1, -1);
+      }
+      
+      // Remove escape de aspas internas
+      content = content.replace(/\\"/g, '"').replace(/\\'/g, "'");
+      
+      // Remove aspas extras que podem ter ficado
+      content = content.replace(/^"(.+)"$/, '$1');
+      
+      // Decodifica entidades HTML
+      content = decodeHTMLEntities(content);
+      
+      paragraph.content = content;
+      
+      // 🔧 Verificação final
+      if (content.includes('"<') || content.includes('>"')) {
+        console.warn(`⚠️ Aspas ainda detectadas no content: ${content.substring(0, 50)}...`);
+      } else {
+        console.log(`✅ Content limpo para ${paragraph.type}: ${content.substring(0, 50)}...`);
+      }
+    }
+    
+    // NOVIDADE: Parse de arrays JSON para componentes avançados
+    const imagesMatch = block.match(/images:\s*(\[[\s\S]*?\])/);
+    if (imagesMatch) {
+      try {
+        paragraph.images = JSON.parse(imagesMatch[1].replace(/\n\s*/g, ' '));
+      } catch (e) {
+        console.warn('Erro ao parsear images:', e);
+        paragraph.images = [];
+      }
+    }
+    
+    const itemsMatch = block.match(/items:\s*(\[[\s\S]*?\])/);
+    if (itemsMatch) {
+      try {
+        paragraph.items = JSON.parse(itemsMatch[1].replace(/\n\s*/g, ' '));
+      } catch (e) {
+        console.warn('Erro ao parsear items:', e);
+        paragraph.items = [];
+      }
+    }
+    
+    const stepsMatch = block.match(/steps:\s*(\[[\s\S]*?\])/);
+    if (stepsMatch) {
+      try {
+        paragraph.steps = JSON.parse(stepsMatch[1].replace(/\n\s*/g, ' '));
+      } catch (e) {
+        console.warn('Erro ao parsear steps:', e);
+        paragraph.steps = [];
+      }
+    }
+    
+    // 🔧 MAPEAMENTO COMPLETO DE CAMPOS (incluindo novos)
     const fieldMappings = {
+      // Campos de layout e posicionamento
       backgroundPosition: 'backgroundPosition',
       backgroundPositionMobile: 'backgroundPositionMobile',
       textPosition: 'textPosition',
@@ -339,6 +331,8 @@ function parseParagraphsHTML(html) {
       textAlignMobile: 'textAlignMobile',
       height: 'height',
       heightMobile: 'heightMobile',
+      
+      // Campos básicos existentes
       author: 'author',
       role: 'role',
       src: 'src',
@@ -365,7 +359,8 @@ function parseParagraphsHTML(html) {
       afterLabel: 'afterLabel',
       image: 'image',
       speed: 'speed',
-      content: 'content',
+      
+      // Campos específicos do GloboPlayer
       videoId: 'videoId',
       videosIDs: 'videosIDs',
       id: 'id',
@@ -386,17 +381,29 @@ function parseParagraphsHTML(html) {
       adCmsId: 'adCmsId',
       siteName: 'siteName',
       width: 'width',
+      
       showCaption: 'showCaption',
       alignment: 'alignment',
       loop: 'loop'
     };
     
     for (const [field, prop] of Object.entries(fieldMappings)) {
-      const match = block.match(new RegExp(`${field}:\\s*([^\\n<]+)`));
+      // 🔧 CORREÇÃO ESPECÍFICA PARA PARALLAX HEIGHT
+      // Se for parallax e estamos procurando por height, usa regex mais específica
+      let match;
+      if (paragraph.type?.toLowerCase() === 'parallax' && field === 'height') {
+        match = block.match(new RegExp(`height:\\s*([^\\n\\r]+)`, 'i'));
+        if (match) {
+          console.log(`🌄 PARALLAX HEIGHT encontrado: "${match[1].trim()}" no bloco`);
+        }
+      } else {
+        match = block.match(new RegExp(`${field}:\\s*([^\\n<]+)`));
+      }
+      
       if (match) {
         let value = decodeHTMLEntities(match[1].trim());
         
-        // Conversão de tipos
+        // 🔧 CONVERSÃO DE TIPOS
         if (['height', 'heightMobile', 'width', 'columns', 'interval', 'stickyHeight'].includes(field)) {
           const numValue = parseInt(value);
           if (!isNaN(numValue)) {
@@ -406,6 +413,34 @@ function parseParagraphsHTML(html) {
         
         paragraph[prop] = value;
       }
+    }
+    
+    // 🆕 VALIDAÇÃO ESPECÍFICA PARA GLOBOPLAYER
+    if (['globovideo', 'globo-video', 'globoplayer', 'globo-player', 'globo'].includes(paragraph.type?.toLowerCase())) {
+      const videoId = paragraph.videoId || paragraph.videosIDs || paragraph.id;
+      if (!videoId) {
+        console.warn(`⚠️ GloboPlayer sem videoId encontrado:`, paragraph);
+      } else {
+        console.log(`✅ GloboPlayer válido encontrado: ${videoId}`);
+      }
+      
+      // Definir padrões para GloboPlayer
+      if (!paragraph.width) paragraph.width = '100%';
+      if (!paragraph.height) paragraph.height = '450';
+      if (paragraph.startMuted === undefined) paragraph.startMuted = 'true';
+      if (!paragraph.maxQuality && !paragraph.quality) paragraph.maxQuality = 'high';
+    }
+    
+    // 🔧 DEBUG: Log do parágrafo processado
+    if (paragraph.type && (paragraph.backgroundImage || paragraph.backgroundImageMobile)) {
+      console.log(`✅ Parágrafo com background processado:`, {
+        type: paragraph.type,
+        text: paragraph.text?.substring(0, 50) + '...',
+        backgroundImage: paragraph.backgroundImage,
+        backgroundImageMobile: paragraph.backgroundImageMobile,
+        textPosition: paragraph.textPosition,
+        textAlign: paragraph.textAlign
+      });
     }
     
     if (paragraph.type) {
@@ -420,12 +455,13 @@ function parseParagraphsHTML(html) {
 function cleanAndFormatHTML(html) {
   if (!html) return '';
   
+  // Primeiro decodifica entities HTML
   html = decodeHTMLEntities(html);
   
-  // Converte <br> em quebras de linha para listas
+  // Converte <br> em quebras de linha reais para listas
   html = html.replace(/<br[^>]*>/gi, '\n• ');
   
-  // Se tem bullet points, transforma em lista HTML
+  // Se tem bullet points com •, transforma em lista HTML
   if (html.includes('• ')) {
     const items = html.split('• ').filter(item => item.trim());
     if (items.length > 1) {
@@ -433,19 +469,21 @@ function cleanAndFormatHTML(html) {
     }
   }
   
-  // Formatação
+  // Captura formatação do Google Docs com base nos estilos inline
   html = html.replace(/<([^>]+)style="[^"]*font-weight:\s*(?:bold|[7-9]\d\d|700|800|900)[^"]*"[^>]*>(.*?)<\/\1>/gi, '<strong>$2</strong>');
   html = html.replace(/<([^>]+)style="[^"]*font-style:\s*italic[^"]*"[^>]*>(.*?)<\/\1>/gi, '<em>$2</em>');
   html = html.replace(/<([^>]+)style="[^"]*text-decoration[^"]*underline[^"]*"[^>]*>(.*?)<\/\1>/gi, '<u>$2</u>');
   
-  // Preserva links
+  // Preserva links existentes
   html = html.replace(/<a\s+href="([^"]*)"[^>]*>(.*?)<\/a>/gi, '<a href="$1">$2</a>');
   
-  // Remove spans e outros elementos
+  // Remove span tags vazios mas preserva o conteúdo
   html = html.replace(/<span[^>]*>(.*?)<\/span>/gi, '$1');
+  
+  // Remove outras tags de estrutura do Google Docs mas preserva conteúdo  
   html = html.replace(/<\/?(?:div|p)[^>]*>/gi, ' ');
   
-  // Formatação aninhada
+  // Aplica formatação aninhada
   let previousHtml = '';
   let iterations = 0;
   while (html !== previousHtml && iterations < 5) {
@@ -456,8 +494,10 @@ function cleanAndFormatHTML(html) {
     iterations++;
   }
   
+  // Remove spans restantes sem formatação importante
   html = html.replace(/<\/?span[^>]*>/gi, '');
   
+  // Limpa espaços extras mas preserva quebras em listas
   if (!html.includes('<ul>')) {
     html = html.replace(/\s+/g, ' ').trim();
   }
