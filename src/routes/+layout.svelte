@@ -3,7 +3,6 @@
   import '../app.css';
   import '../lib/styles/tokens.css';
   import '../lib/styles/themes.css';
-
   // Importa o seletor de temas
   import ThemeSwitcher from '$lib/components/ThemeSwitcher.svelte';
 </script>
@@ -17,21 +16,28 @@
 
 <style>
   .persistent-theme-switcher {
-    position: fixed; /* Fica fixo na tela ao rolar */
+    position: fixed;
     top: 1rem;
     right: 1rem;
-    z-index: 9999; /* Garante que ele fique na frente de tudo */
+    z-index: 9999;
   }
 
-  /* Esta é a única regra de estilo que realmente PRECISA estar aqui.
-    Ela garante que o tema selecionado seja aplicado ao fundo e à fonte
-    de todo o site.
-  */
+  /* ▼▼▼ INÍCIO DA CORREÇÃO ▼▼▼ */
+
+  /* Garante que a raiz do documento também receba a cor do tema */
+  :global(html) {
+    background-color: var(--color-background);
+    transition: background-color 0.2s;
+  }
+
   :global(body) {
     background-color: var(--color-background);
     color: var(--color-text);
     font-family: 'Globotipo', -apple-system, sans-serif;
     margin: 0;
+    min-height: 100vh; /* Garante que o body ocupe no mínimo a altura total da tela */
     transition: background-color 0.2s, color 0.2s;
   }
+  
+  /* ▲▲▲ FIM DA CORREÇÃO ▲▲▲ */
 </style>

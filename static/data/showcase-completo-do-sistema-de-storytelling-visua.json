@@ -13,11 +13,11 @@
       "text": "Showcase do Sistema Visual",
       "backgroundImage": "https://cdn.pixabay.com/photo/2020/12/06/17/58/trees-5809559_1280.jpg",
       "variant": "hero",
-      "overlay": "true"
+      "overlay": true
     },
     {
       "type": "texto",
-      "text": "Este é um <strong>parágrafo de texto normal</strong> que demonstra a formatação básica. Aqui temos <em>texto em itálico</em>, <u>texto sublinhado</u>, e <a href=\"https://example.com\">links funcionais</a>. O objetivo é mostrar como o texto flui naturalmente na página."
+      "text": "Este é um <strong>parágrafo de texto normal</strong> que demonstra a formatação básica. Aqui temos <em>texto em itálico</em>, <u>texto sublinhado</u>, e <a href=\""
     },
     {
       "type": "texto",
@@ -32,7 +32,7 @@
     },
     {
       "type": "intertitulo",
-      "text": "Seção 1: Componentes de Texto",
+      "text": "Seção",
       "variant": "default",
       "size": "medium"
     },
@@ -63,9 +63,9 @@
     {
       "type": "intertitulo",
       "text": "Título Centrado",
-      "textAlign": "center",
       "variant": "centered",
-      "size": "medium"
+      "size": "medium",
+      "textAlign": "center"
     },
     {
       "type": "texto",
@@ -83,13 +83,13 @@
     },
     {
       "type": "intertitulo",
-      "text": "Seção 2: Componentes com Imagem de Fundo",
+      "text": "Seção",
       "backgroundImage": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&q=80",
+      "size": "large",
+      "height": "400px",
       "textPosition": "center",
       "textAlign": "center",
-      "height": "400",
-      "size": "large",
-      "overlay": "true"
+      "overlay": true
     },
     {
       "type": "texto",
@@ -99,11 +99,11 @@
       "type": "intertitulo",
       "text": "Título com Posição Superior",
       "backgroundImage": "https://cdn.pixabay.com/photo/2022/11/14/10/54/sunrise-7591335_1280.jpg",
+      "size": "medium",
+      "height": "300px",
       "textPosition": "top",
       "textAlign": "left",
-      "height": "300",
-      "size": "medium",
-      "overlay": "true"
+      "overlay": true
     },
     {
       "type": "texto",
@@ -113,8 +113,8 @@
       "type": "intertitulo",
       "text": "Título com Posição Inferior",
       "backgroundImage": "https://cdn.pixabay.com/photo/2025/06/19/07/59/allgau-9668453_1280.jpg",
-      "textPosition": "bottom",
-      "textAlign": "right"
+      "textAlign": "right",
+      "textPosition": "bottom"
     },
     {
       "type": "texto",
@@ -125,59 +125,59 @@
       "text": "Mobile - Posição Centro",
       "backgroundImage": "https://cdn.pixabay.com/photo/2016/07/28/09/01/mountains-1547302_1280.jpg",
       "backgroundImageMobile": "https://cdn.pixabay.com/photo/2016/07/28/09/01/mountains-1547302_1280.jpg",
+      "size": "large",
+      "height": "400px",
+      "heightMobile": "250px",
       "textPosition": "top",
       "textPositionMobile": "center",
       "textAlign": "left",
       "textAlignMobile": "center",
-      "height": "400",
-      "heightMobile": "250",
-      "size": "large",
-      "overlay": "true"
+      "overlay": true
     },
     {
       "type": "texto",
-      "text": "Este exemplo mostra como o componente pode ter <strong>comportamentos diferentes</strong> entre desktop e mobile. No desktop: topo/esquerda, no mobile: centro/centro."
+      "text": "Este exemplo mostra como o componente pode ter <strong>comportamentos diferentes</strong> entre desktop e mobile. No"
     },
     {
       "type": "intertitulo",
-      "text": "Seção 3: Componentes de Mídia",
+      "text": "Seção",
       "variant": "default",
       "size": "medium"
     },
     {
       "type": "foto",
       "src": "https://cdn.pixabay.com/photo/2023/06/26/21/22/shack-8090832_1280.jpg",
+      "alt": "Carros elétricos em concessionária",
       "caption": "Exemplo de <strong>foto normal</strong> (não fullWidth) com legenda formatada",
       "credit": "Foto: <em>Unsplash</em>",
-      "alt": "Carros elétricos em concessionária",
-      "fullWidth": "false",
+      "fullWidth": false,
       "alignment": "center"
     },
     {
       "type": "foto",
       "src": "https://s2-g1.glbimg.com/17xHZXrK0_UuM618DAVerugv1jk=/0x0:1800x900/924x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/R/O/MEF7xqRtWxad7Si1OAUA/quartetos-fantasticos.jpg",
+      "alt": "Posto de recarga para carros elétricos",
       "caption": "Exemplo de <strong>foto fullWidth</strong> que ocupa toda a largura disponível",
       "credit": "Foto: <a href=\"https://unsplash.com\">Unsplash</a>",
-      "alt": "Posto de recarga para carros elétricos",
-      "fullWidth": "true",
+      "fullWidth": true,
       "alignment": "center"
     },
     {
       "type": "foto",
       "src": "https://s2-g1.glbimg.com/qe95qCVcCW9ld9Sk020FZrVrWuA=/0x0:1296x730/1000x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/f/D/MnB2alRoaZQ3bVWJa4rA/quarteto-fantastico-1994.jpg",
+      "alt": "Lineup de carros elétricos",
       "caption": "Foto com <strong>alinhamento à esquerda</strong> para criar layouts mais dinâmicos",
       "credit": "Crédito com <em>formatação</em>",
-      "alt": "Lineup de carros elétricos",
-      "fullWidth": "false",
+      "fullWidth": false,
       "alignment": "left"
     },
     {
       "type": "foto",
       "src": "https://s2-g1.glbimg.com/xK4a4h0AQp4U98hALh5AuVQkxx4=/0x0:2048x1139/1000x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/z/S/MZt3o4Se2JlQCqo8y4uw/quarteto-fantastico-e-o-surfista-prateado.jpg",
+      "alt": "Fábrica de carros elétricos",
       "caption": "Foto com <strong>alinhamento à direita</strong> para variar o layout visual",
       "credit": "Outro exemplo de crédito",
-      "alt": "Fábrica de carros elétricos",
-      "fullWidth": "false",
+      "fullWidth": false,
       "alignment": "right"
     },
     {
@@ -185,71 +185,59 @@
       "src": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
       "caption": "Exemplo de <strong>vídeo normal</strong> com controles padrão",
       "credit": "Vídeo: <em>Sample Videos</em>",
-      "fullWidth": "false",
-      "autoplay": "false",
-      "controls": "true",
-      "showCaption": "true",
-      "loop": "false"
+      "fullWidth": false,
+      "autoplay": false,
+      "controls": true,
+      "loop": false,
+      "showCaption": true
     },
     {
       "type": "video",
       "src": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
       "caption": "Vídeo <strong>fullWidth</strong> que ocupa toda a largura",
       "credit": "Vídeo: Sample Videos",
-      "fullWidth": "true",
-      "autoplay": "true",
-      "controls": "true",
-      "showCaption": "true",
-      "loop": "true"
+      "fullWidth": true,
+      "autoplay": true,
+      "controls": true,
+      "loop": true,
+      "showCaption": true
     },
     {
       "type": "globovideo",
+      "videoId": "12777862",
       "caption": "Player da Globo <strong>normal</strong> com todos os controles",
       "credit": "Vídeo: <em>G1</em>",
-      "fullWidth": "false",
-      "autoplay": "false",
-      "controls": "true",
-      "videoId": "12777862",
-      "skipDFP": "false",
-      "showCaption": "true",
-      "width": "100%",
-      "height": "450",
-      "startMuted": "true",
-      "maxQuality": "high"
+      "fullWidth": false,
+      "autoplay": false,
+      "controls": true,
+      "skipDFP": false,
+      "showCaption": true
     },
     {
       "type": "globovideo",
+      "videoId": "13786052",
       "caption": "Player da Globo <strong>fullWidth</strong> para maior impacto visual",
       "credit": "Vídeo: G1",
-      "fullWidth": "true",
-      "autoplay": "false",
-      "controls": "true",
-      "videoId": "13786052",
-      "skipDFP": "true",
-      "showCaption": "true",
-      "width": "100%",
-      "height": "450",
-      "startMuted": "true",
-      "maxQuality": "high"
+      "fullWidth": true,
+      "autoplay": false,
+      "controls": true,
+      "skipDFP": true,
+      "showCaption": true
     },
     {
       "type": "globovideo",
+      "videoId": "13784829",
       "caption": "Player com <strong>autoplay</strong> (muted e skipDFP automático)",
       "credit": "Exemplo de autoplay",
-      "fullWidth": "false",
-      "autoplay": "true",
-      "controls": "true",
-      "videoId": "13784829",
-      "skipDFP": "false",
-      "showCaption": "false",
-      "width": "100%",
-      "height": "450",
-      "startMuted": "true",
-      "maxQuality": "high"
+      "fullWidth": false,
+      "autoplay": true,
+      "controls": true,
+      "skipDFP": false,
+      "showCaption": false
     },
     {
       "type": "intertitulo",
-      "text": "Seção 4: Mais Variações de Texto",
+      "text": "Seção",
       "variant": "default",
       "size": "medium"
     },
@@ -275,13 +263,13 @@
     },
     {
       "type": "intertitulo",
-      "text": "Seção 5: Testes de Casos Extremos",
+      "text": "Seção",
       "backgroundImage": "https://cdn.pixabay.com/photo/2020/01/07/13/36/sea-4747601_1280.jpg",
+      "size": "large",
+      "height": "500px",
       "textPosition": "center",
       "textAlign": "center",
-      "height": "500",
-      "size": "large",
-      "overlay": "true"
+      "overlay": true
     },
     {
       "type": "texto",
@@ -290,10 +278,10 @@
     {
       "type": "foto",
       "src": "https://cdn.pixabay.com/photo/2023/12/20/07/04/sunset-8459057_1280.jpg",
+      "alt": "Imagem pequena para teste",
       "caption": "Legenda muito longa que deve quebrar corretamente em múltiplas linhas para testar o comportamento do componente com <strong>textos extensos</strong> que podem causar problemas de layout se não forem tratados adequadamente",
       "credit": "Crédito também muito longo: <em>Fotógrafo com Nome Muito Extenso da Agência de Fotografia Internacional</em>",
-      "alt": "Imagem pequena para teste",
-      "fullWidth": "false",
+      "fullWidth": false,
       "alignment": "center"
     },
     {
@@ -304,17 +292,13 @@
     },
     {
       "type": "globovideo",
+      "videoId": "4372653",
       "caption": "Teste de player sem algumas props para verificar valores padrão",
       "credit": "",
-      "fullWidth": "false",
-      "autoplay": "false",
-      "controls": "true",
-      "videoId": "4372653",
-      "showCaption": "true",
-      "width": "100%",
-      "height": "450",
-      "startMuted": "true",
-      "maxQuality": "high"
+      "fullWidth": false,
+      "autoplay": false,
+      "controls": true,
+      "showCaption": true
     },
     {
       "type": "intertitulo",
@@ -335,10 +319,10 @@
     {
       "type": "foto",
       "src": "https://cdn.pixabay.com/photo/2020/03/08/09/10/church-4911852_1280.jpg",
+      "alt": "",
       "caption": "",
       "credit": "",
-      "alt": "",
-      "fullWidth": "true",
+      "fullWidth": true,
       "alignment": "center"
     },
     {
@@ -347,17 +331,17 @@
     },
     {
       "type": "intertitulo",
-      "text": "Seção 6: Testes Responsivos",
+      "text": "Seção",
       "backgroundImage": "https://cdn.pixabay.com/photo/2018/04/25/09/26/eiffel-tower-3349075_1280.jpg",
       "backgroundImageMobile": "https://cdn.pixabay.com/photo/2024/09/21/15/07/eiffel-tower-9064240_1280.jpg",
+      "size": "large",
+      "height": "400px",
+      "heightMobile": "200px",
       "textPosition": "bottom",
       "textPositionMobile": "top",
       "textAlign": "left",
       "textAlignMobile": "right",
-      "height": "400",
-      "heightMobile": "200",
-      "size": "large",
-      "overlay": "true"
+      "overlay": true
     },
     {
       "type": "texto",
@@ -365,17 +349,17 @@
     },
     {
       "type": "intertitulo",
-      "text": "Desktop: Centro/Centro, Mobile: Topo/Esquerda",
+      "text": "",
       "backgroundImage": "https://cdn.pixabay.com/photo/2018/04/25/09/26/eiffel-tower-3349075_1280.jpg",
       "backgroundImageMobile": "https://cdn.pixabay.com/photo/2013/04/13/18/42/tower-103417_1280.jpg",
+      "size": "medium",
+      "height": "300px",
+      "heightMobile": "180px",
       "textPosition": "center",
       "textPositionMobile": "top",
       "textAlign": "center",
       "textAlignMobile": "left",
-      "height": "300",
-      "heightMobile": "180",
-      "size": "medium",
-      "overlay": "true"
+      "overlay": true
     },
     {
       "type": "texto",
@@ -383,7 +367,7 @@
     },
     {
       "type": "intertitulo",
-      "text": "Seção 8: Componentes Avançados - PhotoGallery",
+      "text": "Seção",
       "variant": "default",
       "size": "medium"
     },
@@ -395,7 +379,11 @@
       "type": "galeria",
       "images": [],
       "layout": "grid",
-      "columns": "3"
+      "columns": "3",
+      "&nbsp; &nbsp; \"src\"": "\"https://cdn.pixabay.com/photo/2015/09/09/07/05/sea-931164_1280.jpg\",",
+      "&nbsp; &nbsp; \"alt\"": "\"Carro elétrico 1\",",
+      "&nbsp; &nbsp; \"caption\"": "\"Tesla Model S na estrada\",",
+      "&nbsp; &nbsp; \"credit\"": "\"Foto: Picsum\""
     },
     {
       "type": "texto",
@@ -405,7 +393,11 @@
       "type": "galeria",
       "images": [],
       "layout": "masonry",
-      "columns": "2"
+      "columns": "2",
+      "&nbsp; &nbsp; \"src\"": "\"https://cdn.pixabay.com/photo/2022/03/30/13/18/betta-7101168_1280.jpg\",",
+      "&nbsp; &nbsp; \"alt\"": "\"Paisagem vertical\",",
+      "&nbsp; &nbsp; \"caption\"": "\"Imagem em formato portrait\",",
+      "&nbsp; &nbsp; \"credit\"": "\"Teste masonry\""
     },
     {
       "type": "texto",
@@ -413,29 +405,40 @@
     },
     {
       "type": "intertitulo",
-      "text": "Seção 9: Carousel Interativo",
+      "text": "Seção",
       "variant": "default",
       "size": "medium"
     },
     {
       "type": "carrossel",
       "items": [],
-      "autoplay": "false",
+      "autoplay": false,
       "interval": "3000",
-      "showDots": "true",
-      "showArrows": "true"
+      "showDots": true,
+      "showArrows": true,
+      "&nbsp; &nbsp; \"type\"": "\"image\",",
+      "&nbsp; &nbsp; \"src\"": "\"https://cdn.pixabay.com/photo/2023/05/30/15/34/silver-gull-8028946_1280.jpg\",",
+      "&nbsp; &nbsp; \"alt\"": "\"Slide 1\",",
+      "&nbsp; &nbsp; \"caption\"": "\"Primeiro slide do carrossel - Carro elétrico moderno\",",
+      "&nbsp; &nbsp; \"credit\"": "\"Carousel test 1\"",
+      "&nbsp; &nbsp; \"content\"": "\"<h2 style='color: var(--color-primary);'>Slide de Conteúdo</h2><p>Este é um slide com <strong>conteúdo HTML</strong> personalizado ao invés de imagem.</p>\","
     },
     {
       "type": "texto",
-      "text": "Carousel <strong>sem autoplay</strong> com diferentes tipos de conteúdo: imagens, HTML customizado e vídeo."
+      "text": "Carousel <strong>sem autoplay</strong> com diferentes tipos de conteú"
     },
     {
       "type": "carrossel",
       "items": [],
-      "autoplay": "true",
+      "autoplay": true,
       "interval": "4000",
-      "showDots": "true",
-      "showArrows": "false"
+      "showDots": true,
+      "showArrows": false,
+      "&nbsp; &nbsp; \"type\"": "\"image\",",
+      "&nbsp; &nbsp; \"src\"": "\"https://cdn.pixabay.com/photo/2023/04/10/12/43/bird-7913707_1280.jpg\",",
+      "&nbsp; &nbsp; \"alt\"": "\"Auto slide 1\",",
+      "&nbsp; &nbsp; \"caption\"": "\"Carousel com autoplay ativado\",",
+      "&nbsp; &nbsp; \"credit\"": "\"Auto carousel 1\""
     },
     {
       "type": "texto",
@@ -443,17 +446,17 @@
     },
     {
       "type": "intertitulo",
-      "text": "Seção 10: Parallax Effect",
+      "text": "Seção",
       "variant": "default",
       "size": "medium"
     },
     {
       "type": "parallax",
-      "content": "\"<h2>Efeito Parallax Suave</h2><p>A imagem se move mais devagar que o scroll, criando profundidade visual. Speed: 0.5</p>\"</span></p><p class=\"c1 c2\"><span class=\"c0\"></span></p><p class=\"c1\"><span class=\"c0\">",
       "image": "https://cdn.pixabay.com/photo/2023/10/21/11/46/sunset-8331285_1280.jpg",
       "height": "100vh",
       "speed": "0.5",
-      "overlay": "true"
+      "overlay": true,
+      "content": "\"<h2>Efeito Parallax Suave</h2><p>A imagem se move mais devagar que o scroll, criando profundidade visual. Speed: 0.5</p>\""
     },
     {
       "type": "texto",
@@ -461,11 +464,11 @@
     },
     {
       "type": "parallax",
-      "content": "\"<h2>Parallax Mais Rápido</h2><p>Com speed 0.8, o movimento é mais pronunciado e dramático.</p>\"</span></p><p class=\"c1 c2\"><span class=\"c0\"></span></p><p class=\"c1\"><span class=\"c0\">",
       "image": "https://cdn.pixabay.com/photo/2016/07/15/22/26/sunset-1520615_1280.jpg",
       "height": "50vh",
       "speed": "0.8",
-      "overlay": "true"
+      "overlay": true,
+      "content": "\"<h2>Parallax Mais Rápido</h2><p>Com speed 0.8, o movimento é mais pronunciado e dramático.</p>\""
     },
     {
       "type": "texto",
@@ -473,11 +476,11 @@
     },
     {
       "type": "parallax",
-      "content": "\"<h2 style='text-shadow: 2px 2px 4px rgba(0,0,0,0.8);'>Sem Overlay</h2><p style='text-shadow: 1px 1px 2px rgba(0,0,0,0.8);'>Parallax sem overlay escuro, texto com sombra para legibilidade.</p>\"</span></p><p class=\"c1 c2\"><span class=\"c0\"></span></p><p class=\"c1\"><span class=\"c0\">",
       "image": "https://cdn.pixabay.com/photo/2016/07/15/22/26/sunset-1520615_1280.jpg",
       "height": "100vh",
       "speed": "0.3",
-      "overlay": "false"
+      "overlay": false,
+      "content": "\"<h2 style='text-shadow: 2px 2px 4px rgba(0,0,0,0.8);'>Sem Overlay</h2><p style='text-shadow: 1px 1px 2px rgba(0,0,0,0.8);'>Parallax sem overlay escuro, texto com sombra para legibilidade.</p>\""
     },
     {
       "type": "texto",
@@ -485,17 +488,17 @@
     },
     {
       "type": "intertitulo",
-      "text": "Seção 11: Before/After Comparisons",
+      "text": "Seção",
       "variant": "default",
       "size": "medium"
     },
     {
       "type": "antes-depois",
-      "orientation": "vertical",
       "beforeImage": "https://cdn.pixabay.com/photo/2015/09/09/16/40/girl-931776_1280.jpg",
       "afterImage": "https://cdn.pixabay.com/photo/2016/11/19/10/30/beach-1838501_1280.jpg",
       "beforeLabel": "Combustão",
-      "afterLabel": "Elétrico"
+      "afterLabel": "Elétrico",
+      "orientation": "vertical"
     },
     {
       "type": "texto",
@@ -503,11 +506,11 @@
     },
     {
       "type": "antes-depois",
-      "orientation": "horizontal",
       "beforeImage": "https://cdn.pixabay.com/photo/2022/09/15/09/05/man-7456044_1280.jpg",
       "afterImage": "https://cdn.pixabay.com/photo/2022/09/15/09/04/sea-7456037_1280.jpg",
       "beforeLabel": "Conceito",
-      "afterLabel": "Produção"
+      "afterLabel": "Produção",
+      "orientation": "horizontal"
     },
     {
       "type": "texto",
@@ -515,11 +518,11 @@
     },
     {
       "type": "antes-depois",
-      "orientation": "vertical",
       "beforeImage": "https://picsum.photos/800/600?random=39",
       "afterImage": "https://picsum.photos/800/600?random=40",
       "beforeLabel": "Poluição",
-      "afterLabel": "Sustentabilidade"
+      "afterLabel": "Sustentabilidade",
+      "orientation": "vertical"
     },
     {
       "type": "texto",
@@ -527,15 +530,19 @@
     },
     {
       "type": "intertitulo",
-      "text": "Seção 12: ScrollyTelling Narrativo",
+      "text": "Seção",
       "variant": "default",
       "size": "medium"
     },
     {
       "type": "scrollytelling",
-      "backgroundImage": "https://cdn.pixabay.com/photo/2016/11/29/04/19/ocean-1867285_1280.jpg",
       "steps": [],
-      "stickyHeight": "100"
+      "stickyHeight": "100vh",
+      "backgroundImage": "https://cdn.pixabay.com/photo/2016/11/29/04/19/ocean-1867285_1280.jpg",
+      "&nbsp; &nbsp; \"title\"": "\"O Início da Revolução\",",
+      "&nbsp; &nbsp; \"text\"": "\"Em 2008, a Tesla lançou o primeiro Roadster, marcando o início da era dos carros elétricos modernos.\",",
+      "&nbsp; &nbsp; \"image\"": "\"https://cdn.pixabay.com/photo/2017/03/27/16/50/beach-2179624_1280.jpg0\",",
+      "&nbsp; &nbsp; \"alt\"": "\"Tesla Roadster\""
     },
     {
       "type": "texto",
@@ -543,9 +550,13 @@
     },
     {
       "type": "scrollytelling",
-      "backgroundImage": "https://cdn.pixabay.com/photo/2025/07/20/15/47/mountain-9724688_1280.jpg",
       "steps": [],
-      "stickyHeight": "80"
+      "stickyHeight": "80vh",
+      "backgroundImage": "https://cdn.pixabay.com/photo/2025/07/20/15/47/mountain-9724688_1280.jpg",
+      "&nbsp; &nbsp; \"title\"": "\"Tecnologia Embarcada\",",
+      "&nbsp; &nbsp; \"text\"": "\"Sistemas inteligentes de assistência ao motorista tornaram a condução mais segura e eficiente.\",",
+      "&nbsp; &nbsp; \"image\"": "\"https://cdn.pixabay.com/photo/2017/11/03/12/10/dolomites-2914157_1280.jpg\",",
+      "&nbsp; &nbsp; \"alt\"": "\"Tecnologia\""
     },
     {
       "type": "texto",
@@ -553,17 +564,17 @@
     },
     {
       "type": "intertitulo",
-      "text": "Seção 13: Combinações Complexas dos Novos Componentes",
+      "text": "Seção",
       "variant": "default",
       "size": "medium"
     },
     {
       "type": "foto",
       "src": "https://cdn.pixabay.com/photo/2022/01/06/14/18/mountains-6919584_1280.jpg",
+      "alt": "Teste de combinação",
       "caption": "Esta foto vem antes de uma citação para testar <strong>proximidade visual</strong>",
       "credit": "Teste de fluxo",
-      "alt": "Teste de combinação",
-      "fullWidth": "true"
+      "fullWidth": true
     },
     {
       "type": "frase",
@@ -576,69 +587,76 @@
       "src": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
       "caption": "Vídeo após citação para testar <strong>sequência de mídias</strong>",
       "credit": "Teste de fluxo visual",
-      "fullWidth": "false",
-      "autoplay": "false",
-      "controls": "true",
-      "showCaption": "true"
+      "fullWidth": false,
+      "autoplay": false,
+      "controls": true,
+      "showCaption": true
     },
     {
       "type": "globovideo",
+      "videoId": "13786292",
       "caption": "Player da Globo após vídeo normal - teste de <strong>players consecutivos</strong>",
       "credit": "Sequência de vídeos",
-      "fullWidth": "true",
-      "autoplay": "false",
-      "controls": "true",
-      "videoId": "13786292",
-      "skipDFP": "true",
-      "showCaption": "true",
-      "width": "100%",
-      "height": "450",
-      "startMuted": "true",
-      "maxQuality": "high"
+      "fullWidth": true,
+      "autoplay": false,
+      "controls": true,
+      "skipDFP": true,
+      "showCaption": true
     },
     {
       "type": "parallax",
-      "content": "\"<h2>Combinação de Componentes</h2><p>Parallax seguido de galeria para testar fluxo visual complexo.</p>\"</span></p><p class=\"c1 c2\"><span class=\"c0\"></span></p><p class=\"c1\"><span class=\"c0\">",
       "image": "https://cdn.pixabay.com/photo/2021/12/12/18/04/mountains-6865752_1280.jpg",
       "height": "100vh",
       "speed": "0.6",
-      "overlay": "true"
+      "overlay": true,
+      "content": "\"<h2>Combinação de Componentes</h2><p>Parallax seguido de galeria para testar fluxo visual complexo.</p>\""
     },
     {
       "type": "galeria",
       "images": [],
       "layout": "grid",
-      "columns": "4"
+      "columns": "4",
+      "&nbsp; &nbsp; \"src\"": "\"https://cdn.pixabay.com/photo/2023/03/16/20/56/mountains-7857522_1280.jpg\",",
+      "&nbsp; &nbsp; \"alt\"": "\"Mini 1\",",
+      "&nbsp; &nbsp; \"caption\"": "\"Grid 4 colunas\""
     },
     {
       "type": "antes-depois",
-      "orientation": "vertical",
       "beforeImage": "https://cdn.pixabay.com/photo/2021/12/29/14/47/water-6901805_1280.jpg",
       "afterImage": "https://cdn.pixabay.com/photo/2016/02/22/12/37/waves-1215449_1280.jpg",
       "beforeLabel": "Passado",
-      "afterLabel": "Futuro"
+      "afterLabel": "Futuro",
+      "orientation": "vertical"
     },
     {
       "type": "carrossel",
       "items": [],
-      "autoplay": "true",
+      "autoplay": true,
       "interval": "5000",
-      "showDots": "false",
-      "showArrows": "true"
+      "showDots": false,
+      "showArrows": true,
+      "&nbsp; &nbsp; \"type\"": "\"content\",",
+      "&nbsp; &nbsp; \"content\"": "\"<div style='background: linear-gradient(45deg, var(--color-primary), var(--color-secondary)); padding: 3rem; color: white; text-align: center;'><h2>Carousel Final</h2><p>Teste de carousel após before/after</p></div>\"",
+      "&nbsp; &nbsp; \"src\"": "\"https://cdn.pixabay.com/photo/2020/02/02/23/50/beach-4814418_1280.jpg\",",
+      "&nbsp; &nbsp; \"caption\"": "\"Sequência de componentes avançados funcionando perfeitamente\""
     },
     {
       "type": "intertitulo",
       "text": "Final do Showcase Completo",
       "backgroundImage": "https://cdn.pixabay.com/photo/2021/02/20/18/11/sea-6034191_1280.jpg",
+      "size": "large",
+      "height": "350px",
       "textPosition": "center",
       "textAlign": "center",
-      "height": "350",
-      "size": "large",
-      "overlay": "true"
+      "overlay": true
     },
     {
       "type": "texto",
-      "text": "<ul><li><strong>&#127881; SHOWCASE COMPLETO FINALIZADO!</strong></li><li>  <strong>Componentes testados:</strong></li><li>  &bull; <em>Header</em> - variants e backgrounds &#9989;</li><li>  &bull; <em>StoryText</em> - body, lead, quote &#9989;</li><li>  &bull; <em>SectionTitle</em> - 15+ variações &#9989;</li><li>  &bull; <em>PhotoWithCaption</em> - todos alinhamentos &#9989;</li><li>  &bull; <em>VideoPlayer</em> - configurações diversas &#9989;</li><li>  &bull; <em>GloboPlayer</em> - todas as props &#9989;</li><li>  &bull; <em>PhotoGallery</em> - grid, masonry, lightbox &#9989;</li><li>  &bull; <em>Carousel</em> - autoplay, tipos de conteúdo &#9989;</li><li>  &bull; <em>Parallax</em> - velocidades e alturas &#9989;</li><li>  &bull; <em>BeforeAfter</em> - vertical e horizontal &#9989;</li><li>  &bull; <em>ScrollyTelling</em> - narrativa imersiva &#9989;</li><li>  <strong>Casos extremos:</strong> props vazias, textos longos, sequências complexas &#9989;</li><li>  <strong>Responsividade:</strong> desktop/mobile específicos &#9989;</li><li>  <strong>Combinações:</strong> fluxos visuais complexos &#9989;    </li></ul>"
+      "text": "<ul><li><strong>&#127881; SHOWCASE COMPLETO FINALIZADO!</strong></li><li>  <strong>Componentes</li></ul>",
+      "<strong>Componentes testados": "</strong><br>",
+      "<strong>Casos extremos": "</strong> props vazias, textos longos, sequências complexas &#9989;<br>",
+      "<strong>Responsividade": "</strong> desktop/mobile específicos &#9989;<br>",
+      "<strong>Combinações": "</strong> fluxos visuais complexos &#9989;"
     },
     {
       "type": "frase",
