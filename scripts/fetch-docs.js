@@ -19,11 +19,7 @@ async function fetchGoogleDoc(docId) {
     
     let rawHtml = response.data.trim();
     
-    // Parse HTML mantendo formatação
     const data = parseHTMLFormat(rawHtml);
-    
-    console.log('\n🔍 Dados processados:');
-    console.log(JSON.stringify(data, null, 2));
     
     if (!data.title) {
       throw new Error('Documento deve ter "title:"');
@@ -52,20 +48,6 @@ async function fetchGoogleDoc(docId) {
     console.log(`📊 Intro: ${data.intro ? 'OK' : 'Vazio'}`);
     console.log(`📊 Paragraphs: ${data.paragraphs ? data.paragraphs.length : 0} itens`);
     
-    // Validações e logs (mantidos como no seu original)
-    const withBackgrounds = data.paragraphs?.filter(p => p.backgroundImage || p.backgroundImageMobile) || [];
-    if (withBackgrounds.length > 0) {
-      console.log(`🖼️ Componentes com background encontrados: ${withBackgrounds.length}`);
-    }
-    const globoPlayers = data.paragraphs?.filter(p => ['globovideo', 'globo-video', 'globoplayer', 'globo-player', 'globo'].includes(p.type?.toLowerCase())) || [];
-    if (globoPlayers.length > 0) {
-        console.log(`🎬 GloboPlayers encontrados: ${globoPlayers.length}`);
-    }
-    const parallaxComponents = data.paragraphs?.filter(p => p.type?.toLowerCase() === 'parallax') || [];
-    if (parallaxComponents.length > 0) {
-        console.log(`🌄 Componentes Parallax encontrados: ${parallaxComponents.length}`);
-    }
-    
     return data;
     
   } catch (error) {
@@ -75,7 +57,6 @@ async function fetchGoogleDoc(docId) {
 }
 
 function parseHTMLFormat(html) {
-  // Esta função permanece idêntica à sua original
   html = html.replace(/<style[^>]*>.*?<\/style>/gs, '');
   html = html.replace(/<script[^>]*>.*?<\/script>/gs, '');
   html = html.replace(/<head[^>]*>.*?<\/head>/gs, '');
@@ -132,142 +113,114 @@ function parseHTMLFormat(html) {
 }
 
 function decodeHTMLEntities(text) {
-    if (!text) return '';
-    const entities = { '&amp;': '&', '&lt;': '<', '&gt;': '>', '&quot;': '"', '&#39;': "'", '&aacute;': 'á', '&agrave;': 'à', '&acirc;': 'â', '&atilde;': 'ã', '&auml;': 'ä', '&eacute;': 'é', '&egrave;': 'è', '&ecirc;': 'ê', '&euml;': 'ë', '&iacute;': 'í', '&igrave;': 'ì', '&icirc;': 'î', '&iuml;': 'ï', '&oacute;': 'ó', '&ograve;': 'ò', '&ocirc;': 'ô', '&otilde;': 'õ', '&ouml;': 'ö', '&uacute;': 'ú', '&ugrave;': 'ù', '&ucirc;': 'û', '&uuml;': 'ü', '&ccedil;': 'ç', '&ntilde;': 'ñ' };
-    return text.replace(/&[a-zA-Z0-9#]+;/g, (entity) => entities[entity] || entity);
+  if (!text) return '';
+  const entities = { '&amp;': '&', '&lt;': '<', '&gt;': '>', '&quot;': '"', '&#39;': "'", '&aacute;': 'á', '&agrave;': 'à', '&acirc;': 'â', '&atilde;': 'ã', '&auml;': 'ä', '&eacute;': 'é', '&egrave;': 'è', '&ecirc;': 'ê', '&euml;': 'ë', '&iacute;': 'í', '&igrave;': 'ì', '&icirc;': 'î', '&iuml;': 'ï', '&oacute;': 'ó', '&ograve;': 'ò', '&ocirc;': 'ô', '&otilde;': 'õ', '&ouml;': 'ö', '&uacute;': 'ú', '&ugrave;': 'ù', '&ucirc;': 'û', '&uuml;': 'ü', '&ccedil;': 'ç', '&ntilde;': 'ñ' };
+  return text.replace(/&[a-zA-Z0-9#]+;/g, (entity) => entities[entity] || entity);
 }
 
-// =================================================================
-// ▼▼▼ FUNÇÃO CORRIGIDA ▼▼▼
-// =================================================================
 function parseParagraphsHTML(html) {
-    const paragraphs = [];
-    const typeBlocks = html.split(/(?=type:\s*)/);
-
-    for (let block of typeBlocks) {
-        if (!block.trim() || !block.includes('type:')) continue;
-
-        const paragraph = {};
-        
-        // 1. Extrai o 'type' primeiro e limpa a chave do bloco
-        const typeMatch = block.match(/type:\s*([^\n<]+)/);
-        if (typeMatch) {
-            paragraph.type = decodeHTMLEntities(typeMatch[1].trim());
-            block = block.substring(typeMatch[0].length); // Remove a chave 'type'
-        } else {
-            continue; // Se não tem tipo, pula o bloco
-        }
-
-        // 2. Extrai campos "complexos" (JSON ou HTML) primeiro
-        
-        // Para 'images', 'items', 'steps' (JSON)
-        const jsonFields = ['images', 'items', 'steps'];
-        for (const field of jsonFields) {
-            const regex = new RegExp(`${field}:\\s*(\\[[\\s\\S]*?\\])`);
-            const match = block.match(regex);
-            if (match) {
-                try {
-                    // Limpa quebras de linha e tenta o parse
-                    paragraph[field] = JSON.parse(match[1].replace(/\n\s*/g, ' '));
-                    block = block.replace(match[0], ''); // Remove o campo do bloco
-                } catch (e) {
-                    console.warn(`⚠️ Erro ao processar JSON para o campo '${field}':`, e);
-                    paragraph[field] = [];
-                }
-            }
-        }
-
-        // Para 'content' do Parallax (HTML)
-        // Procura por content:"..." ou content:'...'
-        const contentMatch = block.match(/content:\s*(?:"([^"]*(?:"[^"]*"[^"]*)*[^"]*)"|'([^']*(?:'[^']*'[^']*)*[^']*)')/s);
-        if (contentMatch) {
-            // Usa o grupo que capturou (aspas duplas ou simples)
-            const contentValue = contentMatch[1] || contentMatch[2];
-            paragraph.content = decodeHTMLEntities(contentValue);
-            block = block.replace(contentMatch[0], ''); // Remove o campo do bloco
-        }
-
-        // 3. Processa os campos simples restantes (key: value)
-        // Remove tags HTML para facilitar a busca de chaves simples
-        const cleanBlock = decodeHTMLEntities(block.replace(/<[^>]*>/g, '\n'));
-        const lines = cleanBlock.split('\n').filter(line => line.trim().includes(':'));
-
-        for (const line of lines) {
-            const parts = line.split(/:(.*)/s); // Divide no primeiro ':'
-            if (parts.length > 1) {
-                const key = parts[0].trim();
-                let value = parts[1].trim();
-
-                // Converte valores booleanos e numéricos
-                if (value === 'true') value = true;
-                else if (value === 'false') value = false;
-                else if (!isNaN(value) && value.trim() !== '') {
-                  // Mantém como string para consistência, a não ser que precise de números
-                  // value = parseFloat(value); 
-                }
-                
-                if (key && !paragraph.hasOwnProperty(key)) {
-                    paragraph[key] = value;
-                }
-            }
-        }
-        
-        // 4. Tratamento especial para o campo 'text' que pode conter HTML
-        const textMatch = block.match(/text:\s*([\s\S]*)/);
-        if (textMatch) {
-            // O 'resto' do bloco, após extrair outras chaves, é provavelmente o texto.
-            // Esta é uma heurística, mas funciona para ArchieML.
-            const remainingBlock = textMatch[1];
-            const nextKeyMatch = remainingBlock.match(/[a-zA-Z0-9]+:/); // Procura pela próxima chave
-            
-            let textValue = remainingBlock;
-            if (nextKeyMatch) {
-                textValue = remainingBlock.substring(0, nextKeyMatch.index).trim();
-            }
-            
-            paragraph.text = cleanAndFormatHTML(textValue);
-        }
-
-        paragraphs.push(paragraph);
+  const paragraphs = [];
+  const typeBlocks = html.split(/(?=type:\s*)/);
+  
+  for (const block of typeBlocks) {
+    if (!block.trim() || !block.includes('type:')) continue;
+    
+    const paragraph = {};
+    
+    const typeMatch = block.match(/type:\s*([^\n<]+)/);
+    if (typeMatch) {
+      paragraph.type = decodeHTMLEntities(typeMatch[1].trim());
     }
-    return paragraphs;
-}
-// =================================================================
-// ▲▲▲ FIM DA FUNÇÃO CORRIGIDA ▲▲▲
-// =================================================================
+    
+    const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:backgroundImage|backgroundImageMobile|backgroundVideo|backgroundVideoMobile|backgroundPosition|backgroundPositionMobile|author|role|src|caption|credit|alt|fullWidth|variant|size|orientation|autoplay|controls|poster|images|items|steps|beforeImage|afterImage|beforeLabel|afterLabel|image|height|heightMobile|speed|content|overlay|layout|columns|interval|showDots|showArrows|stickyHeight|videoId|videosIDs|id|skipDFP|skipdfp|autoPlay|startMuted|maxQuality|quality|chromeless|isLive|live|allowRestrictedContent|preventBlackBars|globoId|token|adAccountId|adCmsId|siteName|width|textPosition|textPositionMobile|textAlign|textAlignMobile):|type:|$)/s);
+    if (textMatch) {
+        if (paragraph.type === 'texto') {
+            paragraph.text = cleanAndFormatHTML(textMatch[1].trim());
+        } else {
+            paragraph.text = decodeHTMLEntities(textMatch[1].trim().replace(/<[^>]*>/g, ' '));
+        }
+    }
+    
+    const jsonFields = ['images', 'items', 'steps'];
+    for (const field of jsonFields) {
+        const regex = new RegExp(`${field}:\\s*(\\[[\\s\\S]*?\\])`);
+        const match = block.match(regex);
+        if (match) {
+            try {
+                let jsonString = match[1].replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').replace(/&quot;/g, '"').replace(/,\s*\]/g, ']').replace(/,\s*}/g, '}').replace(/\n/g, ' ').replace(/\s+/g, ' ');
+                let parsedArray = JSON.parse(jsonString);
+                if (Array.isArray(parsedArray)) {
+                  parsedArray.forEach(item => {
+                    if (item.title) item.title = decodeHTMLEntities(item.title);
+                    if (item.text) item.text = decodeHTMLEntities(item.text);
+                    if (item.caption) item.caption = decodeHTMLEntities(item.caption);
+                  });
+                }
+                paragraph[field] = parsedArray;
+            } catch (e) {
+                console.warn(`⚠️ Erro ao processar JSON para o campo '${field}':`, e);
+                paragraph[field] = [];
+            }
+        }
+    }
 
+    const fieldMappings = {
+      backgroundImage: 'backgroundImage', backgroundImageMobile: 'backgroundImageMobile', backgroundVideo: 'backgroundVideo',
+      backgroundVideoMobile: 'backgroundVideoMobile', backgroundPosition: 'backgroundPosition', backgroundPositionMobile: 'backgroundPositionMobile',
+      textPosition: 'textPosition', textPositionMobile: 'textPositionMobile', textAlign: 'textAlign', textAlignMobile: 'textAlignMobile',
+      author: 'author', role: 'role', src: 'src', caption: 'caption', credit: 'credit', alt: 'alt', fullWidth: 'fullWidth', variant: 'variant',
+      size: 'size', orientation: 'orientation', autoplay: 'autoplay', controls: 'controls', poster: 'poster', overlay: 'overlay',
+      layout: 'layout', columns: 'columns', interval: 'interval', showDots: 'showDots', showArrows: 'showArrows',
+      stickyHeight: 'stickyHeight', beforeImage: 'beforeImage', afterImage: 'afterImage', beforeLabel: 'beforeLabel',
+      afterLabel: 'afterLabel', image: 'image', speed: 'speed', content: 'content', videoId: 'videoId', videosIDs: 'videosIDs', id: 'id',
+      skipDFP: 'skipDFP', skipdfp: 'skipdfp', autoPlay: 'autoPlay', startMuted: 'startMuted', maxQuality: 'maxQuality', quality: 'quality',
+      chromeless: 'chromeless', isLive: 'isLive', live: 'live', allowRestrictedContent: 'allowRestrictedContent',
+      preventBlackBars: 'preventBlackBars', globoId: 'globoId', token: 'token', adAccountId: 'adAccountId', adCmsId: 'adCmsId',
+      siteName: 'siteName', width: 'width', height: 'height', heightMobile: 'heightMobile', showCaption: 'showCaption',
+      alignment: 'alignment', loop: 'loop'
+    };
+    
+    for (const [field, prop] of Object.entries(fieldMappings)) {
+      const regex = new RegExp(`${field}:\\s*([^\\n<]*)`);
+      const match = block.match(regex);
+      if (match) {
+        paragraph[prop] = decodeHTMLEntities(match[1].trim());
+      }
+    }
+    
+    if (paragraph.type) {
+      paragraphs.push(paragraph);
+    }
+  }
+  return paragraphs;
+}
 
 function cleanAndFormatHTML(html) {
-  // Esta função permanece idêntica à sua original
   if (!html) return '';
-  html = decodeHTMLEntities(html);
-  html = html.replace(/<br[^>]*>/gi, '\n• ');
-  if (html.includes('• ')) {
-    const items = html.split('• ').filter(item => item.trim());
-    if (items.length > 1) {
-      html = '<ul>' + items.map(item => `<li>${item.trim()}</li>`).join('') + '</ul>';
-    }
-  }
-  html = html.replace(/<([^>]+)style="[^"]*font-weight:\s*(?:bold|[7-9]\d\d|700|800|900)[^"]*"[^>]*>(.*?)<\/\1>/gi, '<strong>$2</strong>');
-  html = html.replace(/<([^>]+)style="[^"]*font-style:\s*italic[^"]*"[^>]*>(.*?)<\/\1>/gi, '<em>$2</em>');
-  html = html.replace(/<([^>]+)style="[^"]*text-decoration[^"]*underline[^"]*"[^>]*>(.*?)<\/\1>/gi, '<u>$2</u>');
-  html = html.replace(/<a\s+href="([^"]*)"[^>]*>(.*?)<\/a>/gi, '<a href="$1">$2</a>');
-  html = html.replace(/<span[^>]*>(.*?)<\/span>/gi, '$1');
-  html = html.replace(/<\/?(?:div|p)[^>]*>/gi, ' ');
-  let previousHtml = '';
-  let iterations = 0;
-  while (html !== previousHtml && iterations < 5) {
-    previousHtml = html;
-    html = html.replace(/<span[^>]*font-weight:\s*(?:bold|[7-9]\d\d)[^>]*>(.*?)<\/span>/gi, '<strong>$1</strong>');
-    html = html.replace(/<span[^>]*font-style:\s*italic[^>]*>(.*?)<\/span>/gi, '<em>$1</em>');
-    html = html.replace(/<span[^>]*text-decoration[^"]*underline[^>]*>(.*?)<\/span>/gi, '<u>$1</u>');
-    iterations++;
-  }
-  html = html.replace(/<\/?span[^>]*>/gi, '');
-  if (!html.includes('<ul>')) {
-    html = html.replace(/\s+/g, ' ').trim();
-  }
-  return html;
+  
+  let cleanedHtml = decodeHTMLEntities(html);
+  
+  cleanedHtml = cleanedHtml.replace(/<([^>]+)style="[^"]*font-weight:\s*(?:bold|[7-9]\d\d|700|800|900)[^"]*"[^>]*>(.*?)<\/\1>/gi, '<strong>$2</strong>');
+  cleanedHtml = cleanedHtml.replace(/<([^>]+)style="[^"]*font-style:\s*italic[^"]*"[^>]*>(.*?)<\/\1>/gi, '<em>$2</em>');
+  cleanedHtml = cleanedHtml.replace(/<([^>]+)style="[^"]*text-decoration[^"]*underline[^"]*"[^>]*>(.*?)<\/\1>/gi, '<u>$2</u>');
+  cleanedHtml = cleanedHtml.replace(/<a\s+href="([^"]*)"[^>]*>(.*?)<\/a>/gi, '<a href="$1">$2</a>');
+  
+  // ▼▼▼ ADIÇÃO CIRÚRGICA PARA CORRIGIR APENAS A LISTA DE BULLETS ▼▼▼
+  // Esta regex encontra um bloco de texto que contém itens de lista (iniciados com •, * ou -) separados por <br>.
+  // Ela transforma APENAS esse bloco em uma lista <ul>, sem afetar o resto do texto.
+  const listRegex = /((?:[•*-]\s.*)(?:<br\s*\/?>\s*[•*-]\s.*)*)/g;
+  cleanedHtml = cleanedHtml.replace(listRegex, (listBlock) => {
+    const items = listBlock.split(/<br\s*\/?>/gi)
+      .map(item => item.trim())
+      .filter(item => item.length > 0)
+      .map(item => `<li>${item.replace(/^[•*-]\s/, '').trim()}</li>`)
+      .join('');
+    return items ? `<ul>${items}</ul>` : '';
+  });
+
+  cleanedHtml = cleanedHtml.replace(/<\/?(span|p|div)[^>]*>/gi, '');
+  
+  return cleanedHtml.trim();
 }
 
 const args = process.argv.slice(2);

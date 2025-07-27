@@ -1,4 +1,3 @@
-<!-- src/lib/components/StoryRenderer.svelte -->
 <script>
   import Header from './story/Header.svelte';
   import StoryText from './story/StoryText.svelte';
@@ -14,10 +13,8 @@
 
   export let storyData = {};
 
-  // Mapeia os tipos que vêm do ArchieML para os componentes
   function getComponentType(paragraph) {
     const type = paragraph.type?.toLowerCase();
-    
     switch (type) {
       case 'header':
       case 'titulo-principal':
@@ -38,7 +35,6 @@
       case 'video':
       case 'mp4':
         return 'video';
-      // 🆕 ADICIONADOS NOVOS TIPOS PARA GLOBOPLAYER
       case 'globovideo':
       case 'globo-video':
       case 'globoplayer':
@@ -65,9 +61,8 @@
   }
 </script>
 
-<!-- Header se tiver title -->
 {#if storyData.title}
-  <Header 
+  <Header
     title={storyData.title}
     subtitle={storyData.subtitle || storyData.intro?.text}
     author={storyData.author}
@@ -77,39 +72,26 @@
   />
 {/if}
 
-<!-- Container principal -->
 <main class="story-container">
-  <!-- Intro se existir -->
   {#if storyData.intro && storyData.intro.text}
-    <StoryText 
-      content={storyData.intro.text}
-      variant="lead"
-      maxWidth="800px"
-    />
+    <StoryText content={storyData.intro.text} variant="lead" maxWidth="800px" />
   {/if}
 
-  <!-- Renderiza cada parágrafo do ArchieML -->
   {#if storyData.paragraphs}
     {#each storyData.paragraphs as paragraph, index}
       {@const componentType = getComponentType(paragraph)}
-      
+
       {#if componentType === 'text'}
-        <StoryText 
-          content={paragraph.text}
-          variant={paragraph.variant || 'body'}
-          maxWidth="700px"
-        />
-      
+        <StoryText content={paragraph.text} variant={paragraph.variant || 'body'} maxWidth="700px" />
       {:else if componentType === 'quote'}
-        <StoryText 
+        <StoryText
           content={paragraph.text}
           variant="quote"
           author={paragraph.author}
           role={paragraph.role}
         />
-      
       {:else if componentType === 'section-title'}
-        <SectionTitle 
+        <SectionTitle
           title={paragraph.text}
           subtitle={paragraph.subtitle}
           backgroundImage={paragraph.backgroundImage}
@@ -128,9 +110,8 @@
           textAlignMobile={paragraph.textAlignMobile}
           overlay={paragraph.overlay !== 'false'}
         />
-      
       {:else if componentType === 'photo'}
-        <PhotoWithCaption 
+        <PhotoWithCaption
           src={paragraph.src || paragraph.url || paragraph.image}
           alt={paragraph.alt || paragraph.text}
           caption={paragraph.caption || paragraph.legenda}
@@ -138,9 +119,8 @@
           fullWidth={paragraph.fullWidth === 'true' || paragraph.full === 'true'}
           alignment={paragraph.alignment || 'center'}
         />
-      
       {:else if componentType === 'video'}
-        <VideoPlayer 
+        <VideoPlayer
           src={paragraph.src || paragraph.url || paragraph.video}
           poster={paragraph.poster}
           caption={paragraph.caption || paragraph.legenda}
@@ -152,10 +132,8 @@
           showCaption={paragraph.showCaption !== 'false'}
           alignment={paragraph.alignment || 'center'}
         />
-      
-      <!-- 🆕 NOVO COMPONENTE GLOBOPLAYER -->
       {:else if componentType === 'globo-player'}
-        <GloboPlayer 
+        <GloboPlayer
           videosIDs={paragraph.videoId || paragraph.videosIDs || paragraph.id}
           width={paragraph.width || '100%'}
           height={parseInt(paragraph.height) || 450}
@@ -173,8 +151,6 @@
           adCmsId={paragraph.adCmsId}
           siteName={paragraph.siteName}
         />
-        
-        <!-- Caption/legenda separada para manter o layout -->
         {#if paragraph.caption || paragraph.legenda}
           <div class="component-caption">
             <p>{@html paragraph.caption || paragraph.legenda}</p>
@@ -183,65 +159,43 @@
             {/if}
           </div>
         {/if}
-      
       {:else if componentType === 'gallery'}
-        <PhotoGallery 
-          images={paragraph.images && Array.isArray(paragraph.images) && paragraph.images.length > 0 
-            ? paragraph.images 
-            : [
-              {src: "https://cdn.pixabay.com/photo/2015/09/09/07/05/sea-931164_1280.jpg", alt: "Fallback 1", caption: "Imagem de fallback 1"},
-              {src: "https://cdn.pixabay.com/photo/2017/05/22/19/50/surfer-2335088_1280.jpg", alt: "Fallback 2", caption: "Imagem de fallback 2"},
-              {src: "https://cdn.pixabay.com/photo/2016/11/29/03/27/action-1867052_1280.jpg", alt: "Fallback 3", caption: "Imagem de fallback 3"}
-            ]
-          }
+        <PhotoGallery
+          images={paragraph.images && Array.isArray(paragraph.images) && paragraph.images.length > 0 ? paragraph.images : []}
           layout={paragraph.layout || 'grid'}
           columns={parseInt(paragraph.columns) || 3}
         />
-      
       {:else if componentType === 'carousel'}
-        <Carousel 
-          items={paragraph.items && Array.isArray(paragraph.items) && paragraph.items.length > 0 
-            ? paragraph.items 
-            : [
-              {type: "image", src: "https://cdn.pixabay.com/photo/2023/05/30/15/34/silver-gull-8028946_1280.jpg", caption: "Slide de fallback 1"},
-              {type: "image", src: "https://cdn.pixabay.com/photo/2023/04/14/10/27/seagull-7924729_1280.jpg", caption: "Slide de fallback 2"},
-              {type: "content", content: "<h2>Fallback Content</h2><p>Conteúdo de teste para carousel</p>"}
-            ]
-          }
+        <Carousel
+          items={paragraph.items && Array.isArray(paragraph.items) && paragraph.items.length > 0 ? paragraph.items : []}
           autoplay={paragraph.autoplay === 'true'}
           interval={parseInt(paragraph.interval) || 5000}
           showDots={paragraph.showDots !== 'false'}
           showArrows={paragraph.showArrows !== 'false'}
         />
-      
       {:else if componentType === 'parallax'}
-        <Parallax 
-          image={paragraph.image || 'https://cdn.pixabay.com/photo/2023/10/21/11/46/sunset-8331285_1280.jpg'}
+        <Parallax
+          image={paragraph.image}
           height={paragraph.height || '80vh'}
           speed={parseFloat(paragraph.speed) || 0.5}
-          content={paragraph.content || '<h2>Parallax sem conteúdo</h2><p>Configure o campo content no Google Docs</p>'}
+          content={paragraph.content}
           overlay={paragraph.overlay !== 'false'}
         />
-      
       {:else if componentType === 'before-after'}
-        <BeforeAfter 
+        <BeforeAfter
           beforeImage={paragraph.beforeImage}
           afterImage={paragraph.afterImage}
           beforeLabel={paragraph.beforeLabel || 'Antes'}
           afterLabel={paragraph.afterLabel || 'Depois'}
           orientation={paragraph.orientation || 'vertical'}
         />
-      
       {:else if componentType === 'scrolly'}
-        <ScrollyTelling 
-          steps={paragraph.steps && paragraph.steps.length > 0 ? paragraph.steps : [
-            {title: "Step 1", text: "Primeiro passo do fallback", image: "https://images.unsplash.com/photo-1593941707874-ef36c1e51e84?w=800&q=80"},
-            {title: "Step 2", text: "Segundo passo do fallback", image: "https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=800&q=80"}
-          ]}
-          backgroundImage={paragraph.backgroundImage || "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1600&q=80"}
+        <ScrollyTelling
+          steps={paragraph.steps && paragraph.steps.length > 0 ? paragraph.steps : []}
+          backgroundImage={paragraph.backgroundImage}
           stickyHeight={paragraph.stickyHeight || '100vh'}
+          fullWidth={paragraph.fullWidth === 'true'}
         />
-      
       {/if}
     {/each}
   {/if}
@@ -253,28 +207,23 @@
     color: var(--color-text);
     min-height: 100vh;
   }
-
-  /* 🆕 ESTILOS PARA CAPTION DO GLOBOPLAYER */
   .component-caption {
     max-width: 800px;
     margin: 1rem auto 2rem auto;
     padding: 0 2rem;
     text-align: center;
   }
-
   .component-caption p {
     color: var(--color-text-muted, #666);
     font-size: 0.9rem;
     line-height: 1.5;
     margin: 0 0 0.5rem 0;
   }
-
   .component-caption .credit {
     color: var(--color-text-light, #999);
     font-size: 0.8rem;
     display: block;
   }
-
   @media (max-width: 768px) {
     .component-caption {
       padding: 0 1rem;
