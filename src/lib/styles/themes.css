@@ -6,97 +6,106 @@
 
 :root {
   /* --- Tema 1: Padrão Claro (Default) --- */
-  --color-background: #FFFFFF; /*  */
-  --color-text: #1A1A1A; /*  */
-  --color-primary: #C4170C; /*  */
-  --color-secondary: #666666; /*  */
-  --color-subtle-text: #888888; /*  */
-  --color-border: #EEEEEE; /*  */
-  --color-highlight-bg: #F5F5F5; /*  */
+  --color-background: #FFFFFF;
+  --color-background-rgb: 255, 255, 255;
+  --color-text: #1A1A1A;
+  --color-primary: #C4170C;
+  --color-secondary: #666666;
+  --color-subtle-text: #888888;
+  --color-border: #EEEEEE;
+  --color-highlight-bg: #F5F5F5;
 }
 
 [data-theme="dark"] {
   /* --- Tema 2: Padrão Escuro --- */
-  --color-background: #1A1A1A; /*  */
-  --color-text: #F5F5F5; /*  */
-  --color-primary: #C4170C; /*  */
-  --color-secondary: #888888; /*  */
-  --color-subtle-text: #666666; /*  */
-  --color-border: #333333; /*  */
-  --color-highlight-bg: #262626; /*  */
+  --color-background: #1A1A1A;
+  --color-background-rgb: 26, 26, 26;
+  --color-text: #F5F5F5;
+  --color-primary: #C4170C;
+  --color-secondary: #888888;
+  --color-subtle-text: #666666;
+  --color-border: #333333;
+  --color-highlight-bg: #262626;
 }
 
 [data-theme="mundo-light"] {
   /* --- Tema 3: Editorial "Mundo" (Claro) --- */
-  --color-background: #FFFFFF; /*  */
-  --color-text: #001D3A; /*  */
-  --color-primary: #C4170C; /*  */
-  --color-secondary: #00407E; /*  */
-  --color-subtle-text: #4D91D3; /*  */
-  --color-border: #D9E2EA; /*  */
+  --color-background: #FFFFFF;
+  --color-background-rgb: 255, 255, 255;
+  --color-text: #001D3A;
+  --color-primary: #C4170C;
+  --color-secondary: #00407E;
+  --color-subtle-text: #4D91D3;
+  --color-border: #D9E2EA;
   --color-highlight-bg: #F0F3F5;
 }
 
 [data-theme="mundo-dark"] {
   /* --- Tema 4: Editorial "Mundo" (Escuro) --- */
-  --color-background: #001D3A; /*  */
-  --color-text: #FFFFFF; /*  */
-  --color-primary: #C4170C; /*  */
-  --color-secondary: #4D91D3; /*  */
-  --color-subtle-text: #D9E2EA; /*  */
-  --color-border: #00407E; /*  */
+  --color-background: #001D3A;
+  --color-background-rgb: 0, 29, 58;
+  --color-text: #FFFFFF;
+  --color-primary: #C4170C;
+  --color-secondary: #4D91D3;
+  --color-subtle-text: #D9E2EA;
+  --color-border: #00407E;
   --color-highlight-bg: #002C58;
 }
 
 [data-theme="economia"] {
   /* --- Tema 5: Editorial "Economia" --- */
   --color-background: #FFFBF2;
+  --color-background-rgb: 255, 251, 242;
   --color-text: #331A00;
-  --color-primary: #C4170C; /*  */
-  --color-secondary: #CC5200; /*  */
-  --color-subtle-text: #F3A400; /*  */
-  --color-border: #FFF3D9; /*  */
-  --color-highlight-bg: #FFFFFF; /*  */
+  --color-primary: #C4170C;
+  --color-secondary: #CC5200;
+  --color-subtle-text: #F3A400;
+  --color-border: #FFF3D9;
+  --color-highlight-bg: #FFFFFF;
 }
 
 [data-theme="tecnologia"] {
   /* --- Tema 6: Editorial "Tecnologia" (Escuro) --- */
-  --color-background: #180031; /*  */
-  --color-text: #EFEAFF; /*  */
-  --color-primary: #C4170C; /*  */
-  --color-secondary: #8540F5; /*  */
-  --color-subtle-text: #BCA0F9; /*  */
-  --color-border: #511F9F; /*  */
+  --color-background: #180031;
+  --color-background-rgb: 24, 0, 49;
+  --color-text: #EFEAFF;
+  --color-primary: #C4170C;
+  --color-secondary: #8540F5;
+  --color-subtle-text: #BCA0F9;
+  --color-border: #511F9F;
   --color-highlight-bg: #280050;
 }
 
 [data-theme="natureza"] {
   /* --- Tema 7: "Natureza" (Retrô/Sépia) --- */
-  --color-background: #F6F3ED; /*  */
-  --color-text: #363027; /*  */
-  --color-primary: #C4170C; /*  */
-  --color-secondary: #5E5343; /*  */
-  --color-subtle-text: #8C7D66; /*  */
-  --color-border: #EBE5DA; /*  */
-  --color-highlight-bg: #FFFFFF; /*  */
+  --color-background: #F6F3ED;
+  --color-background-rgb: 246, 243, 237;
+  --color-text: #363027;
+  --color-primary: #C4170C;
+  --color-secondary: #5E5343;
+  --color-subtle-text: #8C7D66;
+  --color-border: #EBE5DA;
+  --color-highlight-bg: #FFFFFF;
 }
 
 [data-theme="pop-art"] {
   /* --- Tema 8: "Pop & Art" (Vibrante) --- */
-  --color-background: #1A1A1A; /*  */
-  --color-text: #FFFFFF; /*  */
-  --color-primary: #C4170C; /*  */
-  --color-secondary: #E80042; /*  */
-  --color-subtle-text: #CCCCCC; /*  */
-  --color-border: #444444; /*  */
+  --color-background: #1A1A1A;
+  --color-background-rgb: 26, 26, 26;
+  --color-text: #FFFFFF;
+  --color-primary: #C4170C;
+  --color-secondary: #E80042;
+  --color-subtle-text: #CCCCCC;
+  --color-border: #444444;
   --color-highlight-bg: #2E000D;
 }
 
 [data-theme="alto-contraste"] {
   /* --- Tema 9: Alto Contraste --- */
-  --color-background: #FFFFFF; /*  */
+  --color-background: #FFFFFF;
+  --color-background-rgb: 255, 255, 255;
   --color-text: #000000;
-  --color-primary: #C4170C; /*  */
+  --color-primary: #C4170C;
   --color-secondary: #000000;
   --color-subtle-text: #202020;
   --color-border: #202020;
@@ -105,11 +114,12 @@
 
 [data-theme="bem-estar"] {
   /* --- Tema 10: "Bem-estar" (Suave) --- */
-  --color-background: #F2FBFA; /*  */
-  --color-text: #003229; /*  */
-  --color-primary: #C4170C; /*  */
-  --color-secondary: #007D69; /*  */
-  --color-subtle-text: #00BFAA; /*  */
-  --color-border: #D9F2EE; /*  */
-  --color-highlight-bg: #FFFFFF; /*  */
+  --color-background: #F2FBFA;
+  --color-background-rgb: 242, 251, 250;
+  --color-text: #003229;
+  --color-primary: #C4170C;
+  --color-secondary: #007D69;
+  --color-subtle-text: #00BFAA;
+  --color-border: #D9F2EE;
+  --color-highlight-bg: #FFFFFF;
 }
