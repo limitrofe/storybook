@@ -13,6 +13,7 @@
   // ▼▼▼ 1. IMPORTAR OS NOVOS COMPONENTES ▼▼▼
   import FlourishEmbed from './story/FlourishEmbed.svelte';
   import FlourishScrolly from './story/FlourishScrolly.svelte';
+  import FinalCredits from './FinalCredits.svelte'; // Importação do componente FinalCredits
 
   export let storyData = {};
 
@@ -217,6 +218,16 @@
     {/each}
   {/if}
 </main>
+
+{#if storyData.credits || storyData.notes || storyData.sources || storyData.additionalGraphics || storyData.editedBy || storyData.author}
+  <FinalCredits
+    notes={storyData.credits?.notes || storyData.notes || ''}
+    sources={storyData.credits?.sources || storyData.sources || []}
+    additionalGraphics={storyData.credits?.additionalGraphics || storyData.additionalGraphics || []}
+    editedBy={storyData.credits?.editedBy || storyData.editedBy || []}
+    authors={storyData.credits?.authors || (storyData.author ? [storyData.author] : [])}
+  />
+{/if}
 
 <style>
   .story-container {
