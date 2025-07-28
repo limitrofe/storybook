@@ -10,7 +10,7 @@
   "paragraphs": [
     {
       "type": "header",
-      "text": "Showcase do Sistema Visual    ",
+      "text": "Showcase do Sistema Visual",
       "backgroundImage": "https://cdn.pixabay.com/photo/2020/12/06/17/58/trees-5809559_1280.jpg",
       "variant": "hero",
       "overlay": "true"
@@ -26,13 +26,13 @@
     },
     {
       "type": "frase",
-      "text": "Esta é uma <strong>citação moderna</strong> com o novo design elegante. Aqui podemos ter <em>formatação em itálico</em> e texto que realmente se destaca na página de forma sofisticada.    ",
+      "text": "Esta é uma <strong>citação moderna</strong> com o novo design elegante. Aqui podemos ter <em>formatação em itálico</em> e texto que realmente se destaca na página de forma sofisticada.",
       "author": "Designer do Sistema",
       "role": "Especialista em UX/UI"
     },
     {
       "type": "intertitulo",
-      "text": "Seção 1: Componentes de Texto    ",
+      "text": "Seção 1: Componentes de Texto",
       "variant": "default",
       "size": "medium"
     },
@@ -42,7 +42,7 @@
     },
     {
       "type": "intertitulo",
-      "text": "Título Simples Pequeno    ",
+      "text": "Título Simples Pequeno",
       "variant": "default",
       "size": "small"
     },
@@ -52,7 +52,7 @@
     },
     {
       "type": "intertitulo",
-      "text": "Título Simples Grande    ",
+      "text": "Título Simples Grande",
       "variant": "default",
       "size": "large"
     },
@@ -62,7 +62,7 @@
     },
     {
       "type": "intertitulo",
-      "text": "Título Centrado    ",
+      "text": "Título Centrado",
       "textAlign": "center",
       "variant": "centered",
       "size": "medium"
@@ -73,7 +73,7 @@
     },
     {
       "type": "intertitulo",
-      "text": "Título Minimal com Borda    ",
+      "text": "Título Minimal com Borda",
       "variant": "minimal",
       "size": "medium"
     },
@@ -83,7 +83,7 @@
     },
     {
       "type": "intertitulo",
-      "text": "Seção 2: Componentes com Imagem de Fundo    ",
+      "text": "Seção 2: Componentes com Imagem de Fundo",
       "backgroundImage": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&q=80",
       "textPosition": "center",
       "textAlign": "center",
@@ -97,7 +97,7 @@
     },
     {
       "type": "intertitulo",
-      "text": "Título com Posição Superior    ",
+      "text": "Título com Posição Superior",
       "backgroundImage": "https://cdn.pixabay.com/photo/2022/11/14/10/54/sunrise-7591335_1280.jpg",
       "textPosition": "top",
       "textAlign": "left",
@@ -111,7 +111,7 @@
     },
     {
       "type": "intertitulo",
-      "text": "Título com Posição Inferior    ",
+      "text": "Título com Posição Inferior",
       "backgroundImage": "https://cdn.pixabay.com/photo/2025/06/19/07/59/allgau-9668453_1280.jpg",
       "textPosition": "bottom",
       "textAlign": "right"
@@ -122,7 +122,7 @@
     },
     {
       "type": "intertitulo",
-      "text": "Mobile - Posição Centro    ",
+      "text": "Mobile - Posição Centro",
       "backgroundImage": "https://cdn.pixabay.com/photo/2016/07/28/09/01/mountains-1547302_1280.jpg",
       "backgroundImageMobile": "https://cdn.pixabay.com/photo/2016/07/28/09/01/mountains-1547302_1280.jpg",
       "textPosition": "top",
@@ -140,7 +140,7 @@
     },
     {
       "type": "intertitulo",
-      "text": "Seção 3: Componentes de Mídia    ",
+      "text": "Seção 3: Componentes de Mídia",
       "variant": "default",
       "size": "medium"
     },
@@ -237,13 +237,13 @@
     },
     {
       "type": "intertitulo",
-      "text": "Seção 4: Mais Variações de Texto    ",
+      "text": "Seção 4: Mais Variações de Texto",
       "variant": "default",
       "size": "medium"
     },
     {
       "type": "frase",
-      "text": "Segunda citação para testar o <strong>layout múltiplo</strong>. O design deve manter consistência mesmo com várias citações na mesma página.    ",
+      "text": "Segunda citação para testar o <strong>layout múltiplo</strong>. O design deve manter consistência mesmo com várias citações na mesma página.",
       "author": "Segundo Autor",
       "role": "Outro Especialista"
     },
@@ -253,7 +253,7 @@
     },
     {
       "type": "frase",
-      "text": "Terceira citação com <em>formatação diferente</em> para testar a robustez do componente. Aqui temos texto mais longo para verificar como o design se comporta com <strong>conteúdo extenso</strong> que pode ocupar múltiplas linhas e criar layouts mais complexos.    ",
+      "text": "Terceira citação com <em>formatação diferente</em> para testar a robustez do componente. Aqui temos texto mais longo para verificar como o design se comporta com <strong>conteúdo extenso</strong> que pode ocupar múltiplas linhas e criar layouts mais complexos.",
       "author": "Terceiro Especialista",
       "role": "Designer de Produto Sênior"
     },
@@ -263,7 +263,7 @@
     },
     {
       "type": "intertitulo",
-      "text": "Seção 5: Testes de Casos Extremos    ",
+      "text": "Seção 5: Testes de Casos Extremos",
       "backgroundImage": "https://cdn.pixabay.com/photo/2020/01/07/13/36/sea-4747601_1280.jpg",
       "textPosition": "center",
       "textAlign": "center",
@@ -286,7 +286,7 @@
     },
     {
       "type": "frase",
-      "text": "Citação com texto muito extenso para testar quebras de linha e comportamento responsivo. Este é um exemplo de como o componente deve se comportar quando recebe <strong>conteúdo longo</strong> que pode se estender por múltiplas linhas e criar desafios de layout. O design deve manter a elegância mesmo com <em>textos muito longos</em> que testam os limites do sistema.    ",
+      "text": "Citação com texto muito extenso para testar quebras de linha e comportamento responsivo. Este é um exemplo de como o componente deve se comportar quando recebe <strong>conteúdo longo</strong> que pode se estender por múltiplas linhas e criar desafios de layout. O design deve manter a elegância mesmo com <em>textos muito longos</em> que testam os limites do sistema.",
       "author": "Autor com Nome Muito Longo e Extenso",
       "role": "Especialista em Testes de Interface e Experiência do Usuário Sênior"
     },
@@ -302,13 +302,13 @@
     },
     {
       "type": "intertitulo",
-      "text": "Título Sem Imagem de Fundo    ",
+      "text": "Título Sem Imagem de Fundo",
       "variant": "default",
       "size": "small"
     },
     {
       "type": "intertitulo",
-      "text": "    ",
+      "text": "",
       "variant": "minimal",
       "size": "medium"
     },
@@ -331,7 +331,7 @@
     },
     {
       "type": "intertitulo",
-      "text": "Seção 6: Testes Responsivos    ",
+      "text": "Seção 6: Testes Responsivos",
       "backgroundImage": "https://cdn.pixabay.com/photo/2018/04/25/09/26/eiffel-tower-3349075_1280.jpg",
       "backgroundImageMobile": "https://cdn.pixabay.com/photo/2024/09/21/15/07/eiffel-tower-9064240_1280.jpg",
       "textPosition": "bottom",
@@ -349,7 +349,7 @@
     },
     {
       "type": "intertitulo",
-      "text": "Desktop: Centro/Centro, Mobile: Topo/Esquerda    ",
+      "text": "Desktop: Centro/Centro, Mobile: Topo/Esquerda",
       "backgroundImage": "https://cdn.pixabay.com/photo/2018/04/25/09/26/eiffel-tower-3349075_1280.jpg",
       "backgroundImageMobile": "https://cdn.pixabay.com/photo/2013/04/13/18/42/tower-103417_1280.jpg",
       "textPosition": "center",
@@ -367,7 +367,7 @@
     },
     {
       "type": "intertitulo",
-      "text": "Seção 8: Componentes Avançados - PhotoGallery    ",
+      "text": "Seção 8: Componentes Avançados - PhotoGallery",
       "variant": "default",
       "size": "medium"
     },
@@ -380,39 +380,39 @@
       "images": [
         {
           "src": "https://cdn.pixabay.com/photo/2015/09/09/07/05/sea-931164_1280.jpg",
-          "alt": "Carro el&eacute;trico 1",
+          "alt": "Carro elétrico 1",
           "caption": "Tesla Model S na estrada",
-          "credit": "Foto: Picsum"
+          "credit": "Foto:Picsum"
         },
         {
           "src": "https://cdn.pixabay.com/photo/2017/05/22/19/50/surfer-2335088_1280.jpg",
           "alt": "Posto de recarga",
           "caption": "Estação de recarga rápida",
-          "credit": "Foto: Picsum"
+          "credit": "Foto:Picsum"
         },
         {
           "src": "https://cdn.pixabay.com/photo/2016/11/29/03/27/action-1867052_1280.jpg",
-          "alt": "Carros el&eacute;tricos",
+          "alt": "Carros elétricos",
           "caption": "Lineup de veículos elétricos",
-          "credit": "Foto: Picsum"
+          "credit": "Foto:Picsum"
         },
         {
           "src": "https://cdn.pixabay.com/photo/2017/08/07/10/08/sea-2602227_1280.jpg",
-          "alt": "F&aacute;brica",
+          "alt": "Fábrica",
           "caption": "Produção de carros elétricos",
-          "credit": "Foto: Picsum"
+          "credit": "Foto:Picsum"
         },
         {
           "src": "https://cdn.pixabay.com/photo/2016/11/29/05/25/sharks-1867523_1280.jpg",
           "alt": "Tecnologia",
           "caption": "Tecnologia embarcada",
-          "credit": "Foto: Picsum"
+          "credit": "Foto:Picsum"
         },
         {
           "src": "https://cdn.pixabay.com/photo/2022/08/09/13/38/fish-7375042_1280.jpg",
           "alt": "Natureza",
           "caption": "Impacto ambiental positivo",
-          "credit": "Foto: Picsum"
+          "credit": "Foto:Picsum"
         }
       ],
       "layout": "grid",
@@ -459,7 +459,7 @@
     },
     {
       "type": "intertitulo",
-      "text": "Seção 9: Carousel Interativo    ",
+      "text": "Seção 9: Carousel Interativo",
       "variant": "default",
       "size": "medium"
     },
@@ -470,26 +470,26 @@
           "type": "image",
           "src": "https://cdn.pixabay.com/photo/2023/05/30/15/34/silver-gull-8028946_1280.jpg",
           "alt": "Slide 1",
-          "caption": "Primeiro slide do carrossel - Carro elétrico moderno",
+          "caption": "Primeiro slide do carrossel <ul><li>Carro elétrico moderno</li></ul>",
           "credit": "Carousel test 1"
         },
         {
           "type": "image",
           "src": "https://cdn.pixabay.com/photo/2023/04/14/10/27/seagull-7924729_1280.jpg",
           "alt": "Slide 2",
-          "caption": "Segundo slide - Infraestrutura de recarga",
+          "caption": "Segundo slide <ul><li>Infraestrutura de recarga</li></ul>",
           "credit": "Carousel test 2"
         },
         {
           "type": "content",
-          "content": "&lt;h2 style=&#39;color: var(--color-primary);&#39;&gt;Slide de Conte&uacute;do&lt;/h2&gt;&lt;p&gt;Este &eacute; um slide com &lt;strong&gt;conte&uacute;do HTML&lt;/strong&gt; personalizado ao inv&eacute;s de imagem.&lt;/p&gt;",
+          "content": "<h2 style='color:var(--color-primary);'>Slide de Conteúdo</h2>Este é um slide com <strong>conteúdo HTML</strong> personalizado ao invés de imagem.",
           "caption": "Slide com conteúdo customizado"
         },
         {
           "type": "image",
           "src": "https://cdn.pixabay.com/photo/2022/08/18/10/41/herring-gull-7394570_1280.jpg",
           "alt": "Slide 4",
-          "caption": "Quarto slide - Imagem ao invés de vídeo",
+          "caption": "Quarto slide <ul><li>Imagem ao invés de vídeo</li></ul>",
           "credit": "Image carousel test"
         }
       ],
@@ -516,7 +516,7 @@
           "type": "image",
           "src": "https://cdn.pixabay.com/photo/2022/08/26/00/07/bird-7411459_1280.jpg",
           "alt": "Auto slide 2",
-          "caption": "Sem setas, apenas dots para navegação",
+          "caption": "Sem setas,apenas dots para navegação",
           "credit": "Auto carousel 2"
         },
         {
@@ -538,7 +538,7 @@
     },
     {
       "type": "intertitulo",
-      "text": "Seção 10: Parallax Effect    ",
+      "text": "Seção 10: Parallax Effect",
       "variant": "default",
       "size": "medium"
     },
@@ -580,7 +580,7 @@
     },
     {
       "type": "intertitulo",
-      "text": "Seção 11: Before/After Comparisons    ",
+      "text": "Seção 11: Before/After Comparisons",
       "variant": "default",
       "size": "medium"
     },
@@ -622,7 +622,7 @@
     },
     {
       "type": "intertitulo",
-      "text": "Seção 12: ScrollyTelling - Demonstração Completa    ",
+      "text": "Seção 12: ScrollyTelling - Demonstração Completa",
       "variant": "default",
       "size": "large"
     },
@@ -632,7 +632,7 @@
     },
     {
       "type": "intertitulo",
-      "text": "Exemplo 1: Layout Padrão (50/50) com Imagens Otimizadas    ",
+      "text": "Exemplo 1: Layout Padrão (50/50) com Imagens Otimizadas",
       "variant": "default",
       "size": "medium"
     },
@@ -641,23 +641,23 @@
       "steps": [
         {
           "title": "Imagem Otimizada para Mobile",
-          "text": "Neste primeiro passo, o sistema detecta que a tela é menor (mobile) e carrega uma imagem vertical (9:16), que se encaixa melhor no formato do celular.",
+          "text": "Neste primeiro passo,o sistema detecta que a tela é menor (mobile) e carrega uma imagem vertical (9:16),que se encaixa melhor no formato do celular.",
           "image": "https://cdn.pixabay.com/photo/2016/11/29/04/19/ocean-1867285_1280.jpg",
           "imageMobile": "https://cdn.pixabay.com/photo/2016/12/17/18/53/winter-1913959_960_720.jpg",
           "alt": "Paisagem de inverno em formato vertical"
         },
         {
           "title": "Imagem Padrão para Desktop",
-          "text": "Ao visualizar em um desktop ou tela maior, a imagem original (horizontal) é utilizada, aproveitando melhor o espaço disponível ao lado do texto.",
+          "text": "Ao visualizar em um desktop ou tela maior,a imagem original (horizontal) é utilizada,aproveitando melhor o espaço disponível ao lado do texto.",
           "image": "https://cdn.pixabay.com/photo/2016/11/29/04/19/ocean-1867285_1280.jpg",
           "imageMobile": "https://cdn.pixabay.com/photo/2016/12/17/18/53/winter-1913959_960_720.jpg",
           "alt": "Oceano em formato horizontal"
         },
         {
           "title": "Narrativa Contínua",
-          "text": "A transição suave entre os 'steps' permite construir uma narrativa visual coesa, onde o texto guia o leitor através das imagens.",
+          "text": "A transição suave entre os 'steps' permite construir uma narrativa visual coesa,onde o texto guia o leitor através das imagens.",
           "image": "https://cdn.pixabay.com/photo/2018/10/05/14/39/sunset-3726030_1280.jpg",
-          "alt": "P&ocirc;r do sol"
+          "alt": "Pôr do sol"
         }
       ],
       "stickyHeight": "90vh"
@@ -668,7 +668,7 @@
     },
     {
       "type": "intertitulo",
-      "text": "Exemplo 2: Layout Full Width com Vídeos    ",
+      "text": "Exemplo 2: Layout Full Width com Vídeos",
       "variant": "default",
       "size": "medium"
     },
@@ -677,14 +677,14 @@
       "steps": [
         {
           "title": "Vídeo Imersivo em Tela Cheia",
-          "text": "Com a opção <strong>fullWidth: true</strong>, a mídia ocupa todo o fundo da tela, criando uma experiência cinematográfica e de alto impacto. O texto aparece sobreposto.",
+          "text": "Com a opção <strong>fullWidth:true</strong>,a mídia ocupa todo o fundo da tela,criando uma experiência cinematográfica e de alto impacto. O texto aparece sobreposto.",
           "video": "https://assets.mixkit.co/videos/preview/mixkit-waves-in-the-ocean-1164-large.mp4",
           "videoMobile": "https://assets.mixkit.co/videos/preview/mixkit-vertical-shot-of-a-lake-in-a-forest-40487-large.mp4",
           "alt": "Ondas do mar em tela cheia"
         },
         {
           "title": "Vídeo Otimizado para Mobile",
-          "text": "Assim como nas imagens, podemos definir um vídeo específico para mobile (<strong>videoMobile</strong>), garantindo que o enquadramento e a performance sejam ideais para telas verticais.",
+          "text": "Assim como nas imagens,podemos definir um vídeo específico para mobile (<strong>videoMobile</strong>),garantindo que o enquadramento e a performance sejam ideais para telas verticais.",
           "video": "https://assets.mixkit.co/videos/preview/mixkit-waves-in-the-ocean-1164-large.mp4",
           "videoMobile": "https://assets.mixkit.co/videos/preview/mixkit-vertical-shot-of-a-lake-in-a-forest-40487-large.mp4",
           "alt": "Lago na floresta em formato vertical"
@@ -699,7 +699,7 @@
     },
     {
       "type": "intertitulo",
-      "text": "Exemplo 3: ScrollyTelling Misto (Imagens, Vídeos e HTML)    ",
+      "text": "Exemplo 3: ScrollyTelling Misto (Imagens, Vídeos e HTML)",
       "variant": "default",
       "size": "medium"
     },
@@ -714,15 +714,15 @@
         },
         {
           "title": "Transição para um Vídeo",
-          "text": "No segundo passo, a imagem dá lugar a um vídeo, adicionando dinamismo e movimento à história sem que o leitor precise sair do componente.",
+          "text": "No segundo passo,a imagem dá lugar a um vídeo,adicionando dinamismo e movimento à história sem que o leitor precise sair do componente.",
           "video": "https://assets.mixkit.co/videos/preview/mixkit-waves-in-the-ocean-1164-large.mp4",
-          "alt": "V&iacute;deo de ondas"
+          "alt": "Vídeo de ondas"
         },
         {
           "title": "Conteúdo HTML Customizado",
-          "text": "Para finalizar, podemos usar a chave <strong>html</strong> para exibir conteúdo formatado, como uma citação ou um destaque, em vez de uma imagem ou vídeo.",
-          "html": "&lt;div style=&#39;padding: 2rem; text-align: center;&#39;&gt;&lt;h2&gt;&#39;A natureza &eacute; a melhor designer.&#39;&lt;/h2&gt;&lt;p&gt;- Autor Desconhecido&lt;/p&gt;&lt;/div&gt;",
-          "alt": "Cita&ccedil;&atilde;o em HTML"
+          "text": "Para finalizar,podemos usar a chave <strong>html</strong> para exibir conteúdo formatado,como uma citação ou um destaque,em vez de uma imagem ou vídeo.",
+          "html": "<div style='padding:2rem; text-align:center;'><h2>'A natureza é a melhor designer.'</h2><p>- Autor Desconhecido</p></div>",
+          "alt": "Citação em HTML"
         }
       ],
       "fullWidth": "true",
@@ -734,7 +734,7 @@
     },
     {
       "type": "intertitulo",
-      "text": "Seção 13: Combinações Complexas dos Novos Componentes    ",
+      "text": "Seção 13: Combinações Complexas dos Novos Componentes",
       "variant": "default",
       "size": "medium"
     },
@@ -748,7 +748,7 @@
     },
     {
       "type": "frase",
-      "text": "Citação imediatamente após foto fullWidth. O <strong>espaçamento</strong> deve ser adequado para manter a hierarquia visual clara sem criar confusão.    ",
+      "text": "Citação imediatamente após foto fullWidth. O <strong>espaçamento</strong> deve ser adequado para manter a hierarquia visual clara sem criar confusão.",
       "author": "Designer de Layout",
       "role": "Especialista em Tipografia"
     },
@@ -821,7 +821,7 @@
       "items": [
         {
           "type": "content",
-          "content": "&lt;div style=&#39;background: linear-gradient(45deg, var(--color-primary), var(--color-secondary)); padding: 3rem; color: white; text-align: center;&#39;&gt;&lt;h2&gt;Carousel Final&lt;/h2&gt;&lt;p&gt;Teste de carousel ap&oacute;s before/after&lt;/p&gt;&lt;/div&gt;"
+          "content": "<h2>Carousel Final</h2>Teste de carousel após before/after"
         },
         {
           "type": "image",
@@ -836,7 +836,73 @@
     },
     {
       "type": "intertitulo",
-      "text": "Final do Showcase Completo    ",
+      "text": "Seção 14: Integração com Flourish",
+      "variant": "default",
+      "size": "large"
+    },
+    {
+      "type": "texto",
+      "text": "Esta seção demonstra a integração com a plataforma de visualização de dados <strong>Flourish</strong>. Podemos incorporar tanto gráficos e mapas estáticos quanto narrativas guiadas por scroll.---"
+    },
+    {
+      "type": "intertitulo",
+      "text": "Exemplo 1: Gráfico Simples (Embed)",
+      "variant": "default",
+      "size": "medium"
+    },
+    {
+      "type": "flourish",
+      "src": "visualisation/24092168"
+    },
+    {
+      "type": "texto",
+      "text": "O componente acima ('"
+    },
+    {
+      "type": "flourish`) renderiza uma visualização única do Flourish. &Eacute; ideal para gráficos, mapas ou qualquer outro embed simples. O jornalista só precisa do ID da visualização."
+    },
+    {
+      "type": "intertitulo",
+      "text": "Exemplo 2: Story como Scrollytelling",
+      "variant": "default",
+      "size": "medium"
+    },
+    {
+      "type": "flourish-scrolly",
+      "src": "story/3218812",
+      "steps": [
+        {
+          "title": "Abertura:Mapa Global",
+          "text": "Começamos com a visão geral do mapa,que corresponde ao <strong>slide 0</strong> da nossa Flourish Story. O texto aqui introduz o cenário.",
+          "slide": 0
+        },
+        {
+          "title": "Foco na América do Sul",
+          "text": "Ao rolar para este card,o mapa dá um zoom na América do Sul. Este é o <strong>slide 1</strong> da nossa história.",
+          "slide": 1
+        },
+        {
+          "title": "Análise do Brasil",
+          "text": "Ainda no slide 1,podemos usar um segundo card de texto para guiar a atenção do leitor para um ponto específico do mapa,como o Brasil,sem mudar a visualização.",
+          "slide": 1
+        },
+        {
+          "title": "Conclusão:Dados de SP",
+          "text": "Finalmente,o mapa avança para o <strong>slide 2</strong>,mostrando dados específicos do estado de São Paulo para concluir a nossa análise.",
+          "slide": 2
+        }
+      ]
+    },
+    {
+      "type": "texto",
+      "text": "O componente acima ('"
+    },
+    {
+      "type": "flourish-scrolly`) transforma uma \"Flourish Story\" completa em uma experiência de scrollytelling, onde cada passo do texto pode controlar qual slide da história é exibido."
+    },
+    {
+      "type": "intertitulo",
+      "text": "Final do Showcase Completo",
       "backgroundImage": "https://cdn.pixabay.com/photo/2021/02/20/18/11/sea-6034191_1280.jpg",
       "textPosition": "center",
       "textAlign": "center",
@@ -850,7 +916,7 @@
     },
     {
       "type": "frase",
-      "text": "Sistema de storytelling visual <strong>100% funcional</strong> e robusto! Todos os componentes foram testados extensivamente com suas variações e combinações mais complexas. &#128640;    ",
+      "text": "Sistema de storytelling visual <strong>100% funcional</strong> e robusto! Todos os componentes foram testados extensivamente com suas variações e combinações mais complexas. &#128640;",
       "author": "Sistema de Design Completo",
       "role": "Validação Total de Componentes"
     }

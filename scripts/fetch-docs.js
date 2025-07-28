@@ -48,6 +48,27 @@ async function fetchGoogleDoc(docId) {
     console.log(`📊 Intro: ${data.intro ? 'OK' : 'Vazio'}`);
     console.log(`📊 Paragraphs: ${data.paragraphs ? data.paragraphs.length : 0} itens`);
     
+    // Validação específica para ScrollyTelling
+    const scrollyComponents = data.paragraphs?.filter(p => 
+      ['scrollytelling', 'scrolly'].includes(p.type?.toLowerCase())
+    ) || [];
+    
+    if (scrollyComponents.length > 0) {
+      console.log(`📜 ScrollyTelling encontrados: ${scrollyComponents.length}`);
+      scrollyComponents.forEach((comp, index) => {
+        const stepsCount = comp.steps?.length || 0;
+        console.log(`  ${index + 1}. Steps: ${stepsCount} | FullWidth: ${comp.fullWidth || 'false'}`);
+        
+        if (stepsCount === 0) {
+          console.warn(`⚠️ ScrollyTelling sem steps: ${comp.text?.substring(0, 50)}...`);
+        } else {
+          comp.steps.forEach((step, stepIndex) => {
+            console.log(`     Step ${stepIndex + 1}: "${step.title?.substring(0, 30)}..."`);
+          });
+        }
+      });
+    }
+    
     return data;
     
   } catch (error) {
@@ -114,8 +135,97 @@ function parseHTMLFormat(html) {
 
 function decodeHTMLEntities(text) {
   if (!text) return '';
-  const entities = { '&amp;': '&', '&lt;': '<', '&gt;': '>', '&quot;': '"', '&#39;': "'", '&aacute;': 'á', '&agrave;': 'à', '&acirc;': 'â', '&atilde;': 'ã', '&auml;': 'ä', '&eacute;': 'é', '&egrave;': 'è', '&ecirc;': 'ê', '&euml;': 'ë', '&iacute;': 'í', '&igrave;': 'ì', '&icirc;': 'î', '&iuml;': 'ï', '&oacute;': 'ó', '&ograve;': 'ò', '&ocirc;': 'ô', '&otilde;': 'õ', '&ouml;': 'ö', '&uacute;': 'ú', '&ugrave;': 'ù', '&ucirc;': 'û', '&uuml;': 'ü', '&ccedil;': 'ç', '&ntilde;': 'ñ' };
+  const entities = { 
+    '&amp;': '&', '&lt;': '<', '&gt;': '>', '&quot;': '"', '&#39;': "'", 
+    '&aacute;': 'á', '&agrave;': 'à', '&acirc;': 'â', '&atilde;': 'ã', '&auml;': 'ä', 
+    '&eacute;': 'é', '&egrave;': 'è', '&ecirc;': 'ê', '&euml;': 'ë', 
+    '&iacute;': 'í', '&igrave;': 'ì', '&icirc;': 'î', '&iuml;': 'ï', 
+    '&oacute;': 'ó', '&ograve;': 'ò', '&ocirc;': 'ô', '&otilde;': 'õ', '&ouml;': 'ö', 
+    '&uacute;': 'ú', '&ugrave;': 'ù', '&ucirc;': 'û', '&uuml;': 'ü', 
+    '&ccedil;': 'ç', '&ntilde;': 'ñ' 
+  };
   return text.replace(/&[a-zA-Z0-9#]+;/g, (entity) => entities[entity] || entity);
+}
+
+// 🔧 FUNÇÃO MELHORADA: Parser robusto para arrays JSON
+function parseJSONField(jsonString, fieldName) {
+  if (!jsonString) return null;
+  
+  try {
+    console.log(`🔍 Tentando parsear ${fieldName}:`, jsonString.substring(0, 100) + '...');
+    
+    // Limpeza robusta do JSON vindo do Google Docs
+    let cleanJson = jsonString
+      // Remove tags HTML
+      .replace(/<[^>]*>/g, '')
+      // Converte entidades HTML
+      .replace(/&quot;/g, '"')
+      .replace(/&amp;/g, '&')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&#39;/g, "'")
+      .replace(/&nbsp;/g, ' ')
+      // Remove quebras de linha e espaços extras
+      .replace(/\n/g, ' ')
+      .replace(/\r/g, ' ')
+      .replace(/\s+/g, ' ')
+      // Fix vírgulas extras
+      .replace(/,\s*\]/g, ']')
+      .replace(/,\s*}/g, '}')
+      // Fix aspas curvas (problema comum do Google Docs)
+      .replace(/[""]/g, '"')
+      .replace(/['']/g, "'")
+      // Remove espaços ao redor de : e ,
+      .replace(/\s*:\s*/g, ':')
+      .replace(/\s*,\s*/g, ',')
+      .trim();
+    
+    // Tenta o parse direto primeiro
+    let parsed = JSON.parse(cleanJson);
+    
+    // Se é array, processa cada item
+    if (Array.isArray(parsed)) {
+      parsed = parsed.map(item => {
+        if (typeof item === 'object' && item !== null) {
+          // Limpa strings dentro do objeto
+          Object.keys(item).forEach(key => {
+            if (typeof item[key] === 'string') {
+              item[key] = decodeHTMLEntities(item[key]);
+              // Se for um campo de texto, permite formatação HTML
+              if (['text', 'caption', 'content'].includes(key)) {
+                item[key] = cleanAndFormatHTML(item[key]);
+              }
+            }
+          });
+        }
+        return item;
+      });
+    }
+    
+    console.log(`✅ ${fieldName} parseado com sucesso:`, parsed.length, 'itens');
+    return parsed;
+    
+  } catch (error) {
+    console.warn(`⚠️ Erro ao parsear ${fieldName}:`, error.message);
+    console.log('JSON problemático:', jsonString.substring(0, 200));
+    
+    // Fallback: tenta um parse mais agressivo
+    try {
+      // Remove tudo que não é essencial para o JSON
+      let fallbackJson = jsonString
+        .replace(/[^\[\]{}":,\w\s\-\.\/\?=&]/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+      
+      let fallbackParsed = JSON.parse(fallbackJson);
+      console.log(`🔄 Fallback parse funcionou para ${fieldName}`);
+      return fallbackParsed;
+      
+    } catch (fallbackError) {
+      console.error(`❌ Fallback também falhou para ${fieldName}:`, fallbackError.message);
+      return [];
+    }
+  }
 }
 
 function parseParagraphsHTML(html) {
@@ -131,39 +241,45 @@ function parseParagraphsHTML(html) {
     if (typeMatch) {
       paragraph.type = decodeHTMLEntities(typeMatch[1].trim());
     }
-    
-    const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:backgroundImage|backgroundImageMobile|backgroundVideo|backgroundVideoMobile|backgroundPosition|backgroundPositionMobile|author|role|src|caption|credit|alt|fullWidth|variant|size|orientation|autoplay|controls|poster|images|items|steps|beforeImage|afterImage|beforeLabel|afterLabel|image|height|heightMobile|speed|content|overlay|layout|columns|interval|showDots|showArrows|stickyHeight|videoId|videosIDs|id|skipDFP|skipdfp|autoPlay|startMuted|maxQuality|quality|chromeless|isLive|live|allowRestrictedContent|preventBlackBars|globoId|token|adAccountId|adCmsId|siteName|width|textPosition|textPositionMobile|textAlign|textAlignMobile):|type:|$)/s);
-    if (textMatch) {
-        if (paragraph.type === 'texto') {
-            paragraph.text = cleanAndFormatHTML(textMatch[1].trim());
-        } else {
-            paragraph.text = decodeHTMLEntities(textMatch[1].trim().replace(/<[^>]*>/g, ' '));
-        }
-    }
-    
-    const jsonFields = ['images', 'items', 'steps'];
-    for (const field of jsonFields) {
-        const regex = new RegExp(`${field}:\\s*(\\[[\\s\\S]*?\\])`);
-        const match = block.match(regex);
-        if (match) {
-            try {
-                let jsonString = match[1].replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').replace(/&quot;/g, '"').replace(/,\s*\]/g, ']').replace(/,\s*}/g, '}').replace(/\n/g, ' ').replace(/\s+/g, ' ');
-                let parsedArray = JSON.parse(jsonString);
-                if (Array.isArray(parsedArray)) {
-                  parsedArray.forEach(item => {
-                    if (item.title) item.title = decodeHTMLEntities(item.title);
-                    if (item.text) item.text = decodeHTMLEntities(item.text);
-                    if (item.caption) item.caption = decodeHTMLEntities(item.caption);
-                  });
-                }
-                paragraph[field] = parsedArray;
-            } catch (e) {
-                console.warn(`⚠️ Erro ao processar JSON para o campo '${field}':`, e);
-                paragraph[field] = [];
-            }
-        }
+
+    // 🔧 MELHORIA: Tratamento especial para componentes Flourish
+    if (['flourish', 'flourish-scrolly', 'grafico', 'mapa'].includes(paragraph.type)) {
+      const srcMatch = block.match(/src:\s*([^\n<]+)/);
+      if (srcMatch) {
+        paragraph.src = srcMatch[1].trim();
+      }
+
+      // 🔧 NOVO: Parser melhorado para steps
+      const stepsMatch = block.match(/steps:\s*(\[[\s\S]*?\])/);
+      if (stepsMatch) {
+        paragraph.steps = parseJSONField(stepsMatch[1], 'flourish steps');
+      }
+      
+      paragraphs.push(paragraph);
+      continue;
     }
 
+    // Parse de text field
+    const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:backgroundImage|backgroundImageMobile|backgroundVideo|backgroundVideoMobile|backgroundPosition|backgroundPositionMobile|author|role|src|caption|credit|alt|fullWidth|variant|size|orientation|autoplay|controls|poster|images|items|steps|beforeImage|afterImage|beforeLabel|afterLabel|image|height|heightMobile|speed|content|overlay|layout|columns|interval|showDots|showArrows|stickyHeight|videoId|videosIDs|id|skipDFP|skipdfp|autoPlay|startMuted|maxQuality|quality|chromeless|isLive|live|allowRestrictedContent|preventBlackBars|globoId|token|adAccountId|adCmsId|siteName|width|textPosition|textPositionMobile|textAlign|textAlignMobile):|type:|$)/s);
+    if (textMatch) {
+      if (['texto', 'frase', 'intro'].includes(paragraph.type)) {
+        paragraph.text = cleanAndFormatHTML(textMatch[1].trim());
+      } else {
+        paragraph.text = decodeHTMLEntities(textMatch[1].trim().replace(/<[^>]*>/g, ' ')).replace(/\s\s+/g, ' ').trim();
+      }
+    }
+    
+    // 🔧 MELHORIA PRINCIPAL: Parser robusto para arrays JSON
+    const jsonFields = ['images', 'items', 'steps'];
+    for (const field of jsonFields) {
+      const regex = new RegExp(`${field}:\\s*(\\[[\\s\\S]*?\\])`, 'i');
+      const match = block.match(regex);
+      if (match) {
+        paragraph[field] = parseJSONField(match[1], field);
+      }
+    }
+
+    // Parse de outros campos simples
     const fieldMappings = {
       backgroundImage: 'backgroundImage', backgroundImageMobile: 'backgroundImageMobile', backgroundVideo: 'backgroundVideo',
       backgroundVideoMobile: 'backgroundVideoMobile', backgroundPosition: 'backgroundPosition', backgroundPositionMobile: 'backgroundPositionMobile',
@@ -188,6 +304,20 @@ function parseParagraphsHTML(html) {
       }
     }
     
+    // 🔧 VALIDAÇÃO: Log de ScrollyTelling processado
+    if (['scrollytelling', 'scrolly'].includes(paragraph.type?.toLowerCase())) {
+      const stepsCount = paragraph.steps?.length || 0;
+      console.log(`🎬 ScrollyTelling processado: ${stepsCount} steps`);
+      
+      if (stepsCount === 0) {
+        console.warn(`⚠️ ScrollyTelling sem steps detectado. Bloco:`, block.substring(0, 200));
+      } else {
+        paragraph.steps.forEach((step, index) => {
+          console.log(`   Step ${index + 1}: "${step.title?.substring(0, 30)}..." | Imagem: ${!!step.image} | Vídeo: ${!!step.video}`);
+        });
+      }
+    }
+    
     if (paragraph.type) {
       paragraphs.push(paragraph);
     }
@@ -200,14 +330,16 @@ function cleanAndFormatHTML(html) {
   
   let cleanedHtml = decodeHTMLEntities(html);
   
+  // 🔧 CORREÇÃO: Converte crases em aspas simples
+  cleanedHtml = cleanedHtml.replace(/`/g, "'");
+  
+  // Preserva formatação HTML do Google Docs
   cleanedHtml = cleanedHtml.replace(/<([^>]+)style="[^"]*font-weight:\s*(?:bold|[7-9]\d\d|700|800|900)[^"]*"[^>]*>(.*?)<\/\1>/gi, '<strong>$2</strong>');
   cleanedHtml = cleanedHtml.replace(/<([^>]+)style="[^"]*font-style:\s*italic[^"]*"[^>]*>(.*?)<\/\1>/gi, '<em>$2</em>');
   cleanedHtml = cleanedHtml.replace(/<([^>]+)style="[^"]*text-decoration[^"]*underline[^"]*"[^>]*>(.*?)<\/\1>/gi, '<u>$2</u>');
   cleanedHtml = cleanedHtml.replace(/<a\s+href="([^"]*)"[^>]*>(.*?)<\/a>/gi, '<a href="$1">$2</a>');
   
-  // ▼▼▼ ADIÇÃO CIRÚRGICA PARA CORRIGIR APENAS A LISTA DE BULLETS ▼▼▼
-  // Esta regex encontra um bloco de texto que contém itens de lista (iniciados com •, * ou -) separados por <br>.
-  // Ela transforma APENAS esse bloco em uma lista <ul>, sem afetar o resto do texto.
+  // Conversão de listas com bullet points
   const listRegex = /((?:[•*-]\s.*)(?:<br\s*\/?>\s*[•*-]\s.*)*)/g;
   cleanedHtml = cleanedHtml.replace(listRegex, (listBlock) => {
     const items = listBlock.split(/<br\s*\/?>/gi)
@@ -218,6 +350,7 @@ function cleanAndFormatHTML(html) {
     return items ? `<ul>${items}</ul>` : '';
   });
 
+  // Remove tags de estrutura do Google Docs
   cleanedHtml = cleanedHtml.replace(/<\/?(span|p|div)[^>]*>/gi, '');
   
   return cleanedHtml.trim();

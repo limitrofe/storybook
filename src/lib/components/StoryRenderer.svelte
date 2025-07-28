@@ -10,6 +10,9 @@
   import Parallax from './story/Parallax.svelte';
   import BeforeAfter from './story/BeforeAfter.svelte';
   import ScrollyTelling from './story/ScrollyTelling.svelte';
+  // ▼▼▼ 1. IMPORTAR OS NOVOS COMPONENTES ▼▼▼
+  import FlourishEmbed from './story/FlourishEmbed.svelte';
+  import FlourishScrolly from './story/FlourishScrolly.svelte';
 
   export let storyData = {};
 
@@ -55,6 +58,13 @@
       case 'scrollytelling':
       case 'scrolly':
         return 'scrolly';
+      // ▼▼▼ 2. ADICIONAR OS NOVOS CASES ▼▼▼
+      case 'flourish':
+      case 'grafico':
+      case 'mapa':
+        return 'flourish';
+      case 'flourish-scrolly':
+        return 'flourish-scrolly';
       default:
         return 'text';
     }
@@ -195,6 +205,13 @@
           backgroundImage={paragraph.backgroundImage}
           stickyHeight={paragraph.stickyHeight || '100vh'}
           fullWidth={paragraph.fullWidth === 'true'}
+        />
+      {:else if componentType === 'flourish'}
+        <FlourishEmbed src={paragraph.src} />
+      {:else if componentType === 'flourish-scrolly'}
+        <FlourishScrolly
+          src={paragraph.src}
+          steps={paragraph.steps && paragraph.steps.length > 0 ? paragraph.steps : []}
         />
       {/if}
     {/each}
