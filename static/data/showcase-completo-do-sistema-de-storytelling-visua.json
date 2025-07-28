@@ -856,10 +856,7 @@
     },
     {
       "type": "texto",
-      "text": "O componente acima ('"
-    },
-    {
-      "type": "flourish`) renderiza uma visualização única do Flourish. &Eacute; ideal para gráficos, mapas ou qualquer outro embed simples. O jornalista só precisa do ID da visualização."
+      "text": "O componente acima renderiza uma visualização única do Flourish. &Eacute; ideal para gráficos, mapas ou qualquer outro embed simples. O jornalista só precisa do ID da visualização.---"
     },
     {
       "type": "intertitulo",
@@ -895,10 +892,7 @@
     },
     {
       "type": "texto",
-      "text": "O componente acima ('"
-    },
-    {
-      "type": "flourish-scrolly`) transforma uma \"Flourish Story\" completa em uma experiência de scrollytelling, onde cada passo do texto pode controlar qual slide da história é exibido."
+      "text": "O componente acima transforma uma \"Flourish Story\" completa em uma experiência de scrollytelling, onde cada passo do texto pode controlar qual slide da história é exibido."
     },
     {
       "type": "intertitulo",
