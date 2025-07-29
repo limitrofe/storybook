@@ -208,7 +208,6 @@
       "credit": "Vídeo: G1",
       "fullWidth": "false",
       "autoplay": "false",
-      "controls": "true",
       "videoId": "12777862",
       "skipDFP": "false",
       "showCaption": "true"
@@ -219,7 +218,6 @@
       "credit": "Vídeo: G1",
       "fullWidth": "true",
       "autoplay": "false",
-      "controls": "true",
       "videoId": "13786052",
       "skipDFP": "true",
       "showCaption": "true"
@@ -230,9 +228,9 @@
       "credit": "Exemplo de autoplay",
       "fullWidth": "false",
       "autoplay": "true",
-      "controls": "true",
       "videoId": "13784829",
-      "skipDFP": "false",
+      "skipDFP": "true &nbsp; &nbsp;",
+      "startMuted": "true &nbsp;",
       "showCaption": "false"
     },
     {

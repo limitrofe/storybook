@@ -2,7 +2,8 @@
 <script>
   import { onMount } from 'svelte';
   import StoryRenderer from '$lib/components/StoryRenderer.svelte';
-  
+  import ReelsGloboPlayer from '$lib/components/story/GloboPlayer.svelte';
+
   // 🆕 NOVAS FUNCIONALIDADES (opcionais)
   let enhancedMode = false;
   let showExtras = false;
