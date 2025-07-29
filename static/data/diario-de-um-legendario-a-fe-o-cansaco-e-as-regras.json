@@ -1,44 +1,78 @@
 {
-  "title": "Showcase Completo do Sistema de Storytelling Visual - Bruna",
-  "subtitle": "Demonstração de todos os componentes e suas variações para validação e testes",
-  "author": "Sistema de Design",
-  "date": "24 de julho de 2025",
-  "theme": "tecnologia",
+  "title": "Diário de um Legendário: a fé, o cansaço e as regras militares no retiro que virou febre entre famosos",
+  "subtitle": "O g1 foi ao retiro secreto masculino que causa debate nas redes sociais, e conta bastidores. O 1&ordm; dia tem uma impressionante maratona física, com ordens rigorosas, comida racionada e religião ainda em segundo plano.",
+  "author": "Fábio Tito",
+  "date": "26 de julho de 2025",
+  "theme": "Pop & Arte",
   "intro": {
-    "text": "Este documento é um <strong>showcase completo</strong> de todos os componentes do sistema de storytelling visual. Aqui você encontrará <em>todas as variações possíveis</em> de cada elemento, permitindo uma validação completa do design system e identificação de melhorias necessárias."
+    "text": "A frase abaixo, dita para mim e mais 168 homens, resume o espírito do retiro masculino e cristão que ganhou fama nas redes sociais. Fama e mistério."
   },
   "paragraphs": [
     {
-      "type": "header",
-      "text": "Showcase do Sistema Visual",
-      "backgroundImage": "https://cdn.pixabay.com/photo/2020/12/06/17/58/trees-5809559_1280.jpg",
-      "variant": "hero",
-      "overlay": "true"
+      "type": "foto",
+      "src": "https://s2-g1.glbimg.com/8imyaJ9ZfO8Phak8WrEAvoKymA4=/0x0:1920x575/1600x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/K/u/zLQ5ABTDGljqAsMcS98g/dia-01-frases-01.jpg",
+      "caption": "",
+      "credit": "Foto: Bruna Azevedo",
+      "alt": "Posto de recarga para carros elétricos",
+      "fullWidth": "true",
+      "alignment": "left"
     },
     {
       "type": "texto",
-      "text": "Este é um <strong>parágrafo de texto normal</strong> que demonstra a formatação básica. Aqui temos <em>texto em itálico</em>, <u>texto sublinhado</u>, e <a href=\"https://example.com\">links funcionais</a>. O objetivo é mostrar como o texto flui naturalmente na página."
+      "text": "De um lado, <a href=&rdquo;https://g1.globo.com/pop-arte/noticia/2025/04/07/legendarios-como-e-o-movimento-cristao-para-homens-que-atraiu-eliezer-thiago-nigro-e-neymar-pai.ghtml&rdquo;>celebridades como o ex-BBB Eliezer, Neymar pai, Thiago Nigro e Tirulipa</a> exaltam a experiência como transformadora. Do outro, críticos apontam uma visão obsoleta da masculinidade."
     },
     {
       "type": "texto",
-      "text": "Este é um <strong>parágrafo de destaque</strong> que serve como introdução ou destaque de seção. A fonte é ligeiramente maior e possui mais peso visual para chamar atenção do leitor.",
+      "text": "<strong>Leia mais:</strong> <a href=&rdquo;https://g1.globo.com/pop-arte/noticia/2025/06/10/legendarios-nao-quer-impor-modelo-obsoleto-de-masculinidade-diz-fundador-do-movimento.ghtml&rdquo;>Legendários não quer impor modelo obsoleto de masculinidade, diz fundador do movimento ao g1</a>",
       "variant": "lead"
     },
     {
-      "type": "frase",
-      "text": "Esta é uma <strong>citação moderna</strong> com o novo design elegante. Aqui podemos ter <em>formatação em itálico</em> e texto que realmente se destaca na página de forma sofisticada.",
-      "author": "Designer do Sistema",
-      "role": "Especialista em UX/UI"
+      "type": "texto",
+      "text": "Muita gente opina sem conhecer. Eu, homem cristão que cresceu em lar evangélico e tem interesse sobre o assunto, subi a montanha. Agora posso responder: o que acontece, afinal, entre os Legendários?"
+    },
+    {
+      "type": "texto",
+      "text": "Não levei gravador, câmera, nem celular, que eram banidos. Mas tomei notas. E o que relato aqui é o que vi, ouvi e vivi durante o retiro em junho de 2025."
+    },
+    {
+      "type": "texto",
+      "text": "Já no primeiro dia, entendi que o esforço físico e a disciplina militar são tão marcantes quanto o aspecto religioso.",
+      "variant": "lead"
+    },
+    {
+      "type": "texto",
+      "text": "<em>O <strong>g1</strong> publica este Diário de um Legendário em quatro partes diárias, entre sábado (26) e terça-feira (29).</em>"
+    },
+    {
+      "type": "foto",
+      "src": "https://s2-g1.glbimg.com/rGOAQaWtSObw063Lu4zktzP0UDU=/0x0:1920x1165/1600x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/e/y/qoGlAPSuAiu7kYuMb58g/dia-01-capa-desktop-v2.jpg",
+      "caption": "",
+      "credit": "Foto: Bruna Azevedo",
+      "alt": "Posto de recarga para carros elétricos",
+      "fullWidth": "true",
+      "alignment": "left"
     },
     {
       "type": "intertitulo",
-      "text": "Seção 1: Componentes de Texto",
+      "text": "Um boné, um número e nenhum atalho",
       "variant": "default",
       "size": "medium"
     },
     {
       "type": "texto",
-      "text": "Agora vamos demonstrar diferentes tipos de <strong>intertítulos</strong> e suas variações. Cada um tem comportamentos únicos para desktop e mobile."
+      "text": "Cheguei às 13h03 no local que havia sido anunciado todos os dias da última semana no grupo de Whatsapp \"TOP#1071 <ul><li>DESCOBRIMENTO BAHIA\".</li></ul>"
+    },
+    {
+      "type": "texto",
+      "text": "O número do nosso Track Outdoor de Potencial (TOP), 1.071, é único em todo o mundo; sempre que um retiro como esse é organizado, a chancela do Legendários Global vem com a identificação numérica daquela edição."
+    },
+    {
+      "type": "texto",
+      "text": "Da mesma forma, quem completa as 72 horas de TOP recebe um número só seu. No domingo, recebi o boné de legendário 130.821, o que significa que, antes de mim, 130.819 homens se tornaram legendários pelo mundo."
+    },
+    {
+      "type": "texto",
+      "text": "Isso porque Jesus é considerado o \"legendário n&ordm; 1\" &mdash; apesar de o messias do mundo cristão não ter passado exatamente pela jornada em que eu estava prestes a embarcar."
     },
     {
       "type": "intertitulo",
@@ -793,5 +827,5 @@
       "Co-Autor Colaborador"
     ]
   },
-  "slug": "showcase-completo-do-sistema-de-storytelling-visua"
+  "slug": "diario-de-um-legendario-a-fe-o-cansaco-e-as-regras"
 }

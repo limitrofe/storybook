@@ -1,8 +1,8 @@
 <script>
   // Carrega todos os estilos globais e de temas
-  import '../app.css';
-  import '../lib/styles/tokens.css';
-  import '../lib/styles/themes.css';
+  import '../../app.css';
+  import '../../lib/styles/tokens.css';
+  import '../../lib/styles/themes.css';
   // Importa o seletor de temas
   import ThemeSwitcher from '$lib/components/ThemeSwitcher.svelte';
 </script>

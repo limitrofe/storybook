@@ -47,6 +47,8 @@ async function fetchGoogleDoc(docId) {
     console.log(`📝 Título: ${data.title}`);
     console.log(`📊 Intro: ${data.intro ? 'OK' : 'Vazio'}`);
     console.log(`📊 Paragraphs: ${data.paragraphs ? data.paragraphs.length : 0} itens`);
+    console.log(`📝 Créditos: ${data.credits ? 'OK' : 'Vazio'}`);
+
     
     // Validação específica para ScrollyTelling
     const scrollyComponents = data.paragraphs?.filter(p => 
@@ -63,7 +65,7 @@ async function fetchGoogleDoc(docId) {
           console.warn(`⚠️ ScrollyTelling sem steps: ${comp.text?.substring(0, 50)}...`);
         } else {
           comp.steps.forEach((step, stepIndex) => {
-            console.log(`     Step ${stepIndex + 1}: "${step.title?.substring(0, 30)}..."`);
+            console.log(`     Step ${stepIndex + 1}: "${step.title?.substring(0, 30)}..." | Imagem: ${!!step.image} | Vídeo: ${!!step.video}`);
           });
         }
       });
@@ -129,6 +131,12 @@ function parseHTMLFormat(html) {
   } else {
     data.paragraphs = [];
   }
+
+  // Parse top-level credits section
+  const creditsMatch = html.match(/\[(?:\+)?credits\]([\s\S]*?)\[credits\]/s);
+  if (creditsMatch) {
+    data.credits = parseCreditsHTML(creditsMatch[1]);
+  }
   
   return data;
 }
@@ -147,51 +155,40 @@ function decodeHTMLEntities(text) {
   return text.replace(/&[a-zA-Z0-9#]+;/g, (entity) => entities[entity] || entity);
 }
 
-// 🔧 FUNÇÃO MELHORADA: Parser robusto para arrays JSON
+// Robust JSON array parser
 function parseJSONField(jsonString, fieldName) {
   if (!jsonString) return null;
   
   try {
     console.log(`🔍 Tentando parsear ${fieldName}:`, jsonString.substring(0, 100) + '...');
     
-    // Limpeza robusta do JSON vindo do Google Docs
     let cleanJson = jsonString
-      // Remove tags HTML
-      .replace(/<[^>]*>/g, '')
-      // Converte entidades HTML
+      .replace(/<[^>]*>/g, '') // Remove tags HTML
       .replace(/&quot;/g, '"')
       .replace(/&amp;/g, '&')
       .replace(/&lt;/g, '<')
       .replace(/&gt;/g, '>')
       .replace(/&#39;/g, "'")
       .replace(/&nbsp;/g, ' ')
-      // Remove quebras de linha e espaços extras
       .replace(/\n/g, ' ')
       .replace(/\r/g, ' ')
       .replace(/\s+/g, ' ')
-      // Fix vírgulas extras
       .replace(/,\s*\]/g, ']')
       .replace(/,\s*}/g, '}')
-      // Fix aspas curvas (problema comum do Google Docs)
-      .replace(/[""]/g, '"')
-      .replace(/['']/g, "'")
-      // Remove espaços ao redor de : e ,
+      .replace(/["“”„‟«»"‶‷”″‟‹›]/g, '"') // Fix curly quotes
+      .replace(/['‘’‚‛‹›]/g, "'") // Fix curly apostrophes
       .replace(/\s*:\s*/g, ':')
       .replace(/\s*,\s*/g, ',')
       .trim();
     
-    // Tenta o parse direto primeiro
     let parsed = JSON.parse(cleanJson);
     
-    // Se é array, processa cada item
     if (Array.isArray(parsed)) {
       parsed = parsed.map(item => {
         if (typeof item === 'object' && item !== null) {
-          // Limpa strings dentro do objeto
           Object.keys(item).forEach(key => {
             if (typeof item[key] === 'string') {
               item[key] = decodeHTMLEntities(item[key]);
-              // Se for um campo de texto, permite formatação HTML
               if (['text', 'caption', 'content'].includes(key)) {
                 item[key] = cleanAndFormatHTML(item[key]);
               }
@@ -209,9 +206,7 @@ function parseJSONField(jsonString, fieldName) {
     console.warn(`⚠️ Erro ao parsear ${fieldName}:`, error.message);
     console.log('JSON problemático:', jsonString.substring(0, 200));
     
-    // Fallback: tenta um parse mais agressivo
     try {
-      // Remove tudo que não é essencial para o JSON
       let fallbackJson = jsonString
         .replace(/[^\[\]{}":,\w\s\-\.\/\?=&]/g, ' ')
         .replace(/\s+/g, ' ')
@@ -242,14 +237,12 @@ function parseParagraphsHTML(html) {
       paragraph.type = decodeHTMLEntities(typeMatch[1].trim());
     }
 
-    // 🔧 MELHORIA: Tratamento especial para componentes Flourish
     if (['flourish', 'flourish-scrolly', 'grafico', 'mapa'].includes(paragraph.type)) {
       const srcMatch = block.match(/src:\s*([^\n<]+)/);
       if (srcMatch) {
         paragraph.src = srcMatch[1].trim();
       }
 
-      // 🔧 NOVO: Parser melhorado para steps
       const stepsMatch = block.match(/steps:\s*(\[[\s\S]*?\])/);
       if (stepsMatch) {
         paragraph.steps = parseJSONField(stepsMatch[1], 'flourish steps');
@@ -259,7 +252,6 @@ function parseParagraphsHTML(html) {
       continue;
     }
 
-    // Parse de text field
     const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:backgroundImage|backgroundImageMobile|backgroundVideo|backgroundVideoMobile|backgroundPosition|backgroundPositionMobile|author|role|src|caption|credit|alt|fullWidth|variant|size|orientation|autoplay|controls|poster|images|items|steps|beforeImage|afterImage|beforeLabel|afterLabel|image|height|heightMobile|speed|content|overlay|layout|columns|interval|showDots|showArrows|stickyHeight|videoId|videosIDs|id|skipDFP|skipdfp|autoPlay|startMuted|maxQuality|quality|chromeless|isLive|live|allowRestrictedContent|preventBlackBars|globoId|token|adAccountId|adCmsId|siteName|width|textPosition|textPositionMobile|textAlign|textAlignMobile):|type:|$)/s);
     if (textMatch) {
       if (['texto', 'frase', 'intro'].includes(paragraph.type)) {
@@ -269,7 +261,6 @@ function parseParagraphsHTML(html) {
       }
     }
     
-    // 🔧 MELHORIA PRINCIPAL: Parser robusto para arrays JSON
     const jsonFields = ['images', 'items', 'steps'];
     for (const field of jsonFields) {
       const regex = new RegExp(`${field}:\\s*(\\[[\\s\\S]*?\\])`, 'i');
@@ -279,7 +270,6 @@ function parseParagraphsHTML(html) {
       }
     }
 
-    // Parse de outros campos simples
     const fieldMappings = {
       backgroundImage: 'backgroundImage', backgroundImageMobile: 'backgroundImageMobile', backgroundVideo: 'backgroundVideo',
       backgroundVideoMobile: 'backgroundVideoMobile', backgroundPosition: 'backgroundPosition', backgroundPositionMobile: 'backgroundPositionMobile',
@@ -304,7 +294,6 @@ function parseParagraphsHTML(html) {
       }
     }
     
-    // 🔧 VALIDAÇÃO: Log de ScrollyTelling processado
     if (['scrollytelling', 'scrolly'].includes(paragraph.type?.toLowerCase())) {
       const stepsCount = paragraph.steps?.length || 0;
       console.log(`🎬 ScrollyTelling processado: ${stepsCount} steps`);
@@ -325,21 +314,58 @@ function parseParagraphsHTML(html) {
   return paragraphs;
 }
 
+function parseCreditsHTML(html) {
+  const credits = {};
+
+  // Parse notes field
+  const notesMatch = html.match(/notes:\s*([\s\S]*?)(?=sources:|additionalGraphics:|editedBy:|authors:|$)/s);
+  if (notesMatch) {
+    credits.notes = cleanAndFormatHTML(notesMatch[1].trim());
+  }
+
+  // Parse array fields (sources, additionalGraphics, editedBy, authors)
+  const arrayFields = ['sources', 'additionalGraphics', 'editedBy', 'authors'];
+  for (const field of arrayFields) {
+    // This regex now explicitly looks for content between the field name and the next field or end of block.
+    // It captures all the content, including potential HTML tags like <ul>, <li>, &nbsp;
+    const regex = new RegExp(`${field}:\\s*([\\s\\S]*?)(?=(?:notes:|sources:|additionalGraphics:|editedBy:|authors:|\\[credits\\])|$)`, 'i');
+    const match = html.match(regex);
+
+    if (match && match[1]) {
+      // Get the raw content for the list field
+      let rawContent = match[1];
+
+      // Remove any <ul> or <li> tags and &nbsp; that Google Docs might add around the actual list items
+      rawContent = rawContent.replace(/<\/?ul[^>]*>/g, '');
+      rawContent = rawContent.replace(/<\/?li[^>]*>/g, '');
+      rawContent = rawContent.replace(/&nbsp;/g, ' ');
+      
+      // Split by the hyphen `-` that indicates a new list item
+      // Then, clean each item and filter out empty strings
+      credits[field] = rawContent.split('- ').map(item => {
+        // Apply cleanAndFormatHTML to each individual item
+        return cleanAndFormatHTML(item.trim());
+      }).filter(Boolean); // Filter out any empty strings
+    }
+  }
+  return credits;
+}
+
 function cleanAndFormatHTML(html) {
   if (!html) return '';
   
   let cleanedHtml = decodeHTMLEntities(html);
   
-  // 🔧 CORREÇÃO: Converte crases em aspas simples
+  // Convert backticks to single quotes
   cleanedHtml = cleanedHtml.replace(/`/g, "'");
   
-  // Preserva formatação HTML do Google Docs
+  // Preserve HTML formatting from Google Docs
   cleanedHtml = cleanedHtml.replace(/<([^>]+)style="[^"]*font-weight:\s*(?:bold|[7-9]\d\d|700|800|900)[^"]*"[^>]*>(.*?)<\/\1>/gi, '<strong>$2</strong>');
   cleanedHtml = cleanedHtml.replace(/<([^>]+)style="[^"]*font-style:\s*italic[^"]*"[^>]*>(.*?)<\/\1>/gi, '<em>$2</em>');
   cleanedHtml = cleanedHtml.replace(/<([^>]+)style="[^"]*text-decoration[^"]*underline[^"]*"[^>]*>(.*?)<\/\1>/gi, '<u>$2</u>');
   cleanedHtml = cleanedHtml.replace(/<a\s+href="([^"]*)"[^>]*>(.*?)<\/a>/gi, '<a href="$1">$2</a>');
   
-  // Conversão de listas com bullet points
+  // Convert bullet points to proper HTML lists
   const listRegex = /((?:[•*-]\s.*)(?:<br\s*\/?>\s*[•*-]\s.*)*)/g;
   cleanedHtml = cleanedHtml.replace(listRegex, (listBlock) => {
     const items = listBlock.split(/<br\s*\/?>/gi)
@@ -350,7 +376,7 @@ function cleanAndFormatHTML(html) {
     return items ? `<ul>${items}</ul>` : '';
   });
 
-  // Remove tags de estrutura do Google Docs
+  // Remove structural Google Docs tags that are often wrapped around text or lists
   cleanedHtml = cleanedHtml.replace(/<\/?(span|p|div)[^>]*>/gi, '');
   
   return cleanedHtml.trim();
