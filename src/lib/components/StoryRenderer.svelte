@@ -14,6 +14,7 @@
   import FlourishEmbed from './story/FlourishEmbed.svelte';
   import FlourishScrolly from './story/FlourishScrolly.svelte';
   import FinalCredits from './FinalCredits.svelte';
+  import AnchorPoint from './story/AnchorPoint.svelte'; // <-- 1. Importado aqui
 
   export let storyData = {};
 
@@ -69,6 +70,11 @@
         return 'flourish';
       case 'flourish-scrolly':
         return 'flourish-scrolly';
+      // ---- Bloco da Âncora Adicionado ----
+      case 'ancora': // <-- 2. Adicionado o case para a âncora
+      case 'anchor':
+        return 'anchor';
+      // ---------------------------------
       default:
         return 'text';
     }
@@ -77,12 +83,18 @@
   /**
    * Converte uma string (vinda do JSON) para um booleano de forma segura.
    */
-  function toBoolean(value) {
+  function toBoolean(value, defaultValue = false) {
+    if (value === null || typeof value === 'undefined') {
+      return defaultValue;
+    }
     if (typeof value !== 'string') {
       return !!value; // Retorna o valor booleano se não for string
     }
     // .trim() remove espaços e .toLowerCase() torna a comparação case-insensitive
-    return value.trim().toLowerCase() === 'true';
+    const processedValue = value.trim().toLowerCase();
+    if (processedValue === 'true') return true;
+    if (processedValue === 'false') return false;
+    return defaultValue;
   }
 </script>
 
@@ -96,7 +108,7 @@
     backgroundImageMobile={storyData.backgroundImageMobile}
     backgroundVideo={storyData.backgroundVideo}
     backgroundVideoMobile={storyData.backgroundVideoMobile}
-    overlay={toBoolean(storyData.overlay)}
+    overlay={toBoolean(storyData.overlay, true)}
     variant={storyData.variant}
   />
 {/if}
@@ -142,7 +154,7 @@
           src={paragraph.src}
           fullWidth={toBoolean(paragraph.fullWidth)}
           autoplay={toBoolean(paragraph.autoplay)}
-          controls={!toBoolean(paragraph.controls, false)}
+          controls={toBoolean(paragraph.controls, true)}
           loop={toBoolean(paragraph.loop)}
           showCaption={toBoolean(paragraph.showCaption, true)}
         />
@@ -180,8 +192,8 @@
           items={paragraph.items || []}
           autoplay={toBoolean(paragraph.autoplay)}
           interval={parseInt(paragraph.interval) || 5000}
-          showDots={!toBoolean(paragraph.showDots, false)}
-          showArrows={!toBoolean(paragraph.showArrows, false)}
+          showDots={toBoolean(paragraph.showDots, true)}
+          showArrows={toBoolean(paragraph.showArrows, true)}
         />
       {:else if componentType === 'parallax'}
         <Parallax
@@ -208,6 +220,8 @@
         <FlourishEmbed src={paragraph.src} />
       {:else if componentType === 'flourish-scrolly'}
         <FlourishScrolly src={paragraph.src} steps={paragraph.steps || []} />
+      
+      {:else if componentType === 'anchor'} <AnchorPoint id={paragraph.id || paragraph.name} />
       {/if}
     {/each}
   {/if}

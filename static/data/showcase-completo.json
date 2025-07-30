@@ -35,6 +35,10 @@
       "role": "Especialista em UX/UI"
     },
     {
+      "type": "ancora",
+      "id": "componentes-de-texto"
+    },
+    {
       "type": "intertitulo",
       "text": "Seção 1: Componentes de Texto",
       "variant": "default",
@@ -141,6 +145,10 @@
     {
       "type": "texto",
       "text": "Este exemplo mostra como o componente pode ter <strong>comportamentos diferentes</strong> entre desktop e mobile. No desktop: topo/esquerda, no mobile: centro/centro."
+    },
+    {
+      "type": "ancora",
+      "id": "componentes-de-midia"
     },
     {
       "type": "intertitulo",
