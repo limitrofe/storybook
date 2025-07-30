@@ -1,4 +1,3 @@
-<!-- src/lib/components/story/SectionTitle.svelte -->
 <script>
   export let title = '';
   export let subtitle = '';
@@ -18,7 +17,7 @@
   export let textAlign = 'center';
   export let textAlignMobile = '';
 
-  // 🔧 CORREÇÃO: Verificar se realmente tem mídia
+  // Verificar se realmente tem mídia
   $: hasMedia = !!(backgroundImage || backgroundVideo);
   $: hasMobileMedia = !!(backgroundImageMobile || backgroundVideoMobile);
 
@@ -37,7 +36,7 @@
                            textPositionMobile === 'bottom' ? 'text-position-mobile-bottom' : 
                            textPositionMobile === 'center' ? 'text-position-mobile-center' : '';
 
-  // 🔧 CORREÇÃO: Styles dinâmicos só se tiver imagem E com url() wrapper
+  // Styles dinâmicos só se tiver imagem E com url() wrapper
   $: desktopStyle = [
     height ? `min-height: ${height}` : '',
     backgroundImage ? `background-image: url(${backgroundImage})` : '',
@@ -50,7 +49,7 @@
     backgroundImageMobile && backgroundPositionMobile ? `background-position: ${backgroundPositionMobile}` : ''
   ].filter(Boolean).join('; ');
 
-  // 🔧 NOVO: Debug para desenvolvimento
+  // Debug para desenvolvimento
   $: if (import.meta.env.DEV) {
     console.log('🎨 SectionTitle Debug:', {
       title,
@@ -72,7 +71,6 @@
   class:has-mobile-media={hasMobileMedia}
   style={desktopStyle}
 >
-  <!-- 🔧 CORREÇÃO: Background Desktop (só renderiza se tiver imagem) -->
   {#if backgroundImage}
     <div 
       class="section-title__background section-title__background--desktop"
@@ -80,7 +78,6 @@
     ></div>
   {/if}
 
-  <!-- Background Mobile (só renderiza se tiver imagem mobile) -->
   {#if backgroundImageMobile}
     <div 
       class="section-title__background section-title__background--mobile"
@@ -88,7 +85,6 @@
     ></div>
   {/if}
 
-  <!-- 🔧 CORREÇÃO: Video Desktop (só renderiza se tiver vídeo) -->
   {#if backgroundVideo}
     <video 
       class="section-title__background-video section-title__background-video--desktop" 
@@ -101,7 +97,6 @@
     </video>
   {/if}
 
-  <!-- Video Mobile (só renderiza se tiver vídeo mobile) -->
   {#if backgroundVideoMobile}
     <video 
       class="section-title__background-video section-title__background-video--mobile" 
@@ -114,7 +109,6 @@
     </video>
   {/if}
 
-  <!-- 🔧 CORREÇÃO: Overlay só aparece se tiver mídia E overlay for true -->
   {#if overlay && (hasMedia || hasMobileMedia)}
     <div class="section-title__overlay"></div>
   {/if}
@@ -140,7 +134,7 @@
     margin: 2rem 0;
   }
 
-  /* 🔧 CORREÇÃO: Cor do texto só muda se REALMENTE tiver mídia */
+  /* Cor do texto só muda se REALMENTE tiver mídia */
   .section-title.has-media,
   .section-title.has-mobile-media {
     color: white;
@@ -162,7 +156,7 @@
     padding: 2rem 0;
   }
 
-  /* 🔧 CORREÇÃO: Sizes COM imagem (só aplica se tiver .has-media) */
+  /* Sizes COM imagem (só aplica se tiver .has-media) */
   .section-title--small.has-media,
   .section-title--small.has-mobile-media {
     min-height: 200px;
@@ -266,24 +260,42 @@
     text-align: center;
   }
 
+  /* ▼▼▼ INÍCIO DA ALTERAÇÃO ▼▼▼ */
   .section-title--minimal {
     background: none;
-    border-bottom: 1px solid var(--color-border);
-    margin: 1rem 0;
-    padding: 1rem 0;
+    border: none;
+    margin: 2.5rem 0;
+    padding: 0;
+    /* justify-content: center; é herdado do .section-title, o que já centraliza na horizontal */
   }
 
   .section-title--minimal .section-title__container {
-    text-align: left;
-    border-left: 4px solid var(--color-primary);
-    padding-left: 1.5rem;
+    position: relative;
+    text-align: center; /* Centraliza o texto */
+    border: none;
+    padding: 0;
+    padding-top: 1.5rem;
+    margin: 0 auto; /* Garante que o container se centralize */
   }
 
-  /* 🔧 NOVO: Estilo para seções sem mídia */
-  .section-title:not(.has-media):not(.has-mobile-media) {
-    background: var(--color-highlight-bg);
-    border: 1px solid var(--color-border);
-    border-radius: 8px;
+  /* A linha de 30% de largura, agora centralizada */
+  .section-title--minimal .section-title__container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%); /* O truque para centralizar horizontalmente */
+    width: 30%;
+    height: 2px;
+    background-color: var(--color-primary);
+  }
+  /* ▲▲▲ FIM DA ALTERAÇÃO ▲▲▲ */
+
+
+  /* Estilo para seções sem mídia (sem fundo) */
+  .section-title:not(.has-media):not(.has-mobile-media):not(.section-title--minimal) {
+    background: transparent;
+    border: none;
     color: var(--color-text);
   }
 
@@ -318,7 +330,7 @@
     }
 
     .section-title--minimal {
-      margin: 1rem 0;
+      margin: 2rem 0;
     }
 
     /* Mobile backgrounds - visíveis apenas no mobile */
@@ -379,9 +391,9 @@
     }
   }
 
-  /* 🔧 NOVO: Debug visual em desenvolvimento */
+  /* Regra de debug visual em desenvolvimento */
   @media (max-width: 768px) {
-    .section-title:not(.has-media):not(.has-mobile-media) {
+    .section-title:not(.has-media):not(.has-mobile-media):not(.section-title--minimal) {
       border-left: 4px solid var(--color-primary);
     }
   }

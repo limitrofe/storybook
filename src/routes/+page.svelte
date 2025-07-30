@@ -20,7 +20,7 @@
 
   onMount(async () => {
     try {
-      const response = await fetch('./data/showcase-completo-do-sistema-de-storytelling-visua.json');
+      const response = await fetch('./data/showcase-completo.json');
       if (response.ok) {
         currentStory = await response.json();
         
