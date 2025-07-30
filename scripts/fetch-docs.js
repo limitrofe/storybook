@@ -290,7 +290,15 @@ function parseParagraphsHTML(html) {
       const regex = new RegExp(`${field}:\\s*([^\\n<]*)`);
       const match = block.match(regex);
       if (match) {
-        paragraph[prop] = decodeHTMLEntities(match[1].trim());
+        // --- INÍCIO DA ÚNICA CORREÇÃO NESTE ARQUIVO ---
+        // Limpeza robusta do valor para garantir que o ID do vídeo seja lido corretamente
+        const cleanedValue = (match[1] || '')
+            .replace(/&nbsp;/g, ' ')       // Converte espaços "não-quebráveis" em espaços normais
+            .replace(/<[^>]*>/g, '')       // Remove quaisquer tags HTML (como spans)
+            .trim();                       // Remove espaços em branco no início e no fim
+            
+        paragraph[prop] = decodeHTMLEntities(cleanedValue);
+        // --- FIM DA CORREÇÃO ---
       }
     }
     
@@ -317,35 +325,25 @@ function parseParagraphsHTML(html) {
 function parseCreditsHTML(html) {
   const credits = {};
 
-  // Parse notes field
   const notesMatch = html.match(/notes:\s*([\s\S]*?)(?=sources:|additionalGraphics:|editedBy:|authors:|$)/s);
   if (notesMatch) {
     credits.notes = cleanAndFormatHTML(notesMatch[1].trim());
   }
 
-  // Parse array fields (sources, additionalGraphics, editedBy, authors)
   const arrayFields = ['sources', 'additionalGraphics', 'editedBy', 'authors'];
   for (const field of arrayFields) {
-    // This regex now explicitly looks for content between the field name and the next field or end of block.
-    // It captures all the content, including potential HTML tags like <ul>, <li>, &nbsp;
     const regex = new RegExp(`${field}:\\s*([\\s\\S]*?)(?=(?:notes:|sources:|additionalGraphics:|editedBy:|authors:|\\[credits\\])|$)`, 'i');
     const match = html.match(regex);
 
     if (match && match[1]) {
-      // Get the raw content for the list field
       let rawContent = match[1];
-
-      // Remove any <ul> or <li> tags and &nbsp; that Google Docs might add around the actual list items
       rawContent = rawContent.replace(/<\/?ul[^>]*>/g, '');
       rawContent = rawContent.replace(/<\/?li[^>]*>/g, '');
       rawContent = rawContent.replace(/&nbsp;/g, ' ');
       
-      // Split by the hyphen `-` that indicates a new list item
-      // Then, clean each item and filter out empty strings
       credits[field] = rawContent.split('- ').map(item => {
-        // Apply cleanAndFormatHTML to each individual item
         return cleanAndFormatHTML(item.trim());
-      }).filter(Boolean); // Filter out any empty strings
+      }).filter(Boolean);
     }
   }
   return credits;
@@ -356,16 +354,13 @@ function cleanAndFormatHTML(html) {
   
   let cleanedHtml = decodeHTMLEntities(html);
   
-  // Convert backticks to single quotes
   cleanedHtml = cleanedHtml.replace(/`/g, "'");
   
-  // Preserve HTML formatting from Google Docs
   cleanedHtml = cleanedHtml.replace(/<([^>]+)style="[^"]*font-weight:\s*(?:bold|[7-9]\d\d|700|800|900)[^"]*"[^>]*>(.*?)<\/\1>/gi, '<strong>$2</strong>');
   cleanedHtml = cleanedHtml.replace(/<([^>]+)style="[^"]*font-style:\s*italic[^"]*"[^>]*>(.*?)<\/\1>/gi, '<em>$2</em>');
   cleanedHtml = cleanedHtml.replace(/<([^>]+)style="[^"]*text-decoration[^"]*underline[^"]*"[^>]*>(.*?)<\/\1>/gi, '<u>$2</u>');
   cleanedHtml = cleanedHtml.replace(/<a\s+href="([^"]*)"[^>]*>(.*?)<\/a>/gi, '<a href="$1">$2</a>');
   
-  // Convert bullet points to proper HTML lists
   const listRegex = /((?:[•*-]\s.*)(?:<br\s*\/?>\s*[•*-]\s.*)*)/g;
   cleanedHtml = cleanedHtml.replace(listRegex, (listBlock) => {
     const items = listBlock.split(/<br\s*\/?>/gi)
@@ -376,7 +371,6 @@ function cleanAndFormatHTML(html) {
     return items ? `<ul>${items}</ul>` : '';
   });
 
-  // Remove structural Google Docs tags that are often wrapped around text or lists
   cleanedHtml = cleanedHtml.replace(/<\/?(span|p|div)[^>]*>/gi, '');
   
   return cleanedHtml.trim();

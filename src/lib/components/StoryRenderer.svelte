@@ -147,12 +147,13 @@
 
       {:else if componentType === 'globo-player'}
         {@const isFullWidth = toBoolean(paragraph.fullWidth)}
-        <div class="component-wrapper" class:full-width={isFullWidth}>
+        
+        <div class="component-wrapper globo-player-wrapper" class:full-width={isFullWidth}>
             <GloboPlayer
               videosIDs={paragraph.videoId || paragraph.videosIDs}
 
-              width={isFullWidth ? '100%' : (paragraph.width || 640)}
-              height={isFullWidth ? '540' : (paragraph.height || 360)}
+              width={isFullWidth ? '100%' : (paragraph.width || '100%')}
+              height={'100%'}
 
               autoPlay={toBoolean(paragraph.autoplay)}
               startMuted={toBoolean(paragraph.startMuted)}
@@ -162,7 +163,7 @@
         </div>
 
         {#if toBoolean(paragraph.showCaption, true) && (paragraph.caption || paragraph.credit)}
-          <div class="component-caption">
+          <div class="component-caption" class:full-width-caption={isFullWidth}>
             <p>{@html paragraph.caption || ''}</p>
             {#if paragraph.credit}
               <small class="credit">{@html paragraph.credit}</small>
@@ -238,11 +239,28 @@
     max-width: none; /* Remove a largura máxima para o modo full-width */
     padding: 0;
   }
+  
+  /* ✅ AJUSTE 2: CSS QUE FORÇA A PROPORÇÃO 16:9 NO CONTÊINER DO PLAYER */
+  .globo-player-wrapper {
+    /* Por padrão (não full-width), o player terá no máximo 60% da largura da tela */
+    max-width: 60vw;
+    aspect-ratio: 16 / 9; /* A altura será calculada automaticamente */
+  }
+
+  .globo-player-wrapper.full-width {
+    max-width: 100%; /* Em full-width, ele ocupa 100% */
+    aspect-ratio: 16 / 9;
+  }
+  
   .component-caption {
     max-width: 700px;
     margin: -1rem auto 2.5rem auto; /* Margem negativa para aproximar da mídia */
     padding: 0 1rem;
     text-align: center;
+  }
+  /* Adicionado para centralizar a legenda do player full-width */
+  .full-width-caption {
+      max-width: 800px;
   }
   .component-caption p {
     color: var(--color-text-muted, #555);
