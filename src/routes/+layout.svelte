@@ -1,18 +1,11 @@
 <script>
-  import { onMount } from 'svelte';
+  // Carrega todos os estilos globais e de temas
+  // Caminho corrigido para '../app.css' para subir um nível a partir da pasta 'routes'
   import '../app.css';
-  import '../lib/styles/tokens.css';
-  import '../lib/styles/themes.css';
-  
-  // ✅ 1. Importando as actions do seu store
-  import { storyActions } from '$lib/stores/storyStores.js';
+  import '$lib/styles/tokens.css';
+  import '$lib/styles/themes.css';
+  // Importa o seletor de temas
   import ThemeSwitcher from '$lib/components/ThemeSwitcher.svelte';
-
-  // ✅ 2. Ao carregar o layout, verificamos se há um tema salvo
-  onMount(() => {
-    const savedTheme = localStorage.getItem('story-theme') || 'default';
-    storyActions.setTheme(savedTheme);
-  });
 </script>
 
 <div class="persistent-theme-switcher">
@@ -20,6 +13,7 @@
 </div>
 
 <slot />
+
 
 <style>
   .persistent-theme-switcher {
@@ -29,7 +23,7 @@
     z-index: 9999;
   }
 
-  /* Seus estilos globais foram mantidos */
+  /* Garante que a raiz do documento também receba a cor do tema */
   :global(html) {
     background-color: var(--color-background);
     transition: background-color 0.2s;
@@ -40,7 +34,7 @@
     color: var(--color-text);
     font-family: 'Globotipo', -apple-system, sans-serif;
     margin: 0;
-    min-height: 100vh;
+    min-height: 100vh; /* Garante que o body ocupe no mínimo a altura total da tela */
     transition: background-color 0.2s, color 0.2s;
   }
 </style>
