@@ -75,9 +75,7 @@
   }
 
   /**
-   * ✅ NOVA FUNÇÃO AUXILIAR
    * Converte uma string (vinda do JSON) para um booleano de forma segura.
-   * Lida com espaços em branco e caracteres invisíveis como &nbsp;
    */
   function toBoolean(value) {
     if (typeof value !== 'string') {
@@ -94,8 +92,12 @@
     subtitle={storyData.subtitle || storyData.intro?.text}
     author={storyData.author}
     publishDate={storyData.publishDate || storyData.date}
-    backgroundImage={storyData.headerImage}
-    variant="hero"
+    backgroundImage={storyData.backgroundImage}
+    backgroundImageMobile={storyData.backgroundImageMobile}
+    backgroundVideo={storyData.backgroundVideo}
+    backgroundVideoMobile={storyData.backgroundVideoMobile}
+    overlay={toBoolean(storyData.overlay)}
+    variant={storyData.variant}
   />
 {/if}
 
@@ -144,17 +146,14 @@
           loop={toBoolean(paragraph.loop)}
           showCaption={toBoolean(paragraph.showCaption, true)}
         />
-
       {:else if componentType === 'globo-player'}
         {@const isFullWidth = toBoolean(paragraph.fullWidth)}
         
         <div class="component-wrapper globo-player-wrapper" class:full-width={isFullWidth}>
             <GloboPlayer
               videosIDs={paragraph.videoId || paragraph.videosIDs}
-
               width={isFullWidth ? '100%' : (paragraph.width || '100%')}
               height={'100%'}
-
               autoPlay={toBoolean(paragraph.autoplay)}
               startMuted={toBoolean(paragraph.startMuted)}
               skipDFP={toBoolean(paragraph.skipDFP)}
@@ -240,9 +239,7 @@
     padding: 0;
   }
   
-  /* ✅ AJUSTE 2: CSS QUE FORÇA A PROPORÇÃO 16:9 NO CONTÊINER DO PLAYER */
   .globo-player-wrapper {
-    /* Por padrão (não full-width), o player terá no máximo 60% da largura da tela */
     max-width: 60vw;
     aspect-ratio: 16 / 9; /* A altura será calculada automaticamente */
   }
@@ -258,7 +255,7 @@
     padding: 0 1rem;
     text-align: center;
   }
-  /* Adicionado para centralizar a legenda do player full-width */
+
   .full-width-caption {
       max-width: 800px;
   }

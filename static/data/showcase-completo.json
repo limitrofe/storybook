@@ -4,6 +4,10 @@
   "author": "Ana Silva",
   "date": "2025-07-29",
   "theme": "tecnologia",
+  "backgroundImage": "https://s3.glbimg.com/v1/AUTH_8b29beb0cbe247a296f902be2fe084b6/2025/html/especiais/metanfetamina/midia/1.jpg",
+  "backgroundImageMobile": "https://s3.glbimg.com/v1/AUTH_8b29beb0cbe247a296f902be2fe084b6/2025/html/especiais/metanfetamina/midia/1.jpg",
+  "overlay": "true",
+  "variant": "hero",
   "intro": {
     "text": "Este documento é um <strong>showcase completo</strong> de todos os componentes do sistema de storytelling visual. Aqui você encontrará <em>todas as variações possíveis</em> de cada elemento, permitindo uma validação completa do design system e identificação de melhorias necessárias."
   },

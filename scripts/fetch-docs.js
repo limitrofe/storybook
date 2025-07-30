@@ -100,6 +100,25 @@ function parseHTMLFormat(html) {
   
   const themeMatch = html.match(/theme:\s*([^<\n]+)/i);
   if (themeMatch) data.theme = decodeHTMLEntities(themeMatch[1].trim());
+
+  const bgImageMatch = html.match(/backgroundImage:\s*([^\n<]+)/i);
+  if (bgImageMatch) data.backgroundImage = decodeHTMLEntities(bgImageMatch[1].trim());
+
+  const bgImageMobileMatch = html.match(/backgroundImageMobile:\s*([^\n<]+)/i);
+  if (bgImageMobileMatch) data.backgroundImageMobile = decodeHTMLEntities(bgImageMobileMatch[1].trim());
+  
+  const bgVideoMatch = html.match(/backgroundVideo:\s*([^\n<]+)/i);
+  if (bgVideoMatch) data.backgroundVideo = decodeHTMLEntities(bgVideoMatch[1].trim());
+
+  const bgVideoMobileMatch = html.match(/backgroundVideoMobile:\s*([^\n<]+)/i);
+  if (bgVideoMobileMatch) data.backgroundVideoMobile = decodeHTMLEntities(bgVideoMobileMatch[1].trim());
+
+  const overlayMatch = html.match(/overlay:\s*([^\n<]+)/i);
+  if (overlayMatch) data.overlay = decodeHTMLEntities(overlayMatch[1].trim());
+
+  // ▼▼▼ ADIÇÃO PARA LER A ALTURA ▼▼▼
+  const variantMatch = html.match(/variant:\s*([^\n<]+)/i);
+  if (variantMatch) data.variant = decodeHTMLEntities(variantMatch[1].trim());
   
   if (!data.title) {
     const textContent = html.replace(/<[^>]*>/g, '\n');
@@ -132,7 +151,6 @@ function parseHTMLFormat(html) {
     data.paragraphs = [];
   }
 
-  // Parse top-level credits section
   const creditsMatch = html.match(/\[(?:\+)?credits\]([\s\S]*?)\[credits\]/s);
   if (creditsMatch) {
     data.credits = parseCreditsHTML(creditsMatch[1]);
@@ -155,15 +173,12 @@ function decodeHTMLEntities(text) {
   return text.replace(/&[a-zA-Z0-9#]+;/g, (entity) => entities[entity] || entity);
 }
 
-// Robust JSON array parser
 function parseJSONField(jsonString, fieldName) {
   if (!jsonString) return null;
   
   try {
-    console.log(`🔍 Tentando parsear ${fieldName}:`, jsonString.substring(0, 100) + '...');
-    
     let cleanJson = jsonString
-      .replace(/<[^>]*>/g, '') // Remove tags HTML
+      .replace(/<[^>]*>/g, '') 
       .replace(/&quot;/g, '"')
       .replace(/&amp;/g, '&')
       .replace(/&lt;/g, '<')
@@ -175,8 +190,8 @@ function parseJSONField(jsonString, fieldName) {
       .replace(/\s+/g, ' ')
       .replace(/,\s*\]/g, ']')
       .replace(/,\s*}/g, '}')
-      .replace(/["“”„‟«»"‶‷”″‟‹›]/g, '"') // Fix curly quotes
-      .replace(/['‘’‚‛‹›]/g, "'") // Fix curly apostrophes
+      .replace(/["“”„‟«»"‶‷”″‟‹›]/g, '"') 
+      .replace(/['‘’‚‛‹›]/g, "'") 
       .replace(/\s*:\s*/g, ':')
       .replace(/\s*,\s*/g, ',')
       .trim();
@@ -199,7 +214,6 @@ function parseJSONField(jsonString, fieldName) {
       });
     }
     
-    console.log(`✅ ${fieldName} parseado com sucesso:`, parsed.length, 'itens');
     return parsed;
     
   } catch (error) {
@@ -290,28 +304,21 @@ function parseParagraphsHTML(html) {
       const regex = new RegExp(`${field}:\\s*([^\\n<]*)`);
       const match = block.match(regex);
       if (match) {
-        // --- INÍCIO DA ÚNICA CORREÇÃO NESTE ARQUIVO ---
-        // Limpeza robusta do valor para garantir que o ID do vídeo seja lido corretamente
         const cleanedValue = (match[1] || '')
-            .replace(/&nbsp;/g, ' ')       // Converte espaços "não-quebráveis" em espaços normais
-            .replace(/<[^>]*>/g, '')       // Remove quaisquer tags HTML (como spans)
-            .trim();                       // Remove espaços em branco no início e no fim
+            .replace(/&nbsp;/g, ' ')
+            .replace(/<[^>]*>/g, '')
+            .trim();
             
         paragraph[prop] = decodeHTMLEntities(cleanedValue);
-        // --- FIM DA CORREÇÃO ---
       }
     }
     
     if (['scrollytelling', 'scrolly'].includes(paragraph.type?.toLowerCase())) {
       const stepsCount = paragraph.steps?.length || 0;
-      console.log(`🎬 ScrollyTelling processado: ${stepsCount} steps`);
-      
       if (stepsCount === 0) {
         console.warn(`⚠️ ScrollyTelling sem steps detectado. Bloco:`, block.substring(0, 200));
       } else {
-        paragraph.steps.forEach((step, index) => {
-          console.log(`   Step ${index + 1}: "${step.title?.substring(0, 30)}..." | Imagem: ${!!step.image} | Vídeo: ${!!step.video}`);
-        });
+        paragraph.steps.forEach((step, index) => {});
       }
     }
     
