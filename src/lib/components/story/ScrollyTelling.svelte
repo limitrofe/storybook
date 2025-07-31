@@ -25,7 +25,7 @@
 
 		const useMobileVideo = isMobile && step.videoMobile;
 		const useMobileImage = isMobile && step.imageMobile;
-		
+
 		if (useMobileVideo || step.video) {
 			return { type: 'video', src: useMobileVideo || step.video };
 		}
@@ -37,9 +37,9 @@
 </script>
 
 <div class="scrolly-container" class:fullWidth>
-	<Scroller top={0.2} bottom={0.8} threshold={0.5} bind:index={currentStepIndex}>
+	<Scroller top={0} bottom={0.8} threshold={0.5} bind:index={currentStepIndex}>
 
-		<div slot="background" class="background-container">
+		<div slot="background" class="background-container-fixed">
 			{#each validSteps as step, i}
 				{@const media = getMediaSource(step)}
 				{#if media.src}
@@ -72,17 +72,26 @@
 		width: 100vw;
 		margin-left: calc(-50vw + 50%);
 	}
-	.background-container {
-		position: sticky;
+
+	/* --- ALTERAÇÃO PRINCIPAL --- */
+	/* Trocamos 'position: sticky' por 'position: fixed' */
+	.background-container-fixed {
+		position: fixed; /* Garante que ele fique fixo na viewport */
 		top: 0;
+		left: 0;
 		width: 100%;
-		height: 100vh;
+		height: 100vh; /* Para garantir, mas 100dvh é ideal se o Svelte suportar */
+		height: 100dvh; /* Altura dinâmica da viewport, mais preciso */
 		background: #000;
+		z-index: -1; /* Joga para trás do conteúdo de texto */
 	}
+
 	.media-wrapper {
 		position: absolute;
-		top: 0; left: 0;
-		width: 100%; height: 100%;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
 		opacity: 0;
 		transition: opacity 0.6s ease-in-out;
 	}
@@ -90,14 +99,27 @@
 		opacity: 1;
 	}
 	.media-wrapper img, .media-wrapper video {
-		width: 100%; height: 100%;
+		width: 100%;
+		height: 100%;
 		object-fit: cover;
 	}
+
+	/* O container de texto precisa de um z-index para ficar na frente */
 	.steps-foreground {
 		position: relative;
 		z-index: 10;
 	}
+
+	/* O spacer é importante para dar espaço de rolagem inicial */
 	.spacer-top {
 		height: 40vh;
+	}
+
+	/* Esta parte foi adicionada para garantir que o Scroller não bloqueie o conteúdo de texto */
+	:global(.scroller-foreground) {
+		pointer-events: none;
+	}
+	:global(.scroller-foreground section) {
+		pointer-events: auto;
 	}
 </style>
