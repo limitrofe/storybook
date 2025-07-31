@@ -1,3 +1,4 @@
+<!-- src/lib/components/StoryRenderer.svelte -->
 <script>
   // Importação dos componentes da história
   import Header from './story/Header.svelte';
@@ -93,12 +94,23 @@
     return defaultValue;
   }
 
-  // Verifica se existe um bloco de header dentro dos parágrafos
+  // 🔧 CORREÇÃO: Nova lógica para detectar headers
   const headerBlockInParagraphs = storyData.paragraphs?.find(p => getComponentType(p) === 'header');
+  
+  // 🔧 NOVA LÓGICA: Só renderiza header automático se:
+  // 1. Tem title nos metadados E
+  // 2. NÃO tem nenhum header block nos parágrafos
+  const shouldRenderAutoHeader = storyData.title && !headerBlockInParagraphs;
+
+  // 🔧 CORREÇÃO: Só renderiza intro automático se:
+  // 1. Tem intro nos metadados E  
+  // 2. NÃO tem header block nos parágrafos (porque se tem, intro vai estar dentro)
+  const shouldRenderAutoIntro = storyData.intro?.text && !headerBlockInParagraphs;
 
 </script>
 
-{#if storyData.title && !headerBlockInParagraphs}
+<!-- 🔧 CORREÇÃO: Header automático apenas se NÃO houver header nos parágrafos -->
+{#if shouldRenderAutoHeader}
   <Header
     title={storyData.title}
     subtitle={storyData.subtitle || storyData.intro?.text}
@@ -114,7 +126,8 @@
 {/if}
 
 <main class="story-container">
-  {#if storyData.intro && storyData.intro.text && !headerBlockInParagraphs}
+  <!-- 🔧 CORREÇÃO: Intro automático apenas se NÃO houver header nos parágrafos -->
+  {#if shouldRenderAutoIntro}
     <StoryText content={storyData.intro.text} variant="lead" maxWidth="800px" />
   {/if}
 
@@ -185,7 +198,6 @@
               chromeless={toBoolean(paragraph.chromeless)}
             />
         </div>
-
 
         {#if toBoolean(paragraph.showCaption, true) && (paragraph.caption || paragraph.credit)}
           <div class="component-caption" class:full-width-caption={isFullWidth}>

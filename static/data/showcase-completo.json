@@ -689,43 +689,6 @@
       "size": "medium"
     },
     {
-      "type": "scrollytelling",
-      "steps": [
-        {
-          "title": "A Jornada Começa:Visão Panorâmica",
-          "text": "&Agrave; medida que você desliza para baixo,a cena se abre. A imagem de fundo é o nosso ponto de partida para essa aventura visual. <strong>Role para baixo para ver a transformação!</strong>",
-          "image": "https://s3.glbimg.com/v1/AUTH_8b29beb0cbe247a296f902be2fe084b6/2025/html/especiais/foz-do-amazonas/g1_esp_foz-amazonas_abre.png",
-          "alt": "Paisagem inicial,ampla e deslumbrante"
-        },
-        {
-          "title": "Detalhe Revelado:Zoom In Dinâmico",
-          "text": "Continue rolando! Observe como o elemento visual no centro da tela começa a se aproximar,focando em um detalhe específico. Este é um efeito de zoom que reage ao seu scroll. Sinta a imersão!",
-          "image": "https://s3.glbimg.com/v1/AUTH_8b29beb0cbe247a296f902be2fe084b6/2025/html/especiais/foz-do-amazonas/g1_esp_foz-amazonas_tela_01.png",
-          "alt": "Detalhe de balões de ar quente com zoom"
-        },
-        {
-          "title": "Perspectiva Inesperada:Deslocamento Lateral",
-          "text": "Agora,sinta a imagem se mover sutilmente para o lado. Essa pequena mudança de perspectiva cria uma sensação de profundidade e exploração contínua,mantendo o usuário engajado em uma coreografia perfeita.",
-          "image": "https://s3.glbimg.com/v1/AUTH_8b29beb0cbe247a296f902be2fe084b6/2025/html/especiais/foz-do-amazonas/g1_esp_foz-amazonas_tela_02.png",
-          "alt": "Paisagem com deslocamento lateral suave"
-        },
-        {
-          "title": "Aprofundando a Narrativa:Opacidade e Escala",
-          "text": "&Agrave; medida que o texto avança,o visual de fundo pode reagir de maneiras diferentes &ndash; talvez diminuindo um pouco a opacidade ou se expandindo ainda mais,guiando o olhar do usuário.",
-          "image": "https://s3.glbimg.com/v1/AUTH_8b29beb0cbe247a296f902be2fe084b6/2025/html/especiais/foz-do-amazonas/g1_esp_foz-amazonas_tela_03.png",
-          "alt": "Cores vibrantes do oceano"
-        },
-        {
-          "title": "Finalização Grandiosa:Vídeo Imersivo",
-          "text": "Para a grande final,um vídeo envolvente pode surgir e preencher a tela,oferecendo uma conclusão dramática e visualmente rica para sua narrativa de scroll.",
-          "video": "https://s3.glbimg.com/v1/AUTH_8b29beb0cbe247a296f902be2fe084b6/2025/html/especiais/plastico/video-timeline_red.mp4",
-          "alt": "Vídeo de uma pequena cachoeira para final imersivo"
-        }
-      ],
-      "fullWidth": "true",
-      "stickyHeight": "100vh # Garante que a área visual é alta o suficiente"
-    },
-    {
       "type": "texto",
       "text": "O layout padrão é ideal para quando o texto descritivo é tão importante quanto a imagem, criando um equilíbrio entre os dois elementos na tela."
     },
