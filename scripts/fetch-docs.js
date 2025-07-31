@@ -21,9 +21,10 @@ async function fetchGoogleDoc(docId) {
     
     const data = parseHTMLFormat(rawHtml);
     
-    if (!data.title) {
-      throw new Error('Documento deve ter "title:"');
-    }
+if (!data.title) {
+  // Apenas exibe um aviso em vez de um erro fatal.
+  console.warn('⚠️  Aviso: O campo "title" não foi encontrado nos metadados do topo. O sistema irá procurar por um componente `type: header` nos parágrafos.');
+}
     
     if (!data.slug) {
       data.slug = data.title

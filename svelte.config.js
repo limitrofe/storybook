@@ -1,15 +1,9 @@
-import adapter from '@sveltejs/adapter-static';
+// svelte.config.js
+import adapter from '@sveltejs/adapter-node'; // <-- Altere esta linha
 
 const config = {
   kit: {
-    adapter: adapter({
-      pages: 'build',
-      assets: 'build',
-      fallback: null,
-      precompress: false,
-      strict: false
-    })
-    // SEM paths aqui!
+    adapter: adapter() // <-- Altere esta linha
   }
 };
 

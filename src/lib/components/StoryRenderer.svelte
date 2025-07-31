@@ -14,18 +14,17 @@
   import FlourishEmbed from './story/FlourishEmbed.svelte';
   import FlourishScrolly from './story/FlourishScrolly.svelte';
   import FinalCredits from './FinalCredits.svelte';
-  import AnchorPoint from './story/AnchorPoint.svelte'; // <-- 1. Importado aqui
+  import AnchorPoint from './story/AnchorPoint.svelte';
 
   export let storyData = {};
 
   /**
-   * Mapeia os tipos de parágrafo do ArchieML para os nomes dos componentes.
+   * Mapeia os tipos de parágrafo para os nomes dos componentes.
    */
   function getComponentType(paragraph) {
-    // .trim() limpa espaços e caracteres invisíveis no início/fim
     const type = paragraph.type?.toLowerCase().trim();
     switch (type) {
-      case 'header':
+      case 'header': // Case para o novo header dinâmico
       case 'titulo-principal':
         return 'header';
       case 'texto':
@@ -70,11 +69,9 @@
         return 'flourish';
       case 'flourish-scrolly':
         return 'flourish-scrolly';
-      // ---- Bloco da Âncora Adicionado ----
-      case 'ancora': // <-- 2. Adicionado o case para a âncora
+      case 'ancora':
       case 'anchor':
         return 'anchor';
-      // ---------------------------------
       default:
         return 'text';
     }
@@ -88,17 +85,20 @@
       return defaultValue;
     }
     if (typeof value !== 'string') {
-      return !!value; // Retorna o valor booleano se não for string
+      return !!value;
     }
-    // .trim() remove espaços e .toLowerCase() torna a comparação case-insensitive
     const processedValue = value.trim().toLowerCase();
     if (processedValue === 'true') return true;
     if (processedValue === 'false') return false;
     return defaultValue;
   }
+
+  // Verifica se existe um bloco de header dentro dos parágrafos
+  const headerBlockInParagraphs = storyData.paragraphs?.find(p => getComponentType(p) === 'header');
+
 </script>
 
-{#if storyData.title}
+{#if storyData.title && !headerBlockInParagraphs}
   <Header
     title={storyData.title}
     subtitle={storyData.subtitle || storyData.intro?.text}
@@ -114,7 +114,7 @@
 {/if}
 
 <main class="story-container">
-  {#if storyData.intro && storyData.intro.text}
+  {#if storyData.intro && storyData.intro.text && !headerBlockInParagraphs}
     <StoryText content={storyData.intro.text} variant="lead" maxWidth="800px" />
   {/if}
 
@@ -122,7 +122,20 @@
     {#each storyData.paragraphs as paragraph}
       {@const componentType = getComponentType(paragraph)}
 
-      {#if componentType === 'text'}
+      {#if componentType === 'header'}
+        <Header
+            title={paragraph.title || storyData.title}
+            subtitle={paragraph.subtitle || storyData.subtitle}
+            author={paragraph.author || storyData.author}
+            publishDate={paragraph.publishDate || paragraph.date || storyData.date}
+            backgroundImage={paragraph.backgroundImage || storyData.backgroundImage}
+            backgroundImageMobile={paragraph.backgroundImageMobile || storyData.backgroundImageMobile}
+            backgroundVideo={paragraph.backgroundVideo || storyData.backgroundVideo}
+            backgroundVideoMobile={paragraph.backgroundVideoMobile || storyData.backgroundVideoMobile}
+            overlay={toBoolean(paragraph.overlay, toBoolean(storyData.overlay, true))}
+            variant={paragraph.variant || storyData.variant}
+        />
+      {:else if componentType === 'text'}
         <StoryText content={paragraph.text} variant={paragraph.variant || 'body'} maxWidth="700px" />
       {:else if componentType === 'quote'}
         <StoryText
@@ -160,7 +173,7 @@
         />
       {:else if componentType === 'globo-player'}
         {@const isFullWidth = toBoolean(paragraph.fullWidth)}
-        
+
         <div class="component-wrapper globo-player-wrapper" class:full-width={isFullWidth}>
             <GloboPlayer
               videosIDs={paragraph.videoId || paragraph.videosIDs}
@@ -172,6 +185,7 @@
               chromeless={toBoolean(paragraph.chromeless)}
             />
         </div>
+
 
         {#if toBoolean(paragraph.showCaption, true) && (paragraph.caption || paragraph.credit)}
           <div class="component-caption" class:full-width-caption={isFullWidth}>
@@ -220,7 +234,7 @@
         <FlourishEmbed src={paragraph.src} />
       {:else if componentType === 'flourish-scrolly'}
         <FlourishScrolly src={paragraph.src} steps={paragraph.steps || []} />
-      
+
       {:else if componentType === 'anchor'} <AnchorPoint id={paragraph.id || paragraph.name} />
       {/if}
     {/each}
@@ -252,7 +266,7 @@
     max-width: none; /* Remove a largura máxima para o modo full-width */
     padding: 0;
   }
-  
+
   .globo-player-wrapper {
     max-width: 60vw;
     aspect-ratio: 16 / 9; /* A altura será calculada automaticamente */
@@ -262,7 +276,7 @@
     max-width: 100%; /* Em full-width, ele ocupa 100% */
     aspect-ratio: 16 / 9;
   }
-  
+
   .component-caption {
     max-width: 700px;
     margin: -1rem auto 2.5rem auto; /* Margem negativa para aproximar da mídia */
