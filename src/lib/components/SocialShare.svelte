@@ -539,4 +539,8 @@
 			border-width: 2px;
 		}
 	}
+<<<<<<< HEAD
 </style>
+=======
+</style>
+>>>>>>> 1e7943c1add4e430800da5197fc6dd3d4954b4cf
