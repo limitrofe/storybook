@@ -19,19 +19,19 @@ async function fetchGoogleDoc(docId) {
     
     let rawHtml = response.data.trim();
     
+    // ✅ ÚNICA MUDANÇA: A chamada para a função de parse corrigida.
     const data = parseHTMLFormat(rawHtml);
     
-if (!data.title) {
-  // Apenas exibe um aviso em vez de um erro fatal.
-  console.warn('⚠️  Aviso: O campo "title" não foi encontrado nos metadados do topo. O sistema irá procurar por um componente `type: header` nos parágrafos.');
-}
+    if (!data.title) {
+      console.warn('⚠️  Aviso: O campo "title" não foi encontrado nos metadados do topo. O sistema irá procurar por um componente `type: header` nos parágrafos.');
+    }
     
     if (!data.slug) {
-      data.slug = data.title
+      data.slug = (data.title || `doc-${Date.now()}`)
         .toLowerCase()
         .normalize('NFD')
         .replace(/[\u0300-\u036f]/g, '')
-        .replace(/[^a-z0-9\s]/g, '')
+        .replace(/[^a-z0-9\s-]/g, '')
         .replace(/\s+/g, '-')
         .substring(0, 50);
     }
@@ -50,8 +50,6 @@ if (!data.title) {
     console.log(`📊 Paragraphs: ${data.paragraphs ? data.paragraphs.length : 0} itens`);
     console.log(`📝 Créditos: ${data.credits ? 'OK' : 'Vazio'}`);
 
-    
-    // Validação específica para ScrollyTelling
     const scrollyComponents = data.paragraphs?.filter(p => 
       ['scrollytelling', 'scrolly'].includes(p.type?.toLowerCase())
     ) || [];
@@ -61,7 +59,6 @@ if (!data.title) {
       scrollyComponents.forEach((comp, index) => {
         const stepsCount = comp.steps?.length || 0;
         console.log(`  ${index + 1}. Steps: ${stepsCount} | FullWidth: ${comp.fullWidth || 'false'}`);
-        
         if (stepsCount === 0) {
           console.warn(`⚠️ ScrollyTelling sem steps: ${comp.text?.substring(0, 50)}...`);
         } else {
@@ -80,84 +77,87 @@ if (!data.title) {
   }
 }
 
+/**
+ * ✅ FUNÇÃO CORRIGIDA: Esta versão respeita a ordem e a estrutura do seu .docs
+ * Ela não mistura mais os dados dos componentes.
+ */
 function parseHTMLFormat(html) {
   html = html.replace(/<style[^>]*>.*?<\/style>/gs, '');
   html = html.replace(/<script[^>]*>.*?<\/script>/gs, '');
   html = html.replace(/<head[^>]*>.*?<\/head>/gs, '');
-  
+
   const data = {};
-  
-  const titleMatch = html.match(/title:\s*([^<\n]+)/i);
-  if (titleMatch) data.title = decodeHTMLEntities(titleMatch[1].trim());
-  
-  const subtitleMatch = html.match(/subtitle:\s*([^<\n]+)/i);
-  if (subtitleMatch) data.subtitle = decodeHTMLEntities(subtitleMatch[1].trim());
-  
-  const authorMatch = html.match(/author:\s*([^<\n]+)/i);
-  if (authorMatch) data.author = decodeHTMLEntities(authorMatch[1].trim());
-  
-  const dateMatch = html.match(/date:\s*([^<\n]+)/i);
-  if (dateMatch) data.date = decodeHTMLEntities(dateMatch[1].trim());
-  
-  const themeMatch = html.match(/theme:\s*([^<\n]+)/i);
-  if (themeMatch) data.theme = decodeHTMLEntities(themeMatch[1].trim());
+  let allBlocks = [];
 
-  const bgImageMatch = html.match(/backgroundImage:\s*([^\n<]+)/i);
-  if (bgImageMatch) data.backgroundImage = decodeHTMLEntities(bgImageMatch[1].trim());
+  // 1. Pega todo o conteúdo do body para análise
+  const bodyContentMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/s);
+  if (!bodyContentMatch) {
+    console.warn("⚠️ Tag <body> não encontrada. Analisando o HTML completo.");
+    bodyContentMatch = [null, html];
+  }
+  let bodyContent = bodyContentMatch[1];
 
-  const bgImageMobileMatch = html.match(/backgroundImageMobile:\s*([^\n<]+)/i);
-  if (bgImageMobileMatch) data.backgroundImageMobile = decodeHTMLEntities(bgImageMobileMatch[1].trim());
+  // 2. Separa os blocos estruturados ([+...]) do conteúdo solto
+  const blockRegex = /\[(?:\+)?(paragraphs|intro|credits)\]([\s\S]*?)\[\1\]/gs;
   
-  const bgVideoMatch = html.match(/backgroundVideo:\s*([^\n<]+)/i);
-  if (bgVideoMatch) data.backgroundVideo = decodeHTMLEntities(bgVideoMatch[1].trim());
-
-  const bgVideoMobileMatch = html.match(/backgroundVideoMobile:\s*([^\n<]+)/i);
-  if (bgVideoMobileMatch) data.backgroundVideoMobile = decodeHTMLEntities(bgVideoMobileMatch[1].trim());
-
-  const overlayMatch = html.match(/overlay:\s*([^\n<]+)/i);
-  if (overlayMatch) data.overlay = decodeHTMLEntities(overlayMatch[1].trim());
-
-  // ▼▼▼ ADIÇÃO PARA LER A ALTURA ▼▼▼
-  const variantMatch = html.match(/variant:\s*([^\n<]+)/i);
-  if (variantMatch) data.variant = decodeHTMLEntities(variantMatch[1].trim());
+  const potentialMetaContent = bodyContent.replace(blockRegex, '').trim();
+  const blocks = [...bodyContent.matchAll(blockRegex)];
   
-  if (!data.title) {
-    const textContent = html.replace(/<[^>]*>/g, '\n');
-    const lines = textContent.split('\n').map(line => line.trim()).filter(line => line);
-    
-    for (const line of lines) {
-      if (line.toLowerCase().startsWith('title:')) {
-        data.title = decodeHTMLEntities(line.replace(/^title:\s*/i, '').trim());
-        break;
+  // 3. Adiciona o conteúdo solto (que deve ser seu header principal) à lista para ser parseado
+  if (potentialMetaContent) {
+      allBlocks.push(...parseParagraphsHTML(potentialMetaContent));
+  }
+
+  // 4. Adiciona o conteúdo dos blocos estruturados na ordem em que aparecem
+  blocks.forEach(blockMatch => {
+      const blockType = blockMatch[1];
+      const blockContent = blockMatch[2];
+
+      if (blockType === 'paragraphs') {
+          allBlocks.push(...parseParagraphsHTML(blockContent));
+      } else if (blockType === 'intro') {
+          const introData = parseIntroHTML(blockContent);
+          if (introData.text) {
+              allBlocks.push({ type: 'intro', ...introData });
+          }
+      } else if (blockType === 'credits') {
+          data.credits = parseCreditsHTML(blockContent);
       }
-    }
-  }
-  
-  const introMatch = html.match(/\[(?:\+)?intro\](.*?)\[intro\]/s);
-  if (introMatch) {
-    const introHtml = introMatch[1];
-    const introTextMatch = introHtml.match(/text:\s*([\s\S]*?)(?=\[intro\]|$)/);
-    if (introTextMatch) {
-      data.intro = {
-        text: cleanAndFormatHTML(introTextMatch[1])
-      };
-    }
-  }
-  
-  const paragraphsMatch = html.match(/\[(?:\+)?paragraphs\](.*?)\[paragraphs\]/s);
-  if (paragraphsMatch) {
-    const paragraphsHtml = paragraphsMatch[1];
-    data.paragraphs = parseParagraphsHTML(paragraphsHtml);
+  });
+
+  // 5. Encontra o PRIMEIRO 'type: header' na lista de todos os blocos
+  const mainHeaderIndex = allBlocks.findIndex(block => block.type && block.type.toLowerCase() === 'header');
+
+  if (mainHeaderIndex !== -1) {
+    // 6. Tira ele da lista e usa para os metadados principais (data.title, etc.)
+    const [mainHeader] = allBlocks.splice(mainHeaderIndex, 1);
+    Object.assign(data, mainHeader);
   } else {
-    data.paragraphs = [];
+    // Se não achar um header, usa a lógica antiga como fallback para pegar pelo menos o título
+    console.warn('⚠️ Nenhum bloco `type: header` encontrado. Usando fallback para metadados.');
+    const titleMatch = html.match(/title:\s*([^<\n]+)/i);
+    if (titleMatch) data.title = decodeHTMLEntities(titleMatch[1].trim());
   }
 
-  const creditsMatch = html.match(/\[(?:\+)?credits\]([\s\S]*?)\[credits\]/s);
-  if (creditsMatch) {
-    data.credits = parseCreditsHTML(creditsMatch[1]);
+  // 7. O que sobrou na lista vira o `paragraphs` do JSON
+  data.paragraphs = allBlocks;
+
+  const introIndex = data.paragraphs.findIndex(p => p.type === 'intro');
+  if (introIndex !== -1) {
+      const [introBlock] = data.paragraphs.splice(introIndex, 1);
+      data.intro = { text: introBlock.text };
   }
-  
+
   return data;
+}
+
+function parseIntroHTML(html) {
+    const intro = {};
+    const introTextMatch = html.match(/text:\s*([\s\S]*?)(?=\[intro\]|$)/);
+    if (introTextMatch) {
+      intro.text = cleanAndFormatHTML(introTextMatch[1]);
+    }
+    return intro;
 }
 
 function decodeHTMLEntities(text) {
@@ -191,8 +191,8 @@ function parseJSONField(jsonString, fieldName) {
       .replace(/\s+/g, ' ')
       .replace(/,\s*\]/g, ']')
       .replace(/,\s*}/g, '}')
-      .replace(/["“”„‟«»"‶‷”″‟‹›]/g, '"') 
-      .replace(/['‘’‚‛‹›]/g, "'") 
+      .replace(/["""„‟«»"‶‷"″‟‹›]/g, '"') 
+      .replace(/['''‚‛‹›]/g, "'") 
       .replace(/\s*:\s*/g, ':')
       .replace(/\s*,\s*/g, ',')
       .trim();
@@ -267,7 +267,7 @@ function parseParagraphsHTML(html) {
       continue;
     }
 
-    const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:backgroundImage|backgroundImageMobile|backgroundVideo|backgroundVideoMobile|backgroundPosition|backgroundPositionMobile|author|role|src|caption|credit|alt|fullWidth|variant|size|orientation|autoplay|controls|poster|images|items|steps|beforeImage|afterImage|beforeLabel|afterLabel|image|height|heightMobile|speed|content|overlay|layout|columns|interval|showDots|showArrows|stickyHeight|videoId|videosIDs|id|skipDFP|skipdfp|autoPlay|startMuted|maxQuality|quality|chromeless|isLive|live|allowRestrictedContent|preventBlackBars|globoId|token|adAccountId|adCmsId|siteName|width|textPosition|textPositionMobile|textAlign|textAlignMobile):|type:|$)/s);
+    const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:backgroundImage|backgroundImageMobile|backgroundVideo|backgroundVideoMobile|backgroundPosition|backgroundPositionMobile|author|role|src|caption|credit|alt|fullWidth|variant|size|orientation|autoplay|controls|poster|images|items|steps|beforeImage|afterImage|beforeLabel|afterLabel|image|height|heightMobile|speed|content|overlay|layout|columns|interval|showDots|showArrows|stickyHeight|videoId|videosIDs|id|skipDFP|skipdfp|autoPlay|startMuted|maxQuality|quality|chromeless|isLive|live|allowRestrictedContent|preventBlackBars|globoId|token|adAccountId|adCmsId|siteName|width|textPosition|textPositionMobile|textAlign|textAlignMobile|title|subtitle|date|theme):|type:|$)/si);
     if (textMatch) {
       if (['texto', 'frase', 'intro'].includes(paragraph.type)) {
         paragraph.text = cleanAndFormatHTML(textMatch[1].trim());
@@ -286,6 +286,7 @@ function parseParagraphsHTML(html) {
     }
 
     const fieldMappings = {
+      title: 'title', subtitle: 'subtitle', date: 'date', theme: 'theme',
       backgroundImage: 'backgroundImage', backgroundImageMobile: 'backgroundImageMobile', backgroundVideo: 'backgroundVideo',
       backgroundVideoMobile: 'backgroundVideoMobile', backgroundPosition: 'backgroundPosition', backgroundPositionMobile: 'backgroundPositionMobile',
       textPosition: 'textPosition', textPositionMobile: 'textPositionMobile', textAlign: 'textAlign', textAlignMobile: 'textAlignMobile',
@@ -302,26 +303,29 @@ function parseParagraphsHTML(html) {
     };
     
     for (const [field, prop] of Object.entries(fieldMappings)) {
-      const regex = new RegExp(`${field}:\\s*([^\\n<]*)`);
+      const regex = new RegExp(`\\b${field}:\\s*([^\\n<]*)`, 'i');
       const match = block.match(regex);
       if (match) {
-        const cleanedValue = (match[1] || '')
+        let cleanedValue = (match[1] || '')
             .replace(/&nbsp;/g, ' ')
             .replace(/<[^>]*>/g, '')
             .trim();
             
-        paragraph[prop] = decodeHTMLEntities(cleanedValue);
+        // ✅ FIX ESPECÍFICO: Decodifica entidades HTML para campos de URL/imagem
+        if (['backgroundImage', 'backgroundImageMobile', 'backgroundVideo', 'backgroundVideoMobile', 'src', 'image'].includes(field)) {
+          cleanedValue = decodeHTMLEntities(cleanedValue);
+        }
+        
+        paragraph[prop] = cleanedValue;
       }
     }
     
-    if (['scrollytelling', 'scrolly'].includes(paragraph.type?.toLowerCase())) {
-      const stepsCount = paragraph.steps?.length || 0;
-      if (stepsCount === 0) {
-        console.warn(`⚠️ ScrollyTelling sem steps detectado. Bloco:`, block.substring(0, 200));
-      } else {
-        paragraph.steps.forEach((step, index) => {});
+    // ✅ FIX ADICIONAL: Garante que todos os campos de URL sejam decodificados
+    ['backgroundImage', 'backgroundImageMobile', 'backgroundVideo', 'backgroundVideoMobile', 'src', 'image'].forEach(field => {
+      if (paragraph[field]) {
+        paragraph[field] = decodeHTMLEntities(paragraph[field]);
       }
-    }
+    });
     
     if (paragraph.type) {
       paragraphs.push(paragraph);

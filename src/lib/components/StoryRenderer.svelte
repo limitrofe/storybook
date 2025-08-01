@@ -2,6 +2,19 @@
 <script>
   // Importação dos componentes da história
   import Header from './story/Header.svelte';
+  
+  // ✅ DEBUG: Ver o que está chegando
+  $: {
+    console.log('=== DEBUG STORYDATA ===');
+    console.log('storyData:', storyData);
+    console.log('paragraphs:', storyData.paragraphs);
+    if (storyData.paragraphs) {
+      storyData.paragraphs.forEach((p, i) => {
+        console.log(`Paragraph ${i}:`, p.type, p);
+      });
+    }
+    console.log('========================');
+  }
   import StoryText from './story/StoryText.svelte';
   import SectionTitle from './story/SectionTitle.svelte';
   import PhotoWithCaption from './story/PhotoWithCaption.svelte';
@@ -25,8 +38,10 @@
   function getComponentType(paragraph) {
     const type = paragraph.type?.toLowerCase().trim();
     switch (type) {
-      case 'header': // Case para o novo header dinâmico
+      case 'header':
       case 'titulo-principal':
+      case 'tituloprincipal':
+      case 'abre':
         return 'header';
       case 'texto':
       case 'paragrafo':
@@ -93,44 +108,9 @@
     if (processedValue === 'false') return false;
     return defaultValue;
   }
-
-  // 🔧 CORREÇÃO: Nova lógica para detectar headers
-  const headerBlockInParagraphs = storyData.paragraphs?.find(p => getComponentType(p) === 'header');
-  
-  // 🔧 NOVA LÓGICA: Só renderiza header automático se:
-  // 1. Tem title nos metadados E
-  // 2. NÃO tem nenhum header block nos parágrafos
-  const shouldRenderAutoHeader = storyData.title && !headerBlockInParagraphs;
-
-  // 🔧 CORREÇÃO: Só renderiza intro automático se:
-  // 1. Tem intro nos metadados E  
-  // 2. NÃO tem header block nos parágrafos (porque se tem, intro vai estar dentro)
-  const shouldRenderAutoIntro = storyData.intro?.text && !headerBlockInParagraphs;
-
 </script>
 
-<!-- 🔧 CORREÇÃO: Header automático apenas se NÃO houver header nos parágrafos -->
-{#if shouldRenderAutoHeader}
-  <Header
-    title={storyData.title}
-    subtitle={storyData.subtitle || storyData.intro?.text}
-    author={storyData.author}
-    publishDate={storyData.publishDate || storyData.date}
-    backgroundImage={storyData.backgroundImage}
-    backgroundImageMobile={storyData.backgroundImageMobile}
-    backgroundVideo={storyData.backgroundVideo}
-    backgroundVideoMobile={storyData.backgroundVideoMobile}
-    overlay={toBoolean(storyData.overlay, true)}
-    variant={storyData.variant}
-  />
-{/if}
-
 <main class="story-container">
-  <!-- 🔧 CORREÇÃO: Intro automático apenas se NÃO houver header nos parágrafos -->
-  {#if shouldRenderAutoIntro}
-    <StoryText content={storyData.intro.text} variant="lead" maxWidth="800px" />
-  {/if}
-
   {#if storyData.paragraphs}
     {#each storyData.paragraphs as paragraph}
       {@const componentType = getComponentType(paragraph)}
@@ -148,6 +128,13 @@
             overlay={toBoolean(paragraph.overlay, toBoolean(storyData.overlay, true))}
             variant={paragraph.variant || storyData.variant}
         />
+      {:else if componentType === 'scrolly'}
+        <ScrollyTelling
+          steps={paragraph.steps || []}
+          fullWidth={toBoolean(paragraph.fullWidth)}
+        />
+        <!-- ✅ ADICIONADO: Spacer para dar espaço após o ScrollyTelling -->
+        <div style="height: 50vh;"></div>
       {:else if componentType === 'text'}
         <StoryText content={paragraph.text} variant={paragraph.variant || 'body'} maxWidth="700px" />
       {:else if componentType === 'quote'}
@@ -247,7 +234,8 @@
       {:else if componentType === 'flourish-scrolly'}
         <FlourishScrolly src={paragraph.src} steps={paragraph.steps || []} />
 
-      {:else if componentType === 'anchor'} <AnchorPoint id={paragraph.id || paragraph.name} />
+      {:else if componentType === 'anchor'} 
+        <AnchorPoint id={paragraph.id || paragraph.name} />
       {/if}
     {/each}
   {/if}
@@ -270,28 +258,28 @@
     min-height: 100vh;
   }
   .component-wrapper {
-    max-width: 800px; /* Largura padrão para componentes */
+    max-width: 800px;
     margin: 2rem auto;
     padding: 0 1rem;
   }
   .component-wrapper.full-width {
-    max-width: none; /* Remove a largura máxima para o modo full-width */
+    max-width: none;
     padding: 0;
   }
 
   .globo-player-wrapper {
     max-width: 60vw;
-    aspect-ratio: 16 / 9; /* A altura será calculada automaticamente */
+    aspect-ratio: 16 / 9;
   }
 
   .globo-player-wrapper.full-width {
-    max-width: 100%; /* Em full-width, ele ocupa 100% */
+    max-width: 100%;
     aspect-ratio: 16 / 9;
   }
 
   .component-caption {
     max-width: 700px;
-    margin: -1rem auto 2.5rem auto; /* Margem negativa para aproximar da mídia */
+    margin: -1rem auto 2.5rem auto;
     padding: 0 1rem;
     text-align: center;
   }

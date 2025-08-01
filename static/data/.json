@@ -19,7 +19,17 @@
       "Co-Autor Colaborador"
     ]
   },
+  "type": "header",
+  "text": "Este documento é um <strong> showcase completo </strong> de todos os componentes do sistema de storytelling visual. Aqui você encontrará <em> todas as variações possíveis </em> de cada elemento, permitindo uma validação completa do design system e identificação de melhorias necessárias. [intro] [+paragraphs]",
   "title": "Showcase Completo",
+  "subtitle": "Demonstração de todos os componentes",
+  "date": "29/07/2025",
+  "theme": "tecnologia",
+  "backgroundImage": "https://s3.glbimg.com/v1/AUTH_8b29beb0cbe247a296f902be2fe084b6/2025/html/especiais/metanfetamina/midia/1.jpg",
+  "backgroundImageMobile": "https://s3.glbimg.com/v1/AUTH_8b29beb0cbe247a296f902be2fe084b6/2025/html/especiais/metanfetamina/midia/1.jpg",
+  "author": "Ana Silva",
+  "variant": "minimal",
+  "overlay": "true",
   "paragraphs": [
     {
       "type": "scrollytelling",
@@ -54,18 +64,13 @@
           "video": "https://s3.glbimg.com/v1/AUTH_8b29beb0cbe247a296f902be2fe084b6/2025/html/especiais/plastico/video-timeline_red.mp4",
           "alt": "Vídeo de uma pequena cachoeira para final imersivo"
         }
-      ],
-      "fullWidth": "false"
+      ]
     },
     {
-      "type": "abre",
-      "title": "Showcase Completo",
-      "subtitle": "Demonstra&ccedil;&atilde;o de todos os componentes",
-      "date": "29/07/2025",
-      "backgroundImage": "",
-      "backgroundImageMobile": "",
-      "author": "Ana Silva",
-      "variant": "minimal",
+      "type": "header",
+      "text": "Showcase do Sistema Visual",
+      "backgroundImage": "https://cdn.pixabay.com/photo/2020/12/06/17/58/trees-5809559_1280.jpg",
+      "variant": "hero",
       "overlay": "true"
     },
     {
@@ -208,44 +213,44 @@
     {
       "type": "foto",
       "src": "https://cdn.pixabay.com/photo/2023/06/26/21/22/shack-8090832_1280.jpg",
-      "caption": "Exemplo de &lt;strong&gt;foto normal&lt;/strong&gt; (n&atilde;o fullWidth) com legenda formatada",
-      "credit": "Foto: &lt;em&gt;Unsplash&lt;/em&gt;",
-      "alt": "Carros el&eacute;tricos em concession&aacute;ria",
+      "caption": "Exemplo de <strong>foto normal</strong> (não fullWidth) com legenda formatada",
+      "credit": "Foto: <em>Unsplash</em>",
+      "alt": "Carros elétricos em concessionária",
       "fullWidth": "false",
       "alignment": "center"
     },
     {
       "type": "foto",
       "src": "https://s2-g1.glbimg.com/17xHZXrK0_UuM618DAVerugv1jk=/0x0:1800x900/924x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/R/O/MEF7xqRtWxad7Si1OAUA/quartetos-fantasticos.jpg",
-      "caption": "Exemplo de &lt;strong&gt;foto fullWidth&lt;/strong&gt; que ocupa toda a largura dispon&iacute;vel",
-      "credit": "Foto: &lt;a href=&quot;https://unsplash.com&quot;&gt;Unsplash&lt;/a&gt;",
-      "alt": "Posto de recarga para carros el&eacute;tricos",
+      "caption": "Exemplo de <strong>foto fullWidth</strong> que ocupa toda a largura disponível",
+      "credit": "Foto: <a href=\"https://unsplash.com\">Unsplash</a>",
+      "alt": "Posto de recarga para carros elétricos",
       "fullWidth": "true",
       "alignment": "center"
     },
     {
       "type": "foto",
       "src": "https://s2-g1.glbimg.com/qe95qCVcCW9ld9Sk020FZrVrWuA=/0x0:1296x730/1000x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/f/D/MnB2alRoaZQ3bVWJa4rA/quarteto-fantastico-1994.jpg",
-      "caption": "Foto com &lt;strong&gt;alinhamento &agrave; esquerda&lt;/strong&gt; para criar layouts mais din&acirc;micos",
-      "credit": "Cr&eacute;dito com &lt;em&gt;formata&ccedil;&atilde;o&lt;/em&gt;",
-      "alt": "Lineup de carros el&eacute;tricos",
+      "caption": "Foto com <strong>alinhamento à esquerda</strong> para criar layouts mais dinâmicos",
+      "credit": "Crédito com <em>formatação</em>",
+      "alt": "Lineup de carros elétricos",
       "fullWidth": "false",
       "alignment": "left"
     },
     {
       "type": "foto",
       "src": "https://s2-g1.glbimg.com/xK4a4h0AQp4U98hALh5AuVQkxx4=/0x0:2048x1139/1000x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/z/S/MZt3o4Se2JlQCqo8y4uw/quarteto-fantastico-e-o-surfista-prateado.jpg",
-      "caption": "Foto com &lt;strong&gt;alinhamento &agrave; direita&lt;/strong&gt; para variar o layout visual",
-      "credit": "Outro exemplo de cr&eacute;dito",
-      "alt": "F&aacute;brica de carros el&eacute;tricos",
+      "caption": "Foto com <strong>alinhamento à direita</strong> para variar o layout visual",
+      "credit": "Outro exemplo de crédito",
+      "alt": "Fábrica de carros elétricos",
       "fullWidth": "false",
       "alignment": "right"
     },
     {
       "type": "video",
       "src": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-      "caption": "Exemplo de &lt;strong&gt;v&iacute;deo normal&lt;/strong&gt; com controles padr&atilde;o",
-      "credit": "V&iacute;deo: &lt;em&gt;Sample Videos&lt;/em&gt;",
+      "caption": "Exemplo de <strong>vídeo normal</strong> com controles padrão",
+      "credit": "Vídeo: <em>Sample Videos</em>",
       "fullWidth": "false",
       "autoplay": "false",
       "controls": "true",
@@ -256,8 +261,8 @@
     {
       "type": "video",
       "src": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-      "caption": "V&iacute;deo &lt;strong&gt;fullWidth&lt;/strong&gt; que ocupa toda a largura",
-      "credit": "V&iacute;deo: Sample Videos",
+      "caption": "Vídeo <strong>fullWidth</strong> que ocupa toda a largura",
+      "credit": "Vídeo: Sample Videos",
       "fullWidth": "true",
       "autoplay": "true",
       "controls": "true",
@@ -267,7 +272,7 @@
     },
     {
       "type": "globovideo",
-      "caption": "Teste de player sem algumas props para verificar valores padr&atilde;o",
+      "caption": "Teste de player sem algumas props para verificar valores padrão",
       "credit": "",
       "fullWidth": "false",
       "autoplay": "false",
@@ -278,7 +283,7 @@
     },
     {
       "type": "globovideo",
-      "caption": "Teste de player sem algumas props para verificar valores padr&atilde;o",
+      "caption": "Teste de player sem algumas props para verificar valores padrão",
       "credit": "",
       "fullWidth": "true",
       "autoplay": "true",
@@ -289,7 +294,7 @@
     },
     {
       "type": "globovideo",
-      "caption": "Teste de player sem algumas props para verificar valores padr&atilde;o",
+      "caption": "Teste de player sem algumas props para verificar valores padrão",
       "credit": "",
       "fullWidth": "true",
       "autoplay": "true",
@@ -318,7 +323,7 @@
       "type": "frase",
       "text": "Terceira citação com <em>formatação diferente</em> para testar a robustez do componente. Aqui temos texto mais longo para verificar como o design se comporta com <strong>conteúdo extenso</strong> que pode ocupar múltiplas linhas e criar layouts mais complexos.",
       "author": "Terceiro Especialista",
-      "role": "Designer de Produto S&ecirc;nior"
+      "role": "Designer de Produto Sênior"
     },
     {
       "type": "texto",
@@ -341,8 +346,8 @@
     {
       "type": "foto",
       "src": "https://cdn.pixabay.com/photo/2023/12/20/07/04/sunset-8459057_1280.jpg",
-      "caption": "Legenda muito longa que deve quebrar corretamente em m&uacute;ltiplas linhas para testar o comportamento do componente com &lt;strong&gt;textos extensos&lt;/strong&gt; que podem causar problemas de layout se n&atilde;o forem tratados adequadamente",
-      "credit": "Cr&eacute;dito tamb&eacute;m muito longo: &lt;em&gt;Fot&oacute;grafo com Nome Muito Extenso da Ag&ecirc;ncia de Fotografia Internacional&lt;/em&gt;",
+      "caption": "Legenda muito longa que deve quebrar corretamente em múltiplas linhas para testar o comportamento do componente com <strong>textos extensos</strong> que podem causar problemas de layout se não forem tratados adequadamente",
+      "credit": "Crédito também muito longo: <em>Fotógrafo com Nome Muito Extenso da Agência de Fotografia Internacional</em>",
       "alt": "Imagem pequena para teste",
       "fullWidth": "false",
       "alignment": "center"
@@ -351,11 +356,11 @@
       "type": "frase",
       "text": "Citação com texto muito extenso para testar quebras de linha e comportamento responsivo. Este é um exemplo de como o componente deve se comportar quando recebe <strong>conteúdo longo</strong> que pode se estender por múltiplas linhas e criar desafios de layout. O design deve manter a elegância mesmo com <em>textos muito longos</em> que testam os limites do sistema.",
       "author": "Autor com Nome Muito Longo e Extenso",
-      "role": "Especialista em Testes de Interface e Experi&ecirc;ncia do Usu&aacute;rio S&ecirc;nior"
+      "role": "Especialista em Testes de Interface e Experiência do Usuário Sênior"
     },
     {
       "type": "globovideo",
-      "caption": "Teste de player sem algumas props para verificar valores padr&atilde;o",
+      "caption": "Teste de player sem algumas props para verificar valores padrão",
       "credit": "",
       "fullWidth": "false",
       "autoplay": "false",
@@ -613,7 +618,7 @@
       "overlay": "true",
       "image": "https://cdn.pixabay.com/photo/2023/10/21/11/46/sunset-8331285_1280.jpg",
       "speed": "0.5",
-      "content": "&quot;&lt;h2&gt;Efeito Parallax Suave&lt;/h2&gt;&lt;p&gt;A imagem se move mais devagar que o scroll, criando profundidade visual. Speed: 0.5&lt;/p&gt;&quot;",
+      "content": "\"<h2>Efeito Parallax Suave</h2><p>A imagem se move mais devagar que o scroll, criando profundidade visual. Speed: 0.5</p>\"",
       "height": "100vh"
     },
     {
@@ -625,7 +630,7 @@
       "overlay": "true",
       "image": "https://cdn.pixabay.com/photo/2016/07/15/22/26/sunset-1520615_1280.jpg",
       "speed": "0.8",
-      "content": "&quot;&lt;h2&gt;Parallax Mais R&aacute;pido&lt;/h2&gt;&lt;p&gt;Com speed 0.8, o movimento &eacute; mais pronunciado e dram&aacute;tico.&lt;/p&gt;&quot;",
+      "content": "\"<h2>Parallax Mais Rápido</h2><p>Com speed 0.8, o movimento é mais pronunciado e dramático.</p>\"",
       "height": "50vh"
     },
     {
@@ -637,7 +642,7 @@
       "overlay": "false",
       "image": "https://cdn.pixabay.com/photo/2016/07/15/22/26/sunset-1520615_1280.jpg",
       "speed": "0.3",
-      "content": "&quot;&lt;h2 style=&#39;text-shadow: 2px 2px 4px rgba(0,0,0,0.8);&#39;&gt;Sem Overlay&lt;/h2&gt;&lt;p style=&#39;text-shadow: 1px 1px 2px rgba(0,0,0,0.8);&#39;&gt;Parallax sem overlay escuro, texto com sombra para legibilidade.&lt;/p&gt;&quot;",
+      "content": "\"<h2 style='text-shadow: 2px 2px 4px rgba(0,0,0,0.8);'>Sem Overlay</h2><p style='text-shadow: 1px 1px 2px rgba(0,0,0,0.8);'>Parallax sem overlay escuro, texto com sombra para legibilidade.</p>\"",
       "height": "100vh"
     },
     {
@@ -655,8 +660,8 @@
       "orientation": "vertical",
       "beforeImage": "https://cdn.pixabay.com/photo/2015/09/09/16/40/girl-931776_1280.jpg",
       "afterImage": "https://cdn.pixabay.com/photo/2016/11/19/10/30/beach-1838501_1280.jpg",
-      "beforeLabel": "Combust&atilde;o",
-      "afterLabel": "El&eacute;trico"
+      "beforeLabel": "Combustão",
+      "afterLabel": "Elétrico"
     },
     {
       "type": "texto",
@@ -668,7 +673,7 @@
       "beforeImage": "https://cdn.pixabay.com/photo/2022/09/15/09/05/man-7456044_1280.jpg",
       "afterImage": "https://cdn.pixabay.com/photo/2022/09/15/09/04/sea-7456037_1280.jpg",
       "beforeLabel": "Conceito",
-      "afterLabel": "Produ&ccedil;&atilde;o"
+      "afterLabel": "Produção"
     },
     {
       "type": "texto",
@@ -679,7 +684,7 @@
       "orientation": "vertical",
       "beforeImage": "https://picsum.photos/800/600?random=39",
       "afterImage": "https://picsum.photos/800/600?random=40",
-      "beforeLabel": "Polui&ccedil;&atilde;o",
+      "beforeLabel": "Poluição",
       "afterLabel": "Sustentabilidade"
     },
     {
@@ -799,12 +804,12 @@
       "type": "frase",
       "text": "Sistema de storytelling visual <strong>100% funcional</strong> e robusto! Todos os componentes foram testados extensivamente com suas variações e combinações mais complexas. &#128640;",
       "author": "Sistema de Design Completo",
-      "role": "Valida&ccedil;&atilde;o Total de Componentes"
+      "role": "Validação Total de Componentes"
     },
     {
       "type": "texto",
       "text": "Este exemplo mostra como o componente pode ter <strong>comportamentos diferentes</strong> entre desktop e mobile. No desktop: topo/esquerda, no mobile: centro/centro."
     }
   ],
-  "slug": "showcase-completo"
+  "slug": ""
 }

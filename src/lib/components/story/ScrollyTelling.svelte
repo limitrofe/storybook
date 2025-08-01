@@ -5,6 +5,7 @@
 	
 	export let steps = [];
 	export let fullWidth = false;
+	export let hasHeaderBefore = false;
 
 	let currentStepIndex = 0;
 	let isMobile = false;
