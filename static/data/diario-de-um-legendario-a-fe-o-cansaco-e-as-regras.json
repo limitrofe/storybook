@@ -1,78 +1,121 @@
 {
-  "title": "Diário de um Legendário: a fé, o cansaço e as regras militares no retiro que virou febre entre famosos",
-  "subtitle": "O g1 foi ao retiro secreto masculino que causa debate nas redes sociais, e conta bastidores. O 1&ordm; dia tem uma impressionante maratona física, com ordens rigorosas, comida racionada e religião ainda em segundo plano.",
-  "author": "Fábio Tito",
-  "date": "26 de julho de 2025",
-  "theme": "Pop & Arte",
-  "intro": {
-    "text": "A frase abaixo, dita para mim e mais 168 homens, resume o espírito do retiro masculino e cristão que ganhou fama nas redes sociais. Fama e mistério."
+  "credits": {
+    "notes": "Este é um espaço para quaisquer notas adicionais, agradecimentos, ou informações complementares sobre a matéria. Você pode adicionar texto formatado, como negrito ou itálico.",
+    "sources": [
+      "Fonte 1: Nome da Organização ou Publicação. Link: https://www.fonte1.com",
+      "Fonte 2: Artigo \"Título do Artigo\", Autor. Data.",
+      "Fonte 3: Pesquisa da Universidade XYZ, 2024."
+    ],
+    "additionalGraphics": [
+      "João Desenhos",
+      "Estúdio Gráfico Inovador"
+    ],
+    "editedBy": [
+      "Editor Chefe da Notícia",
+      "Revisor de Conteúdo"
+    ],
+    "authors": [
+      "Autor Principal da Matéria",
+      "Co-Autor Colaborador"
+    ]
   },
+  "title": "Diário de um Legendário: a fé, o cansaço e as regras militares no retiro que virou febre entre famosos",
   "paragraphs": [
+    {
+      "type": "scrollytelling",
+      "steps": [
+        {
+          "title": "A Jornada Começa:Visão Panorâmica",
+          "text": "&Agrave; medida que você desliza para baixo,a cena se abre. A imagem de fundo é o nosso ponto de partida para essa aventura visual. <strong>Role para baixo para ver a transformação!</strong>",
+          "image": "https://s2-g1.glbimg.com/rGOAQaWtSObw063Lu4zktzP0UDU=/0x0:1920x1165/1600x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/e/y/qoGlAPSuAiu7kYuMb58g/dia-01-capa-desktop-v2.jpg",
+          "alt": "Paisagem inicial,ampla e deslumbrante"
+        },
+        {
+          "title": "Detalhe Revelado:Zoom In Dinâmico",
+          "text": "Continue rolando! Observe como o elemento visual no centro da tela começa a se aproximar,focando em um detalhe específico. Este é um efeito de zoom que reage ao seu scroll. Sinta a imersão!",
+          "image": "https://s2-g1.glbimg.com/rGOAQaWtSObw063Lu4zktzP0UDU=/0x0:1920x1165/1600x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/e/y/qoGlAPSuAiu7kYuMb58g/dia-01-capa-desktop-v2.jpg",
+          "alt": "Detalhe de balões de ar quente com zoom"
+        },
+        {
+          "title": "Perspectiva Inesperada:Deslocamento Lateral",
+          "text": "Agora,sinta a imagem se mover sutilmente para o lado. Essa pequena mudança de perspectiva cria uma sensação de profundidade e exploração contínua,mantendo o usuário engajado em uma coreografia perfeita.",
+          "image": "https://s2-g1.glbimg.com/gxr1so9qCY025b4OgYdZ10CVpaY=/0x0:1920x1165/1600x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/K/U/lrdBNXRCmytDvLWsQYrw/cena1-chegada-pos.jpg",
+          "alt": "Paisagem com deslocamento lateral suave"
+        },
+        {
+          "title": "Aprofundando a Narrativa:Opacidade e Escala",
+          "text": "&Agrave; medida que o texto avança,o visual de fundo pode reagir de maneiras diferentes &ndash; talvez diminuindo um pouco a opacidade ou se expandindo ainda mais,guiando o olhar do usuário.",
+          "image": "https://s2-g1.glbimg.com/FlOe9prOlMOy2ughX-9n_ejmack=/0x0:1920x1080/1600x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/j/I/6Ppg4eTCyCEgGwobKkmA/dia-01-cena-02-cova-desktop-v2.jpg",
+          "alt": "Cores vibrantes do oceano"
+        },
+        {
+          "title": "Finalização Grandiosa:Vídeo Imersivo",
+          "text": "Para a grande final,um vídeo envolvente pode surgir e preencher a tela,oferecendo uma conclusão dramática e visualmente rica para sua narrativa de scroll.",
+          "image": "https://s2-g1.glbimg.com/BzDf6YS5VXIUK_p__YLYY607Ew8=/0x0:1920x1080/1600x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/7/3/R8t2RsTRmZunBONsgoiw/dia-01-cena-03-trilha-noturna-pos-desktop.jpg",
+          "alt": "Vídeo de uma pequena cachoeira para final imersivo"
+        }
+      ],
+      "fullWidth": "false"
+    },
+    {
+      "type": "abre",
+      "title": "Diário de um Legendário: a fé, o cansaço e as regras militares no retiro que virou febre entre famosos",
+      "subtitle": "O g1 foi ao retiro secreto masculino que causa debate nas redes sociais, e conta bastidores. O 1&ordm; dia tem uma impressionante maratona física, com ordens rigorosas, comida racionada e religião ainda em segundo plano.",
+      "date": "29/07/2025",
+      "backgroundImage": "",
+      "backgroundImageMobile": "",
+      "author": "Fábio Tito | 26/07/2025 04h00",
+      "variant": "minimal",
+      "overlay": "true"
+    },
+    {
+      "type": "globovideo",
+      "caption": "Teste de player sem algumas props para verificar valores padrão",
+      "credit": "",
+      "fullWidth": "false",
+      "autoplay": "true",
+      "controls": "true",
+      "videoId": "13789200",
+      "autoPlay": "true",
+      "showCaption": "false"
+    },
     {
       "type": "foto",
       "src": "https://s2-g1.glbimg.com/8imyaJ9ZfO8Phak8WrEAvoKymA4=/0x0:1920x575/1600x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/K/u/zLQ5ABTDGljqAsMcS98g/dia-01-frases-01.jpg",
-      "caption": "",
-      "credit": "Foto: Bruna Azevedo",
-      "alt": "Posto de recarga para carros elétricos",
+      "caption": "Exemplo de <strong>foto normal</strong> (não fullWidth) com legenda formatada",
+      "credit": "Foto: <em>Unsplash</em>",
+      "alt": "Carros elétricos em concessionária",
       "fullWidth": "true",
-      "alignment": "left"
+      "alignment": "center"
     },
     {
       "type": "texto",
-      "text": "De um lado, <a href=&rdquo;https://g1.globo.com/pop-arte/noticia/2025/04/07/legendarios-como-e-o-movimento-cristao-para-homens-que-atraiu-eliezer-thiago-nigro-e-neymar-pai.ghtml&rdquo;>celebridades como o ex-BBB Eliezer, Neymar pai, Thiago Nigro e Tirulipa</a> exaltam a experiência como transformadora. Do outro, críticos apontam uma visão obsoleta da masculinidade."
+      "text": "Este é um <strong>parágrafo de texto normal</strong> que demonstra a formatação básica. Aqui temos <em>texto em itálico</em>, <u>texto sublinhado</u>, e <a href=\"https://example.com\">links funcionais</a>. O objetivo é mostrar como o texto flui naturalmente na página."
     },
     {
       "type": "texto",
-      "text": "<strong>Leia mais:</strong> <a href=&rdquo;https://g1.globo.com/pop-arte/noticia/2025/06/10/legendarios-nao-quer-impor-modelo-obsoleto-de-masculinidade-diz-fundador-do-movimento.ghtml&rdquo;>Legendários não quer impor modelo obsoleto de masculinidade, diz fundador do movimento ao g1</a>",
+      "text": "Este é um <strong>parágrafo de destaque</strong> que serve como introdução ou destaque de seção. A fonte é ligeiramente maior e possui mais peso visual para chamar atenção do leitor.",
       "variant": "lead"
     },
     {
-      "type": "texto",
-      "text": "Muita gente opina sem conhecer. Eu, homem cristão que cresceu em lar evangélico e tem interesse sobre o assunto, subi a montanha. Agora posso responder: o que acontece, afinal, entre os Legendários?"
+      "type": "frase",
+      "text": "Esta é uma <strong>citação moderna</strong> com o novo design elegante. Aqui podemos ter <em>formatação em itálico</em> e texto que realmente se destaca na página de forma sofisticada.",
+      "author": "Designer do Sistema",
+      "role": "Especialista em UX/UI"
     },
     {
-      "type": "texto",
-      "text": "Não levei gravador, câmera, nem celular, que eram banidos. Mas tomei notas. E o que relato aqui é o que vi, ouvi e vivi durante o retiro em junho de 2025."
-    },
-    {
-      "type": "texto",
-      "text": "Já no primeiro dia, entendi que o esforço físico e a disciplina militar são tão marcantes quanto o aspecto religioso.",
-      "variant": "lead"
-    },
-    {
-      "type": "texto",
-      "text": "<em>O <strong>g1</strong> publica este Diário de um Legendário em quatro partes diárias, entre sábado (26) e terça-feira (29).</em>"
-    },
-    {
-      "type": "foto",
-      "src": "https://s2-g1.glbimg.com/rGOAQaWtSObw063Lu4zktzP0UDU=/0x0:1920x1165/1600x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/e/y/qoGlAPSuAiu7kYuMb58g/dia-01-capa-desktop-v2.jpg",
-      "caption": "",
-      "credit": "Foto: Bruna Azevedo",
-      "alt": "Posto de recarga para carros elétricos",
-      "fullWidth": "true",
-      "alignment": "left"
+      "type": "ancora",
+      "id": "componentes-de-texto"
     },
     {
       "type": "intertitulo",
-      "text": "Um boné, um número e nenhum atalho",
+      "text": "Seção 1: Componentes de Texto",
       "variant": "default",
       "size": "medium"
     },
     {
       "type": "texto",
-      "text": "Cheguei às 13h03 no local que havia sido anunciado todos os dias da última semana no grupo de Whatsapp \"TOP#1071 <ul><li>DESCOBRIMENTO BAHIA\".</li></ul>"
-    },
-    {
-      "type": "texto",
-      "text": "O número do nosso Track Outdoor de Potencial (TOP), 1.071, é único em todo o mundo; sempre que um retiro como esse é organizado, a chancela do Legendários Global vem com a identificação numérica daquela edição."
-    },
-    {
-      "type": "texto",
-      "text": "Da mesma forma, quem completa as 72 horas de TOP recebe um número só seu. No domingo, recebi o boné de legendário 130.821, o que significa que, antes de mim, 130.819 homens se tornaram legendários pelo mundo."
-    },
-    {
-      "type": "texto",
-      "text": "Isso porque Jesus é considerado o \"legendário n&ordm; 1\" &mdash; apesar de o messias do mundo cristão não ter passado exatamente pela jornada em que eu estava prestes a embarcar."
+      "text": "Agora vamos demonstrar diferentes tipos de <strong>intertítulos</strong> e suas variações. Cada um tem comportamentos únicos para desktop e mobile."
     },
     {
       "type": "intertitulo",
@@ -173,19 +216,14 @@
       "text": "Este exemplo mostra como o componente pode ter <strong>comportamentos diferentes</strong> entre desktop e mobile. No desktop: topo/esquerda, no mobile: centro/centro."
     },
     {
+      "type": "ancora",
+      "id": "componentes-de-midia"
+    },
+    {
       "type": "intertitulo",
       "text": "Seção 3: Componentes de Mídia",
       "variant": "default",
       "size": "medium"
-    },
-    {
-      "type": "foto",
-      "src": "https://cdn.pixabay.com/photo/2023/06/26/21/22/shack-8090832_1280.jpg",
-      "caption": "Exemplo de <strong>foto normal</strong> (não fullWidth) com legenda formatada",
-      "credit": "Foto: <em>Unsplash</em>",
-      "alt": "Carros elétricos em concessionária",
-      "fullWidth": "false",
-      "alignment": "center"
     },
     {
       "type": "foto",
@@ -222,6 +260,7 @@
       "fullWidth": "false",
       "autoplay": "false",
       "controls": "true",
+      "autoPlay": "false",
       "showCaption": "true",
       "loop": "false"
     },
@@ -233,41 +272,31 @@
       "fullWidth": "true",
       "autoplay": "true",
       "controls": "true",
+      "autoPlay": "true",
       "showCaption": "true",
       "loop": "true"
     },
     {
       "type": "globovideo",
-      "caption": "Player da Globo <strong>normal</strong> com todos os controles",
-      "credit": "Vídeo: G1",
-      "fullWidth": "false",
-      "autoplay": "false",
-      "controls": "true",
-      "videoId": "12777862",
-      "skipDFP": "false",
-      "showCaption": "true"
-    },
-    {
-      "type": "globovideo",
-      "caption": "Player da Globo <strong>fullWidth</strong> para maior impacto visual",
-      "credit": "Vídeo: G1",
+      "caption": "Teste de player sem algumas props para verificar valores padrão",
+      "credit": "",
       "fullWidth": "true",
-      "autoplay": "false",
-      "controls": "true",
-      "videoId": "13786052",
-      "skipDFP": "true",
-      "showCaption": "true"
-    },
-    {
-      "type": "globovideo",
-      "caption": "Player com <strong>autoplay</strong> (muted e skipDFP automático)",
-      "credit": "Exemplo de autoplay",
-      "fullWidth": "false",
       "autoplay": "true",
       "controls": "true",
-      "videoId": "13784829",
-      "skipDFP": "false",
-      "showCaption": "false"
+      "videoId": "13798642",
+      "autoPlay": "true",
+      "showCaption": "true"
+    },
+    {
+      "type": "globovideo",
+      "caption": "Teste de player sem algumas props para verificar valores padrão",
+      "credit": "",
+      "fullWidth": "true",
+      "autoplay": "true",
+      "controls": "true",
+      "videoId": "13798680",
+      "autoPlay": "true",
+      "showCaption": "true"
     },
     {
       "type": "intertitulo",
@@ -332,6 +361,7 @@
       "autoplay": "false",
       "controls": "true",
       "videoId": "4372653",
+      "autoPlay": "false",
       "showCaption": "true"
     },
     {
@@ -530,7 +560,8 @@
       "autoplay": "false",
       "interval": "3000",
       "showDots": "true",
-      "showArrows": "true"
+      "showArrows": "true",
+      "autoPlay": "false"
     },
     {
       "type": "texto",
@@ -564,7 +595,8 @@
       "autoplay": "true",
       "interval": "4000",
       "showDots": "true",
-      "showArrows": "false"
+      "showArrows": "false",
+      "autoPlay": "true"
     },
     {
       "type": "texto",
@@ -671,43 +703,6 @@
       "size": "medium"
     },
     {
-      "type": "scrollytelling",
-      "steps": [
-        {
-          "title": "A Jornada Começa:Visão Panorâmica",
-          "text": "&Agrave; medida que você desliza para baixo,a cena se abre. A imagem de fundo é o nosso ponto de partida para essa aventura visual. <strong>Role para baixo para ver a transformação!</strong>",
-          "image": "https://s3.glbimg.com/v1/AUTH_8b29beb0cbe247a296f902be2fe084b6/2025/html/especiais/foz-do-amazonas/g1_esp_foz-amazonas_abre.png",
-          "alt": "Paisagem inicial,ampla e deslumbrante"
-        },
-        {
-          "title": "Detalhe Revelado:Zoom In Dinâmico",
-          "text": "Continue rolando! Observe como o elemento visual no centro da tela começa a se aproximar,focando em um detalhe específico. Este é um efeito de zoom que reage ao seu scroll. Sinta a imersão!",
-          "image": "https://s3.glbimg.com/v1/AUTH_8b29beb0cbe247a296f902be2fe084b6/2025/html/especiais/foz-do-amazonas/g1_esp_foz-amazonas_tela_01.png",
-          "alt": "Detalhe de balões de ar quente com zoom"
-        },
-        {
-          "title": "Perspectiva Inesperada:Deslocamento Lateral",
-          "text": "Agora,sinta a imagem se mover sutilmente para o lado. Essa pequena mudança de perspectiva cria uma sensação de profundidade e exploração contínua,mantendo o usuário engajado em uma coreografia perfeita.",
-          "image": "https://s3.glbimg.com/v1/AUTH_8b29beb0cbe247a296f902be2fe084b6/2025/html/especiais/foz-do-amazonas/g1_esp_foz-amazonas_tela_02.png",
-          "alt": "Paisagem com deslocamento lateral suave"
-        },
-        {
-          "title": "Aprofundando a Narrativa:Opacidade e Escala",
-          "text": "&Agrave; medida que o texto avança,o visual de fundo pode reagir de maneiras diferentes &ndash; talvez diminuindo um pouco a opacidade ou se expandindo ainda mais,guiando o olhar do usuário.",
-          "image": "https://s3.glbimg.com/v1/AUTH_8b29beb0cbe247a296f902be2fe084b6/2025/html/especiais/foz-do-amazonas/g1_esp_foz-amazonas_tela_03.png",
-          "alt": "Cores vibrantes do oceano"
-        },
-        {
-          "title": "Finalização Grandiosa:Vídeo Imersivo",
-          "text": "Para a grande final,um vídeo envolvente pode surgir e preencher a tela,oferecendo uma conclusão dramática e visualmente rica para sua narrativa de scroll.",
-          "video": "https://s3.glbimg.com/v1/AUTH_8b29beb0cbe247a296f902be2fe084b6/2025/html/especiais/plastico/video-timeline_red.mp4",
-          "alt": "Vídeo de uma pequena cachoeira para final imersivo"
-        }
-      ],
-      "fullWidth": "true",
-      "stickyHeight": "100vh # Garante que a área visual é alta o suficiente"
-    },
-    {
       "type": "texto",
       "text": "O layout padrão é ideal para quando o texto descritivo é tão importante quanto a imagem, criando um equilíbrio entre os dois elementos na tela."
     },
@@ -805,27 +800,11 @@
       "text": "Sistema de storytelling visual <strong>100% funcional</strong> e robusto! Todos os componentes foram testados extensivamente com suas variações e combinações mais complexas. &#128640;",
       "author": "Sistema de Design Completo",
       "role": "Validação Total de Componentes"
+    },
+    {
+      "type": "texto",
+      "text": "Este exemplo mostra como o componente pode ter <strong>comportamentos diferentes</strong> entre desktop e mobile. No desktop: topo/esquerda, no mobile: centro/centro."
     }
   ],
-  "credits": {
-    "notes": "Este é um espaço para quaisquer notas adicionais, agradecimentos, ou informações complementares sobre a matéria. Você pode adicionar texto formatado, como negrito ou itálico.",
-    "sources": [
-      "Fonte 1: Nome da Organização ou Publicação. Link: https://www.fonte1.com",
-      "Fonte 2: Artigo \"Título do Artigo\", Autor. Data.",
-      "Fonte 3: Pesquisa da Universidade XYZ, 2024."
-    ],
-    "additionalGraphics": [
-      "João Desenhos",
-      "Estúdio Gráfico Inovador"
-    ],
-    "editedBy": [
-      "Editor Chefe da Notícia",
-      "Revisor de Conteúdo"
-    ],
-    "authors": [
-      "Autor Principal da Matéria",
-      "Co-Autor Colaborador"
-    ]
-  },
   "slug": "diario-de-um-legendario-a-fe-o-cansaco-e-as-regras"
 }

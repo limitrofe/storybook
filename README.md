@@ -1,38 +1,44 @@
-# sv
+# Sistema de Storytelling do Newsroom
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Este projeto usa Svelte para construir narrativas interativas a partir de documentos do Google Docs. As histórias são processadas e transformadas em arquivos JSON que servem de fonte para o renderizador no navegador.
 
-## Creating a project
+## Pré-requisitos
 
-If you're seeing this, you've probably already done this step. Congrats!
+1. Instale as dependências:
 
 ```bash
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
+npm install
 ```
 
-## Developing
+2. Gere os arquivos JSON de uma história executando o script de captura. Forneça o ID do documento do Google Docs:
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+```bash
+npm run fetch DOC_ID
+# ou
+node scripts/fetch-docs.js DOC_ID
+```
+
+Os arquivos são salvos em `static/data/`.
+
+## Desenvolvimento
+
+Inicie o servidor de desenvolvimento para visualizar as histórias:
 
 ```bash
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
+Acesse `http://localhost:5173` no navegador.
 
-To create a production version of your app:
+## Temas
+
+O sistema possui vários temas definidos em `src/lib/styles/themes.css`. Cada história escolhe um tema e o renderizador aplica as cores correspondentes.
+
+## Produção
+
+Para gerar a versão final do site:
 
 ```bash
 npm run build
 ```
 
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.

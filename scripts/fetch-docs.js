@@ -191,8 +191,8 @@ function parseJSONField(jsonString, fieldName) {
       .replace(/\s+/g, ' ')
       .replace(/,\s*\]/g, ']')
       .replace(/,\s*}/g, '}')
-      .replace(/["""„‟«»"‶‷"″‟‹›]/g, '"') 
-      .replace(/['''‚‛‹›]/g, "'") 
+      .replace(/["“”„‟«»"‶‷”″‟‹›]/g, '"') 
+      .replace(/['‘’‚‛‹›]/g, "'") 
       .replace(/\s*:\s*/g, ':')
       .replace(/\s*,\s*/g, ',')
       .trim();
@@ -306,26 +306,14 @@ function parseParagraphsHTML(html) {
       const regex = new RegExp(`\\b${field}:\\s*([^\\n<]*)`, 'i');
       const match = block.match(regex);
       if (match) {
-        let cleanedValue = (match[1] || '')
+        const cleanedValue = (match[1] || '')
             .replace(/&nbsp;/g, ' ')
             .replace(/<[^>]*>/g, '')
             .trim();
             
-        // ✅ FIX ESPECÍFICO: Decodifica entidades HTML para campos de URL/imagem
-        if (['backgroundImage', 'backgroundImageMobile', 'backgroundVideo', 'backgroundVideoMobile', 'src', 'image'].includes(field)) {
-          cleanedValue = decodeHTMLEntities(cleanedValue);
-        }
-        
-        paragraph[prop] = cleanedValue;
+        paragraph[prop] = decodeHTMLEntities(cleanedValue);
       }
     }
-    
-    // ✅ FIX ADICIONAL: Garante que todos os campos de URL sejam decodificados
-    ['backgroundImage', 'backgroundImageMobile', 'backgroundVideo', 'backgroundVideoMobile', 'src', 'image'].forEach(field => {
-      if (paragraph[field]) {
-        paragraph[field] = decodeHTMLEntities(paragraph[field]);
-      }
-    });
     
     if (paragraph.type) {
       paragraphs.push(paragraph);

@@ -134,7 +134,7 @@
           fullWidth={toBoolean(paragraph.fullWidth)}
         />
         <!-- ✅ ADICIONADO: Spacer para dar espaço após o ScrollyTelling -->
-        <div style="height: 50vh;"></div>
+        <div style="height: 20vh;"></div>
       {:else if componentType === 'text'}
         <StoryText content={paragraph.text} variant={paragraph.variant || 'body'} maxWidth="700px" />
       {:else if componentType === 'quote'}
