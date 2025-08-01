@@ -42,4 +42,3 @@ Para gerar a versão final do site:
 npm run build
 ```
 
-Em seguida execute `npm run preview` para conferir o resultado.
