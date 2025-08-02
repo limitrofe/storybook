@@ -19,8 +19,89 @@
       "Co-Autor Colaborador"
     ]
   },
-  "title": "Diário de um Legendário: a fé, o cansaço e as regras militares no retiro que virou febre entre famosos",
   "paragraphs": [
+    {
+      "type": "videoscrollytelling",
+      "steps": [
+        {
+          "title": "Abertura:Estabelecendo o Cenário",
+          "text": "Nossa jornada começa do zero,apresentando o <strong>contexto inicial</strong> e estabelecendo as bases para tudo que será revelado.",
+          "time": 3
+        },
+        {
+          "title": "Primeiros Insights",
+          "text": "Aos 60 segundos (0:02),começamos a desvendar os <em>primeiros elementos cruciais</em> que moldarão nossa compreensão.",
+          "time": 6
+        },
+        {
+          "title": "Desenvolvimento das Ideias",
+          "text": "No minuto 0:02,as ideias ganham forma e começamos a ver <strong>conexões importantes</strong> entre os diferentes elementos.",
+          "time": 9
+        },
+        {
+          "title": "Momento de Transição",
+          "text": "Aos 3 minutos,chegamos a um <em>ponto de virada fundamental</em> que redefine nossa perspectiva sobre o tema.",
+          "time": 15
+        },
+        {
+          "title": "Aprofundamento da Análise",
+          "text": "No minuto 4:00,mergulhamos mais fundo na análise,explorando <strong>camadas mais complexas</strong> da narrativa.",
+          "time": 19
+        }
+      ],
+      "videoSrc": "https://www.reuters.com/graphics/USA-TEMPERATURE/PRISONS/jnpwbejwlvw/cdn/videos/cell-render.mp4",
+      "videoSrcMobile": "https://www.reuters.com/graphics/USA-TEMPERATURE/PRISONS/jnpwbejwlvw/cdn/videos/cell-render-mobile.mp4",
+      "height": "400vh",
+      "videoAspectRatio": "16/9",
+      "showProgress": "true",
+      "showTime": "true",
+      "showControls": "false"
+    },
+    {
+      "type": "abre",
+      "title": "Diário de um Legendário: a fé, o cansaço e as regras militares no retiro que virou febre entre famosos",
+      "subtitle": "O g1 foi ao retiro secreto masculino que causa debate nas redes sociais, e conta bastidores. O 1&ordm; dia tem uma impressionante maratona física, com ordens rigorosas, comida racionada e religião ainda em segundo plano.",
+      "date": "29/07/2025",
+      "backgroundImage": "",
+      "backgroundImageMobile": "",
+      "author": "Fábio Tito | 26/07/2025 04h00",
+      "variant": "minimal",
+      "overlay": "true"
+    },
+    {
+      "type": "globovideo",
+      "caption": "Descrição do vídeo",
+      "credit": "Globo",
+      "fullWidth": "true",
+      "autoplay": "false",
+      "videoId": "13789200",
+      "autoPlay": "false",
+      "showCaption": "true"
+    },
+    {
+      "type": "foto",
+      "src": "https://s2-g1.glbimg.com/8imyaJ9ZfO8Phak8WrEAvoKymA4=/0x0:1920x575/1600x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/K/u/zLQ5ABTDGljqAsMcS98g/dia-01-frases-01.jpg",
+      "caption": "Exemplo de <strong>foto normal</strong> (não fullWidth) com legenda formatada",
+      "credit": "Foto: <em>Unsplash</em>",
+      "alt": "Carros elétricos em concessionária",
+      "fullWidth": "true",
+      "alignment": "center"
+    },
+    {
+      "type": "texto",
+      "text": "Este é um <strong>parágrafo de texto normal</strong> que demonstra a formatação básica. Aqui temos <em>texto em itálico</em>, <u>texto sublinhado</u>, e <a href=\"https://example.com\">links funcionais</a>. O objetivo é mostrar como o texto flui naturalmente na página."
+    },
+    {
+      "type": "texto",
+      "text": "Este é um <strong>parágrafo de destaque</strong> que serve como introdução ou destaque de seção. A fonte é ligeiramente maior e possui mais peso visual para chamar atenção do leitor.",
+      "variant": "lead"
+    },
+    {
+      "type": "frase",
+      "text": "Esta é uma <strong>citação moderna</strong> com o novo design elegante. Aqui podemos ter <em>formatação em itálico</em> e texto que realmente se destaca na página de forma sofisticada.",
+      "author": "Designer do Sistema",
+      "role": "Especialista em UX/UI"
+    },
     {
       "type": "scrollytelling",
       "steps": [
@@ -56,52 +137,6 @@
         }
       ],
       "fullWidth": "false"
-    },
-    {
-      "type": "abre",
-      "title": "Diário de um Legendário: a fé, o cansaço e as regras militares no retiro que virou febre entre famosos",
-      "subtitle": "O g1 foi ao retiro secreto masculino que causa debate nas redes sociais, e conta bastidores. O 1&ordm; dia tem uma impressionante maratona física, com ordens rigorosas, comida racionada e religião ainda em segundo plano.",
-      "date": "29/07/2025",
-      "backgroundImage": "",
-      "backgroundImageMobile": "",
-      "author": "Fábio Tito | 26/07/2025 04h00",
-      "variant": "minimal",
-      "overlay": "true"
-    },
-    {
-      "type": "globovideo",
-      "caption": "Teste de player sem algumas props para verificar valores padrão",
-      "credit": "",
-      "fullWidth": "false",
-      "autoplay": "true",
-      "controls": "true",
-      "videoId": "13789200",
-      "autoPlay": "true",
-      "showCaption": "false"
-    },
-    {
-      "type": "foto",
-      "src": "https://s2-g1.glbimg.com/8imyaJ9ZfO8Phak8WrEAvoKymA4=/0x0:1920x575/1600x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/K/u/zLQ5ABTDGljqAsMcS98g/dia-01-frases-01.jpg",
-      "caption": "Exemplo de <strong>foto normal</strong> (não fullWidth) com legenda formatada",
-      "credit": "Foto: <em>Unsplash</em>",
-      "alt": "Carros elétricos em concessionária",
-      "fullWidth": "true",
-      "alignment": "center"
-    },
-    {
-      "type": "texto",
-      "text": "Este é um <strong>parágrafo de texto normal</strong> que demonstra a formatação básica. Aqui temos <em>texto em itálico</em>, <u>texto sublinhado</u>, e <a href=\"https://example.com\">links funcionais</a>. O objetivo é mostrar como o texto flui naturalmente na página."
-    },
-    {
-      "type": "texto",
-      "text": "Este é um <strong>parágrafo de destaque</strong> que serve como introdução ou destaque de seção. A fonte é ligeiramente maior e possui mais peso visual para chamar atenção do leitor.",
-      "variant": "lead"
-    },
-    {
-      "type": "frase",
-      "text": "Esta é uma <strong>citação moderna</strong> com o novo design elegante. Aqui podemos ter <em>formatação em itálico</em> e texto que realmente se destaca na página de forma sofisticada.",
-      "author": "Designer do Sistema",
-      "role": "Especialista em UX/UI"
     },
     {
       "type": "ancora",

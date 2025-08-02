@@ -68,6 +68,26 @@ async function fetchGoogleDoc(docId) {
         }
       });
     }
+
+    // 🆕 MUDANÇA 1: Adicionar detecção de VideoScrollytelling
+    const videoScrollyComponents = data.paragraphs?.filter(p => 
+      ['videoscrollytelling', 'video-scrollytelling', 'videoscrolly', 'video-scrolly'].includes(p.type?.toLowerCase())
+    ) || [];
+    
+    if (videoScrollyComponents.length > 0) {
+      console.log(`🎥 VideoScrollyTelling encontrados: ${videoScrollyComponents.length}`);
+      videoScrollyComponents.forEach((comp, index) => {
+        const stepsCount = comp.steps?.length || 0;
+        console.log(`  ${index + 1}. Steps: ${stepsCount} | VideoSrc: ${!!comp.videoSrc || !!comp.src} | Mobile: ${!!comp.videoSrcMobile || !!comp.srcMobile}`);
+        if (stepsCount === 0) {
+          console.warn(`⚠️ VideoScrollyTelling sem steps: ${comp.text?.substring(0, 50)}...`);
+        } else {
+          comp.steps.forEach((step, stepIndex) => {
+            console.log(`     Step ${stepIndex + 1}: "${step.title?.substring(0, 30)}..." | Time: ${step.time}s`);
+          });
+        }
+      });
+    }
     
     return data;
     
@@ -191,8 +211,8 @@ function parseJSONField(jsonString, fieldName) {
       .replace(/\s+/g, ' ')
       .replace(/,\s*\]/g, ']')
       .replace(/,\s*}/g, '}')
-      .replace(/["“”„‟«»"‶‷”″‟‹›]/g, '"') 
-      .replace(/['‘’‚‛‹›]/g, "'") 
+      .replace(/["""„‟«»"‶‷"″‟‹›]/g, '"') 
+      .replace(/['''‚‛‹›]/g, "'") 
       .replace(/\s*:\s*/g, ':')
       .replace(/\s*,\s*/g, ',')
       .trim();
@@ -267,7 +287,8 @@ function parseParagraphsHTML(html) {
       continue;
     }
 
-    const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:backgroundImage|backgroundImageMobile|backgroundVideo|backgroundVideoMobile|backgroundPosition|backgroundPositionMobile|author|role|src|caption|credit|alt|fullWidth|variant|size|orientation|autoplay|controls|poster|images|items|steps|beforeImage|afterImage|beforeLabel|afterLabel|image|height|heightMobile|speed|content|overlay|layout|columns|interval|showDots|showArrows|stickyHeight|videoId|videosIDs|id|skipDFP|skipdfp|autoPlay|startMuted|maxQuality|quality|chromeless|isLive|live|allowRestrictedContent|preventBlackBars|globoId|token|adAccountId|adCmsId|siteName|width|textPosition|textPositionMobile|textAlign|textAlignMobile|title|subtitle|date|theme):|type:|$)/si);
+    // 🆕 MUDANÇA 2: Adicionar tratamento específico para VideoScrollytelling no regex do textMatch
+    const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:backgroundImage|backgroundImageMobile|backgroundVideo|backgroundVideoMobile|backgroundPosition|backgroundPositionMobile|author|role|src|videoSrc|videoSrcMobile|caption|credit|alt|fullWidth|variant|size|orientation|autoplay|controls|poster|images|items|steps|beforeImage|afterImage|beforeLabel|afterLabel|image|height|heightMobile|speed|content|overlay|layout|columns|interval|showDots|showArrows|stickyHeight|videoId|videosIDs|id|skipDFP|skipdfp|autoPlay|startMuted|maxQuality|quality|chromeless|isLive|live|allowRestrictedContent|preventBlackBars|globoId|token|adAccountId|adCmsId|siteName|width|textPosition|textPositionMobile|textAlign|textAlignMobile|title|subtitle|date|theme|videoAspectRatio|showProgress|showTime|showControls):|type:|$)/si);
     if (textMatch) {
       if (['texto', 'frase', 'intro'].includes(paragraph.type)) {
         paragraph.text = cleanAndFormatHTML(textMatch[1].trim());
@@ -285,12 +306,13 @@ function parseParagraphsHTML(html) {
       }
     }
 
+    // 🆕 MUDANÇA 3: Adicionar os novos campos do VideoScrollytelling no fieldMappings
     const fieldMappings = {
       title: 'title', subtitle: 'subtitle', date: 'date', theme: 'theme',
       backgroundImage: 'backgroundImage', backgroundImageMobile: 'backgroundImageMobile', backgroundVideo: 'backgroundVideo',
       backgroundVideoMobile: 'backgroundVideoMobile', backgroundPosition: 'backgroundPosition', backgroundPositionMobile: 'backgroundPositionMobile',
       textPosition: 'textPosition', textPositionMobile: 'textPositionMobile', textAlign: 'textAlign', textAlignMobile: 'textAlignMobile',
-      author: 'author', role: 'role', src: 'src', caption: 'caption', credit: 'credit', alt: 'alt', fullWidth: 'fullWidth', variant: 'variant',
+      author: 'author', role: 'role', src: 'src', videoSrc: 'videoSrc', videoSrcMobile: 'videoSrcMobile', srcMobile: 'srcMobile', caption: 'caption', credit: 'credit', alt: 'alt', fullWidth: 'fullWidth', variant: 'variant',
       size: 'size', orientation: 'orientation', autoplay: 'autoplay', controls: 'controls', poster: 'poster', overlay: 'overlay',
       layout: 'layout', columns: 'columns', interval: 'interval', showDots: 'showDots', showArrows: 'showArrows',
       stickyHeight: 'stickyHeight', beforeImage: 'beforeImage', afterImage: 'afterImage', beforeLabel: 'beforeLabel',
@@ -299,7 +321,7 @@ function parseParagraphsHTML(html) {
       chromeless: 'chromeless', isLive: 'isLive', live: 'live', allowRestrictedContent: 'allowRestrictedContent',
       preventBlackBars: 'preventBlackBars', globoId: 'globoId', token: 'token', adAccountId: 'adAccountId', adCmsId: 'adCmsId',
       siteName: 'siteName', width: 'width', height: 'height', heightMobile: 'heightMobile', showCaption: 'showCaption',
-      alignment: 'alignment', loop: 'loop'
+      alignment: 'alignment', loop: 'loop', videoAspectRatio: 'videoAspectRatio', aspectRatio: 'aspectRatio', showProgress: 'showProgress', showTime: 'showTime', showControls: 'showControls'
     };
     
     for (const [field, prop] of Object.entries(fieldMappings)) {
