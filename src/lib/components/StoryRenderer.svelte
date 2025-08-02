@@ -38,6 +38,9 @@
    */
   function getComponentType(paragraph) {
     const type = paragraph.type?.toLowerCase().trim();
+    
+    console.log('🔍 Debug StoryRenderer:', { originalType: paragraph.type, normalizedType: type });
+    
     switch (type) {
       case 'header':
       case 'titulo-principal':
@@ -86,10 +89,12 @@
       case 'video-scrolly':
         return 'video-scrolly';
       case 'flourish':
+      case 'flourish-embed':
       case 'grafico':
       case 'mapa':
         return 'flourish';
       case 'flourish-scrolly':
+      case 'flourish-story':
         return 'flourish-scrolly';
       case 'ancora':
       case 'anchor':
@@ -320,11 +325,12 @@
           showTime={props.showTime !== false}
         />
 
-      <!-- Flourish -->
+      <!-- Flourish Embed -->
       {:else if componentType === 'flourish'}
         <FlourishEmbed
+          src={props.src}
           url={props.url}
-          height={props.height || '500px'}
+          height={props.height || '600px'}
           caption={props.caption}
           credit={props.credit}
         />
@@ -332,8 +338,9 @@
       <!-- Flourish Scrolly -->
       {:else if componentType === 'flourish-scrolly'}
         <FlourishScrolly
-          steps={props.steps || []}
+          src={props.src}
           flourishUrl={props.flourishUrl}
+          steps={props.steps || []}
           flourishHeight={props.flourishHeight || '500px'}
           layout={props.layout || 'split'}
         />

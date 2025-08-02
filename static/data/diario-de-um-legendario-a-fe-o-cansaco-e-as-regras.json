@@ -51,7 +51,7 @@
       ],
       "videoSrc": "https://www.reuters.com/graphics/USA-TEMPERATURE/PRISONS/jnpwbejwlvw/cdn/videos/cell-render.mp4",
       "videoSrcMobile": "https://www.reuters.com/graphics/USA-TEMPERATURE/PRISONS/jnpwbejwlvw/cdn/videos/cell-render-mobile.mp4",
-      "height": "400vh",
+      "height": "250vh",
       "videoAspectRatio": "16/9",
       "showProgress": "true",
       "showTime": "true",
@@ -73,9 +73,9 @@
       "caption": "Descrição do vídeo",
       "credit": "Globo",
       "fullWidth": "true",
-      "autoplay": "false",
+      "autoplay": "true",
       "videoId": "13789200",
-      "autoPlay": "false",
+      "autoPlay": "true",
       "showCaption": "true"
     },
     {

@@ -1,68 +1,139 @@
+<!-- FlourishScrolly.svelte - CORRIGIDO -->
 <script>
-	import Scroller from './shared/Scroller.svelte';
-	import FlourishScrollyEmbed from './shared/FlourishScrollyEmbed.svelte';
-	import Step from './shared/Step.svelte';
+  import Scroller from './shared/Scroller.svelte';
+  import FlourishScrollyEmbed from './shared/FlourishScrollyEmbed.svelte';
+  import Step from './shared/Step.svelte';
 
-	export let src = '';
-export let steps = [];
+  export let src = '';
+  export let steps = [];
+  export let flourishUrl = ''; // Alias para src
+  export let flourishHeight = '500px';
+  export let layout = 'split';
 
-	let length = steps.length - 1;
-	let currentStepIndex = 0;
-// Renomeado para maior clareza, representa o índice do card de texto ativo.
-$: stepContent = steps.map(step => {
-		let content = '';
-		if (step.title) content += `<h3>${step.title}</h3>`;
-		if (step.text) content += `<div>${step.text}</div>`;
-		return content;
-	});
-// Calcula qual slide do Flourish deve ser exibido, baseado no step atual.
-// Se a propriedade 'slide' não estiver definida para o step atual, usa 0 como padrão.
-$: flourishSlideIndex = steps[currentStepIndex]?.slide !== undefined ? steps[currentStepIndex].slide : 0;
+  // Resolver src
+  $: actualSrc = src || flourishUrl;
+
+  let length = steps.length - 1;
+  let currentStepIndex = 0;
+
+  // Preparar conteúdo dos steps
+  $: stepContent = steps.map(step => {
+    let content = '';
+    if (step.title) content += `<h3>${step.title}</h3>`;
+    if (step.text) content += `<div>${step.text}</div>`;
+    return content;
+  });
+
+  // Calcular slide do Flourish baseado no step atual
+  $: flourishSlideIndex = steps[currentStepIndex]?.slide !== undefined ? steps[currentStepIndex].slide : 0;
+
+  $: {
+    console.log('📜 FlourishScrolly:', { 
+      actualSrc, 
+      currentStepIndex, 
+      flourishSlideIndex, 
+      stepsLength: steps.length 
+    });
+  }
 </script>
 
-<div class="scrolly-wrapper">
-	<Scroller top={0} bottom={1} threshold={0.5} bind:index={currentStepIndex}>
-		<div slot="background" class="flourish-background-fullscreen">
-			<FlourishScrollyEmbed {src} index={flourishSlideIndex} />
-		</div>
+{#if actualSrc && steps.length > 0}
+  <div class="scrolly-wrapper">
+    <Scroller top={0} bottom={1} threshold={0.5} bind:index={currentStepIndex}>
+      <div slot="background" class="flourish-background-fullscreen">
+        <FlourishScrollyEmbed src={actualSrc} index={flourishSlideIndex} />
+      </div>
 
-		<div slot="foreground" class="steps-foreground">
-			<section class="spacer-top"></section>
-			
-			{#each stepContent as stepText, i}
-				<Step {stepText} {length} {i} />
-			{/each}
-		</div>
-	</Scroller>
-</div>
+      <div slot="foreground" class="steps-foreground">
+        <section class="spacer-top"></section>
+        
+        {#each stepContent as stepText, i}
+          <Step {stepText} {length} {i} />
+        {/each}
+      </div>
+    </Scroller>
+  </div>
+{:else}
+  <div class="scrolly-fallback">
+    <div class="fallback-content">
+      <span class="fallback-icon">📜</span>
+      <h3>Flourish ScrollyTelling</h3>
+      {#if !actualSrc}
+        <p>Propriedade 'src' não definida.</p>
+        <small>Exemplo: <code>src: story/3218812</code></small>
+      {:else if steps.length === 0}
+        <p>Nenhum step definido.</p>
+        <small>Adicione steps com title, text e slide.</small>
+      {/if}
+    </div>
+  </div>
+{/if}
 
 <style>
-	.scrolly-wrapper {
-		position: relative;
-}
+  .scrolly-wrapper {
+    position: relative;
+  }
 
-	.flourish-background-fullscreen {
-		width: 100%;
-		height: 100vh;
-	}
-	
-	.steps-foreground {
-		position: relative;
-		z-index: 10;
-}
+  .flourish-background-fullscreen {
+    width: 100%;
+    height: 100vh;
+  }
+  
+  .steps-foreground {
+    position: relative;
+    z-index: 10;
+  }
 
-	.spacer-top {
-		/* This pushes the first step down so it aligns in the middle of the screen */
-		height: 10vh;
-}
+  .spacer-top {
+    height: 10vh;
+  }
 
-	/* Allow clicking through the foreground container */
-	:global(.scroller-foreground) {
-		pointer-events: none !important;
-}
+  /* Allow clicking through the foreground container */
+  :global(.scroller-foreground) {
+    pointer-events: none !important;
+  }
 
-	/* Re-enable pointer events for the steps themselves */
-	:global(.scroller-foreground section) {
-		pointer-events: auto;
-	}
+  /* Re-enable pointer events for the steps themselves */
+  :global(.scroller-foreground section) {
+    pointer-events: auto;
+  }
+
+  .scrolly-fallback {
+    padding: 3rem 2rem;
+    margin: 2rem auto;
+    max-width: 600px;
+    border: 2px dashed #d1d5db;
+    background: #f9fafb;
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .fallback-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .fallback-icon {
+    font-size: 3rem;
+  }
+
+  .fallback-content h3 {
+    margin: 0;
+    color: #374151;
+  }
+
+  .fallback-content p {
+    margin: 0;
+    color: #6b7280;
+  }
+
+  .fallback-content small {
+    color: #9ca3af;
+    font-family: monospace;
+    background: #f3f4f6;
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
 </style>
