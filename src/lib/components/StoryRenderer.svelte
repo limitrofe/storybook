@@ -4,6 +4,7 @@
   import Header from './story/Header.svelte';
   import StoryText from './story/StoryText.svelte';
   import SectionTitle from './story/SectionTitle.svelte';
+  import SectionWrapper from './story/SectionWrapper.svelte'; // 🆕 NOVO COMPONENTE
   import PhotoWithCaption from './story/PhotoWithCaption.svelte';
   import VideoPlayer from './story/VideoPlayer.svelte';
   import GloboPlayer from './story/GloboPlayer.svelte';
@@ -12,7 +13,7 @@
   import Parallax from './story/Parallax.svelte';
   import BeforeAfter from './story/BeforeAfter.svelte';
   import ScrollyTelling from './story/ScrollyTelling.svelte';
-  import VideoScrollytelling from './story/VideoScrollytelling.svelte'; // 🆕 NOVO COMPONENTE
+  import VideoScrollytelling from './story/VideoScrollytelling.svelte';
   import FlourishEmbed from './story/FlourishEmbed.svelte';
   import FlourishScrolly from './story/FlourishScrolly.svelte';
   import FinalCredits from './FinalCredits.svelte';
@@ -53,6 +54,11 @@
       case 'intertitulo':
       case 'titulo':
         return 'section-title';
+      case 'section': // 🆕 NOVO TIPO
+      case 'secao':
+      case 'section-wrapper':
+      case 'wrapper':
+        return 'section-wrapper';
       case 'frase':
       case 'citacao':
       case 'quote':
@@ -83,7 +89,7 @@
       case 'scrollytelling':
       case 'scrolly':
         return 'scrolly';
-      case 'videoscrollytelling': // 🆕 NOVO TIPO
+      case 'videoscrollytelling':
       case 'video-scrollytelling':
       case 'videoscrolly':
       case 'video-scrolly':
@@ -178,20 +184,40 @@
           backgroundVideo={props.backgroundVideo}
           backgroundVideoMobile={props.backgroundVideoMobile}
           variant={props.variant || 'default'}
-          overlay={props.overlay}
+          overlay={stringToBoolean(props.overlay, true)}
         />
 
-      <!-- Texto -->
+      <!-- 🆕 SECTION WRAPPER -->
+      {:else if componentType === 'section-wrapper'}
+        <SectionWrapper
+          id={props.id}
+          backgroundImage={props.backgroundImage}
+          backgroundImageMobile={props.backgroundImageMobile}
+          backgroundPosition={props.backgroundPosition || 'center'}
+          backgroundPositionMobile={props.backgroundPositionMobile || 'center'}
+          overlay={stringToBoolean(props.overlay, false)}
+          height={props.height}
+          heightMobile={props.heightMobile}
+          padding={props.padding}
+          paddingMobile={props.paddingMobile}
+          children={props.children || []}
+        >
+          <!-- Slot para conteúdo manual se necessário -->
+          {#if props.content}
+            <div class="section-content">
+              {@html props.content}
+            </div>
+          {/if}
+        </SectionWrapper>
+
+      <!-- Text -->
       {:else if componentType === 'text'}
-        <StoryText 
-          content={props.text} 
-          variant={props.variant || 'body'}
-        />
+        <StoryText content={props.text} variant={props.variant || 'body'} />
 
       <!-- Quote -->
       {:else if componentType === 'quote'}
-        <StoryText 
-          content={props.text} 
+        <StoryText
+          content={props.text}
           variant="quote"
           author={props.author}
           role={props.role}
@@ -204,23 +230,29 @@
           subtitle={props.subtitle}
           backgroundImage={props.backgroundImage}
           backgroundImageMobile={props.backgroundImageMobile}
+          backgroundPosition={props.backgroundPosition || 'center'}
+          backgroundPositionMobile={props.backgroundPositionMobile || 'center'}
+          backgroundVideo={props.backgroundVideo}
+          backgroundVideoMobile={props.backgroundVideoMobile}
           variant={props.variant || 'default'}
           size={props.size || 'medium'}
-          textPosition={props.textPosition || 'left'}
-          textAlign={props.textAlign || 'left'}
           height={props.height}
-          overlay={props.overlay}
+          heightMobile={props.heightMobile}
+          textPosition={props.textPosition || 'center'}
+          textPositionMobile={props.textPositionMobile}
+          textAlign={props.textAlign || 'center'}
+          textAlignMobile={props.textAlignMobile}
+          overlay={stringToBoolean(props.overlay, false)}
         />
 
       <!-- Photo -->
       {:else if componentType === 'photo'}
         <PhotoWithCaption
           src={props.src}
-          srcMobile={props.srcMobile}
-          caption={props.caption}
-          credit={props.credit}
-          alt={props.alt || 'Imagem'}
-          fullWidth={props.fullWidth}
+          alt={props.alt || ''}
+          caption={props.caption || ''}
+          credit={props.credit || ''}
+          fullWidth={stringToBoolean(props.fullWidth, false)}
           alignment={props.alignment || 'center'}
         />
 
@@ -228,61 +260,57 @@
       {:else if componentType === 'video'}
         <VideoPlayer
           src={props.src}
-          srcMobile={props.srcMobile}
           caption={props.caption}
           credit={props.credit}
-          fullWidth={props.fullWidth}
-          autoplay={props.autoplay}
-          controls={props.controls}
-          loop={props.loop}
-          showCaption={props.showCaption}
+          fullWidth={stringToBoolean(props.fullWidth, false)}
+          autoplay={stringToBoolean(props.autoplay, false)}
+          controls={stringToBoolean(props.controls, true)}
+          loop={stringToBoolean(props.loop, false)}
+          showCaption={stringToBoolean(props.showCaption, true)}
         />
 
       <!-- Globo Player -->
       {:else if componentType === 'globo-player'}
         <GloboPlayer
           videoId={props.videoId}
+          videosIDs={props.videosIDs}
           caption={props.caption}
           credit={props.credit}
-          fullWidth={props.fullWidth}
-          autoplay={props.autoplay}
-          controls={props.controls}
-          showCaption={props.showCaption}
+          fullWidth={stringToBoolean(props.fullWidth, false)}
+          autoplay={stringToBoolean(props.autoplay, false)}
+          startMuted={stringToBoolean(props.startMuted, true)}
+          skipDFP={stringToBoolean(props.skipDFP, false)}
+          chromeless={stringToBoolean(props.chromeless, false)}
+          showCaption={stringToBoolean(props.showCaption, true)}
         />
 
       <!-- Gallery -->
       {:else if componentType === 'gallery'}
         <PhotoGallery
           images={props.images || []}
-          caption={props.caption}
-          credit={props.credit}
           layout={props.layout || 'grid'}
-          columns={props.columns || 3}
-          lightbox={props.lightbox}
-          masonry={props.masonry}
+          columns={parseInt(props.columns) || 3}
+          lightbox={stringToBoolean(props.lightbox, true)}
         />
 
       <!-- Carousel -->
       {:else if componentType === 'carousel'}
         <Carousel
           items={props.items || []}
-          caption={props.caption}
-          credit={props.credit}
-          autoplay={props.autoplay}
-          showDots={props.showDots}
-          showArrows={props.showArrows}
-          interval={props.interval || 5000}
+          autoplay={stringToBoolean(props.autoplay, false)}
+          interval={parseInt(props.interval) || 3000}
+          showDots={stringToBoolean(props.showDots, true)}
+          showArrows={stringToBoolean(props.showArrows, true)}
         />
 
       <!-- Parallax -->
       {:else if componentType === 'parallax'}
         <Parallax
           image={props.image}
-          imageMobile={props.imageMobile}
-          content={props.content}
-          height={props.height || '50vh'}
-          speed={props.speed || '0.5'}
-          overlay={props.overlay}
+          height={props.height || '60vh'}
+          speed={parseFloat(props.speed) || 0.5}
+          overlay={stringToBoolean(props.overlay, true)}
+          content={props.content || ''}
         />
 
       <!-- Before/After -->
@@ -290,24 +318,16 @@
         <BeforeAfter
           beforeImage={props.beforeImage}
           afterImage={props.afterImage}
-          beforeImageMobile={props.beforeImageMobile}
-          afterImageMobile={props.afterImageMobile}
           beforeLabel={props.beforeLabel || 'Antes'}
           afterLabel={props.afterLabel || 'Depois'}
           orientation={props.orientation || 'vertical'}
-          caption={props.caption}
-          credit={props.credit}
         />
 
       <!-- ScrollyTelling -->
       {:else if componentType === 'scrolly'}
         <ScrollyTelling
           steps={props.steps || []}
-          layout={props.layout || 'split'}
-          height={props.height}
-          mediaType={props.mediaType || 'flourish'}
-          flourishUrl={props.flourishUrl}
-          flourishHeight={props.flourishHeight}
+          fullWidth={stringToBoolean(props.fullWidth, false)}
         />
 
       <!-- 🆕 VIDEO SCROLLYTELLING -->
@@ -316,20 +336,17 @@
           videoSrc={props.videoSrc || props.src}
           videoSrcMobile={props.videoSrcMobile || props.srcMobile}
           steps={props.steps || []}
-          height={props.height || '300vh'}
-          videoAspectRatio={props.videoAspectRatio || props.aspectRatio || '16/9'}
-          fullWidth={props.fullWidth !== false}
-          autoplay={props.autoplay}
-          showControls={props.showControls}
-          showProgress={props.showProgress !== false}
-          showTime={props.showTime !== false}
+          height={props.height || '100vh'}
+          videoAspectRatio={props.videoAspectRatio || '16/9'}
+          showProgress={stringToBoolean(props.showProgress, false)}
+          showTime={stringToBoolean(props.showTime, false)}
+          showControls={stringToBoolean(props.showControls, false)}
         />
 
       <!-- Flourish Embed -->
       {:else if componentType === 'flourish'}
         <FlourishEmbed
           src={props.src}
-          url={props.url}
           height={props.height || '600px'}
           caption={props.caption}
           credit={props.credit}
@@ -339,15 +356,12 @@
       {:else if componentType === 'flourish-scrolly'}
         <FlourishScrolly
           src={props.src}
-          flourishUrl={props.flourishUrl}
           steps={props.steps || []}
-          flourishHeight={props.flourishHeight || '500px'}
-          layout={props.layout || 'split'}
         />
 
       <!-- Anchor Point -->
       {:else if componentType === 'anchor'}
-        <AnchorPoint id={props.id || props.text} />
+        <AnchorPoint id={props.id} />
 
       <!-- Fallback para tipos desconhecidos -->
       {:else}
@@ -359,37 +373,38 @@
     {/each}
   {/if}
 
-  <!-- Créditos finais -->
+  <!-- Renderizar créditos finais se existir -->
   {#if storyData.credits}
-    <FinalCredits 
-      notes={storyData.credits.notes}
-      sources={storyData.credits.sources}
-    />
+    <FinalCredits credits={storyData.credits} />
   {/if}
 </article>
 
 <style>
   .story-content {
+    max-width: none;
     width: 100%;
+  }
+
+  .section-content {
+    max-width: 800px;
     margin: 0 auto;
-    line-height: 1.6;
+    padding: 0 2rem;
   }
 
   .unknown-component {
-    background: #f5f5f5;
-    border: 2px dashed #ccc;
-    padding: 1rem;
-    margin: 1rem 0;
-    border-radius: 4px;
+    background: #f3f4f6;
+    border: 2px dashed #9ca3af;
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 800px;
+    border-radius: 8px;
   }
 
   .unknown-component pre {
-    background: #fff;
-    padding: 0.5rem;
+    background: #ffffff;
+    padding: 1rem;
     border-radius: 4px;
     overflow-x: auto;
-    font-size: 0.8rem;
-    max-height: 200px;
-    overflow-y: auto;
+    font-size: 0.875rem;
   }
 </style>

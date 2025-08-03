@@ -88,6 +88,21 @@ async function fetchGoogleDoc(docId) {
         }
       });
     }
+
+    // 🆕 MUDANÇA 2: Adicionar detecção de SectionWrapper
+    const sectionComponents = data.paragraphs?.filter(p => 
+      ['section', 'secao', 'section-wrapper', 'wrapper'].includes(p.type?.toLowerCase())
+    ) || [];
+    
+    if (sectionComponents.length > 0) {
+      console.log(`🗂️ SectionWrapper encontrados: ${sectionComponents.length}`);
+      sectionComponents.forEach((comp, index) => {
+        console.log(`  ${index + 1}. ID: ${comp.id || 'sem-id'} | Background: ${!!comp.backgroundImage} | Height: ${comp.height || 'auto'}`);
+        if (comp.children && comp.children.length > 0) {
+          console.log(`     Children: ${comp.children.length} componentes`);
+        }
+      });
+    }
     
     return data;
     
@@ -272,6 +287,73 @@ function parseParagraphsHTML(html) {
       paragraph.type = decodeHTMLEntities(typeMatch[1].trim());
     }
 
+    // 🆕 NOVO: Tratamento para SectionWrapper
+    if (['section', 'secao', 'section-wrapper', 'wrapper'].includes(paragraph.type?.toLowerCase())) {
+      const idMatch = block.match(/id:\s*([^\n<]+)/);
+      if (idMatch) {
+        paragraph.id = idMatch[1].trim();
+      }
+
+      const backgroundImageMatch = block.match(/backgroundImage:\s*([^\n<]+)/);
+      if (backgroundImageMatch) {
+        paragraph.backgroundImage = backgroundImageMatch[1].trim();
+      }
+
+      const backgroundImageMobileMatch = block.match(/backgroundImageMobile:\s*([^\n<]+)/);
+      if (backgroundImageMobileMatch) {
+        paragraph.backgroundImageMobile = backgroundImageMobileMatch[1].trim();
+      }
+
+      const backgroundPositionMatch = block.match(/backgroundPosition:\s*([^\n<]+)/);
+      if (backgroundPositionMatch) {
+        paragraph.backgroundPosition = backgroundPositionMatch[1].trim();
+      }
+
+      const backgroundPositionMobileMatch = block.match(/backgroundPositionMobile:\s*([^\n<]+)/);
+      if (backgroundPositionMobileMatch) {
+        paragraph.backgroundPositionMobile = backgroundPositionMobileMatch[1].trim();
+      }
+
+      const heightMatch = block.match(/height:\s*([^\n<]+)/);
+      if (heightMatch) {
+        paragraph.height = heightMatch[1].trim();
+      }
+
+      const heightMobileMatch = block.match(/heightMobile:\s*([^\n<]+)/);
+      if (heightMobileMatch) {
+        paragraph.heightMobile = heightMobileMatch[1].trim();
+      }
+
+      const paddingMatch = block.match(/padding:\s*([^\n<]+)/);
+      if (paddingMatch) {
+        paragraph.padding = paddingMatch[1].trim();
+      }
+
+      const paddingMobileMatch = block.match(/paddingMobile:\s*([^\n<]+)/);
+      if (paddingMobileMatch) {
+        paragraph.paddingMobile = paddingMobileMatch[1].trim();
+      }
+
+      const overlayMatch = block.match(/overlay:\s*([^\n<]+)/);
+      if (overlayMatch) {
+        paragraph.overlay = overlayMatch[1].trim();
+      }
+
+      const contentMatch = block.match(/content:\s*(.*?)(?=\s*(?:type:|$))/s);
+      if (contentMatch) {
+        paragraph.content = cleanAndFormatHTML(contentMatch[1].trim());
+      }
+
+      // Para futuro: children array (caso queira implementar)
+      const childrenMatch = block.match(/children:\s*(\[[\s\S]*?\])/);
+      if (childrenMatch) {
+        paragraph.children = parseJSONField(childrenMatch[1], 'section children');
+      }
+      
+      paragraphs.push(paragraph);
+      continue;
+    }
+
     if (['flourish', 'flourish-scrolly', 'grafico', 'mapa'].includes(paragraph.type)) {
       const srcMatch = block.match(/src:\s*([^\n<]+)/);
       if (srcMatch) {
@@ -288,7 +370,7 @@ function parseParagraphsHTML(html) {
     }
 
     // 🆕 MUDANÇA 2: Adicionar tratamento específico para VideoScrollytelling no regex do textMatch
-    const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:backgroundImage|backgroundImageMobile|backgroundVideo|backgroundVideoMobile|backgroundPosition|backgroundPositionMobile|author|role|src|videoSrc|videoSrcMobile|caption|credit|alt|fullWidth|variant|size|orientation|autoplay|controls|poster|images|items|steps|beforeImage|afterImage|beforeLabel|afterLabel|image|height|heightMobile|speed|content|overlay|layout|columns|interval|showDots|showArrows|stickyHeight|videoId|videosIDs|id|skipDFP|skipdfp|autoPlay|startMuted|maxQuality|quality|chromeless|isLive|live|allowRestrictedContent|preventBlackBars|globoId|token|adAccountId|adCmsId|siteName|width|textPosition|textPositionMobile|textAlign|textAlignMobile|title|subtitle|date|theme|videoAspectRatio|showProgress|showTime|showControls):|type:|$)/si);
+    const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:backgroundImage|backgroundImageMobile|backgroundVideo|backgroundVideoMobile|backgroundPosition|backgroundPositionMobile|author|role|src|videoSrc|videoSrcMobile|caption|credit|alt|fullWidth|variant|size|orientation|autoplay|controls|poster|images|items|steps|beforeImage|afterImage|beforeLabel|afterLabel|image|height|heightMobile|speed|content|overlay|layout|columns|interval|showDots|showArrows|stickyHeight|videoId|videosIDs|id|skipDFP|skipdfp|autoPlay|startMuted|maxQuality|quality|chromeless|isLive|live|allowRestrictedContent|preventBlackBars|globoId|token|adAccountId|adCmsId|siteName|width|textPosition|textPositionMobile|textAlign|textAlignMobile|title|subtitle|date|theme|videoAspectRatio|showProgress|showTime|showControls|padding|paddingMobile|children):|type:|$)/si);
     if (textMatch) {
       if (['texto', 'frase', 'intro'].includes(paragraph.type)) {
         paragraph.text = cleanAndFormatHTML(textMatch[1].trim());
@@ -297,7 +379,7 @@ function parseParagraphsHTML(html) {
       }
     }
     
-    const jsonFields = ['images', 'items', 'steps'];
+    const jsonFields = ['images', 'items', 'steps', 'children'];
     for (const field of jsonFields) {
       const regex = new RegExp(`${field}:\\s*(\\[[\\s\\S]*?\\])`, 'i');
       const match = block.match(regex);
@@ -306,7 +388,7 @@ function parseParagraphsHTML(html) {
       }
     }
 
-    // 🆕 MUDANÇA 3: Adicionar os novos campos do VideoScrollytelling no fieldMappings
+    // 🆕 MUDANÇA 3: Adicionar os novos campos do VideoScrollytelling + SectionWrapper no fieldMappings
     const fieldMappings = {
       title: 'title', subtitle: 'subtitle', date: 'date', theme: 'theme',
       backgroundImage: 'backgroundImage', backgroundImageMobile: 'backgroundImageMobile', backgroundVideo: 'backgroundVideo',
@@ -321,7 +403,9 @@ function parseParagraphsHTML(html) {
       chromeless: 'chromeless', isLive: 'isLive', live: 'live', allowRestrictedContent: 'allowRestrictedContent',
       preventBlackBars: 'preventBlackBars', globoId: 'globoId', token: 'token', adAccountId: 'adAccountId', adCmsId: 'adCmsId',
       siteName: 'siteName', width: 'width', height: 'height', heightMobile: 'heightMobile', showCaption: 'showCaption',
-      alignment: 'alignment', loop: 'loop', videoAspectRatio: 'videoAspectRatio', aspectRatio: 'aspectRatio', showProgress: 'showProgress', showTime: 'showTime', showControls: 'showControls'
+      alignment: 'alignment', loop: 'loop', videoAspectRatio: 'videoAspectRatio', aspectRatio: 'aspectRatio', 
+      showProgress: 'showProgress', showTime: 'showTime', showControls: 'showControls',
+      padding: 'padding', paddingMobile: 'paddingMobile' // 🆕 Campos do SectionWrapper
     };
     
     for (const [field, prop] of Object.entries(fieldMappings)) {

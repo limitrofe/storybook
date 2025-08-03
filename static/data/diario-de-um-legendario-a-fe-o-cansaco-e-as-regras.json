@@ -26,36 +26,98 @@
         {
           "title": "Abertura:Estabelecendo o Cenário",
           "text": "Nossa jornada começa do zero,apresentando o <strong>contexto inicial</strong> e estabelecendo as bases para tudo que será revelado.",
-          "time": 3
+          "time": 3,
+          "calculatedTime": 3,
+          "frameIndex": 30
         },
         {
           "title": "Primeiros Insights",
           "text": "Aos 60 segundos (0:02),começamos a desvendar os <em>primeiros elementos cruciais</em> que moldarão nossa compreensão.",
-          "time": 6
+          "time": 6,
+          "calculatedTime": 6,
+          "frameIndex": 60
         },
         {
           "title": "Desenvolvimento das Ideias",
           "text": "No minuto 0:02,as ideias ganham forma e começamos a ver <strong>conexões importantes</strong> entre os diferentes elementos.",
-          "time": 9
+          "time": 9,
+          "calculatedTime": 9,
+          "frameIndex": 90
         },
         {
           "title": "Momento de Transição",
           "text": "Aos 3 minutos,chegamos a um <em>ponto de virada fundamental</em> que redefine nossa perspectiva sobre o tema.",
-          "time": 15
+          "time": 15,
+          "calculatedTime": 15,
+          "frameIndex": 150
         },
         {
           "title": "Aprofundamento da Análise",
           "text": "No minuto 4:00,mergulhamos mais fundo na análise,explorando <strong>camadas mais complexas</strong> da narrativa.",
-          "time": 19
+          "time": 19,
+          "calculatedTime": 19,
+          "frameIndex": 190
         }
       ],
-      "videoSrc": "https://www.reuters.com/graphics/USA-TEMPERATURE/PRISONS/jnpwbejwlvw/cdn/videos/cell-render.mp4",
-      "videoSrcMobile": "https://www.reuters.com/graphics/USA-TEMPERATURE/PRISONS/jnpwbejwlvw/cdn/videos/cell-render-mobile.mp4",
-      "height": "250vh",
+      "videoSrc": "videos/videoscrolly_1_main.mp4",
+      "videoSrcMobile": "videos/videoscrolly_1_mobile.mp4",
+      "height": "400vh",
       "videoAspectRatio": "16/9",
       "showProgress": "true",
       "showTime": "true",
-      "showControls": "false"
+      "showControls": "false",
+      "fallbackFrames": [
+        {
+          "index": 0,
+          "time": 3,
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/videoscrolly_1_frame_001.jpg",
+          "alt": "Frame do vídeo aos 0:03"
+        },
+        {
+          "index": 1,
+          "time": 6,
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/videoscrolly_1_frame_002.jpg",
+          "alt": "Frame do vídeo aos 0:06"
+        },
+        {
+          "index": 2,
+          "time": 9,
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/videoscrolly_1_frame_003.jpg",
+          "alt": "Frame do vídeo aos 0:09"
+        },
+        {
+          "index": 3,
+          "time": 15,
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/videoscrolly_1_frame_004.jpg",
+          "alt": "Frame do vídeo aos 0:15"
+        },
+        {
+          "index": 4,
+          "time": 19,
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/videoscrolly_1_frame_005.jpg",
+          "alt": "Frame do vídeo aos 0:19"
+        }
+      ],
+      "videoMetadata": {
+        "duration": 20.416667,
+        "fps": 10,
+        "totalFrames": 205,
+        "interval": 0.09959349756097562,
+        "stepTimings": [
+          3,
+          6,
+          9,
+          15,
+          19
+        ]
+      },
+      "frameMetadata": {
+        "totalFrames": 5,
+        "generatedAt": "2025-08-03T04:02:12.770Z",
+        "videoSrc": "videos/videoscrolly_1_main.mp4",
+        "project": "newsroom-system-2024"
+      },
+      "posterImage": "https://picsum.photos/1920/1080?random=1"
     },
     {
       "type": "abre",
@@ -75,6 +137,8 @@
       "fullWidth": "true",
       "autoplay": "true",
       "videoId": "13789200",
+      "skipDFP": "true",
+      "skipdfp": "true",
       "autoPlay": "true",
       "showCaption": "true"
     },
@@ -145,8 +209,18 @@
     {
       "type": "intertitulo",
       "text": "Seção 1: Componentes de Texto",
-      "variant": "default",
-      "size": "medium"
+      "backgroundImage": "https://www.reuters.com/graphics/USA-TEMPERATURE/PRISONS/jnpwbejwlvw/cdn/images/graphics/ACdays-lg.png",
+      "backgroundImageMobile": "https://www.reuters.com/graphics/USA-TEMPERATURE/PRISONS/jnpwbejwlvw/cdn/images/graphics/ACdays-xs.png",
+      "backgroundPosition": "center bottom",
+      "backgroundPositionMobile": "center bottom",
+      "textPosition": "top",
+      "textPositionMobile": "center",
+      "textAlign": "left",
+      "textAlignMobile": "center",
+      "size": "large",
+      "overlay": "true",
+      "height": "1200px",
+      "heightMobile": "1250px"
     },
     {
       "type": "texto",
