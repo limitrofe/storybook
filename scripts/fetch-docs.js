@@ -79,12 +79,20 @@ async function fetchGoogleDoc(docId) {
       videoScrollyComponents.forEach((comp, index) => {
         const stepsCount = comp.steps?.length || 0;
         console.log(`  ${index + 1}. Steps: ${stepsCount} | VideoSrc: ${!!comp.videoSrc || !!comp.src} | Mobile: ${!!comp.videoSrcMobile || !!comp.srcMobile}`);
+        console.log(`     🖼️ ImagePrefix: ${comp.imagePrefix ? 'SIM' : 'NÃO'} | Mobile: ${comp.imagePrefixMobile ? 'SIM' : 'NÃO'} | Frames: ${comp.totalFrames || 0}`);
+        
         if (stepsCount === 0) {
           console.warn(`⚠️ VideoScrollyTelling sem steps: ${comp.text?.substring(0, 50)}...`);
         } else {
           comp.steps.forEach((step, stepIndex) => {
             console.log(`     Step ${stepIndex + 1}: "${step.title?.substring(0, 30)}..." | Time: ${step.time}s`);
           });
+        }
+        
+        // 🔍 Diagnóstico para iOS
+        if (!comp.imagePrefix && !comp.imagePrefixMobile && !comp.fallbackFrames?.length) {
+          console.warn(`⚠️ VideoScrollyTelling ${index + 1}: Sem imagens configuradas para iOS!`);
+          console.warn(`   Adicione: imagePrefix, imagePrefixMobile e totalFrames`);
         }
       });
     }
@@ -160,21 +168,18 @@ function parseHTMLFormat(html) {
       }
   });
 
-  // 5. Encontra o PRIMEIRO 'type: header' na lista de todos os blocos
-  const mainHeaderIndex = allBlocks.findIndex(block => block.type && block.type.toLowerCase() === 'header');
-
-  if (mainHeaderIndex !== -1) {
-    // 6. Tira ele da lista e usa para os metadados principais (data.title, etc.)
-    const [mainHeader] = allBlocks.splice(mainHeaderIndex, 1);
-    Object.assign(data, mainHeader);
-  } else {
-    // Se não achar um header, usa a lógica antiga como fallback para pegar pelo menos o título
-    console.warn('⚠️ Nenhum bloco `type: header` encontrado. Usando fallback para metadados.');
-    const titleMatch = html.match(/title:\s*([^<\n]+)/i);
-    if (titleMatch) data.title = decodeHTMLEntities(titleMatch[1].trim());
+  // 5. MUDANÇA: NÃO pegar automaticamente o primeiro header como metadados principais
+  // Deixar todos os headers ficarem nos paragraphs para evitar duplicação
+  
+  // 6. Buscar metadados apenas em blocos específicos de metadados (não em headers dos paragraphs)
+  const metaRegex = /(?:^|\n)\s*title:\s*([^<\n]+)/i;
+  const titleMatch = bodyContent.match(metaRegex);
+  if (titleMatch && !bodyContent.includes('type:')) {
+    // Só pega o title se não estiver dentro de um bloco com 'type:'
+    data.title = decodeHTMLEntities(titleMatch[1].trim());
   }
 
-  // 7. O que sobrou na lista vira o `paragraphs` do JSON
+  // 7. O que sobrou na lista vira o `paragraphs` do JSON (mantém TODOS os headers)
   data.paragraphs = allBlocks;
 
   const introIndex = data.paragraphs.findIndex(p => p.type === 'intro');
@@ -370,7 +375,7 @@ function parseParagraphsHTML(html) {
     }
 
     // 🆕 MUDANÇA 2: Adicionar tratamento específico para VideoScrollytelling no regex do textMatch
-    const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:backgroundImage|backgroundImageMobile|backgroundVideo|backgroundVideoMobile|backgroundPosition|backgroundPositionMobile|author|role|src|videoSrc|videoSrcMobile|caption|credit|alt|fullWidth|variant|size|orientation|autoplay|controls|poster|images|items|steps|beforeImage|afterImage|beforeLabel|afterLabel|image|height|heightMobile|speed|content|overlay|layout|columns|interval|showDots|showArrows|stickyHeight|videoId|videosIDs|id|skipDFP|skipdfp|autoPlay|startMuted|maxQuality|quality|chromeless|isLive|live|allowRestrictedContent|preventBlackBars|globoId|token|adAccountId|adCmsId|siteName|width|textPosition|textPositionMobile|textAlign|textAlignMobile|title|subtitle|date|theme|videoAspectRatio|showProgress|showTime|showControls|padding|paddingMobile|children):|type:|$)/si);
+    const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:backgroundImage|backgroundImageMobile|backgroundVideo|backgroundVideoMobile|backgroundPosition|backgroundPositionMobile|author|role|src|videoSrc|videoSrcMobile|caption|credit|alt|fullWidth|variant|size|orientation|autoplay|controls|poster|images|items|steps|beforeImage|afterImage|beforeLabel|afterLabel|image|height|heightMobile|speed|content|overlay|layout|columns|interval|showDots|showArrows|stickyHeight|videoId|videosIDs|id|skipDFP|skipdfp|autoPlay|startMuted|maxQuality|quality|chromeless|isLive|live|allowRestrictedContent|preventBlackBars|globoId|token|adAccountId|adCmsId|siteName|width|textPosition|textPositionMobile|textAlign|textAlignMobile|title|subtitle|date|theme|videoAspectRatio|showProgress|showTime|showControls|padding|paddingMobile|children|imagePrefix|imagePrefixMobile|totalFrames|preloadFrames|bufferSize|smoothTransition|lazyLoading|fallbackFrames|posterImage):|type:|$)/si);
     if (textMatch) {
       if (['texto', 'frase', 'intro'].includes(paragraph.type)) {
         paragraph.text = cleanAndFormatHTML(textMatch[1].trim());
@@ -379,7 +384,7 @@ function parseParagraphsHTML(html) {
       }
     }
     
-    const jsonFields = ['images', 'items', 'steps', 'children'];
+    const jsonFields = ['images', 'items', 'steps', 'children', 'fallbackFrames'];
     for (const field of jsonFields) {
       const regex = new RegExp(`${field}:\\s*(\\[[\\s\\S]*?\\])`, 'i');
       const match = block.match(regex);
@@ -405,7 +410,17 @@ function parseParagraphsHTML(html) {
       siteName: 'siteName', width: 'width', height: 'height', heightMobile: 'heightMobile', showCaption: 'showCaption',
       alignment: 'alignment', loop: 'loop', videoAspectRatio: 'videoAspectRatio', aspectRatio: 'aspectRatio', 
       showProgress: 'showProgress', showTime: 'showTime', showControls: 'showControls',
-      padding: 'padding', paddingMobile: 'paddingMobile' // 🆕 Campos do SectionWrapper
+      padding: 'padding', paddingMobile: 'paddingMobile', // 🆕 Campos do SectionWrapper
+      
+      // 🆕 CAMPOS NOVOS DO VIDEOSCROLLYTELLING:
+      imagePrefix: 'imagePrefix',
+      imagePrefixMobile: 'imagePrefixMobile', 
+      totalFrames: 'totalFrames',
+      preloadFrames: 'preloadFrames',
+      bufferSize: 'bufferSize',
+      smoothTransition: 'smoothTransition',
+      lazyLoading: 'lazyLoading',
+      posterImage: 'posterImage'
     };
     
     for (const [field, prop] of Object.entries(fieldMappings)) {

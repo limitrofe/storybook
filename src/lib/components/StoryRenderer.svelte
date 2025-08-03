@@ -131,12 +131,24 @@
     // Converter strings para booleanos onde necessário
     const booleanFields = [
       'fullWidth', 'autoplay', 'controls', 'loop', 'showCaption', 'autoPlay',
-      'overlay', 'lightbox', 'masonry', 'showControls', 'showProgress', 'showTime'
+      'overlay', 'lightbox', 'masonry', 'showControls', 'showProgress', 'showTime',
+      'smoothTransition', 'lazyLoading', 'skipDFP', 'chromeless', 'startMuted'
     ];
     
     booleanFields.forEach(field => {
       if (props[field] !== undefined) {
         props[field] = stringToBoolean(props[field]);
+      }
+    });
+
+    // 🆕 Converter strings para números onde necessário
+    const numberFields = [
+      'columns', 'interval', 'speed', 'totalFrames', 'preloadFrames', 'bufferSize'
+    ];
+    
+    numberFields.forEach(field => {
+      if (props[field] !== undefined && !isNaN(props[field])) {
+        props[field] = parseFloat(props[field]);
       }
     });
 
@@ -330,17 +342,26 @@
           fullWidth={stringToBoolean(props.fullWidth, false)}
         />
 
-      <!-- 🆕 VIDEO SCROLLYTELLING -->
+      <!-- 🆕 VIDEO SCROLLYTELLING - VERSÃO COMPLETA E CORRIGIDA -->
       {:else if componentType === 'video-scrolly'}
         <VideoScrollytelling
           videoSrc={props.videoSrc || props.src}
           videoSrcMobile={props.videoSrcMobile || props.srcMobile}
           steps={props.steps || []}
-          height={props.height || '100vh'}
-          videoAspectRatio={props.videoAspectRatio || '16/9'}
-          showProgress={stringToBoolean(props.showProgress, false)}
-          showTime={stringToBoolean(props.showTime, false)}
+          height={props.height || '300vh'}
+          fullWidth={stringToBoolean(props.fullWidth, true)}
+          showProgress={stringToBoolean(props.showProgress, true)}
+          showTime={stringToBoolean(props.showTime, true)}
           showControls={stringToBoolean(props.showControls, false)}
+          fallbackFrames={props.fallbackFrames || []}
+          posterImage={props.posterImage || props.poster}
+          imagePrefix={props.imagePrefix || ''}
+          imagePrefixMobile={props.imagePrefixMobile || ''}
+          totalFrames={parseInt(props.totalFrames) || 0}
+          preloadFrames={parseInt(props.preloadFrames) || 5}
+          bufferSize={parseInt(props.bufferSize) || 10}
+          smoothTransition={stringToBoolean(props.smoothTransition, true)}
+          lazyLoading={stringToBoolean(props.lazyLoading, true)}
         />
 
       <!-- Flourish Embed -->
