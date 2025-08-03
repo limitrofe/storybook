@@ -1,8 +1,9 @@
+<!-- VideoScrollytelling.svelte - Versão Simples e Funcional -->
 <script>
   import { onMount, onDestroy } from 'svelte';
   import { browser } from '$app/environment';
   
-  // Props
+  // Props principais
   export let videoSrc = '';
   export let videoSrcMobile = '';
   export let steps = [];
@@ -10,8 +11,7 @@
   export let fullWidth = true;
   export let showProgress = true;
   export let showTime = true;
-  export let fallbackFrames = []; // Ex: [{ src: '/frames/001.jpg', time: 0.04 }, ...]
-  export let videoMetadata = null;
+  export let fallbackFrames = [];
   export let posterImage = '';
   
   // Estados
@@ -20,8 +20,8 @@
   let currentStep = 0;
   let scrollProgress = 0;
   let isReady = false;
-  let useVideoFallback = false; // Flag para forçar fallback se o vídeo falhar
-  let isVisible = false;
+  let useVideoFallback = false;
+  let userInteracted = false;
   
   // Detecção de dispositivo
   let isIOS = false;
@@ -30,64 +30,45 @@
   // Scroll handling
   let scrollHandler;
   let ticking = false;
-  
-  onMount(() => {
-    // A detecção de dispositivo só pode ocorrer no cliente
-    isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
-           (navigator.userAgent.includes('Mac') && 'ontouchend' in document);
+
+  $: if (browser) {
+    isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     isMobile = window.innerWidth <= 768 || isIOS;
     
-    console.log('🔍 Device detection:', { isIOS, isMobile });
-
-    setupScrollListener();
-    initializeStrategy();
-    
-    // Marcar como pronto
-    setTimeout(() => { isReady = true; }, 100);
-  });
-  
-  onDestroy(() => {
-    if (scrollHandler) {
-      window.removeEventListener('scroll', scrollHandler);
-    }
-  });
-
-  // --- Lógica Reativa ---
-
-  // 🎯 CORREÇÃO 1: Lógica de decisão mais precisa
-  // Usaremos o fallback se:
-  // 1. O vídeo falhar explicitamente (useVideoFallback = true).
-  // 2. Estamos no iOS E temos frames de fallback para mostrar.
-  // 3. Nenhuma fonte de vídeo foi fornecida, mas temos frames.
-  $: shouldUseFallback = useVideoFallback || 
-                        (isIOS && fallbackFrames.length > 0) ||
-                        (!actualVideoSrc && fallbackFrames.length > 0);
-
-  $: actualVideoSrc = (isMobile && videoSrcMobile) ? videoSrcMobile : videoSrc;
-  
-  // Log para debug da estratégia
-  $: if (browser) {
-    console.log('🎬 Strategy decision:', {
-      isIOS,
-      shouldUseFallback,
-      hasVideoSrc: !!actualVideoSrc,
-      hasFallbackFrames: fallbackFrames.length > 0
+    // 🎯 FORÇAR iOS para debug
+    console.log('🔍 Device:', {
+      userAgent: navigator.userAgent,
+      isIOS: isIOS,
+      isMobile: isMobile,
+      fallbackFrames: fallbackFrames.length
     });
   }
   
-  // Calcular step atual baseado no progresso
+  // Escolher estratégia
+  $: actualVideoSrc = (isMobile && videoSrcMobile) ? videoSrcMobile : videoSrc;
+  $: shouldUseFallback = isIOS || useVideoFallback || !actualVideoSrc;
+  
+  // Step atual
   $: if (steps.length > 0) {
     const stepIndex = Math.floor(scrollProgress * steps.length);
     currentStep = Math.min(stepIndex, steps.length - 1);
   }
   
-  // Calcular posição e opacidade dos steps
+  // Frame atual para fallback
+  $: currentFrame = shouldUseFallback && fallbackFrames.length > 0 
+    ? fallbackFrames[Math.floor(scrollProgress * (fallbackFrames.length - 1))]
+    : null;
+    
+  // Imagem para mostrar (poster ou frame atual)
+  $: displayImage = currentFrame?.src || posterImage || (fallbackFrames.length > 0 ? fallbackFrames[0].src : null);
+  
+  // Posições dos steps
   $: stepPositions = steps.map((_, index) => {
     const stepProgress = scrollProgress * steps.length;
     const stepStart = index;
     const stepEnd = index + 1;
-    let localProgress = 0;
     
+    let localProgress = 0;
     if (stepProgress >= stepStart && stepProgress <= stepEnd) {
       localProgress = stepProgress - stepStart;
     } else if (stepProgress > stepEnd) {
@@ -97,64 +78,47 @@
     let yPosition = 150 - (localProgress * 200);
     let opacity = 0;
     
-    if (localProgress > 0 && localProgress < 1) {
-      if (localProgress <= 0.1) opacity = localProgress * 10;
-      else if (localProgress >= 0.9) opacity = (1 - localProgress) * 10;
-      else opacity = 1;
+    if (localProgress >= 0 && localProgress <= 1) {
+      if (localProgress <= 0.1) {
+        opacity = localProgress * 10;
+      } else if (localProgress >= 0.9) {
+        opacity = (1 - localProgress) * 10;
+      } else {
+        opacity = 1;
+      }
     }
     
-    if (stepProgress > stepEnd) yPosition = -50;
-    if (stepProgress < stepStart) yPosition = 150;
+    if (stepProgress > stepEnd) {
+      yPosition = -50;
+      opacity = 0;
+    }
+    
+    if (stepProgress < stepStart) {
+      yPosition = 150;
+      opacity = 0;
+    }
     
     return {
-      yPosition,
+      yPosition: yPosition,
       opacity: Math.max(0, Math.min(1, opacity)),
       isActive: localProgress > 0.1 && localProgress < 0.9
     };
   });
+
+  onMount(() => {
+    setupScrollListener();
+    
+    setTimeout(() => {
+      isReady = true;
+    }, 500);
+  });
   
-  // Selecionar o frame de imagem correto para o fallback
-  $: currentFallbackFrame = (() => {
-    if (!shouldUseFallback || fallbackFrames.length === 0) return null;
-    
-    const progress = Math.max(0, Math.min(1, scrollProgress));
-    
-    if (videoMetadata && videoMetadata.duration) {
-      // Lógica de tempo preciso se metadados existem
-      const currentTime = progress * videoMetadata.duration;
-      let closestFrame = fallbackFrames[0];
-      let minDiff = Math.abs(currentTime - (closestFrame.time || 0));
-      for (const frame of fallbackFrames) {
-        const diff = Math.abs(currentTime - (frame.time || 0));
-        if (diff < minDiff) {
-          minDiff = diff;
-          closestFrame = frame;
-        }
-      }
-      return closestFrame;
-    } else {
-      // Fallback para índice simples
-      const frameIndex = Math.floor(progress * (fallbackFrames.length - 1));
-      return fallbackFrames[frameIndex];
+  onDestroy(() => {
+    if (scrollHandler) {
+      window.removeEventListener('scroll', scrollHandler);
     }
-  })();
-    
-  // Determinar qual imagem exibir (poster, primeiro frame, ou frame atual)
-  $: displayImage = (() => {
-    if (shouldUseFallback) {
-      // Se estamos scrollando e temos um frame atual, use-o
-      if (scrollProgress > 0 && currentFallbackFrame) return currentFallbackFrame.src;
-      // Caso contrário, use o poster se existir
-      if (posterImage) return posterImage;
-      // Se não, use o primeiro frame da sequência como imagem inicial
-      if (fallbackFrames.length > 0) return fallbackFrames[0].src;
-    }
-    // Para o modo vídeo, o poster é tratado pelo atributo `poster` da tag <video>
-    return posterImage;
-  })();
-
-  // --- Funções ---
-
+  });
+  
   function setupScrollListener() {
     scrollHandler = () => {
       if (!ticking) {
@@ -162,12 +126,12 @@
         ticking = true;
       }
     };
+    
     window.addEventListener('scroll', scrollHandler, { passive: true });
-    handleScroll(); // Chamar uma vez para definir o estado inicial
   }
   
   function handleScroll() {
-    if (!containerElement) {
+    if (!containerElement || !isReady) {
       ticking = false;
       return;
     }
@@ -175,47 +139,52 @@
     const rect = containerElement.getBoundingClientRect();
     const windowHeight = window.innerHeight;
     const sectionHeight = containerElement.offsetHeight;
+    
     const startY = 0;
     const endY = -(sectionHeight - windowHeight);
+    const currentY = rect.top;
     
-    let newProgress = (startY - rect.top) / (startY - endY);
+    let newProgress = 0;
+    if (currentY <= startY && currentY >= endY) {
+      newProgress = Math.abs(currentY - startY) / Math.abs(endY - startY);
+    } else if (currentY > startY) {
+      newProgress = 0;
+    } else {
+      newProgress = 1;
+    }
+    
     scrollProgress = Math.max(0, Math.min(1, newProgress));
     
-    isVisible = rect.bottom > 0 && rect.top < windowHeight;
-    
-    // Atualizar vídeo apenas se estivermos usando a estratégia de vídeo
+    // Atualizar vídeo se não estiver em fallback
     if (!shouldUseFallback && videoElement && videoElement.duration) {
       const targetTime = scrollProgress * videoElement.duration;
-      if (Math.abs(videoElement.currentTime - targetTime) > 0.1) {
-        videoElement.currentTime = targetTime;
+      if (Math.abs(videoElement.currentTime - targetTime) > 0.2) {
+        if (!videoElement.paused) {
+          videoElement.pause();
+        }
+        try {
+          videoElement.currentTime = targetTime;
+        } catch (error) {
+          // Ignorar erros de currentTime
+        }
       }
     }
     
     ticking = false;
   }
   
-  function initializeStrategy() {
-    if (shouldUseFallback) {
-      console.log('📱 Usando fallback de imagens para iOS ou por falta de vídeo.');
-    } else if (videoElement) {
-      console.log('🎥 Usando vídeo HTML5.');
-      videoElement.addEventListener('loadedmetadata', () => {
-        console.log('✅ Metadados do vídeo carregados.');
-        handleScroll(); // Atualizar para o frame correto no carregamento
-      });
-      videoElement.addEventListener('error', (e) => {
-        console.error('❌ Erro ao carregar o vídeo. Tentando usar fallback.', e);
-        useVideoFallback = true;
-      });
-      // Garantir que o vídeo não reproduza sozinho
-      videoElement.addEventListener('play', (e) => {
-        if (videoElement.readyState >= 2) {
-            videoElement.pause();
-        }
-      });
+  function handleUserInteraction() {
+    if (!userInteracted) {
+      userInteracted = true;
+      
+      if (!shouldUseFallback && videoElement) {
+        videoElement.pause();
+        videoElement.muted = true;
+        videoElement.currentTime = scrollProgress * (videoElement.duration || 0);
+      }
     }
   }
-
+  
   function formatTime(seconds) {
     const mins = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);
@@ -226,48 +195,101 @@
 <section 
   class="video-scrollytelling"
   class:full-width={fullWidth}
-  style:height
+  style="height: {height};"
   bind:this={containerElement}
+  on:touchstart={handleUserInteraction}
+  on:click={handleUserInteraction}
 >
+  <!-- Media Container - STICKY -->
   <div class="media-container">
-    {#if shouldUseFallback}
+    
+    <!-- Debug temporário - SEMPRE visível -->
+    <div class="debug-overlay">
+      <div>iOS: {isIOS ? 'SIM' : 'NÃO'}</div>
+      <div>Mobile: {isMobile ? 'SIM' : 'NÃO'}</div>
+      <div>Fallback: {shouldUseFallback ? 'SIM' : 'NÃO'}</div>
+      <div>Frames: {fallbackFrames.length}</div>
+      <div>Progress: {Math.round(scrollProgress * 100)}%</div>
+      <div>Display: {displayImage ? 'SIM' : 'NÃO'}</div>
       {#if displayImage}
-        <img
-          src={displayImage}
-          alt={currentFallbackFrame?.alt || 'Cena do scrollytelling'}
-          class="fallback-image"
-          class:visible={isReady}
-        />
-      {:else}
-        <div class="placeholder"><span>Modo Fallback: Nenhuma imagem fornecida.</span></div>
+        <div style="font-size: 10px; word-break: break-all;">URL: {displayImage.substring(0, 50)}...</div>
       {/if}
-
-    {:else if actualVideoSrc}
+    </div>
+    
+    <!-- Vídeo (desktop/android) -->
+    {#if !shouldUseFallback && actualVideoSrc}
       <video
         bind:this={videoElement}
         src={actualVideoSrc}
-        poster={posterImage || null}
+        poster={displayImage}
         muted
         playsinline
-        preload="auto"
+        webkit-playsinline="true"
+        preload="metadata"
         class="scroll-video"
-        class:visible={isReady}
+        autoplay={false}
+        loop={false}
       >
         <track kind="captions" />
       </video>
-
-    {:else}
-      <div class="placeholder"><span>🎬 Conteúdo de vídeo ou fallback não encontrado.</span></div>
+    {/if}
+    
+    <!-- 🎯 TESTE: FORÇAR IMAGEM SEMPRE (independente de iOS) -->
+    {#if fallbackFrames && fallbackFrames.length > 0}
+      {@const testImage = fallbackFrames[0].src}
+      <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: {isIOS ? 20 : 5}; background: blue;">
+        <img
+          src={testImage}
+          alt="TESTE FORÇADO"
+          style="width: 100%; height: 100%; object-fit: cover;"
+          on:load={() => console.log('✅ TESTE: Imagem carregou!', testImage)}
+          on:error={(e) => console.log('❌ TESTE: Erro na imagem', testImage, e)}
+        />
+        <div style="position: absolute; top: 10px; right: 10px; background: rgba(255,0,0,0.8); color: white; padding: 5px; font-size: 12px;">
+          {isIOS ? 'iOS TESTE' : 'DESKTOP TESTE'}
+        </div>
+      </div>
+    {/if}
+    
+    <!-- Placeholder -->
+    {#if !displayImage && !actualVideoSrc}
+      <div class="placeholder">
+        <div class="placeholder-content">
+          <p>🎬 VideoScrollytelling</p>
+          <p>iOS: {isIOS ? 'Detectado' : 'Não detectado'}</p>
+          <p>Frames: {fallbackFrames.length}</p>
+        </div>
+      </div>
+    {/if}
+    
+    <!-- iOS Play Button -->
+    {#if isIOS && !userInteracted && !shouldUseFallback}
+      <div class="ios-prompt">
+        <button 
+          class="play-button"
+          on:click={handleUserInteraction}
+        >
+          <svg width="60" height="60" viewBox="0 0 60 60">
+            <circle cx="30" cy="30" r="30" fill="rgba(0,0,0,0.7)"/>
+            <polygon points="22,18 22,42 42,30" fill="white"/>
+          </svg>
+          <span>Toque para iniciar</span>
+        </button>
+      </div>
     {/if}
   </div>
   
+  <!-- Steps Container - TAMBÉM STICKY -->
   <div class="steps-container">
     {#each steps as step, index}
       <div 
         class="step"
         class:active={stepPositions[index]?.isActive}
-        style:transform="translateY({stepPositions[index]?.yPosition}vh)"
-        style:opacity={stepPositions[index]?.opacity}
+        class:visible={isReady}
+        style="
+          transform: translateY({stepPositions[index]?.yPosition || 150}vh);
+          opacity: {stepPositions[index]?.opacity || 0};
+        "
       >
         <div class="step-content">
           <div class="step-number">{index + 1}</div>
@@ -281,40 +303,29 @@
     {/each}
   </div>
   
-  {#if showProgress}
+  <!-- Progress Bar -->
+  {#if showProgress && isReady}
     <div class="progress-bar">
-      <div class="progress-fill" style:width="{scrollProgress * 100}%"></div>
-    </div>
-  {/if}
-  
-  {#if import.meta.env.DEV}
-    <div class="debug-info">
-      <p>Strategy: {shouldUseFallback ? '🖼️ Fallback' : '🎥 Video'}</p>
-      <p>Progress: {Math.round(scrollProgress * 100)}%</p>
-      <p>Step: {currentStep + 1}/{steps.length}</p>
-      {#if !shouldUseFallback && videoElement}
-        <p>Video Time: {videoElement?.currentTime?.toFixed(2) || 0}s</p>
-      {/if}
-      {#if shouldUseFallback && currentFallbackFrame}
-        <p>Frame Index: {fallbackFrames.indexOf(currentFallbackFrame)}</p>
-      {/if}
+      <div 
+        class="progress-fill" 
+        style="width: {scrollProgress * 100}%"
+      ></div>
     </div>
   {/if}
 </section>
 
 <style>
-  :root {
-    --step-transition-speed: 0.3s;
-  }
   .video-scrollytelling {
     position: relative;
     width: 100%;
     background: #000;
   }
+  
   .video-scrollytelling.full-width {
     width: 100vw;
     margin-left: calc(-50vw + 50%);
   }
+  
   .media-container {
     position: sticky;
     top: 0;
@@ -324,112 +335,189 @@
     z-index: 1;
     background: #000;
   }
+  
   .scroll-video,
   .fallback-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0;
-    transition: opacity 0.5s ease;
+    display: block;
   }
-  .scroll-video.visible,
-  .fallback-image.visible {
-    opacity: 1;
-  }
+  
   .placeholder {
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: #111;
     color: #666;
-    font-family: monospace;
   }
-  .steps-container {
+  
+  .placeholder-content {
+    text-align: center;
+  }
+  
+  .placeholder-content p {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+  }
+  
+  .ios-prompt {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 10;
-    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 5;
   }
-  .step {
+  
+  .play-button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1rem;
+  }
+  
+  .steps-container {
     position: sticky;
     top: 0;
-    left: 0;
     width: 100%;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 10;
+  }
+  
+  .step {
+    position: absolute;
+    top: 0;
+    left: 2rem;
+    right: 2rem;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    padding: 2rem;
-    transition: opacity var(--step-transition-speed) ease, transform var(--step-transition-speed) ease;
+    pointer-events: none;
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out;
   }
+  
   .step-content {
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.85);
     backdrop-filter: blur(10px);
     color: white;
     padding: 2rem;
     border-radius: 12px;
-    max-width: 450px;
-    pointer-events: all;
+    max-width: 500px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
+  
   .step-number {
-    background: #4A5568;
+    display: inline-block;
+    background: linear-gradient(135deg, #667eea, #764ba2);
     color: white;
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    display: grid;
-    place-items: center;
+    text-align: center;
+    line-height: 30px;
     font-weight: bold;
     margin-bottom: 1rem;
     font-size: 14px;
   }
+  
   .step-content h3 {
     margin: 0 0 1rem 0;
     font-size: 1.5rem;
+    font-weight: bold;
+    line-height: 1.3;
   }
+  
   .step-text {
     line-height: 1.6;
+    margin-bottom: 1rem;
   }
+  
+  .step-text :global(strong) {
+    color: #ffd700;
+  }
+  
+  .step-text :global(em) {
+    color: #87ceeb;
+  }
+  
   .step-time {
-    margin-top: 1rem;
-    font-family: monospace;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 0.25rem 0.75rem;
-    border-radius: 99px;
-    font-size: 0.9rem;
     display: inline-block;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-family: monospace;
   }
+  
   .progress-bar {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
     height: 4px;
-    background: rgba(255, 255, 255, 0.2);
-    z-index: 20;
-    pointer-events: none;
+    background: rgba(255, 255, 255, 0.3);
+    z-index: 15;
   }
+  
   .progress-fill {
     height: 100%;
-    background: white;
-    width: 0;
-    transition: width 0.1s linear;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    transition: width 0.1s ease;
   }
-  .debug-info {
-    position: fixed; top: 1rem; right: 1rem; background: rgba(0,0,0,0.8); color: white; padding: 1rem; border-radius: 8px; font-size: 12px; font-family: monospace; z-index: 99; border: 1px solid #333;
+  
+  .debug-overlay {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px;
+    font-size: 12px;
+    z-index: 100;
+    border-radius: 4px;
   }
+  
+  .debug-overlay div {
+    margin: 2px 0;
+  }
+  
+  /* Mobile */
   @media (max-width: 768px) {
-    .step { padding: 1rem; }
-    .step-content { max-width: 100%; padding: 1.5rem; }
-    .step-content h3 { font-size: 1.25rem; }
+    .step {
+      left: 1rem;
+      right: 1rem;
+    }
+    
+    .step-content {
+      padding: 1.5rem;
+    }
+    
+    .step-content h3 {
+      font-size: 1.25rem;
+    }
   }
+  
+  /* Accessibility */
   @media (prefers-reduced-motion: reduce) {
-    .step { transition: none; }
-    .progress-fill { transition: none; }
+    .step,
+    .progress-fill,
+    .play-button {
+      transition: none;
+    }
   }
 </style>
