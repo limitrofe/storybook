@@ -1,4 +1,3 @@
-// scripts/fetch-docs.js - COMPLETO com ScrollyFrames
 import axios from 'axios';
 import fs from 'fs/promises';
 import path from 'path';
@@ -20,21 +19,22 @@ async function fetchGoogleDoc(docId) {
     
     let rawHtml = response.data.trim();
     
-    // Parse do HTML
     const data = parseHTMLFormat(rawHtml);
     
-    // Buscar título se não encontrou
     if (!data.title) {
-      console.log('🔍 Título não encontrado no conteúdo, buscando na tag <title>...');
-      data.title = extractTitleFromHTML(rawHtml);
+      console.warn('⚠️  Aviso: O campo "title" não foi encontrado nos metadados do topo. O sistema irá procurar por um componente `type: header` nos parágrafos.');
     }
     
-    // Gerar slug baseado no título
     if (!data.slug) {
-      data.slug = generateSlug(data.title || `doc-${Date.now()}`);
+      data.slug = (data.title || `doc-${Date.now()}`)
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .substring(0, 50);
     }
     
-    // Salvar arquivo
     const outputDir = path.join(__dirname, '../static/data');
     await fs.mkdir(outputDir, { recursive: true });
     
@@ -44,27 +44,12 @@ async function fetchGoogleDoc(docId) {
     await fs.writeFile(filepath, JSON.stringify(data, null, 2));
     
     console.log(`\n✅ Sucesso! Arquivo salvo: ${filename}`);
-    console.log(`📝 Título: ${data.title || 'Não encontrado'}`);
-    console.log(`🔗 Slug: ${data.slug}`);
+    console.log(`📝 Título: ${data.title}`);
     console.log(`📊 Intro: ${data.intro ? 'OK' : 'Vazio'}`);
     console.log(`📊 Paragraphs: ${data.paragraphs ? data.paragraphs.length : 0} itens`);
     console.log(`📝 Créditos: ${data.credits ? 'OK' : 'Vazio'}`);
 
-    // Debug para ScrollyFrames
-    const scrollyFramesComponents = data.paragraphs?.filter(p => 
-      p.type?.toLowerCase() === 'scrollyframes'
-    ) || [];
-    
-    if (scrollyFramesComponents.length > 0) {
-      console.log(`🎬 ScrollyFrames encontrados: ${scrollyFramesComponents.length}`);
-      scrollyFramesComponents.forEach((comp, index) => {
-        const stepsCount = comp.steps?.length || 0;
-        console.log(`  ${index + 1}. Frames: ${comp.frameStart || 1}-${comp.frameStop || 'N/A'} | Prefix: ${comp.imagePrefix ? '✅' : '❌'}`);
-        console.log(`     Steps: ${stepsCount} | FullWidth: ${comp.fullWidth !== false}`);
-      });
-    }
-
-    // Debug para ScrollyTelling normal
+    // ScrollyTelling tradicional
     const scrollyComponents = data.paragraphs?.filter(p => 
       ['scrollytelling', 'scrolly'].includes(p.type?.toLowerCase())
     ) || [];
@@ -74,92 +59,64 @@ async function fetchGoogleDoc(docId) {
       scrollyComponents.forEach((comp, index) => {
         const stepsCount = comp.steps?.length || 0;
         console.log(`  ${index + 1}. Steps: ${stepsCount} | FullWidth: ${comp.fullWidth || 'false'}`);
+        if (stepsCount === 0) {
+          console.warn(`⚠️ ScrollyTelling sem steps: ${comp.text?.substring(0, 50)}...`);
+        } else {
+          comp.steps.forEach((step, stepIndex) => {
+            console.log(`     Step ${stepIndex + 1}: "${step.title?.substring(0, 30)}..." | Imagem: ${!!step.image} | Vídeo: ${!!step.video}`);
+          });
+        }
       });
     }
+
+    // 🆕 ScrollyFrames (novo)
+    const scrollyFramesComponents = data.paragraphs?.filter(p => 
+      p.type?.toLowerCase() === 'scrollyframes'
+    ) || [];
     
-    console.log('\n🎮 Para testar:');
-    console.log(`1. npm run dev`);
-    console.log(`2. Abrir: http://localhost:5173/${data.slug}`);
+    if (scrollyFramesComponents.length > 0) {
+      console.log(`🎬 ScrollyFrames encontrados: ${scrollyFramesComponents.length}`);
+      scrollyFramesComponents.forEach((comp, index) => {
+        const stepsCount = comp.steps?.length || 0;
+        console.log(`  ${index + 1}. Frames: ${comp.frameStart || 1}-${comp.frameStop || 'N/A'} | Steps: ${stepsCount}`);
+        console.log(`     Prefix: ${comp.imagePrefix ? '✅' : '❌'} | Mobile: ${comp.imagePrefixMobile ? '✅' : '❌'}`);
+        console.log(`     Progress: ${comp.showProgress !== false} | Time: ${comp.showTime !== false}`);
+        if (stepsCount > 0) {
+          comp.steps.forEach((step, stepIndex) => {
+            console.log(`     Step ${stepIndex + 1}: "${step.title?.substring(0, 30)}..." | Frames: ${step.startFrame}-${step.endFrame}`);
+          });
+        }
+      });
+    }
+
+    // VideoScrollyTelling 
+    const videoScrollyComponents = data.paragraphs?.filter(p => 
+      ['videoscrollytelling', 'video-scrollytelling', 'videoscrolly', 'video-scrolly'].includes(p.type?.toLowerCase())
+    ) || [];
+    
+    if (videoScrollyComponents.length > 0) {
+      console.log(`🎥 VideoScrollyTelling encontrados: ${videoScrollyComponents.length}`);
+      videoScrollyComponents.forEach((comp, index) => {
+        const stepsCount = comp.steps?.length || 0;
+        console.log(`  ${index + 1}. Steps: ${stepsCount} | VideoSrc: ${!!comp.videoSrc || !!comp.src} | Mobile: ${!!comp.videoSrcMobile || !!comp.srcMobile}`);
+        if (stepsCount === 0) {
+          console.warn(`⚠️ VideoScrollyTelling sem steps: ${comp.text?.substring(0, 50)}...`);
+        } else {
+          comp.steps.forEach((step, stepIndex) => {
+            console.log(`     Step ${stepIndex + 1}: "${step.title?.substring(0, 30)}..." | Time: ${step.time}s`);
+          });
+        }
+      });
+    }
     
     return data;
     
   } catch (error) {
     console.error(`❌ Erro: ${error.message}`);
-    console.error('Stack:', error.stack);
     process.exit(1);
   }
 }
 
-/**
- * Extrair título da tag <title> do HTML
- */
-function extractTitleFromHTML(html) {
-  // 1. Tentar pegar da tag <title>
-  const titleMatch = html.match(/<title[^>]*>(.*?)<\/title>/i);
-  if (titleMatch) {
-    let title = titleMatch[1].trim();
-    
-    // Limpar sufixos comuns do Google Docs
-    title = title.replace(/\s*-\s*Google\s*(Docs|Drive)$/i, '');
-    title = title.replace(/\s*-\s*Documentos\s*Google$/i, '');
-    
-    if (title && title.length > 0) {
-      console.log(`📄 Título extraído da tag <title>: "${title}"`);
-      return decodeHTMLEntities(title);
-    }
-  }
-  
-  // 2. Tentar pegar do primeiro h1
-  const h1Match = html.match(/<h1[^>]*>(.*?)<\/h1>/i);
-  if (h1Match) {
-    const h1Title = h1Match[1].replace(/<[^>]*>/g, '').trim();
-    if (h1Title && h1Title.length > 0) {
-      console.log(`📄 Título extraído do H1: "${h1Title}"`);
-      return decodeHTMLEntities(h1Title);
-    }
-  }
-  
-  // 3. Tentar pegar texto em destaque no início do documento
-  const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-  if (bodyMatch) {
-    const bodyContent = bodyMatch[1];
-    
-    // Procurar por texto grande/destacado no início
-    const largeTextMatch = bodyContent.match(/<[^>]*(?:font-size:\s*(?:2[0-9]|[3-9][0-9]|1[0-9][0-9])(?:px|pt)|font-weight:\s*(?:bold|[7-9]00))[^>]*>(.*?)<\/[^>]*>/i);
-    if (largeTextMatch) {
-      const largeTitle = largeTextMatch[1].replace(/<[^>]*>/g, '').trim();
-      if (largeTitle && largeTitle.length > 0 && largeTitle.length < 100) {
-        console.log(`📄 Título extraído do texto destacado: "${largeTitle}"`);
-        return decodeHTMLEntities(largeTitle);
-      }
-    }
-  }
-  
-  console.warn('⚠️ Não foi possível extrair título do documento');
-  return null;
-}
-
-/**
- * Gerar slug limpo e amigável
- */
-function generateSlug(title) {
-  if (!title) return `doc-${Date.now()}`;
-  
-  return title
-    .toLowerCase()
-    .normalize('NFD') // Normalizar acentos
-    .replace(/[\u0300-\u036f]/g, '') // Remover acentos
-    .replace(/[^a-z0-9\s-]/g, '') // Manter apenas letras, números, espaços e hífens
-    .replace(/\s+/g, '-') // Espaços → hífens
-    .replace(/-+/g, '-') // Múltiplos hífens → um hífen
-    .replace(/^-|-$/g, '') // Remover hífens do início/fim
-    .substring(0, 50) // Limitar tamanho
-    .replace(/-$/, ''); // Remover hífen final se sobrou
-}
-
-/**
- * Parse principal do HTML
- */
 function parseHTMLFormat(html) {
   html = html.replace(/<style[^>]*>.*?<\/style>/gs, '');
   html = html.replace(/<script[^>]*>.*?<\/script>/gs, '');
@@ -182,60 +139,61 @@ function parseHTMLFormat(html) {
   const potentialMetaContent = bodyContent.replace(blockRegex, '').trim();
   const blocks = [...bodyContent.matchAll(blockRegex)];
   
-  // 3. Adiciona o conteúdo solto à lista para ser parseado
+  // 3. Adiciona o conteúdo solto (que deve ser seu header principal) à lista para ser parseado
   if (potentialMetaContent) {
-    allBlocks.push(...parseParagraphsHTML(potentialMetaContent));
+      allBlocks.push(...parseParagraphsHTML(potentialMetaContent));
   }
 
-  // 4. Adiciona o conteúdo dos blocos estruturados
+  // 4. Adiciona o conteúdo dos blocos estruturados na ordem em que aparecem
   blocks.forEach(blockMatch => {
-    const blockType = blockMatch[1];
-    const blockContent = blockMatch[2];
+      const blockType = blockMatch[1];
+      const blockContent = blockMatch[2];
 
-    if (blockType === 'paragraphs') {
-      allBlocks.push(...parseParagraphsHTML(blockContent));
-    } else if (blockType === 'intro') {
-      const introData = parseIntroHTML(blockContent);
-      if (introData.text) {
-        allBlocks.push({ type: 'intro', ...introData });
+      if (blockType === 'paragraphs') {
+          allBlocks.push(...parseParagraphsHTML(blockContent));
+      } else if (blockType === 'intro') {
+          const introData = parseIntroHTML(blockContent);
+          if (introData.text) {
+              allBlocks.push({ type: 'intro', ...introData });
+          }
+      } else if (blockType === 'credits') {
+          data.credits = parseCreditsHTML(blockContent);
       }
-    } else if (blockType === 'credits') {
-      data.credits = parseCreditsHTML(blockContent);
-    }
   });
 
-  // 5. Buscar título nos próprios componentes se existir
-  const titleComponent = allBlocks.find(block => 
-    block.type === 'header' || 
-    (block.type === 'texto' && block.text && block.text.length < 100)
-  );
-  
-  if (titleComponent && !data.title) {
-    // Se encontrou um componente que parece ser título
-    data.title = titleComponent.text?.replace(/<[^>]*>/g, '').trim();
-    console.log(`📄 Título extraído dos componentes: "${data.title}"`);
+  // 5. Encontra o PRIMEIRO 'type: header' na lista de todos os blocos
+  const mainHeaderIndex = allBlocks.findIndex(block => block.type && block.type.toLowerCase() === 'header');
+
+  if (mainHeaderIndex !== -1) {
+    // 6. Tira ele da lista e usa para os metadados principais (data.title, etc.)
+    const [mainHeader] = allBlocks.splice(mainHeaderIndex, 1);
+    Object.assign(data, mainHeader);
+  } else {
+    // Se não achar um header, usa a lógica antiga como fallback para pegar pelo menos o título
+    console.warn('⚠️ Nenhum bloco `type: header` encontrado. Usando fallback para metadados.');
+    const titleMatch = html.match(/title:\s*([^<\n]+)/i);
+    if (titleMatch) data.title = decodeHTMLEntities(titleMatch[1].trim());
   }
 
-  // 6. O que sobrou vira os paragraphs
+  // 7. O que sobrou na lista vira o `paragraphs` do JSON
   data.paragraphs = allBlocks;
 
-  // 7. Mover intro para nível superior se existir
   const introIndex = data.paragraphs.findIndex(p => p.type === 'intro');
   if (introIndex !== -1) {
-    const [introBlock] = data.paragraphs.splice(introIndex, 1);
-    data.intro = { text: introBlock.text };
+      const [introBlock] = data.paragraphs.splice(introIndex, 1);
+      data.intro = { text: introBlock.text };
   }
 
   return data;
 }
 
 function parseIntroHTML(html) {
-  const intro = {};
-  const introTextMatch = html.match(/text:\s*([\s\S]*?)(?=\[intro\]|$)/);
-  if (introTextMatch) {
-    intro.text = cleanAndFormatHTML(introTextMatch[1]);
-  }
-  return intro;
+    const intro = {};
+    const introTextMatch = html.match(/text:\s*([\s\S]*?)(?=\[intro\]|$)/);
+    if (introTextMatch) {
+      intro.text = cleanAndFormatHTML(introTextMatch[1]);
+    }
+    return intro;
 }
 
 function decodeHTMLEntities(text) {
@@ -293,11 +251,27 @@ function parseJSONField(jsonString, fieldName) {
       });
     }
     
+    console.log(`✅ JSON parseado com sucesso para ${fieldName}: ${Array.isArray(parsed) ? parsed.length : 1} item(s)`);
     return parsed;
     
   } catch (error) {
     console.warn(`⚠️ Erro ao parsear ${fieldName}:`, error.message);
-    return [];
+    console.log('JSON problemático:', jsonString.substring(0, 200));
+    
+    try {
+      let fallbackJson = jsonString
+        .replace(/[^\[\]{}":,\w\s\-\.\/\?=&]/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+      
+      let fallbackParsed = JSON.parse(fallbackJson);
+      console.log(`🔄 Fallback parse funcionou para ${fieldName}`);
+      return fallbackParsed;
+      
+    } catch (fallbackError) {
+      console.error(`❌ Fallback também falhou para ${fieldName}:`, fallbackError.message);
+      return [];
+    }
   }
 }
 
@@ -315,266 +289,199 @@ function parseParagraphsHTML(html) {
       paragraph.type = decodeHTMLEntities(typeMatch[1].trim());
     }
 
-    // ✅ MAPEAMENTO PARA SCROLLYFRAMES
-    const typeMapping = {
-      'videoscrollytelling': 'scrollyframes',
-      'video-scrollytelling': 'scrollyframes',
-      'videoscrolly': 'scrollyframes',
-      'video-scrolly': 'scrollyframes'
+    // 🆕 TRATAMENTO ESPECÍFICO PARA SCROLLYFRAMES
+    if (paragraph.type?.toLowerCase() === 'scrollyframes') {
+      console.log('🎬 Processando ScrollyFrames...');
+      
+      // Campos específicos do ScrollyFrames
+      const scrollyFramesFields = {
+        frameStart: /frameStart:\s*([^\n<]+)/i,
+        frameStop: /frameStop:\s*([^\n<]+)/i,
+        imagePrefix: /imagePrefix:\s*([^\n<]+)/i,
+        imageSuffix: /imageSuffix:\s*([^\n<]+)/i,
+        imagePrefixMobile: /imagePrefixMobile:\s*([^\n<]+)/i,
+        imageSuffixMobile: /imageSuffixMobile:\s*([^\n<]+)/i,
+        height: /height:\s*([^\n<]+)/i,
+        showProgress: /showProgress:\s*([^\n<]+)/i,
+        showTime: /showTime:\s*([^\n<]+)/i,
+        preloadFrames: /preloadFrames:\s*([^\n<]+)/i,
+        memoryLimit: /memoryLimit:\s*([^\n<]+)/i,
+        animationSpeed: /animationSpeed:\s*([^\n<]+)/i,
+        smoothing: /smoothing:\s*([^\n<]+)/i,
+        debug: /debug:\s*([^\n<]+)/i,
+        fullWidth: /fullWidth:\s*([^\n<]+)/i
+      };
+
+      // Processar campos específicos
+      for (const [field, regex] of Object.entries(scrollyFramesFields)) {
+        const match = block.match(regex);
+        if (match) {
+          let value = decodeHTMLEntities(match[1].trim());
+          
+          // Converter tipos apropriados
+          if (['frameStart', 'frameStop', 'preloadFrames', 'memoryLimit'].includes(field)) {
+            paragraph[field] = parseInt(value) || (field === 'frameStart' ? 1 : field === 'preloadFrames' ? 8 : field === 'memoryLimit' ? 30 : 100);
+          } else if (field === 'animationSpeed') {
+            paragraph[field] = parseFloat(value) || 0.1;
+          } else if (['showProgress', 'showTime', 'smoothing', 'fullWidth'].includes(field)) {
+            paragraph[field] = value.toLowerCase() !== 'false';
+          } else if (field === 'debug') {
+            paragraph[field] = value.toLowerCase() === 'true';
+          } else {
+            paragraph[field] = value;
+          }
+        }
+      }
+
+      // Processar steps específicos para ScrollyFrames
+      const stepsMatch = block.match(/steps:\s*(\[[\s\S]*?\])/i);
+      if (stepsMatch) {
+        paragraph.steps = parseJSONField(stepsMatch[1], 'scrollyframes steps');
+        console.log(`   ✅ ${paragraph.steps?.length || 0} steps processados`);
+      }
+
+      // Processar texto se existir
+      const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:frameStart|frameStop|imagePrefix|imageSuffix|imagePrefixMobile|imageSuffixMobile|height|showProgress|showTime|preloadFrames|memoryLimit|animationSpeed|smoothing|debug|fullWidth|steps):|type:|$)/si);
+      if (textMatch) {
+        paragraph.text = decodeHTMLEntities(textMatch[1].trim().replace(/<[^>]*>/g, ' ')).replace(/\s\s+/g, ' ').trim();
+      }
+
+      paragraphs.push(paragraph);
+      continue;
+    }
+
+    // Flourish e outros componentes especiais
+    if (['flourish', 'flourish-scrolly', 'grafico', 'mapa'].includes(paragraph.type)) {
+      const srcMatch = block.match(/src:\s*([^\n<]+)/);
+      if (srcMatch) {
+        paragraph.src = srcMatch[1].trim();
+      }
+
+      const stepsMatch = block.match(/steps:\s*(\[[\s\S]*?\])/);
+      if (stepsMatch) {
+        paragraph.steps = parseJSONField(stepsMatch[1], 'flourish steps');
+      }
+      
+      paragraphs.push(paragraph);
+      continue;
+    }
+
+    // Processamento de texto para outros tipos
+    const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:backgroundImage|backgroundImageMobile|backgroundVideo|backgroundVideoMobile|backgroundPosition|backgroundPositionMobile|author|role|src|videoSrc|videoSrcMobile|caption|credit|alt|fullWidth|variant|size|orientation|autoplay|controls|poster|images|items|steps|beforeImage|afterImage|beforeLabel|afterLabel|image|height|heightMobile|speed|content|overlay|layout|columns|interval|showDots|showArrows|stickyHeight|videoId|videosIDs|id|skipDFP|skipdfp|autoPlay|startMuted|maxQuality|quality|chromeless|isLive|live|allowRestrictedContent|preventBlackBars|globoId|token|adAccountId|adCmsId|siteName|width|textPosition|textPositionMobile|textAlign|textAlignMobile|title|subtitle|date|theme|videoAspectRatio|showProgress|showTime|showControls):|type:|$)/si);
+    if (textMatch) {
+      if (['texto', 'frase', 'intro'].includes(paragraph.type)) {
+        paragraph.text = cleanAndFormatHTML(textMatch[1].trim());
+      } else {
+        paragraph.text = decodeHTMLEntities(textMatch[1].trim().replace(/<[^>]*>/g, ' ')).replace(/\s\s+/g, ' ').trim();
+      }
+    }
+    
+    // Processar arrays JSON
+    const jsonFields = ['images', 'items', 'steps'];
+    for (const field of jsonFields) {
+      const regex = new RegExp(`${field}:\\s*(\\[[\\s\\S]*?\\])`, 'i');
+      const match = block.match(regex);
+      if (match) {
+        paragraph[field] = parseJSONField(match[1], field);
+      }
+    }
+
+    // Campos gerais (mantém sua lógica original)
+    const fieldMappings = {
+      title: 'title', subtitle: 'subtitle', date: 'date', theme: 'theme',
+      backgroundImage: 'backgroundImage', backgroundImageMobile: 'backgroundImageMobile', backgroundVideo: 'backgroundVideo',
+      backgroundVideoMobile: 'backgroundVideoMobile', backgroundPosition: 'backgroundPosition', backgroundPositionMobile: 'backgroundPositionMobile',
+      textPosition: 'textPosition', textPositionMobile: 'textPositionMobile', textAlign: 'textAlign', textAlignMobile: 'textAlignMobile',
+      author: 'author', role: 'role', src: 'src', videoSrc: 'videoSrc', videoSrcMobile: 'videoSrcMobile', srcMobile: 'srcMobile', caption: 'caption', credit: 'credit', alt: 'alt', fullWidth: 'fullWidth', variant: 'variant',
+      size: 'size', orientation: 'orientation', autoplay: 'autoplay', controls: 'controls', poster: 'poster', overlay: 'overlay',
+      layout: 'layout', columns: 'columns', interval: 'interval', showDots: 'showDots', showArrows: 'showArrows',
+      stickyHeight: 'stickyHeight', beforeImage: 'beforeImage', afterImage: 'afterImage', beforeLabel: 'beforeLabel',
+      afterLabel: 'afterLabel', image: 'image', speed: 'speed', content: 'content', videoId: 'videoId', videosIDs: 'videosIDs', id: 'id',
+      skipDFP: 'skipDFP', skipdfp: 'skipdfp', autoPlay: 'autoPlay', startMuted: 'startMuted', maxQuality: 'maxQuality', quality: 'quality',
+      chromeless: 'chromeless', isLive: 'isLive', live: 'live', allowRestrictedContent: 'allowRestrictedContent',
+      preventBlackBars: 'preventBlackBars', globoId: 'globoId', token: 'token', adAccountId: 'adAccountId', adCmsId: 'adCmsId',
+      siteName: 'siteName', width: 'width', height: 'height', heightMobile: 'heightMobile', showCaption: 'showCaption',
+      alignment: 'alignment', loop: 'loop', videoAspectRatio: 'videoAspectRatio', aspectRatio: 'aspectRatio', showProgress: 'showProgress', showTime: 'showTime', showControls: 'showControls'
     };
-
-    // Aplicar mapeamento se necessário
-    if (typeMapping[paragraph.type?.toLowerCase()]) {
-      const originalType = paragraph.type;
-      paragraph.type = typeMapping[paragraph.type.toLowerCase()];
-      console.log(`📝 Convertido: ${originalType} → ${paragraph.type}`);
-    }
-
-    // Tratamento especial para ScrollyFrames
-    if (paragraph.type === 'scrollyframes') {
-      
-      // Props de frames
-      const frameStartMatch = block.match(/frameStart:\s*([^\n<]+)/i);
-      if (frameStartMatch) {
-        paragraph.frameStart = parseInt(frameStartMatch[1].trim()) || 1;
-      }
-      const frameStopMatch = block.match(/frameStop:\s*([^\n<]+)/i);
-      if (frameStopMatch) {
-        paragraph.frameStop = parseInt(frameStopMatch[1].trim()) || 100;
-      }
-      const totalFramesMatch = block.match(/totalFrames:\s*([^\n<]+)/i);
-      if (totalFramesMatch) {
-        paragraph.totalFrames = parseInt(totalFramesMatch[1].trim()) || 150;
-      }
-      const imagePrefixMatch = block.match(/imagePrefix:\s*([^\n<]+)/i);
-      if (imagePrefixMatch) {
-        paragraph.imagePrefix = imagePrefixMatch[1].trim();
-      }
-      const imageSuffixMatch = block.match(/imageSuffix:\s*([^\n<]+)/i);
-      if (imageSuffixMatch) {
-        paragraph.imageSuffix = imageSuffixMatch[1].trim();
-      }
-      const imagePrefixMobileMatch = block.match(/imagePrefixMobile:\s*([^\n<]+)/i);
-      if (imagePrefixMobileMatch) {
-        paragraph.imagePrefixMobile = imagePrefixMobileMatch[1].trim();
-      }
-      const imageSuffixMobileMatch = block.match(/imageSuffixMobile:\s*([^\n<]+)/i);
-      if (imageSuffixMobileMatch) {
-        paragraph.imageSuffixMobile = imageSuffixMobileMatch[1].trim();
-      }
-      
-      // Props visuais
-      const heightMatch = block.match(/height:\s*([^\n<]+)/i);
-      if (heightMatch) {
-        paragraph.height = heightMatch[1].trim();
-      }
-      const fullWidthMatch = block.match(/fullWidth:\s*([^\n<]+)/i);
-      if (fullWidthMatch) {
-        paragraph.fullWidth = fullWidthMatch[1].trim().toLowerCase() !== 'false';
-      }
-      const showProgressMatch = block.match(/showProgress:\s*([^\n<]+)/i);
-      if (showProgressMatch) {
-        paragraph.showProgress = showProgressMatch[1].trim().toLowerCase() !== 'false';
-      }
-      const showTimeMatch = block.match(/showTime:\s*([^\n<]+)/i);
-      if (showTimeMatch) {
-        paragraph.showTime = showTimeMatch[1].trim().toLowerCase() !== 'false';
-      }
-      
-      // Props de performance
-      const preloadFramesMatch = block.match(/preloadFrames:\s*([^\n<]+)/i);
-      if (preloadFramesMatch) {
-        paragraph.preloadFrames = parseInt(preloadFramesMatch[1].trim()) || 8;
-      }
-      
-      // Steps JSON
-      const stepsMatch = block.match(/steps:\s*(\[[\s\S]*?\])/i);
-      if (stepsMatch) {
-        paragraph.steps = parseJSONField(stepsMatch[1], 'steps') || [];
-      }
-      
-    } else if (['scrollytelling', 'scrolly'].includes(paragraph.type?.toLowerCase())) {
-      // ScrollyTelling tradicional
-      const fullWidthMatch = block.match(/fullWidth:\s*([^\n<]+)/i);
-      if (fullWidthMatch) {
-        paragraph.fullWidth = fullWidthMatch[1].trim().toLowerCase() === 'true';
-      }
-      
-      const stepsMatch = block.match(/steps:\s*(\[[\s\S]*?\])/i);
-      if (stepsMatch) {
-        paragraph.steps = parseJSONField(stepsMatch[1], 'steps') || [];
-      }
-      
-    } else if (paragraph.type === 'imagem') {
-      // Componente de imagem
-      const srcMatch = block.match(/src:\s*([^\n<]+)/);
-      if (srcMatch) {
-        paragraph.src = srcMatch[1].trim();
-      }
-      const altMatch = block.match(/alt:\s*([^\n<]+)/);
-      if (altMatch) {
-        paragraph.alt = altMatch[1].trim();
-      }
-      const captionMatch = block.match(/caption:\s*([\s\S]*?)(?=\w+:|$)/);
-      if (captionMatch) {
-        paragraph.caption = cleanAndFormatHTML(captionMatch[1]);
-      }
-      const fullWidthMatch = block.match(/fullWidth:\s*([^\n<]+)/i);
-      if (fullWidthMatch) {
-        paragraph.fullWidth = fullWidthMatch[1].trim().toLowerCase() === 'true';
-      }
-      
-    } else if (paragraph.type === 'video') {
-      // Componente de vídeo
-      const srcMatch = block.match(/src:\s*([^\n<]+)/);
-      if (srcMatch) {
-        paragraph.src = srcMatch[1].trim();
-      }
-      const captionMatch = block.match(/caption:\s*([\s\S]*?)(?=\w+:|$)/);
-      if (captionMatch) {
-        paragraph.caption = cleanAndFormatHTML(captionMatch[1]);
-      }
-      const fullWidthMatch = block.match(/fullWidth:\s*([^\n<]+)/i);
-      if (fullWidthMatch) {
-        paragraph.fullWidth = fullWidthMatch[1].trim().toLowerCase() === 'true';
-      }
-      
-    } else if (paragraph.type === 'embed') {
-      // Componente de embed
-      const srcMatch = block.match(/src:\s*([^\n<]+)/);
-      if (srcMatch) {
-        paragraph.src = srcMatch[1].trim();
-      }
-      const heightMatch = block.match(/height:\s*([^\n<]+)/);
-      if (heightMatch) {
-        paragraph.height = heightMatch[1].trim();
-      }
-      const captionMatch = block.match(/caption:\s*([\s\S]*?)(?=\w+:|$)/);
-      if (captionMatch) {
-        paragraph.caption = cleanAndFormatHTML(captionMatch[1]);
-      }
-      
-    } else if (paragraph.type === 'galeria') {
-      // Componente de galeria
-      const imagesMatch = block.match(/images:\s*(\[[\s\S]*?\])/);
-      if (imagesMatch) {
-        paragraph.images = parseJSONField(imagesMatch[1], 'images') || [];
-      }
-      const fullWidthMatch = block.match(/fullWidth:\s*([^\n<]+)/i);
-      if (fullWidthMatch) {
-        paragraph.fullWidth = fullWidthMatch[1].trim().toLowerCase() === 'true';
-      }
-      
-    } else if (paragraph.type === 'citacao') {
-      // Componente de citação
-      const textMatch = block.match(/text:\s*([\s\S]*?)(?=author:|$)/);
-      if (textMatch) {
-        paragraph.text = cleanAndFormatHTML(textMatch[1]);
-      }
-      const authorMatch = block.match(/author:\s*([^\n<]+)/);
-      if (authorMatch) {
-        paragraph.author = authorMatch[1].trim();
-      }
-      
-    } else if (paragraph.type === 'separador') {
-      // Componente separador
-      const styleMatch = block.match(/style:\s*([^\n<]+)/);
-      if (styleMatch) {
-        paragraph.style = styleMatch[1].trim();
-      }
-      
-    } else {
-      // Componente de texto ou outros tipos
-      const textMatch = block.match(/text:\s*([\s\S]*?)(?=\w+:|$)/);
-      if (textMatch) {
-        paragraph.text = cleanAndFormatHTML(textMatch[1]);
-      }
-      
-      // Propriedades comuns
-      const alignMatch = block.match(/align:\s*([^\n<]+)/);
-      if (alignMatch) {
-        paragraph.align = alignMatch[1].trim();
-      }
-      const sizeMatch = block.match(/size:\s*([^\n<]+)/);
-      if (sizeMatch) {
-        paragraph.size = sizeMatch[1].trim();
-      }
-      const colorMatch = block.match(/color:\s*([^\n<]+)/);
-      if (colorMatch) {
-        paragraph.color = colorMatch[1].trim();
+    
+    for (const [field, prop] of Object.entries(fieldMappings)) {
+      const regex = new RegExp(`\\b${field}:\\s*([^\\n<]*)`, 'i');
+      const match = block.match(regex);
+      if (match) {
+        const cleanedValue = (match[1] || '')
+            .replace(/&nbsp;/g, ' ')
+            .replace(/<[^>]*>/g, '')
+            .trim();
+            
+        paragraph[prop] = decodeHTMLEntities(cleanedValue);
       }
     }
-
-    // Adicionar à lista se tem conteúdo útil
+    
     if (paragraph.type) {
       paragraphs.push(paragraph);
     }
   }
-
   return paragraphs;
 }
 
 function parseCreditsHTML(html) {
   const credits = {};
-  
-  const textMatch = html.match(/text:\s*([\s\S]*?)(?=\[credits\]|$)/);
-  if (textMatch) {
-    credits.text = cleanAndFormatHTML(textMatch[1]);
+
+  const notesMatch = html.match(/notes:\s*([\s\S]*?)(?=sources:|additionalGraphics:|editedBy:|authors:|$)/s);
+  if (notesMatch) {
+    credits.notes = cleanAndFormatHTML(notesMatch[1].trim());
   }
-  
-  const authorMatch = html.match(/author:\s*([^\n<]+)/);
-  if (authorMatch) {
-    credits.author = authorMatch[1].trim();
+
+  const arrayFields = ['sources', 'additionalGraphics', 'editedBy', 'authors'];
+  for (const field of arrayFields) {
+    const regex = new RegExp(`${field}:\\s*([\\s\\S]*?)(?=(?:notes:|sources:|additionalGraphics:|editedBy:|authors:|\\[credits\\])|$)`, 'i');
+    const match = html.match(regex);
+
+    if (match && match[1]) {
+      let rawContent = match[1];
+      rawContent = rawContent.replace(/<\/?ul[^>]*>/g, '');
+      rawContent = rawContent.replace(/<\/?li[^>]*>/g, '');
+      rawContent = rawContent.replace(/&nbsp;/g, ' ');
+      
+      credits[field] = rawContent.split('- ').map(item => {
+        return cleanAndFormatHTML(item.trim());
+      }).filter(Boolean);
+    }
   }
-  
-  const editorMatch = html.match(/editor:\s*([^\n<]+)/);
-  if (editorMatch) {
-    credits.editor = editorMatch[1].trim();
-  }
-  
-  const photographerMatch = html.match(/photographer:\s*([^\n<]+)/);
-  if (photographerMatch) {
-    credits.photographer = photographerMatch[1].trim();
-  }
-  
-  const designerMatch = html.match(/designer:\s*([^\n<]+)/);
-  if (designerMatch) {
-    credits.designer = designerMatch[1].trim();
-  }
-  
-  const dateMatch = html.match(/date:\s*([^\n<]+)/);
-  if (dateMatch) {
-    credits.date = dateMatch[1].trim();
-  }
-  
   return credits;
 }
 
-function cleanAndFormatHTML(text) {
-  if (!text) return '';
+function cleanAndFormatHTML(html) {
+  if (!html) return '';
   
-  return text
-    .replace(/<\/p>/g, '\n')
-    .replace(/<p[^>]*>/g, '')
-    .replace(/<br[^>]*>/g, '\n')
-    .replace(/<[^>]*>/g, '')
-    .replace(/&nbsp;/g, ' ')
-    .replace(/\n{3,}/g, '\n\n')
-    .trim();
+  let cleanedHtml = decodeHTMLEntities(html);
+  
+  cleanedHtml = cleanedHtml.replace(/`/g, "'");
+  
+  cleanedHtml = cleanedHtml.replace(/<([^>]+)style="[^"]*font-weight:\s*(?:bold|[7-9]\d\d|700|800|900)[^"]*"[^>]*>(.*?)<\/\1>/gi, '<strong>$2</strong>');
+  cleanedHtml = cleanedHtml.replace(/<([^>]+)style="[^"]*font-style:\s*italic[^"]*"[^>]*>(.*?)<\/\1>/gi, '<em>$2</em>');
+  cleanedHtml = cleanedHtml.replace(/<([^>]+)style="[^"]*text-decoration[^"]*underline[^"]*"[^>]*>(.*?)<\/\1>/gi, '<u>$2</u>');
+  cleanedHtml = cleanedHtml.replace(/<a\s+href="([^"]*)"[^>]*>(.*?)<\/a>/gi, '<a href="$1">$2</a>');
+  
+  const listRegex = /((?:[•*-]\s.*)(?:<br\s*\/?>\s*[•*-]\s.*)*)/g;
+  cleanedHtml = cleanedHtml.replace(listRegex, (listBlock) => {
+    const items = listBlock.split(/<br\s*\/?>/gi)
+      .map(item => item.trim())
+      .filter(item => item.length > 0)
+      .map(item => `<li>${item.replace(/^[•*-]\s/, '').trim()}</li>`)
+      .join('');
+    return items ? `<ul>${items}</ul>` : '';
+  });
+
+  cleanedHtml = cleanedHtml.replace(/<\/?(span|p|div)[^>]*>/gi, '');
+  
+  return cleanedHtml.trim();
 }
 
-// SCRIPT PRINCIPAL
-if (import.meta.url === `file://${process.argv[1]}`) {
-  const docId = process.argv[2];
-  
-  if (!docId) {
-    console.error('❌ Uso: node fetch-docs.js DOC_ID');
-    console.error('   DOC_ID: ID do documento do Google Docs');
-    console.error('   Exemplo: node fetch-docs.js 1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms');
-    process.exit(1);
-  }
-  
-  fetchGoogleDoc(docId);
+const args = process.argv.slice(2);
+if (args.length === 0) {
+  console.log('❌ Use: npm run fetch DOC_ID');
+  process.exit(1);
 }
 
-export { fetchGoogleDoc };
+fetchGoogleDoc(args[0]);

@@ -20,7 +20,7 @@
 
   onMount(async () => {
     try {
-      const response = await fetch('./data/foto-acima-com-props-vazias-para-testar-comportame.json');
+      const response = await fetch('./data/diario-de-um-legendario-a-fe-o-cansaco-e-as-regras.json');
       if (response.ok) {
         currentStory = await response.json();
         
