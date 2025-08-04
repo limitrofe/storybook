@@ -1,5 +1,5 @@
-<!-- src/lib/components/StoryRenderer.svelte -->
 <script>
+<<<<<<< HEAD
 	// Importação dos componentes da história
 	import Header from './story/Header.svelte';
 	import StoryText from './story/StoryText.svelte';
@@ -18,30 +18,113 @@
 	import FlourishScrolly from './story/FlourishScrolly.svelte';
 	import FinalCredits from './FinalCredits.svelte';
 	import AnchorPoint from './story/AnchorPoint.svelte';
+=======
+    // Importação dos componentes da história
+    import Header from './story/Header.svelte';
+    import StoryText from './story/StoryText.svelte';
+    import SectionTitle from './story/SectionTitle.svelte';
+    import SectionWrapper from './story/SectionWrapper.svelte';
+    import PhotoWithCaption from './story/PhotoWithCaption.svelte';
+    import VideoPlayer from './story/VideoPlayer.svelte';
+    import GloboPlayer from './story/GloboPlayer.svelte';
+    import PhotoGallery from './story/PhotoGallery.svelte';
+    import Carousel from './story/Carousel.svelte';
+    import Parallax from './story/Parallax.svelte';
+    import BeforeAfter from './story/BeforeAfter.svelte';
+    import ScrollyTelling from './story/ScrollyTelling.svelte';
+    import VideoScrollytelling from './story/VideoScrollytelling.svelte';
+    import FlourishEmbed from './story/FlourishEmbed.svelte';
+    import FlourishScrolly from './story/FlourishScrolly.svelte';
+    import FinalCredits from './FinalCredits.svelte';
+    import AnchorPoint from './story/AnchorPoint.svelte';
+>>>>>>> 5849999 (mudança no deploy pra gerar imagens em webp para mobile)
 
-	export let storyData = {};
+    export let storyData = {};
 
-	// ✅ DEBUG: Ver o que está chegando
-	$: {
-		console.log('=== DEBUG STORYDATA ===');
-		console.log('storyData:', storyData);
-		console.log('paragraphs:', storyData.paragraphs);
-		if (storyData.paragraphs) {
-			storyData.paragraphs.forEach((p, i) => {
-				console.log(`Paragraph ${i}:`, p.type, p);
-			});
-		}
-		console.log('========================');
-	}
+    /**
+     * Mapeia os tipos de parágrafo para os nomes dos componentes.
+     */
+    function getComponentType(paragraph) {
+        const type = paragraph.type?.toLowerCase().trim();
 
-	/**
-	 * Mapeia os tipos de parágrafo para os nomes dos componentes.
-	 */
-	function getComponentType(paragraph) {
-		const type = paragraph.type?.toLowerCase().trim();
+        switch (type) {
+            case 'header':
+            case 'titulo-principal':
+            case 'abre':
+                return 'header';
+            case 'texto':
+            case 'paragrafo':
+                return 'text';
+            case 'intertitulo':
+            case 'titulo':
+                return 'section-title';
+            case 'section':
+            case 'secao':
+            case 'section-wrapper':
+            case 'wrapper':
+                return 'section-wrapper';
+            case 'frase':
+            case 'citacao':
+            case 'quote':
+                return 'quote';
+            case 'foto':
+            case 'imagem':
+                return 'photo';
+            case 'video':
+            case 'mp4':
+                return 'video';
+            case 'globovideo':
+            case 'globo-video':
+            case 'globoplayer':
+                return 'globo-player';
+            case 'galeria':
+            case 'gallery':
+                return 'gallery';
+            case 'carrossel':
+            case 'carousel':
+                return 'carousel';
+            case 'parallax':
+                return 'parallax';
+            case 'antes-depois':
+            case 'before-after':
+                return 'before-after';
+            case 'scrollytelling':
+            case 'scrolly':
+                return 'scrolly';
+            case 'videoscrollytelling':
+            case 'video-scrollytelling':
+            case 'videoscrolly':
+                return 'video-scrolly';
+            case 'flourish':
+            case 'flourish-embed':
+            case 'grafico':
+                return 'flourish';
+            case 'flourish-scrolly':
+            case 'flourish-story':
+                return 'flourish-scrolly';
+            case 'ancora':
+            case 'anchor':
+                return 'anchor';
+            default:
+                return 'text';
+        }
+    }
 
-		console.log('🔍 Debug StoryRenderer:', { originalType: paragraph.type, normalizedType: type });
+    /**
+     * Converte uma string (vinda do JSON) para um booleano de forma segura.
+     */
+    function stringToBoolean(value, defaultValue = false) {
+        if (typeof value === 'boolean') return value;
+        if (typeof value === 'string') {
+            const normalized = value.toLowerCase().trim();
+            return (
+                normalized === 'true' || normalized === 'yes' || normalized === 'sim' || normalized === '1'
+            );
+        }
+        return defaultValue;
+    }
 
+<<<<<<< HEAD
 		switch (type) {
 			case 'header':
 			case 'titulo-principal':
@@ -109,54 +192,40 @@
 				return 'text';
 		}
 	}
+=======
+    /**
+     * Prepara as propriedades de um parágrafo para serem passadas ao componente.
+     */
+    function prepareProps(paragraph) {
+        const props = { ...paragraph };
+>>>>>>> 5849999 (mudança no deploy pra gerar imagens em webp para mobile)
 
-	/**
-	 * Converte uma string (vinda do JSON) para um booleano de forma segura.
-	 */
-	function stringToBoolean(value, defaultValue = false) {
-		if (typeof value === 'boolean') return value;
-		if (typeof value === 'string') {
-			const normalized = value.toLowerCase().trim();
-			return (
-				normalized === 'true' || normalized === 'yes' || normalized === 'sim' || normalized === '1'
-			);
-		}
-		return defaultValue;
-	}
+        const booleanFields = [
+            'fullWidth', 'autoplay', 'controls', 'loop', 'showCaption', 'autoPlay',
+            'overlay', 'lightbox', 'masonry', 'showControls', 'showProgress',
+            'showTime', 'smoothTransition', 'lazyLoading', 'skipDFP',
+            'chromeless', 'startMuted', 'forceFrames'
+        ];
 
-	/**
-	 * Prepara as propriedades de um parágrafo para serem passadas ao componente.
-	 */
-	function prepareProps(paragraph) {
-		const props = { ...paragraph };
+        booleanFields.forEach((field) => {
+            if (props[field] !== undefined) {
+                props[field] = stringToBoolean(props[field]);
+            }
+        });
 
-		// Converter strings para booleanos onde necessário
-		const booleanFields = [
-			'fullWidth',
-			'autoplay',
-			'controls',
-			'loop',
-			'showCaption',
-			'autoPlay',
-			'overlay',
-			'lightbox',
-			'masonry',
-			'showControls',
-			'showProgress',
-			'showTime',
-			'smoothTransition',
-			'lazyLoading',
-			'skipDFP',
-			'chromeless',
-			'startMuted'
-		];
+        const numberFields = [
+            'columns', 'interval', 'speed', 'totalFrames', 'preloadFrames',
+            'bufferSize', 'frameStart', 'frameStop', 'frameStartSeconds',
+            'frameStopSeconds', 'frameRate', 'scrollSmoothness', 'frameDuration'
+        ];
 
-		booleanFields.forEach((field) => {
-			if (props[field] !== undefined) {
-				props[field] = stringToBoolean(props[field]);
-			}
-		});
+        numberFields.forEach((field) => {
+            if (props[field] !== undefined && !isNaN(props[field])) {
+                props[field] = parseFloat(props[field]);
+            }
+        });
 
+<<<<<<< HEAD
 		// 🆕 Converter strings para números onde necessário
 		const numberFields = [
 			'columns',
@@ -181,51 +250,44 @@
 
 		return props;
 	}
+=======
+        return props;
+    }
+>>>>>>> 5849999 (mudança no deploy pra gerar imagens em webp para mobile)
 </script>
 
 <article class="story-content" data-theme={storyData.theme || 'default'}>
-	<!-- Renderizar o header se tiver -->
-	{#if storyData.title || storyData.subtitle}
-		<Header
-			title={storyData.title}
-			subtitle={storyData.subtitle}
-			author={storyData.author}
-			publishDate={storyData.publishDate || storyData.date}
-			backgroundImage={storyData.backgroundImage}
-			backgroundImageMobile={storyData.backgroundImageMobile}
-			backgroundVideo={storyData.backgroundVideo}
-			backgroundVideoMobile={storyData.backgroundVideoMobile}
-			variant={storyData.variant || 'default'}
-			overlay={stringToBoolean(storyData.overlay, true)}
-		/>
-	{/if}
+    {#if storyData.title || storyData.subtitle}
+        <Header
+            title={storyData.title}
+            subtitle={storyData.subtitle}
+            author={storyData.author}
+            publishDate={storyData.publishDate || storyData.date}
+            backgroundImage={storyData.backgroundImage}
+            backgroundImageMobile={storyData.backgroundImageMobile}
+            variant={storyData.variant || 'default'}
+            overlay={stringToBoolean(storyData.overlay, true)}
+        />
+    {/if}
 
-	<!-- Renderizar intro se existir -->
-	{#if storyData.intro && storyData.intro.text}
-		<StoryText content={storyData.intro.text} variant="lead" />
-	{/if}
+    {#if storyData.paragraphs && Array.isArray(storyData.paragraphs)}
+        {#each storyData.paragraphs as paragraph}
+            {@const componentType = getComponentType(paragraph)}
+            {@const props = prepareProps(paragraph)}
 
-	<!-- Renderizar parágrafos -->
-	{#if storyData.paragraphs && Array.isArray(storyData.paragraphs)}
-		{#each storyData.paragraphs as paragraph, index}
-			{@const componentType = getComponentType(paragraph)}
-			{@const props = prepareProps(paragraph)}
+            {#if componentType === 'header'}
+                <Header {...props} />
 
-			<!-- Header -->
-			{#if componentType === 'header'}
-				<Header
-					title={props.title}
-					subtitle={props.subtitle}
-					author={props.author}
-					publishDate={props.publishDate || props.date}
-					backgroundImage={props.backgroundImage}
-					backgroundImageMobile={props.backgroundImageMobile}
-					backgroundVideo={props.backgroundVideo}
-					backgroundVideoMobile={props.backgroundVideoMobile}
-					variant={props.variant || 'default'}
-					overlay={stringToBoolean(props.overlay, true)}
-				/>
+            {:else if componentType === 'section-wrapper'}
+                <SectionWrapper {...props}>
+                    {#if props.content}
+                        <div class="section-content">
+                            {@html props.content}
+                        </div>
+                    {/if}
+                </SectionWrapper>
 
+<<<<<<< HEAD
 			<!-- Section Wrapper -->
 			{:else if componentType === 'section-wrapper'}
 				<SectionWrapper
@@ -448,4 +510,90 @@
 		overflow-x: auto;
 		font-size: 0.875rem;
 	}
+=======
+            {:else if componentType === 'text'}
+                <StoryText content={props.text} variant={props.variant || 'body'} />
+
+            {:else if componentType === 'quote'}
+                <StoryText content={props.text} variant="quote" author={props.author} role={props.role} />
+
+            {:else if componentType === 'section-title'}
+                <SectionTitle title={props.text} {...props} />
+
+            {:else if componentType === 'photo'}
+                <PhotoWithCaption {...props} />
+
+            {:else if componentType === 'video'}
+                <VideoPlayer {...props} />
+
+            {:else if componentType === 'globo-player'}
+                <GloboPlayer {...props} />
+
+            {:else if componentType === 'gallery'}
+                <PhotoGallery {...props} />
+
+            {:else if componentType === 'carousel'}
+                <Carousel {...props} />
+
+            {:else if componentType === 'parallax'}
+                <Parallax {...props} />
+
+            {:else if componentType === 'before-after'}
+                <BeforeAfter {...props} />
+
+            {:else if componentType === 'scrolly'}
+                <ScrollyTelling {...props} />
+
+            {:else if componentType === 'video-scrolly'}
+                <VideoScrollytelling {...props} />
+
+            {:else if componentType === 'flourish'}
+                <FlourishEmbed {...props} />
+
+            {:else if componentType === 'flourish-scrolly'}
+                <FlourishScrolly {...props} />
+
+            {:else if componentType === 'anchor'}
+                <AnchorPoint id={props.id} />
+
+            {:else}
+                <div class="unknown-component">
+                    <p><strong>Componente desconhecido:</strong> {paragraph.type}</p>
+                    <pre>{JSON.stringify(paragraph, null, 2)}</pre>
+                </div>
+            {/if}
+        {/each}
+    {/if}
+
+    {#if storyData.credits}
+        <FinalCredits credits={storyData.credits} />
+    {/if}
+</article>
+
+<style>
+    .story-content {
+        max-width: none;
+        width: 100%;
+    }
+    .section-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+    .unknown-component {
+        background: #f3f4f6;
+        border: 2px dashed #9ca3af;
+        padding: 2rem;
+        margin: 2rem auto;
+        max-width: 800px;
+        border-radius: 8px;
+    }
+    .unknown-component pre {
+        background: #ffffff;
+        padding: 1rem;
+        border-radius: 4px;
+        overflow-x: auto;
+        font-size: 0.875rem;
+    }
+>>>>>>> 5849999 (mudança no deploy pra gerar imagens em webp para mobile)
 </style>

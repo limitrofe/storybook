@@ -52,7 +52,11 @@
       "showTime": "true",
       "totalFrames": 204,
       "deployMetadata": {
+<<<<<<< HEAD
         "deployedAt": "2025-08-04T01:17:05.918Z",
+=======
+        "deployedAt": "2025-08-04T18:02:54.662Z",
+>>>>>>> 5849999 (mudança no deploy pra gerar imagens em webp para mobile)
         "project": "newsroom-system-2024",
         "baseUrl": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024",
         "desktopFrames": 204,
