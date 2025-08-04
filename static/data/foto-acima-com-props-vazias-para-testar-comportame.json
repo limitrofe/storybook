@@ -1,0 +1,2295 @@
+{
+  "credits": {},
+  "paragraphs": [
+    {
+      "type": "videoscrollytelling",
+      "frameStart": 1,
+      "frameStop": 50,
+      "imagePrefix": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_",
+      "imageSuffix": ".jpg",
+      "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_",
+      "imageSuffixMobile": ".webp",
+      "frameStartSeconds": 0,
+      "frameStopSeconds": 20,
+      "preloadFrames": "8",
+      "text": "Título opcional do seu VideoScrollytelling",
+      "steps": [
+        {
+          "title": "Abertura:Estabelecendo o Cenário",
+          "text": "Nossa jornada começa do zero,apresentando o <strong>contexto inicial</strong> e estabelecendo as bases para tudo que será revelado.",
+          "time": 0
+        },
+        {
+          "title": "Primeiros Insights",
+          "text": "Começamos a desvendar os <em>primeiros elementos cruciais</em> que moldarão nossa compreensão.",
+          "time": 3
+        },
+        {
+          "title": "Desenvolvimento das Ideias",
+          "text": "As ideias ganham forma e começamos a ver <strong>conexões importantes</strong> entre os diferentes elementos.",
+          "time": 6
+        },
+        {
+          "title": "Momento de Transição",
+          "text": "Chegamos a um <em>ponto de virada fundamental</em> que redefine nossa perspectiva sobre o tema.",
+          "time": 9
+        },
+        {
+          "title": "Aprofundamento da Análise",
+          "text": "Mergulhamos mais fundo na análise,explorando <strong>camadas mais complexas</strong> da narrativa.",
+          "time": 12
+        },
+        {
+          "title": "Conclusão",
+          "text": "Chegamos ao final com uma compreensão completa e transformadora do tema apresentado.",
+          "time": 15
+        }
+      ],
+      "videoSrc": "videos/videoscrolly_1_main.mp4",
+      "videoSrcMobile": "videos/videoscrolly_1_mobile.mp4",
+      "height": "400vh",
+      "showProgress": "true",
+      "showTime": "true",
+      "totalFrames": 204,
+      "deployMetadata": {
+        "deployedAt": "2025-08-04T01:17:05.918Z",
+        "project": "newsroom-system-2024",
+        "baseUrl": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024",
+        "desktopFrames": 204,
+        "mobileFrames": 204,
+        "patterns": {
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_"
+        }
+      },
+      "fallbackFrames": [
+        {
+          "index": 0,
+          "time": 0,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0001.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0001.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0001.jpg"
+        },
+        {
+          "index": 1,
+          "time": 0.1,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0002.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0002.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0002.jpg"
+        },
+        {
+          "index": 2,
+          "time": 0.2,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0003.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0003.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0003.jpg"
+        },
+        {
+          "index": 3,
+          "time": 0.3,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0004.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0004.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0004.jpg"
+        },
+        {
+          "index": 4,
+          "time": 0.4,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0005.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0005.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0005.jpg"
+        },
+        {
+          "index": 5,
+          "time": 0.5,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0006.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0006.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0006.jpg"
+        },
+        {
+          "index": 6,
+          "time": 0.6,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0007.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0007.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0007.jpg"
+        },
+        {
+          "index": 7,
+          "time": 0.7,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0008.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0008.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0008.jpg"
+        },
+        {
+          "index": 8,
+          "time": 0.8,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0009.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0009.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0009.jpg"
+        },
+        {
+          "index": 9,
+          "time": 0.9,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0010.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0010.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0010.jpg"
+        },
+        {
+          "index": 10,
+          "time": 1,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0011.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0011.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0011.jpg"
+        },
+        {
+          "index": 11,
+          "time": 1.1,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0012.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0012.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0012.jpg"
+        },
+        {
+          "index": 12,
+          "time": 1.2,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0013.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0013.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0013.jpg"
+        },
+        {
+          "index": 13,
+          "time": 1.29,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0014.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0014.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0014.jpg"
+        },
+        {
+          "index": 14,
+          "time": 1.39,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0015.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0015.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0015.jpg"
+        },
+        {
+          "index": 15,
+          "time": 1.49,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0016.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0016.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0016.jpg"
+        },
+        {
+          "index": 16,
+          "time": 1.59,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0017.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0017.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0017.jpg"
+        },
+        {
+          "index": 17,
+          "time": 1.69,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0018.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0018.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0018.jpg"
+        },
+        {
+          "index": 18,
+          "time": 1.79,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0019.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0019.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0019.jpg"
+        },
+        {
+          "index": 19,
+          "time": 1.89,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0020.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0020.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0020.jpg"
+        },
+        {
+          "index": 20,
+          "time": 1.99,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0021.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0021.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0021.jpg"
+        },
+        {
+          "index": 21,
+          "time": 2.09,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0022.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0022.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0022.jpg"
+        },
+        {
+          "index": 22,
+          "time": 2.19,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0023.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0023.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0023.jpg"
+        },
+        {
+          "index": 23,
+          "time": 2.29,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0024.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0024.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0024.jpg"
+        },
+        {
+          "index": 24,
+          "time": 2.39,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0025.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0025.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0025.jpg"
+        },
+        {
+          "index": 25,
+          "time": 2.49,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0026.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0026.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0026.jpg"
+        },
+        {
+          "index": 26,
+          "time": 2.59,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0027.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0027.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0027.jpg"
+        },
+        {
+          "index": 27,
+          "time": 2.69,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0028.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0028.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0028.jpg"
+        },
+        {
+          "index": 28,
+          "time": 2.79,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0029.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0029.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0029.jpg"
+        },
+        {
+          "index": 29,
+          "time": 2.89,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0030.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0030.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0030.jpg"
+        },
+        {
+          "index": 30,
+          "time": 2.99,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0031.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0031.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0031.jpg"
+        },
+        {
+          "index": 31,
+          "time": 3.09,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0032.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0032.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0032.jpg"
+        },
+        {
+          "index": 32,
+          "time": 3.19,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0033.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0033.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0033.jpg"
+        },
+        {
+          "index": 33,
+          "time": 3.29,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0034.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0034.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0034.jpg"
+        },
+        {
+          "index": 34,
+          "time": 3.39,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0035.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0035.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0035.jpg"
+        },
+        {
+          "index": 35,
+          "time": 3.49,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0036.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0036.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0036.jpg"
+        },
+        {
+          "index": 36,
+          "time": 3.59,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0037.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0037.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0037.jpg"
+        },
+        {
+          "index": 37,
+          "time": 3.68,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0038.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0038.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0038.jpg"
+        },
+        {
+          "index": 38,
+          "time": 3.78,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0039.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0039.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0039.jpg"
+        },
+        {
+          "index": 39,
+          "time": 3.88,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0040.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0040.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0040.jpg"
+        },
+        {
+          "index": 40,
+          "time": 3.98,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0041.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0041.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0041.jpg"
+        },
+        {
+          "index": 41,
+          "time": 4.08,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0042.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0042.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0042.jpg"
+        },
+        {
+          "index": 42,
+          "time": 4.18,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0043.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0043.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0043.jpg"
+        },
+        {
+          "index": 43,
+          "time": 4.28,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0044.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0044.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0044.jpg"
+        },
+        {
+          "index": 44,
+          "time": 4.38,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0045.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0045.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0045.jpg"
+        },
+        {
+          "index": 45,
+          "time": 4.48,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0046.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0046.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0046.jpg"
+        },
+        {
+          "index": 46,
+          "time": 4.58,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0047.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0047.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0047.jpg"
+        },
+        {
+          "index": 47,
+          "time": 4.68,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0048.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0048.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0048.jpg"
+        },
+        {
+          "index": 48,
+          "time": 4.78,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0049.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0049.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0049.jpg"
+        },
+        {
+          "index": 49,
+          "time": 4.88,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0050.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0050.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0050.jpg"
+        },
+        {
+          "index": 50,
+          "time": 4.98,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0051.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0051.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0051.jpg"
+        },
+        {
+          "index": 51,
+          "time": 5.08,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0052.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0052.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0052.jpg"
+        },
+        {
+          "index": 52,
+          "time": 5.18,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0053.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0053.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0053.jpg"
+        },
+        {
+          "index": 53,
+          "time": 5.28,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0054.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0054.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0054.jpg"
+        },
+        {
+          "index": 54,
+          "time": 5.38,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0055.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0055.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0055.jpg"
+        },
+        {
+          "index": 55,
+          "time": 5.48,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0056.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0056.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0056.jpg"
+        },
+        {
+          "index": 56,
+          "time": 5.58,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0057.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0057.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0057.jpg"
+        },
+        {
+          "index": 57,
+          "time": 5.68,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0058.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0058.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0058.jpg"
+        },
+        {
+          "index": 58,
+          "time": 5.78,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0059.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0059.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0059.jpg"
+        },
+        {
+          "index": 59,
+          "time": 5.88,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0060.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0060.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0060.jpg"
+        },
+        {
+          "index": 60,
+          "time": 5.98,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0061.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0061.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0061.jpg"
+        },
+        {
+          "index": 61,
+          "time": 6.08,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0062.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0062.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0062.jpg"
+        },
+        {
+          "index": 62,
+          "time": 6.17,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0063.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0063.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0063.jpg"
+        },
+        {
+          "index": 63,
+          "time": 6.27,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0064.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0064.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0064.jpg"
+        },
+        {
+          "index": 64,
+          "time": 6.37,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0065.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0065.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0065.jpg"
+        },
+        {
+          "index": 65,
+          "time": 6.47,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0066.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0066.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0066.jpg"
+        },
+        {
+          "index": 66,
+          "time": 6.57,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0067.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0067.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0067.jpg"
+        },
+        {
+          "index": 67,
+          "time": 6.67,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0068.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0068.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0068.jpg"
+        },
+        {
+          "index": 68,
+          "time": 6.77,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0069.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0069.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0069.jpg"
+        },
+        {
+          "index": 69,
+          "time": 6.87,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0070.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0070.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0070.jpg"
+        },
+        {
+          "index": 70,
+          "time": 6.97,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0071.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0071.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0071.jpg"
+        },
+        {
+          "index": 71,
+          "time": 7.07,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0072.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0072.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0072.jpg"
+        },
+        {
+          "index": 72,
+          "time": 7.17,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0073.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0073.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0073.jpg"
+        },
+        {
+          "index": 73,
+          "time": 7.27,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0074.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0074.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0074.jpg"
+        },
+        {
+          "index": 74,
+          "time": 7.37,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0075.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0075.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0075.jpg"
+        },
+        {
+          "index": 75,
+          "time": 7.47,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0076.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0076.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0076.jpg"
+        },
+        {
+          "index": 76,
+          "time": 7.57,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0077.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0077.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0077.jpg"
+        },
+        {
+          "index": 77,
+          "time": 7.67,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0078.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0078.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0078.jpg"
+        },
+        {
+          "index": 78,
+          "time": 7.77,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0079.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0079.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0079.jpg"
+        },
+        {
+          "index": 79,
+          "time": 7.87,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0080.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0080.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0080.jpg"
+        },
+        {
+          "index": 80,
+          "time": 7.97,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0081.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0081.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0081.jpg"
+        },
+        {
+          "index": 81,
+          "time": 8.07,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0082.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0082.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0082.jpg"
+        },
+        {
+          "index": 82,
+          "time": 8.17,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0083.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0083.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0083.jpg"
+        },
+        {
+          "index": 83,
+          "time": 8.27,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0084.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0084.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0084.jpg"
+        },
+        {
+          "index": 84,
+          "time": 8.37,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0085.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0085.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0085.jpg"
+        },
+        {
+          "index": 85,
+          "time": 8.47,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0086.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0086.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0086.jpg"
+        },
+        {
+          "index": 86,
+          "time": 8.57,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0087.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0087.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0087.jpg"
+        },
+        {
+          "index": 87,
+          "time": 8.66,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0088.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0088.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0088.jpg"
+        },
+        {
+          "index": 88,
+          "time": 8.76,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0089.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0089.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0089.jpg"
+        },
+        {
+          "index": 89,
+          "time": 8.86,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0090.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0090.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0090.jpg"
+        },
+        {
+          "index": 90,
+          "time": 8.96,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0091.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0091.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0091.jpg"
+        },
+        {
+          "index": 91,
+          "time": 9.06,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0092.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0092.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0092.jpg"
+        },
+        {
+          "index": 92,
+          "time": 9.16,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0093.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0093.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0093.jpg"
+        },
+        {
+          "index": 93,
+          "time": 9.26,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0094.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0094.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0094.jpg"
+        },
+        {
+          "index": 94,
+          "time": 9.36,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0095.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0095.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0095.jpg"
+        },
+        {
+          "index": 95,
+          "time": 9.46,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0096.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0096.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0096.jpg"
+        },
+        {
+          "index": 96,
+          "time": 9.56,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0097.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0097.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0097.jpg"
+        },
+        {
+          "index": 97,
+          "time": 9.66,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0098.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0098.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0098.jpg"
+        },
+        {
+          "index": 98,
+          "time": 9.76,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0099.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0099.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0099.jpg"
+        },
+        {
+          "index": 99,
+          "time": 9.86,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0100.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0100.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0100.jpg"
+        },
+        {
+          "index": 100,
+          "time": 9.96,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0101.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0101.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0101.jpg"
+        },
+        {
+          "index": 101,
+          "time": 10.06,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0102.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0102.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0102.jpg"
+        },
+        {
+          "index": 102,
+          "time": 10.16,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0103.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0103.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0103.jpg"
+        },
+        {
+          "index": 103,
+          "time": 10.26,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0104.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0104.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0104.jpg"
+        },
+        {
+          "index": 104,
+          "time": 10.36,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0105.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0105.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0105.jpg"
+        },
+        {
+          "index": 105,
+          "time": 10.46,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0106.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0106.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0106.jpg"
+        },
+        {
+          "index": 106,
+          "time": 10.56,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0107.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0107.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0107.jpg"
+        },
+        {
+          "index": 107,
+          "time": 10.66,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0108.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0108.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0108.jpg"
+        },
+        {
+          "index": 108,
+          "time": 10.76,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0109.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0109.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0109.jpg"
+        },
+        {
+          "index": 109,
+          "time": 10.86,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0110.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0110.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0110.jpg"
+        },
+        {
+          "index": 110,
+          "time": 10.96,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0111.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0111.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0111.jpg"
+        },
+        {
+          "index": 111,
+          "time": 11.05,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0112.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0112.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0112.jpg"
+        },
+        {
+          "index": 112,
+          "time": 11.15,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0113.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0113.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0113.jpg"
+        },
+        {
+          "index": 113,
+          "time": 11.25,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0114.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0114.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0114.jpg"
+        },
+        {
+          "index": 114,
+          "time": 11.35,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0115.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0115.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0115.jpg"
+        },
+        {
+          "index": 115,
+          "time": 11.45,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0116.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0116.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0116.jpg"
+        },
+        {
+          "index": 116,
+          "time": 11.55,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0117.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0117.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0117.jpg"
+        },
+        {
+          "index": 117,
+          "time": 11.65,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0118.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0118.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0118.jpg"
+        },
+        {
+          "index": 118,
+          "time": 11.75,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0119.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0119.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0119.jpg"
+        },
+        {
+          "index": 119,
+          "time": 11.85,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0120.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0120.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0120.jpg"
+        },
+        {
+          "index": 120,
+          "time": 11.95,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0121.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0121.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0121.jpg"
+        },
+        {
+          "index": 121,
+          "time": 12.05,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0122.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0122.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0122.jpg"
+        },
+        {
+          "index": 122,
+          "time": 12.15,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0123.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0123.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0123.jpg"
+        },
+        {
+          "index": 123,
+          "time": 12.25,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0124.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0124.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0124.jpg"
+        },
+        {
+          "index": 124,
+          "time": 12.35,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0125.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0125.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0125.jpg"
+        },
+        {
+          "index": 125,
+          "time": 12.45,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0126.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0126.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0126.jpg"
+        },
+        {
+          "index": 126,
+          "time": 12.55,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0127.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0127.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0127.jpg"
+        },
+        {
+          "index": 127,
+          "time": 12.65,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0128.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0128.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0128.jpg"
+        },
+        {
+          "index": 128,
+          "time": 12.75,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0129.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0129.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0129.jpg"
+        },
+        {
+          "index": 129,
+          "time": 12.85,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0130.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0130.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0130.jpg"
+        },
+        {
+          "index": 130,
+          "time": 12.95,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0131.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0131.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0131.jpg"
+        },
+        {
+          "index": 131,
+          "time": 13.05,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0132.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0132.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0132.jpg"
+        },
+        {
+          "index": 132,
+          "time": 13.15,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0133.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0133.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0133.jpg"
+        },
+        {
+          "index": 133,
+          "time": 13.25,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0134.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0134.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0134.jpg"
+        },
+        {
+          "index": 134,
+          "time": 13.35,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0135.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0135.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0135.jpg"
+        },
+        {
+          "index": 135,
+          "time": 13.45,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0136.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0136.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0136.jpg"
+        },
+        {
+          "index": 136,
+          "time": 13.54,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0137.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0137.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0137.jpg"
+        },
+        {
+          "index": 137,
+          "time": 13.64,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0138.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0138.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0138.jpg"
+        },
+        {
+          "index": 138,
+          "time": 13.74,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0139.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0139.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0139.jpg"
+        },
+        {
+          "index": 139,
+          "time": 13.84,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0140.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0140.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0140.jpg"
+        },
+        {
+          "index": 140,
+          "time": 13.94,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0141.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0141.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0141.jpg"
+        },
+        {
+          "index": 141,
+          "time": 14.04,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0142.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0142.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0142.jpg"
+        },
+        {
+          "index": 142,
+          "time": 14.14,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0143.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0143.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0143.jpg"
+        },
+        {
+          "index": 143,
+          "time": 14.24,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0144.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0144.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0144.jpg"
+        },
+        {
+          "index": 144,
+          "time": 14.34,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0145.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0145.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0145.jpg"
+        },
+        {
+          "index": 145,
+          "time": 14.44,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0146.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0146.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0146.jpg"
+        },
+        {
+          "index": 146,
+          "time": 14.54,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0147.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0147.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0147.jpg"
+        },
+        {
+          "index": 147,
+          "time": 14.64,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0148.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0148.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0148.jpg"
+        },
+        {
+          "index": 148,
+          "time": 14.74,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0149.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0149.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0149.jpg"
+        },
+        {
+          "index": 149,
+          "time": 14.84,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0150.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0150.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0150.jpg"
+        },
+        {
+          "index": 150,
+          "time": 14.94,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0151.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0151.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0151.jpg"
+        },
+        {
+          "index": 151,
+          "time": 15.04,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0152.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0152.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0152.jpg"
+        },
+        {
+          "index": 152,
+          "time": 15.14,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0153.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0153.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0153.jpg"
+        },
+        {
+          "index": 153,
+          "time": 15.24,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0154.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0154.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0154.jpg"
+        },
+        {
+          "index": 154,
+          "time": 15.34,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0155.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0155.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0155.jpg"
+        },
+        {
+          "index": 155,
+          "time": 15.44,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0156.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0156.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0156.jpg"
+        },
+        {
+          "index": 156,
+          "time": 15.54,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0157.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0157.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0157.jpg"
+        },
+        {
+          "index": 157,
+          "time": 15.64,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0158.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0158.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0158.jpg"
+        },
+        {
+          "index": 158,
+          "time": 15.74,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0159.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0159.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0159.jpg"
+        },
+        {
+          "index": 159,
+          "time": 15.84,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0160.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0160.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0160.jpg"
+        },
+        {
+          "index": 160,
+          "time": 15.93,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0161.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0161.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0161.jpg"
+        },
+        {
+          "index": 161,
+          "time": 16.03,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0162.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0162.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0162.jpg"
+        },
+        {
+          "index": 162,
+          "time": 16.13,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0163.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0163.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0163.jpg"
+        },
+        {
+          "index": 163,
+          "time": 16.23,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0164.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0164.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0164.jpg"
+        },
+        {
+          "index": 164,
+          "time": 16.33,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0165.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0165.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0165.jpg"
+        },
+        {
+          "index": 165,
+          "time": 16.43,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0166.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0166.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0166.jpg"
+        },
+        {
+          "index": 166,
+          "time": 16.53,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0167.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0167.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0167.jpg"
+        },
+        {
+          "index": 167,
+          "time": 16.63,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0168.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0168.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0168.jpg"
+        },
+        {
+          "index": 168,
+          "time": 16.73,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0169.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0169.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0169.jpg"
+        },
+        {
+          "index": 169,
+          "time": 16.83,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0170.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0170.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0170.jpg"
+        },
+        {
+          "index": 170,
+          "time": 16.93,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0171.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0171.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0171.jpg"
+        },
+        {
+          "index": 171,
+          "time": 17.03,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0172.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0172.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0172.jpg"
+        },
+        {
+          "index": 172,
+          "time": 17.13,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0173.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0173.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0173.jpg"
+        },
+        {
+          "index": 173,
+          "time": 17.23,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0174.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0174.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0174.jpg"
+        },
+        {
+          "index": 174,
+          "time": 17.33,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0175.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0175.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0175.jpg"
+        },
+        {
+          "index": 175,
+          "time": 17.43,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0176.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0176.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0176.jpg"
+        },
+        {
+          "index": 176,
+          "time": 17.53,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0177.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0177.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0177.jpg"
+        },
+        {
+          "index": 177,
+          "time": 17.63,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0178.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0178.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0178.jpg"
+        },
+        {
+          "index": 178,
+          "time": 17.73,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0179.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0179.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0179.jpg"
+        },
+        {
+          "index": 179,
+          "time": 17.83,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0180.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0180.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0180.jpg"
+        },
+        {
+          "index": 180,
+          "time": 17.93,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0181.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0181.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0181.jpg"
+        },
+        {
+          "index": 181,
+          "time": 18.03,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0182.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0182.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0182.jpg"
+        },
+        {
+          "index": 182,
+          "time": 18.13,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0183.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0183.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0183.jpg"
+        },
+        {
+          "index": 183,
+          "time": 18.23,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0184.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0184.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0184.jpg"
+        },
+        {
+          "index": 184,
+          "time": 18.33,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0185.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0185.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0185.jpg"
+        },
+        {
+          "index": 185,
+          "time": 18.42,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0186.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0186.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0186.jpg"
+        },
+        {
+          "index": 186,
+          "time": 18.52,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0187.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0187.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0187.jpg"
+        },
+        {
+          "index": 187,
+          "time": 18.62,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0188.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0188.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0188.jpg"
+        },
+        {
+          "index": 188,
+          "time": 18.72,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0189.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0189.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0189.jpg"
+        },
+        {
+          "index": 189,
+          "time": 18.82,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0190.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0190.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0190.jpg"
+        },
+        {
+          "index": 190,
+          "time": 18.92,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0191.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0191.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0191.jpg"
+        },
+        {
+          "index": 191,
+          "time": 19.02,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0192.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0192.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0192.jpg"
+        },
+        {
+          "index": 192,
+          "time": 19.12,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0193.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0193.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0193.jpg"
+        },
+        {
+          "index": 193,
+          "time": 19.22,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0194.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0194.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0194.jpg"
+        },
+        {
+          "index": 194,
+          "time": 19.32,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0195.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0195.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0195.jpg"
+        },
+        {
+          "index": 195,
+          "time": 19.42,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0196.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0196.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0196.jpg"
+        },
+        {
+          "index": 196,
+          "time": 19.52,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0197.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0197.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0197.jpg"
+        },
+        {
+          "index": 197,
+          "time": 19.62,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0198.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0198.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0198.jpg"
+        },
+        {
+          "index": 198,
+          "time": 19.72,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0199.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0199.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0199.jpg"
+        },
+        {
+          "index": 199,
+          "time": 19.82,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0200.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0200.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0200.jpg"
+        },
+        {
+          "index": 200,
+          "time": 19.92,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0201.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0201.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0201.jpg"
+        },
+        {
+          "index": 201,
+          "time": 20.02,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0202.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0202.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0202.jpg"
+        },
+        {
+          "index": 202,
+          "time": 20.12,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0203.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0203.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0203.jpg"
+        },
+        {
+          "index": 203,
+          "time": 20.22,
+          "desktop": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0204.jpg",
+          "mobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_0204.webp",
+          "src": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_0204.jpg"
+        }
+      ],
+      "frameMetadata": {
+        "generated": "2025-08-04T00:45:42.378Z",
+        "videoInfo": {
+          "duration": 20.416667,
+          "width": 1280,
+          "height": 720,
+          "fps": 12,
+          "codec": "h264",
+          "bitrate": 1477526
+        },
+        "formats": [
+          "jpg",
+          "webp"
+        ],
+        "resolutions": {
+          "desktop": {
+            "width": 1920,
+            "height": 1080
+          },
+          "mobile": {
+            "width": 800,
+            "height": 450
+          }
+        }
+      }
+    },
+    {
+      "type": "abre",
+      "backgroundImage": "",
+      "backgroundImageMobile": "",
+      "author": "Fábio Tito | 26/07/2025 04h00",
+      "variant": "minimal",
+      "overlay": "true",
+      "title": "Diário de um Legendário: a fé, o cansaço e as regras militares no retiro que virou febre entre famosos",
+      "subtitle": "O g1 foi ao retiro secreto masculino que causa debate nas redes sociais, e conta bastidores. O 1&ordm; dia tem uma impressionante maratona física, com ordens rigorosas, comida racionada e religião ainda em segundo plano.",
+      "date": "29/07/2025"
+    },
+    {
+      "type": "globovideo",
+      "caption": "Descrição do vídeo",
+      "credit": "Globo",
+      "fullWidth": "true",
+      "autoplay": "true",
+      "videoId": "13789200",
+      "skipDFP": "true"
+    },
+    {
+      "type": "foto",
+      "src": "https://s2-g1.glbimg.com/8imyaJ9ZfO8Phak8WrEAvoKymA4=/0x0:1920x575/1600x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/K/u/zLQ5ABTDGljqAsMcS98g/dia-01-frases-01.jpg",
+      "caption": "Exemplo de <strong>foto normal</strong> (não fullWidth) com legenda formatada",
+      "credit": "Foto: <em>Unsplash</em>",
+      "alt": "Carros elétricos em concessionária",
+      "fullWidth": "true"
+    },
+    {
+      "type": "texto",
+      "text": "Este &eacute; um &lt;strong&gt;par&aacute;grafo de texto normal&lt;/strong&gt; que demonstra a formata&ccedil;&atilde;o b&aacute;sica. Aqui temos &lt;em&gt;texto em it&aacute;lico&lt;/em&gt;, &lt;u&gt;texto sublinhado&lt;/u&gt;, e &lt;a href=&quot;https://example.com&quot;&gt;links funcionais&lt;/a&gt;. O objetivo &eacute; mostrar como o texto flui naturalmente na p&aacute;gina."
+    },
+    {
+      "type": "texto",
+      "text": "Este &eacute; um &lt;strong&gt;par&aacute;grafo de destaque&lt;/strong&gt; que serve como introdu&ccedil;&atilde;o ou destaque de se&ccedil;&atilde;o. A fonte &eacute; ligeiramente maior e possui mais peso visual para chamar aten&ccedil;&atilde;o do leitor.",
+      "variant": "lead"
+    },
+    {
+      "type": "frase",
+      "text": "Esta &eacute; uma &lt;strong&gt;cita&ccedil;&atilde;o moderna&lt;/strong&gt; com o novo design elegante. Aqui podemos ter &lt;em&gt;formata&ccedil;&atilde;o em it&aacute;lico&lt;/em&gt; e texto que realmente se destaca na p&aacute;gina de forma sofisticada.",
+      "author": "Designer do Sistema",
+      "role": "Especialista em UX/UI"
+    },
+    {
+      "type": "scrollytelling",
+      "steps": [
+        {
+          "title": "A Jornada Começa:Visão Panorâmica",
+          "text": "&Agrave; medida que você desliza para baixo,a cena se abre. A imagem de fundo é o nosso ponto de partida para essa aventura visual. <strong>Role para baixo para ver a transformação!</strong>",
+          "image": "https://s2-g1.glbimg.com/rGOAQaWtSObw063Lu4zktzP0UDU=/0x0:1920x1165/1600x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/e/y/qoGlAPSuAiu7kYuMb58g/dia-01-capa-desktop-v2.jpg",
+          "alt": "Paisagem inicial,ampla e deslumbrante"
+        },
+        {
+          "title": "Detalhe Revelado:Zoom In Dinâmico",
+          "text": "Continue rolando! Observe como o elemento visual no centro da tela começa a se aproximar,focando em um detalhe específico. Este é um efeito de zoom que reage ao seu scroll. Sinta a imersão!",
+          "image": "https://s2-g1.glbimg.com/rGOAQaWtSObw063Lu4zktzP0UDU=/0x0:1920x1165/1600x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/e/y/qoGlAPSuAiu7kYuMb58g/dia-01-capa-desktop-v2.jpg",
+          "alt": "Detalhe de balões de ar quente com zoom"
+        },
+        {
+          "title": "Perspectiva Inesperada:Deslocamento Lateral",
+          "text": "Agora,sinta a imagem se mover sutilmente para o lado. Essa pequena mudança de perspectiva cria uma sensação de profundidade e exploração contínua,mantendo o usuário engajado em uma coreografia perfeita.",
+          "image": "https://s2-g1.glbimg.com/gxr1so9qCY025b4OgYdZ10CVpaY=/0x0:1920x1165/1600x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/K/U/lrdBNXRCmytDvLWsQYrw/cena1-chegada-pos.jpg",
+          "alt": "Paisagem com deslocamento lateral suave"
+        },
+        {
+          "title": "Aprofundando a Narrativa:Opacidade e Escala",
+          "text": "&Agrave; medida que o texto avança,o visual de fundo pode reagir de maneiras diferentes &ndash; talvez diminuindo um pouco a opacidade ou se expandindo ainda mais,guiando o olhar do usuário.",
+          "image": "https://s2-g1.glbimg.com/FlOe9prOlMOy2ughX-9n_ejmack=/0x0:1920x1080/1600x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/j/I/6Ppg4eTCyCEgGwobKkmA/dia-01-cena-02-cova-desktop-v2.jpg",
+          "alt": "Cores vibrantes do oceano"
+        },
+        {
+          "title": "Finalização Grandiosa:Vídeo Imersivo",
+          "text": "Para a grande final,um vídeo envolvente pode surgir e preencher a tela,oferecendo uma conclusão dramática e visualmente rica para sua narrativa de scroll.",
+          "image": "https://s2-g1.glbimg.com/BzDf6YS5VXIUK_p__YLYY607Ew8=/0x0:1920x1080/1600x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/7/3/R8t2RsTRmZunBONsgoiw/dia-01-cena-03-trilha-noturna-pos-desktop.jpg",
+          "alt": "Vídeo de uma pequena cachoeira para final imersivo"
+        }
+      ],
+      "fullWidth": "false"
+    },
+    {
+      "type": "ancora",
+      "id": "componentes-de-texto"
+    },
+    {
+      "type": "intertitulo",
+      "text": "Seção 1: Componentes de Texto",
+      "backgroundImage": "https://www.reuters.com/graphics/USA-TEMPERATURE/PRISONS/jnpwbejwlvw/cdn/images/graphics/ACdays-lg.png",
+      "backgroundImageMobile": "https://www.reuters.com/graphics/USA-TEMPERATURE/PRISONS/jnpwbejwlvw/cdn/images/graphics/ACdays-xs.png",
+      "backgroundPosition": "center bottom",
+      "backgroundPositionMobile": "center bottom",
+      "size": "large",
+      "height": "1200px",
+      "heightMobile": "1250px",
+      "overlay": "true",
+      "textPosition": "top",
+      "textPositionMobile": "center",
+      "textAlign": "left",
+      "textAlignMobile": "center"
+    },
+    {
+      "type": "texto",
+      "text": "Agora vamos demonstrar diferentes tipos de &lt;strong&gt;intert&iacute;tulos&lt;/strong&gt; e suas varia&ccedil;&otilde;es. Cada um tem comportamentos &uacute;nicos para desktop e mobile."
+    },
+    {
+      "type": "intertitulo",
+      "text": "Título Simples Pequeno",
+      "variant": "default",
+      "size": "small"
+    },
+    {
+      "type": "texto",
+      "text": "Este &eacute; um exemplo ap&oacute;s um t&iacute;tulo pequeno. Observe o &lt;strong&gt;espa&ccedil;amento&lt;/strong&gt; e a hierarquia visual."
+    },
+    {
+      "type": "intertitulo",
+      "text": "Título Simples Grande",
+      "variant": "default",
+      "size": "large"
+    },
+    {
+      "type": "texto",
+      "text": "Este &eacute; um exemplo ap&oacute;s um t&iacute;tulo grande. Note como a &lt;em&gt;hierarquia visual&lt;/em&gt; muda com o tamanho."
+    },
+    {
+      "type": "intertitulo",
+      "text": "Título Centrado",
+      "variant": "centered",
+      "size": "medium",
+      "textAlign": "center"
+    },
+    {
+      "type": "texto",
+      "text": "Exemplo de t&iacute;tulo centrado que pode ser usado para se&ccedil;&otilde;es especiais ou destaque."
+    },
+    {
+      "type": "intertitulo",
+      "text": "Título Minimal com Borda",
+      "variant": "minimal",
+      "size": "medium"
+    },
+    {
+      "type": "texto",
+      "text": "O variant &lt;strong&gt;minimal&lt;/strong&gt; &eacute; perfeito para subdivis&otilde;es discretas do conte&uacute;do, mantendo a organiza&ccedil;&atilde;o sem criar muito peso visual."
+    },
+    {
+      "type": "intertitulo",
+      "text": "Seção 2: Componentes com Imagem de Fundo",
+      "backgroundImage": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&q=80",
+      "size": "large",
+      "height": "400px",
+      "overlay": "true",
+      "textPosition": "center",
+      "textAlign": "center"
+    },
+    {
+      "type": "texto",
+      "text": "Os t&iacute;tulos com imagem de fundo s&atilde;o &lt;strong&gt;perfeitos para criar impacto visual&lt;/strong&gt; e separar se&ccedil;&otilde;es importantes do conte&uacute;do."
+    },
+    {
+      "type": "intertitulo",
+      "text": "Título com Posição Superior",
+      "backgroundImage": "https://cdn.pixabay.com/photo/2022/11/14/10/54/sunrise-7591335_1280.jpg",
+      "size": "medium",
+      "height": "300px",
+      "overlay": "true",
+      "textPosition": "top",
+      "textAlign": "left"
+    },
+    {
+      "type": "texto",
+      "text": "Aqui o texto fica no &lt;strong&gt;topo da imagem&lt;/strong&gt;, alinhado &agrave; esquerda. &Uacute;til para designs mais din&acirc;micos."
+    },
+    {
+      "type": "intertitulo",
+      "text": "Título com Posição Inferior",
+      "backgroundImage": "https://cdn.pixabay.com/photo/2025/06/19/07/59/allgau-9668453_1280.jpg",
+      "textPosition": "bottom",
+      "textAlign": "right"
+    },
+    {
+      "type": "texto",
+      "text": "E aqui o texto fica na &lt;strong&gt;parte inferior&lt;/strong&gt;, alinhado &agrave; direita. Permite criar layouts mais interessantes."
+    },
+    {
+      "type": "intertitulo",
+      "text": "Mobile - Posição Centro",
+      "backgroundImage": "https://cdn.pixabay.com/photo/2016/07/28/09/01/mountains-1547302_1280.jpg",
+      "backgroundImageMobile": "https://cdn.pixabay.com/photo/2016/07/28/09/01/mountains-1547302_1280.jpg",
+      "size": "large",
+      "height": "400px",
+      "heightMobile": "250px",
+      "overlay": "true",
+      "textPosition": "top",
+      "textPositionMobile": "center",
+      "textAlign": "left",
+      "textAlignMobile": "center"
+    },
+    {
+      "type": "texto",
+      "text": "Este exemplo mostra como o componente pode ter &lt;strong&gt;comportamentos diferentes&lt;/strong&gt; entre desktop e mobile. No desktop: topo/esquerda, no mobile: centro/centro."
+    },
+    {
+      "type": "ancora",
+      "id": "componentes-de-midia"
+    },
+    {
+      "type": "intertitulo",
+      "text": "Seção 3: Componentes de Mídia",
+      "variant": "default",
+      "size": "medium"
+    },
+    {
+      "type": "foto",
+      "src": "https://s2-g1.glbimg.com/17xHZXrK0_UuM618DAVerugv1jk=/0x0:1800x900/924x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/R/O/MEF7xqRtWxad7Si1OAUA/quartetos-fantasticos.jpg",
+      "caption": "Exemplo de <strong>foto fullWidth</strong> que ocupa toda a largura disponível",
+      "credit": "Foto: <a href=\"https://unsplash.com\">Unsplash</a>",
+      "alt": "Posto de recarga para carros elétricos",
+      "fullWidth": "true"
+    },
+    {
+      "type": "foto",
+      "src": "https://s2-g1.glbimg.com/qe95qCVcCW9ld9Sk020FZrVrWuA=/0x0:1296x730/1000x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/f/D/MnB2alRoaZQ3bVWJa4rA/quarteto-fantastico-1994.jpg",
+      "caption": "Foto com <strong>alinhamento à esquerda</strong> para criar layouts mais dinâmicos",
+      "credit": "Crédito com <em>formatação</em>",
+      "alt": "Lineup de carros elétricos",
+      "fullWidth": "false"
+    },
+    {
+      "type": "foto",
+      "src": "https://s2-g1.glbimg.com/xK4a4h0AQp4U98hALh5AuVQkxx4=/0x0:2048x1139/1000x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/z/S/MZt3o4Se2JlQCqo8y4uw/quarteto-fantastico-e-o-surfista-prateado.jpg",
+      "caption": "Foto com <strong>alinhamento à direita</strong> para variar o layout visual",
+      "credit": "Outro exemplo de crédito",
+      "alt": "Fábrica de carros elétricos",
+      "fullWidth": "false"
+    },
+    {
+      "type": "video",
+      "src": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+      "caption": "Exemplo de <strong>vídeo normal</strong> com controles padrão",
+      "credit": "Vídeo: <em>Sample Videos</em>",
+      "fullWidth": "false",
+      "autoplay": "false",
+      "controls": "true"
+    },
+    {
+      "type": "video",
+      "src": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      "caption": "Vídeo <strong>fullWidth</strong> que ocupa toda a largura",
+      "credit": "Vídeo: Sample Videos",
+      "fullWidth": "true",
+      "autoplay": "true",
+      "controls": "true"
+    },
+    {
+      "type": "globovideo",
+      "caption": "Teste de player sem algumas props para verificar valores padrão",
+      "credit": "",
+      "fullWidth": "true",
+      "autoplay": "true",
+      "controls": "true",
+      "videoId": "13798642"
+    },
+    {
+      "type": "globovideo",
+      "caption": "Teste de player sem algumas props para verificar valores padrão",
+      "credit": "",
+      "fullWidth": "true",
+      "autoplay": "true",
+      "controls": "true",
+      "videoId": "13798680"
+    },
+    {
+      "type": "intertitulo",
+      "text": "Seção 4: Mais Variações de Texto",
+      "variant": "default",
+      "size": "medium"
+    },
+    {
+      "type": "frase",
+      "text": "Segunda cita&ccedil;&atilde;o para testar o &lt;strong&gt;layout m&uacute;ltiplo&lt;/strong&gt;. O design deve manter consist&ecirc;ncia mesmo com v&aacute;rias cita&ccedil;&otilde;es na mesma p&aacute;gina.",
+      "author": "Segundo Autor",
+      "role": "Outro Especialista"
+    },
+    {
+      "type": "texto",
+      "text": "Texto intercalado entre cita&ccedil;&otilde;es para testar o &lt;strong&gt;fluxo visual&lt;/strong&gt; e espa&ccedil;amentos. Este par&aacute;grafo serve para avaliar se as margens e paddings est&atilde;o corretos."
+    },
+    {
+      "type": "frase",
+      "text": "Terceira cita&ccedil;&atilde;o com &lt;em&gt;formata&ccedil;&atilde;o diferente&lt;/em&gt; para testar a robustez do componente. Aqui temos texto mais longo para verificar como o design se comporta com &lt;strong&gt;conte&uacute;do extenso&lt;/strong&gt; que pode ocupar m&uacute;ltiplas linhas e criar layouts mais complexos.",
+      "author": "Terceiro Especialista",
+      "role": "Designer de Produto Sênior"
+    },
+    {
+      "type": "texto",
+      "text": "Mais um par&aacute;grafo normal para &lt;strong&gt;testar o ritmo&lt;/strong&gt; da p&aacute;gina. Aqui podemos incluir &lt;a href=&quot;#&quot;&gt;links&lt;/a&gt;, &lt;em&gt;it&aacute;licos&lt;/em&gt;, e outros elementos inline."
+    },
+    {
+      "type": "intertitulo",
+      "text": "Seção 5: Testes de Casos Extremos",
+      "backgroundImage": "https://cdn.pixabay.com/photo/2020/01/07/13/36/sea-4747601_1280.jpg",
+      "size": "large",
+      "height": "100vh",
+      "overlay": "true",
+      "textPosition": "center",
+      "textAlign": "center"
+    },
+    {
+      "type": "texto",
+      "text": "Esta se&ccedil;&atilde;o testa &lt;strong&gt;casos extremos&lt;/strong&gt; e combina&ccedil;&otilde;es incomuns para garantir que o sistema seja robusto em qualquer situa&ccedil;&atilde;o."
+    },
+    {
+      "type": "foto",
+      "src": "https://cdn.pixabay.com/photo/2023/12/20/07/04/sunset-8459057_1280.jpg",
+      "caption": "Legenda muito longa que deve quebrar corretamente em múltiplas linhas para testar o comportamento do componente com <strong>textos extensos</strong> que podem causar problemas de layout se não forem tratados adequadamente",
+      "credit": "Crédito também muito longo: <em>Fotógrafo com Nome Muito Extenso da Agência de Fotografia Internacional</em>",
+      "alt": "Imagem pequena para teste",
+      "fullWidth": "false"
+    },
+    {
+      "type": "frase",
+      "text": "Cita&ccedil;&atilde;o com texto muito extenso para testar quebras de linha e comportamento responsivo. Este &eacute; um exemplo de como o componente deve se comportar quando recebe &lt;strong&gt;conte&uacute;do longo&lt;/strong&gt; que pode se estender por m&uacute;ltiplas linhas e criar desafios de layout. O design deve manter a eleg&acirc;ncia mesmo com &lt;em&gt;textos muito longos&lt;/em&gt; que testam os limites do sistema.",
+      "author": "Autor com Nome Muito Longo e Extenso",
+      "role": "Especialista em Testes de Interface e Experiência do Usuário Sênior"
+    },
+    {
+      "type": "globovideo",
+      "caption": "Teste de player sem algumas props para verificar valores padrão",
+      "credit": "",
+      "fullWidth": "false",
+      "autoplay": "false",
+      "controls": "true",
+      "videoId": "4372653"
+    },
+    {
+      "type": "intertitulo",
+      "text": "Título Sem Imagem de Fundo",
+      "variant": "default",
+      "size": "small"
+    },
+    {
+      "type": "intertitulo",
+      "text": "",
+      "variant": "minimal",
+      "size": "medium"
+    },
+    {
+      "type": "texto",
+      "text": "Teste com t&iacute;tulo vazio acima. O sistema deve ser &lt;strong&gt;robusto&lt;/strong&gt; o suficiente para lidar com props vazias ou indefinidas."
+    },
+    {
+      "type": "foto",
+      "src": "https://cdn.pixabay.com/photo/2020/03/08/09/10/church-4911852_1280.jpg",
+      "caption": "",
+      "credit": "",
+      "alt": "",
+      "fullWidth": "true"
+    },
+    {
+      "type": "texto",
+      "text": "Foto acima com props vazias para testar comportamento padr&atilde;o."
+    },
+    {
+      "type": "intertitulo",
+      "text": "Seção 6: Testes Responsivos",
+      "backgroundImage": "https://cdn.pixabay.com/photo/2018/04/25/09/26/eiffel-tower-3349075_1280.jpg",
+      "backgroundImageMobile": "https://cdn.pixabay.com/photo/2024/09/21/15/07/eiffel-tower-9064240_1280.jpg",
+      "size": "large",
+      "height": "400px",
+      "heightMobile": "200px",
+      "overlay": "true",
+      "textPosition": "bottom",
+      "textPositionMobile": "top",
+      "textAlign": "left",
+      "textAlignMobile": "right"
+    },
+    {
+      "type": "texto",
+      "text": "Esta se&ccedil;&atilde;o testa &lt;strong&gt;comportamentos responsivos&lt;/strong&gt; espec&iacute;ficos. O t&iacute;tulo acima deve ter imagens, posi&ccedil;&otilde;es e alinhamentos diferentes entre desktop e mobile."
+    },
+    {
+      "type": "intertitulo",
+      "text": "Desktop: Centro/Centro, Mobile: Topo/Esquerda",
+      "backgroundImage": "https://cdn.pixabay.com/photo/2018/04/25/09/26/eiffel-tower-3349075_1280.jpg",
+      "backgroundImageMobile": "https://cdn.pixabay.com/photo/2013/04/13/18/42/tower-103417_1280.jpg",
+      "size": "medium",
+      "height": "300px",
+      "heightMobile": "180px",
+      "overlay": "true",
+      "textPosition": "center",
+      "textPositionMobile": "top",
+      "textAlign": "center",
+      "textAlignMobile": "left"
+    },
+    {
+      "type": "texto",
+      "text": "Mais um teste de &lt;strong&gt;responsividade&lt;/strong&gt; com configura&ccedil;&otilde;es espec&iacute;ficas para cada breakpoint."
+    },
+    {
+      "type": "intertitulo",
+      "text": "Seção 8: Componentes Avançados - PhotoGallery",
+      "variant": "default",
+      "size": "medium"
+    },
+    {
+      "type": "texto",
+      "text": "Agora vamos testar os &lt;strong&gt;componentes mais avan&ccedil;ados&lt;/strong&gt; do sistema. Come&ccedil;ando com galerias de fotos em diferentes layouts."
+    },
+    {
+      "type": "galeria",
+      "images": [
+        {
+          "src": "https://cdn.pixabay.com/photo/2015/09/09/07/05/sea-931164_1280.jpg",
+          "alt": "Carro elétrico 1",
+          "caption": "Tesla Model S na estrada",
+          "credit": "Foto:Picsum"
+        },
+        {
+          "src": "https://cdn.pixabay.com/photo/2017/05/22/19/50/surfer-2335088_1280.jpg",
+          "alt": "Posto de recarga",
+          "caption": "Estação de recarga rápida",
+          "credit": "Foto:Picsum"
+        },
+        {
+          "src": "https://cdn.pixabay.com/photo/2016/11/29/03/27/action-1867052_1280.jpg",
+          "alt": "Carros elétricos",
+          "caption": "Lineup de veículos elétricos",
+          "credit": "Foto:Picsum"
+        },
+        {
+          "src": "https://cdn.pixabay.com/photo/2017/08/07/10/08/sea-2602227_1280.jpg",
+          "alt": "Fábrica",
+          "caption": "Produção de carros elétricos",
+          "credit": "Foto:Picsum"
+        },
+        {
+          "src": "https://cdn.pixabay.com/photo/2016/11/29/05/25/sharks-1867523_1280.jpg",
+          "alt": "Tecnologia",
+          "caption": "Tecnologia embarcada",
+          "credit": "Foto:Picsum"
+        },
+        {
+          "src": "https://cdn.pixabay.com/photo/2022/08/09/13/38/fish-7375042_1280.jpg",
+          "alt": "Natureza",
+          "caption": "Impacto ambiental positivo",
+          "credit": "Foto:Picsum"
+        }
+      ],
+      "layout": "grid",
+      "columns": "3"
+    },
+    {
+      "type": "texto",
+      "text": "Galeria em &lt;strong&gt;grid 3 colunas&lt;/strong&gt; com lightbox interativo. Clique nas imagens para ver o efeito."
+    },
+    {
+      "type": "galeria",
+      "images": [
+        {
+          "src": "https://cdn.pixabay.com/photo/2022/03/30/13/18/betta-7101168_1280.jpg",
+          "alt": "Paisagem vertical",
+          "caption": "Imagem em formato portrait",
+          "credit": "Teste masonry"
+        },
+        {
+          "src": "https://cdn.pixabay.com/photo/2021/08/13/07/11/siamese-fighting-fish-6542427_1280.jpg",
+          "alt": "Paisagem horizontal",
+          "caption": "Imagem em formato landscape",
+          "credit": "Layout masonry"
+        },
+        {
+          "src": "https://cdn.pixabay.com/photo/2019/06/10/10/20/betta-fish-nemo-4263848_1280.jpg",
+          "alt": "Vertical 2",
+          "caption": "Outra imagem vertical para testar o layout masonry",
+          "credit": "Masonry test"
+        },
+        {
+          "src": "https://cdn.pixabay.com/photo/2017/08/06/00/26/fish-2587058_1280.jpg",
+          "alt": "Horizontal 2",
+          "caption": "Imagem horizontal no layout masonry",
+          "credit": "Grid masonry"
+        }
+      ],
+      "layout": "masonry",
+      "columns": "2"
+    },
+    {
+      "type": "texto",
+      "text": "Galeria &lt;strong&gt;masonry 2 colunas&lt;/strong&gt; que se adapta automaticamente ao tamanho das imagens, criando um layout mais org&acirc;nico."
+    },
+    {
+      "type": "intertitulo",
+      "text": "Seção 9: Carousel Interativo",
+      "variant": "default",
+      "size": "medium"
+    },
+    {
+      "type": "carrossel",
+      "items": [
+        {
+          "type": "image",
+          "src": "https://cdn.pixabay.com/photo/2023/05/30/15/34/silver-gull-8028946_1280.jpg",
+          "alt": "Slide 1",
+          "caption": "Primeiro slide do carrossel - Carro elétrico moderno",
+          "credit": "Carousel test 1"
+        },
+        {
+          "type": "image",
+          "src": "https://cdn.pixabay.com/photo/2023/04/14/10/27/seagull-7924729_1280.jpg",
+          "alt": "Slide 2",
+          "caption": "Segundo slide - Infraestrutura de recarga",
+          "credit": "Carousel test 2"
+        },
+        {
+          "type": "content",
+          "content": "<h2 style='color:var(--color-primary);'>Slide de Conteúdo</h2>Este é um slide com <strong>conteúdo HTML</strong> personalizado ao invés de imagem.",
+          "caption": "Slide com conteúdo customizado"
+        },
+        {
+          "type": "image",
+          "src": "https://cdn.pixabay.com/photo/2022/08/18/10/41/herring-gull-7394570_1280.jpg",
+          "alt": "Slide 4",
+          "caption": "Quarto slide - Imagem ao invés de vídeo",
+          "credit": "Image carousel test"
+        }
+      ],
+      "autoplay": "false",
+      "interval": "3000",
+      "showDots": "true",
+      "showArrows": "true"
+    },
+    {
+      "type": "texto",
+      "text": "Carousel &lt;strong&gt;sem autoplay&lt;/strong&gt; com diferentes tipos de conte&uacute;do: imagens, HTML customizado e v&iacute;deo."
+    },
+    {
+      "type": "carrossel",
+      "items": [
+        {
+          "type": "image",
+          "src": "https://cdn.pixabay.com/photo/2023/04/10/12/43/bird-7913707_1280.jpg",
+          "alt": "Auto slide 1",
+          "caption": "Carousel com autoplay ativado",
+          "credit": "Auto carousel 1"
+        },
+        {
+          "type": "image",
+          "src": "https://cdn.pixabay.com/photo/2022/08/26/00/07/bird-7411459_1280.jpg",
+          "alt": "Auto slide 2",
+          "caption": "Sem setas,apenas dots para navegação",
+          "credit": "Auto carousel 2"
+        },
+        {
+          "type": "image",
+          "src": "https://cdn.pixabay.com/photo/2013/02/09/10/57/seagull-79658_1280.jpg",
+          "alt": "Auto slide 3",
+          "caption": "Mudança automática a cada 4 segundos",
+          "credit": "Auto carousel 3"
+        }
+      ],
+      "autoplay": "true",
+      "interval": "4000",
+      "showDots": "true",
+      "showArrows": "false"
+    },
+    {
+      "type": "texto",
+      "text": "Carousel com &lt;strong&gt;autoplay ativado&lt;/strong&gt; e apenas dots para navega&ccedil;&atilde;o. Para no hover e reinicia quando o mouse sai."
+    },
+    {
+      "type": "intertitulo",
+      "text": "Seção 10: Parallax Effect",
+      "variant": "default",
+      "size": "medium"
+    },
+    {
+      "type": "parallax",
+      "image": "https://cdn.pixabay.com/photo/2023/10/21/11/46/sunset-8331285_1280.jpg",
+      "height": "100vh",
+      "speed": "0.5",
+      "content": "\"<h2>Efeito Parallax Suave</h2>A imagem se move mais devagar que o scroll, criando profundidade visual. Speed: 0.5<br>\"",
+      "overlay": "true"
+    },
+    {
+      "type": "texto",
+      "text": "O componente &lt;strong&gt;Parallax&lt;/strong&gt; cria uma sensa&ccedil;&atilde;o de profundidade fazendo a imagem de fundo se mover em velocidade diferente do scroll."
+    },
+    {
+      "type": "parallax",
+      "image": "https://cdn.pixabay.com/photo/2016/07/15/22/26/sunset-1520615_1280.jpg",
+      "height": "50vh",
+      "speed": "0.8",
+      "content": "\"<h2>Parallax Mais Rápido</h2>Com speed 0.8, o movimento é mais pronunciado e dramático.<br>\"",
+      "overlay": "true"
+    },
+    {
+      "type": "texto",
+      "text": "Segundo exemplo de parallax com &lt;strong&gt;velocidade diferente&lt;/strong&gt; (0.8) e altura menor (60vh)."
+    },
+    {
+      "type": "parallax",
+      "image": "https://cdn.pixabay.com/photo/2016/07/15/22/26/sunset-1520615_1280.jpg",
+      "height": "100vh",
+      "speed": "0.3",
+      "content": "\"<h2 style='text-shadow: 2px 2px 4px rgba(0,0,0,0.8);'>Sem Overlay</h2>Parallax sem overlay escuro, texto com sombra para legibilidade.<br>\"",
+      "overlay": "false"
+    },
+    {
+      "type": "texto",
+      "text": "Terceiro parallax &lt;strong&gt;sem overlay&lt;/strong&gt;, altura total (100vh) e velocidade mais lenta (0.3)."
+    },
+    {
+      "type": "intertitulo",
+      "text": "Seção 11: Before/After Comparisons",
+      "variant": "default",
+      "size": "medium"
+    },
+    {
+      "type": "antes-depois",
+      "orientation": "vertical",
+      "beforeImage": "https://cdn.pixabay.com/photo/2015/09/09/16/40/girl-931776_1280.jpg",
+      "afterImage": "https://cdn.pixabay.com/photo/2016/11/19/10/30/beach-1838501_1280.jpg",
+      "beforeLabel": "Combustão",
+      "afterLabel": "Elétrico"
+    },
+    {
+      "type": "texto",
+      "text": "Compara&ccedil;&atilde;o &lt;strong&gt;vertical&lt;/strong&gt; (padr&atilde;o) entre ve&iacute;culos a combust&atilde;o e el&eacute;tricos. Arraste o controle para revelar a diferen&ccedil;a."
+    },
+    {
+      "type": "antes-depois",
+      "orientation": "horizontal",
+      "beforeImage": "https://cdn.pixabay.com/photo/2022/09/15/09/05/man-7456044_1280.jpg",
+      "afterImage": "https://cdn.pixabay.com/photo/2022/09/15/09/04/sea-7456037_1280.jpg",
+      "beforeLabel": "Conceito",
+      "afterLabel": "Produção"
+    },
+    {
+      "type": "texto",
+      "text": "Compara&ccedil;&atilde;o &lt;strong&gt;horizontal&lt;/strong&gt; entre conceito e produ&ccedil;&atilde;o. O slider funciona tanto com mouse quanto com touch."
+    },
+    {
+      "type": "antes-depois",
+      "orientation": "vertical",
+      "beforeImage": "https://picsum.photos/800/600?random=39",
+      "afterImage": "https://picsum.photos/800/600?random=40",
+      "beforeLabel": "Poluição",
+      "afterLabel": "Sustentabilidade"
+    },
+    {
+      "type": "texto",
+      "text": "Outra compara&ccedil;&atilde;o vertical mostrando o &lt;strong&gt;impacto ambiental&lt;/strong&gt;. O componente &eacute; responsivo e funciona bem em mobile."
+    },
+    {
+      "type": "intertitulo",
+      "text": "Seção 12: ScrollyTelling - Demonstração Completa",
+      "variant": "default",
+      "size": "large"
+    },
+    {
+      "type": "texto",
+      "text": "A seguir, vamos explorar todas as varia&ccedil;&otilde;es do componente &lt;strong&gt;ScrollyTelling&lt;/strong&gt;, desde o layout padr&atilde;o at&eacute; o modo de tela cheia com m&iacute;dias diferentes para desktop e mobile."
+    },
+    {
+      "type": "intertitulo",
+      "text": "Exemplo 1: Layout Padrão (50/50) com Imagens Otimizadas",
+      "variant": "default",
+      "size": "medium"
+    },
+    {
+      "type": "texto",
+      "text": "O layout padr&atilde;o &eacute; ideal para quando o texto descritivo &eacute; t&atilde;o importante quanto a imagem, criando um equil&iacute;brio entre os dois elementos na tela."
+    },
+    {
+      "type": "intertitulo",
+      "text": "Seção 14: Integração com Flourish",
+      "variant": "default",
+      "size": "large"
+    },
+    {
+      "type": "texto",
+      "text": "Esta se&ccedil;&atilde;o demonstra a integra&ccedil;&atilde;o com a plataforma de visualiza&ccedil;&atilde;o de dados &lt;strong&gt;Flourish&lt;/strong&gt;. Podemos incorporar tanto gr&aacute;ficos e mapas est&aacute;ticos quanto narrativas guiadas por scroll."
+    },
+    {
+      "type": "intertitulo",
+      "text": "Exemplo 1: Gráfico Simples (Embed)",
+      "variant": "default",
+      "size": "medium"
+    },
+    {
+      "type": "flourish",
+      "src": "visualisation/24092168"
+    },
+    {
+      "type": "texto",
+      "text": "O componente acima renderiza uma visualiza&ccedil;&atilde;o &uacute;nica do Flourish. &Eacute; ideal para gr&aacute;ficos, mapas ou qualquer outro embed simples. O jornalista s&oacute; precisa do ID da visualiza&ccedil;&atilde;o."
+    },
+    {
+      "type": "intertitulo",
+      "text": "Exemplo 2: Story como Scrollytelling",
+      "variant": "default",
+      "size": "medium"
+    },
+    {
+      "type": "flourish-scrolly",
+      "steps": [
+        {
+          "title": "Abertura:Mapa Global",
+          "text": "Começamos com a visão geral do mapa,que corresponde ao <strong>slide 0</strong> da nossa Flourish Story. O texto aqui introduz o cenário.",
+          "slide": 0
+        },
+        {
+          "title": "Abertura:Mapa Global",
+          "text": "Começamos com a visão geral do mapa,que corresponde ao <strong>slide 0</strong> da nossa Flourish Story. O texto aqui introduz o cenário.",
+          "slide": 0
+        },
+        {
+          "title": "Abertura:Mapa Global",
+          "text": "Começamos com a visão geral do mapa,que corresponde ao <strong>slide 0</strong> da nossa Flourish Story. O texto aqui introduz o cenário.",
+          "slide": 0
+        },
+        {
+          "title": "Abertura:Mapa Global2",
+          "text": "Começamos com a visão geral do mapa,que corresponde ao <strong>slide 0</strong> da nossa Flourish Story. O texto aqui introduz o cenário.",
+          "slide": 0
+        },
+        {
+          "title": "Foco na América do Sul",
+          "text": "Ao rolar para este card,o mapa dá um zoom na América do Sul. Este é o <strong>slide 1</strong> da nossa história.",
+          "slide": 1
+        },
+        {
+          "title": "Análise do Brasil",
+          "text": "Ainda no slide 1,podemos usar um segundo card de texto para guiar a atenção do leitor para um ponto específico do mapa,como o Brasil,sem mudar a visualização.",
+          "slide": 1
+        },
+        {
+          "title": "Conclusão:Dados de SP",
+          "text": "Finalmente,o mapa avança para o <strong>slide 2</strong>,mostrando dados específicos do estado de São Paulo para concluir a nossa análise.",
+          "slide": 2
+        }
+      ],
+      "src": "story/3218812"
+    },
+    {
+      "type": "texto",
+      "text": "O componente acima transforma uma &quot;Flourish Story&quot; completa em uma experi&ecirc;ncia de scrollytelling, onde cada passo do texto pode controlar qual slide da hist&oacute;ria &eacute; exibido."
+    },
+    {
+      "type": "intertitulo",
+      "text": "Final do Showcase Completo",
+      "backgroundImage": "https://cdn.pixabay.com/photo/2021/02/20/18/11/sea-6034191_1280.jpg",
+      "size": "large",
+      "height": "350px",
+      "overlay": "true",
+      "textPosition": "center",
+      "textAlign": "center"
+    },
+    {
+      "type": "texto",
+      "text": "&lt;strong&gt;&#127881; SHOWCASE COMPLETO FINALIZADO!&lt;/strong&gt;&lt;br&gt;&lt;br&gt;<br>&lt;strong&gt;Componentes testados:&lt;/strong&gt;&lt;br&gt;<br>&bull; &lt;em&gt;Header&lt;/em&gt; - variants e backgrounds &#9989;&lt;br&gt;<br>&bull; &lt;em&gt;StoryText&lt;/em&gt; - body, lead, quote &#9989;&lt;br&gt;<br>&bull; &lt;em&gt;SectionTitle&lt;/em&gt; - 15+ varia&ccedil;&otilde;es &#9989;&lt;br&gt;<br>&bull; &lt;em&gt;PhotoWithCaption&lt;/em&gt; - todos alinhamentos &#9989;&lt;br&gt;<br>&bull; &lt;em&gt;VideoPlayer&lt;/em&gt; - configura&ccedil;&otilde;es diversas &#9989;&lt;br&gt;<br>&bull; &lt;em&gt;GloboPlayer&lt;/em&gt; - todas as props &#9989;&lt;br&gt;<br>&bull; &lt;em&gt;PhotoGallery&lt;/em&gt; - grid, masonry, lightbox &#9989;&lt;br&gt;<br>&bull; &lt;em&gt;Carousel&lt;/em&gt; - autoplay, tipos de conte&uacute;do &#9989;&lt;br&gt;<br>&bull; &lt;em&gt;Parallax&lt;/em&gt; - velocidades e alturas &#9989;&lt;br&gt;<br>&bull; &lt;em&gt;BeforeAfter&lt;/em&gt; - vertical e horizontal &#9989;&lt;br&gt;<br>&bull; &lt;em&gt;ScrollyTelling&lt;/em&gt; - narrativa imersiva &#9989;&lt;br&gt;&lt;br&gt;<br>&lt;strong&gt;Casos extremos:&lt;/strong&gt; props vazias, textos longos, sequ&ecirc;ncias complexas &#9989;&lt;br&gt;<br>&lt;strong&gt;Responsividade:&lt;/strong&gt; desktop/mobile espec&iacute;ficos &#9989;&lt;br&gt;<br>&lt;strong&gt;Combina&ccedil;&otilde;es:&lt;/strong&gt; fluxos visuais complexos &#9989;"
+    },
+    {
+      "type": "frase",
+      "text": "Sistema de storytelling visual &lt;strong&gt;100% funcional&lt;/strong&gt; e robusto! Todos os componentes foram testados extensivamente com suas varia&ccedil;&otilde;es e combina&ccedil;&otilde;es mais complexas. &#128640;",
+      "author": "Sistema de Design Completo",
+      "role": "Validação Total de Componentes"
+    },
+    {
+      "type": "texto",
+      "text": "Este exemplo mostra como o componente pode ter &lt;strong&gt;comportamentos diferentes&lt;/strong&gt; entre desktop e mobile. No desktop: topo/esquerda, no mobile: centro/centro."
+    }
+  ],
+  "slug": "foto-acima-com-props-vazias-para-testar-comportame"
+}
