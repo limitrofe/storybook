@@ -1,15 +1,19 @@
 // src/routes/+page.js - Load function para página inicial
-import { error } from '@sveltejs/kit';
+import { browser } from '$app/environment';
 
 /** @type {import('./$types').PageLoad} */
 export async function load({ params, url, fetch }) {
-  // Verificar se há um slug específico na URL
-  const searchParams = url.searchParams;
-  const slug = searchParams.get('story') || 'default';
+  // 🔧 CORREÇÃO: Só acessar searchParams no browser
+  let slug = 'default';
+  
+  if (browser) {
+    const searchParams = url.searchParams;
+    slug = searchParams.get('story') || 'default';
+  }
   
   try {
-    // Tentar carregar a story específica
-    if (slug !== 'default') {
+    // Tentar carregar a story específica (apenas se não for default)
+    if (browser && slug !== 'default') {
       const response = await fetch(`/data/${slug}.json`);
       
       if (response.ok) {
@@ -21,8 +25,8 @@ export async function load({ params, url, fetch }) {
       }
     }
     
-    // Se não encontrou story específica ou é default, carregar lista
-    // ou story padrão se existir
+    // Durante o prerendering ou se não encontrou story específica,
+    // tentar carregar lista de stories
     try {
       const defaultResponse = await fetch('/data/index.json');
       if (defaultResponse.ok) {
@@ -42,6 +46,20 @@ export async function load({ params, url, fetch }) {
       }
     } catch (e) {
       console.log('Não foi possível carregar lista de stories');
+    }
+    
+    // Fallback: tentar carregar a story hardcoded
+    try {
+      const fallbackResponse = await fetch('/data/diario-de-um-legendario-a-fe-o-cansaco-e-as-regras.json');
+      if (fallbackResponse.ok) {
+        const story = await fallbackResponse.json();
+        return {
+          story,
+          slug: 'diario-de-um-legendario-a-fe-o-cansaco-e-as-regras'
+        };
+      }
+    } catch (e) {
+      console.log('Não foi possível carregar story padrão');
     }
     
     // Retornar estado vazio se nada foi encontrado
