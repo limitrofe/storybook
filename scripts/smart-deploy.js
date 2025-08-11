@@ -4,6 +4,7 @@ import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
+import BaseUploader from './BaseUploader.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -16,7 +17,10 @@ class SmartDeploy {
     this.projectName = projectName;
     this.uploader = null;
     this.buildDir = path.join(__dirname, '../build');
-    this.baseUrl = `https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/${projectName}`;
+class MeuUploader extends BaseUploader {
+  // Herda toda configuração central
+}
+
   }
 
   // Inicializar o uploader de forma async

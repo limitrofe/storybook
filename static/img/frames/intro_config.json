@@ -1,0 +1,21 @@
+{
+  "name": "intro",
+  "originalName": "intro",
+  "desktop": {
+    "path": "/img/frames/desktop/intro/",
+    "frameCount": 51,
+    "format": "jpg",
+    "pattern": "frame_%04d.jpg"
+  },
+  "mobile": {
+    "path": "/img/frames/mobile/intro/",
+    "frameCount": 101,
+    "format": "webp",
+    "pattern": "frame_%04d.webp"
+  },
+  "settings": {
+    "fps": 15,
+    "quality": 85
+  },
+  "processedAt": "2025-08-11T00:45:37.906Z"
+}

@@ -1,0 +1,601 @@
+{
+  "credits": {
+    "notes": "Este é um espaço para quaisquer notas adicionais, agradecimentos, ou informações complementares sobre a matéria. Você pode adicionar texto formatado, como negrito ou itálico.",
+    "sources": [
+      "Fonte 1: Nome da Organização ou Publicação. Link: https://www.fonte1.com",
+      "Fonte 2: Artigo \"Título do Artigo\", Autor. Data.",
+      "Fonte 3: Pesquisa da Universidade XYZ, 2024."
+    ],
+    "additionalGraphics": [
+      "João Desenhos",
+      "Estúdio Gráfico Inovador"
+    ],
+    "editedBy": [
+      "Editor Chefe da Notícia",
+      "Revisor de Conteúdo"
+    ],
+    "authors": [
+      "Autor Principal da Matéria",
+      "Co-Autor Colaborador"
+    ]
+  },
+  "title": "DIAS PERFEITOS",
+  "paragraphs": [
+    {
+      "type": "scrollyframes",
+      "frameStart": 1,
+      "frameStop": 51,
+      "imagePrefix": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/frames/desktop/intro/frame_",
+      "imageSuffix": ".jpg",
+      "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/frames/mobile/intro/frame_",
+      "imageSuffixMobile": ".webp",
+      "height": "300vh",
+      "showProgress": false,
+      "showTime": false,
+      "preloadFrames": 8,
+      "memoryLimit": 30,
+      "animationSpeed": 0.1,
+      "smoothing": true,
+      "debug": false,
+      "steps": [
+        {
+          "title": "Abertura:Estabelecendo o Cenário",
+          "text": "Nossa jornada começa do zero,apresentando o <strong>contexto inicial</strong> e estabelecendo as bases para tudo que será revelado.",
+          "startFrame": 1,
+          "endFrame": 5,
+          "duration": 1000
+        },
+        {
+          "title": "Primeiros Insights",
+          "text": "Começamos a desvendar os <em>primeiros elementos cruciais</em> que moldarão nossa compreensão.",
+          "startFrame": 6,
+          "endFrame": 10,
+          "duration": 1000
+        },
+        {
+          "title": "Desenvolvimento das Ideias",
+          "text": "As ideias ganham forma e começamos a ver <strong>conexões importantes</strong> entre os diferentes elementos.",
+          "startFrame": 11,
+          "endFrame": 15,
+          "duration": 1000
+        },
+        {
+          "title": "Momento de Transição",
+          "text": "Chegamos a um <em>ponto de virada fundamental</em> que redefine nossa perspectiva sobre o tema.",
+          "startFrame": 16,
+          "endFrame": 25,
+          "duration": 1000
+        },
+        {
+          "title": "Aprofundamento da Análise",
+          "text": "Mergulhamos mais fundo na análise,explorando <strong>camadas mais complexas</strong> da narrativa.",
+          "startFrame": 26,
+          "endFrame": 40,
+          "duration": 1000
+        },
+        {
+          "title": "Conclusão",
+          "text": "Chegamos ao final com uma compreensão completa e transformadora do tema apresentado.",
+          "startFrame": 41,
+          "endFrame": 51,
+          "duration": 1000
+        }
+      ],
+      "text": "intro"
+    },
+    {
+      "type": "abre",
+      "title": "DIAS PERFEITOS",
+      "subtitle": "",
+      "date": "13/08/2025",
+      "author": "Tata | 13/08/2025 04h00",
+      "variant": "minimal",
+      "overlay": "true"
+    },
+    {
+      "type": "intertitulo",
+      "text": "Sinopse",
+      "textAlign": "center",
+      "variant": "centered",
+      "size": "medium"
+    },
+    {
+      "type": "texto",
+      "text": "Téo é um solitário estudante de medicina que divide seu tempo entre cuidar da mãe paraplégica e dissecar cadáveres nas aulas de anatomia. Num churrasco a que vai contrariado, conhece CLARICE, jovem de espírito livre que sonha tornar-se roteirista de cinema. Para enciumar seu namorado, Clarice beija Téo. Para ela, apenas uma farra. Para ele, o início de uma paixão que, afrontada por sucessivas negativas, rapidamente se transforma em sequestro e brutalidade."
+    },
+    {
+      "type": "frase",
+      "text": "&ldquo;&Eacute; uma história de amor obsessivo, de machismo, de violência contra a mulher, narrada, no caso do livro, na perspectiva do psicopata. No caso da série, a gente tem uma outra proposta que é superinteressante, que é mostrar as duas visões. Então é uma relação que, por um lado, é abusiva e violenta e, para o outro lado, é uma história romântica.&rdquo;",
+      "author": "Raphael Montes",
+      "role": "Autor"
+    },
+    {
+      "type": "scrollyframes",
+      "frameStart": 1,
+      "frameStop": 138,
+      "imagePrefix": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/frames/desktop/cena1/frame_",
+      "imageSuffix": ".jpg",
+      "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/frames/mobile/cena1/frame_",
+      "imageSuffixMobile": ".webp",
+      "height": "800vh",
+      "showProgress": false,
+      "showTime": false,
+      "preloadFrames": 8,
+      "memoryLimit": 30,
+      "animationSpeed": 0.1,
+      "smoothing": true,
+      "debug": false,
+      "steps": [
+        {
+          "title": "Abertura:Estabelecendo o Cenário",
+          "text": "Nossa jornada começa do zero,apresentando o <strong>contexto inicial</strong> e estabelecendo as bases para tudo que será revelado.",
+          "startFrame": 1,
+          "endFrame": 30,
+          "duration": 3000
+        },
+        {
+          "title": "Primeiros Insights",
+          "text": "Começamos a desvendar os <em>primeiros elementos cruciais</em> que moldarão nossa compreensão.",
+          "startFrame": 31,
+          "endFrame": 60,
+          "duration": 3000
+        },
+        {
+          "title": "Desenvolvimento das Ideias",
+          "text": "As ideias ganham forma e começamos a ver <strong>conexões importantes</strong> entre os diferentes elementos.",
+          "startFrame": 61,
+          "endFrame": 80,
+          "duration": 3000
+        },
+        {
+          "title": "Momento de Transição",
+          "text": "Chegamos a um <em>ponto de virada fundamental</em> que redefine nossa perspectiva sobre o tema.",
+          "startFrame": 81,
+          "endFrame": 100,
+          "duration": 3000
+        },
+        {
+          "title": "Aprofundamento da Análise",
+          "text": "Mergulhamos mais fundo na análise,explorando <strong>camadas mais complexas</strong> da narrativa.",
+          "startFrame": 101,
+          "endFrame": 120,
+          "duration": 4000
+        },
+        {
+          "title": "Conclusão",
+          "text": "Chegamos ao final com uma compreensão completa e transformadora do tema apresentado.",
+          "startFrame": 121,
+          "endFrame": 135,
+          "duration": 4000
+        }
+      ],
+      "text": "cena1"
+    },
+    {
+      "type": "intertitulo",
+      "text": "Personagens",
+      "textAlign": "center",
+      "variant": "centered",
+      "size": "medium"
+    },
+    {
+      "type": "intertitulo",
+      "text": "Clarice (Julia Dalavia)",
+      "variant": "default",
+      "size": "small"
+    },
+    {
+      "type": "texto",
+      "text": "Filha de uma família rica da zona sul do Rio, Clarice é livre, impulsiva e idealista. Estudante de História da Arte, vive entre festas, amores plurais e a paixão por escrever roteiros. Com estilo alternativo e personalidade provocadora, ela desafia os padrões dos pais, mas esconde uma insegurança profunda. A relação com Téo, inicialmente levada como brincadeira, toma rumos sombrios e violentos, fazendo com que ela perca sua liberdade e força. Ainda assim, uma fagulha de rebeldia permanece viva, alimentando seu desejo por justiça."
+    },
+    {
+      "type": "intertitulo",
+      "text": "Téo (Jaffar Bambirra)",
+      "variant": "default",
+      "size": "small"
+    },
+    {
+      "type": "texto",
+      "text": "Estudante de Medicina, Téo aparenta ser o genro ideal &mdash; educado, discreto e dedicado. No entanto, por trás da fachada está um homem frio, manipulador e misógino. Criado sob a violência do pai, repete os padrões abusivos com mulheres, incluindo Clarice, a quem ele tenta transformar em sua \"esposa perfeita\". Sua inteligência o torna perigoso, e sua relação doentia com a mãe revela um histórico familiar marcado por controle e negação."
+    },
+    {
+      "type": "intertitulo",
+      "text": "Laura (Julianna Gerais)",
+      "variant": "default",
+      "size": "small"
+    },
+    {
+      "type": "texto",
+      "text": "Filha de uma família periférica e militante feminista, Laura é determinada, inteligente e engajada. &Eacute; melhor amiga de Clarice, com quem mantém uma ligação profunda e secreta paixão. Em contraste com a imaturidade da amiga, Laura é pé no chão e carrega o peso da responsabilidade. Seu faro aguçado e sua coragem serão decisivos ao longo da trama."
+    },
+    {
+      "type": "intertitulo",
+      "text": "Breno (Elzio Vieira)",
+      "variant": "default",
+      "size": "small"
+    },
+    {
+      "type": "texto",
+      "text": "Violinista sensível e charmoso, Breno trocou tudo para seguir seu sonho na música. Elegante e introspectivo, ele vive um romance com Clarice, mas a intensidade da jovem o desestabiliza. O afastamento da família e sua dedicação à orquestra tornam seus amigos músicos sua nova rede de apoio. Seu desaparecimento é um ponto de virada na história, levantando suspeitas e provocando reações em quem o ama."
+    },
+    {
+      "type": "intertitulo",
+      "text": "Helena (Fabíula Nascimento)",
+      "variant": "default",
+      "size": "small"
+    },
+    {
+      "type": "texto",
+      "text": "Mãe de Clarice, Helena é uma advogada criminalista ambiciosa. Exige perfeição da filha e tenta moldá-la à sua imagem, desprezando quem considera fora do padrão que idealizou. Tem um olhar preconceituoso e elitista, o que a coloca em choque com os amigos de Clarice. Enxerga em Téo o genro ideal, sem imaginar o perigo por trás da aparência."
+    },
+    {
+      "type": "intertitulo",
+      "text": "Patrícia (Débora Bloch)",
+      "variant": "default",
+      "size": "small"
+    },
+    {
+      "type": "texto",
+      "text": "Mãe de Téo, Patrícia é uma mulher que teve uma relação traumática com o ex-marido, um desembargador abusivo. &Eacute; uma personagem ativa e muito positiva, mas tem uma relação de dependência emocional com o filho. No passado, sofreu um acidente que a deixou em uma cadeira de rodas."
+    },
+    {
+      "type": "scrollyframes",
+      "frameStart": 1,
+      "frameStop": 50,
+      "imagePrefix": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/frames/desktop/cena2/frame_",
+      "imageSuffix": ".jpg",
+      "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/frames/mobile/cena2/frame_",
+      "imageSuffixMobile": ".webp",
+      "height": "400vh",
+      "showProgress": false,
+      "showTime": false,
+      "preloadFrames": 8,
+      "memoryLimit": 30,
+      "animationSpeed": 0.1,
+      "smoothing": true,
+      "debug": false,
+      "steps": [
+        {
+          "title": "Abertura:Estabelecendo o Cenário",
+          "text": "Nossa jornada começa do zero,apresentando o <strong>contexto inicial</strong> e estabelecendo as bases para tudo que será revelado.",
+          "startFrame": 1,
+          "endFrame": 24,
+          "duration": 1000
+        },
+        {
+          "title": "Primeiros Insights",
+          "text": "Começamos a desvendar os <em>primeiros elementos cruciais</em> que moldarão nossa compreensão.",
+          "startFrame": 25,
+          "endFrame": 44,
+          "duration": 1000
+        },
+        {
+          "title": "Desenvolvimento das Ideias",
+          "text": "As ideias ganham forma e começamos a ver <strong>conexões importantes</strong> entre os diferentes elementos.",
+          "startFrame": 45,
+          "endFrame": 59,
+          "duration": 1000
+        },
+        {
+          "title": "Momento de Transição",
+          "text": "Chegamos a um <em>ponto de virada fundamental</em> que redefine nossa perspectiva sobre o tema.",
+          "startFrame": 60,
+          "endFrame": 100,
+          "duration": 3000
+        },
+        {
+          "title": "Aprofundamento da Análise",
+          "text": "Mergulhamos mais fundo na análise,explorando <strong>camadas mais complexas</strong> da narrativa.",
+          "startFrame": 101,
+          "endFrame": 120,
+          "duration": 4000
+        },
+        {
+          "title": "Conclusão",
+          "text": "Chegamos ao final com uma compreensão completa e transformadora do tema apresentado.",
+          "startFrame": 121,
+          "endFrame": 154,
+          "duration": 4000
+        }
+      ],
+      "text": "cena2"
+    },
+    {
+      "type": "intertitulo",
+      "text": "Curiosidades da série",
+      "textAlign": "center",
+      "variant": "centered",
+      "size": "medium"
+    },
+    {
+      "type": "texto",
+      "text": "A série conta com alguns easter eggs do universo de Raphael Montes, como os nomes de personagens de outros livros do autor."
+    },
+    {
+      "type": "frase",
+      "text": "&ldquo;Eu pedi uma lista com o nome de todos os personagens do Raphael, de todos os livros dele. E eu usei os nomes. Vocês vão ter que achá-los ao longo da série.&rdquo;",
+      "author": "Cláudia Jouvin",
+      "role": "roteirista"
+    },
+    {
+      "type": "texto",
+      "text": "Raphael Montes faz participação especial em um dos episódios da série.&nbsp;"
+    },
+    {
+      "type": "texto",
+      "text": "A produção contou com a consultoria do psicanalista e escritor Christian Dunker, que orientou o elenco sobre as psicopatologias."
+    },
+    {
+      "type": "frase",
+      "text": "&ldquo;A gente fez uma consultoria com psicanalistas, com psiquiatras, para tentar entender a mente do Téo, sem trazer um olhar de fora. Esse foi o maior desafio e o maior presente do ponto de vista de direção: fazer uma série sobre dois personagens tentando estar o máximo possível dentro deles.&rdquo;",
+      "author": "Joana Jabace",
+      "role": "diretora"
+    },
+    {
+      "type": "texto",
+      "text": "As cenas do sequestro de Clarice foram gravadas em locações na região do Alto da Boa Vista, no Rio de Janeiro, e também em uma praia de Mangaratiba, localizada na Costa Verde da cidade."
+    },
+    {
+      "type": "frase",
+      "text": "&ldquo;O livro é quase um road movie, porque, a partir do momento em que ele a sequestra, ele vai fugindo. As pessoas começam a desconfiar, então ele vai indo para os lugares do roteiro da Clarice. [...] Então, as locações, que são muito importantes no livro, também são na série. Elas são personagens da série.&rdquo;",
+      "author": "Joana Jabace",
+      "role": "diretora"
+    },
+    {
+      "type": "texto",
+      "text": "Os artistas Zé Ibarra e Ana Frango Elétrico regravaram os sucessos &ldquo;Carinhoso&rdquo; e &ldquo;Luz Del Fuego&rdquo;, respectivamente, para a trilha sonora da série."
+    },
+    {
+      "type": "scrollyframes",
+      "frameStart": 1,
+      "frameStop": 155,
+      "imagePrefix": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/frames/desktop/cena3/frame_",
+      "imageSuffix": ".jpg",
+      "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/frames/mobile/cena3/frame_",
+      "imageSuffixMobile": ".webp",
+      "height": "800vh",
+      "showProgress": false,
+      "showTime": false,
+      "preloadFrames": 8,
+      "memoryLimit": 30,
+      "animationSpeed": 0.05,
+      "smoothing": true,
+      "debug": false,
+      "steps": [
+        {
+          "title": "Abertura:Estabelecendo o Cenário",
+          "text": "Nossa jornada começa do zero,apresentando o <strong>contexto inicial</strong> e estabelecendo as bases para tudo que será revelado.",
+          "startFrame": 1,
+          "endFrame": 30,
+          "duration": 3000
+        },
+        {
+          "title": "Primeiros Insights",
+          "text": "Começamos a desvendar os <em>primeiros elementos cruciais</em> que moldarão nossa compreensão.",
+          "startFrame": 31,
+          "endFrame": 60,
+          "duration": 3000
+        },
+        {
+          "title": "Desenvolvimento das Ideias",
+          "text": "As ideias ganham forma e começamos a ver <strong>conexões importantes</strong> entre os diferentes elementos.",
+          "startFrame": 61,
+          "endFrame": 80,
+          "duration": 3000
+        },
+        {
+          "title": "Momento de Transição",
+          "text": "Chegamos a um <em>ponto de virada fundamental</em> que redefine nossa perspectiva sobre o tema.",
+          "startFrame": 81,
+          "endFrame": 100,
+          "duration": 3000
+        },
+        {
+          "title": "Aprofundamento da Análise",
+          "text": "Mergulhamos mais fundo na análise,explorando <strong>camadas mais complexas</strong> da narrativa.",
+          "startFrame": 101,
+          "endFrame": 120,
+          "duration": 4000
+        },
+        {
+          "title": "Conclusão",
+          "text": "Chegamos ao final com uma compreensão completa e transformadora do tema apresentado.",
+          "startFrame": 121,
+          "endFrame": 135,
+          "duration": 4000
+        }
+      ],
+      "text": "cena3"
+    },
+    {
+      "type": "intertitulo",
+      "text": "Sobre o livro",
+      "textAlign": "center",
+      "variant": "centered",
+      "size": "medium"
+    },
+    {
+      "type": "texto",
+      "text": "Lançado em 2014, Dias Perfeitos é o segundo livro publicado de Raphael Montes, traduzido em 22 países, incluindo Estados Unidos, Inglaterra, Espanha e Itália.&nbsp; &nbsp;"
+    },
+    {
+      "type": "texto",
+      "text": "Na época em que escreveu a obra, o autor atuava como advogado. O sucesso astronômico do livro permitiu que Raphael largasse a carreira jurídica para se dedicar à literatura, um de seus maiores sonhos."
+    },
+    {
+      "type": "texto",
+      "text": "Em 2025, Dias Perfeitos ganhou uma edição de colecionador, lançada na Bienal do Livro. A obra conta com capa dura e ilustração baseada na edição norte-americana. Além disso, traz conteúdos exclusivos, como uma dedicatória do autor e um final alternativo. &nbsp;&nbsp;"
+    },
+    {
+      "type": "scrollyframes",
+      "frameStart": 1,
+      "frameStop": 28,
+      "imagePrefix": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/frames/desktop/cena4/frame_",
+      "imageSuffix": ".jpg",
+      "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/frames/mobile/cena4/frame_",
+      "imageSuffixMobile": ".webp",
+      "height": "200vh",
+      "showProgress": false,
+      "showTime": false,
+      "preloadFrames": 8,
+      "memoryLimit": 30,
+      "animationSpeed": 0.05,
+      "smoothing": true,
+      "debug": false,
+      "steps": [
+        {
+          "title": "Abertura:Estabelecendo o Cenário",
+          "text": "Nossa jornada começa do zero,apresentando o <strong>contexto inicial</strong> e estabelecendo as bases para tudo que será revelado.",
+          "startFrame": 1,
+          "endFrame": 30,
+          "duration": 3000
+        },
+        {
+          "title": "Primeiros Insights",
+          "text": "Começamos a desvendar os <em>primeiros elementos cruciais</em> que moldarão nossa compreensão.",
+          "startFrame": 31,
+          "endFrame": 60,
+          "duration": 3000
+        },
+        {
+          "title": "Desenvolvimento das Ideias",
+          "text": "As ideias ganham forma e começamos a ver <strong>conexões importantes</strong> entre os diferentes elementos.",
+          "startFrame": 61,
+          "endFrame": 80,
+          "duration": 3000
+        },
+        {
+          "title": "Momento de Transição",
+          "text": "Chegamos a um <em>ponto de virada fundamental</em> que redefine nossa perspectiva sobre o tema.",
+          "startFrame": 81,
+          "endFrame": 100,
+          "duration": 3000
+        },
+        {
+          "title": "Aprofundamento da Análise",
+          "text": "Mergulhamos mais fundo na análise,explorando <strong>camadas mais complexas</strong> da narrativa.",
+          "startFrame": 101,
+          "endFrame": 120,
+          "duration": 4000
+        },
+        {
+          "title": "Conclusão",
+          "text": "Chegamos ao final com uma compreensão completa e transformadora do tema apresentado.",
+          "startFrame": 121,
+          "endFrame": 135,
+          "duration": 4000
+        }
+      ],
+      "text": "cena4"
+    },
+    {
+      "type": "intertitulo",
+      "text": "Diferenças entre o livro e a série",
+      "textAlign": "center",
+      "variant": "centered",
+      "size": "medium"
+    },
+    {
+      "type": "texto",
+      "text": "Diferente do livro, a série é narrada a partir de dois pontos de vista: o de Téo e o de Clarice, construindo uma dualidade intrigante entre percepção e realidade."
+    },
+    {
+      "type": "frase",
+      "text": "&ldquo;Trazer o ponto de vista da Clarice foi importante para a personagem não ser apenas uma vítima. Esse ponto de vista, além de enriquecer a trama, se mostrou essencial para construir uma personagem forte e atual, apesar de tudo o que acontece com ela na história.&rdquo;",
+      "author": "Cláudia Jouvin",
+      "role": "roteirista"
+    },
+    {
+      "type": "texto",
+      "text": "Personagens como Breno (Elzio Vieira) e Laura (Juliana Gerais) têm maior destaque na série, influenciando o desenvolvimento da trama."
+    },
+    {
+      "type": "texto",
+      "text": "O Téo da produção audiovisual se apresenta mais violento que o personagem do livro, sendo o autor de mais crimes."
+    },
+    {
+      "type": "texto",
+      "text": "A série apresenta um desfecho diferente do que foi apresentado na obra literária."
+    },
+    {
+      "type": "frase",
+      "text": "&ldquo;O último episódio da série é uma trama pós-livro. &Eacute; interessante que as histórias sejam complementares, e não idênticas.&rdquo;",
+      "author": "Raphael Montes",
+      "role": "autor"
+    },
+    {
+      "type": "intertitulo",
+      "text": "Sobre Raphael Montes",
+      "textAlign": "center",
+      "variant": "centered",
+      "size": "medium"
+    },
+    {
+      "type": "texto",
+      "text": "Raphael Montes é escritor, roteirista e produtor executivo, conhecido por renovar o suspense e o terror na literatura e no audiovisual brasileiro. Formado em Direito, iniciou sua carreira de autor aos 18 anos, quando publicou contos em diversas antologias de mistério. Desde então, publicou 8 livros, traduzidos para mais de 20 idiomas. &Eacute; autor de best-sellers como Dias Perfeitos e Jantar Secreto, e coautor de Bom Dia, Verônica, livro que rendeu a série homônima de sucesso. Também roteirizou os filmes da franquia A Menina que Matou os Pais e é o criador da novela Beleza Fatal. Com passagens marcantes por eventos literários e prêmios como o Jabuti, Raphael se firmou como um dos autores mais vendidos do país, atuando também à frente da sua produtora, Casa Montes."
+    },
+    {
+      "type": "scrollyframes",
+      "frameStart": 1,
+      "frameStop": 139,
+      "imagePrefix": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/frames/desktop/final/frame_",
+      "imageSuffix": ".jpg",
+      "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/frames/mobile/final/frame_",
+      "imageSuffixMobile": ".webp",
+      "height": "800vh",
+      "showProgress": false,
+      "showTime": false,
+      "preloadFrames": 8,
+      "memoryLimit": 30,
+      "animationSpeed": 0.1,
+      "smoothing": true,
+      "debug": false,
+      "steps": [
+        {
+          "title": "Abertura:Estabelecendo o Cenário",
+          "text": "Nossa jornada começa do zero,apresentando o <strong>contexto inicial</strong> e estabelecendo as bases para tudo que será revelado.",
+          "startFrame": 1,
+          "endFrame": 30,
+          "duration": 3000
+        },
+        {
+          "title": "Primeiros Insights",
+          "text": "Começamos a desvendar os <em>primeiros elementos cruciais</em> que moldarão nossa compreensão.",
+          "startFrame": 31,
+          "endFrame": 60,
+          "duration": 3000
+        },
+        {
+          "title": "Desenvolvimento das Ideias",
+          "text": "As ideias ganham forma e começamos a ver <strong>conexões importantes</strong> entre os diferentes elementos.",
+          "startFrame": 61,
+          "endFrame": 80,
+          "duration": 3000
+        },
+        {
+          "title": "Momento de Transição",
+          "text": "Chegamos a um <em>ponto de virada fundamental</em> que redefine nossa perspectiva sobre o tema.",
+          "startFrame": 81,
+          "endFrame": 100,
+          "duration": 3000
+        },
+        {
+          "title": "Aprofundamento da Análise",
+          "text": "Mergulhamos mais fundo na análise,explorando <strong>camadas mais complexas</strong> da narrativa.",
+          "startFrame": 101,
+          "endFrame": 120,
+          "duration": 4000
+        },
+        {
+          "title": "Conclusão",
+          "text": "Chegamos ao final com uma compreensão completa e transformadora do tema apresentado.",
+          "startFrame": 121,
+          "endFrame": 135,
+          "duration": 4000
+        }
+      ],
+      "text": "final"
+    }
+  ],
+  "slug": "dias-perfeitos"
+}

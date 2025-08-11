@@ -1,0 +1,21 @@
+{
+  "name": "cena3",
+  "originalName": "cena3",
+  "desktop": {
+    "path": "/img/frames/desktop/cena3/",
+    "frameCount": 155,
+    "format": "jpg",
+    "pattern": "frame_%04d.jpg"
+  },
+  "mobile": {
+    "path": "/img/frames/mobile/cena3/",
+    "frameCount": 166,
+    "format": "webp",
+    "pattern": "frame_%04d.webp"
+  },
+  "settings": {
+    "fps": 15,
+    "quality": 85
+  },
+  "processedAt": "2025-08-11T00:45:24.091Z"
+}

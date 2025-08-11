@@ -1,0 +1,21 @@
+{
+  "name": "01",
+  "originalName": "01",
+  "desktop": {
+    "path": "/img/frames/desktop/01/",
+    "frameCount": 306,
+    "format": "jpg",
+    "pattern": "frame_%04d.jpg"
+  },
+  "mobile": {
+    "path": "/img/frames/mobile/01/",
+    "frameCount": 306,
+    "format": "webp",
+    "pattern": "frame_%04d.webp"
+  },
+  "settings": {
+    "fps": 15,
+    "quality": 85
+  },
+  "processedAt": "2025-08-10T01:32:52.792Z"
+}

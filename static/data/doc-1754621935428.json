@@ -1,0 +1,29 @@
+{
+  "credits": {
+    "notes": "Este é um espaço para quaisquer notas adicionais, agradecimentos, ou informações complementares sobre a matéria. Você pode adicionar texto formatado, como negrito ou itálico.",
+    "sources": [
+      "Fonte 1: Nome da Organização ou Publicação. Link: https://www.fonte1.com",
+      "Fonte 2: Artigo \"Título do Artigo\", Autor. Data.",
+      "Fonte 3: Pesquisa da Universidade XYZ, 2024."
+    ],
+    "additionalGraphics": [
+      "João Desenhos",
+      "Estúdio Gráfico Inovador"
+    ],
+    "editedBy": [
+      "Editor Chefe da Notícia",
+      "Revisor de Conteúdo"
+    ],
+    "authors": [
+      "Autor Principal da Matéria",
+      "Co-Autor Colaborador"
+    ]
+  },
+  "paragraphs": [
+    {
+      "type": "scrollyframes",
+      "text": "Título opcional framePrefix=\"/img/frames/desktop/intro/frame_\" framePrefixMobile=\"/img/frames/mobile/intro/frame_\" startFrame=1 endFrame=306 framePadding=4 frameExtension=\".jpg\" frameExtensionMobile=\".webp\" height=\"400vh\""
+    }
+  ],
+  "slug": "doc-1754621935428"
+}

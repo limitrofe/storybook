@@ -19,16 +19,17 @@
       "Co-Autor Colaborador"
     ]
   },
+  "title": "Diário de um Legendário: a fé, o cansaço e as regras militares no retiro que virou febre entre famosos",
   "paragraphs": [
     {
       "type": "scrollyframes",
       "frameStart": 1,
-      "frameStop": 200,
-      "imagePrefix": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_",
+      "frameStop": 51,
+      "imagePrefix": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/especial-eleicoes-2024/img/frames/desktop/intro/frame_",
       "imageSuffix": ".jpg",
-      "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_",
+      "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/especial-eleicoes-2024/img/frames/desktop/intro/frame_",
       "imageSuffixMobile": ".webp",
-      "height": "400vh",
+      "height": "250vh",
       "showProgress": true,
       "showTime": true,
       "preloadFrames": 8,
@@ -80,7 +81,7 @@
           "duration": 4000
         }
       ],
-      "text": "Título opcional do seu ScrollyFrames"
+      "text": "intro"
     },
     {
       "type": "abre",
@@ -227,6 +228,68 @@
       "size": "medium"
     },
     {
+      "type": "scrollyframes",
+      "frameStart": 1,
+      "frameStop": 200,
+      "imagePrefix": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_",
+      "imageSuffix": ".jpg",
+      "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_",
+      "imageSuffixMobile": ".webp",
+      "height": "400vh",
+      "showProgress": true,
+      "showTime": true,
+      "preloadFrames": 8,
+      "memoryLimit": 30,
+      "animationSpeed": 0.1,
+      "smoothing": true,
+      "debug": false,
+      "steps": [
+        {
+          "title": "Abertura:Estabelecendo o Cenário",
+          "text": "Nossa jornada começa do zero,apresentando o <strong>contexto inicial</strong> e estabelecendo as bases para tudo que será revelado.",
+          "startFrame": 1,
+          "endFrame": 30,
+          "duration": 3000
+        },
+        {
+          "title": "Primeiros Insights",
+          "text": "Começamos a desvendar os <em>primeiros elementos cruciais</em> que moldarão nossa compreensão.",
+          "startFrame": 31,
+          "endFrame": 60,
+          "duration": 3000
+        },
+        {
+          "title": "Desenvolvimento das Ideias",
+          "text": "As ideias ganham forma e começamos a ver <strong>conexões importantes</strong> entre os diferentes elementos.",
+          "startFrame": 61,
+          "endFrame": 90,
+          "duration": 3000
+        },
+        {
+          "title": "Momento de Transição",
+          "text": "Chegamos a um <em>ponto de virada fundamental</em> que redefine nossa perspectiva sobre o tema.",
+          "startFrame": 91,
+          "endFrame": 120,
+          "duration": 3000
+        },
+        {
+          "title": "Aprofundamento da Análise",
+          "text": "Mergulhamos mais fundo na análise,explorando <strong>camadas mais complexas</strong> da narrativa.",
+          "startFrame": 121,
+          "endFrame": 160,
+          "duration": 4000
+        },
+        {
+          "title": "Conclusão",
+          "text": "Chegamos ao final com uma compreensão completa e transformadora do tema apresentado.",
+          "startFrame": 161,
+          "endFrame": 200,
+          "duration": 4000
+        }
+      ],
+      "text": "Título opcional do seu ScrollyFrames"
+    },
+    {
       "type": "texto",
       "text": "O variant <strong>minimal</strong> é perfeito para subdivisões discretas do conteúdo, mantendo a organização sem criar muito peso visual."
     },
@@ -296,6 +359,68 @@
       "text": "Seção 3: Componentes de Mídia",
       "variant": "default",
       "size": "medium"
+    },
+    {
+      "type": "scrollyframes",
+      "frameStart": 1,
+      "frameStop": 200,
+      "imagePrefix": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/desktop/videoscrolly_1_frame_",
+      "imageSuffix": ".jpg",
+      "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b/g1/newsroom-system-2024/video-frames/mobile/videoscrolly_1_frame_",
+      "imageSuffixMobile": ".webp",
+      "height": "400vh",
+      "showProgress": true,
+      "showTime": true,
+      "preloadFrames": 8,
+      "memoryLimit": 30,
+      "animationSpeed": 0.1,
+      "smoothing": true,
+      "debug": false,
+      "steps": [
+        {
+          "title": "Abertura:Estabelecendo o Cenário",
+          "text": "Nossa jornada começa do zero,apresentando o <strong>contexto inicial</strong> e estabelecendo as bases para tudo que será revelado.",
+          "startFrame": 1,
+          "endFrame": 30,
+          "duration": 3000
+        },
+        {
+          "title": "Primeiros Insights",
+          "text": "Começamos a desvendar os <em>primeiros elementos cruciais</em> que moldarão nossa compreensão.",
+          "startFrame": 31,
+          "endFrame": 60,
+          "duration": 3000
+        },
+        {
+          "title": "Desenvolvimento das Ideias",
+          "text": "As ideias ganham forma e começamos a ver <strong>conexões importantes</strong> entre os diferentes elementos.",
+          "startFrame": 61,
+          "endFrame": 90,
+          "duration": 3000
+        },
+        {
+          "title": "Momento de Transição",
+          "text": "Chegamos a um <em>ponto de virada fundamental</em> que redefine nossa perspectiva sobre o tema.",
+          "startFrame": 91,
+          "endFrame": 120,
+          "duration": 3000
+        },
+        {
+          "title": "Aprofundamento da Análise",
+          "text": "Mergulhamos mais fundo na análise,explorando <strong>camadas mais complexas</strong> da narrativa.",
+          "startFrame": 121,
+          "endFrame": 160,
+          "duration": 4000
+        },
+        {
+          "title": "Conclusão",
+          "text": "Chegamos ao final com uma compreensão completa e transformadora do tema apresentado.",
+          "startFrame": 161,
+          "endFrame": 200,
+          "duration": 4000
+        }
+      ],
+      "text": "Título opcional do seu ScrollyFrames"
     },
     {
       "type": "foto",

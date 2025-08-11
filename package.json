@@ -11,49 +11,26 @@
     "format": "prettier --write .",
     "lint": "prettier --check .",
     
-    "_comment": "Scripts do Google Docs - AGORA COM VIDEOSCROLLY AUTOMÁTICO! 🚀",
+    "// === 🚀 WORKFLOW PRINCIPAL ===": "",
+    "start": "node scripts/workflow.js",
+    "workflow": "node scripts/workflow.js",
+    "workflow:update": "node scripts/workflow.js update",
+    "workflow:config": "node scripts/workflow.js config",
+    
+    "// === 📹 FRAMES ===": "",
+    "extract": "node scripts/extract-frames.js",
+    "extract:all": "node scripts/extract-frames.js --process-all",
+    "extract:list": "node scripts/extract-frames.js --list-videos",
+    
+    "// === 📄 GOOGLE DOCS ===": "",
     "fetch": "node scripts/fetch-docs.js",
-    "fetch-original": "node scripts/fetch-docs.js",
     
-    "_comment2": "COMANDO SUPER SIMPLES - USE ESTE! 🚀",
-    "videoscrolly": "node scripts/sistema-simplificado.js",
+    "// === ☁️ UPLOAD/DEPLOY ===": "",
+    "upload": "node scripts/upload-globo-storage.js",
+    "deploy": "node scripts/smart-deploy.js",
     
-    "_comment3": "Scripts NOVOS para VideoScrollyTelling",
-    "video-to-frames": "node scripts/video-to-frames.js",
-    "upload-frames": "node scripts/auto-upload-frames.js",
-    "process-videoscrolly": "node scripts/process-videoscrolly.js",
-    "workflow": "node scripts/workflow-integrado.js",
-    
-    "_comment4": "Comandos integrados",
-    "story:complete": "node scripts/workflow-integrado.js",
-    "story:videos": "node scripts/workflow-integrado.js --videos-only",
-    "story:update": "node scripts/workflow-integrado.js --update",
-    "story:list": "node scripts/workflow-integrado.js --list",
-    
-    "_comment4": "Scripts para processamento de vídeo",
-    "setup": "node scripts/setup-environment.js",
-    "download-videos": "node scripts/video-downloader.js",
-    "generate-frames": "node scripts/generate-video-frames.js",
-    "generate-frames-advanced": "node scripts/enhanced-video-frames.js",
-    "upload-frames-old": "node scripts/upload-video-frames.js",
-    "process-video-scrolly": "node scripts/upload-video-frames.js",
-    "process-video-advanced": "node scripts/enhanced-video-frames.js",
-    "upload-globo": "node scripts/upload-globo-storage.js",
-    "process-doc": "npm run fetch $1 && npm run generate-frames --docs $1",
-    
-    "_comment5": "Helpers de desenvolvimento",
-    "test-upload": "node scripts/upload-globo-storage.js --help",
-    "list-projects": "node scripts/upload-globo-storage.js --list",
-    "new-project": "node scripts/upload-globo-storage.js --new-project",
-    
-    "_comment6": "Scripts de deploy",
-    "deploy": "node scripts/smart-deploy.js newsroom-system-2024 --build --validate",
-    "deploy:quick": "node scripts/smart-deploy.js newsroom-system-2024 --build",
-    
-    "_comment7": "Workflows completos ANTIGOS",
-    "workflow:complete": "npm run fetch -- $1 && npm run process-video-scrolly static/data/$1.json newsroom-system-2024 && npm run deploy",
-    "workflow:video-only": "npm run process-video-scrolly static/data/$1.json newsroom-system-2024",
-    "workflow:download-only": "npm run download-videos static/data/$1.json"
+    "// === 🎥 VÍDEOS ===": "",
+    "download-video": "node scripts/video-downloader.js"
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "^6.0.0",
@@ -69,7 +46,8 @@
   "dependencies": {
     "@sveltejs/svelte-scroller": "^2.0.7",
     "archieml": "^0.5.0",
-    "axios": "^1.11.0"
+    "axios": "^1.11.0",
+    "dotenv": "^17.2.1"
   },
   "optionalDependencies": {
     "fluent-ffmpeg": "^2.1.3",

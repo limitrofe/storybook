@@ -1,0 +1,51 @@
+[
+  {
+    "name": "01",
+    "type": "videoscrollytelling",
+    "imagePrefix": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/frames/desktop/01/frame_",
+    "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/frames/mobile/01/frame_",
+    "totalFrames": 306
+  },
+  {
+    "name": "cena1",
+    "type": "videoscrollytelling",
+    "imagePrefix": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/frames/desktop/cena1/frame_",
+    "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/frames/mobile/cena1/frame_",
+    "totalFrames": 138
+  },
+  {
+    "name": "cena2",
+    "type": "videoscrollytelling",
+    "imagePrefix": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/frames/desktop/cena2/frame_",
+    "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/frames/mobile/cena2/frame_",
+    "totalFrames": 50
+  },
+  {
+    "name": "cena3",
+    "type": "videoscrollytelling",
+    "imagePrefix": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/frames/desktop/cena3/frame_",
+    "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/frames/mobile/cena3/frame_",
+    "totalFrames": 155
+  },
+  {
+    "name": "cena4",
+    "type": "videoscrollytelling",
+    "imagePrefix": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/frames/desktop/cena4/frame_",
+    "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/frames/mobile/cena4/frame_",
+    "totalFrames": 28
+  },
+  {
+    "name": "final",
+    "type": "videoscrollytelling",
+    "imagePrefix": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/frames/desktop/final/frame_",
+    "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/frames/mobile/final/frame_",
+    "totalFrames": 139
+  },
+  {
+    "name": "intro",
+    "type": "videoscrollytelling",
+    "imagePrefix": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/frames/desktop/intro/frame_",
+    "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/frames/mobile/intro/frame_",
+    "totalFrames": 51
+  }
+]

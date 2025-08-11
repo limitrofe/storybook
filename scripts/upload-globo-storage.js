@@ -26,6 +26,7 @@ class GloboStorageUploader {
       authUrl: 'https://auth.s3.globoi.com:5000/v3',
       projectAuth: 'Projeto_especiais_svelte'
     };
+
     
     console.log(`📁 Projeto configurado: ${this.projectName}`);
   }
