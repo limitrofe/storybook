@@ -22,7 +22,8 @@
     { id: 'acqua', name: 'Acqua' },
     { id: 'dourado', name: 'Dourado' },
     { id: 'vermelho-profundo', name: 'Vermelho Profundo' },
-    { id: 'neon-sutil', name: 'Neon Sutil' }
+    { id: 'neon-sutil', name: 'Neon Sutil' },
+    { id: 'dias-perfeitos', name: 'Dias Perfeitos' }
   ];
 </script>
 

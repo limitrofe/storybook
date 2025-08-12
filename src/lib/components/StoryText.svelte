@@ -64,7 +64,7 @@
 
   /* Variant: Quote - Design Moderno */
   .story-text--quote {
-    margin: 3rem auto;
+    margin: 1rem auto;
   }
 
   .quote-container {
@@ -187,7 +187,7 @@
   /* Estiliza bullet points se houver */
   .story-text :global(ul) {
     margin: 1rem 0;
-    padding-left: 2rem;
+    padding-left: 1rem;
   }
 
   .story-text :global(li) {

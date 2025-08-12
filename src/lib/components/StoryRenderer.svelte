@@ -1,4 +1,4 @@
-<!-- StoryRenderer.svelte - COMPLETO com ScrollyFrames -->
+<!-- StoryRenderer.svelte - COMPLETO com ScrollyFrames e CharacterPresentation -->
 <script>
 	// Importação dos componentes da história
 	import Header from './story/Header.svelte';
@@ -19,6 +19,8 @@
 	import FlourishScrolly from './story/FlourishScrolly.svelte';
 	import FinalCredits from './FinalCredits.svelte';
 	import AnchorPoint from './story/AnchorPoint.svelte';
+	// 🎬 NOVO: Componente de apresentação de personagens
+	import CharacterPresentation from './story/CharacterPresentation.svelte';
 
 	export let storyData = {};
 
@@ -81,6 +83,12 @@
 			case 'ancora':
 			case 'anchor':
 				return 'anchor';
+			// 🎬 NOVO: Mapeamento para apresentação de personagens
+			case 'personagens':
+			case 'characters':
+			case 'character-presentation':
+			case 'apresentacao-personagens':
+				return 'character-presentation';
 			default:
 				return 'text';
 		}
@@ -103,6 +111,35 @@
 	function getComponentProps(paragraph) {
 		const { type, ...props } = paragraph;
 		return props;
+	}
+
+	/**
+	 * Processa array de personagens do formato Google Docs
+	 */
+	function processCharacters(characters) {
+		if (!characters) return [];
+		
+		// Se for string JSON, faz parse
+		if (typeof characters === 'string') {
+			try {
+				characters = JSON.parse(characters);
+			} catch (e) {
+				console.error('Erro ao fazer parse dos personagens:', e);
+				return [];
+			}
+		}
+
+		// Se for array, retorna processado
+		if (Array.isArray(characters)) {
+			return characters.map(char => ({
+				nome: char.nome || char.name || '',
+				sobrenome: char.sobrenome || char.surname || '',
+				foto: char.foto || char.photo || char.image || '',
+				descricao: char.descricao || char.description || char.texto || ''
+			}));
+		}
+
+		return [];
 	}
 </script>
 
@@ -280,6 +317,19 @@
 					preloadRadius={parseInt(props.preloadFrames) || 8}
 				/>
 
+			<!-- 🎬 CHARACTER PRESENTATION - NOVO COMPONENTE -->
+			{:else if componentType === 'character-presentation'}
+				<CharacterPresentation
+					personagens={processCharacters(props.personagens || props.characters || props.lista)}
+					shapeColor={props.shapeColor || '#DC2626'}
+					nameColor={props.nameColor || '#000'}
+					textColor={props.textColor || '#fff'}
+					backgroundColor={props.backgroundColor || '#000'}
+					animationSpeed={props.animationSpeed || 'normal'}
+					sectionHeight={props.sectionHeight || '100vh'}
+					sectionHeightMobile={props.sectionHeightMobile || '100vh'}
+				/>
+
 			<!-- Flourish Embed -->
 			{:else if componentType === 'flourish'}
 				<FlourishEmbed
@@ -322,7 +372,7 @@
 	.section-content {
 		max-width: 800px;
 		margin: 0 auto;
-		padding: 0 2rem;
+		padding: 0 0rem;
 	}
 
 	.unknown-component {

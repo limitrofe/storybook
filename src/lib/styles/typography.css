@@ -1,0 +1,55 @@
+/* src/lib/styles/typography.css */
+
+/* 🎨 OBVIOUSLY FONT VARIABLES */
+:root {
+  /* Primary typography families */
+  --font-primary: "obviously", "Globotipo", sans-serif;
+  --font-display: "obviously-compressed", "Globotipo", sans-serif;
+  --font-wide: "obviously-wide", "Globotipo", sans-serif;
+  --font-narrow: "obviously-narrow", "Globotipo", sans-serif;
+  --font-condensed: "obviously-condensed", "Globotipo", sans-serif;
+  --font-extended: "obviously-extended", "Globotipo", sans-serif;
+  
+  /* Weight tokens */
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  --font-weight-black: 900;
+}
+
+/* 🎭 COMPONENT-SPECIFIC TYPOGRAPHY */
+
+/* Headers use compressed */
+h1, h2, h3, .heading {
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-bold);
+}
+
+/* Body text uses regular Obviously */
+body, p, .body-text {
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-regular);
+}
+
+/* Special display elements */
+.display-text {
+  font-family: var(--font-wide);
+  font-weight: var(--font-weight-bold);
+}
+
+.caption-text {
+  font-family: var(--font-narrow);
+  font-weight: var(--font-weight-regular);
+}
+
+/* Character presentation specific */
+.character-display {
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-bold);
+}
+
+.character-subtitle {
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-regular);
+}

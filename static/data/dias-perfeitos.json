@@ -24,17 +24,17 @@
     {
       "type": "scrollyframes",
       "frameStart": 1,
-      "frameStop": 51,
+      "frameStop": 124,
       "imagePrefix": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/frames/desktop/intro/frame_",
       "imageSuffix": ".jpg",
       "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/frames/mobile/intro/frame_",
       "imageSuffixMobile": ".webp",
-      "height": "300vh",
+      "height": "510vh",
       "showProgress": false,
       "showTime": false,
       "preloadFrames": 8,
       "memoryLimit": 30,
-      "animationSpeed": 0.1,
+      "animationSpeed": 0.05,
       "smoothing": true,
       "debug": false,
       "steps": [
@@ -87,8 +87,8 @@
       "type": "abre",
       "title": "DIAS PERFEITOS",
       "subtitle": "",
-      "date": "13/08/2025",
-      "author": "Tata | 13/08/2025 04h00",
+      "date": "",
+      "author": "",
       "variant": "minimal",
       "overlay": "true"
     },
@@ -105,7 +105,7 @@
     },
     {
       "type": "frase",
-      "text": "&ldquo;&Eacute; uma história de amor obsessivo, de machismo, de violência contra a mulher, narrada, no caso do livro, na perspectiva do psicopata. No caso da série, a gente tem uma outra proposta que é superinteressante, que é mostrar as duas visões. Então é uma relação que, por um lado, é abusiva e violenta e, para o outro lado, é uma história romântica.&rdquo;",
+      "text": "\"É uma história de amor obsessivo, de machismo, de violência contra a mulher, narrada, no caso do livro, na perspectiva do psicopata. No caso da série, a gente tem uma outra proposta que é superinteressante, que é mostrar as duas visões. Então é uma relação que, por um lado, é abusiva e violenta e, para o outro lado, é uma história romântica.\"",
       "author": "Raphael Montes",
       "role": "Autor"
     },
@@ -122,7 +122,7 @@
       "showTime": false,
       "preloadFrames": 8,
       "memoryLimit": 30,
-      "animationSpeed": 0.1,
+      "animationSpeed": 0.05,
       "smoothing": true,
       "debug": false,
       "steps": [
@@ -179,64 +179,45 @@
       "size": "medium"
     },
     {
-      "type": "intertitulo",
-      "text": "Clarice (Julia Dalavia)",
-      "variant": "default",
-      "size": "small"
-    },
-    {
-      "type": "texto",
-      "text": "Filha de uma família rica da zona sul do Rio, Clarice é livre, impulsiva e idealista. Estudante de História da Arte, vive entre festas, amores plurais e a paixão por escrever roteiros. Com estilo alternativo e personalidade provocadora, ela desafia os padrões dos pais, mas esconde uma insegurança profunda. A relação com Téo, inicialmente levada como brincadeira, toma rumos sombrios e violentos, fazendo com que ela perca sua liberdade e força. Ainda assim, uma fagulha de rebeldia permanece viva, alimentando seu desejo por justiça."
-    },
-    {
-      "type": "intertitulo",
-      "text": "Téo (Jaffar Bambirra)",
-      "variant": "default",
-      "size": "small"
-    },
-    {
-      "type": "texto",
-      "text": "Estudante de Medicina, Téo aparenta ser o genro ideal &mdash; educado, discreto e dedicado. No entanto, por trás da fachada está um homem frio, manipulador e misógino. Criado sob a violência do pai, repete os padrões abusivos com mulheres, incluindo Clarice, a quem ele tenta transformar em sua \"esposa perfeita\". Sua inteligência o torna perigoso, e sua relação doentia com a mãe revela um histórico familiar marcado por controle e negação."
-    },
-    {
-      "type": "intertitulo",
-      "text": "Laura (Julianna Gerais)",
-      "variant": "default",
-      "size": "small"
-    },
-    {
-      "type": "texto",
-      "text": "Filha de uma família periférica e militante feminista, Laura é determinada, inteligente e engajada. &Eacute; melhor amiga de Clarice, com quem mantém uma ligação profunda e secreta paixão. Em contraste com a imaturidade da amiga, Laura é pé no chão e carrega o peso da responsabilidade. Seu faro aguçado e sua coragem serão decisivos ao longo da trama."
-    },
-    {
-      "type": "intertitulo",
-      "text": "Breno (Elzio Vieira)",
-      "variant": "default",
-      "size": "small"
-    },
-    {
-      "type": "texto",
-      "text": "Violinista sensível e charmoso, Breno trocou tudo para seguir seu sonho na música. Elegante e introspectivo, ele vive um romance com Clarice, mas a intensidade da jovem o desestabiliza. O afastamento da família e sua dedicação à orquestra tornam seus amigos músicos sua nova rede de apoio. Seu desaparecimento é um ponto de virada na história, levantando suspeitas e provocando reações em quem o ama."
-    },
-    {
-      "type": "intertitulo",
-      "text": "Helena (Fabíula Nascimento)",
-      "variant": "default",
-      "size": "small"
-    },
-    {
-      "type": "texto",
-      "text": "Mãe de Clarice, Helena é uma advogada criminalista ambiciosa. Exige perfeição da filha e tenta moldá-la à sua imagem, desprezando quem considera fora do padrão que idealizou. Tem um olhar preconceituoso e elitista, o que a coloca em choque com os amigos de Clarice. Enxerga em Téo o genro ideal, sem imaginar o perigo por trás da aparência."
-    },
-    {
-      "type": "intertitulo",
-      "text": "Patrícia (Débora Bloch)",
-      "variant": "default",
-      "size": "small"
-    },
-    {
-      "type": "texto",
-      "text": "Mãe de Téo, Patrícia é uma mulher que teve uma relação traumática com o ex-marido, um desembargador abusivo. &Eacute; uma personagem ativa e muito positiva, mas tem uma relação de dependência emocional com o filho. No passado, sofreu um acidente que a deixou em uma cadeira de rodas."
+      "type": "personagens",
+      "personagens": [
+        {
+          "nome": "Clarice",
+          "sobrenome": "Julia Dalavia",
+          "foto": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/personagens/clarice3.jpg",
+          "descricao": "Filha de uma família rica da zona sul do Rio,Clarice é livre,impulsiva e idealista. Estudante de História da Arte,vive entre festas,amores plurais e a paixão por escrever roteiros. Com estilo alternativo e personalidade provocadora,ela desafia os padrões dos pais,mas esconde uma insegurança profunda. A relação com Téo,inicialmente levada como brincadeira,toma rumos sombrios e violentos,fazendo com que ela perca sua liberdade e força. Ainda assim,uma fagulha de rebeldia permanece viva,alimentando seu desejo por justiça."
+        },
+        {
+          "nome": "Téo",
+          "sobrenome": "Jaffar Bambirra",
+          "foto": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/personagens/theo.jpg",
+          "descricao": "Estudante de Medicina,Téo aparenta ser o genro ideal — educado,discreto e dedicado. No entanto,por trás da fachada está um homem frio,manipulador e misógino. Criado sob a violência do pai,repete os padrões abusivos com mulheres,incluindo Clarice,a quem ele tenta transformar em sua 'esposa perfeita'. Sua inteligência o torna perigoso,e sua relação doentia com a mãe revela um histórico familiar marcado por controle e negação."
+        },
+        {
+          "nome": "Laura",
+          "sobrenome": "Julianna Gerais",
+          "foto": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/personagens/laura.jpg",
+          "descricao": "Filha de uma família periférica e militante feminista,Laura é determinada,inteligente e engajada. É melhor amiga de Clarice,com quem mantém uma ligação profunda e secreta paixão. Em contraste com a imaturidade da amiga,Laura é pé no chão e carrega o peso da responsabilidade. Seu faro aguçado e sua coragem serão decisivos ao longo da trama."
+        },
+        {
+          "nome": "Breno",
+          "sobrenome": "Elzio Vieira",
+          "foto": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/personagens/breno.jpg",
+          "descricao": "Violinista sensível e charmoso,Breno trocou tudo para seguir seu sonho na música. Elegante e introspectivo,ele vive um romance com Clarice,mas a intensidade da jovem o desestabiliza. O afastamento da família e sua dedicação à orquestra tornam seus amigos músicos sua nova rede de apoio. Seu desaparecimento é um ponto de virada na história,levantando suspeitas e provocando reações em quem o ama."
+        },
+        {
+          "nome": "Helena",
+          "sobrenome": "Fabíula Nascimento",
+          "foto": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/personagens/helena.jpg",
+          "descricao": "Mãe de Clarice,Helena é uma advogada criminalista ambiciosa. Exige perfeição da filha e tenta moldá-la à sua imagem,desprezando quem considera fora do padrão que idealizou. Tem um olhar preconceituoso e elitista,o que a coloca em choque com os amigos de Clarice. Enxerga em Téo o genro ideal,sem imaginar o perigo por trás da aparência."
+        },
+        {
+          "nome": "Patrícia",
+          "sobrenome": "Débora Bloch",
+          "foto": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/personagens/patricia.jpg",
+          "descricao": "Mãe de Téo,Patrícia é uma mulher que teve uma relação traumática com o ex-marido,um desembargador abusivo. É uma personagem ativa e muito positiva,mas tem uma relação de dependência emocional com o filho. No passado,sofreu um acidente que a deixou em uma cadeira de rodas."
+        }
+      ]
     },
     {
       "type": "scrollyframes",
@@ -251,7 +232,7 @@
       "showTime": false,
       "preloadFrames": 8,
       "memoryLimit": 30,
-      "animationSpeed": 0.1,
+      "animationSpeed": 0.05,
       "smoothing": true,
       "debug": false,
       "steps": [
@@ -308,42 +289,56 @@
       "size": "medium"
     },
     {
-      "type": "texto",
-      "text": "A série conta com alguns easter eggs do universo de Raphael Montes, como os nomes de personagens de outros livros do autor."
-    },
-    {
-      "type": "frase",
-      "text": "&ldquo;Eu pedi uma lista com o nome de todos os personagens do Raphael, de todos os livros dele. E eu usei os nomes. Vocês vão ter que achá-los ao longo da série.&rdquo;",
-      "author": "Cláudia Jouvin",
-      "role": "roteirista"
-    },
-    {
-      "type": "texto",
-      "text": "Raphael Montes faz participação especial em um dos episódios da série.&nbsp;"
-    },
-    {
-      "type": "texto",
-      "text": "A produção contou com a consultoria do psicanalista e escritor Christian Dunker, que orientou o elenco sobre as psicopatologias."
-    },
-    {
-      "type": "frase",
-      "text": "&ldquo;A gente fez uma consultoria com psicanalistas, com psiquiatras, para tentar entender a mente do Téo, sem trazer um olhar de fora. Esse foi o maior desafio e o maior presente do ponto de vista de direção: fazer uma série sobre dois personagens tentando estar o máximo possível dentro deles.&rdquo;",
-      "author": "Joana Jabace",
-      "role": "diretora"
-    },
-    {
-      "type": "texto",
-      "text": "As cenas do sequestro de Clarice foram gravadas em locações na região do Alto da Boa Vista, no Rio de Janeiro, e também em uma praia de Mangaratiba, localizada na Costa Verde da cidade."
-    },
-    {
-      "type": "frase",
-      "text": "&ldquo;O livro é quase um road movie, porque, a partir do momento em que ele a sequestra, ele vai fugindo. As pessoas começam a desconfiar, então ele vai indo para os lugares do roteiro da Clarice. [...] Então, as locações, que são muito importantes no livro, também são na série. Elas são personagens da série.&rdquo;",
-      "author": "Joana Jabace",
-      "role": "diretora"
-    },
-    {
-      "type": "texto",
-      "text": "Os artistas Zé Ibarra e Ana Frango Elétrico regravaram os sucessos &ldquo;Carinhoso&rdquo; e &ldquo;Luz Del Fuego&rdquo;, respectivamente, para a trilha sonora da série."
+      "type": "personagens",
+      "personagens": [
+        {
+          "nome": "Easter Eggs",
+          "foto": "teste.jpg",
+          "descricao": "A série conta com alguns easter eggs do universo de Raphael Montes,como os nomes de personagens de outros livros do autor."
+        },
+        {
+          "nome": "Cláudia Jouvin",
+          "sobrenome": "roteirista",
+          "foto": "teste.jpg",
+          "descricao": "Eu pedi uma lista com o nome de todos os personagens do Raphael,de todos os livros dele. E eu usei os nomes. Vocês vão ter que achá-los ao longo da série."
+        },
+        {
+          "nome": "Raphael Montes",
+          "sobrenome": "autor",
+          "foto": "teste.jpg",
+          "descricao": "Raphael Montes faz participação especial em um dos episódios da série."
+        },
+        {
+          "nome": "Christian Dunker",
+          "sobrenome": "psicanalista e escritor",
+          "foto": "teste.jpg",
+          "descricao": "A produção contou com a consultoria do psicanalista e escritor Christian Dunker,que orientou o elenco sobre as psicopatologias."
+        },
+        {
+          "nome": "Joana Jabace",
+          "sobrenome": "diretora",
+          "foto": "teste.jpg",
+          "descricao": "A gente fez uma consultoria com psicanalistas,com psiquiatras,para tentar entender a mente do Téo,sem trazer um olhar de fora. Esse foi o maior desafio e o maior presente do ponto de vista de direção:fazer uma série sobre dois personagens tentando estar o máximo possível dentro deles."
+        },
+        {
+          "nome": "Rio de Janeiro",
+          "sobrenome": "locações",
+          "foto": "teste.jpg",
+          "descricao": "As cenas do sequestro de Clarice foram gravadas em locações na região do Alto da Boa Vista,no Rio de Janeiro,e também em uma praia de Mangaratiba,localizada na Costa Verde da cidade."
+        },
+        {
+          "nome": "Joana Jabace",
+          "sobrenome": "diretora",
+          "foto": "teste.jpg",
+          "descricao": "O livro é quase um road movie,porque,a partir do momento em que ele a sequestra,ele vai fugindo. As pessoas começam a desconfiar,então ele vai indo para os lugares do roteiro da Clarice. ...Então,as locações,que são muito importantes no livro,também são na série. Elas são personagens da série."
+        },
+        {
+          "nome": "Trilha Sonora",
+          "sobrenome": "-",
+          "foto": "teste.jpg",
+          "descricao": "Os artistas Zé Ibarra e Ana Frango Elétrico regravaram os sucessos 'Carinhoso' e 'Luz Del Fuego',respectivamente,para a trilha sonora da série."
+        }
+      ]
     },
     {
       "type": "scrollyframes",
@@ -416,7 +411,7 @@
     },
     {
       "type": "texto",
-      "text": "Lançado em 2014, Dias Perfeitos é o segundo livro publicado de Raphael Montes, traduzido em 22 países, incluindo Estados Unidos, Inglaterra, Espanha e Itália.&nbsp; &nbsp;"
+      "text": "Lançado em 2014, Dias Perfeitos é o segundo livro publicado de Raphael Montes, traduzido em 22 países, incluindo Estados Unidos, Inglaterra, Espanha e Itália."
     },
     {
       "type": "texto",
@@ -424,7 +419,7 @@
     },
     {
       "type": "texto",
-      "text": "Em 2025, Dias Perfeitos ganhou uma edição de colecionador, lançada na Bienal do Livro. A obra conta com capa dura e ilustração baseada na edição norte-americana. Além disso, traz conteúdos exclusivos, como uma dedicatória do autor e um final alternativo. &nbsp;&nbsp;"
+      "text": "Em 2025, Dias Perfeitos ganhou uma edição de colecionador, lançada na Bienal do Livro. A obra conta com capa dura e ilustração baseada na edição norte-americana. Além disso, traz conteúdos exclusivos, como uma dedicatória do autor e um final alternativo."
     },
     {
       "type": "scrollyframes",
@@ -434,7 +429,7 @@
       "imageSuffix": ".jpg",
       "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/frames/mobile/cena4/frame_",
       "imageSuffixMobile": ".webp",
-      "height": "200vh",
+      "height": "300vh",
       "showProgress": false,
       "showTime": false,
       "preloadFrames": 8,
@@ -501,7 +496,7 @@
     },
     {
       "type": "frase",
-      "text": "&ldquo;Trazer o ponto de vista da Clarice foi importante para a personagem não ser apenas uma vítima. Esse ponto de vista, além de enriquecer a trama, se mostrou essencial para construir uma personagem forte e atual, apesar de tudo o que acontece com ela na história.&rdquo;",
+      "text": "\"Trazer o ponto de vista da Clarice foi importante para a personagem não ser apenas uma vítima. Esse ponto de vista, além de enriquecer a trama, se mostrou essencial para construir uma personagem forte e atual, apesar de tudo o que acontece com ela na história.\"",
       "author": "Cláudia Jouvin",
       "role": "roteirista"
     },
@@ -519,7 +514,7 @@
     },
     {
       "type": "frase",
-      "text": "&ldquo;O último episódio da série é uma trama pós-livro. &Eacute; interessante que as histórias sejam complementares, e não idênticas.&rdquo;",
+      "text": "\"O último episódio da série é uma trama pós-livro. É interessante que as histórias sejam complementares, e não idênticas.\"",
       "author": "Raphael Montes",
       "role": "autor"
     },
@@ -532,7 +527,7 @@
     },
     {
       "type": "texto",
-      "text": "Raphael Montes é escritor, roteirista e produtor executivo, conhecido por renovar o suspense e o terror na literatura e no audiovisual brasileiro. Formado em Direito, iniciou sua carreira de autor aos 18 anos, quando publicou contos em diversas antologias de mistério. Desde então, publicou 8 livros, traduzidos para mais de 20 idiomas. &Eacute; autor de best-sellers como Dias Perfeitos e Jantar Secreto, e coautor de Bom Dia, Verônica, livro que rendeu a série homônima de sucesso. Também roteirizou os filmes da franquia A Menina que Matou os Pais e é o criador da novela Beleza Fatal. Com passagens marcantes por eventos literários e prêmios como o Jabuti, Raphael se firmou como um dos autores mais vendidos do país, atuando também à frente da sua produtora, Casa Montes."
+      "text": "Raphael Montes é escritor, roteirista e produtor executivo, conhecido por renovar o suspense e o terror na literatura e no audiovisual brasileiro. Formado em Direito, iniciou sua carreira de autor aos 18 anos, quando publicou contos em diversas antologias de mistério. Desde então, publicou 8 livros, traduzidos para mais de 20 idiomas. É autor de best-sellers como Dias Perfeitos e Jantar Secreto, e coautor de Bom Dia, Verônica, livro que rendeu a série homônima de sucesso. Também roteirizou os filmes da franquia A Menina que Matou os Pais e é o criador da novela Beleza Fatal. Com passagens marcantes por eventos literários e prêmios como o Jabuti, Raphael se firmou como um dos autores mais vendidos do país, atuando também à frente da sua produtora, Casa Montes."
     },
     {
       "type": "scrollyframes",
@@ -542,12 +537,12 @@
       "imageSuffix": ".jpg",
       "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/frames/mobile/final/frame_",
       "imageSuffixMobile": ".webp",
-      "height": "800vh",
+      "height": "600vh",
       "showProgress": false,
       "showTime": false,
       "preloadFrames": 8,
       "memoryLimit": 30,
-      "animationSpeed": 0.1,
+      "animationSpeed": 0.05,
       "smoothing": true,
       "debug": false,
       "steps": [

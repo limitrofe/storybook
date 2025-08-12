@@ -1,19 +1,36 @@
 <script>
   // Carrega todos os estilos globais e de temas
-  // Caminho corrigido para '../app.css' para subir um nível a partir da pasta 'routes'
   import '../app.css';
   import '$lib/styles/tokens.css';
   import '$lib/styles/themes.css';
-  // Importa o seletor de temas
   import ThemeSwitcher from '$lib/components/ThemeSwitcher.svelte';
+  import { onMount } from 'svelte';
+  
+  // 🎯 CONFIGURAÇÃO CONDICIONAL
+  // Para desenvolvimento: mostra seletor
+  // Para produção: tema fixo "dias-perfeitos"
+  const isProduction = import.meta.env.PROD;
+  const TEMA_FIXO = 'dias-perfeitos';
+
+  onMount(() => {
+    if (isProduction) {
+      // Em produção: aplica tema fixo
+      document.documentElement.setAttribute('data-theme', TEMA_FIXO);
+      console.log('🎨 Produção: Tema "Dias Perfeitos" aplicado automaticamente');
+    } else {
+      console.log('🛠️ Desenvolvimento: Seletor de tema disponível');
+    }
+  });
 </script>
 
-<div class="persistent-theme-switcher">
-  <ThemeSwitcher />
-</div>
+<!-- Mostra seletor apenas em desenvolvimento -->
+{#if !isProduction}
+  <div class="persistent-theme-switcher">
+    <ThemeSwitcher />
+  </div>
+{/if}
 
 <slot />
-
 
 <style>
   .persistent-theme-switcher {
@@ -34,7 +51,7 @@
     color: var(--color-text);
     font-family: 'Globotipo', -apple-system, sans-serif;
     margin: 0;
-    min-height: 100vh; /* Garante que o body ocupe no mínimo a altura total da tela */
+    min-height: 100vh;
     transition: background-color 0.2s, color 0.2s;
   }
 </style>

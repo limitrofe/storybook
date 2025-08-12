@@ -394,7 +394,7 @@
   /* Regra de debug visual em desenvolvimento */
   @media (max-width: 768px) {
     .section-title:not(.has-media):not(.has-mobile-media):not(.section-title--minimal) {
-      border-left: 4px solid var(--color-primary);
+      border-left: 0px solid var(--color-primary);
     }
   }
 </style>

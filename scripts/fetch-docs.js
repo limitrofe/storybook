@@ -108,6 +108,25 @@ async function fetchGoogleDoc(docId) {
         }
       });
     }
+
+    // 🎬 NOVO: Apresentação de Personagens
+    const characterComponents = data.paragraphs?.filter(p => 
+      ['personagens', 'characters', 'character-presentation', 'apresentacao-personagens'].includes(p.type?.toLowerCase())
+    ) || [];
+    
+    if (characterComponents.length > 0) {
+      console.log(`🎭 Apresentação de Personagens encontrados: ${characterComponents.length}`);
+      characterComponents.forEach((comp, index) => {
+        const charCount = comp.personagens?.length || comp.characters?.length || comp.lista?.length || 0;
+        console.log(`  ${index + 1}. Personagens: ${charCount} | ShapeColor: ${comp.shapeColor || '#DC2626'}`);
+        if (charCount > 0) {
+          const chars = comp.personagens || comp.characters || comp.lista || [];
+          chars.forEach((char, charIndex) => {
+            console.log(`     Personagem ${charIndex + 1}: "${char.nome || char.name}" | Foto: ${!!char.foto || !!char.photo} | Descrição: ${(char.descricao || char.description || '').substring(0, 50)}...`);
+          });
+        }
+      });
+    }
     
     return data;
     
@@ -198,16 +217,63 @@ function parseIntroHTML(html) {
 
 function decodeHTMLEntities(text) {
   if (!text) return '';
+  
+  // Mapa completo de entidades HTML incluindo aspas especiais e caracteres especiais
   const entities = { 
-    '&amp;': '&', '&lt;': '<', '&gt;': '>', '&quot;': '"', '&#39;': "'", 
-    '&aacute;': 'á', '&agrave;': 'à', '&acirc;': 'â', '&atilde;': 'ã', '&auml;': 'ä', 
-    '&eacute;': 'é', '&egrave;': 'è', '&ecirc;': 'ê', '&euml;': 'ë', 
-    '&iacute;': 'í', '&igrave;': 'ì', '&icirc;': 'î', '&iuml;': 'ï', 
-    '&oacute;': 'ó', '&ograve;': 'ò', '&ocirc;': 'ô', '&otilde;': 'õ', '&ouml;': 'ö', 
-    '&uacute;': 'ú', '&ugrave;': 'ù', '&ucirc;': 'û', '&uuml;': 'ü', 
-    '&ccedil;': 'ç', '&ntilde;': 'ñ' 
+    // Básicas
+    '&amp;': '&', '&lt;': '<', '&gt;': '>', '&quot;': '"', '&#39;': "'", '&nbsp;': ' ',
+    
+    // Aspas e citações - PROBLEMA PRINCIPAL
+    '&lsquo;': "'", '&rsquo;': "'", '&ldquo;': '"', '&rdquo;': '"',
+    '&laquo;': '«', '&raquo;': '»', '&sbquo;': '‚', '&bdquo;': '„',
+    '&#8216;': "'", '&#8217;': "'", '&#8218;': '‚', '&#8220;': '"', 
+    '&#8221;': '"', '&#8222;': '„', '&#8249;': '‹', '&#8250;': '›',
+    
+    // Acentos portugueses
+    '&aacute;': 'á', '&agrave;': 'à', '&acirc;': 'â', '&atilde;': 'ã', '&auml;': 'ä', '&aring;': 'å',
+    '&eacute;': 'é', '&egrave;': 'è', '&ecirc;': 'ê', '&euml;': 'ë',
+    '&iacute;': 'í', '&igrave;': 'ì', '&icirc;': 'î', '&iuml;': 'ï',
+    '&oacute;': 'ó', '&ograve;': 'ò', '&ocirc;': 'ô', '&otilde;': 'õ', '&ouml;': 'ö',
+    '&uacute;': 'ú', '&ugrave;': 'ù', '&ucirc;': 'û', '&uuml;': 'ü',
+    '&ccedil;': 'ç', '&ntilde;': 'ñ',
+    
+    // Maiúsculas acentuadas
+    '&Aacute;': 'Á', '&Agrave;': 'À', '&Acirc;': 'Â', '&Atilde;': 'Ã', '&Auml;': 'Ä',
+    '&Eacute;': 'É', '&Egrave;': 'È', '&Ecirc;': 'Ê', '&Euml;': 'Ë',
+    '&Iacute;': 'Í', '&Igrave;': 'Ì', '&Icirc;': 'Î', '&Iuml;': 'Ï',
+    '&Oacute;': 'Ó', '&Ograve;': 'Ò', '&Ocirc;': 'Ô', '&Otilde;': 'Õ', '&Ouml;': 'Ö',
+    '&Uacute;': 'Ú', '&Ugrave;': 'Ù', '&Ucirc;': 'Û', '&Uuml;': 'Ü',
+    '&Ccedil;': 'Ç', '&Ntilde;': 'Ñ',
+    
+    // Outros símbolos comuns
+    '&mdash;': '—', '&ndash;': '–', '&hellip;': '…', '&middot;': '·',
+    '&bull;': '•', '&dagger;': '†', '&Dagger;': '‡', '&permil;': '‰',
+    '&prime;': '′', '&Prime;': '″', '&lsaquo;': '‹', '&rsaquo;': '›',
+    '&copy;': '©', '&reg;': '®', '&trade;': '™', '&deg;': '°'
   };
-  return text.replace(/&[a-zA-Z0-9#]+;/g, (entity) => entities[entity] || entity);
+  
+  // Primeiro, aplica o mapa de entidades conhecidas
+  let decoded = text.replace(/&[a-zA-Z0-9#]+;/g, (entity) => entities[entity] || entity);
+  
+  // Em seguida, tenta decodificar entidades numéricas que possam ter sobrado
+  decoded = decoded.replace(/&#(\d+);/g, (match, num) => {
+    try {
+      return String.fromCharCode(parseInt(num, 10));
+    } catch (e) {
+      return match; // Se falhar, mantém o original
+    }
+  });
+  
+  // Por último, tenta decodificar entidades hexadecimais
+  decoded = decoded.replace(/&#x([0-9a-fA-F]+);/g, (match, hex) => {
+    try {
+      return String.fromCharCode(parseInt(hex, 16));
+    } catch (e) {
+      return match; // Se falhar, mantém o original
+    }
+  });
+  
+  return decoded;
 }
 
 function parseJSONField(jsonString, fieldName) {
@@ -222,6 +288,15 @@ function parseJSONField(jsonString, fieldName) {
       .replace(/&gt;/g, '>')
       .replace(/&#39;/g, "'")
       .replace(/&nbsp;/g, ' ')
+      // 🔧 CORREÇÃO: Adicionar tratamento para aspas especiais
+      .replace(/&lsquo;/g, "'")
+      .replace(/&rsquo;/g, "'")
+      .replace(/&ldquo;/g, '"')
+      .replace(/&rdquo;/g, '"')
+      .replace(/&#8216;/g, "'")
+      .replace(/&#8217;/g, "'")
+      .replace(/&#8220;/g, '"')
+      .replace(/&#8221;/g, '"')
       .replace(/\n/g, ' ')
       .replace(/\r/g, ' ')
       .replace(/\s+/g, ' ')
@@ -241,7 +316,7 @@ function parseJSONField(jsonString, fieldName) {
           Object.keys(item).forEach(key => {
             if (typeof item[key] === 'string') {
               item[key] = decodeHTMLEntities(item[key]);
-              if (['text', 'caption', 'content'].includes(key)) {
+              if (['text', 'caption', 'content', 'title', 'nome', 'name', 'descricao', 'description'].includes(key)) {
                 item[key] = cleanAndFormatHTML(item[key]);
               }
             }
@@ -287,6 +362,55 @@ function parseParagraphsHTML(html) {
     const typeMatch = block.match(/type:\s*([^\n<]+)/);
     if (typeMatch) {
       paragraph.type = decodeHTMLEntities(typeMatch[1].trim());
+    }
+
+    // 🎬 NOVO: TRATAMENTO ESPECÍFICO PARA APRESENTAÇÃO DE PERSONAGENS
+    if (['personagens', 'characters', 'character-presentation', 'apresentacao-personagens'].includes(paragraph.type?.toLowerCase())) {
+      console.log('🎭 Processando Apresentação de Personagens...');
+      
+      // Campos específicos de personagens
+      const characterFields = {
+        personagens: /personagens:\s*(\[[\s\S]*?\])/i,
+        characters: /characters:\s*(\[[\s\S]*?\])/i,
+        lista: /lista:\s*(\[[\s\S]*?\])/i,
+        shapeColor: /shapeColor:\s*([^\n<]+)/i,
+        nameColor: /nameColor:\s*([^\n<]+)/i,
+        textColor: /textColor:\s*([^\n<]+)/i,
+        backgroundColor: /backgroundColor:\s*([^\n<]+)/i,
+        animationSpeed: /animationSpeed:\s*([^\n<]+)/i,
+        sectionHeight: /sectionHeight:\s*([^\n<]+)/i,
+        sectionHeightMobile: /sectionHeightMobile:\s*([^\n<]+)/i
+      };
+
+      // Processar lista de personagens (JSON array)
+      for (const field of ['personagens', 'characters', 'lista']) {
+        const regex = characterFields[field];
+        const match = block.match(regex);
+        if (match) {
+          paragraph[field] = parseJSONField(match[1], `character ${field}`);
+          console.log(`   ✅ ${paragraph[field]?.length || 0} personagens processados em ${field}`);
+          break; // Usa apenas o primeiro campo encontrado
+        }
+      }
+
+      // Processar outros campos
+      for (const [field, regex] of Object.entries(characterFields)) {
+        if (['personagens', 'characters', 'lista'].includes(field)) continue; // Já processado acima
+        
+        const match = block.match(regex);
+        if (match) {
+          paragraph[field] = decodeHTMLEntities(match[1].trim());
+        }
+      }
+
+      // 🔧 CORREÇÃO: Processar campo 'text' para apresentação de personagens também
+      const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:personagens|characters|lista|shapeColor|nameColor|textColor|backgroundColor|animationSpeed|sectionHeight|sectionHeightMobile):|type:|$)/si);
+      if (textMatch) {
+        paragraph.text = cleanAndFormatHTML(textMatch[1].trim());
+      }
+
+      paragraphs.push(paragraph);
+      continue;
     }
 
     // 🆕 TRATAMENTO ESPECÍFICO PARA SCROLLYFRAMES
@@ -343,7 +467,7 @@ function parseParagraphsHTML(html) {
       // Processar texto se existir
       const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:frameStart|frameStop|imagePrefix|imageSuffix|imagePrefixMobile|imageSuffixMobile|height|showProgress|showTime|preloadFrames|memoryLimit|animationSpeed|smoothing|debug|fullWidth|steps):|type:|$)/si);
       if (textMatch) {
-        paragraph.text = decodeHTMLEntities(textMatch[1].trim().replace(/<[^>]*>/g, ' ')).replace(/\s\s+/g, ' ').trim();
+        paragraph.text = cleanAndFormatHTML(textMatch[1].trim());
       }
 
       paragraphs.push(paragraph);
@@ -372,7 +496,7 @@ function parseParagraphsHTML(html) {
       if (['texto', 'frase', 'intro'].includes(paragraph.type)) {
         paragraph.text = cleanAndFormatHTML(textMatch[1].trim());
       } else {
-        paragraph.text = decodeHTMLEntities(textMatch[1].trim().replace(/<[^>]*>/g, ' ')).replace(/\s\s+/g, ' ').trim();
+        paragraph.text = cleanAndFormatHTML(textMatch[1].trim());
       }
     }
     
@@ -454,15 +578,19 @@ function parseCreditsHTML(html) {
 function cleanAndFormatHTML(html) {
   if (!html) return '';
   
+  // 🔧 CORREÇÃO: Primeiro decodifica as entidades HTML
   let cleanedHtml = decodeHTMLEntities(html);
   
+  // Remove backticks problemáticos
   cleanedHtml = cleanedHtml.replace(/`/g, "'");
   
+  // Preserva formatação básica convertendo estilos inline para tags simples
   cleanedHtml = cleanedHtml.replace(/<([^>]+)style="[^"]*font-weight:\s*(?:bold|[7-9]\d\d|700|800|900)[^"]*"[^>]*>(.*?)<\/\1>/gi, '<strong>$2</strong>');
   cleanedHtml = cleanedHtml.replace(/<([^>]+)style="[^"]*font-style:\s*italic[^"]*"[^>]*>(.*?)<\/\1>/gi, '<em>$2</em>');
   cleanedHtml = cleanedHtml.replace(/<([^>]+)style="[^"]*text-decoration[^"]*underline[^"]*"[^>]*>(.*?)<\/\1>/gi, '<u>$2</u>');
   cleanedHtml = cleanedHtml.replace(/<a\s+href="([^"]*)"[^>]*>(.*?)<\/a>/gi, '<a href="$1">$2</a>');
   
+  // Processa listas com bullets
   const listRegex = /((?:[•*-]\s.*)(?:<br\s*\/?>\s*[•*-]\s.*)*)/g;
   cleanedHtml = cleanedHtml.replace(listRegex, (listBlock) => {
     const items = listBlock.split(/<br\s*\/?>/gi)
@@ -473,6 +601,7 @@ function cleanAndFormatHTML(html) {
     return items ? `<ul>${items}</ul>` : '';
   });
 
+  // Remove tags desnecessárias mas preserva conteúdo
   cleanedHtml = cleanedHtml.replace(/<\/?(span|p|div)[^>]*>/gi, '');
   
   return cleanedHtml.trim();

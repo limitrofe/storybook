@@ -260,3 +260,15 @@
   --color-highlight-bg: #F5F8E6;
   --color-border: #DDE2CC;
 }
+
+[data-theme="dias-perfeitos"] {
+  --color-primary: #BCC1C7;
+  --color-secondary: #BCC1C7;
+  --color-accent: #b51207;
+  --color-text: #BCC1C7;
+  --color-subtle-text: #74787C;
+  --color-background: #000100;
+  --color-background-rgb: 252, 254, 250;
+  --color-highlight-bg: #b51207;
+  --color-border: #b51207;
+}

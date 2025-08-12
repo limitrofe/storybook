@@ -88,7 +88,7 @@
     width: 100%;
     background-color: var(--color-background);
     margin: 0;
-    padding: 4rem 0;
+    padding: 1rem 0;
   }
 
   .section-wrapper.has-media {
@@ -134,7 +134,7 @@
     z-index: 3;
     max-width: 800px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 0rem;
   }
 
   /* Quando tem background, o texto fica branco */
@@ -157,7 +157,7 @@
   /* ========== MOBILE STYLES ========== */
   @media (max-width: 768px) {
     .section-wrapper {
-      padding: 3rem 0;
+      padding: 0rem 0;
     }
 
     /* Mobile backgrounds - visíveis apenas no mobile */
