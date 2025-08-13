@@ -139,9 +139,9 @@
 }
 
 .recommended-title {
-  font-size: 2rem;
+font-size: var(--font-size-140, 3rem);
   font-weight: 600;
-  color: var(--title-color);
+color: var(--color-text);
   margin: 0 0 1.5rem 0;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -207,9 +207,12 @@
 
 .item-image {
   position: relative;
-  width: 100%;
-  aspect-ratio: 9/16;
+  width: 70%;
   overflow: hidden;
+  margin: 0 auto; /* Centraliza a imagem */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .item-image img {
@@ -328,11 +331,38 @@
   }
   
   .recommended-title {
-    font-size: 1.25rem;
-  }
+        font-size: var(--font-size-120, 2.5rem);
+        }
   
   .item-content {
     padding: 0.75rem;
+  }
+  
+  /* Centralização específica para mobile */
+  .recommended-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .item-image {
+    width: 60%; /* Pode ajustar este valor para deixar ainda menor */
+  }
+  
+  .item-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .item-title,
+  .item-subtitle,
+  .item-description,
+  .item-category {
+    text-align: center;
+    width: 100%;
   }
 }
 
@@ -344,6 +374,11 @@
   .recommended-items {
     padding: 1rem 0;
   }
+  
+  /* Mobile muito pequeno - imagem ainda menor */
+  .item-image {
+    width: 50%; /* Imagem mais pequena para telas muito pequenas */
+  }
+  
 }
-
 </style>

@@ -102,11 +102,36 @@
 
     animationStates = [...animationStates];
   }
+
+  // Função para dividir o nome em linhas quando necessário
+  function splitName(nome) {
+    if (!nome) return { linha1: '', linha2: '' };
+    
+    const palavras = nome.trim().split(/\s+/);
+    
+    // Se tem só uma palavra, coloca ela sozinha
+    if (palavras.length === 1) {
+      return { linha1: palavras[0], linha2: '' };
+    }
+    
+    // Se tem duas palavras, uma em cada linha
+    if (palavras.length === 2) {
+      return { linha1: palavras[0], linha2: palavras[1] };
+    }
+    
+    // Se tem três ou mais palavras, divide aproximadamente no meio
+    const meio = Math.ceil(palavras.length / 2);
+    return {
+      linha1: palavras.slice(0, meio).join(' '),
+      linha2: palavras.slice(meio).join(' ')
+    };
+  }
 </script>
 
 <div class="container" bind:this={containerElement}>
   {#if processedPersonagens && processedPersonagens.length > 0}
     {#each processedPersonagens as personagem, index}
+      {@const nomeLinhas = splitName(personagem.nome)}
       <div class="character-wrapper">
         <div class="character-section">
           <div class="character-container">
@@ -177,7 +202,14 @@
               {#if personagem.sobrenome}
                 <h5>{personagem.sobrenome}</h5>
               {/if}
-              <h2>{personagem.nome}</h2>
+              
+              <!-- Nome dividido em duas linhas automaticamente -->
+              <div class="nome-container">
+                <h2 class="nome-linha">{nomeLinhas.linha1}</h2>
+                {#if nomeLinhas.linha2}
+                  <h2 class="nome-linha">{nomeLinhas.linha2}</h2>
+                {/if}
+              </div>
             </div>
             
             <!-- Tarja vermelha -->
@@ -347,29 +379,20 @@
   .character-name {
     position: absolute;
     left: 50%;
-    top: 20%;
+    top: 60%;
     transform: translate(-50%, -50%);
-    font-size: clamp(8rem, 15vw, 15rem);
+    font-size: clamp(4rem, 10vw, 10rem);
     font-weight: 700;
     letter-spacing: -0.01em;
     z-index: 10;
     text-transform: uppercase;
     font-family: "obviously-compressed", sans-serif;
-    white-space: nowrap;
     transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: transform;
     /* text-shadow: 0 0 5px rgba(0,0,0,0.5); */
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-  
-  .character-name h2 {
-    margin: 0;
-    line-height: 0.9;
-    font-size: inherit;
-    font-family: "obviously-compressed", sans-serif;
-    font-weight: 700;
   }
   
   .character-name h5 {
@@ -382,6 +405,23 @@
     margin-bottom: 0.3rem;
     opacity: 0.9;
     text-transform: none;
+  }
+
+  /* Container para o nome dividido em linhas */
+  .nome-container {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    line-height: 0.8;
+  }
+  
+  .nome-linha {
+    margin: 0;
+    line-height: 0.8;
+    font-size: inherit;
+    font-family: "obviously-compressed", sans-serif;
+    font-weight: 700;
+    white-space: nowrap;
   }
 
   /* Tarja vermelha - cobre toda a tela */
@@ -442,11 +482,11 @@
   
   /* Seção de descrição */
   .description-section {
-    width: 100%;
+    width: 95%;
   }
   
   .description-text {
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     line-height: 1.5;
     font-weight: 300;
     color: var(--text-color, #fff);
@@ -468,12 +508,12 @@
 
   /* Seção de frase destacada */
   .quote-section {
-    width: 100%;
+    width: 80%;
     margin-top: 0rem;
   }
 
   .quote-text {
-    font-size: 2.2rem;
+    font-size: 1.6rem;
     line-height: 1.3;
     font-weight: 400;
     color: var(--quote-color, #ffd700);
@@ -488,7 +528,7 @@
 
   /* Atribuição da frase (autor e profissão) */
   .quote-attribution {
-    margin-top: 1rem;
+    margin-top: 0.9rem;
     text-align: right;
     font-family: "obviously", sans-serif;
     font-style: normal;
@@ -496,7 +536,7 @@
 
   .quote-author {
     display: block;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 600;
     color: var(--quote-color, #ffd700);
     margin-bottom: 0.2rem;
@@ -521,8 +561,8 @@
   
   @media (max-width: 768px) {
     .character-name {
-      font-size: clamp(6rem, 16vw, 4rem);
-      top: 80%;
+      font-size: clamp(4rem, 16vw, 4rem);
+      top: 75%;
       align-items: start;
       margin-bottom: 0px;
       text-shadow: none;
@@ -537,14 +577,18 @@
     .description-text {
       font-size: 0.9rem;
       text-align: left;
-      width: 80%;
+      width: 100%;
     }
 
+    .quote-section{
+      width: 95%;
+    }
     .quote-text {
-      font-size: 1.1rem;
-      padding-left: 1rem;
+      font-size: 1rem;
+      padding-left: 0.5rem;
       border-left-width: 3px;
     }
+
 
     .quote-author {
       font-size: 1rem;
@@ -569,7 +613,8 @@
     .content-wrapper {
       width: 90%;
       text-align: center !important;
-      top: 10%;
+      top: 5%;
+      gap: 0.5rem;
     }
     
     .content-wrapper.align-left,

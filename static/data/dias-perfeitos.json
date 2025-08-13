@@ -1,10 +1,10 @@
 {
   "credits": {
     "authors": [
-      "Conteúdo: Tatá Dias",
-      "Design: Otávio Camargo, Thalita Santos e Bruna Azevedo",
-      "Coordenação: Davi Padovani (conteúdo) e Guilherme Gomes (design e desenvolvimento",
-      "Produtos: Amanda Araújo e Marcela Vasconcelos"
+      "Conteúdo: Tatá Dias e Josué Santos",
+      "Design: Otávio Camargo, Thalita Ferraz e Bruna Azevedo",
+      "Coordenação: Davi Padovani (conteúdo) e Guilherme Gomes (design e desenvolvimento)",
+      "Produto: Amanda Araújo e Marcela Vasconcelos"
     ]
   },
   "title": "DIAS PERFEITOS",
@@ -89,7 +89,7 @@
     },
     {
       "type": "texto",
-      "text": "Téo é um solitário estudante de medicina que divide seu tempo entre cuidar da mãe paraplégica e dissecar cadáveres nas aulas de anatomia. Num churrasco a que vai contrariado, conhece CLARICE, jovem de espírito livre que sonha tornar-se roteirista de cinema. Para enciumar seu namorado, Clarice beija Téo. Para ela, apenas uma farra. Para ele, o início de uma paixão que, afrontada por sucessivas negativas, rapidamente se transforma em sequestro e brutalidade."
+      "text": "Téo é um solitário estudante de medicina que divide seu tempo entre cuidar da mãe paraplégica e dissecar cadáveres nas aulas de anatomia. Num churrasco a que vai contrariado, conhece Clarice, jovem de espírito livre que sonha tornar-se roteirista de cinema. Para enciumar seu namorado, Clarice beija Téo. Para ela, apenas uma farra. Para ele, o início de uma paixão que, afrontada por sucessivas negativas, rapidamente se transforma em sequestro e brutalidade."
     },
     {
       "type": "frase",
@@ -176,7 +176,9 @@
       "text": "PERSONAGENS",
       "textAlign": "center",
       "variant": "centered",
-      "size": "large"
+      "size": "large",
+      "height": "40vh",
+      "heightMobile": "40vh"
     },
     {
       "type": "personagens",
@@ -211,14 +213,14 @@
         },
         {
           "nome": "Helena",
-          "sobrenome": "Fabíula Nascimento",
+          "sobrenome": "Fabiula Nascimento",
           "foto": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/personagens/helena.jpg",
           "fotoMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/personagens/helena_mob.jpg",
           "descricao": "Mãe de Clarice, Helena é uma advogada criminalista ambiciosa. Exige perfeição da filha e tenta moldá-la à sua imagem, desprezando quem considera fora do padrão que idealizou. Tem um olhar preconceituoso e elitista, o que a coloca em choque com os amigos de Clarice. Enxerga em Téo o genro ideal, sem imaginar o perigo por trás da aparência."
         },
         {
           "nome": "Patrícia",
-          "sobrenome": "Débora Bloch",
+          "sobrenome": "Debora Bloch",
           "foto": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/personagens/patricia.jpg",
           "fotoMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/personagens/patricia_mob.jpg",
           "descricao": "Mãe de Téo, Patrícia é uma mulher que teve uma relação traumática com o ex-marido, um desembargador abusivo. É uma personagem ativa e muito positiva, mas tem uma relação de dependência emocional com o filho. No passado, sofreu um acidente que a deixou em uma cadeira de rodas."
@@ -292,7 +294,9 @@
       "text": "CURIOSIDADES DA SÉRIE",
       "textAlign": "center",
       "variant": "centered",
-      "size": "large"
+      "size": "large",
+      "height": "40vh",
+      "heightMobile": "40vh"
     },
     {
       "type": "curiosidades",
@@ -301,7 +305,7 @@
           "nome": "EASTER EGGS",
           "descricao": "A série conta com alguns easter eggs do universo de Raphael Montes, como os nomes de personagens de outros livros do autor.",
           "frase": "Eu pedi uma lista com o nome de todos os personagens do Raphael, de todos os livros dele. E eu usei os nomes. Vocês vão ter que achá-los ao longo da série.",
-          "autor": "Cláudia Jouvin",
+          "autor": "Claudia Jouvin",
           "profissao": "roteirista"
         },
         {
@@ -396,7 +400,9 @@
       "text": "SOBRE O LIVRO",
       "textAlign": "center",
       "variant": "centered",
-      "size": "large"
+      "size": "large",
+      "height": "40vh",
+      "heightMobile": "40vh"
     },
     {
       "type": "texto",
@@ -417,7 +423,7 @@
     },
     {
       "type": "texto",
-      "text": "Em 2025, Dias Perfeitos ganhou uma edição de colecionador, lançada na Bienal do Livro. A obra conta com capa dura e ilustração baseada na edição norte-americana. Além disso, traz conteúdos exclusivos, como uma dedicatória do autor e um final alternativo."
+      "text": "Em 2025, Dias Perfeitos ganhou uma edição de colecionador, lançada na Bienal do Livro Rio. A obra conta com capa dura e ilustração baseada na edição norte-americana. Além disso, traz conteúdos exclusivos, como uma dedicatória do autor e um final alternativo."
     },
     {
       "type": "scrollyframes",
@@ -495,7 +501,7 @@
     {
       "type": "frase",
       "text": "\"Trazer o ponto de vista da Clarice foi importante para a personagem não ser apenas uma vítima. Esse ponto de vista, além de enriquecer a trama, se mostrou essencial para construir uma personagem forte e atual, apesar de tudo o que acontece com ela na história.\"",
-      "author": "Cláudia Jouvin",
+      "author": "Claudia Jouvin",
       "role": "roteirista"
     },
     {

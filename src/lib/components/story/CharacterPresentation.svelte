@@ -248,7 +248,7 @@
   .character-name {
     position: absolute;
     left: 50%;
-    top: 20%;
+    top: 70%;
     transform: translate(-50%, -50%);
     font-size: clamp(8rem, 15vw, 15rem);
     font-weight: 700;
