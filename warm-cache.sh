@@ -2,7 +2,7 @@
 # Script para aquecer o cache com TODOS os frames
 # Executa em paralelo para ser mais rápido
 
-echo "🔥 Aquecendo cache com 1279 arquivos..."
+echo "🔥 Aquecendo cache com 1291 arquivos..."
 
 # Função para fazer o curl
 warm_url() {

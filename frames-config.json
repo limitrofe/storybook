@@ -18,7 +18,7 @@
     "type": "videoscrollytelling",
     "imagePrefix": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/frames/desktop/cena3/frame_",
     "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/frames/mobile/cena3/frame_",
-    "totalFrames": 155
+    "totalFrames": 161
   },
   {
     "name": "cena4",
@@ -39,6 +39,6 @@
     "type": "videoscrollytelling",
     "imagePrefix": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/frames/desktop/intro/frame_",
     "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/frames/mobile/intro/frame_",
-    "totalFrames": 124
+    "totalFrames": 127
   }
 ]

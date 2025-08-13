@@ -1,22 +1,10 @@
 {
   "credits": {
-    "notes": "Este é um espaço para quaisquer notas adicionais, agradecimentos, ou informações complementares sobre a matéria. Você pode adicionar texto formatado, como negrito ou itálico.",
-    "sources": [
-      "Fonte 1: Nome da Organização ou Publicação. Link: https://www.fonte1.com",
-      "Fonte 2: Artigo \"Título do Artigo\", Autor. Data.",
-      "Fonte 3: Pesquisa da Universidade XYZ, 2024."
-    ],
-    "additionalGraphics": [
-      "João Desenhos",
-      "Estúdio Gráfico Inovador"
-    ],
-    "editedBy": [
-      "Editor Chefe da Notícia",
-      "Revisor de Conteúdo"
-    ],
     "authors": [
-      "Autor Principal da Matéria",
-      "Co-Autor Colaborador"
+      "Conteúdo: Tatá Dias",
+      "Design: Otávio Camargo, Thalita Santos e Bruna Azevedo",
+      "Coordenação: Davi Padovani (conteúdo) e Guilherme Gomes (design e desenvolvimento",
+      "Produtos: Amanda Araújo e Marcela Vasconcelos"
     ]
   },
   "title": "DIAS PERFEITOS",
@@ -29,7 +17,7 @@
       "imageSuffix": ".jpg",
       "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/frames/mobile/intro/frame_",
       "imageSuffixMobile": ".webp",
-      "height": "510vh",
+      "height": "610vh",
       "showProgress": false,
       "showTime": false,
       "preloadFrames": 8,
@@ -39,8 +27,8 @@
       "debug": false,
       "steps": [
         {
-          "title": "Abertura:Estabelecendo o Cenário",
-          "text": "Nossa jornada começa do zero,apresentando o <strong>contexto inicial</strong> e estabelecendo as bases para tudo que será revelado.",
+          "title": "Abertura: Estabelecendo o Cenário",
+          "text": "Nossa jornada começa do zero, apresentando o <strong>contexto inicial</strong> e estabelecendo as bases para tudo que será revelado.",
           "startFrame": 1,
           "endFrame": 5,
           "duration": 1000
@@ -68,7 +56,7 @@
         },
         {
           "title": "Aprofundamento da Análise",
-          "text": "Mergulhamos mais fundo na análise,explorando <strong>camadas mais complexas</strong> da narrativa.",
+          "text": "Mergulhamos mais fundo na análise, explorando <strong>camadas mais complexas</strong> da narrativa.",
           "startFrame": 26,
           "endFrame": 40,
           "duration": 1000
@@ -94,10 +82,10 @@
     },
     {
       "type": "intertitulo",
-      "text": "Sinopse",
+      "text": "SINOPSE",
       "textAlign": "center",
       "variant": "centered",
-      "size": "medium"
+      "size": "large"
     },
     {
       "type": "texto",
@@ -108,6 +96,18 @@
       "text": "\"É uma história de amor obsessivo, de machismo, de violência contra a mulher, narrada, no caso do livro, na perspectiva do psicopata. No caso da série, a gente tem uma outra proposta que é superinteressante, que é mostrar as duas visões. Então é uma relação que, por um lado, é abusiva e violenta e, para o outro lado, é uma história romântica.\"",
       "author": "Raphael Montes",
       "role": "Autor"
+    },
+    {
+      "type": "video",
+      "src": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/videos/info_mala_rosa.mp4",
+      "caption": "",
+      "credit": "",
+      "fullWidth": "false",
+      "autoplay": "true",
+      "controls": "false",
+      "autoPlay": "true",
+      "showCaption": "false",
+      "loop": "true"
     },
     {
       "type": "scrollyframes",
@@ -127,8 +127,8 @@
       "debug": false,
       "steps": [
         {
-          "title": "Abertura:Estabelecendo o Cenário",
-          "text": "Nossa jornada começa do zero,apresentando o <strong>contexto inicial</strong> e estabelecendo as bases para tudo que será revelado.",
+          "title": "Abertura: Estabelecendo o Cenário",
+          "text": "Nossa jornada começa do zero, apresentando o <strong>contexto inicial</strong> e estabelecendo as bases para tudo que será revelado.",
           "startFrame": 1,
           "endFrame": 30,
           "duration": 3000
@@ -156,7 +156,7 @@
         },
         {
           "title": "Aprofundamento da Análise",
-          "text": "Mergulhamos mais fundo na análise,explorando <strong>camadas mais complexas</strong> da narrativa.",
+          "text": "Mergulhamos mais fundo na análise, explorando <strong>camadas mais complexas</strong> da narrativa.",
           "startFrame": 101,
           "endFrame": 120,
           "duration": 4000
@@ -173,10 +173,10 @@
     },
     {
       "type": "intertitulo",
-      "text": "Personagens",
+      "text": "PERSONAGENS",
       "textAlign": "center",
       "variant": "centered",
-      "size": "medium"
+      "size": "large"
     },
     {
       "type": "personagens",
@@ -185,37 +185,43 @@
           "nome": "Clarice",
           "sobrenome": "Julia Dalavia",
           "foto": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/personagens/clarice3.jpg",
-          "descricao": "Filha de uma família rica da zona sul do Rio,Clarice é livre,impulsiva e idealista. Estudante de História da Arte,vive entre festas,amores plurais e a paixão por escrever roteiros. Com estilo alternativo e personalidade provocadora,ela desafia os padrões dos pais,mas esconde uma insegurança profunda. A relação com Téo,inicialmente levada como brincadeira,toma rumos sombrios e violentos,fazendo com que ela perca sua liberdade e força. Ainda assim,uma fagulha de rebeldia permanece viva,alimentando seu desejo por justiça."
+          "fotoMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/personagens/clarice_mob.jpg",
+          "descricao": "Filha de uma família rica da zona sul do Rio, Clarice é livre, impulsiva e idealista. Estudante de História da Arte, vive entre festas, amores plurais e a paixão por escrever roteiros. Com estilo alternativo e personalidade provocadora, ela desafia os padrões dos pais, mas esconde uma insegurança profunda. A relação com Téo, inicialmente levada como brincadeira, toma rumos sombrios e violentos, fazendo com que ela perca sua liberdade e força. Ainda assim, uma fagulha de rebeldia permanece viva, alimentando seu desejo por justiça."
         },
         {
           "nome": "Téo",
           "sobrenome": "Jaffar Bambirra",
           "foto": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/personagens/theo.jpg",
-          "descricao": "Estudante de Medicina,Téo aparenta ser o genro ideal — educado,discreto e dedicado. No entanto,por trás da fachada está um homem frio,manipulador e misógino. Criado sob a violência do pai,repete os padrões abusivos com mulheres,incluindo Clarice,a quem ele tenta transformar em sua 'esposa perfeita'. Sua inteligência o torna perigoso,e sua relação doentia com a mãe revela um histórico familiar marcado por controle e negação."
+          "fotoMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/personagens/theo_mob.jpg",
+          "descricao": "Estudante de Medicina, Téo aparenta ser o genro ideal — educado, discreto e dedicado. No entanto, por trás da fachada está um homem frio, manipulador e misógino. Criado sob a violência do pai, repete os padrões abusivos com mulheres, incluindo Clarice, a quem ele tenta transformar em sua 'esposa perfeita'. Sua inteligência o torna perigoso, e sua relação doentia com a mãe revela um histórico familiar marcado por controle e negação."
         },
         {
           "nome": "Laura",
           "sobrenome": "Julianna Gerais",
           "foto": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/personagens/laura.jpg",
-          "descricao": "Filha de uma família periférica e militante feminista,Laura é determinada,inteligente e engajada. É melhor amiga de Clarice,com quem mantém uma ligação profunda e secreta paixão. Em contraste com a imaturidade da amiga,Laura é pé no chão e carrega o peso da responsabilidade. Seu faro aguçado e sua coragem serão decisivos ao longo da trama."
+          "fotoMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/personagens/laura_mob.jpg",
+          "descricao": "Filha de uma família periférica e militante feminista, Laura é determinada, inteligente e engajada. É melhor amiga de Clarice, com quem mantém uma ligação profunda e secreta paixão. Em contraste com a imaturidade da amiga, Laura é pé no chão e carrega o peso da responsabilidade. Seu faro aguçado e sua coragem serão decisivos ao longo da trama."
         },
         {
           "nome": "Breno",
           "sobrenome": "Elzio Vieira",
           "foto": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/personagens/breno.jpg",
-          "descricao": "Violinista sensível e charmoso,Breno trocou tudo para seguir seu sonho na música. Elegante e introspectivo,ele vive um romance com Clarice,mas a intensidade da jovem o desestabiliza. O afastamento da família e sua dedicação à orquestra tornam seus amigos músicos sua nova rede de apoio. Seu desaparecimento é um ponto de virada na história,levantando suspeitas e provocando reações em quem o ama."
+          "fotoMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/personagens/breno_mob.jpg",
+          "descricao": "Violinista sensível e charmoso, Breno trocou tudo para seguir seu sonho na música. Elegante e introspectivo, ele vive um romance com Clarice, mas a intensidade da jovem o desestabiliza. O afastamento da família e sua dedicação à orquestra tornam seus amigos músicos sua nova rede de apoio. Seu desaparecimento é um ponto de virada na história, levantando suspeitas e provocando reações em quem o ama."
         },
         {
           "nome": "Helena",
           "sobrenome": "Fabíula Nascimento",
           "foto": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/personagens/helena.jpg",
-          "descricao": "Mãe de Clarice,Helena é uma advogada criminalista ambiciosa. Exige perfeição da filha e tenta moldá-la à sua imagem,desprezando quem considera fora do padrão que idealizou. Tem um olhar preconceituoso e elitista,o que a coloca em choque com os amigos de Clarice. Enxerga em Téo o genro ideal,sem imaginar o perigo por trás da aparência."
+          "fotoMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/personagens/helena_mob.jpg",
+          "descricao": "Mãe de Clarice, Helena é uma advogada criminalista ambiciosa. Exige perfeição da filha e tenta moldá-la à sua imagem, desprezando quem considera fora do padrão que idealizou. Tem um olhar preconceituoso e elitista, o que a coloca em choque com os amigos de Clarice. Enxerga em Téo o genro ideal, sem imaginar o perigo por trás da aparência."
         },
         {
           "nome": "Patrícia",
           "sobrenome": "Débora Bloch",
           "foto": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/personagens/patricia.jpg",
-          "descricao": "Mãe de Téo,Patrícia é uma mulher que teve uma relação traumática com o ex-marido,um desembargador abusivo. É uma personagem ativa e muito positiva,mas tem uma relação de dependência emocional com o filho. No passado,sofreu um acidente que a deixou em uma cadeira de rodas."
+          "fotoMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/personagens/patricia_mob.jpg",
+          "descricao": "Mãe de Téo, Patrícia é uma mulher que teve uma relação traumática com o ex-marido, um desembargador abusivo. É uma personagem ativa e muito positiva, mas tem uma relação de dependência emocional com o filho. No passado, sofreu um acidente que a deixou em uma cadeira de rodas."
         }
       ]
     },
@@ -237,8 +243,8 @@
       "debug": false,
       "steps": [
         {
-          "title": "Abertura:Estabelecendo o Cenário",
-          "text": "Nossa jornada começa do zero,apresentando o <strong>contexto inicial</strong> e estabelecendo as bases para tudo que será revelado.",
+          "title": "Abertura: Estabelecendo o Cenário",
+          "text": "Nossa jornada começa do zero, apresentando o <strong>contexto inicial</strong> e estabelecendo as bases para tudo que será revelado.",
           "startFrame": 1,
           "endFrame": 24,
           "duration": 1000
@@ -266,7 +272,7 @@
         },
         {
           "title": "Aprofundamento da Análise",
-          "text": "Mergulhamos mais fundo na análise,explorando <strong>camadas mais complexas</strong> da narrativa.",
+          "text": "Mergulhamos mais fundo na análise, explorando <strong>camadas mais complexas</strong> da narrativa.",
           "startFrame": 101,
           "endFrame": 120,
           "duration": 4000
@@ -283,62 +289,45 @@
     },
     {
       "type": "intertitulo",
-      "text": "Curiosidades da série",
+      "text": "CURIOSIDADES DA SÉRIE",
       "textAlign": "center",
       "variant": "centered",
-      "size": "medium"
+      "size": "large"
     },
     {
-      "type": "personagens",
+      "type": "curiosidades",
       "personagens": [
         {
-          "nome": "Easter Eggs",
-          "foto": "teste.jpg",
-          "descricao": "A série conta com alguns easter eggs do universo de Raphael Montes,como os nomes de personagens de outros livros do autor."
+          "nome": "EASTER EGGS",
+          "descricao": "A série conta com alguns easter eggs do universo de Raphael Montes, como os nomes de personagens de outros livros do autor.",
+          "frase": "Eu pedi uma lista com o nome de todos os personagens do Raphael, de todos os livros dele. E eu usei os nomes. Vocês vão ter que achá-los ao longo da série.",
+          "autor": "Cláudia Jouvin",
+          "profissao": "roteirista"
         },
         {
-          "nome": "Cláudia Jouvin",
-          "sobrenome": "roteirista",
-          "foto": "teste.jpg",
-          "descricao": "Eu pedi uma lista com o nome de todos os personagens do Raphael,de todos os livros dele. E eu usei os nomes. Vocês vão ter que achá-los ao longo da série."
-        },
-        {
-          "nome": "Raphael Montes",
-          "sobrenome": "autor",
-          "foto": "teste.jpg",
+          "nome": "PARTICIPAÇÃO ESPECIAL",
           "descricao": "Raphael Montes faz participação especial em um dos episódios da série."
         },
         {
-          "nome": "Christian Dunker",
-          "sobrenome": "psicanalista e escritor",
-          "foto": "teste.jpg",
-          "descricao": "A produção contou com a consultoria do psicanalista e escritor Christian Dunker,que orientou o elenco sobre as psicopatologias."
+          "nome": "CONSULTORIA",
+          "descricao": "A produção contou com a consultoria do psicanalista e escritor Christian Dunker, que orientou o elenco sobre as psicopatologias.",
+          "frase": "A gente fez uma consultoria com psicanalistas, com psiquiatras, para tentar entender a mente do Téo, sem trazer um olhar de fora. Esse foi o maior desafio e o maior presente do ponto de vista de direção: fazer uma série sobre dois personagens tentando estar o máximo possível dentro deles.",
+          "autor": "Joana Jabace",
+          "profissao": "diretora"
         },
         {
-          "nome": "Joana Jabace",
-          "sobrenome": "diretora",
-          "foto": "teste.jpg",
-          "descricao": "A gente fez uma consultoria com psicanalistas,com psiquiatras,para tentar entender a mente do Téo,sem trazer um olhar de fora. Esse foi o maior desafio e o maior presente do ponto de vista de direção:fazer uma série sobre dois personagens tentando estar o máximo possível dentro deles."
+          "nome": "CENÁRIOS REAIS",
+          "descricao": "As cenas do sequestro de Clarice foram gravadas em locações na região do Alto da Boa Vista, no Rio de Janeiro, e também em uma praia de Mangaratiba, localizada na Costa Verde da cidade.",
+          "frase": "O livro é quase um road movie, porque, a partir do momento em que ele a sequestra, ele vai fugindo. As pessoas começam a desconfiar, então ele vai indo para os lugares do roteiro da Clarice. .Então, as locações, que são muito importantes no livro, também são na série. Elas são personagens da série.",
+          "autor": "Joana Jabace",
+          "profissao": "diretora"
         },
         {
-          "nome": "Rio de Janeiro",
-          "sobrenome": "locações",
-          "foto": "teste.jpg",
-          "descricao": "As cenas do sequestro de Clarice foram gravadas em locações na região do Alto da Boa Vista,no Rio de Janeiro,e também em uma praia de Mangaratiba,localizada na Costa Verde da cidade."
-        },
-        {
-          "nome": "Joana Jabace",
-          "sobrenome": "diretora",
-          "foto": "teste.jpg",
-          "descricao": "O livro é quase um road movie,porque,a partir do momento em que ele a sequestra,ele vai fugindo. As pessoas começam a desconfiar,então ele vai indo para os lugares do roteiro da Clarice. ...Então,as locações,que são muito importantes no livro,também são na série. Elas são personagens da série."
-        },
-        {
-          "nome": "Trilha Sonora",
-          "sobrenome": "-",
-          "foto": "teste.jpg",
-          "descricao": "Os artistas Zé Ibarra e Ana Frango Elétrico regravaram os sucessos 'Carinhoso' e 'Luz Del Fuego',respectivamente,para a trilha sonora da série."
+          "nome": "TRILHA SONORA",
+          "descricao": "Os artistas Zé Ibarra e Ana Frango Elétrico regravaram os sucessos 'Carinhoso' e 'Luz Del Fuego', respectivamente, para a trilha sonora da série."
         }
-      ]
+      ],
+      "backgroundColor": "#000000"
     },
     {
       "type": "scrollyframes",
@@ -358,8 +347,8 @@
       "debug": false,
       "steps": [
         {
-          "title": "Abertura:Estabelecendo o Cenário",
-          "text": "Nossa jornada começa do zero,apresentando o <strong>contexto inicial</strong> e estabelecendo as bases para tudo que será revelado.",
+          "title": "Abertura: Estabelecendo o Cenário",
+          "text": "Nossa jornada começa do zero, apresentando o <strong>contexto inicial</strong> e estabelecendo as bases para tudo que será revelado.",
           "startFrame": 1,
           "endFrame": 30,
           "duration": 3000
@@ -387,7 +376,7 @@
         },
         {
           "title": "Aprofundamento da Análise",
-          "text": "Mergulhamos mais fundo na análise,explorando <strong>camadas mais complexas</strong> da narrativa.",
+          "text": "Mergulhamos mais fundo na análise, explorando <strong>camadas mais complexas</strong> da narrativa.",
           "startFrame": 101,
           "endFrame": 120,
           "duration": 4000
@@ -404,14 +393,23 @@
     },
     {
       "type": "intertitulo",
-      "text": "Sobre o livro",
+      "text": "SOBRE O LIVRO",
       "textAlign": "center",
       "variant": "centered",
-      "size": "medium"
+      "size": "large"
     },
     {
       "type": "texto",
       "text": "Lançado em 2014, Dias Perfeitos é o segundo livro publicado de Raphael Montes, traduzido em 22 países, incluindo Estados Unidos, Inglaterra, Espanha e Itália."
+    },
+    {
+      "type": "foto",
+      "src": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/capa_dias_perfeitos.jpg",
+      "caption": "",
+      "credit": "",
+      "alt": "",
+      "fullWidth": "false",
+      "alignment": "center"
     },
     {
       "type": "texto",
@@ -439,8 +437,8 @@
       "debug": false,
       "steps": [
         {
-          "title": "Abertura:Estabelecendo o Cenário",
-          "text": "Nossa jornada começa do zero,apresentando o <strong>contexto inicial</strong> e estabelecendo as bases para tudo que será revelado.",
+          "title": "Abertura: Estabelecendo o Cenário",
+          "text": "Nossa jornada começa do zero, apresentando o <strong>contexto inicial</strong> e estabelecendo as bases para tudo que será revelado.",
           "startFrame": 1,
           "endFrame": 30,
           "duration": 3000
@@ -468,7 +466,7 @@
         },
         {
           "title": "Aprofundamento da Análise",
-          "text": "Mergulhamos mais fundo na análise,explorando <strong>camadas mais complexas</strong> da narrativa.",
+          "text": "Mergulhamos mais fundo na análise, explorando <strong>camadas mais complexas</strong> da narrativa.",
           "startFrame": 101,
           "endFrame": 120,
           "duration": 4000
@@ -485,10 +483,10 @@
     },
     {
       "type": "intertitulo",
-      "text": "Diferenças entre o livro e a série",
+      "text": "DIFERENÇAS ENTRE O LIVRO E A SÉRIE",
       "textAlign": "center",
       "variant": "centered",
-      "size": "medium"
+      "size": "large"
     },
     {
       "type": "texto",
@@ -519,11 +517,20 @@
       "role": "autor"
     },
     {
+      "type": "foto",
+      "src": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/quem_raphael.jpg",
+      "caption": "",
+      "credit": "",
+      "alt": "",
+      "fullWidth": "false",
+      "alignment": "center"
+    },
+    {
       "type": "intertitulo",
-      "text": "Sobre Raphael Montes",
+      "text": "SOBRE RAPHAEL MONTES",
       "textAlign": "center",
       "variant": "centered",
-      "size": "medium"
+      "size": "large"
     },
     {
       "type": "texto",
@@ -547,8 +554,8 @@
       "debug": false,
       "steps": [
         {
-          "title": "Abertura:Estabelecendo o Cenário",
-          "text": "Nossa jornada começa do zero,apresentando o <strong>contexto inicial</strong> e estabelecendo as bases para tudo que será revelado.",
+          "title": "Abertura: Estabelecendo o Cenário",
+          "text": "Nossa jornada começa do zero, apresentando o <strong>contexto inicial</strong> e estabelecendo as bases para tudo que será revelado.",
           "startFrame": 1,
           "endFrame": 30,
           "duration": 3000
@@ -576,7 +583,7 @@
         },
         {
           "title": "Aprofundamento da Análise",
-          "text": "Mergulhamos mais fundo na análise,explorando <strong>camadas mais complexas</strong> da narrativa.",
+          "text": "Mergulhamos mais fundo na análise, explorando <strong>camadas mais complexas</strong> da narrativa.",
           "startFrame": 101,
           "endFrame": 120,
           "duration": 4000
@@ -590,6 +597,65 @@
         }
       ],
       "text": "final"
+    },
+    {
+      "type": "recomendados",
+      "items": [
+        {
+          "title": "OS OUTROS",
+          "subtitle": "Série Original Globoplay",
+          "image": "img/recomendados/os-outros.jpg",
+          "link": "https://globoplay.globo.com/os-outros/t/vbN21h5xX1/",
+          "category": "Suspense",
+          "year": "2024",
+          "rating": "16",
+          "genre": "Drama",
+          "duration": "8 eps",
+          "isNew": false
+        },
+        {
+          "title": "UMA FAMÍLIA FELIZ",
+          "subtitle": "Filme",
+          "image": "img/recomendados/uma-familia-feliz.webp",
+          "link": "https://globoplay.globo.com/uma-familia-feliz-2022/t/1wyxkzrFtK/",
+          "category": "Thriller/Drama",
+          "year": "2022",
+          "rating": "16",
+          "genre": "Drama",
+          "duration": "110 minutos",
+          "isNew": false
+        },
+        {
+          "title": "DUPLA IDENTIDADE",
+          "subtitle": "Série",
+          "image": "img/recomendados/dupla-identidade.webp",
+          "link": "https://globoplay.globo.com/dupla-identidade/t/mcCRZgrVkB/",
+          "category": "Policial, Suspense",
+          "year": "2014",
+          "rating": "16",
+          "genre": "Policial, Suspense",
+          "duration": "13 eps",
+          "isNew": false
+        },
+        {
+          "title": "SUPERMAX",
+          "subtitle": "Série",
+          "image": "img/recomendados/supermax.webp",
+          "link": "https://globoplay.globo.com/supermax/t/89jbYjnsWF/",
+          "category": "Ação",
+          "year": "2016",
+          "rating": "16",
+          "genre": "Ação, Sobrenatural",
+          "duration": "12 eps",
+          "isNew": false
+        }
+      ],
+      "title": "CONTEÚDOS RELACIONADOS",
+      "layout": "grid",
+      "columns": "4",
+      "backgroundColor": "#000000",
+      "titleColor": "#ff0000",
+      "textColor": "#ffffff"
     }
   ],
   "slug": "dias-perfeitos"

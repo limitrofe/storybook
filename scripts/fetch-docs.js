@@ -127,7 +127,61 @@ async function fetchGoogleDoc(docId) {
         }
       });
     }
+       // 🎯 NOVO: Curiosidades - ADICIONAR após o bloco de Apresentação de Personagens
+    const curiosidadesComponents = data.paragraphs?.filter(p => 
+      ['curiosidades', 'trivia', 'facts', 'apresentacao-curiosidades'].includes(p.type?.toLowerCase())
+    ) || [];
     
+    if (curiosidadesComponents.length > 0) {
+      console.log(`🎯 Curiosidades encontrados: ${curiosidadesComponents.length}`);
+      curiosidadesComponents.forEach((comp, index) => {
+        const charCount = comp.personagens?.length || comp.characters?.length || comp.lista?.length || 0;
+        console.log(`  ${index + 1}. Curiosidades: ${charCount} | ShapeColor: ${comp.shapeColor || '#b51207'} | QuoteColor: ${comp.quoteColor || '#ffd700'}`);
+        if (charCount > 0) {
+          const chars = comp.personagens || comp.characters || comp.lista || [];
+          chars.forEach((char, charIndex) => {
+            const temFrase = !!(char.frase || char.quote || char.phrase);
+            console.log(`     Curiosidade ${charIndex + 1}: "${char.nome || char.name}" | Foto: ${!!char.foto || !!char.photo} | Frase: ${temFrase ? '✅' : '❌'} | Descrição: ${(char.descricao || char.description || '').substring(0, 50)}...`);
+          });
+        }
+      });
+    }
+
+    // 🆕 NOVO: Itens Recomendados
+    const recommendedComponents = data.paragraphs?.filter(p => 
+      ['recomendados', 'recommended', 'recommended-items', 'itens-recomendados', 'relacionados', 'conteudos-relacionados'].includes(p.type?.toLowerCase())
+    ) || [];
+
+    if (recommendedComponents.length > 0) {
+      console.log(`🎯 Itens Recomendados encontrados: ${recommendedComponents.length}`);
+      recommendedComponents.forEach((comp, index) => {
+        const itemsCount = comp.items?.length || comp.itens?.length || 0;
+        const layout = comp.layout || 'grid';
+        const columns = comp.columns || comp.colunas || 5;
+        const title = comp.title || comp.titulo || 'conteúdos relacionados';
+        const backgroundColor = comp.backgroundColor || comp.corFundo || '#000000';
+        const titleColor = comp.titleColor || comp.corTitulo || '#ff0000';
+        
+        console.log(`  ${index + 1}. Items: ${itemsCount} | Layout: ${layout} | Columns: ${columns} | Title: "${title}"`);
+        console.log(`     Colors: BG=${backgroundColor} | Title=${titleColor}`);
+        
+        if (itemsCount === 0) {
+          console.warn(`⚠️ Itens Recomendados sem items: ${comp.text?.substring(0, 50)}...`);
+        } else {
+          const items = comp.items || comp.itens || [];
+          items.forEach((item, itemIndex) => {
+            const itemTitle = item.title || item.titulo || item.nome || 'Sem título';
+            const hasImage = !!(item.image || item.imagem || item.img || item.foto);
+            const hasLink = !!(item.link || item.url);
+            const category = item.category || item.categoria || '';
+            const isNew = item.isNew || item.novo || item.new || false;
+            
+            console.log(`     Item ${itemIndex + 1}: "${itemTitle.substring(0, 30)}..." | Image: ${hasImage} | Link: ${hasLink} | Category: ${category} | New: ${isNew}`);
+          });
+        }
+      });
+    }
+
     return data;
     
   } catch (error) {
@@ -300,12 +354,21 @@ function parseJSONField(jsonString, fieldName) {
       .replace(/\n/g, ' ')
       .replace(/\r/g, ' ')
       .replace(/\s+/g, ' ')
+.replace(/\.{2,}/g, '.')  // Remove pontos duplos
+.replace(/\.\s*\.\s*$/g, '.')  // Remove pontos duplos no final
+.replace(/\s+\.\s*$/g, '.')  // Remove espaços antes do ponto final
       .replace(/,\s*\]/g, ']')
       .replace(/,\s*}/g, '}')
       .replace(/["""„‟«»"‶‷"″‟‹›]/g, '"') 
+      .replace(/\[/g, '[')  // Preserva colchetes de abertura
+      .replace(/\]/g, ']')  // Preserva colchetes de fechamento
       .replace(/['''‚‛‹›]/g, "'") 
-      .replace(/\s*:\s*/g, ':')
-      .replace(/\s*,\s*/g, ',')
+      .replace(/\s*:\s*/g, ': ')  // Mantém espaço após dois pontos
+      .replace(/,(?!\s)/g, ', ')  // Adiciona espaço após vírgula se não houver
+      .replace(/https:\s+\/\//g, 'https://')  // Remove espaços em https: //
+.replace(/http:\s+\/\//g, 'http://')    // Remove espaços em http: //
+.replace(/:\s+\/\//g, '://')            // Remove espaços genéricos em protocolos
+
       .trim();
     
     let parsed = JSON.parse(cleanJson);
@@ -413,6 +476,107 @@ function parseParagraphsHTML(html) {
       continue;
     }
 
+    // 🎯 NOVO: TRATAMENTO ESPECÍFICO PARA CURIOSIDADES - ADICIONAR após personagens
+    if (['curiosidades', 'trivia', 'facts', 'apresentacao-curiosidades'].includes(paragraph.type?.toLowerCase())) {
+      console.log('🎯 Processando Curiosidades...');
+      
+      // Campos específicos de curiosidades
+      const curiosidadesFields = {
+        personagens: /personagens:\s*(\[[\s\S]*?\])/i,
+        characters: /characters:\s*(\[[\s\S]*?\])/i,
+        lista: /lista:\s*(\[[\s\S]*?\])/i,
+        shapeColor: /shapeColor:\s*([^\n<]+)/i,
+        nameColor: /nameColor:\s*([^\n<]+)/i,
+        textColor: /textColor:\s*([^\n<]+)/i,
+        backgroundColor: /backgroundColor:\s*([^\n<]+)/i,
+        quoteColor: /quoteColor:\s*([^\n<]+)/i  // ✅ NOVO CAMPO
+      };
+
+      // Processar lista de curiosidades (JSON array)
+      for (const field of ['personagens', 'characters', 'lista']) {
+        const regex = curiosidadesFields[field];
+        const match = block.match(regex);
+        if (match) {
+          paragraph[field] = parseJSONField(match[1], `curiosidades ${field}`);
+          console.log(`   ✅ ${paragraph[field]?.length || 0} curiosidades processadas em ${field}`);
+          break; // Usa apenas o primeiro campo encontrado
+        }
+      }
+
+      // Processar outros campos de curiosidades
+      for (const [field, regex] of Object.entries(curiosidadesFields)) {
+        if (['personagens', 'characters', 'lista'].includes(field)) continue; // Já processado acima
+        
+        const match = block.match(regex);
+        if (match) {
+          paragraph[field] = decodeHTMLEntities(match[1].trim());
+        }
+      }
+
+      // Processar campo 'text' para curiosidades
+      const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:personagens|characters|lista|shapeColor|nameColor|textColor|backgroundColor|quoteColor):|type:|$)/si);
+      if (textMatch) {
+        paragraph.text = cleanAndFormatHTML(textMatch[1].trim());
+      }
+
+      paragraphs.push(paragraph);
+      continue;
+    }
+
+    // 🆕 NOVO: TRATAMENTO ESPECÍFICO PARA ITENS RECOMENDADOS
+    if (['recomendados', 'recommended', 'recommended-items', 'itens-recomendados', 'relacionados', 'conteudos-relacionados'].includes(paragraph.type?.toLowerCase())) {
+      console.log('🎯 Processando Itens Recomendados...');
+      
+      // Campos específicos de itens recomendados
+      const recommendedFields = {
+        items: /items:\s*(\[[\s\S]*?\])/i,
+        itens: /itens:\s*(\[[\s\S]*?\])/i,
+        title: /title:\s*([^\n<]+)/i,
+        titulo: /titulo:\s*([^\n<]+)/i,
+        layout: /layout:\s*([^\n<]+)/i,
+        columns: /columns:\s*([^\n<]+)/i,
+        colunas: /colunas:\s*([^\n<]+)/i,
+        showTitle: /showTitle:\s*([^\n<]+)/i,
+        mostrarTitulo: /mostrarTitulo:\s*([^\n<]+)/i,
+        backgroundColor: /backgroundColor:\s*([^\n<]+)/i,
+        corFundo: /corFundo:\s*([^\n<]+)/i,
+        titleColor: /titleColor:\s*([^\n<]+)/i,
+        corTitulo: /corTitulo:\s*([^\n<]+)/i,
+        textColor: /textColor:\s*([^\n<]+)/i,
+        corTexto: /corTexto:\s*([^\n<]+)/i
+      };
+
+      // Processar lista de itens (JSON array)
+      for (const field of ['items', 'itens']) {
+        const regex = recommendedFields[field];
+        const match = block.match(regex);
+        if (match) {
+          paragraph[field] = parseJSONField(match[1], `recommended ${field}`);
+          console.log(`   ✅ ${paragraph[field]?.length || 0} itens processados em ${field}`);
+          break; // Usa apenas o primeiro campo encontrado
+        }
+      }
+
+      // Processar outros campos de itens recomendados
+      for (const [field, regex] of Object.entries(recommendedFields)) {
+        if (['items', 'itens'].includes(field)) continue; // Já processado acima
+        
+        const match = block.match(regex);
+        if (match) {
+          paragraph[field] = decodeHTMLEntities(match[1].trim());
+        }
+      }
+
+      // Processar campo 'text' para itens recomendados
+      const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:items|itens|title|titulo|layout|columns|colunas|showTitle|mostrarTitulo|backgroundColor|corFundo|titleColor|corTitulo|textColor|corTexto):|type:|$)/si);
+      if (textMatch) {
+        paragraph.text = cleanAndFormatHTML(textMatch[1].trim());
+      }
+
+      paragraphs.push(paragraph);
+      continue;
+    }
+
     // 🆕 TRATAMENTO ESPECÍFICO PARA SCROLLYFRAMES
     if (paragraph.type?.toLowerCase() === 'scrollyframes') {
       console.log('🎬 Processando ScrollyFrames...');
@@ -493,11 +657,20 @@ function parseParagraphsHTML(html) {
     // Processamento de texto para outros tipos
     const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:backgroundImage|backgroundImageMobile|backgroundVideo|backgroundVideoMobile|backgroundPosition|backgroundPositionMobile|author|role|src|videoSrc|videoSrcMobile|caption|credit|alt|fullWidth|variant|size|orientation|autoplay|controls|poster|images|items|steps|beforeImage|afterImage|beforeLabel|afterLabel|image|height|heightMobile|speed|content|overlay|layout|columns|interval|showDots|showArrows|stickyHeight|videoId|videosIDs|id|skipDFP|skipdfp|autoPlay|startMuted|maxQuality|quality|chromeless|isLive|live|allowRestrictedContent|preventBlackBars|globoId|token|adAccountId|adCmsId|siteName|width|textPosition|textPositionMobile|textAlign|textAlignMobile|title|subtitle|date|theme|videoAspectRatio|showProgress|showTime|showControls):|type:|$)/si);
     if (textMatch) {
-      if (['texto', 'frase', 'intro'].includes(paragraph.type)) {
-        paragraph.text = cleanAndFormatHTML(textMatch[1].trim());
-      } else {
-        paragraph.text = cleanAndFormatHTML(textMatch[1].trim());
-      }
+  if (['texto', 'frase', 'intro'].includes(paragraph.type)) {
+  // 🔧 LIMPEZA ESPECÍFICA PARA ÚLTIMO PARÁGRAFO
+  let rawText = textMatch[1].trim();
+  rawText = rawText.replace(/\.\s*\.\s*$/, '.'); // Remove ponto duplo no final
+  rawText = rawText.replace(/\s+\.\s*$/, '.'); // Remove espaços antes do ponto final
+  paragraph.text = cleanAndFormatHTML(rawText);
+} else {
+  // 🔧 LIMPEZA ESPECÍFICA PARA ÚLTIMO PARÁGRAFO
+  let rawText = textMatch[1].trim();
+  rawText = rawText.replace(/\.\s*\.\s*$/, '.'); // Remove ponto duplo no final
+  rawText = rawText.replace(/\s+\.\s*$/, '.'); // Remove espaços antes do ponto final
+  paragraph.text = cleanAndFormatHTML(rawText);
+}
+
     }
     
     // Processar arrays JSON
@@ -604,6 +777,19 @@ function cleanAndFormatHTML(html) {
   // Remove tags desnecessárias mas preserva conteúdo
   cleanedHtml = cleanedHtml.replace(/<\/?(span|p|div)[^>]*>/gi, '');
   
+  cleanedHtml = cleanedHtml
+  .replace(/\.{2,}/g, '.')  // Remove pontos duplos/triplos
+  .replace(/,(?!\s)/g, ', ')  // Garante espaço após vírgula
+  .replace(/\s+\./g, '.')  // Remove espaços antes de pontos
+  .replace(/\s+,/g, ',')   // Remove espaços antes de vírgulas
+  .replace(/\s{2,}/g, ' '); // Remove espaços múltiplos
+
+  cleanedHtml = cleanedHtml
+  .replace(/\.\s*\.\s*$/g, '.')  // Remove pontos duplos especificamente no final
+  .replace(/\.\s*\.\s*/g, '. ')  // Substitui pontos duplos por ponto simples + espaço no meio
+  .replace(/\s+\.\s*$/g, '.')    // Remove espaços antes do ponto final
+  .replace(/\.+$/g, '.');        // Garante apenas um ponto no final
+
   return cleanedHtml.trim();
 }
 

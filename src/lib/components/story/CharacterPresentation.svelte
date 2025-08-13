@@ -10,6 +10,7 @@
   // Processar personagens
   $: processedPersonagens = (() => {
     if (!personagens) return [];
+    
     if (typeof personagens === 'string') {
       try {
         return JSON.parse(personagens);
@@ -17,7 +18,12 @@
         return [];
       }
     }
-    if (Array.isArray(personagens)) return personagens;
+    
+    if (Array.isArray(personagens)) {
+      return personagens;
+    }
+    
+    // Se for objeto, tenta extrair o array
     return personagens.personagens || personagens.characters || personagens.lista || [];
   })();
 
@@ -99,25 +105,17 @@
   }
 </script>
 
-
-
-<div class="container" bind:this={containerElement}>
+<div class="container" bind:this={containerElement} style="background: {backgroundColor};">
   {#if processedPersonagens && processedPersonagens.length > 0}
     {#each processedPersonagens as personagem, index}
       <div class="character-wrapper">
         <div class="character-section">
           <div class="character-container">
-            <div class="photo-background">
-              {#if personagem.foto}
-                <img 
-                  src={personagem.foto} 
-                  alt={personagem.nome}
-                  class="photo"
-                />
-              {:else}
-                <div class="photo-placeholder">Sem imagem</div>
-              {/if}
-            </div>
+            <!-- Foto responsiva com background-image -->
+            <div class="photo-background" style="
+              background-image: url('{personagem.foto}');
+              --mobile-bg: url('{personagem.fotoMobile || personagem.foto}');
+            "></div>
             
             <div
               class="character-name"
@@ -125,10 +123,7 @@
                 color: {nameColor};
                 transform: 
                   translate(
-                    /* Valor de X: -10% para a esquerda, -90% para a direita (ajuste se necessário) */
                     {index % 2 === 0 ? -10 : -90}%, 
-
-                    /* Valor de Y: 20% para a esquerda, e um valor para a direita (comece com 20% e ajuste) */
                     {index % 2 === 0 ? 20 : 20}%
                   ) 
                   translateX(
@@ -145,18 +140,18 @@
             <div 
               class="shape-overlay"
               style="
-                --shape-color: #b51207;
+                background: {shapeColor};
                 transform: translateX({
                   index % 2 === 0 
                     ? 100 - (animationStates[index]?.shapeProgress || 0) * 100
                     : -100 + (animationStates[index]?.shapeProgress || 0) * 100
                 }%);
               "
-            />
+            ></div>
             
             <div class="text-container {index % 2 === 0 ? 'text-right' : 'text-left'}">
               <div class="text-wrapper {index % 2 === 0 ? 'align-left' : 'align-right'}">
-                <p class="description-text" style="--text-color: {textColor}">
+                <p class="description-text" style="color: {textColor};">
                   {#each (personagem.descricao || '').split('. ') as linha, lineIndex}
                     {#if linha.trim()}
                       {@const totalLines = personagem.descricao.split('. ').filter(l => l.trim()).length}
@@ -166,7 +161,7 @@
                         class:visible={lineIndex < lineProgress}
                         style="transition-delay: {lineIndex * 0.15}s"
                       >
-                        {linha}.
+                        {linha.replace(/\.+$/, '')}.
                       </span>
                     {/if}
                   {/each}
@@ -184,17 +179,14 @@
   {/if}
 </div>
 
-
-
 <style>
   .container {
     width: 100%;
-    background: #b51207;
     position: relative;
   }
   
   .character-wrapper {
-    height: 400vh; /* Altura para permitir scroll longo */
+    height: 400vh;
     position: relative;
   }
   
@@ -209,7 +201,6 @@
     overflow: hidden;
   }
   
-  /* Container principal - tela inteira */
   .character-container {
     width: 100%;
     height: 100vh;
@@ -217,7 +208,6 @@
     overflow: hidden;
   }
   
-  /* Foto de fundo - tela inteira */
   .photo-background {
     position: absolute;
     top: 0;
@@ -225,9 +215,19 @@
     width: 100%;
     height: 100%;
     z-index: 1;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
-  
-  .photo {
+
+  /* Responsivo com CSS custom properties */
+  @media (max-width: 768px) {
+    .photo-background {
+      background-image: var(--mobile-bg) !important;
+    }
+  }
+
+  .background-video {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -245,7 +245,6 @@
     font-size: 2rem;
   }
   
-  /* Nome do personagem - centralizado inicialmente */
   .character-name {
     position: absolute;
     left: 50%;
@@ -256,55 +255,46 @@
     letter-spacing: -0.01em;
     z-index: 10;
     text-transform: uppercase;
-    /* 🎨 MUDANÇA: Obviously Compressed para nomes de personagens */
     font-family: "obviously-compressed", sans-serif;
     white-space: nowrap;
     transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: transform;
     text-shadow: 0 0 5px rgba(0,0,0,0.5);
-    /* ADIÇÃO NECESSÁRIA PARA ALINHAR OS ITENS INTERNOS */
     display: flex;
     flex-direction: column;
     align-items: center;
   }
   
-  /* ATUALIZAÇÃO: Regra para o h2 (nome principal) */
   .character-name h2 {
     margin: 0;
     line-height: 0.9;
     font-size: inherit;
-    /* 🎨 Obviously Compressed Bold para nome principal */
     font-family: "obviously-compressed", sans-serif;
     font-weight: 700;
   }
   
-  /* ATUALIZAÇÃO: Regra para o h5 (sobrenome) */
   .character-name h5 {
-    font-size: 1.5rem; /* Aumentado para ser mais visível */
-    /* 🎨 Obviously regular para sobrenome */
+    font-size: 1.5rem;
     font-family: "obviously", sans-serif;
-    font-weight: 400; /* Fonte mais leve */
-    letter-spacing: normal; /* Espaçamento normal */
+    font-weight: 400;
+    letter-spacing: normal;
     line-height: 0.8;
     margin: 0;
-    margin-bottom: 0.3rem; /* Pequeno espaço entre sobrenome e nome */
-    opacity: 0.9; /* Levemente mais discreto */
-    text-transform: none; /* Remove uppercase do sobrenome */
+    margin-bottom: 0.3rem;
+    opacity: 0.9;
+    text-transform: none;
   }
 
-  /* Tarja vermelha - cobre toda a tela */
   .shape-overlay {
     position: absolute;
     top: 0;
     width: 100%;
     height: 100%;
-    background: var(--shape-color, #b51207);
     z-index: 5;
     will-change: transform;
     transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
-  /* Container do texto - aparece sobre a tarja */
   .text-container {
     position: absolute;
     top: 0;
@@ -317,13 +307,11 @@
     pointer-events: none;
   }
   
-  /* Texto à direita (quando nome vai para esquerda) */
   .text-container.text-right {
     justify-content: flex-end;
     padding-right: 5%;
   }
   
-  /* Texto à esquerda (quando nome vai para direita) */
   .text-container.text-left {
     justify-content: flex-start;
     padding-left: 5%;
@@ -347,7 +335,6 @@
     font-size: 1.5rem;
     line-height: 1.5;
     font-weight: 300;
-    color: var(--text-color, #fff);
   }
   
   .text-line {
@@ -363,7 +350,6 @@
     transform: translateY(0);
   }
   
-  /* Background gradiente */
   .character-wrapper:nth-child(even) .character-section {
     background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
   }
@@ -378,9 +364,8 @@
       top: 80%;
     }
 
-    /* ATUALIZAÇÃO: Regra para o H5 no mobile */
     .character-name h5 {
-      font-size: 1rem; /* Maior no mobile também */
+      font-size: 1rem;
     }
     
     .description-text {
@@ -388,11 +373,12 @@
       text-align: left;
       width: 80%;
     }
-    .text-container{
-        align-items: start;
-        top: 5%;
+    
+    .text-container {
+      align-items: start;
+      top: 5%;
     }
-    /* No mobile, centraliza o texto */
+    
     .text-container.text-right,
     .text-container.text-left {
       justify-content: center;
@@ -409,11 +395,11 @@
     .text-wrapper.align-right {
       text-align: left !important;
     }
-    .character-name{
-        align-items: start;
-        margin-bottom: 0px;
-        text-shadow: none;
+    
+    .character-name {
+      align-items: start;
+      margin-bottom: 0px;
+      text-shadow: none;
     }
-
   }
 </style>

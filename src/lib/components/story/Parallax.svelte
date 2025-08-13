@@ -2,7 +2,8 @@
 	import { onMount } from 'svelte';
 
 	// Props que o componente recebe do JSON
-	export let image = ''; // URL da imagem de fundo
+	export let image = ''; // URL da imagem de fundo desktop
+	export let imageMobile = ''; // ✅ NOVO: URL da imagem de fundo mobile
 	export let height = '80vh'; // Altura do container do parallax
 	export let speed = 0.5; // Velocidade do efeito (0 a 1)
 	export let overlay = true; // Se deve aplicar um overlay escuro
@@ -12,7 +13,14 @@
 	let parallaxImage; // Referência ao elemento da imagem
 	let mounted = false; // Flag para aplicar animações de entrada
 
-	// --- CORREÇÃO PRINCIPAL ESTÁ AQUI ---
+	// ✅ NOVO: Determinar qual imagem usar baseado no tamanho da tela
+	$: currentImage = (() => {
+		if (typeof window !== 'undefined') {
+			return window.innerWidth <= 768 && imageMobile ? imageMobile : image;
+		}
+		return image;
+	})();
+
 	onMount(() => {
 		mounted = true;
 
@@ -25,8 +33,6 @@
 
 			// O efeito só é executado quando o container está visível.
 			if (rect.bottom >= 0 && rect.top <= window.innerHeight) {
-				
-				// AQUI ESTÁ A LÓGICA CORRIGIDA:
 				// O deslocamento vertical (offset) da imagem é calculado
 				// com base na posição do topo do container (rect.top)
 				// multiplicado pela velocidade. Isso cria um movimento
@@ -37,12 +43,22 @@
 			}
 		};
 
-		// Adiciona o listener de scroll na janela
-		window.addEventListener('scroll', handleScroll, { passive: true });
+		// ✅ NOVO: Listener para mudanças de tamanho da tela
+		const handleResize = () => {
+			// Forçar re-renderização quando a tela muda de tamanho
+			if (parallaxImage) {
+				parallaxImage.style.backgroundImage = `url(${currentImage})`;
+			}
+		};
 
-		// Remove o listener quando o componente for destruído para evitar memory leaks
+		// Adiciona os listeners
+		window.addEventListener('scroll', handleScroll, { passive: true });
+		window.addEventListener('resize', handleResize, { passive: true });
+
+		// Remove os listeners quando o componente for destruído para evitar memory leaks
 		return () => {
 			window.removeEventListener('scroll', handleScroll);
+			window.removeEventListener('resize', handleResize);
 		};
 	});
 </script>
@@ -53,10 +69,11 @@
 	style:height
 	class:mounted
 >
+	<!-- ✅ ATUALIZADO: Agora usa currentImage que é reativo -->
 	<div
 		class="parallax-image"
 		bind:this={parallaxImage}
-		style:background-image="url({image})"
+		style:background-image="url({currentImage})"
 	/>
 
 	{#if overlay}
@@ -86,19 +103,20 @@
 		transform: translateY(0);
 	}
 
-.parallax-image {
-	position: absolute;
-	top: -100%;
-	left: 0;
-	width: 100%;
-	height: 200%;
-	background-size: cover;
-	background-position: center;
-	will-change: transform;
-	z-index: 1;
-	/* ▼▼▼ ALTERAÇÃO AQUI ▼▼▼ */
-	background-color: var(--color-background); /* Usa a cor de fundo do tema atual */
-}
+	.parallax-image {
+		position: absolute;
+		top: -100%;
+		left: 0;
+		width: 100%;
+		height: 200%;
+		background-size: cover;
+		background-position: center;
+		will-change: transform;
+		z-index: 1;
+		background-color: var(--color-background); /* Usa a cor de fundo do tema atual */
+		/* ✅ NOVO: Transição suave para mudança de imagem */
+		transition: background-image 0.3s ease-in-out;
+	}
 
 	.parallax-overlay {
 		position: absolute;
@@ -106,7 +124,7 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background-color: transparent; /* Cor e opacidade do overlay */
+		background-color: rgba(0, 0, 0, 0.4); /* Overlay padrão com 40% de opacidade */
 		z-index: 2;
 	}
 
@@ -131,5 +149,20 @@
 		font-size: 1.2rem;
 		max-width: 600px;
 		margin: 0 auto;
+	}
+
+	/* ✅ NOVO: Ajustes específicos para mobile */
+	@media (max-width: 768px) {
+		.parallax-content :global(h2) {
+			font-size: 1.8rem;
+		}
+
+		.parallax-content :global(p) {
+			font-size: 1rem;
+		}
+
+		.parallax-content {
+			padding: 1rem;
+		}
 	}
 </style>

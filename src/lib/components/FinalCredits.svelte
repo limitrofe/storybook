@@ -9,7 +9,7 @@
 <footer class="final-credits">
   <div class="credits-section">
     {#if authors.length > 0}
-      <h3>Autores</h3>
+      <h3>Créditos</h3>
       <ul class="credits-list">
         {#each authors as author}
           <li>{author}</li>
@@ -50,9 +50,7 @@
     {/if}
   </div>
 
-  <div class="credits-powered-by">
-    <p>Projeto desenvolvido com &#x2764;&#xfe0f; e Svelte.</p>
-  </div>
+
 </footer>
 
 <style>

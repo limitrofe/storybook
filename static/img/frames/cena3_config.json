@@ -3,7 +3,7 @@
   "originalName": "cena3",
   "desktop": {
     "path": "/img/frames/desktop/cena3/",
-    "frameCount": 155,
+    "frameCount": 161,
     "format": "jpg",
     "pattern": "frame_%04d.jpg"
   },
@@ -17,5 +17,5 @@
     "fps": 15,
     "quality": 85
   },
-  "processedAt": "2025-08-12T03:14:27.097Z"
+  "processedAt": "2025-08-13T04:20:46.622Z"
 }

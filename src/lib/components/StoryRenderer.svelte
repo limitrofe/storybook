@@ -1,4 +1,4 @@
-<!-- StoryRenderer.svelte - COMPLETO com ScrollyFrames e CharacterPresentation -->
+<!-- StoryRenderer.svelte - COMPLETO com ScrollyFrames, CharacterPresentation, Curiosidades e RecommendedItems -->
 <script>
 	// Importação dos componentes da história
 	import Header from './story/Header.svelte';
@@ -19,8 +19,11 @@
 	import FlourishScrolly from './story/FlourishScrolly.svelte';
 	import FinalCredits from './FinalCredits.svelte';
 	import AnchorPoint from './story/AnchorPoint.svelte';
-	// 🎬 NOVO: Componente de apresentação de personagens
+	// 🎬 COMPONENTES DE APRESENTAÇÃO
 	import CharacterPresentation from './story/CharacterPresentation.svelte';
+	import Curiosidades from './story/Curiosidades.svelte';
+	// 🆕 NOVO: Itens Recomendados
+	import RecommendedItems from './story/RecommendedItems.svelte';
 
 	export let storyData = {};
 
@@ -29,92 +32,133 @@
 	 */
 	function getComponentType(paragraph) {
 		const type = paragraph.type?.toLowerCase();
-		
+
 		switch (type) {
-			case 'abre':
+			// Headers e títulos
 			case 'header':
 			case 'titulo-principal':
 				return 'header';
+
+			// Texto
 			case 'texto':
 			case 'paragrafo':
 				return 'text';
+
 			case 'intertitulo':
 			case 'titulo':
 				return 'section-title';
+
 			case 'frase':
 			case 'citacao':
 			case 'quote':
 				return 'quote';
+
+			// Mídia
 			case 'foto':
 			case 'imagem':
 				return 'photo';
+
 			case 'video':
 			case 'mp4':
 				return 'video';
+
 			case 'globovideo':
 			case 'globo-video':
 			case 'globoplayer':
 			case 'globo-player':
 			case 'globo':
 				return 'globo-player';
+
 			case 'galeria':
 			case 'gallery':
 				return 'gallery';
-			case 'carrossel':
+
 			case 'carousel':
+			case 'carrossel':
 				return 'carousel';
+
+			// 🆕 NOVO: Itens Recomendados
+			case 'recomendados':
+			case 'recommended':
+			case 'recommended-items':
+			case 'itens-recomendados':
+			case 'relacionados':
+			case 'conteudos-relacionados':
+				return 'recommended-items';
+
+			// Componentes interativos
 			case 'parallax':
 				return 'parallax';
-			case 'antes-depois':
+
+			case 'beforeafter':
 			case 'before-after':
+			case 'antes-depois':
 				return 'before-after';
-			case 'scrollytelling':
+
 			case 'scrolly':
+			case 'scrollytelling':
 				return 'scrolly';
-			// ✅ MUDANÇA: scrollyframes mapeado para scrollyframes
+
+			// ✅ SCROLLY FRAMES
 			case 'scrollyframes':
+			case 'scrolly-frames':
+			case 'videoscrollytelling':
+			case 'video-scrollytelling':
+			case 'videoscrolly':
+			case 'video-scrolly':
 				return 'scrollyframes';
+
+			// Visualizações
 			case 'flourish':
-			case 'flourish-embed':
 				return 'flourish';
+
 			case 'flourish-scrolly':
-			case 'flourish-scrollytelling':
 				return 'flourish-scrolly';
-			case 'ancora':
-			case 'anchor':
-				return 'anchor';
-			// 🎬 NOVO: Mapeamento para apresentação de personagens
+
+			// 🎬 APRESENTAÇÕES
 			case 'personagens':
 			case 'characters':
 			case 'character-presentation':
-			case 'apresentacao-personagens':
 				return 'character-presentation';
+
+			case 'curiosidades':
+			case 'trivia':
+			case 'facts':
+				return 'curiosidades';
+
+			// Navegação
+			case 'anchor':
+			case 'ancora':
+				return 'anchor';
+
+			// Fallback
 			default:
 				return 'text';
 		}
 	}
 
 	/**
-	 * Converte string para boolean de forma segura
-	 */
-	function stringToBoolean(value, defaultValue = false) {
-		if (typeof value === 'boolean') return value;
-		if (typeof value === 'string') {
-			return value.toLowerCase() === 'true';
-		}
-		return defaultValue;
-	}
-
-	/**
-	 * Obter props do componente de forma segura
+	 * Extrai propriedades de um parágrafo para um componente
 	 */
 	function getComponentProps(paragraph) {
+		// Retorna todas as propriedades exceto 'type'
 		const { type, ...props } = paragraph;
 		return props;
 	}
 
 	/**
-	 * Processa array de personagens do formato Google Docs
+	 * Converte string para boolean
+	 */
+	function stringToBoolean(value, defaultValue = false) {
+		if (typeof value === 'boolean') return value;
+		if (typeof value === 'string') {
+			return value.toLowerCase() === 'true' || value === '1';
+		}
+		return defaultValue;
+	}
+
+	/**
+	 * Processa lista de personagens/curiosidades para padronizar formato
 	 */
 	function processCharacters(characters) {
 		if (!characters) return [];
@@ -135,7 +179,48 @@
 				nome: char.nome || char.name || '',
 				sobrenome: char.sobrenome || char.surname || '',
 				foto: char.foto || char.photo || char.image || '',
-				descricao: char.descricao || char.description || char.texto || ''
+				fotoMobile: char.fotoMobile || char.photoMobile || char.foto_mobile || char.photo_mobile || '',
+				descricao: char.descricao || char.description || char.texto || '',
+				frase: char.frase || char.quote || char.phrase || '', // ✅ CAMPO EXISTENTE
+				autor: char.autor || char.author || '', // ✅ NOVO CAMPO
+				profissao: char.profissao || char.profession || '' // ✅ NOVO CAMPO
+			}));
+		}
+
+		return [];
+	}
+
+	/**
+	 * 🆕 Processa lista de itens recomendados para padronizar formato
+	 */
+	function processRecommendedItems(items) {
+		if (!items) return [];
+		
+		// Se for string JSON, faz parse
+		if (typeof items === 'string') {
+			try {
+				items = JSON.parse(items);
+			} catch (e) {
+				console.error('Erro ao fazer parse dos itens recomendados:', e);
+				return [];
+			}
+		}
+
+		// Se for array, retorna processado
+		if (Array.isArray(items)) {
+			return items.map(item => ({
+				title: item.title || item.titulo || item.nome || '',
+				subtitle: item.subtitle || item.subtitulo || '',
+				description: item.description || item.descricao || '',
+				image: item.image || item.imagem || item.img || item.foto || '',
+				link: item.link || item.url || '',
+				category: item.category || item.categoria || '',
+				year: item.year || item.ano || '',
+				rating: item.rating || item.avaliacao || item.nota || '',
+				genre: item.genre || item.genero || '',
+				duration: item.duration || item.duracao || '',
+				badge: item.badge || item.selo || '',
+				isNew: item.isNew || item.novo || item.new || false
 			}));
 		}
 
@@ -205,6 +290,9 @@
 					backgroundPositionMobile={props.backgroundPositionMobile || 'center'}
 					backgroundVideo={props.backgroundVideo}
 					backgroundVideoMobile={props.backgroundVideoMobile}
+					backgroundColor={props.backgroundColor}
+					textColor={props.textColor}
+					fontFamily={props.fontFamily || 'obviously'}
 					variant={props.variant || 'default'}
 					size={props.size || 'medium'}
 					height={props.height}
@@ -274,10 +362,24 @@
 					showArrows={stringToBoolean(props.showArrows, true)}
 				/>
 
+			<!-- 🆕 NOVO: Recommended Items -->
+			{:else if componentType === 'recommended-items'}
+				<RecommendedItems
+					items={processRecommendedItems(props.items || props.itens)}
+					title={props.title || props.titulo || 'conteúdos relacionados'}
+					layout={props.layout || 'grid'}
+					columns={parseInt(props.columns || props.colunas) || 5}
+					showTitle={stringToBoolean(props.showTitle || props.mostrarTitulo, true)}
+					backgroundColor={props.backgroundColor || props.corFundo || '#000000'}
+					titleColor={props.titleColor || props.corTitulo || '#ff0000'}
+					textColor={props.textColor || props.corTexto || '#ffffff'}
+				/>
+
 			<!-- Parallax -->
 			{:else if componentType === 'parallax'}
 				<Parallax
 					image={props.image}
+					imageMobile={props.imageMobile}
 					height={props.height || '60vh'}
 					speed={parseFloat(props.speed) || 0.5}
 					overlay={stringToBoolean(props.overlay, true)}
@@ -317,7 +419,7 @@
 					preloadRadius={parseInt(props.preloadFrames) || 8}
 				/>
 
-			<!-- 🎬 CHARACTER PRESENTATION - NOVO COMPONENTE -->
+			<!-- 🎬 CHARACTER PRESENTATION - COMPONENTE DE PERSONAGENS -->
 			{:else if componentType === 'character-presentation'}
 				<CharacterPresentation
 					personagens={processCharacters(props.personagens || props.characters || props.lista)}
@@ -328,6 +430,17 @@
 					animationSpeed={props.animationSpeed || 'normal'}
 					sectionHeight={props.sectionHeight || '100vh'}
 					sectionHeightMobile={props.sectionHeightMobile || '100vh'}
+				/>
+
+			<!-- 🎯 CURIOSIDADES - NOVO COMPONENTE -->
+			{:else if componentType === 'curiosidades'}
+				<Curiosidades
+					personagens={processCharacters(props.personagens || props.characters || props.lista)}
+					shapeColor={props.shapeColor || '#b51207'}
+					nameColor={props.nameColor || '#000000'}
+					textColor={props.textColor || '#ffffff'}
+					backgroundColor={props.backgroundColor || '#000000'}
+					quoteColor={props.quoteColor || '#ffd700'}
 				/>
 
 			<!-- Flourish Embed -->
@@ -358,9 +471,16 @@
 	{/if}
 
 	<!-- Renderizar créditos finais se existir -->
-	{#if storyData.credits}
-		<FinalCredits credits={storyData.credits} />
-	{/if}
+<!-- Renderizar créditos finais se existir -->
+{#if storyData.credits}
+  <FinalCredits 
+    notes={storyData.credits.notes || ''}
+    sources={storyData.credits.sources || []}
+    additionalGraphics={storyData.credits.additionalGraphics || []}
+    editedBy={storyData.credits.editedBy || []}
+    authors={storyData.credits.authors || []}
+  />
+{/if}
 </article>
 
 <style>

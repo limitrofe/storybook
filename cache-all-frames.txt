@@ -341,6 +341,12 @@
 /g1/dias-perfeitos/img/frames/desktop/cena3/frame_0153.jpg
 /g1/dias-perfeitos/img/frames/desktop/cena3/frame_0154.jpg
 /g1/dias-perfeitos/img/frames/desktop/cena3/frame_0155.jpg
+/g1/dias-perfeitos/img/frames/desktop/cena3/frame_0156.jpg
+/g1/dias-perfeitos/img/frames/desktop/cena3/frame_0157.jpg
+/g1/dias-perfeitos/img/frames/desktop/cena3/frame_0158.jpg
+/g1/dias-perfeitos/img/frames/desktop/cena3/frame_0159.jpg
+/g1/dias-perfeitos/img/frames/desktop/cena3/frame_0160.jpg
+/g1/dias-perfeitos/img/frames/desktop/cena3/frame_0161.jpg
 /g1/dias-perfeitos/img/frames/desktop/cena4/frame_0001.jpg
 /g1/dias-perfeitos/img/frames/desktop/cena4/frame_0002.jpg
 /g1/dias-perfeitos/img/frames/desktop/cena4/frame_0003.jpg
@@ -632,6 +638,9 @@
 /g1/dias-perfeitos/img/frames/desktop/intro/frame_0122.jpg
 /g1/dias-perfeitos/img/frames/desktop/intro/frame_0123.jpg
 /g1/dias-perfeitos/img/frames/desktop/intro/frame_0124.jpg
+/g1/dias-perfeitos/img/frames/desktop/intro/frame_0125.jpg
+/g1/dias-perfeitos/img/frames/desktop/intro/frame_0126.jpg
+/g1/dias-perfeitos/img/frames/desktop/intro/frame_0127.jpg
 /g1/dias-perfeitos/img/frames/mobile/cena1/frame_0001.webp
 /g1/dias-perfeitos/img/frames/mobile/cena1/frame_0002.webp
 /g1/dias-perfeitos/img/frames/mobile/cena1/frame_0003.webp
@@ -1277,3 +1286,6 @@
 /g1/dias-perfeitos/img/frames/mobile/intro/frame_0122.webp
 /g1/dias-perfeitos/img/frames/mobile/intro/frame_0123.webp
 /g1/dias-perfeitos/img/frames/mobile/intro/frame_0124.webp
+/g1/dias-perfeitos/img/frames/mobile/intro/frame_0125.webp
+/g1/dias-perfeitos/img/frames/mobile/intro/frame_0126.webp
+/g1/dias-perfeitos/img/frames/mobile/intro/frame_0127.webp

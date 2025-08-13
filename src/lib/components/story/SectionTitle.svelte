@@ -3,50 +3,60 @@
   export let subtitle = '';
   export let backgroundImage = '';
   export let backgroundImageMobile = '';
-  export let backgroundVideo = '';
-  export let backgroundVideoMobile = '';
   export let backgroundPosition = 'center';
   export let backgroundPositionMobile = 'center';
-  export let overlay = true;
-  export let variant = 'default';
-  export let size = 'medium';
+  export let backgroundVideo = '';
+  export let backgroundVideoMobile = '';
+  export let backgroundColor = ''; // ✅ NOVO CAMPO
+  export let textColor = ''; // ✅ NOVO CAMPO
+  export let variant = 'default'; // default, centered, minimal
+  export let size = 'medium'; // small, medium, large
   export let height = '';
   export let heightMobile = '';
-  export let textPosition = 'center';
+  export let textPosition = 'center'; // top, center, bottom
   export let textPositionMobile = '';
-  export let textAlign = 'center';
+  export let textAlign = 'center'; // left, center, right
   export let textAlignMobile = '';
+  export let overlay = false;
+  export let fontFamily = 'obviously'; // ✅ NOVO: obviously, obviously-compressed, default
 
-  // Verificar se realmente tem mídia
+  // Lógica reativa para determinar se há mídia
   $: hasMedia = !!(backgroundImage || backgroundVideo);
   $: hasMobileMedia = !!(backgroundImageMobile || backgroundVideoMobile);
 
-  // Criar classes dinâmicas seguras
-  $: alignClass = textAlign === 'left' ? 'text-align-left' : 
-                  textAlign === 'right' ? 'text-align-right' : 'text-align-center';
-  
-  $: positionClass = textPosition === 'top' ? 'text-position-top' : 
-                     textPosition === 'bottom' ? 'text-position-bottom' : 'text-position-center';
+  // Classes CSS dinâmicas para alinhamento de texto
+  $: alignClass = textAlign ? `text-align-${textAlign}` : '';
+  $: alignClassMobile = textAlignMobile ? `text-align-mobile-${textAlignMobile}` : '';
 
-  $: alignClassMobile = textAlignMobile === 'left' ? 'text-align-mobile-left' : 
-                        textAlignMobile === 'right' ? 'text-align-mobile-right' : 
-                        textAlignMobile === 'center' ? 'text-align-mobile-center' : '';
-  
-  $: positionClassMobile = textPositionMobile === 'top' ? 'text-position-mobile-top' : 
-                           textPositionMobile === 'bottom' ? 'text-position-mobile-bottom' : 
-                           textPositionMobile === 'center' ? 'text-position-mobile-center' : '';
+  // Classes CSS dinâmicas para posição de texto
+  $: positionClass = textPosition ? `text-position-${textPosition}` : '';
+  $: positionClassMobile = textPositionMobile ? `text-position-mobile-${textPositionMobile}` : '';
 
-  // Styles dinâmicos só se tiver imagem E com url() wrapper
+  // Classes CSS dinâmicas para fonte
+  $: fontClass = fontFamily ? `font-${fontFamily}` : '';
+
+  // Decodificar URLs se necessário
+  $: backgroundImageDecoded = backgroundImage ? decodeURIComponent(backgroundImage) : '';
+  $: backgroundImageMobileDecoded = backgroundImageMobile ? decodeURIComponent(backgroundImageMobile) : '';
+
+  // Estilos dinâmicos para desktop com !important
   $: desktopStyle = [
     height ? `min-height: ${height}` : '',
-    backgroundImage ? `background-image: url(${backgroundImage})` : '',
-    backgroundImage && backgroundPosition ? `background-position: ${backgroundPosition}` : ''
+    backgroundColor ? `background-color: ${backgroundColor} !important` : '',
+    backgroundImageDecoded ? `background-image: url(${backgroundImageDecoded})` : '',
+    backgroundImageDecoded && backgroundPosition ? `background-position: ${backgroundPosition}` : ''
   ].filter(Boolean).join('; ');
 
   $: mobileStyle = [
     heightMobile ? `min-height: ${heightMobile}` : '',
-    backgroundImageMobile ? `background-image: url(${backgroundImageMobile})` : '',
-    backgroundImageMobile && backgroundPositionMobile ? `background-position: ${backgroundPositionMobile}` : ''
+    backgroundImageMobileDecoded ? `background-image: url(${backgroundImageMobileDecoded})` : '',
+    backgroundImageMobileDecoded && backgroundPositionMobile ? `background-position: ${backgroundPositionMobile}` : ''
+  ].filter(Boolean).join('; ');
+
+  // Estilo do texto com !important para sobrescrever temas
+  $: textStyle = [
+    textColor ? `color: ${textColor} !important` : '',
+    backgroundColor ? `background-color: ${backgroundColor} !important` : ''
   ].filter(Boolean).join('; ');
 
   // Debug para desenvolvimento
@@ -54,19 +64,17 @@
     console.log('🎨 SectionTitle Debug:', {
       title,
       hasMedia,
-      backgroundImage,
-      backgroundImageDecoded: backgroundImage ? decodeURIComponent(backgroundImage) : null,
-      desktopStyle,
+      backgroundColor,
+      textColor,
+      fontFamily,
       variant,
-      size,
-      textPosition,
-      textAlign
+      size
     });
   }
 </script>
 
 <section 
-  class="section-title section-title--{variant} section-title--{size} {alignClass} {positionClass} {alignClassMobile} {positionClassMobile}"
+  class="section-title section-title--{variant} section-title--{size} {alignClass} {positionClass} {alignClassMobile} {positionClassMobile} {fontClass}"
   class:has-media={hasMedia}
   class:has-mobile-media={hasMobileMedia}
   style={desktopStyle}
@@ -74,14 +82,14 @@
   {#if backgroundImage}
     <div 
       class="section-title__background section-title__background--desktop"
-      style="background-image: url({backgroundImage}); background-position: {backgroundPosition};"
+      style="background-image: url({backgroundImageDecoded}); background-position: {backgroundPosition};"
     ></div>
   {/if}
 
   {#if backgroundImageMobile}
     <div 
       class="section-title__background section-title__background--mobile"
-      style="background-image: url({backgroundImageMobile}); background-position: {backgroundPositionMobile};"
+      style="background-image: url({backgroundImageMobileDecoded}); background-position: {backgroundPositionMobile};"
     ></div>
   {/if}
 
@@ -113,11 +121,11 @@
     <div class="section-title__overlay"></div>
   {/if}
 
-  <div class="section-title__content">
+  <div class="section-title__content" style={textStyle}>
     <div class="section-title__container">
-      <h2 class="section-title__title">{title}</h2>
+      <h2 class="section-title__title" style={textColor ? `color: ${textColor} !important` : ''}>{title}</h2>
       {#if subtitle}
-        <p class="section-title__subtitle">{subtitle}</p>
+        <p class="section-title__subtitle" style={textColor ? `color: ${textColor} !important` : ''}>{subtitle}</p>
       {/if}
     </div>
   </div>
@@ -132,6 +140,59 @@
     color: var(--color-text);
     background-color: var(--color-background);
     margin: 2rem 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* ✅ CORES CUSTOMIZADAS COM ALTA ESPECIFICIDADE */
+  .section-title[style*="background-color"] {
+    background-color: inherit !important;
+  }
+
+  .section-title__title[style*="color"] {
+    color: inherit !important;
+  }
+
+  .section-title__subtitle[style*="color"] {
+    color: inherit !important;
+  }
+
+  .section-title__content[style*="color"] * {
+    color: inherit !important;
+  }
+  .font-obviously .section-title__title {
+    font-family: "obviously", sans-serif;
+    font-weight: 600;
+  }
+
+  .font-obviously .section-title__subtitle {
+    font-family: "obviously", sans-serif;
+    font-weight: 400;
+  }
+
+  .font-obviously-compressed .section-title__title {
+    font-family: "obviously-compressed", sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+  }
+
+  .font-obviously-compressed .section-title__subtitle {
+    font-family: "obviously", sans-serif;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+
+  .font-default .section-title__title {
+    font-family: var(--font-family-heading);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .font-default .section-title__subtitle {
+    font-family: var(--font-family-body);
+    font-weight: var(--font-weight-normal);
   }
 
   /* Cor do texto só muda se REALMENTE tiver mídia */
@@ -140,71 +201,26 @@
     color: white;
   }
 
-  /* Sizes SEM imagem - espaçamentos menores */
-  .section-title--small:not(.has-media):not(.has-mobile-media) {
-    min-height: auto;
-    padding: 1rem 0;
+  /* Backgrounds */
+  .section-title__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 1;
   }
 
-  .section-title--medium:not(.has-media):not(.has-mobile-media) {
-    min-height: auto;
-    padding: 1.5rem 0;
+  .section-title__background--desktop {
+    display: block;
   }
 
-  .section-title--large:not(.has-media):not(.has-mobile-media) {
-    min-height: auto;
-    padding: 2rem 0;
+  .section-title__background--mobile {
+    display: none;
   }
 
-  /* Sizes COM imagem (só aplica se tiver .has-media) */
-  .section-title--small.has-media,
-  .section-title--small.has-mobile-media {
-    min-height: 200px;
-    padding: 2rem 0;
-  }
-
-  .section-title--medium.has-media,
-  .section-title--medium.has-mobile-media {
-    min-height: 300px;
-    padding: 3rem 0;
-  }
-
-  .section-title--large.has-media,
-  .section-title--large.has-mobile-media {
-    min-height: 400px;
-    padding: 4rem 0;
-  }
-
-  /* Posicionamento vertical do texto - DESKTOP */
-  .section-title.text-position-top {
-    align-items: flex-start;
-    padding-top: 3rem;
-  }
-
-  .section-title.text-position-center {
-    align-items: center;
-  }
-
-  .section-title.text-position-bottom {
-    align-items: flex-end;
-    padding-bottom: 3rem;
-  }
-
-  /* Alinhamento horizontal do texto - DESKTOP */
-  .section-title.text-align-left .section-title__container {
-    text-align: left;
-  }
-
-  .section-title.text-align-center .section-title__container {
-    text-align: center;
-  }
-
-  .section-title.text-align-right .section-title__container {
-    text-align: right;
-  }
-
-  /* Background Elements */
-  .section-title__background,
   .section-title__background-video {
     position: absolute;
     top: 0;
@@ -212,19 +228,13 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    background-size: cover;
-    background-repeat: no-repeat;
     z-index: 1;
   }
 
-  /* Desktop backgrounds - visíveis apenas no desktop */
-  .section-title__background--desktop,
   .section-title__background-video--desktop {
     display: block;
   }
 
-  /* Mobile backgrounds - ocultos no desktop */
-  .section-title__background--mobile,
   .section-title__background-video--mobile {
     display: none;
   }
@@ -260,37 +270,32 @@
     text-align: center;
   }
 
-  /* ▼▼▼ INÍCIO DA ALTERAÇÃO ▼▼▼ */
   .section-title--minimal {
     background: none;
     border: none;
     margin: 2.5rem 0;
     padding: 0;
-    /* justify-content: center; é herdado do .section-title, o que já centraliza na horizontal */
   }
 
   .section-title--minimal .section-title__container {
     position: relative;
-    text-align: center; /* Centraliza o texto */
+    text-align: center;
     border: none;
     padding: 0;
     padding-top: 1.5rem;
-    margin: 0 auto; /* Garante que o container se centralize */
+    margin: 0 auto;
   }
 
-  /* A linha de 30% de largura, agora centralizada */
   .section-title--minimal .section-title__container::before {
     content: '';
     position: absolute;
     top: 0;
     left: 50%;
-    transform: translateX(-50%); /* O truque para centralizar horizontalmente */
+    transform: translateX(-50%);
     width: 30%;
     height: 2px;
     background-color: var(--color-primary);
   }
-  /* ▲▲▲ FIM DA ALTERAÇÃO ▲▲▲ */
-
 
   /* Estilo para seções sem mídia (sem fundo) */
   .section-title:not(.has-media):not(.has-mobile-media):not(.section-title--minimal) {
@@ -301,100 +306,116 @@
 
   /* Typography */
   .section-title__title {
-    font-size: var(--font-size-120);
+    font-size: var(--font-size-120, 2.5rem);
     font-weight: 800;
     line-height: 1.2;
     margin: 0 0 1rem 0;
   }
 
   .section-title--small .section-title__title {
-    font-size: var(--font-size-100);
+    font-size: var(--font-size-100, 2rem);
   }
 
   .section-title--large .section-title__title {
-    font-size: var(--font-size-140);
+    font-size: var(--font-size-140, 3rem);
   }
 
   .section-title__subtitle {
-    font-size: var(--font-size-80);
+    font-size: var(--font-size-90, 1.125rem);
     font-weight: 400;
     line-height: 1.4;
     margin: 0;
     opacity: 0.9;
   }
 
-  /* ========== MOBILE STYLES ========== */
+  /* Text positioning */
+  .text-position-top {
+    align-items: flex-start;
+    padding-top: 2rem;
+  }
+
+  .text-position-center {
+    align-items: center;
+  }
+
+  .text-position-bottom {
+    align-items: flex-end;
+    padding-bottom: 2rem;
+  }
+
+  /* Text alignment */
+  .text-align-left .section-title__container {
+    text-align: left;
+  }
+
+  .text-align-center .section-title__container {
+    text-align: center;
+  }
+
+  .text-align-right .section-title__container {
+    text-align: right;
+  }
+
+  /* Mobile styles */
   @media (max-width: 768px) {
-    .section-title {
-      margin: 1.5rem 0;
+    .section-title__background--desktop {
+      display: none;
     }
 
-    .section-title--minimal {
-      margin: 2rem 0;
-    }
-
-    /* Mobile backgrounds - visíveis apenas no mobile */
-    .section-title__background--mobile,
-    .section-title__background-video--mobile {
+    .section-title__background--mobile {
       display: block;
     }
 
-    /* Desktop backgrounds - ocultos no mobile */
-    .section-title__background--desktop,
     .section-title__background-video--desktop {
       display: none;
     }
 
-    /* Posicionamento vertical MOBILE (sobrescreve desktop se definido) */
-    .section-title.text-position-mobile-top {
-      align-items: flex-start !important;
-      padding-top: 2rem;
-      padding-bottom: 0;
+    .section-title__background-video--mobile {
+      display: block;
     }
 
-    .section-title.text-position-mobile-center {
-      align-items: center !important;
-      padding-top: 0;
-      padding-bottom: 0;
+    .section-title__content {
+      padding: 0 1rem;
     }
 
-    .section-title.text-position-mobile-bottom {
-      align-items: flex-end !important;
-      padding-bottom: 2rem;
-      padding-top: 0;
-    }
-
-    /* Alinhamento horizontal MOBILE (sobrescreve desktop se definido) */
-    .section-title.text-align-mobile-left .section-title__container {
-      text-align: left !important;
-    }
-
-    .section-title.text-align-mobile-center .section-title__container {
-      text-align: center !important;
-    }
-
-    .section-title.text-align-mobile-right .section-title__container {
-      text-align: right !important;
-    }
-
-    /* Typography mobile */
     .section-title__title {
-      font-size: var(--font-size-100);
+      font-size: var(--font-size-110, 2.25rem);
+    }
+
+    .section-title--small .section-title__title {
+      font-size: var(--font-size-100, 2rem);
     }
 
     .section-title--large .section-title__title {
-      font-size: var(--font-size-120);
+      font-size: var(--font-size-120, 2.5rem);
     }
 
-    .section-title__subtitle {
-      font-size: var(--font-size-70);
+    /* Mobile text positioning */
+    .text-position-mobile-top {
+      align-items: flex-start;
+      padding-top: 1rem;
     }
-  }
 
-  /* Regra de debug visual em desenvolvimento */
-  @media (max-width: 768px) {
-    .section-title:not(.has-media):not(.has-mobile-media):not(.section-title--minimal) {
-      border-left: 0px solid var(--color-primary);
+    .text-position-mobile-center {
+      align-items: center;
+    }
+
+    .text-position-mobile-bottom {
+      align-items: flex-end;
+      padding-bottom: 1rem;
+    }
+
+    /* Mobile text alignment */
+    .text-align-mobile-left .section-title__container {
+      text-align: left;
+    }
+
+    .text-align-mobile-center .section-title__container {
+      text-align: center;
+    }
+
+    .text-align-mobile-right .section-title__container {
+      text-align: right;
     }
   }
 </style>

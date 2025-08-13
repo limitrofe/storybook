@@ -3,13 +3,13 @@
   "originalName": "intro",
   "desktop": {
     "path": "/img/frames/desktop/intro/",
-    "frameCount": 124,
+    "frameCount": 127,
     "format": "jpg",
     "pattern": "frame_%04d.jpg"
   },
   "mobile": {
     "path": "/img/frames/mobile/intro/",
-    "frameCount": 124,
+    "frameCount": 127,
     "format": "webp",
     "pattern": "frame_%04d.webp"
   },
@@ -17,5 +17,5 @@
     "fps": 15,
     "quality": 85
   },
-  "processedAt": "2025-08-12T03:14:43.287Z"
+  "processedAt": "2025-08-13T04:21:03.792Z"
 }
