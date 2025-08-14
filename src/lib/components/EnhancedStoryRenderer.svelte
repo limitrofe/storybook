@@ -12,11 +12,11 @@
   
   // Importar novos componentes (com fallback)
   let ReadingProgress;
-  let SocialShare;
+  // let SocialShare;
   
   export let storyData = {};
   export let enableAnalytics = true;
-  export let enableSharing = true;
+  // export let enableSharing = false;
   export let enableReadingProgress = true;
   export let enableThemeSwitcher = true;
   export let autoOptimize = true;
@@ -145,12 +145,12 @@
       console.log('ReadingProgress não disponível:', err.message);
     }
 
-    try {
-      const socialShareModule = await import('./SocialShare.svelte');
-      SocialShare = socialShareModule.default;
-    } catch (err) {
-      console.log('SocialShare não disponível:', err.message);
-    }
+    // try {
+    //   const socialShareModule = await import('./SocialShare.svelte');
+    //   SocialShare = socialShareModule.default;
+    // } catch (err) {
+    //   console.log('SocialShare não disponível:', err.message);
+    // }
   });
 
   // Reativo
@@ -185,11 +185,11 @@
 {/if}
 
 <!-- Botão de compartilhamento flutuante -->
-{#if enableSharing}
+<!-- {#if enableSharing}
   <button class="share-button" on:click={shareStory} title="Compartilhar história">
     📤 Compartilhar
   </button>
-{/if}
+{/if} -->
 
 <!-- Conteúdo principal -->
 <main class="enhanced-story" data-theme={storyData.theme}>
@@ -312,13 +312,13 @@
       {/if}
     </div>
     
-    {#if enableSharing}
+    <!-- {#if enableSharing}
       <div class="footer-share">
         <button on:click={shareStory} class="share-btn">
           📤 Compartilhar esta história
         </button>
       </div>
-    {/if}
+    {/if} -->
   </footer>
 </main>
 

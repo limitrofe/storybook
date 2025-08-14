@@ -3,6 +3,9 @@
   import { browser } from '$app/environment'; // Importa o 'browser' para checagem
   import StoryRenderer from '$lib/components/StoryRenderer.svelte';
   import ReelsGloboPlayer from '$lib/components/story/GloboPlayer.svelte';
+  
+  // 🆕 NOVO: Importa o menu de navegação
+  import StickyNavigationMenu from '$lib/components/story/StickyNavigationMenu.svelte';
 
   // NOVAS FUNCIONALIDADES (opcionais)
   let enhancedMode = false;
@@ -153,23 +156,29 @@
   {/if}
 </svelte:head>
 
+<!-- 🆕 NOVO: Menu de Navegação Sticky -->
+{#if currentStory && !loading}
+  <StickyNavigationMenu 
+    storyData={currentStory}
+    seriesName="DIAS PERFEITOS"
+  />
+{/if}
+
 <div class="reading-progress">
   <div class="progress-bar" style="width: {readingProgress}%"></div>
-  </div>
+</div>
 
-{#if currentStory}
+<!-- {#if currentStory}
   <button class="share-button" on:click={quickShare} title="Compartilhar">
     📤
   </button>
-{/if}
-
+{/if} -->
 
 <!-- <div class="dev-controls">
   <button on:click={toggleExtras} class="toggle-btn" class:active={showExtras}>
     {showExtras ? '🚀' : '📰'} {showExtras ? 'Extras ON' : 'Extras OFF'}
   </button>
 </div> -->
-
 
 {#if showExtras}
   {#if currentStory && !loading}
@@ -206,7 +215,6 @@
   {/if}
 {/if}
 
-
 {#if loading}
   <div class="loading">
     <div class="spinner"></div>
@@ -216,8 +224,18 @@
   <StoryRenderer storyData={currentStory} />
 {/if}
 
-
 <style>
+  /* 🆕 NOVO: Ajuste para o menu sticky */
+  :global(body) {
+    padding-top: 70px; /* Espaço para o menu sticky */
+  }
+
+  @media (max-width: 768px) {
+    :global(body) {
+      padding-top: 60px; /* Menor no mobile */
+    }
+  }
+
   /* ======= SEUS ESTILOS ORIGINAIS (não alterados) ======= */
   .loading {
     display: flex;
@@ -278,13 +296,19 @@
   /* 🔧 BARRA DE PROGRESSO MELHORADA */
   .reading-progress {
     position: fixed;
-    top: 0;
+    top: 70px; /* 🆕 AJUSTADO: Posicionar abaixo do menu sticky */
     left: 0;
     right: 0;
     height: 4px;
     background: rgba(0, 0, 0, 0.1);
     z-index: 1000;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  @media (max-width: 768px) {
+    .reading-progress {
+      top: 60px; /* 🆕 AJUSTADO: Menor no mobile */
+    }
   }
 
   .progress-bar {

@@ -5,7 +5,7 @@
   
   export let showEstimate = true;
   export let showPercentage = true;
-  export let position = 'top'; // 'top', 'bottom'
+  export let position = 'bottom'; // 'top', 'bottom'
   
   let progress = 0;
   let scrollY = 0;

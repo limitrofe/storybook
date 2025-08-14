@@ -17,11 +17,29 @@
     "workflow:update": "node scripts/workflow.js update",
     "workflow:config": "node scripts/workflow.js config",
     
+    "// === 🔧 FIX PARA EMBED S3 ===": "",
+    "fix-urls": "node scripts/fix-absolute-urls.js",
+    "build-embed": "npm run build && npm run fix-urls",
+    
     "// === 📹 FRAMES ===": "",
     "extract": "node scripts/extract-frames.js",
     "extract:all": "node scripts/extract-frames.js --process-all",
     "extract:list": "node scripts/extract-frames.js --list-videos",
     
+  
+    "// === 🧹 CACHE MANAGEMENT ===": "",
+    "cache:generate": "node scripts/auto-cache-generator.js",
+    "cache:warm": "./warm-cache.sh",
+    "cache:batch": "./warm-cache-batch.sh",
+    "cache:all": "npm run cache:generate && npm run cache:warm",
+    "cache:purge": "node scripts/cache-purge.js",
+    "cache:purge:project": "node scripts/cache-purge.js project",
+    "cache:purge:script": "node scripts/cache-purge.js script",
+    "cache:clear": "npm run cache:purge",
+    "cache:check": "node scripts/check-cache-status.js",
+    "cache:check:file": "node scripts/check-cache-status.js --file",
+
+
     "// === 📄 GOOGLE DOCS ===": "",
     "fetch": "node scripts/fetch-docs.js",
     

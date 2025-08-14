@@ -1,19 +1,33 @@
 #!/bin/bash
-# Script para aquecer o cache com TODOS os frames
-# Executa em paralelo para ser mais rápido
+# Script automático para aquecer cache do projeto dias-perfeitos
+# Gerado automaticamente em: 8/13/2025, 10:40:40 PM
 
-echo "🔥 Aquecendo cache com 1291 arquivos..."
+echo "🔥 Aquecendo cache do projeto: dias-perfeitos"
+echo "📊 Total de arquivos: 1291"
+echo "🌐 CDN Base: https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35"
+echo ""
 
-# Função para fazer o curl
+# Função para requisição de aquecimento
 warm_url() {
-  url=$1
-  curl -s -o /dev/null -w "%{http_code}" "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35$url"
-  echo "✓ $url"
+  local url="$1"
+  local response_code=$(curl -s -o /dev/null -w "%{http_code}" "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35$url")
+  
+  if [ "$response_code" -eq 200 ]; then
+    echo "✅ $url (HTTP $response_code)"
+  else
+    echo "❌ $url (HTTP $response_code)"
+  fi
 }
 
 export -f warm_url
 
-# Processar em paralelo (10 de cada vez)
-cat cache-all-frames.txt | xargs -P 10 -I {} bash -c 'warm_url "{}"'
+echo "🚀 Iniciando aquecimento em paralelo (8 conexões simultâneas)..."
+echo ""
 
-echo "✅ Cache aquecido com sucesso!"
+# Processar em paralelo
+cat cache-list.txt | xargs -P 8 -I {} bash -c 'warm_url "{}"'
+
+echo ""
+echo "✅ Aquecimento do cache concluído!"
+echo "🎯 Projeto: dias-perfeitos"
+echo "🌐 URL: https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos"

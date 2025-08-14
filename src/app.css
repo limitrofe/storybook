@@ -87,7 +87,7 @@ body {
   font-family: 'Globotipo', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-wrap: pretty; 
+  text-wrap: balance; 
 }
 
 
@@ -195,7 +195,7 @@ body {
   font-family: "obviously", "Globotipo", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-wrap: pretty; 
+  text-wrap: balance; 
 }
 
 /* --- 🎭 PERSONAGENS COMPONENT FONT OVERRIDE --- */

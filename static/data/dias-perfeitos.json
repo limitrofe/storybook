@@ -81,6 +81,10 @@
       "overlay": "true"
     },
     {
+      "type": "ancora",
+      "id": "sinopse"
+    },
+    {
       "type": "intertitulo",
       "text": "SINOPSE",
       "textAlign": "center",
@@ -104,7 +108,7 @@
       "credit": "",
       "fullWidth": "false",
       "autoplay": "true",
-      "controls": "false",
+      "controls": "true",
       "autoPlay": "true",
       "showCaption": "false",
       "loop": "true"
@@ -170,6 +174,10 @@
         }
       ],
       "text": "cena1"
+    },
+    {
+      "type": "ancora",
+      "id": "personagens"
     },
     {
       "type": "intertitulo",
@@ -299,6 +307,10 @@
       "heightMobile": "40vh"
     },
     {
+      "type": "ancora",
+      "id": "curiosidades"
+    },
+    {
       "type": "curiosidades",
       "personagens": [
         {
@@ -396,13 +408,15 @@
       "text": "cena3"
     },
     {
+      "type": "ancora",
+      "id": "sobre-o-livro"
+    },
+    {
       "type": "intertitulo",
       "text": "SOBRE O LIVRO",
       "textAlign": "center",
       "variant": "centered",
-      "size": "large",
-      "height": "40vh",
-      "heightMobile": "40vh"
+      "size": "large"
     },
     {
       "type": "texto",
@@ -488,6 +502,10 @@
       "text": "cena4"
     },
     {
+      "type": "ancora",
+      "id": "diferencas-entre-o-livro-e-a-serie"
+    },
+    {
       "type": "intertitulo",
       "text": "DIFERENÇAS ENTRE O LIVRO E A SÉRIE",
       "textAlign": "center",
@@ -521,6 +539,10 @@
       "text": "\"O último episódio da série é uma trama pós-livro. É interessante que as histórias sejam complementares, e não idênticas.\"",
       "author": "Raphael Montes",
       "role": "autor"
+    },
+    {
+      "type": "ancora",
+      "id": "sobre-raphael-montes"
     },
     {
       "type": "foto",
@@ -605,13 +627,17 @@
       "text": "final"
     },
     {
+      "type": "ancora",
+      "id": "conteudos-relacionados"
+    },
+    {
       "type": "recomendados",
       "items": [
         {
           "title": "OS OUTROS",
           "subtitle": "Série Original Globoplay",
-          "image": "img/recomendados/os-outros.jpg",
-          "link": "https://globoplay.globo.com/os-outros/t/vbN21h5xX1/",
+          "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/recomendados/os-outros.jpg",
+          "link": "https://globoplay.globo.com/os-outros/t/vbN21h5xX1/?origemId=93802&utm_source=familiag&utm_medium=gshow&utm_campaign=familiag_conteudo_cons_botao_web_globoplay_dias-perfeitos_na_serie_pag-esp-dias-perfeitos&utm_content=dias-perfeitos_na_serie_cons_familiag_botao_na_botao-pag-esp-dias-perfeitos_na_globoplay",
           "category": "Suspense",
           "year": "2024",
           "rating": "16",
@@ -622,8 +648,8 @@
         {
           "title": "UMA FAMÍLIA FELIZ",
           "subtitle": "Filme",
-          "image": "img/recomendados/uma-familia-feliz.webp",
-          "link": "https://globoplay.globo.com/uma-familia-feliz-2022/t/1wyxkzrFtK/",
+          "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/recomendados/uma-familia-feliz.webp",
+          "link": "https://globoplay.globo.com/uma-familia-feliz-2022/t/1wyxkzrFtK/?origemId=93802&utm_source=familiag&utm_medium=gshow&utm_campaign=familiag_conteudo_cons_botao_web_globoplay_dias-perfeitos_na_serie_pag-esp-dias-perfeitos&utm_content=dias-perfeitos_na_serie_cons_familiag_botao_na_botao-pag-esp-dias-perfeitos_na_globoplay",
           "category": "Thriller/Drama",
           "year": "2022",
           "rating": "16",
@@ -634,8 +660,8 @@
         {
           "title": "DUPLA IDENTIDADE",
           "subtitle": "Série",
-          "image": "img/recomendados/dupla-identidade.webp",
-          "link": "https://globoplay.globo.com/dupla-identidade/t/mcCRZgrVkB/",
+          "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/recomendados/dupla-identidade.webp",
+          "link": "https://globoplay.globo.com/dupla-identidade/t/mcCRZgrVkB/?origemId=93802&utm_source=familiag&utm_medium=gshow&utm_campaign=familiag_conteudo_cons_botao_web_globoplay_dias-perfeitos_na_serie_pag-esp-dias-perfeitos&utm_content=dias-perfeitos_na_serie_cons_familiag_botao_na_botao-pag-esp-dias-perfeitos_na_globoplay",
           "category": "Policial, Suspense",
           "year": "2014",
           "rating": "16",
@@ -646,8 +672,8 @@
         {
           "title": "SUPERMAX",
           "subtitle": "Série",
-          "image": "img/recomendados/supermax.webp",
-          "link": "https://globoplay.globo.com/supermax/t/89jbYjnsWF/",
+          "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/recomendados/supermax.webp",
+          "link": "https://globoplay.globo.com/supermax/t/89jbYjnsWF/?origemId=93802&utm_source=familiag&utm_medium=gshow&utm_campaign=familiag_conteudo_cons_botao_web_globoplay_dias-perfeitos_na_serie_pag-esp-dias-perfeitos&utm_content=dias-perfeitos_na_serie_cons_familiag_botao_na_botao-pag-esp-dias-perfeitos_na_globoplay",
           "category": "Ação",
           "year": "2016",
           "rating": "16",

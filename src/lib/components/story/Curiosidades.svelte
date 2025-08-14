@@ -379,7 +379,7 @@
   .character-name {
     position: absolute;
     left: 50%;
-    top: 60%;
+    top: 50%;
     transform: translate(-50%, -50%);
     font-size: clamp(4rem, 10vw, 10rem);
     font-weight: 700;
@@ -565,7 +565,7 @@
       top: 75%;
       align-items: start;
       margin-bottom: 0px;
-      text-shadow: none;
+      /* text-shadow: none; */
       color: white;
     }
 
