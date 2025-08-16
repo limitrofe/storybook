@@ -1,17 +1,29 @@
-// scripts/fix-absolute-urls.js
+// scripts/fix-absolute-urls-clean.js
+// Script limpo para corrigir URLs duplicadas
+
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import PROJECT_CONFIG from '../project.config.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// 🎯 URL BASE DO SEU CDN S3
-const BASE_URL = 'https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos';
-
 async function fixAbsoluteUrls() {
-  console.log('🔧 CORRIGINDO URLs PARA ABSOLUTOS...');
-  console.log(`📍 URL Base: ${BASE_URL}`);
+  console.log('\n🔧 CORRIGINDO URLs DUPLICADAS...');
+  
+  // Validar configuração do projeto
+  if (!PROJECT_CONFIG.validate()) {
+    console.error('❌ Configuração do projeto inválida');
+    process.exit(1);
+  }
+  
+  // Usar URL base dinâmica do projeto
+  const BASE_URL = PROJECT_CONFIG.baseProjectUrl;
+  
+  console.log(`📁 Projeto: ${PROJECT_CONFIG.projectName}`);
+  console.log(`🌐 URL Base: ${BASE_URL}`);
+  console.log('=' .repeat(80));
   
   const buildDir = path.join(__dirname, '../build');
   
@@ -20,90 +32,150 @@ async function fixAbsoluteUrls() {
     const indexPath = path.join(buildDir, 'index.html');
     let indexContent = await fs.readFile(indexPath, 'utf8');
     
-    console.log('🔍 URLs relativos encontrados no index.html:');
+    console.log('🔍 Corrigindo URLs no index.html...');
     
-    // Encontrar e substituir links relativos
-    const patterns = [
-      // CSS e JS
-      { pattern: /href="\.\/([^"]+)"/g, replacement: `href="${BASE_URL}/$1"`, type: 'CSS/JS' },
-      { pattern: /src="\.\/([^"]+)"/g, replacement: `src="${BASE_URL}/$1"`, type: 'Scripts' },
+    let totalChanges = 0;
+    
+    // Padrão 1: Corrigir URLs duplicadas (mais comum)
+    const duplicatedPattern = /https:\/\/[^"']*https:\/\/[^"']*/g;
+    const duplicatedUrls = indexContent.match(duplicatedPattern);
+    
+    if (duplicatedUrls) {
+      console.log(`  ⚠️ Encontradas ${duplicatedUrls.length} URLs duplicadas`);
+      duplicatedUrls.forEach((url, index) => {
+        if (index < 3) {
+          console.log(`    ${url.substring(0, 80)}...`);
+        }
+      });
       
-      // Assets gerais
-      { pattern: /href="\/([^"]+)"/g, replacement: `href="${BASE_URL}/$1"`, type: 'Assets' },
-      { pattern: /src="\/([^"]+)"/g, replacement: `src="${BASE_URL}/$1"`, type: 'Sources' },
+      // Corrigir duplicações: manter apenas a primeira parte da URL
+      indexContent = indexContent.replace(duplicatedPattern, (match) => {
+        // Pegar apenas a primeira URL válida
+        const firstHttps = match.indexOf('https://');
+        const secondHttps = match.indexOf('https://', firstHttps + 1);
+        
+        if (secondHttps > -1) {
+          // Pegar a primeira URL + a parte após a segunda
+          const firstPart = match.substring(0, secondHttps);
+          const secondPart = match.substring(secondHttps);
+          
+          // Extrair apenas o path da segunda URL
+          const pathMatch = secondPart.match(/https:\/\/[^\/]+(.*)$/);
+          if (pathMatch) {
+            return firstPart + pathMatch[1];
+          }
+        }
+        
+        return match;
+      });
       
-      // URLs em scripts JavaScript
-      { pattern: /"\/data\/([^"]+)"/g, replacement: `"${BASE_URL}/data/$1"`, type: 'Data URLs' },
-      { pattern: /'\/data\/([^']+)'/g, replacement: `'${BASE_URL}/data/$1'`, type: 'Data URLs (single quotes)' },
-      
-      // Fetch calls
-      { pattern: /fetch\("\/([^"]+)"\)/g, replacement: `fetch("${BASE_URL}/$1")`, type: 'Fetch calls' },
-      { pattern: /fetch\('\/([^']+)'\)/g, replacement: `fetch('${BASE_URL}/$1')`, type: 'Fetch calls (single quotes)' },
-      
-      // Import statements
-      { pattern: /import\("\.\/([^"]+)"\)/g, replacement: `import("${BASE_URL}/$1")`, type: 'Dynamic imports' },
-      { pattern: /import\('\.\/([^']+)'\)/g, replacement: `import('${BASE_URL}/$1')`, type: 'Dynamic imports (single quotes)' }
+      totalChanges += duplicatedUrls.length;
+      console.log(`  ✅ URLs duplicadas corrigidas`);
+    }
+    
+    // Padrão 2: Substituir URLs relativos que não foram convertidos
+    const relativePatterns = [
+      {
+        pattern: /href="\.\/([^"]+)"/g,
+        replacement: `href="${BASE_URL}/$1"`,
+        name: 'CSS/JS relativos (href)'
+      },
+      {
+        pattern: /src="\.\/([^"]+)"/g,
+        replacement: `src="${BASE_URL}/$1"`,
+        name: 'Scripts relativos (src)'
+      },
+      {
+        pattern: /href="\/(?!http)([^"]+)"/g,
+        replacement: `href="${BASE_URL}/$1"`,
+        name: 'Assets absolutos (href)'
+      },
+      {
+        pattern: /src="\/(?!http)([^"]+)"/g,
+        replacement: `src="${BASE_URL}/$1"`,
+        name: 'Sources absolutos (src)'
+      },
+      // ✅ NOVO: URLs em import() dentro de JavaScript inline
+      {
+        pattern: /import\("\.\/([^"]+)"\)/g,
+        replacement: `import("${BASE_URL}/$1")`,
+        name: 'Import statements inline'
+      },
+      {
+        pattern: /import\('\.\/([^']+)'\)/g,
+        replacement: `import('${BASE_URL}/$1')`,
+        name: 'Import statements inline (single quotes)'
+      },
+      // ✅ NOVO: URLs em import() que começam com /
+      {
+        pattern: /import\("\/(?!http)([^"]+)"\)/g,
+        replacement: `import("${BASE_URL}/$1")`,
+        name: 'Import absolutos'
+      },
+      {
+        pattern: /import\('\/(?!http)([^']+)'\)/g,
+        replacement: `import('${BASE_URL}/$1')`,
+        name: 'Import absolutos (single quotes)'
+      }
     ];
     
-    let changesCount = 0;
-    
-    patterns.forEach(({ pattern, replacement, type }) => {
+    relativePatterns.forEach(({ pattern, replacement, name }) => {
       const matches = indexContent.match(pattern);
       if (matches) {
-        console.log(`  📝 ${type}: ${matches.length} substituições`);
-        matches.forEach(match => console.log(`    ${match}`));
-        changesCount += matches.length;
+        console.log(`  📝 ${name}: ${matches.length} correções`);
+        indexContent = indexContent.replace(pattern, replacement);
+        totalChanges += matches.length;
       }
-      indexContent = indexContent.replace(pattern, replacement);
     });
     
-    // 2. Corrigir URLs específicos conhecidos - SEM duplicar
-    const specificFixes = [
-      // URLs de dados que aparecem no erro - apenas se não for http
-      { from: '/data/dias-perfeitos.json', to: `${BASE_URL}/data/dias-perfeitos.json` },
-      { from: '"data/dias-perfeitos.json"', to: `"${BASE_URL}/data/dias-perfeitos.json"` },
-      { from: "'data/dias-perfeitos.json'", to: `'${BASE_URL}/data/dias-perfeitos.json'` },
-      
-      // Assets do _app - apenas se não for http
-      { from: '/_app/', to: `${BASE_URL}/_app/` },
+    // Padrão 3: Verificar se há URLs de projetos antigos
+    const oldUrls = [
+      'https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos',
+      'https://s3.glbimg.com/v1/AUTH_9897f8564b5c46c9b6e85bda5912fe3b'
     ];
     
-    specificFixes.forEach(({ from, to }) => {
-      // Apenas substituir se o 'from' existir e não for duplicação
-      if (indexContent.includes(from) && !indexContent.includes(to)) {
-        console.log(`  🔄 Corrigindo: ${from} → ${to}`);
-        indexContent = indexContent.replaceAll(from, to);
-        changesCount++;
+    oldUrls.forEach(oldUrl => {
+      if (oldUrl !== BASE_URL && indexContent.includes(oldUrl)) {
+        console.log(`  🔄 Substituindo URL antiga: ${oldUrl}`);
+        const count = (indexContent.match(new RegExp(oldUrl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g')) || []).length;
+        indexContent = indexContent.replaceAll(oldUrl, BASE_URL);
+        totalChanges += count;
       }
     });
     
-    // 3. Salvar index.html corrigido
+    // Salvar arquivo corrigido
     await fs.writeFile(indexPath, indexContent);
-    console.log(`✅ index.html corrigido (${changesCount} alterações)`);
+    console.log(`✅ index.html corrigido (${totalChanges} alterações)`);
     
-    // 4. Processar arquivos JavaScript no build
+    // 2. Processar arquivos JavaScript
+    console.log('\n🔍 Processando arquivos JavaScript...');
     const jsFiles = await findJSFiles(buildDir);
     
-    for (const jsFile of jsFiles) {
-      await fixJSFile(jsFile);
+    if (jsFiles.length > 0) {
+      for (const jsFile of jsFiles) {
+        await fixJSFile(jsFile, BASE_URL);
+      }
+    } else {
+      console.log('ℹ️  Nenhum arquivo JS encontrado');
     }
     
-    // 5. Verificar se há arquivos JSON que precisam ser corrigidos
-    const dataDir = path.join(buildDir, 'data');
-    try {
-      await fs.access(dataDir);
-      console.log('✅ Pasta data/ encontrada no build');
-    } catch {
-      console.log('⚠️  Pasta data/ não encontrada no build - arquivos podem estar embedados');
-    }
-    
-    console.log('\n🎯 RESULTADO:');
-    console.log(`📁 Build corrigido em: ${buildDir}`);
-    console.log(`🌐 Todas as URLs agora apontam para: ${BASE_URL}`);
-    console.log('\n✅ Pronto para embed em plataforma externa!');
+    // 3. Relatório final
+    console.log('\n' + '=' .repeat(80));
+    console.log('🎯 CORREÇÃO CONCLUÍDA:');
+    console.log('=' .repeat(80));
+    console.log(`📁 Projeto: ${PROJECT_CONFIG.projectName}`);
+    console.log(`🌐 URL Base: ${BASE_URL}`);
+    console.log(`🔧 Total de correções: ${totalChanges}`);
+    console.log(`📄 Arquivos JS processados: ${jsFiles.length}`);
+    console.log('');
+    console.log('✅ Build corrigido e pronto para deploy!');
+    console.log(`🔗 URL para testar: ${BASE_URL}/index.html`);
+    console.log('=' .repeat(80));
     
   } catch (error) {
-    console.error('❌ Erro:', error.message);
+    console.error('❌ Erro durante a correção:', error.message);
+    console.error(error.stack);
+    process.exit(1);
   }
 }
 
@@ -111,16 +183,20 @@ async function findJSFiles(dir) {
   const files = [];
   
   async function scan(currentDir) {
-    const items = await fs.readdir(currentDir, { withFileTypes: true });
-    
-    for (const item of items) {
-      const fullPath = path.join(currentDir, item.name);
+    try {
+      const items = await fs.readdir(currentDir, { withFileTypes: true });
       
-      if (item.isDirectory()) {
-        await scan(fullPath);
-      } else if (item.name.endsWith('.js')) {
-        files.push(fullPath);
+      for (const item of items) {
+        const fullPath = path.join(currentDir, item.name);
+        
+        if (item.isDirectory() && !item.name.startsWith('.')) {
+          await scan(fullPath);
+        } else if (item.name.endsWith('.js') || item.name.endsWith('.mjs')) {
+          files.push(fullPath);
+        }
       }
+    } catch (error) {
+      // Ignorar erros de diretório
     }
   }
   
@@ -128,22 +204,42 @@ async function findJSFiles(dir) {
   return files;
 }
 
-async function fixJSFile(filePath) {
+async function fixJSFile(filePath, baseUrl) {
   try {
     let content = await fs.readFile(filePath, 'utf8');
     const originalContent = content;
     
+    // Corrigir URLs duplicadas em JS
+    const duplicatedPattern = /https:\/\/[^"']*https:\/\/[^"']*/g;
+    if (duplicatedPattern.test(content)) {
+      content = content.replace(duplicatedPattern, (match) => {
+        const firstHttps = match.indexOf('https://');
+        const secondHttps = match.indexOf('https://', firstHttps + 1);
+        
+        if (secondHttps > -1) {
+          const firstPart = match.substring(0, secondHttps);
+          const secondPart = match.substring(secondHttps);
+          
+          const pathMatch = secondPart.match(/https:\/\/[^\/]+(.*)$/);
+          if (pathMatch) {
+            return firstPart + pathMatch[1];
+          }
+        }
+        
+        return match;
+      });
+    }
+    
     // Padrões específicos para JavaScript
     const jsPatterns = [
-      // Fetch URLs
-      { pattern: /fetch\s*\(\s*["']\/data\/([^"']+)["']\s*\)/g, replacement: `fetch("${BASE_URL}/data/$1")` },
-      { pattern: /fetch\s*\(\s*["']\.\/data\/([^"']+)["']\s*\)/g, replacement: `fetch("${BASE_URL}/data/$1")` },
-      
-      // Import URLs
-      { pattern: /import\s*\(\s*["']\.\/([^"']+)["']\s*\)/g, replacement: `import("${BASE_URL}/$1")` },
-      
-      // Asset URLs em strings
-      { pattern: /["']\/\_app\/([^"']+)["']/g, replacement: `"${BASE_URL}/_app/$1"` },
+      {
+        pattern: /fetch\s*\(\s*["']\/(?!http)([^"']+)["']\s*\)/g,
+        replacement: `fetch("${baseUrl}/$1")`
+      },
+      {
+        pattern: /import\s*\(\s*["']\.\/([^"']+)["']\s*\)/g,
+        replacement: `import("${baseUrl}/$1")`
+      }
     ];
     
     jsPatterns.forEach(({ pattern, replacement }) => {
@@ -152,11 +248,11 @@ async function fixJSFile(filePath) {
     
     if (content !== originalContent) {
       await fs.writeFile(filePath, content);
-      console.log(`  ✅ JS corrigido: ${path.basename(filePath)}`);
+      console.log(`  ✅ ${path.basename(filePath)} corrigido`);
     }
     
   } catch (error) {
-    console.log(`  ⚠️  Erro ao processar ${filePath}: ${error.message}`);
+    console.log(`  ⚠️ Erro ao processar ${path.basename(filePath)}: ${error.message}`);
   }
 }
 

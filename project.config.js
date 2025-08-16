@@ -6,18 +6,18 @@
  */
 const PROJECT_CONFIG = {
   // Nome do projeto (será a pasta no CDN)
-  projectName: 'dias-perfeitos',
+  projectName: 'scroll',
   
   // Título da página
-  pageTitle: 'Dias Perfeitos',
+  pageTitle: 'Scroll',
   
   // ID do Google Docs
-  googleDocsId: '1j8z_D_SIgNpX9dZHMEoCCCEiHdzp810c5N49W6uOGT4',  // Cole o ID aqui quando tiver
+  googleDocsId: '1mmoqcRS-I2tBFDThmmGnIufFF4LxSSi8UbYNs_mzgFQ',  // Cole o ID aqui quando tiver
   
   // Performance dos frames
   frames: {
-    fps: 15,
-    quality: 85,
+    fps: 30,
+    quality: 60,
     desktopScale: '1920:-1',
     mobileScale: '768:-1'
   },

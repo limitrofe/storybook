@@ -2,43 +2,43 @@
   {
     "name": "cena1",
     "type": "videoscrollytelling",
-    "imagePrefix": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/frames/desktop/cena1/frame_",
-    "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/frames/mobile/cena1/frame_",
-    "totalFrames": 138
+    "imagePrefix": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/scroll/frames/desktop/cena1/frame_",
+    "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/scroll/frames/mobile/cena1/frame_",
+    "totalFrames": 276
   },
   {
     "name": "cena2",
     "type": "videoscrollytelling",
-    "imagePrefix": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/frames/desktop/cena2/frame_",
-    "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/frames/mobile/cena2/frame_",
-    "totalFrames": 50
+    "imagePrefix": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/scroll/frames/desktop/cena2/frame_",
+    "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/scroll/frames/mobile/cena2/frame_",
+    "totalFrames": 100
   },
   {
     "name": "cena3",
     "type": "videoscrollytelling",
-    "imagePrefix": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/frames/desktop/cena3/frame_",
-    "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/frames/mobile/cena3/frame_",
-    "totalFrames": 161
+    "imagePrefix": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/scroll/frames/desktop/cena3/frame_",
+    "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/scroll/frames/mobile/cena3/frame_",
+    "totalFrames": 322
   },
   {
     "name": "cena4",
     "type": "videoscrollytelling",
-    "imagePrefix": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/frames/desktop/cena4/frame_",
-    "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/frames/mobile/cena4/frame_",
-    "totalFrames": 28
+    "imagePrefix": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/scroll/frames/desktop/cena4/frame_",
+    "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/scroll/frames/mobile/cena4/frame_",
+    "totalFrames": 55
   },
   {
     "name": "final",
     "type": "videoscrollytelling",
-    "imagePrefix": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/frames/desktop/final/frame_",
-    "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/frames/mobile/final/frame_",
-    "totalFrames": 139
+    "imagePrefix": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/scroll/frames/desktop/final/frame_",
+    "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/scroll/frames/mobile/final/frame_",
+    "totalFrames": 277
   },
   {
     "name": "intro",
     "type": "videoscrollytelling",
-    "imagePrefix": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/frames/desktop/intro/frame_",
-    "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/frames/mobile/intro/frame_",
-    "totalFrames": 127
+    "imagePrefix": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/scroll/frames/desktop/intro/frame_",
+    "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/scroll/frames/mobile/intro/frame_",
+    "totalFrames": 254
   }
 ]

@@ -7,73 +7,25 @@
       "Produto: Amanda Araújo e Marcela Vasconcelos"
     ]
   },
-  "title": "DIAS PERFEITOS",
+  "title": "Scroll Teste",
   "paragraphs": [
     {
       "type": "scrollyframes",
       "frameStart": 1,
-      "frameStop": 124,
+      "frameStop": 138,
       "imagePrefix": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/frames/desktop/intro/frame_",
       "imageSuffix": ".jpg",
       "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/frames/mobile/intro/frame_",
       "imageSuffixMobile": ".webp",
-      "height": "413vh",
-      "showProgress": false,
+      "height": "0vh",
+      "showProgress": true,
       "showTime": false,
-      "preloadFrames": 8,
-      "memoryLimit": 30,
-      "animationSpeed": 0.1,
-      "smoothing": true,
-      "debug": false,
-      "steps": [
-        {
-          "title": "Abertura: Estabelecendo o Cenário",
-          "text": "Nossa jornada começa do zero, apresentando o <strong>contexto inicial</strong> e estabelecendo as bases para tudo que será revelado.",
-          "startFrame": 1,
-          "endFrame": 5,
-          "duration": 1000
-        },
-        {
-          "title": "Primeiros Insights",
-          "text": "Começamos a desvendar os <em>primeiros elementos cruciais</em> que moldarão nossa compreensão.",
-          "startFrame": 6,
-          "endFrame": 10,
-          "duration": 1000
-        },
-        {
-          "title": "Desenvolvimento das Ideias",
-          "text": "As ideias ganham forma e começamos a ver <strong>conexões importantes</strong> entre os diferentes elementos.",
-          "startFrame": 11,
-          "endFrame": 15,
-          "duration": 1000
-        },
-        {
-          "title": "Momento de Transição",
-          "text": "Chegamos a um <em>ponto de virada fundamental</em> que redefine nossa perspectiva sobre o tema.",
-          "startFrame": 16,
-          "endFrame": 25,
-          "duration": 1000
-        },
-        {
-          "title": "Aprofundamento da Análise",
-          "text": "Mergulhamos mais fundo na análise, explorando <strong>camadas mais complexas</strong> da narrativa.",
-          "startFrame": 26,
-          "endFrame": 40,
-          "duration": 1000
-        },
-        {
-          "title": "Conclusão",
-          "text": "Chegamos ao final com uma compreensão completa e transformadora do tema apresentado.",
-          "startFrame": 41,
-          "endFrame": 51,
-          "duration": 1000
-        }
-      ],
+      "preloadFrames": 15,
       "text": "intro"
     },
     {
       "type": "abre",
-      "title": "DIAS PERFEITOS",
+      "title": "Scroll Teste",
       "subtitle": "",
       "date": "",
       "author": "",
@@ -121,58 +73,10 @@
       "imageSuffix": ".jpg",
       "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/frames/mobile/cena1/frame_",
       "imageSuffixMobile": ".webp",
-      "height": "460vh",
-      "showProgress": false,
+      "height": "0vh",
+      "showProgress": true,
       "showTime": false,
-      "preloadFrames": 8,
-      "memoryLimit": 30,
-      "animationSpeed": 0.1,
-      "smoothing": true,
-      "debug": false,
-      "steps": [
-        {
-          "title": "Abertura: Estabelecendo o Cenário",
-          "text": "Nossa jornada começa do zero, apresentando o <strong>contexto inicial</strong> e estabelecendo as bases para tudo que será revelado.",
-          "startFrame": 1,
-          "endFrame": 30,
-          "duration": 3000
-        },
-        {
-          "title": "Primeiros Insights",
-          "text": "Começamos a desvendar os <em>primeiros elementos cruciais</em> que moldarão nossa compreensão.",
-          "startFrame": 31,
-          "endFrame": 60,
-          "duration": 3000
-        },
-        {
-          "title": "Desenvolvimento das Ideias",
-          "text": "As ideias ganham forma e começamos a ver <strong>conexões importantes</strong> entre os diferentes elementos.",
-          "startFrame": 61,
-          "endFrame": 80,
-          "duration": 3000
-        },
-        {
-          "title": "Momento de Transição",
-          "text": "Chegamos a um <em>ponto de virada fundamental</em> que redefine nossa perspectiva sobre o tema.",
-          "startFrame": 81,
-          "endFrame": 100,
-          "duration": 3000
-        },
-        {
-          "title": "Aprofundamento da Análise",
-          "text": "Mergulhamos mais fundo na análise, explorando <strong>camadas mais complexas</strong> da narrativa.",
-          "startFrame": 101,
-          "endFrame": 120,
-          "duration": 4000
-        },
-        {
-          "title": "Conclusão",
-          "text": "Chegamos ao final com uma compreensão completa e transformadora do tema apresentado.",
-          "startFrame": 121,
-          "endFrame": 135,
-          "duration": 4000
-        }
-      ],
+      "preloadFrames": 15,
       "text": "cena1"
     },
     {
@@ -243,58 +147,10 @@
       "imageSuffix": ".jpg",
       "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/frames/mobile/cena2/frame_",
       "imageSuffixMobile": ".webp",
-      "height": "266vh",
-      "showProgress": false,
+      "height": "0vh",
+      "showProgress": true,
       "showTime": false,
-      "preloadFrames": 8,
-      "memoryLimit": 30,
-      "animationSpeed": 0.1,
-      "smoothing": true,
-      "debug": false,
-      "steps": [
-        {
-          "title": "Abertura: Estabelecendo o Cenário",
-          "text": "Nossa jornada começa do zero, apresentando o <strong>contexto inicial</strong> e estabelecendo as bases para tudo que será revelado.",
-          "startFrame": 1,
-          "endFrame": 24,
-          "duration": 1000
-        },
-        {
-          "title": "Primeiros Insights",
-          "text": "Começamos a desvendar os <em>primeiros elementos cruciais</em> que moldarão nossa compreensão.",
-          "startFrame": 25,
-          "endFrame": 44,
-          "duration": 1000
-        },
-        {
-          "title": "Desenvolvimento das Ideias",
-          "text": "As ideias ganham forma e começamos a ver <strong>conexões importantes</strong> entre os diferentes elementos.",
-          "startFrame": 45,
-          "endFrame": 59,
-          "duration": 1000
-        },
-        {
-          "title": "Momento de Transição",
-          "text": "Chegamos a um <em>ponto de virada fundamental</em> que redefine nossa perspectiva sobre o tema.",
-          "startFrame": 60,
-          "endFrame": 100,
-          "duration": 3000
-        },
-        {
-          "title": "Aprofundamento da Análise",
-          "text": "Mergulhamos mais fundo na análise, explorando <strong>camadas mais complexas</strong> da narrativa.",
-          "startFrame": 101,
-          "endFrame": 120,
-          "duration": 4000
-        },
-        {
-          "title": "Conclusão",
-          "text": "Chegamos ao final com uma compreensão completa e transformadora do tema apresentado.",
-          "startFrame": 121,
-          "endFrame": 154,
-          "duration": 4000
-        }
-      ],
+      "preloadFrames": 15,
       "text": "cena2"
     },
     {
@@ -353,58 +209,10 @@
       "imageSuffix": ".jpg",
       "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/frames/mobile/cena3/frame_",
       "imageSuffixMobile": ".webp",
-      "height": "516vh",
-      "showProgress": false,
+      "height": "0vh",
+      "showProgress": true,
       "showTime": false,
-      "preloadFrames": 8,
-      "memoryLimit": 30,
-      "animationSpeed": 0.1,
-      "smoothing": true,
-      "debug": false,
-      "steps": [
-        {
-          "title": "Abertura: Estabelecendo o Cenário",
-          "text": "Nossa jornada começa do zero, apresentando o <strong>contexto inicial</strong> e estabelecendo as bases para tudo que será revelado.",
-          "startFrame": 1,
-          "endFrame": 30,
-          "duration": 3000
-        },
-        {
-          "title": "Primeiros Insights",
-          "text": "Começamos a desvendar os <em>primeiros elementos cruciais</em> que moldarão nossa compreensão.",
-          "startFrame": 31,
-          "endFrame": 60,
-          "duration": 3000
-        },
-        {
-          "title": "Desenvolvimento das Ideias",
-          "text": "As ideias ganham forma e começamos a ver <strong>conexões importantes</strong> entre os diferentes elementos.",
-          "startFrame": 61,
-          "endFrame": 80,
-          "duration": 3000
-        },
-        {
-          "title": "Momento de Transição",
-          "text": "Chegamos a um <em>ponto de virada fundamental</em> que redefine nossa perspectiva sobre o tema.",
-          "startFrame": 81,
-          "endFrame": 100,
-          "duration": 3000
-        },
-        {
-          "title": "Aprofundamento da Análise",
-          "text": "Mergulhamos mais fundo na análise, explorando <strong>camadas mais complexas</strong> da narrativa.",
-          "startFrame": 101,
-          "endFrame": 120,
-          "duration": 4000
-        },
-        {
-          "title": "Conclusão",
-          "text": "Chegamos ao final com uma compreensão completa e transformadora do tema apresentado.",
-          "startFrame": 121,
-          "endFrame": 135,
-          "duration": 4000
-        }
-      ],
+      "preloadFrames": 15,
       "text": "cena3"
     },
     {
@@ -447,58 +255,10 @@
       "imageSuffix": ".jpg",
       "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/frames/mobile/cena4/frame_",
       "imageSuffixMobile": ".webp",
-      "height": "200vh",
-      "showProgress": false,
+      "height": "0vh",
+      "showProgress": true,
       "showTime": false,
-      "preloadFrames": 8,
-      "memoryLimit": 30,
-      "animationSpeed": 0.1,
-      "smoothing": true,
-      "debug": false,
-      "steps": [
-        {
-          "title": "Abertura: Estabelecendo o Cenário",
-          "text": "Nossa jornada começa do zero, apresentando o <strong>contexto inicial</strong> e estabelecendo as bases para tudo que será revelado.",
-          "startFrame": 1,
-          "endFrame": 30,
-          "duration": 3000
-        },
-        {
-          "title": "Primeiros Insights",
-          "text": "Começamos a desvendar os <em>primeiros elementos cruciais</em> que moldarão nossa compreensão.",
-          "startFrame": 31,
-          "endFrame": 60,
-          "duration": 3000
-        },
-        {
-          "title": "Desenvolvimento das Ideias",
-          "text": "As ideias ganham forma e começamos a ver <strong>conexões importantes</strong> entre os diferentes elementos.",
-          "startFrame": 61,
-          "endFrame": 80,
-          "duration": 3000
-        },
-        {
-          "title": "Momento de Transição",
-          "text": "Chegamos a um <em>ponto de virada fundamental</em> que redefine nossa perspectiva sobre o tema.",
-          "startFrame": 81,
-          "endFrame": 100,
-          "duration": 3000
-        },
-        {
-          "title": "Aprofundamento da Análise",
-          "text": "Mergulhamos mais fundo na análise, explorando <strong>camadas mais complexas</strong> da narrativa.",
-          "startFrame": 101,
-          "endFrame": 120,
-          "duration": 4000
-        },
-        {
-          "title": "Conclusão",
-          "text": "Chegamos ao final com uma compreensão completa e transformadora do tema apresentado.",
-          "startFrame": 121,
-          "endFrame": 135,
-          "duration": 4000
-        }
-      ],
+      "preloadFrames": 15,
       "text": "cena4"
     },
     {
@@ -568,63 +328,15 @@
       "type": "scrollyframes",
       "frameStart": 1,
       "frameStop": 139,
-      "imagePrefix": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/frames/desktop/final/frame_",
+      "imagePrefix": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/frames/desktop/cena5/frame_",
       "imageSuffix": ".jpg",
-      "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/frames/mobile/final/frame_",
+      "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/dias-perfeitos/img/frames/mobile/cena5/frame_",
       "imageSuffixMobile": ".webp",
-      "height": "463vh",
-      "showProgress": false,
+      "height": "0vh",
+      "showProgress": true,
       "showTime": false,
-      "preloadFrames": 8,
-      "memoryLimit": 30,
-      "animationSpeed": 0.1,
-      "smoothing": true,
-      "debug": false,
-      "steps": [
-        {
-          "title": "Abertura: Estabelecendo o Cenário",
-          "text": "Nossa jornada começa do zero, apresentando o <strong>contexto inicial</strong> e estabelecendo as bases para tudo que será revelado.",
-          "startFrame": 1,
-          "endFrame": 30,
-          "duration": 3000
-        },
-        {
-          "title": "Primeiros Insights",
-          "text": "Começamos a desvendar os <em>primeiros elementos cruciais</em> que moldarão nossa compreensão.",
-          "startFrame": 31,
-          "endFrame": 60,
-          "duration": 3000
-        },
-        {
-          "title": "Desenvolvimento das Ideias",
-          "text": "As ideias ganham forma e começamos a ver <strong>conexões importantes</strong> entre os diferentes elementos.",
-          "startFrame": 61,
-          "endFrame": 80,
-          "duration": 3000
-        },
-        {
-          "title": "Momento de Transição",
-          "text": "Chegamos a um <em>ponto de virada fundamental</em> que redefine nossa perspectiva sobre o tema.",
-          "startFrame": 81,
-          "endFrame": 100,
-          "duration": 3000
-        },
-        {
-          "title": "Aprofundamento da Análise",
-          "text": "Mergulhamos mais fundo na análise, explorando <strong>camadas mais complexas</strong> da narrativa.",
-          "startFrame": 101,
-          "endFrame": 120,
-          "duration": 4000
-        },
-        {
-          "title": "Conclusão",
-          "text": "Chegamos ao final com uma compreensão completa e transformadora do tema apresentado.",
-          "startFrame": 121,
-          "endFrame": 135,
-          "duration": 4000
-        }
-      ],
-      "text": "final"
+      "preloadFrames": 15,
+      "text": "cena5"
     },
     {
       "type": "ancora",
@@ -690,5 +402,5 @@
       "textColor": "#ffffff"
     }
   ],
-  "slug": "dias-perfeitos"
+  "slug": "scroll-teste"
 }
