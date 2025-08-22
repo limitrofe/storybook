@@ -9,7 +9,7 @@
   // 🎯 CONFIGURAÇÃO CONDICIONAL
   // Para desenvolvimento: mostra seletor
   // Para produção: tema fixo "dias-perfeitos"
-  const isProduction = import.meta.env.PROD;
+  const isProduction = false; // 👈 MUDANÇA AQUI: false = desenvolvimento
   const TEMA_FIXO = 'dias-perfeitos';
 
   onMount(() => {

@@ -23,7 +23,7 @@
 
   onMount(async () => {
     try {
-      const response = await fetch('./data/dias-perfeitos.json');
+      const response = await fetch('./data/exemplo-de-header-padrao.json');
       if (response.ok) {
         currentStory = await response.json();
         
@@ -160,7 +160,7 @@
 {#if currentStory && !loading}
   <StickyNavigationMenu 
     storyData={currentStory}
-    seriesName="DIAS PERFEITOS"
+    seriesName="A trama do golpe"
   />
 {/if}
 

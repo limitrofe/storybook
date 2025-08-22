@@ -1,0 +1,56 @@
+{
+ "credits": {
+   "notes": "Esta é uma reconstituição baseada em documentos oficiais da Polícia Federal e do Ministério Público Federal. Todos os fatos apresentados são baseados em evidências coletadas durante as investigações.",
+   "sources": [
+     "Ministério Público Federal: Denúncia contra Jair Messias Bolsonaro e outros",
+     "Polícia Federal: Relatório final da investigação",
+     "Supremo Tribunal Federal: Autos do processo",
+     "Arquivo Nacional: Documentos históricos sobre os ataques"
+   ],
+   "additionalGraphics": [
+     "Arte G1",
+     "Design Newsroom System"
+   ],
+   "editedBy": [
+     "Editoria de Política G1",
+     "Revisão Legal"
+   ],
+   "authors": [
+     "Equipe G1",
+     "Repórteres Investigativos"
+   ]
+ },
+ "type": "header",
+ "title": "A Trama do Golpe",
+ "subtitle": "Um julgamento inédito na história brasileira",
+ "date": "16/08/2025",
+ "backgroundImage": "https://s3.amazonaws.com/newsroom/a-trama-do-golpe/stf-dramatico.jpg",
+ "backgroundImageMobile": "https://s3.amazonaws.com/newsroom/a-trama-do-golpe/stf-dramatico-mobile.jpg",
+ "textPosition": "center",
+ "textAlign": "center",
+ "author": "Equipe G1 | 16/08/2025 08h00",
+ "variant": "cinematic",
+ "overlay": "true",
+ "height": "100vh",
+ "paragraphs": [
+   {
+     "type": "scrollyframes",
+     "frameStart": 1,
+     "frameStop": 181,
+     "totalFrames": 181,
+     "imagePrefix": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/frames/desktop/abre/frame_",
+     "imageSuffix": ".jpg",
+     "imagePrefixMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/frames/mobile/abre/frame_",
+     "imageSuffixMobile": ".webp",
+     "height": "400vh",
+     "showProgress": true,
+     "showFrameCounter": false,
+     "smoothFactor": 0.08,
+     "preloadInitial": 35,
+     "preloadRadius": 12,
+     "enableKinetic": true,
+     "friction": 0.87
+   }
+ ],
+ "slug": "a-trama-do-golpe"
+}

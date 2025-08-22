@@ -182,6 +182,129 @@ async function fetchGoogleDoc(docId) {
       });
     }
 
+    // 🆕 NOVOS COMPONENTES - TIMELINE INTERACTIVE
+    const timelineComponents = data.paragraphs?.filter(p => 
+      ['timeline-interactive', 'timeline', 'cronologia', 'cronologia-interativa'].includes(p.type?.toLowerCase())
+    ) || [];
+
+    if (timelineComponents.length > 0) {
+      console.log(`🕐 Timeline Interactive encontrados: ${timelineComponents.length}`);
+      timelineComponents.forEach((comp, index) => {
+        const eventsCount = comp.events?.length || 0;
+        const theme = comp.theme || 'dramatic';
+        const autoAdvance = comp.autoAdvance || false;
+        const showProgress = comp.showProgress !== false;
+        
+        console.log(`  ${index + 1}. Events: ${eventsCount} | Theme: ${theme} | AutoAdvance: ${autoAdvance} | Progress: ${showProgress}`);
+        
+        if (eventsCount === 0) {
+          console.warn(`⚠️ Timeline Interactive sem events: ${comp.text?.substring(0, 50)}...`);
+        } else {
+          comp.events.forEach((event, eventIndex) => {
+            const eventTitle = event.title || 'Sem título';
+            const hasImage = !!event.image;
+            const hasVideo = !!event.video;
+            const severity = event.severity || 'medium';
+            
+            console.log(`     Event ${eventIndex + 1}: "${eventTitle.substring(0, 30)}..." | Date: ${event.date} | Image: ${hasImage} | Video: ${hasVideo} | Severity: ${severity}`);
+          });
+        }
+      });
+    }
+
+    // 🆕 NOVOS COMPONENTES - DOCUMENT VIEWER
+    const documentComponents = data.paragraphs?.filter(p => 
+      ['document-viewer', 'documents', 'docs', 'visualizador-documentos'].includes(p.type?.toLowerCase())
+    ) || [];
+
+    if (documentComponents.length > 0) {
+      console.log(`📄 Document Viewer encontrados: ${documentComponents.length}`);
+      documentComponents.forEach((comp, index) => {
+        const docsCount = comp.documents?.length || 0;
+        const classification = comp.classification || 'CONFIDENCIAL';
+        const theme = comp.theme || 'investigative';
+        const showWatermark = comp.showWatermark !== false;
+        const highlightAreasCount = comp.highlightAreas?.length || 0;
+        
+        console.log(`  ${index + 1}. Documents: ${docsCount} | Classification: ${classification} | Theme: ${theme} | Watermark: ${showWatermark} | Highlights: ${highlightAreasCount}`);
+        
+        if (docsCount === 0) {
+          console.warn(`⚠️ Document Viewer sem documents: ${comp.text?.substring(0, 50)}...`);
+        } else {
+          comp.documents.forEach((doc, docIndex) => {
+            const docTitle = doc.title || 'Sem título';
+            const hasImage = !!doc.image;
+            const hasThumbnail = !!doc.thumbnail;
+            
+            console.log(`     Doc ${docIndex + 1}: "${docTitle.substring(0, 30)}..." | Date: ${doc.date} | Image: ${hasImage} | Thumbnail: ${hasThumbnail}`);
+          });
+        }
+      });
+    }
+
+    // 🆕 NOVOS COMPONENTES - CRIME EXPLAINER
+    const crimeComponents = data.paragraphs?.filter(p => 
+      ['crime-explainer', 'crimes', 'explicador-crimes', 'crimes-explicacao'].includes(p.type?.toLowerCase())
+    ) || [];
+
+    if (crimeComponents.length > 0) {
+      console.log(`⚖️ Crime Explainer encontrados: ${crimeComponents.length}`);
+      crimeComponents.forEach((comp, index) => {
+        const crimesCount = comp.crimes?.length || 0;
+        const theme = comp.theme || 'judicial';
+        const interactive = comp.interactive !== false;
+        const showPenalties = comp.showPenalties !== false;
+        const layout = comp.layout || 'cards';
+        
+        console.log(`  ${index + 1}. Crimes: ${crimesCount} | Theme: ${theme} | Interactive: ${interactive} | Penalties: ${showPenalties} | Layout: ${layout}`);
+        
+        if (crimesCount === 0) {
+          console.warn(`⚠️ Crime Explainer sem crimes: ${comp.text?.substring(0, 50)}...`);
+        } else {
+          comp.crimes.forEach((crime, crimeIndex) => {
+            const crimeName = crime.name || 'Sem nome';
+            const legalBase = crime.legalBase || 'N/A';
+            const penaltyMin = crime.penaltyMin || 0;
+            const penaltyMax = crime.penaltyMax || 0;
+            const canBeArrested = crime.canBeArrested !== undefined ? crime.canBeArrested : true;
+            
+            console.log(`     Crime ${crimeIndex + 1}: "${crimeName.substring(0, 30)}..." | Base: ${legalBase} | Pena: ${penaltyMin}-${penaltyMax} anos | Prisão: ${canBeArrested}`);
+          });
+        }
+      });
+    }
+
+    // 🌪️ NOVO: Header Caótico
+    const chaoticComponents = data.paragraphs?.filter(p => 
+      ['header-caotico', 'header-caótico', 'caotico', 'chaotic-header', 'caos'].includes(p.type?.toLowerCase())
+    ) || [];
+
+    if (chaoticComponents.length > 0) {
+      console.log(`🌪️ Header Caótico encontrados: ${chaoticComponents.length}`);
+      chaoticComponents.forEach((comp, index) => {
+        const mediasCount = comp.medias?.length || 0;
+        const title = comp.title || 'HEADER CAÓTICO';
+        const subtitle = comp.subtitle || '40 mídias se movimentando dinamicamente';
+        const shuffleInterval = comp.shuffleInterval || 3000;
+        const animationDelay = comp.animationDelay || 100;
+        const backgroundColor = comp.backgroundColor || '#1a1a1a';
+        
+        console.log(`  ${index + 1}. Title: "${title}" | Subtitle: "${subtitle}"`);
+        console.log(`     Mídias customizadas: ${mediasCount > 0 ? mediasCount : 'Usando padrão (40)'} | Shuffle: ${shuffleInterval}ms | Delay: ${animationDelay}ms`);
+        console.log(`     Background: ${backgroundColor}`);
+        
+        if (mediasCount === 0) {
+          console.log(`     ℹ️ Usando 40 mídias padrão (2 vídeos + 38 imagens aleatórias)`);
+        } else {
+          comp.medias.forEach((media, mediaIndex) => {
+            const mediaType = media.type || 'image';
+            const mediaSrc = media.src || 'N/A';
+            console.log(`     Mídia ${mediaIndex + 1}: ${mediaType} | Src: ${mediaSrc.substring(0, 50)}...`);
+          });
+        }
+      });
+    }
+
     return data;
     
   } catch (error) {
@@ -418,18 +541,64 @@ function parseParagraphsHTML(html) {
   const typeBlocks = html.split(/(?=type:\s*)/);
   
   for (const block of typeBlocks) {
+    
     if (!block.trim() || !block.includes('type:')) continue;
     
     const paragraph = {};
+    
     
     const typeMatch = block.match(/type:\s*([^\n<]+)/);
     if (typeMatch) {
       paragraph.type = decodeHTMLEntities(typeMatch[1].trim());
     }
 
+    // 🌪️ NOVO: TRATAMENTO ESPECÍFICO PARA HEADER CAÓTICO
+    if (['header-caotico', 'header-caótico', 'caotico', 'chaotic-header', 'caos'].includes(paragraph.type?.toLowerCase())) {
+      console.log('🌪️ Processando Header Caótico...');
+      
+      // Campos específicos do header caótico
+      const chaoticFields = {
+        title: /title:\s*([^\n<]+)/i,
+        subtitle: /subtitle:\s*([^\n<]+)/i,
+        medias: /medias:\s*(\[[\s\S]*?\])/i,
+        shuffleInterval: /shuffleInterval:\s*([^\n<]+)/i,
+        animationDelay: /animationDelay:\s*([^\n<]+)/i,
+        backgroundColor: /backgroundColor:\s*([^\n<]+)/i,
+        titleColor: /titleColor:\s*([^\n<]+)/i
+      };
+
+      // Processar lista de mídias customizadas (JSON array) - OPCIONAL
+      const mediasMatch = block.match(chaoticFields.medias);
+      if (mediasMatch) {
+        paragraph.medias = parseJSONField(mediasMatch[1], 'chaotic header medias');
+        console.log(`   ✅ ${paragraph.medias?.length || 0} mídias customizadas processadas`);
+      }
+
+      // Processar outros campos do header caótico
+      for (const [field, regex] of Object.entries(chaoticFields)) {
+        if (field === 'medias') continue; // Já processado acima
+        
+        const match = block.match(regex);
+        if (match) {
+          paragraph[field] = decodeHTMLEntities(match[1].trim());
+        }
+      }
+
+      // Processar campo 'text' para header caótico
+      const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:title|subtitle|medias|shuffleInterval|animationDelay|backgroundColor|titleColor):|type:|$)/si);
+      if (textMatch) {
+        paragraph.text = cleanAndFormatHTML(textMatch[1].trim());
+      }
+
+      paragraphs.push(paragraph);
+      continue;
+    }
+
     // 🎬 NOVO: TRATAMENTO ESPECÍFICO PARA APRESENTAÇÃO DE PERSONAGENS
     if (['personagens', 'characters', 'character-presentation', 'apresentacao-personagens'].includes(paragraph.type?.toLowerCase())) {
       console.log('🎭 Processando Apresentação de Personagens...');
+
+      
       
       // Campos específicos de personagens
       const characterFields = {
@@ -569,6 +738,138 @@ function parseParagraphsHTML(html) {
 
       // Processar campo 'text' para itens recomendados
       const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:items|itens|title|titulo|layout|columns|colunas|showTitle|mostrarTitulo|backgroundColor|corFundo|titleColor|corTitulo|textColor|corTexto):|type:|$)/si);
+      if (textMatch) {
+        paragraph.text = cleanAndFormatHTML(textMatch[1].trim());
+      }
+
+      paragraphs.push(paragraph);
+      continue;
+    }
+
+    // 🆕 NOVOS COMPONENTES - TIMELINE INTERACTIVE
+    if (['timeline-interactive', 'timeline', 'cronologia', 'cronologia-interativa'].includes(paragraph.type?.toLowerCase())) {
+      console.log('🕐 Processando Timeline Interactive...');
+      
+      // Campos específicos de timeline
+      const timelineFields = {
+        events: /events:\s*(\[[\s\S]*?\])/i,
+        theme: /theme:\s*([^\n<]+)/i,
+        autoAdvance: /autoAdvance:\s*([^\n<]+)/i,
+        showProgress: /showProgress:\s*([^\n<]+)/i,
+        height: /height:\s*([^\n<]+)/i,
+        fullWidth: /fullWidth:\s*([^\n<]+)/i,
+        highlightCurrent: /highlightCurrent:\s*([^\n<]+)/i
+      };
+
+      // Processar lista de eventos (JSON array)
+      const eventsMatch = block.match(timelineFields.events);
+      if (eventsMatch) {
+        paragraph.events = parseJSONField(eventsMatch[1], 'timeline events');
+        console.log(`   ✅ ${paragraph.events?.length || 0} eventos processados`);
+      }
+
+      // Processar outros campos de timeline
+      for (const [field, regex] of Object.entries(timelineFields)) {
+        if (field === 'events') continue; // Já processado acima
+        
+        const match = block.match(regex);
+        if (match) {
+          paragraph[field] = decodeHTMLEntities(match[1].trim());
+        }
+      }
+
+      // Processar campo 'text' para timeline
+      const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:events|theme|autoAdvance|showProgress|height|fullWidth|highlightCurrent):|type:|$)/si);
+      if (textMatch) {
+        paragraph.text = cleanAndFormatHTML(textMatch[1].trim());
+      }
+
+      paragraphs.push(paragraph);
+      continue;
+    }
+
+    // 🆕 NOVOS COMPONENTES - DOCUMENT VIEWER
+    if (['document-viewer', 'documents', 'docs', 'visualizador-documentos'].includes(paragraph.type?.toLowerCase())) {
+      console.log('📄 Processando Document Viewer...');
+      
+      // Campos específicos de document viewer
+      const documentFields = {
+        documents: /documents:\s*(\[[\s\S]*?\])/i,
+        classification: /classification:\s*([^\n<]+)/i,
+        theme: /theme:\s*([^\n<]+)/i,
+        showWatermark: /showWatermark:\s*([^\n<]+)/i,
+        highlightAreas: /highlightAreas:\s*(\[[\s\S]*?\])/i,
+        allowDownload: /allowDownload:\s*([^\n<]+)/i,
+        showThumbnails: /showThumbnails:\s*([^\n<]+)/i
+      };
+
+      // Processar lista de documentos (JSON array)
+      const documentsMatch = block.match(documentFields.documents);
+      if (documentsMatch) {
+        paragraph.documents = parseJSONField(documentsMatch[1], 'documents');
+        console.log(`   ✅ ${paragraph.documents?.length || 0} documentos processados`);
+      }
+
+      // Processar highlight areas (JSON array)
+      const highlightMatch = block.match(documentFields.highlightAreas);
+      if (highlightMatch) {
+        paragraph.highlightAreas = parseJSONField(highlightMatch[1], 'highlight areas');
+        console.log(`   ✅ ${paragraph.highlightAreas?.length || 0} áreas de destaque processadas`);
+      }
+
+      // Processar outros campos de document viewer
+      for (const [field, regex] of Object.entries(documentFields)) {
+        if (['documents', 'highlightAreas'].includes(field)) continue; // Já processado acima
+        
+        const match = block.match(regex);
+        if (match) {
+          paragraph[field] = decodeHTMLEntities(match[1].trim());
+        }
+      }
+
+      // Processar campo 'text' para document viewer
+      const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:documents|classification|theme|showWatermark|highlightAreas|allowDownload|showThumbnails):|type:|$)/si);
+      if (textMatch) {
+        paragraph.text = cleanAndFormatHTML(textMatch[1].trim());
+      }
+
+      paragraphs.push(paragraph);
+      continue;
+    }
+
+    // 🆕 NOVOS COMPONENTES - CRIME EXPLAINER
+    if (['crime-explainer', 'crimes', 'explicador-crimes', 'crimes-explicacao'].includes(paragraph.type?.toLowerCase())) {
+      console.log('⚖️ Processando Crime Explainer...');
+      
+      // Campos específicos de crime explainer
+      const crimeFields = {
+        crimes: /crimes:\s*(\[[\s\S]*?\])/i,
+        theme: /theme:\s*([^\n<]+)/i,
+        interactive: /interactive:\s*([^\n<]+)/i,
+        showPenalties: /showPenalties:\s*([^\n<]+)/i,
+        layout: /layout:\s*([^\n<]+)/i,
+        autoAdvance: /autoAdvance:\s*([^\n<]+)/i
+      };
+
+      // Processar lista de crimes (JSON array)
+      const crimesMatch = block.match(crimeFields.crimes);
+      if (crimesMatch) {
+        paragraph.crimes = parseJSONField(crimesMatch[1], 'crimes');
+        console.log(`   ✅ ${paragraph.crimes?.length || 0} crimes processados`);
+      }
+
+      // Processar outros campos de crime explainer
+      for (const [field, regex] of Object.entries(crimeFields)) {
+        if (field === 'crimes') continue; // Já processado acima
+        
+        const match = block.match(regex);
+        if (match) {
+          paragraph[field] = decodeHTMLEntities(match[1].trim());
+        }
+      }
+
+      // Processar campo 'text' para crime explainer
+      const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:crimes|theme|interactive|showPenalties|layout|autoAdvance):|type:|$)/si);
       if (textMatch) {
         paragraph.text = cleanAndFormatHTML(textMatch[1].trim());
       }

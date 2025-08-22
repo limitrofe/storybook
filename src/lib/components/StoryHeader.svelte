@@ -77,7 +77,7 @@
 
   /* ✅ Estilos quando HÁ mídia de fundo */
   .story-header.has-media {
-    color: #fff;
+    color: #232323;
     padding: 5rem 1rem;
     border-bottom: none;
   }

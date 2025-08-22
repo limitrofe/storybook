@@ -26,8 +26,8 @@ class FrameExtractor {
     
     // Configurações padrão otimizadas para performance
     this.defaultConfig = {
-      fps: 15,           // 15 fps é suficiente para scroll suave
-      quality: 85,       // Qualidade boa mas não exagerada
+      fps: 30,           // 15 fps é suficiente para scroll suave
+      quality: 75,       // Qualidade boa mas não exagerada
       desktopFormat: 'jpg',
       mobileFormat: 'webp'
     };
@@ -799,7 +799,7 @@ Performance vs Qualidade:
     const videoName = args[3];
     
     const options = {
-      fps: 15,
+      fps: 30,
       skipSizes: [],
       optimizeQuality: true
     };
@@ -918,7 +918,7 @@ Performance vs Qualidade:
     
     // Parse de opções globais
     const options = {
-      fps: 15,
+      fps: 30,
       quality: 85
     };
     
@@ -1014,7 +1014,7 @@ Performance vs Qualidade:
 
   // Parse de opções
   const options = {
-    fps: 15,
+    fps: 30,
     quality: 85,
     desktopScale: '1920:-2',
     mobileScale: '768:-2'

@@ -6,13 +6,13 @@
  */
 const PROJECT_CONFIG = {
   // Nome do projeto (será a pasta no CDN)
-  projectName: 'scroll',
+  projectName: 'a-trama-do-golpe',
   
   // Título da página
-  pageTitle: 'Scroll',
+  pageTitle: 'A trama do golpe',
   
   // ID do Google Docs
-  googleDocsId: '1mmoqcRS-I2tBFDThmmGnIufFF4LxSSi8UbYNs_mzgFQ',  // Cole o ID aqui quando tiver
+  googleDocsId: '1uit0E8qQ_IKERcU-2YoE2mu2RhYCrpPbVEUtS0gtwls',  // Cole o ID aqui quando tiver
   
   // Performance dos frames
   frames: {

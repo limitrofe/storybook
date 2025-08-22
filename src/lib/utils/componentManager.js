@@ -6,7 +6,6 @@ import { analytics } from './analytics.js';
  * Sistema centralizado para gerenciar componentes de stories
  * Inclui lazy loading, performance tracking e error handling
  */
-
 class ComponentManager {
   constructor() {
     this.components = new Map();
@@ -74,7 +73,6 @@ class ComponentManager {
       });
 
       return Component;
-
     } catch (error) {
       const loadTime = performance.now() - startTime;
       
@@ -100,7 +98,6 @@ class ComponentManager {
 
       // Retornar fallback se disponível
       return this.getFallbackComponent(type, error);
-
     } finally {
       this.loading.update(set => {
         set.delete(type);
@@ -224,6 +221,11 @@ export function registerStoryComponents() {
     { lazyLoad: false }
   );
 
+  componentManager.registerComponent('section-title', 
+    () => import('../components/story/SectionTitle.svelte'),
+    { lazyLoad: false }
+  );
+
   // Componentes de mídia (lazy loading)
   componentManager.registerComponent('photo', 
     () => import('../components/story/PhotoWithCaption.svelte')
@@ -250,6 +252,10 @@ export function registerStoryComponents() {
     () => import('../components/story/ScrollyTelling.svelte')
   );
 
+  componentManager.registerComponent('scrollyframes', 
+    () => import('../components/story/ScrollyFrames.svelte')
+  );
+
   componentManager.registerComponent('gallery', 
     () => import('../components/story/PhotoGallery.svelte')
   );
@@ -258,10 +264,109 @@ export function registerStoryComponents() {
     () => import('../components/story/Carousel.svelte')
   );
 
-  componentManager.registerComponent('section-title', 
-    () => import('../components/story/SectionTitle.svelte'),
+  componentManager.registerComponent('character-presentation', 
+    () => import('../components/story/CharacterPresentation.svelte')
+  );
+
+  componentManager.registerComponent('curiosidades', 
+    () => import('../components/story/Curiosidades.svelte')
+  );
+
+  componentManager.registerComponent('recommended-items', 
+    () => import('../components/story/RecommendedItems.svelte')
+  );
+
+  // Componentes de visualização
+  componentManager.registerComponent('flourish', 
+    () => import('../components/story/FlourishEmbed.svelte')
+  );
+
+  componentManager.registerComponent('flourish-scrolly', 
+    () => import('../components/story/FlourishScrolly.svelte')
+  );
+
+  // 🆕 NOVOS COMPONENTES PARA STORYTELLING INVESTIGATIVO
+  componentManager.registerComponent('timeline-interactive', 
+    () => import('../components/story/TimelineInteractive.svelte'),
+    { lazyLoad: true }
+  );
+
+  componentManager.registerComponent('document-viewer', 
+    () => import('../components/story/DocumentViewer.svelte'),
+    { lazyLoad: true }
+  );
+
+  componentManager.registerComponent('crime-explainer', 
+    () => import('../components/story/CrimeExplainer.svelte'),
+    { lazyLoad: true }
+  );
+
+  // Componentes utilitários
+  componentManager.registerComponent('anchor', 
+    () => import('../components/story/AnchorPoint.svelte'),
     { lazyLoad: false }
   );
+}
+
+// Mapeamento de tipos alternativos para componentes
+export const componentTypeMap = {
+  // 🆕 Timeline Interactive
+  'timeline': 'timeline-interactive',
+  'cronologia': 'timeline-interactive',
+  'cronologia-interativa': 'timeline-interactive',
+  
+  // 🆕 Document Viewer  
+  'documents': 'document-viewer',
+  'docs': 'document-viewer',
+  'visualizador-documentos': 'document-viewer',
+  
+  // 🆕 Crime Explainer
+  'crimes': 'crime-explainer',
+  'explicador-crimes': 'crime-explainer',
+  'crimes-explicacao': 'crime-explainer',
+  
+  // Outros mapeamentos existentes
+  'texto': 'text',
+  'paragrafo': 'text',
+  'titulo-principal': 'header',
+  'abre': 'header',
+  'intertitulo': 'section-title',
+  'titulo': 'section-title',
+  'frase': 'quote',
+  'citacao': 'quote',
+  'foto': 'photo',
+  'imagem': 'photo',
+  'mp4': 'video',
+  'globovideo': 'globoplayer',
+  'globo-video': 'globoplayer',
+  'globo-player': 'globoplayer',
+  'globo': 'globoplayer',
+  'galeria': 'gallery',
+  'carrossel': 'carousel',
+  'recomendados': 'recommended-items',
+  'recommended': 'recommended-items',
+  'itens-recomendados': 'recommended-items',
+  'relacionados': 'recommended-items',
+  'conteudos-relacionados': 'recommended-items',
+  'beforeafter': 'before-after',
+  'antes-depois': 'before-after',
+  'scrollytelling': 'scrolly',
+  'scrolly-frames': 'scrollyframes',
+  'videoscrollytelling': 'scrollyframes',
+  'video-scrollytelling': 'scrollyframes',
+  'videoscrolly': 'scrollyframes',
+  'video-scrolly': 'scrollyframes',
+  'personagens': 'character-presentation',
+  'characters': 'character-presentation',
+  'trivia': 'curiosidades',
+  'facts': 'curiosidades',
+  'ancora': 'anchor'
+};
+
+// Função para normalizar tipo de componente
+export function normalizeComponentType(type) {
+  const normalizedType = type?.toLowerCase();
+  return componentTypeMap[normalizedType] || normalizedType;
 }
 
 // Hook para usar em componentes Svelte
@@ -322,6 +427,44 @@ export const performanceUtils = {
       // Se ambos são críticos ou ambos não são, ordena por performance
       return (a.stats?.avgLoadTime || 0) - (b.stats?.avgLoadTime || 0);
     });
+  },
+
+  // 🆕 Preload estratégico baseado no tipo de história
+  preloadByStrategy: async (strategy = 'investigative') => {
+    const strategies = {
+      // Para histórias de investigação/política
+      investigative: [
+        'timeline-interactive',
+        'document-viewer', 
+        'crime-explainer',
+        'character-presentation'
+      ],
+      
+      // Para histórias visuais/magazine
+      visual: [
+        'scrolly',
+        'gallery',
+        'parallax',
+        'before-after'
+      ],
+      
+      // Para histórias de dados
+      data: [
+        'flourish',
+        'flourish-scrolly',
+        'scrollyframes'
+      ]
+    };
+
+    const components = strategies[strategy] || strategies.investigative;
+    
+    for (const type of components) {
+      try {
+        await componentManager.preloadComponent(type);
+      } catch (error) {
+        console.warn(`Falha no preload de '${type}':`, error);
+      }
+    }
   }
 };
 
@@ -347,9 +490,35 @@ export function withErrorBoundary(Component, fallback = null) {
   };
 }
 
+// 🆕 Auto-setup do sistema com configurações para diferentes tipos de história
+export function setupComponentSystem(config = {}) {
+  // Registra todos os componentes
+  registerStoryComponents();
+  
+  // Aplica estratégia de preload se especificada
+  if (config.preloadStrategy) {
+    performanceUtils.preloadByStrategy(config.preloadStrategy);
+  }
+  
+  // Setup do intersection observer
+  if (config.enableIntersectionObserver !== false) {
+    componentManager.initializeObserver();
+  }
+  
+  console.log('🚀 Sistema de componentes inicializado:', componentManager.getPerformanceReport());
+}
+
 // Inicialização automática
 if (typeof window !== 'undefined') {
   registerStoryComponents();
+  
+  // 🆕 Setup automático em desenvolvimento com estratégia investigativa
+  if (import.meta.env?.DEV) {
+    setupComponentSystem({
+      preloadStrategy: 'investigative',
+      enableIntersectionObserver: true
+    });
+  }
 }
 
 export default componentManager;

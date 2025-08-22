@@ -5,7 +5,7 @@
 
   // Props
   export let storyData = null;
-  export let seriesName = "DIAS PERFEITOS";
+  export let seriesName = "A trama do golpe";
 
   // Estado do componente
   let isMenuOpen = false;

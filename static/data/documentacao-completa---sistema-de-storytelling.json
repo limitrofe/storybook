@@ -1,0 +1,655 @@
+{
+  "credits": {
+    "notes": "Esta documentação serve como referência completa para todos os componentes disponíveis no sistema de storytelling.",
+    "sources": [
+      "Sistema de Design Interno",
+      "Documentação Técnica dos Componentes",
+      "Exemplos Práticos de Uso"
+    ],
+    "authors": [
+      "Equipe de Desenvolvimento",
+      "Designers do Sistema"
+    ]
+  },
+  "type": "header",
+  "title": "DOCUMENTAÇÃO COMPLETA - SISTEMA DE STORYTELLING",
+  "subtitle": "Todos os componentes, propriedades e variações disponíveis",
+  "backgroundImage": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1600&q=80",
+  "author": "Sistema de Design | Janeiro 2025",
+  "variant": "hero",
+  "overlay": "true",
+  "paragraphs": [
+    {
+      "type": "texto",
+      "text": "Esta documentação apresenta <strong>todos os componentes disponíveis</strong> no sistema de storytelling, suas propriedades e exemplos práticos de uso."
+    },
+    {
+      "type": "intertitulo",
+      "text": "HEADER (Cabeçalho Principal)",
+      "variant": "default",
+      "size": "large"
+    },
+    {
+      "type": "texto",
+      "text": "<strong>Uso:</strong>"
+    },
+    {
+      "type": "header"
+    },
+    {
+      "type": "texto",
+      "text": "<strong>Props disponíveis:</strong> title, subtitle, author, date, backgroundImage, backgroundImageMobile, variant (default/hero/minimal), overlay (true/false)"
+    },
+    {
+      "type": "header",
+      "title": "Exemplo de Header Padrão",
+      "subtitle": "Este é um exemplo de como usar o componente header",
+      "backgroundImage": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80",
+      "author": "Jornalista Exemplo | 18/08/2025",
+      "variant": "default",
+      "overlay": "true"
+    },
+    {
+      "type": "intertitulo",
+      "text": "STORYTEXT (Texto da Narrativa)",
+      "variant": "default",
+      "size": "large"
+    },
+    {
+      "type": "texto",
+      "text": "<strong>Uso:</strong>"
+    },
+    {
+      "type": "texto"
+    },
+    {
+      "type": "texto",
+      "text": "<strong>Props disponíveis:</strong> text, variant (body/lead/quote)"
+    },
+    {
+      "type": "texto",
+      "text": "Este é um exemplo de <strong>texto normal</strong> no sistema. Pode conter formatação HTML como negrito, itálico e links."
+    },
+    {
+      "type": "texto",
+      "text": "Este é um exemplo de <strong>texto de destaque</strong> que serve como lead ou introdução de seção.",
+      "variant": "lead"
+    },
+    {
+      "type": "intertitulo",
+      "text": "SECTIONTITLE (Intertítulos)",
+      "variant": "default",
+      "size": "large"
+    },
+    {
+      "type": "texto",
+      "text": "<strong>Uso:</strong>"
+    },
+    {
+      "type": "intertitulo"
+    },
+    {
+      "type": "texto",
+      "text": "<strong>Props disponíveis:</strong> text, size (small/medium/large), variant (default/hero/minimal/centered), height, heightMobile, backgroundImage, backgroundImageMobile, textPosition (top/center/bottom), textPositionMobile, textAlign (left/center/right), textAlignMobile, overlay (true/false)"
+    },
+    {
+      "type": "intertitulo",
+      "text": "Exemplo de Título Pequeno",
+      "variant": "default",
+      "size": "small"
+    },
+    {
+      "type": "intertitulo",
+      "text": "Exemplo de Título Médio",
+      "variant": "default",
+      "size": "medium"
+    },
+    {
+      "type": "intertitulo",
+      "text": "Exemplo de Título Grande",
+      "variant": "default",
+      "size": "large"
+    },
+    {
+      "type": "intertitulo",
+      "text": "Título com Imagem de Fundo",
+      "backgroundImage": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80",
+      "textPosition": "center",
+      "textAlign": "center",
+      "size": "large",
+      "overlay": "true",
+      "height": "400px"
+    },
+    {
+      "type": "intertitulo",
+      "text": "FRASE (Citações)",
+      "variant": "default",
+      "size": "large"
+    },
+    {
+      "type": "texto",
+      "text": "<strong>Uso:</strong>"
+    },
+    {
+      "type": "frase"
+    },
+    {
+      "type": "texto",
+      "text": "<strong>Props disponíveis:</strong> text, author, role"
+    },
+    {
+      "type": "frase",
+      "text": "Esta é uma <strong>citação exemplo</strong> que demonstra como o componente de frase funciona no sistema.",
+      "author": "Nome do Autor",
+      "role": "Cargo ou Função"
+    },
+    {
+      "type": "intertitulo",
+      "text": "PHOTOWITHCAPTION (Fotos com Legenda)",
+      "variant": "default",
+      "size": "large"
+    },
+    {
+      "type": "texto",
+      "text": "<strong>Uso:</strong>"
+    },
+    {
+      "type": "foto"
+    },
+    {
+      "type": "texto",
+      "text": "<strong>Props disponíveis:</strong> src, alt, caption, credit, fullWidth (true/false), alignment (center/left/right)"
+    },
+    {
+      "type": "foto",
+      "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80",
+      "caption": "Esta é uma <strong>legenda de exemplo</strong> para demonstrar o componente de foto",
+      "credit": "Crédito: Unsplash",
+      "alt": "Exemplo de foto",
+      "fullWidth": "false",
+      "alignment": "center"
+    },
+    {
+      "type": "foto",
+      "src": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1600&q=80",
+      "caption": "Foto em <strong>largura total</strong> que ocupa todo o espaço disponível",
+      "credit": "Crédito: Unsplash",
+      "alt": "Exemplo de foto fullWidth",
+      "fullWidth": "true",
+      "alignment": "center"
+    },
+    {
+      "type": "intertitulo",
+      "text": "VIDEOPLAYER (Player de Vídeo)",
+      "variant": "default",
+      "size": "large"
+    },
+    {
+      "type": "texto",
+      "text": "<strong>Uso:</strong>"
+    },
+    {
+      "type": "video"
+    },
+    {
+      "type": "texto",
+      "text": "<strong>Props disponíveis:</strong> src, caption, credit, fullWidth (true/false), autoplay (true/false), controls (true/false), loop (true/false), showCaption (true/false)"
+    },
+    {
+      "type": "video",
+      "src": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      "caption": "Exemplo de <strong>vídeo</strong> no sistema",
+      "credit": "Vídeo: Sample Videos",
+      "fullWidth": "false",
+      "autoplay": "false",
+      "controls": "true",
+      "autoPlay": "false",
+      "showCaption": "true",
+      "loop": "false"
+    },
+    {
+      "type": "intertitulo",
+      "text": "GLOBOPLAYER (Player Globo)",
+      "variant": "default",
+      "size": "large"
+    },
+    {
+      "type": "texto",
+      "text": "<strong>Uso:</strong>"
+    },
+    {
+      "type": "globovideo"
+    },
+    {
+      "type": "texto",
+      "text": "<strong>Props disponíveis:</strong> videoId, videosIDs, caption, credit, fullWidth (true/false), autoplay (true/false), startMuted (true/false), skipDFP (true/false), chromeless (true/false), showCaption (true/false)"
+    },
+    {
+      "type": "globovideo",
+      "caption": "Exemplo de player Globo",
+      "credit": "Globo",
+      "fullWidth": "true",
+      "autoplay": "false",
+      "videoId": "13798642",
+      "autoPlay": "false",
+      "showCaption": "true"
+    },
+    {
+      "type": "intertitulo",
+      "text": "PHOTOGALLERY (Galeria de Fotos)",
+      "variant": "default",
+      "size": "large"
+    },
+    {
+      "type": "texto",
+      "text": "<strong>Uso:</strong>"
+    },
+    {
+      "type": "galeria"
+    },
+    {
+      "type": "texto",
+      "text": "<strong>Props disponíveis:</strong> images (array), layout (grid/masonry), columns (número), lightbox (true/false)"
+    },
+    {
+      "type": "galeria",
+      "images": [
+        {
+          "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
+          "alt": "Imagem 1",
+          "caption": "Primeira imagem da galeria",
+          "credit": "Unsplash"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80",
+          "alt": "Imagem 2",
+          "caption": "Segunda imagem da galeria",
+          "credit": "Unsplash"
+        },
+        {
+          "src": "https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=800&q=80",
+          "alt": "Imagem 3",
+          "caption": "Terceira imagem da galeria",
+          "credit": "Unsplash"
+        }
+      ],
+      "layout": "grid",
+      "columns": "3"
+    },
+    {
+      "type": "intertitulo",
+      "text": "CAROUSEL (Carrossel)",
+      "variant": "default",
+      "size": "large"
+    },
+    {
+      "type": "texto",
+      "text": "<strong>Uso:</strong>"
+    },
+    {
+      "type": "carrossel"
+    },
+    {
+      "type": "texto",
+      "text": "<strong>Props disponíveis:</strong> items (array), autoplay (true/false), interval (milissegundos), showDots (true/false), showArrows (true/false)"
+    },
+    {
+      "type": "carrossel",
+      "items": [
+        {
+          "type": "image",
+          "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
+          "alt": "Slide 1",
+          "caption": "Primeiro slide do carrossel",
+          "credit": "Unsplash"
+        },
+        {
+          "type": "image",
+          "src": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80",
+          "alt": "Slide 2",
+          "caption": "Segundo slide do carrossel",
+          "credit": "Unsplash"
+        }
+      ],
+      "autoplay": "false",
+      "interval": "3000",
+      "showDots": "true",
+      "showArrows": "true",
+      "autoPlay": "false"
+    },
+    {
+      "type": "intertitulo",
+      "text": "PARALLAX (Efeito Parallax)",
+      "variant": "default",
+      "size": "large"
+    },
+    {
+      "type": "texto",
+      "text": "<strong>Uso:</strong>"
+    },
+    {
+      "type": "parallax"
+    },
+    {
+      "type": "texto",
+      "text": "<strong>Props disponíveis:</strong> image, imageMobile, height, speed (0.1 a 1.0), overlay (true/false), content (HTML)"
+    },
+    {
+      "type": "parallax",
+      "overlay": "true",
+      "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80",
+      "speed": "0.5",
+      "content": "\"<h2>Efeito Parallax</h2><p>A imagem se move em velocidade diferente do scroll</p>\"",
+      "height": "80vh"
+    },
+    {
+      "type": "intertitulo",
+      "text": "BEFOREAFTER (Comparação Antes/Depois)",
+      "variant": "default",
+      "size": "large"
+    },
+    {
+      "type": "texto",
+      "text": "<strong>Uso:</strong>"
+    },
+    {
+      "type": "antes-depois"
+    },
+    {
+      "type": "texto",
+      "text": "<strong>Props disponíveis:</strong> beforeImage, afterImage, beforeLabel, afterLabel, orientation (vertical/horizontal)"
+    },
+    {
+      "type": "antes-depois",
+      "orientation": "vertical",
+      "beforeImage": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
+      "afterImage": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80",
+      "beforeLabel": "Antes",
+      "afterLabel": "Depois"
+    },
+    {
+      "type": "intertitulo",
+      "text": "SCROLLYTELLING (Narrativa Guiada)",
+      "variant": "default",
+      "size": "large"
+    },
+    {
+      "type": "texto",
+      "text": "<strong>Uso:</strong>"
+    },
+    {
+      "type": "scrollytelling"
+    },
+    {
+      "type": "texto",
+      "text": "<strong>Props disponíveis:</strong> steps (array), fullWidth (true/false)"
+    },
+    {
+      "type": "scrollytelling",
+      "steps": [
+        {
+          "title": "Primeiro Passo",
+          "text": "Este é o primeiro passo da narrativa scrollytelling",
+          "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
+          "alt": "Primeira imagem"
+        },
+        {
+          "title": "Segundo Passo",
+          "text": "Continuamos a narrativa com o segundo passo",
+          "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80",
+          "alt": "Segunda imagem"
+        }
+      ],
+      "fullWidth": "false"
+    },
+    {
+      "type": "intertitulo",
+      "text": "SCROLLYFRAMES (Video Scrollytelling)",
+      "variant": "default",
+      "size": "large"
+    },
+    {
+      "type": "texto",
+      "text": "<strong>Uso:</strong>"
+    },
+    {
+      "type": "scrollyframes"
+    },
+    {
+      "type": "texto",
+      "text": "<strong>Props disponíveis:</strong> frameStart, frameStop, imagePrefix, imagePrefixMobile, imageSuffix, imageSuffixMobile, height, showProgress (true/false), showTime (true/false), preloadFrames, memoryLimit, animationSpeed, smoothing (true/false), debug (true/false), steps (array)"
+    },
+    {
+      "type": "scrollyframes",
+      "frameStart": 1,
+      "frameStop": 50,
+      "imagePrefix": "https://example.com/frames/frame_",
+      "imageSuffix": ".jpg",
+      "imagePrefixMobile": "https://example.com/frames/mobile/frame_",
+      "imageSuffixMobile": ".webp",
+      "height": "300vh",
+      "showProgress": true,
+      "showTime": false,
+      "preloadFrames": 5,
+      "steps": [
+        {
+          "title": "Início",
+          "text": "Primeiro momento do video scrollytelling",
+          "startFrame": 1,
+          "endFrame": 10,
+          "duration": 2000
+        },
+        {
+          "title": "Desenvolvimento",
+          "text": "Continuação da narrativa visual",
+          "startFrame": 11,
+          "endFrame": 30,
+          "duration": 3000
+        },
+        {
+          "title": "Final",
+          "text": "Conclusão da experiência",
+          "startFrame": 31,
+          "endFrame": 50,
+          "duration": 2000
+        }
+      ]
+    },
+    {
+      "type": "intertitulo",
+      "text": "FLOURISH (Visualizações)",
+      "variant": "default",
+      "size": "large"
+    },
+    {
+      "type": "texto",
+      "text": "<strong>Uso:</strong>"
+    },
+    {
+      "type": "flourish"
+    },
+    {
+      "type": "texto",
+      "text": "<strong>Props disponíveis:</strong> src (ID da visualização)"
+    },
+    {
+      "type": "flourish",
+      "src": "visualisation/24092168"
+    },
+    {
+      "type": "intertitulo",
+      "text": "FLOURISH-SCROLLY (Flourish Scrollytelling)",
+      "variant": "default",
+      "size": "large"
+    },
+    {
+      "type": "texto",
+      "text": "<strong>Uso:</strong>"
+    },
+    {
+      "type": "flourish-scrolly"
+    },
+    {
+      "type": "texto",
+      "text": "<strong>Props disponíveis:</strong> src (ID da story), steps (array)"
+    },
+    {
+      "type": "flourish-scrolly",
+      "src": "story/3218812",
+      "steps": [
+        {
+          "title": "Visão Geral",
+          "text": "Começamos com a visão geral dos dados",
+          "slide": 0
+        },
+        {
+          "title": "Detalhamento",
+          "text": "Agora focamos em detalhes específicos",
+          "slide": 1
+        }
+      ]
+    },
+    {
+      "type": "intertitulo",
+      "text": "ANCHOR (Âncoras de Navegação)",
+      "variant": "default",
+      "size": "large"
+    },
+    {
+      "type": "texto",
+      "text": "<strong>Uso:</strong>"
+    },
+    {
+      "type": "ancora"
+    },
+    {
+      "type": "texto",
+      "text": "<strong>Props disponíveis:</strong> id (identificador único)"
+    },
+    {
+      "type": "ancora",
+      "id": "exemplo-ancora"
+    },
+    {
+      "type": "intertitulo",
+      "text": "RECOMMENDED-ITEMS (Itens Recomendados)",
+      "variant": "default",
+      "size": "large"
+    },
+    {
+      "type": "texto",
+      "text": "<strong>Uso:</strong>"
+    },
+    {
+      "type": "recomendados"
+    },
+    {
+      "type": "texto",
+      "text": "<strong>Props disponíveis:</strong> items (array), title, layout (grid), columns, showTitle (true/false), backgroundColor, titleColor, textColor"
+    },
+    {
+      "type": "recomendados",
+      "items": [
+        {
+          "title": "Primeiro Item",
+          "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=80",
+          "link": "https://example.com/item1",
+          "category": "Categoria A"
+        },
+        {
+          "title": "Segundo Item",
+          "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&q=80",
+          "link": "https://example.com/item2",
+          "category": "Categoria B"
+        }
+      ],
+      "title": "Conteúdos Relacionados",
+      "layout": "grid",
+      "columns": "3",
+      "showTitle": "true",
+      "backgroundColor": "#f8f9fa",
+      "titleColor": "#333333",
+      "textColor": "#666666"
+    },
+    {
+      "type": "intertitulo",
+      "text": "CHARACTER-PRESENTATION (Apresentação de Personagens)",
+      "variant": "default",
+      "size": "large"
+    },
+    {
+      "type": "texto",
+      "text": "<strong>Uso:</strong>"
+    },
+    {
+      "type": "personagens"
+    },
+    {
+      "type": "texto",
+      "text": "<strong>Props disponíveis:</strong> personagens (array), shapeColor, nameColor, textColor, backgroundColor"
+    },
+    {
+      "type": "personagens",
+      "personagens": [
+        {
+          "nome": "João Silva",
+          "sobrenome": "Silva",
+          "foto": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80",
+          "descricao": "Especialista em tecnologia com mais de 10 anos de experiência"
+        },
+        {
+          "nome": "Maria Santos",
+          "sobrenome": "Santos",
+          "foto": "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&q=80",
+          "descricao": "Designer UX/UI com foco em experiências digitais inovadoras"
+        }
+      ],
+      "shapeColor": "#DC2626",
+      "nameColor": "#000000",
+      "textColor": "#666666",
+      "backgroundColor": "#ffffff"
+    },
+    {
+      "type": "intertitulo",
+      "text": "CURIOSIDADES (Fatos e Curiosidades)",
+      "variant": "default",
+      "size": "large"
+    },
+    {
+      "type": "texto",
+      "text": "<strong>Uso:</strong>"
+    },
+    {
+      "type": "curiosidades"
+    },
+    {
+      "type": "texto",
+      "text": "<strong>Props disponíveis:</strong> personagens (array), shapeColor, nameColor, textColor, backgroundColor, quoteColor"
+    },
+    {
+      "type": "curiosidades",
+      "personagens": [
+        {
+          "nome": "Fato Interessante 1",
+          "foto": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&q=80",
+          "frase": "Esta é uma curiosidade fascinante sobre o tema abordado"
+        },
+        {
+          "nome": "Fato Interessante 2",
+          "foto": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=80",
+          "frase": "Outro fato curioso que complementa a narrativa"
+        }
+      ],
+      "shapeColor": "#10B981",
+      "nameColor": "#000000",
+      "textColor": "#666666",
+      "backgroundColor": "#ffffff",
+      "quoteColor": "#059669"
+    },
+    {
+      "type": "texto",
+      "text": "<strong> DOCUMENTAÇÃO COMPLETA!</strong> Todos os componentes do sistema de storytelling estão listados acima com suas respectivas propriedades e exemplos de uso."
+    }
+  ],
+  "slug": "documentacao-completa---sistema-de-storytelling"
+}

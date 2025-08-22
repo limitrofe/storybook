@@ -1,0 +1,21 @@
+{
+  "name": "abre",
+  "originalName": "abre",
+  "desktop": {
+    "path": "/img/frames/desktop/abre/",
+    "frameCount": 181,
+    "format": "jpg",
+    "pattern": "frame_%04d.jpg"
+  },
+  "mobile": {
+    "path": "/img/frames/mobile/abre/",
+    "frameCount": 181,
+    "format": "webp",
+    "pattern": "frame_%04d.webp"
+  },
+  "settings": {
+    "fps": 30,
+    "quality": 60
+  },
+  "processedAt": "2025-08-19T02:20:45.558Z"
+}

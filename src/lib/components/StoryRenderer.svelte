@@ -1,4 +1,4 @@
-<!-- StoryRenderer.svelte - COMPLETO com ScrollyFrames, CharacterPresentation, Curiosidades e RecommendedItems -->
+<!-- StoryRenderer.svelte - COMPLETO com ScrollyFrames, CharacterPresentation, Curiosidades, RecommendedItems e HeaderCaotico -->
 <script>
 	// Importação dos componentes da história
 	import Header from './story/Header.svelte';
@@ -24,6 +24,12 @@
 	import Curiosidades from './story/Curiosidades.svelte';
 	// 🆕 NOVO: Itens Recomendados
 	import RecommendedItems from './story/RecommendedItems.svelte';
+	// 🆕 NOVOS COMPONENTES DA TRAMA DO GOLPE
+	import TimelineInteractive from './story/TimelineInteractive.svelte';
+	import DocumentViewer from './story/DocumentViewer.svelte';
+	import CrimeExplainer from './story/CrimeExplainer.svelte';
+	// 🌪️ NOVO: Header Caótico
+	import HeaderCaotico from './story/HeaderCaotico.svelte';
 
 	export let storyData = {};
 
@@ -37,7 +43,16 @@
 			// Headers e títulos
 			case 'header':
 			case 'titulo-principal':
+			case 'abre':
 				return 'header';
+
+			// 🌪️ NOVO: Header Caótico
+			case 'header-caotico':
+			case 'header-caótico':
+			case 'caotico':
+			case 'chaotic-header':
+			case 'caos':
+				return 'header-caotico';
 
 			// Texto
 			case 'texto':
@@ -125,6 +140,25 @@
 			case 'trivia':
 			case 'facts':
 				return 'curiosidades';
+
+			// 🆕 NOVOS COMPONENTES DA TRAMA DO GOLPE
+			case 'timeline-interactive':
+			case 'timeline':
+			case 'cronologia':
+			case 'cronologia-interativa':
+				return 'timeline-interactive';
+
+			case 'document-viewer':
+			case 'documents':
+			case 'docs':
+			case 'visualizador-documentos':
+				return 'document-viewer';
+
+			case 'crime-explainer':
+			case 'crimes':
+			case 'explicador-crimes':
+			case 'crimes-explicacao':
+				return 'crime-explainer';
 
 			// Navegação
 			case 'anchor':
@@ -226,6 +260,38 @@
 
 		return [];
 	}
+
+	/**
+	 * 🌪️ NOVO: Processa lista de mídias para o header caótico
+	 */
+	function processChaoticMedias(medias) {
+		if (!medias) return [];
+		
+		// Se for string JSON, faz parse
+		if (typeof medias === 'string') {
+			try {
+				medias = JSON.parse(medias);
+			} catch (e) {
+				console.error('Erro ao fazer parse das mídias caóticas:', e);
+				return [];
+			}
+		}
+
+		// Se for array, retorna processado
+		if (Array.isArray(medias)) {
+			return medias.map(media => ({
+				type: media.type || 'image',
+				src: media.src || media.url || '',
+				rotation: media.rotation || Math.random() * 30 - 15,
+				scale: media.scale || 0.8 + Math.random() * 0.4,
+				x: media.x || Math.random() * 100,
+				y: media.y || Math.random() * 100,
+				zIndex: media.zIndex || Math.floor(Math.random() * 40)
+			}));
+		}
+
+		return [];
+	}
 </script>
 
 <article class="story-content">
@@ -255,6 +321,18 @@
 					backgroundVideoMobile={props.backgroundVideoMobile}
 					variant={props.variant || 'default'}
 					overlay={stringToBoolean(props.overlay, true)}
+				/>
+
+			<!-- 🌪️ NOVO: Header Caótico -->
+			{:else if componentType === 'header-caotico'}
+				<HeaderCaotico
+					title={props.title || 'HEADER CAÓTICO'}
+					subtitle={props.subtitle || '40 mídias se movimentando dinamicamente'}
+					medias={processChaoticMedias(props.medias || [])}
+					shuffleInterval={parseInt(props.shuffleInterval) || 3000}
+					animationDelay={parseInt(props.animationDelay) || 100}
+					backgroundColor={props.backgroundColor || '#1a1a1a'}
+					titleColor={props.titleColor || 'linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f9ca24)'}
 				/>
 
 			<!-- Text -->
@@ -443,6 +521,41 @@
 					quoteColor={props.quoteColor || '#ffd700'}
 				/>
 
+			<!-- 🆕 TIMELINE INTERACTIVE -->
+			{:else if componentType === 'timeline-interactive'}
+				<TimelineInteractive
+					events={props.events || []}
+					theme={props.theme || 'dramatic'}
+					autoAdvance={stringToBoolean(props.autoAdvance, false)}
+					showProgress={stringToBoolean(props.showProgress, true)}
+					height={props.height || '100vh'}
+					fullWidth={stringToBoolean(props.fullWidth, false)}
+					highlightCurrent={stringToBoolean(props.highlightCurrent, true)}
+				/>
+
+			<!-- 🆕 DOCUMENT VIEWER -->
+			{:else if componentType === 'document-viewer'}
+				<DocumentViewer
+					documents={props.documents || []}
+					classification={props.classification || 'CONFIDENCIAL'}
+					theme={props.theme || 'investigative'}
+					showWatermark={stringToBoolean(props.showWatermark, true)}
+					highlightAreas={props.highlightAreas || []}
+					allowDownload={stringToBoolean(props.allowDownload, false)}
+					showThumbnails={stringToBoolean(props.showThumbnails, true)}
+				/>
+
+			<!-- 🆕 CRIME EXPLAINER -->
+			{:else if componentType === 'crime-explainer'}
+				<CrimeExplainer
+					crimes={props.crimes || []}
+					theme={props.theme || 'judicial'}
+					interactive={stringToBoolean(props.interactive, true)}
+					showPenalties={stringToBoolean(props.showPenalties, true)}
+					layout={props.layout || 'cards'}
+					autoAdvance={stringToBoolean(props.autoAdvance, false)}
+				/>
+
 			<!-- Flourish Embed -->
 			{:else if componentType === 'flourish'}
 				<FlourishEmbed
@@ -471,16 +584,15 @@
 	{/if}
 
 	<!-- Renderizar créditos finais se existir -->
-<!-- Renderizar créditos finais se existir -->
-{#if storyData.credits}
-  <FinalCredits 
-    notes={storyData.credits.notes || ''}
-    sources={storyData.credits.sources || []}
-    additionalGraphics={storyData.credits.additionalGraphics || []}
-    editedBy={storyData.credits.editedBy || []}
-    authors={storyData.credits.authors || []}
-  />
-{/if}
+	{#if storyData.credits}
+		<FinalCredits 
+			notes={storyData.credits.notes || ''}
+			sources={storyData.credits.sources || []}
+			additionalGraphics={storyData.credits.additionalGraphics || []}
+			editedBy={storyData.credits.editedBy || []}
+			authors={storyData.credits.authors || []}
+		/>
+	{/if}
 </article>
 
 <style>

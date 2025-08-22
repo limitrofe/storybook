@@ -1,0 +1,547 @@
+{
+  "credits": {
+    "notes": "Esta documentação serve como referência completa para todos os componentes disponíveis no sistema de storytelling.",
+    "sources": [
+      "Sistema de Design Interno",
+      "Documentação Técnica dos Componentes",
+      "Exemplos Práticos de Uso"
+    ],
+    "authors": [
+      "Equipe de Desenvolvimento",
+      "Designers do Sistema"
+    ]
+  },
+  "type": "header",
+  "title": "Exemplo de Header Padrão",
+  "subtitle": "Este é um exemplo de como usar o componente header",
+  "backgroundImage": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80",
+  "author": "Jornalista Exemplo | 18/08/2025",
+  "variant": "default",
+  "overlay": "true",
+  "paragraphs": [
+    {
+      "type": "header-caotico",
+      "title": "A Trama do Golpe",
+      "subtitle": "Caos visual em movimento",
+      "shuffleInterval": "2000",
+      "animationDelay": "50",
+      "backgroundColor": "#000000",
+      "titleColor": "linear-gradient(45deg, #ff0000, #ffffff, #00ff00)"
+    },
+    {
+      "type": "header",
+      "title": "A Trama do Golpe",
+      "subtitle": "Um julgamento inédito na história brasileira",
+      "backgroundImage": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/frames/desktop/abre/frame_0181.jpg",
+      "author": "Felipe Turioni | 02/09/2025",
+      "variant": "default",
+      "overlay": "true"
+    },
+    {
+      "type": "texto",
+      "text": "Pela primeira vez, um ex-presidente da República senta no banco dos réus do Supremo Tribunal Federal acusado de crimes contra a democracia. Jair Bolsonaro (PL) é apontado pela Procuradoria-Geral da República (PGR) como o líder de uma organização criminosa armada que tentou subverter o resultado das urnas, dar um golpe de Estado e se manter no poder mesmo com a derrota nas eleições de 2022. Ao seu lado, outros sete acusados — civis e militares, inclusive um ex-comandante da Marinha — enfrentam o mesmo julgamento.",
+      "variant": "lead"
+    },
+    {
+      "type": "foto",
+      "src": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/frames/desktop/abre/frame_0181.jpg",
+      "caption": "Foto em <strong>largura total</strong> que ocupa todo o espaço disponível",
+      "credit": "Crédito: Unsplash",
+      "alt": "Exemplo de foto fullWidth",
+      "fullWidth": "true",
+      "alignment": "center"
+    },
+    {
+      "type": "texto",
+      "text": "Segundo a Procuradoria, Bolsonaro liderou uma organização criminosa armada voltada a desacreditar o sistema eleitoral, incitar ataques a instituições democráticas e articular medidas de exceção. O ex-presidente, afirma a PGR, era o principal beneficiário dessa organização."
+    },
+    {
+      "type": "intertitulo",
+      "text": "Os 5 crimes pelos quais Bolsonaro responde",
+      "variant": "default",
+      "size": "large"
+    },
+    {
+      "type": "personagens",
+      "personagens": [
+        {
+          "nome": "Organização criminosa armada",
+          "sobrenome": "Base legal: Lei 12.850/2013",
+          "foto": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80",
+          "descricao": "Definição: crime de liderar organização de quatro ou mais pessoas, estruturada e armada, com divisão de tarefas, visando cometer crimes. Acusação: Segundo a PGR, o grupo desacreditou o sistema eletrônico de votação, mobilizou o braço armado do Estado e atuou para prejudicar a as eleições. Pena prevista: 3 a 8 anos de prisão (até 17 com agravantes). Pode ser preso após o julgamento? Xxxx"
+        },
+        {
+          "nome": "Tentativa de abolição violenta do Estado democrático de Direito",
+          "sobrenome": "Base legal: Art. 359-L do Código Penal",
+          "foto": "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&q=80",
+          "descricao": "Definição: tentativa de, com violência ou grave ameaça, abolir o Estado Democrático de Direito, impedindo ou restringindo poderes constitucionais. Acusação: Segundo o procurador-geral, o Judiciário foi alvo de ameaças públicas, ataques virtuais e planos para ações violentas. Na denúncia, Gonet afirma que medidas de intervenção direta nos poderes constituídos foram apresentadas ao Alto Comando do Exército. Pena prevista: 4 a 8 anos. Pode ser preso após o julgamento? Xxxx"
+        },
+        {
+          "nome": "Tentativa de golpe de Estado",
+          "sobrenome": "Base legal: Art. 359-M do Código Penal",
+          "foto": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80",
+          "descricao": "Definição: tentar depor, por violência ou grave ameaça, o governo legitimamente constituído. Acusação: A Procuradoria afirma que os atos praticados pelo grupo deixam clara a tentativa de golpe de Estado. <ul><li>Não há dúvida de que a organização criminosa desacreditou publicamente o sistema eletrônico de votação, mobilizou o braço armado do Estado e atuou para prejudicar a livre manifestação da vontade popular -, escreveu Gonet. Pena prevista: 4 a 12 anos. Pode ser preso após o julgamento? Xxxx</li></ul>"
+        },
+        {
+          "nome": "Dano qualificado contra o patrimônio da União",
+          "sobrenome": "Base legal: Art. 163, parágrafo único, do Código Penal",
+          "foto": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80",
+          "descricao": "Definição: destruir, inutilizar ou deteriorar patrimônio da União, causando prejuízo relevante. Acusação: Gonet afirma que o crime está comprovado pelas imagens da destruição nas sedes dos Três Poderes em Brasília, no 8 de janeiro. A PGR atribui responsabilidade a Bolsonaro ao dizer que o ato <ul><li>não pode ser dissociado das omissões dolosas - dos personagens denunciados. Pena prevista: 6 meses a 3 anos. Pode ser preso após o julgamento? Xxxx</li></ul>"
+        },
+        {
+          "nome": "Deterioração de patrimônio tombado",
+          "sobrenome": "Base legal: Lei 9.605/1998",
+          "foto": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80",
+          "descricao": "Definição: destruir, inutilizar ou deteriorar bem protegido por lei ou ato administrativo. Acusação: A denúncia segue a mesma justificativa da acusação de dano ao patrimônio e considera que, apesar de não estar presente nos ataques de 8 de janeiro, Bolsonaro deve ser vinculado ao caso. <ul><li>Todos os denunciados, em unidade de desígnios e divisão de tarefas, contribuíram de maneira significativa para o projeto violento de poder da organização criminosa, especialmente para a manutenção do cenário de instabilidade social que culminou nos eventos nocivos -, disse o procurador. Pena prevista: 1 a 3 anos. Pode ser preso após o julgamento? xxxx</li></ul>"
+        }
+      ],
+      "shapeColor": "#DC2626",
+      "nameColor": "#000000",
+      "textColor": "#ffffff",
+      "backgroundColor": "#ffffff"
+    },
+    {
+      "type": "intertitulo",
+      "text": "Julho de 2021: Live com fake news sobre urnas",
+      "backgroundImage": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80",
+      "textPosition": "center",
+      "textAlign": "center",
+      "size": "large",
+      "overlay": "true",
+      "height": "400px"
+    },
+    {
+      "type": "texto",
+      "text": "Segundo a PGR, a escalada golpista começa em julho de 2021. No dia 29, Bolsonaro aparece em uma transmissão ao vivo ao lado do então ministro da Justiça, Anderson Torres, para apresentar supostos indícios de fraude nas eleições — acusações baseadas em informações falsas, fornecidas pelo então chefe da Abin, Alexandre Ramagem."
+    },
+    {
+      "type": "video",
+      "src": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      "caption": "Exemplo de <strong>vídeo</strong> no sistema",
+      "credit": "Vídeo: Sample Videos",
+      "fullWidth": "false",
+      "autoplay": "false",
+      "controls": "true",
+      "autoPlay": "false",
+      "showCaption": "true",
+      "loop": "false"
+    },
+    {
+      "type": "intertitulo",
+      "text": "Setembro de 2021: 'Não mais cumprirá' ordens do STF",
+      "backgroundImage": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80",
+      "textPosition": "center",
+      "textAlign": "center",
+      "size": "large",
+      "overlay": "true",
+      "height": "400px"
+    },
+    {
+      "type": "texto",
+      "text": "Pouco mais de um mês depois da live contra as urnas, as comemorações da Independência no 7 de setembro viram palco de ataques diretos ao STF. Em Brasília e São Paulo, Bolsonaro ameaça o ministro Alexandre de Moraes e insinua ruptura institucional. A Polícia Federal descreve o uso de \"modus operandi de milícia digital\" para amplificar o discurso."
+    },
+    {
+      "type": "foto",
+      "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80",
+      "caption": "atos de 7 de setembro",
+      "credit": "Crédito: Unsplash",
+      "alt": "Exemplo de foto",
+      "fullWidth": "false",
+      "alignment": "center"
+    },
+    {
+      "type": "video",
+      "src": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      "caption": "[VÍDEO – fala de Bolsonaro: 'não mais cumprirá ordens']",
+      "credit": "Vídeo: Sample Videos",
+      "fullWidth": "false",
+      "autoplay": "false",
+      "controls": "true",
+      "autoPlay": "false",
+      "showCaption": "true",
+      "loop": "false"
+    },
+    {
+      "type": "frase",
+      "text": "Dizer a vocês, que qualquer decisão do senhor Alexandre de Moraes, esse presidente não mais cumprirá. A paciência do nosso povo já se esgotou, ele tem tempo ainda de pedir o seu boné e ir cuidar da sua vida. Ele, para nós, não existe mais.",
+      "author": "Jair Bolsonaro",
+      "role": "Presidente"
+    },
+    {
+      "type": "video",
+      "src": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      "caption": "[VÍDEO – fala de Bolsonaro: \"ou se enquadra, ou pede para sair\"]",
+      "credit": "Vídeo: Sample Videos",
+      "fullWidth": "false",
+      "autoplay": "false",
+      "controls": "true",
+      "autoPlay": "false",
+      "showCaption": "true",
+      "loop": "false"
+    },
+    {
+      "type": "frase",
+      "text": "Ou esse ministro se enquadra ou ele pede para sair. Não se pode admitir que uma pessoa apenas, um homem apenas turve a nossa liberdade. Dizer a esse ministro que ele tem tempo ainda para se redimir, tem tempo ainda de arquivar seus inquéritos. Sai, Alexandre de Moraes. Deixa de ser canalha. Deixa de oprimir o povo brasileiro, deixe de censurar o seu povo. Mais do que isso, nós devemos, sim, porque eu falo em nome de vocês, determinar que todos os presos políticos sejam postos em liberdade",
+      "author": "Jair Bolsonaro",
+      "role": "Presidente"
+    },
+    {
+      "type": "intertitulo",
+      "text": "2022: Reunião ministerial e com embaixadores",
+      "backgroundImage": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80",
+      "textPosition": "center",
+      "textAlign": "center",
+      "size": "large",
+      "overlay": "true",
+      "height": "400px"
+    },
+    {
+      "type": "texto",
+      "text": "5 de julho – Em reunião ministerial, Bolsonaro discute estratégias para impedir a vitória do PT. O vídeo do encontro foi achado no computador do tenente-coronel Mauro Cid, ajudante de ordens de Bolsonaro durante o governo. O general Augusto Heleno fala em \"virar a mesa\" antes das eleições, e Bolsonaro é explícito: \"Vai ter um caos no Brasil\" se o PT vencer."
+    },
+    {
+      "type": "video",
+      "src": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      "caption": "[VÍDEO – reunião ministerial",
+      "credit": "Vídeo: Sample Videos",
+      "fullWidth": "false",
+      "autoplay": "false",
+      "controls": "true",
+      "autoPlay": "false",
+      "showCaption": "true",
+      "loop": "false"
+    },
+    {
+      "type": "texto",
+      "text": "18 de julho – Bolsonaro reúne embaixadores no Palácio da Alvorada para repetir acusações sem provas sobre o sistema eletrônico de votação."
+    },
+    {
+      "type": "foto",
+      "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80",
+      "caption": "[FOTO/FRAME/VÍDEO/GIF – encontro com embaixadores]",
+      "credit": "Crédito: Unsplash",
+      "alt": "Exemplo de foto",
+      "fullWidth": "false",
+      "alignment": "center"
+    },
+    {
+      "type": "intertitulo",
+      "text": "Após 1&ordm; turno: 'aspa do cid' 'aspa sobre o bolso'",
+      "backgroundImage": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80",
+      "textPosition": "center",
+      "textAlign": "center",
+      "size": "large",
+      "overlay": "true",
+      "height": "400px"
+    },
+    {
+      "type": "texto",
+      "text": "Em 4 de outubro, dois dias após o 1&ordm; turno, o tenente-coronel Mauro Cid troca mensagens com o coronel Sérgio Cavalieri. Ele confirma que não houve fraude, mas a narrativa pública contrária ao sistema é mantida com a utilização de influencers, militares e o Pa."
+    },
+    {
+      "type": "foto",
+      "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80",
+      "caption": "[PRINT – conversa Mauro Cid / Cavalieri]",
+      "credit": "Crédito: Unsplash",
+      "alt": "Exemplo de foto",
+      "fullWidth": "false",
+      "alignment": "center"
+    },
+    {
+      "type": "intertitulo",
+      "text": "No 2&ordm; turno: PRF dificulta votação no Nordeste",
+      "backgroundImage": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80",
+      "textPosition": "center",
+      "textAlign": "center",
+      "size": "large",
+      "overlay": "true",
+      "height": "400px"
+    },
+    {
+      "type": "texto",
+      "text": "A PGR afirma que, no 2&ordm; turno da eleição, a organização criminosa voltou a agir para prolongar a permanência de Bolsonaro no poder. Regiões onde Lula teve mais votos no 1&ordm; turno foram mapeadas, e a PRF foi acionada para dificultar o acesso às urnas."
+    },
+    {
+      "type": "foto",
+      "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80",
+      "caption": "[PRINT – mensagens de Ramagem e Augusto Heleno sobre urnas VÍDEO - DE AÇÃO DA PRF COM ELEITORES]",
+      "credit": "Crédito: Unsplash",
+      "alt": "Exemplo de foto",
+      "fullWidth": "false",
+      "alignment": "center"
+    },
+    {
+      "type": "texto",
+      "text": "No dia 30 de outubro, Lula vence com 50, 9% dos votos."
+    },
+    {
+      "type": "foto",
+      "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80",
+      "caption": "[info mostra resultado da apuração do segundo turno]",
+      "credit": "Crédito: Unsplash",
+      "alt": "Exemplo de foto",
+      "fullWidth": "false",
+      "alignment": "center"
+    },
+    {
+      "type": "video",
+      "src": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      "caption": "[VÍDEO – anúncio da vitória de Lula]",
+      "credit": "Vídeo: Sample Videos",
+      "fullWidth": "false",
+      "autoplay": "false",
+      "controls": "true",
+      "autoPlay": "false",
+      "showCaption": "true",
+      "loop": "false"
+    },
+    {
+      "type": "intertitulo",
+      "text": "Minuta do golpe 'dentro das quatro linhas' e plano para matar Lula, Alckmin e Moraes",
+      "backgroundImage": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80",
+      "textPosition": "center",
+      "textAlign": "center",
+      "size": "large",
+      "overlay": "true",
+      "height": "400px"
+    },
+    {
+      "type": "texto",
+      "text": "No dia 1&ordm; de novembro, começam os acampamentos golpistas em frente a quartéis. O general Mário Fernandes, então secretário-executivo da Presidência, visita acampamento em Brasília e tira selfies no local. Os registros se repetem ao longo dos dias. Mauro Cid orça custos para levar mais manifestantes para os acampamentos. https://g1.globo.com/politica/noticia/2024/03/15/o-que-diz-cada-versao-da-minuta-do-golpe.ghtml (colocar que foi apreendido no gabiente do Bolsonaro)"
+    },
+    {
+      "type": "texto",
+      "text": "No dia 9, no Planalto, o general Mário Fernandes produz o documento \"Punhal Verde e Amarelo\", que detalha plano para sequestrar ou matar Alexandre de Moraes, Lula e Alckmin."
+    },
+    {
+      "type": "foto",
+      "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80",
+      "caption": "[FOTO – acampamento em Brasília]",
+      "credit": "Crédito: Unsplash",
+      "alt": "Exemplo de foto",
+      "fullWidth": "false",
+      "alignment": "center"
+    },
+    {
+      "type": "texto",
+      "text": "Em 12 de novembro, militares se reúnem na casa de Braga Netto para discutir o assassinato de autoridades. Em 19 de novembro, uma minuta de decreto prevendo novas eleições e a prisão de ministros do STF é apresentada a Bolsonaro, que pede ajustes."
+    },
+    {
+      "type": "foto",
+      "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80",
+      "caption": "[PRINT- mensagem]",
+      "credit": "Crédito: Unsplash",
+      "alt": "Exemplo de foto",
+      "fullWidth": "false",
+      "alignment": "center"
+    },
+    {
+      "type": "intertitulo",
+      "text": "O cerco se intensifica:",
+      "variant": "default",
+      "size": "small"
+    },
+    {
+      "type": "scrollytelling",
+      "steps": [
+        {
+          "title": "PRINT – mensagem Cid calendário Moraes",
+          "text": "Integrantes do grupo do Exército visitam locais descritos na operação para matar autoridades, como a região do apartamento do ministro Alexandre de Moraes e monitoram a agenda do ministro.",
+          "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
+          "alt": "Primeira imagem"
+        },
+        {
+          "title": "22 de novembro",
+          "text": "PL pede anulação dos votos do 2&ordm; turno, sem apresentar prova nenhuma; Moraes aplica multa de R$ 23 milhões.",
+          "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80",
+          "alt": "Segunda imagem"
+        },
+        {
+          "title": "26 de novembro",
+          "text": "A PF relata que Mauro Cid ajusta o teor da e a forma de divulgação da carta golpista. Em troca de mensagens, Cid é questionado se Bolsonaro sabia do conteúdo, e responde que sim.",
+          "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80",
+          "alt": "PRINT – Bolsonaro sabe VÍDEO – CID responde que sim em depoimento"
+        },
+        {
+          "title": "6 de dezembro",
+          "text": "No Planalto, Mário Fernandes imprime o plano de assassinato. Bolsonaro e Mauro Cid estavam no prédio no mesmo horário.",
+          "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80",
+          "alt": "PRINT – impressão"
+        },
+        {
+          "title": "7 de dezembro",
+          "text": "Bolsonaro apresenta minuta de decreto golpista ao ministro da Defesa e aos comandantes do Exército, Freire Gomes, e da Marinha, Almir Garnier. Tércio Arnaud também foi ao Alvorada. Os comandantes do Exército e da Aeronáutica se posicionaram firmemente contra a proposta e se recusaram a assinar o documento. Segundo a PF, a trama golpista não foi adiante por falta desse apoio.",
+          "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80",
+          "alt": "PRINT – relatório da PF descrevendo reunião PRINT – CARTA EXÉRCITO"
+        },
+        {
+          "title": "9 de dezembro",
+          "text": "Em live, o presidente rompe o silêncio: E hoje estão vivendo um momento crucial. Uma encruzilhada. Um destino que o povo tem que tomar. Quem decide o meu futuro, pra onde eu vou são vocês! Quem decide para onde vai as Forças Armadas são vocês!",
+          "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80",
+          "alt": "PRINT – live de 09/12/2022"
+        }
+      ],
+      "fullWidth": "false"
+    },
+    {
+      "type": "texto",
+      "text": "Nos dias seguintes, a trama inclui novas reuniões sobre a adoção de uma GLO (Garantia da Lei e da Ordem) ou de estado de sítio e de defesa. E depoimento, o ex-comandante da Aeronáutica, Baptista Júnior, confirmou a presença de Bolsonaro nos encontros."
+    },
+    {
+      "type": "video",
+      "src": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      "caption": "[VÍDEO - JN DEPOIMENTO https://g1.globo.com/jornal-nacional/noticia/2025/05/21/ao-stf-ex-comandante-da-aeronautica-confirma-que-bolsonaro-participou-de-plano-golpista-e-que-freire-gomes-ameacou-prender-o-ex-presidente.ghtml]",
+      "credit": "Vídeo: [VÍDEO - JN DEPOIMENTO https://g1.globo.com/jornal-nacional/noticia/2025/05/21/ao-stf-ex-comandante-da-aeronautica-confirma-que-bolsonaro-participou-de-plano-golpista-e-que-freire-gomes-ameacou-prender-o-ex-presidente.ghtml]",
+      "fullWidth": "false",
+      "autoplay": "false",
+      "controls": "true",
+      "autoPlay": "false",
+      "showCaption": "true",
+      "loop": "false"
+    },
+    {
+      "type": "intertitulo",
+      "text": "Operação para executar Moraes",
+      "backgroundImage": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80",
+      "textPosition": "center",
+      "textAlign": "center",
+      "size": "large",
+      "overlay": "true",
+      "height": "400px"
+    },
+    {
+      "type": "texto",
+      "text": "Entre 13 e 15 de dezembro, seguem as tentativas de execução de Moraes. Celulares que integrariam o grupo da operação batizada de Copa 2022 se deslocam. Um deles se passa por -locais de interesse da ação-, segundo a PF, incluindo -a residência funcional do ministro Alexandre de Moraes.<ul><li>Segundo a PF, ao menos 6 integrantes do grupo se posicionaram em vários pontos de Brasília. Mas a operação é abortada. </li></ul>"
+    },
+    {
+      "type": "foto",
+      "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80",
+      "caption": "[PRINTS – CARROS OPERAÇÃO MORAES]",
+      "credit": "[PRINTS – CARROS OPERAÇÃO MORAES]",
+      "alt": "Exemplo de foto",
+      "fullWidth": "false",
+      "alignment": "center"
+    },
+    {
+      "type": "texto",
+      "text": "<strong>Props disponíveis:</strong> text, author, role"
+    },
+    {
+      "type": "intertitulo",
+      "text": "Braga Netto manda pressionar chefe do Exército: 'Oferece a cabeça dele. Cagão'",
+      "backgroundImage": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80",
+      "textPosition": "center",
+      "textAlign": "center",
+      "size": "large",
+      "overlay": "true",
+      "height": "400px"
+    },
+    {
+      "type": "texto",
+      "text": "A pressão sobre o comandante do Exército continua, Braga Netto orienta Ailton Gomes a assediar o comandante do Exército, general Freire Gomes. \"Oferece a cabeça dele. Cagão\""
+    },
+    {
+      "type": "foto",
+      "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80",
+      "caption": "[PRINT - CAGÃO]",
+      "credit": "[PRINT - CAGÃO]",
+      "alt": "Exemplo de foto",
+      "fullWidth": "false",
+      "alignment": "center"
+    },
+    {
+      "type": "texto",
+      "text": "A trama inclui ainda o documento \"Operação 142\", que previa anulação das eleições, substituição do TSE e prorrogação de mandatos."
+    },
+    {
+      "type": "intertitulo",
+      "text": "Bolsonaro não passa faixa para Lula",
+      "backgroundImage": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80",
+      "textPosition": "center",
+      "textAlign": "center",
+      "size": "large",
+      "overlay": "true",
+      "height": "400px"
+    },
+    {
+      "type": "texto",
+      "text": "Em 30 de dezembro, Bolsonaro embarca para a Flórida, evitando passar a faixa presidencial. No dia 1&ordm; de janeiro, Lula toma posse diante de centenas de milhares de pessoas em Brasília."
+    },
+    {
+      "type": "video",
+      "src": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      "caption": "[VÍDEO – AVIÃO PRESIDENCIAL DECOLANDO]",
+      "credit": "[VÍDEO – AVIÃO PRESIDENCIAL DECOLANDO]",
+      "fullWidth": "false",
+      "autoplay": "false",
+      "controls": "true",
+      "autoPlay": "false",
+      "showCaption": "true",
+      "loop": "false"
+    },
+    {
+      "type": "foto",
+      "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80",
+      "caption": "[FOTO – Bolsonaro na Flórida]",
+      "credit": "[FOTO – Bolsonaro na Flórida]",
+      "alt": "Exemplo de foto",
+      "fullWidth": "false",
+      "alignment": "center"
+    },
+    {
+      "type": "foto",
+      "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80",
+      "caption": "[FOTO – posse de Lula]",
+      "credit": "[FOTO – posse de Lula]",
+      "alt": "Exemplo de foto",
+      "fullWidth": "false",
+      "alignment": "center"
+    },
+    {
+      "type": "intertitulo",
+      "text": "8 de janeiro de 2023: STF, Planalto e Congresso são invadidos; 'aspa do Bolsonaro'",
+      "backgroundImage": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80",
+      "textPosition": "center",
+      "textAlign": "center",
+      "size": "large",
+      "overlay": "true",
+      "height": "400px"
+    },
+    {
+      "type": "texto",
+      "text": "Na tarde de domingo, milhares de golpistas invadem o Congresso, o Palácio do Planalto e o STF. Vidraças quebradas, obras de arte destruídas, gabinetes saqueados. A pauta era a mesma: intervenção militar e contestação do resultado eleitoral."
+    },
+    {
+      "type": "video",
+      "src": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      "caption": "[VÍDEO – invasão e depredação]",
+      "credit": "[VÍDEO – invasão e depredação]",
+      "fullWidth": "false",
+      "autoplay": "false",
+      "controls": "true",
+      "autoPlay": "false",
+      "showCaption": "true",
+      "loop": "false"
+    },
+    {
+      "type": "foto",
+      "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80",
+      "caption": "[FOTO – cadeiras do plenário destruídas]",
+      "credit": "[FOTO – cadeiras do plenário destruídas]",
+      "alt": "[FOTO – cadeiras do plenário destruídas]",
+      "fullWidth": "false",
+      "alignment": "center"
+    },
+    {
+      "type": "frase",
+      "text": "O comportamento de Jair Bolsonaro nas redes sociais no dia 8 de janeiro de 2023 não altera a realidade de que foi o principal responsável pela contínua radicalização e pela criação do ambiente que possibilitou a explosão de violência naquele dia. Suas posturas ambíguas e sua ausência de ação concreta para conter os ânimos inflamados por ele próprio são indícios claros de sua contribuição para a escalada de violência.",
+      "author": "Paulo Gonet",
+      "role": "Procurador Geral da República"
+    },
+    {
+      "type": "texto",
+      "text": "Segundo o Ministério Público, os ataques de 8 de janeiro não foram um ato isolado, mas o desfecho de um plano gestado ao longo de dois anos, com articulação política, militar e digital para derrubar a democracia brasileira."
+    }
+  ],
+  "slug": "exemplo-de-header-padrao"
+}
