@@ -552,43 +552,77 @@ function parseParagraphsHTML(html) {
       paragraph.type = decodeHTMLEntities(typeMatch[1].trim());
     }
 
-    // 🌪️ NOVO: TRATAMENTO ESPECÍFICO PARA HEADER CAÓTICO
-    if (['header-caotico', 'header-caótico', 'caotico', 'chaotic-header', 'caos'].includes(paragraph.type?.toLowerCase())) {
-      console.log('🌪️ Processando Header Caótico...');
-      
-      // Campos específicos do header caótico
-      const chaoticFields = {
-        title: /title:\s*([^\n<]+)/i,
-        subtitle: /subtitle:\s*([^\n<]+)/i,
-        medias: /medias:\s*(\[[\s\S]*?\])/i,
-        shuffleInterval: /shuffleInterval:\s*([^\n<]+)/i,
-        animationDelay: /animationDelay:\s*([^\n<]+)/i,
-        backgroundColor: /backgroundColor:\s*([^\n<]+)/i,
-        titleColor: /titleColor:\s*([^\n<]+)/i
-      };
+   // 🌪️ NOVO: TRATAMENTO ESPECÍFICO PARA HEADER CAÓTICO
+if (['header-caotico', 'header-caótico', 'caotico', 'chaotic-header', 'caos'].includes(paragraph.type?.toLowerCase())) {
+  console.log('🌪️ Processando Header Caótico...');
+  
+  // Campos específicos do header caótico
+  const chaoticFields = {
+    // Básicos
+    title: /title:\s*([^\n<]+)/i,
+    subtitle: /subtitle:\s*([^\n<]+)/i,
+    titleColor: /titleColor:\s*([^\n<]+)/i,
+    
+    // Mídias caóticas
+    medias: /medias:\s*(\[[\s\S]*?\])/i,
+    totalDefaultMedias: /totalDefaultMedias:\s*([^\n<]+)/i,
+    shuffleInterval: /shuffleInterval:\s*([^\n<]+)/i,
+    animationDelay: /animationDelay:\s*([^\n<]+)/i,
+    
+    // 🆕 CAMPOS DE BACKGROUND
+    useCustomBackground: /useCustomBackground:\s*([^\n<]+)/i,
+    backgroundImage: /backgroundImage:\s*([^\n<]+)/i,
+    backgroundImageMobile: /backgroundImageMobile:\s*([^\n<]+)/i,
+    backgroundVideo: /backgroundVideo:\s*([^\n<]+)/i,
+    backgroundVideoMobile: /backgroundVideoMobile:\s*([^\n<]+)/i,
+    overlay: /overlay:\s*([^\n<]+)/i,
+    overlayOpacity: /overlayOpacity:\s*([^\n<]+)/i,
+    
+    // 🆕 CAMPOS DE TAMANHO
+    mediaWidth: /mediaWidth:\s*([^\n<]+)/i,
+    mediaHeight: /mediaHeight:\s*([^\n<]+)/i,
+    mediaWidthMobile: /mediaWidthMobile:\s*([^\n<]+)/i,
+    mediaHeightMobile: /mediaHeightMobile:\s*([^\n<]+)/i,
+    mediaSizeVariation: /mediaSizeVariation:\s*([^\n<]+)/i
+  };
 
-      // Processar lista de mídias customizadas (JSON array) - OPCIONAL
-      const mediasMatch = block.match(chaoticFields.medias);
-      if (mediasMatch) {
-        paragraph.medias = parseJSONField(mediasMatch[1], 'chaotic header medias');
-        console.log(`   ✅ ${paragraph.medias?.length || 0} mídias customizadas processadas`);
-      }
+  // Processar lista de mídias customizadas (JSON array) - OPCIONAL
+  const mediasMatch = block.match(chaoticFields.medias);
+  if (mediasMatch) {
+    paragraph.medias = parseJSONField(mediasMatch[1], 'chaotic header medias');
+    console.log(`   ✅ ${paragraph.medias?.length || 0} mídias customizadas processadas`);
+  }
 
-      // Processar outros campos do header caótico
-      for (const [field, regex] of Object.entries(chaoticFields)) {
-        if (field === 'medias') continue; // Já processado acima
-        
-        const match = block.match(regex);
-        if (match) {
-          paragraph[field] = decodeHTMLEntities(match[1].trim());
-        }
-      }
+  // Processar outros campos do header caótico
+  for (const [field, regex] of Object.entries(chaoticFields)) {
+    if (field === 'medias') continue; // Já processado acima
+    
+    const match = block.match(regex);
+    if (match) {
+      paragraph[field] = decodeHTMLEntities(match[1].trim());
+    }
+  }
 
-      // Processar campo 'text' para header caótico
-      const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:title|subtitle|medias|shuffleInterval|animationDelay|backgroundColor|titleColor):|type:|$)/si);
-      if (textMatch) {
-        paragraph.text = cleanAndFormatHTML(textMatch[1].trim());
-      }
+  // Log das configurações processadas
+  const totalMedias = paragraph.totalDefaultMedias || '40';
+  const mediaSize = `${paragraph.mediaWidth || '220'}x${paragraph.mediaHeight || '165'}`;
+  const mediaSizeMobile = `${paragraph.mediaWidthMobile || '160'}x${paragraph.mediaHeightMobile || '120'}`;
+  const hasBackground = paragraph.useCustomBackground === 'true';
+  const customMediasCount = paragraph.medias?.length || 0;
+  
+  console.log(`   📏 Tamanhos: Desktop ${mediaSize} | Mobile ${mediaSizeMobile}`);
+  console.log(`   🎪 Mídias: ${customMediasCount > 0 ? customMediasCount + ' customizadas' : totalMedias + ' padrão'}`);
+  console.log(`   🖼️ Background personalizado: ${hasBackground ? 'Sim' : 'Não'}`);
+  console.log(`   ⚡ Shuffle: ${paragraph.shuffleInterval || '3000'}ms | Delay: ${paragraph.animationDelay || '300'}ms`);
+  if (hasBackground) {
+    console.log(`   🎨 Overlay: ${paragraph.overlay !== 'false' ? 'Sim' : 'Não'} (${paragraph.overlayOpacity || '0.5'})`);
+  }
+
+  // Processar campo 'text' para header caótico
+  const textMatch = block.match(/text:\s*(.*?)(?=\s*type:|$)/s);
+  if (textMatch) {
+    paragraph.text = decodeHTMLEntities(textMatch[1].trim());
+  }
 
       paragraphs.push(paragraph);
       continue;

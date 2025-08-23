@@ -21,12 +21,18 @@
   "paragraphs": [
     {
       "type": "header-caotico",
-      "title": "A Trama do Golpe",
-      "subtitle": "Caos visual em movimento",
-      "shuffleInterval": "2000",
-      "animationDelay": "50",
-      "backgroundColor": "#000000",
-      "titleColor": "linear-gradient(45deg, #ff0000, #ffffff, #00ff00)"
+      "title": "A TRAMA DO GOLPE",
+      "subtitle": "Um julgamento inédito na história brasileira",
+      "titleColor": "#232323",
+      "totalDefaultMedias": "8",
+      "shuffleInterval": "10000",
+      "useCustomBackground": "true",
+      "backgroundImage": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/header_mob.jpg",
+      "backgroundImageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/header_mob.jpg",
+      "overlay": "false",
+      "overlayOpacity": "0.4",
+      "mediaWidthMobile": "200",
+      "mediaHeightMobile": "400"
     },
     {
       "type": "header",

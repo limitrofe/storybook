@@ -2,18 +2,39 @@
 <script>
   import { onMount } from 'svelte';
   
-  // Props customizáveis
+  // Props customizáveis básicas
   export let title = 'HEADER CAÓTICO';
   export let subtitle = '40 mídias se movimentando dinamicamente';
+  export let titleColor = '#232323';
+  
+  // 🆕 PROPS DE BACKGROUND PERSONALIZADO
+  export let useCustomBackground = false; // Se true, usa background personalizado
+  export let backgroundImage = ''; // Background desktop
+  export let backgroundImageMobile = ''; // Background mobile
+  export let backgroundVideo = ''; // Vídeo background desktop
+  export let backgroundVideoMobile = ''; // Vídeo background mobile
+  export let overlay = true; // Overlay escuro sobre o background
+  export let overlayOpacity = 0.5; // Opacidade do overlay (0-1)
+  
+  // 🎪 PROPS DE MÍDIAS CAÓTICAS
   export let medias = []; // Array de mídias customizado (opcional)
+  export let totalDefaultMedias = 40; // Quantas mídias padrão gerar se medias estiver vazio
   export let shuffleInterval = 3000; // Intervalo de rotação em ms
   export let animationDelay = 300; // Delay entre animações de entrada
-  export let backgroundColor = '#fff';
-  export let titleColor = '#232323';
+  
+  // 🎨 PROPS DE TAMANHO DAS MÍDIAS
+  export let mediaWidth = 220; // Largura das mídias em pixels
+  export let mediaHeight = 165; // Altura das mídias em pixels
+  export let mediaSizeVariation = 0.4; // Variação de tamanho (0.8 + random * variation)
+  export let mediaWidthMobile = 160; // Largura mobile
+  export let mediaHeightMobile = 120; // Altura mobile
 
   // 🎯 DETECÇÃO AUTOMÁTICA - LINK COMPLETO EM PRODUÇÃO
   let baseUrl = '';
   let mediasWithPosition = [];
+  
+  // Verificar se tem background personalizado
+  $: hasCustomBackground = useCustomBackground && (backgroundImage || backgroundImageMobile || backgroundVideo || backgroundVideoMobile);
   
   // Função para gerar a URL completa baseada no ambiente atual
   function getFullImageUrl(imagePath) {
@@ -30,153 +51,183 @@
     return imagePath;
   }
 
-  // Array padrão de 40 mídias se não for fornecido
-  let defaultMedias = [
-    // 2 vídeos de exemplo
-    { 
-      type: 'video', 
-      src: 'https://sample-videos.com/zip/10/mp4/SampleVideo_720x480_1mb.mp4'
-    },
-    { 
-      type: 'video', 
-      src: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4'
-    },
+  // Array padrão de mídias baseado na prop totalDefaultMedias
+  let defaultMedias = [];
+  
+  // Função para gerar mídias padrão
+  function generateDefaultMedias() {
+    const videoCount = Math.min(2, Math.floor(totalDefaultMedias * 0.1)); // 10% de vídeos, máximo 2
+    const imageCount = totalDefaultMedias - videoCount;
     
-    // 🎯 42 IMAGENS COM URLs COMPLETAS AUTOMÁTICAS
-    ...Array.from({ length: 42 }, (_, i) => ({
-      type: 'image',
-      src: getFullImageUrl(`/img/header/header${i + 1}.jpg`)
-    }))
-  ];
+    // Detectar se está em localhost para usar imagens de exemplo
+    const isLocalhost = typeof window !== 'undefined' && 
+      (window.location.hostname === 'localhost' || 
+       window.location.hostname === '127.0.0.1' ||
+       window.location.hostname.includes('127.0.0.1'));
+    
+    defaultMedias = [
+      // Vídeos de exemplo
+      ...Array.from({ length: videoCount }, (_, i) => ({
+        type: 'video',
+        src: i === 0 
+          ? 'https://sample-videos.com/zip/10/mp4/SampleVideo_720x480_1mb.mp4'
+          : 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4'
+      })),
+      
+      // Imagens: usar URLs online se localhost, ou URLs do projeto se produção
+      ...Array.from({ length: imageCount }, (_, i) => ({
+        type: 'image',
+        src: isLocalhost 
+          ? `https://picsum.photos/300/200?random=${i + 1}`  // Imagens aleatórias do Picsum
+          : getFullImageUrl(`/img/header/header${(i % 42) + 1}.jpg`) // Imagens do projeto
+      }))
+    ];
+    
+    console.log(`🎪 HeaderCaotico gerou ${defaultMedias.length} mídias (${videoCount} vídeos + ${imageCount} imagens)`);
+    if (isLocalhost) {
+      console.log('🌐 Usando imagens de exemplo online (localhost detectado)');
+    }
+  }
 
-  // Usar medias customizadas ou padrão
+  // 🔥 SEMPRE usa as mídias caóticas (com ou sem background personalizado)
   $: sourceMedias = medias.length > 0 ? medias : defaultMedias;
   
-  // Estado das mídias com propriedades de posicionamento
-  let shuffleIntervalRef;
-  let isLoaded = false;
+  // Reagir a mudanças no totalDefaultMedias
+  $: if (totalDefaultMedias) {
+    generateDefaultMedias();
+  }
 
-  // Níveis de Z-index: 1 (fundo), 2 (meio), 3 (frente)
-  const Z_LEVELS = [1, 2, 3];
+  let loadedMedias = 0;
 
-  // Função para gerar posição aleatória
+  // Função para gerar posições randômicas
   function generateRandomPosition() {
     return {
-      x: Math.random() * 90 + 5, // 5% a 95% da largura
-      y: Math.random() * 90 + 5, // 5% a 95% da altura
-      rotation: (Math.random() - 0.5) * 30, // -15° a +15°
-      scale: 0.8 + Math.random() * 0.4, // 0.8x a 1.2x
-      zLevel: Z_LEVELS[Math.floor(Math.random() * Z_LEVELS.length)]
+      left: Math.random() * 80 + 10, // 10% a 90%
+      top: Math.random() * 80 + 10,  // 10% a 90%
+      scale: Math.random() * mediaSizeVariation + (1 - mediaSizeVariation/2), // Baseado na prop
+      rotation: Math.random() * 360,
+      zIndex: Math.floor(Math.random() * 3) + 1 // 1, 2 ou 3
     };
   }
 
-  // Inicializar todas as mídias com posições
-  function initializeMedias() {
+  // Configurar posições iniciais
+  function setupMediaPositions() {
     mediasWithPosition = sourceMedias.map((media, index) => ({
       ...media,
       id: index,
-      loaded: false,
+      ...generateRandomPosition(),
+      loaded: false
+    }));
+  }
+
+  // Reorganizar elementos aleatoriamente
+  function shufflePositions() {
+    mediasWithPosition = mediasWithPosition.map(media => ({
+      ...media,
       ...generateRandomPosition()
     }));
-    console.log(`🌪️ Inicializadas ${mediasWithPosition.length} mídias`);
-    
-    // 🎯 LOG DAS PRIMEIRAS URLs PARA DEBUG
-    if (mediasWithPosition.length > 0) {
-      console.log('🖼️ Primeira imagem:', mediasWithPosition[2]?.src);
-      console.log('🖼️ Última imagem:', mediasWithPosition[mediasWithPosition.length - 1]?.src);
+  }
+
+  // Controlar quando mídia carrega
+  function handleMediaLoad(mediaId) {
+    loadedMedias++;
+    const mediaIndex = mediasWithPosition.findIndex(m => m.id === mediaId);
+    if (mediaIndex >= 0) {
+      mediasWithPosition[mediaIndex].loaded = true;
+      console.log(`✅ Mídia ${mediaId + 1} carregada (${loadedMedias}/${mediasWithPosition.length})`);
     }
   }
-
-  // Função para embaralhar z-levels (movimento das camadas)
-  function shuffleZLevels() {
-    mediasWithPosition = mediasWithPosition.map(media => ({
-      ...media,
-      zLevel: Z_LEVELS[Math.floor(Math.random() * Z_LEVELS.length)]
-    }));
-  }
-
-  // Função para movimento sutil (pequenos ajustes de posição)
-  function subtleMovement() {
-    mediasWithPosition = mediasWithPosition.map(media => ({
-      ...media,
-      x: Math.max(5, Math.min(95, media.x + (Math.random() - 0.5) * 10)), // movimento de até 5%
-      y: Math.max(5, Math.min(95, media.y + (Math.random() - 0.5) * 10)),
-      rotation: media.rotation + (Math.random() - 0.5) * 10 // rotação de até 5°
-    }));
-  }
-
-  // Marcar mídia como carregada
-  function handleMediaLoad(index) {
-    if (mediasWithPosition[index]) {
-      mediasWithPosition[index].loaded = true;
-      
-      // Verificar se todas estão carregadas
-      const allLoaded = mediasWithPosition.every(media => media.loaded);
-      if (allLoaded && !isLoaded) {
-        isLoaded = true;
-        console.log('✅ Todas as mídias carregaram!');
-        startAnimations();
-      }
-    }
-  }
-
-  // Iniciar animações após carregamento
-  function startAnimations() {
-    // Movimento sutil a cada 1 segundo
-    setInterval(subtleMovement, 100000);
-    
-    // Embaralhar z-levels no intervalo especificado
-    shuffleIntervalRef = setInterval(shuffleZLevels, shuffleInterval);
+  
+  // Debug function
+  function debugMedias() {
+    console.log('🔍 DEBUG HeaderCaotico:');
+    console.log('   sourceMedias:', sourceMedias.length);
+    console.log('   mediasWithPosition:', mediasWithPosition.length);
+    console.log('   loadedMedias:', loadedMedias);
+    console.log('   Primeiras 3 mídias:', sourceMedias.slice(0, 3));
   }
 
   onMount(() => {
-    // LOG DE DEBUG
-    console.log('🌍 URL atual:', window.location.href);
-    console.log('🖼️ Primeira imagem:', defaultMedias[2]?.src);
-    console.log('🖼️ Última imagem:', defaultMedias[defaultMedias.length - 1]?.src);
+    generateDefaultMedias(); // Gerar mídias padrão primeiro
+    setupMediaPositions();
     
-    initializeMedias();
-    
-    // Fallback: se algumas mídias não carregarem, iniciar mesmo assim após 5 segundos
+    // Debug
     setTimeout(() => {
-      if (!isLoaded) {
-        console.log('⚠️ Timeout: iniciando animações mesmo com mídias não carregadas');
-        isLoaded = true;
-        startAnimations();
-      }
-    }, 5000);
-
-    return () => {
-      if (shuffleIntervalRef) {
-        clearInterval(shuffleIntervalRef);
-      }
-    };
+      debugMedias();
+    }, 1000);
+    
+    // Sempre iniciar shuffle das mídias caóticas
+    const interval = setInterval(shufflePositions, shuffleInterval);
+    return () => clearInterval(interval);
   });
+
+  // Reagir a mudanças nas mídias ou configurações
+  $: if (typeof window !== 'undefined') {
+    setupMediaPositions();
+  }
 </script>
 
-<header class="chaotic-header">
-  <!-- Container das mídias -->
-  <div class="media-container">
+<header class="chaotic-header" class:custom-background={hasCustomBackground}>
+  
+  <!-- 🆕 BACKGROUND PERSONALIZADO (CAMADA 1) -->
+  {#if hasCustomBackground}
+    <div class="background-container">
+      <!-- Background Mobile (padrão) -->
+      {#if backgroundImageMobile}
+        <div class="background-image mobile" style="background-image: url({backgroundImageMobile})"></div>
+      {/if}
+      {#if backgroundVideoMobile}
+        <video class="background-video mobile" autoplay muted loop playsinline src={backgroundVideoMobile}>
+          <track kind="captions" />
+        </video>
+      {/if}
+      
+      <!-- Background Desktop -->
+      {#if backgroundImage}
+        <div class="background-image desktop" style="background-image: url({backgroundImage})"></div>
+      {/if}
+      {#if backgroundVideo}
+        <video class="background-video desktop" autoplay muted loop playsinline src={backgroundVideo}>
+          <track kind="captions" />
+        </video>
+      {/if}
+      
+      <!-- Overlay -->
+      {#if overlay}
+        <div class="background-overlay" style="background: rgba(0, 0, 0, {overlayOpacity})"></div>
+      {/if}
+    </div>
+  {/if}
+
+  <!-- 🎪 MÍDIAS CAÓTICAS (CAMADA 2 - SEMPRE PRESENTES) -->
+  <div class="media-container" style="
+    --media-width: {mediaWidth}px; 
+    --media-height: {mediaHeight}px;
+    --media-width-mobile: {mediaWidthMobile}px;
+    --media-height-mobile: {mediaHeightMobile}px;
+  ">
     {#each mediasWithPosition as media (media.id)}
       <div 
-        class="media-item z-level-{media.zLevel}"
+        class="media-item z-level-{media.zIndex}"
         class:loaded={media.loaded}
         style="
-          left: {media.x}%;
-          top: {media.y}%;
+          left: {media.left}%;
+          top: {media.top}%;
+          --scale: {media.scale};
+          --rotation: {media.rotation}deg;
           transform: translate(-50%, -50%) rotate({media.rotation}deg) scale({media.scale});
+          transition-delay: {media.id * animationDelay}ms;
         "
       >
         {#if media.type === 'video'}
           <video 
-            src={media.src}
+            src={media.src} 
+            class="media-element video-element"
             autoplay 
             muted 
             loop 
             playsinline
-            class="media-element video-element"
             on:loadeddata={() => handleMediaLoad(media.id)}
-            on:error={() => handleMediaLoad(media.id)}
           >
             <track kind="captions" />
           </video>
@@ -194,9 +245,9 @@
     {/each}
   </div>
 
-  <!-- Título sobreposto (z-index mais alto) -->
+  <!-- 📝 TÍTULO (CAMADA 3 - MAIS ALTO Z-INDEX) -->
   <div class="header-content">
-    <h1 class="main-title">{title}</h1>
+    <h1 class="main-title" style="color: {titleColor}">{title}</h1>
     <p class="subtitle">{subtitle}</p>
   </div>
 </header>
@@ -210,8 +261,60 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background: #fff;
   }
 
+  /* 🆕 ESTILOS PARA BACKGROUND PERSONALIZADO (CAMADA 1) */
+  .background-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Atrás das mídias caóticas */
+  }
+
+  .background-image,
+  .background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-size: cover;
+    background-position: center;
+  }
+
+  /* Mobile first: mostra mobile por padrão */
+  .background-image.desktop,
+  .background-video.desktop {
+    display: none;
+  }
+
+  .background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2; /* Acima do background, mas abaixo das mídias */
+  }
+
+  /* Desktop: esconde mobile e mostra desktop */
+  @media (min-width: 769px) {
+    .background-image.mobile,
+    .background-video.mobile {
+      display: none;
+    }
+
+    .background-image.desktop,
+    .background-video.desktop {
+      display: block;
+    }
+  }
+
+  /* 🎪 ESTILOS DAS MÍDIAS CAÓTICAS (CAMADA 2) */
   .media-container {
     position: absolute;
     top: 0;
@@ -219,6 +322,7 @@
     width: 100%;
     height: 100%;
     pointer-events: none;
+    z-index: 5; /* Acima do background e overlay */
   }
 
   .media-item {
@@ -233,22 +337,22 @@
     opacity: 1;
   }
 
-  /* Níveis de Z-index */
+  /* Níveis de Z-index para mídias caóticas (ACIMA DO BACKGROUND) */
   .z-level-1 {
-    z-index: 1;
+    z-index: 6;
   }
 
   .z-level-2 {
-    z-index: 2;
+    z-index: 7;
   }
 
   .z-level-3 {
-    z-index: 3;
+    z-index: 8;
   }
 
   .media-element {
-    width: 220px;
-    height: 165px;
+    width: var(--media-width, 220px);
+    height: var(--media-height, 165px);
     object-fit: cover;
     border-radius: 8px;
     box-shadow: 
@@ -265,16 +369,23 @@
     border: 2px solid rgba(255, 255, 255, 0.2);
   }
 
+  /* 📝 CONTEÚDO DO HEADER */
   .header-content {
     position: relative;
     z-index: 10; /* Acima de todas as mídias */
     text-align: center;
     color: white;
-    background: #fff;
+    /* background: rgba(255, 255, 255, 0.95);
     padding: 2rem 3rem;
     border-radius: 15px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px); */
+  }
+
+  .custom-background .header-content {
+    /* background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px); */
   }
 
   .main-title {
@@ -284,7 +395,6 @@
     text-transform: uppercase;
     letter-spacing: 0.1em;
     background-size: 400% 400%;
-    color: #232323;
   }
 
   .subtitle {
@@ -295,8 +405,13 @@
     color: #666;
   }
 
-  /* Responsividade */
+  /* Responsividade com props customizáveis */
   @media (max-width: 768px) {
+    .media-container {
+      --media-width: var(--media-width-mobile, 160px);
+      --media-height: var(--media-height-mobile, 120px);
+    }
+
     .main-title {
       font-size: 2.5rem;
     }
@@ -306,23 +421,32 @@
     }
 
     .header-content {
-      padding: 1.5rem 2rem;
-    }
-
-    .media-element {
-      width: 160px;
-      height: 120px;
+      /* padding: 1.5rem 2rem; */
     }
   }
 
   @media (max-width: 480px) {
-    .main-title {
-      font-size: 2rem;
+    .media-container {
+      --media-width: calc(var(--media-width-mobile, 160px) * 0.75);
+      --media-height: calc(var(--media-height-mobile, 120px) * 0.75);
     }
 
-    .media-element {
-      width: 120px;
-      height: 90px;
+    .main-title {
+      font-size: 3rem;
+      text-align: left;
+      padding: 0;
+      margin: 0;
+      line-height: 3rem;
+      padding-left: 2%;
+      font-weight: 1000;
+      font-style: normal;
+    }
+
+        .subtitle {
+      font-size: 1.5rem;
+      text-align: left;
+      padding-left: 2%;
+      line-height: 1.5rem;
     }
   }
 
@@ -331,18 +455,6 @@
     transform-origin: center center;
     backface-visibility: hidden;
     perspective: 1000px;
-  }
-
-  /* Efeitos visuais de fundo */
-  .chaotic-header::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    pointer-events: none;
-    z-index: 0;
   }
 
   /* Animação sutil de flutuação para elementos carregados */

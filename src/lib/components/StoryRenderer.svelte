@@ -323,19 +323,33 @@
 					overlay={stringToBoolean(props.overlay, true)}
 				/>
 
-			<!-- 🌪️ NOVO: Header Caótico -->
+			<!-- 🌪️ Header Caótico -->
 			{:else if componentType === 'header-caotico'}
 				<HeaderCaotico
 					title={props.title || 'HEADER CAÓTICO'}
 					subtitle={props.subtitle || '40 mídias se movimentando dinamicamente'}
+					titleColor={props.titleColor || '#232323'}
 					medias={processChaoticMedias(props.medias || [])}
+					
+					useCustomBackground={stringToBoolean(props.useCustomBackground, false)}
+					backgroundImage={props.backgroundImage || ''}
+					backgroundImageMobile={props.backgroundImageMobile || ''}
+					backgroundVideo={props.backgroundVideo || ''}
+					backgroundVideoMobile={props.backgroundVideoMobile || ''}
+					overlay={stringToBoolean(props.overlay, true)}
+					overlayOpacity={parseFloat(props.overlayOpacity) || 0.5}
+					
+					totalDefaultMedias={parseInt(props.totalDefaultMedias) || 40}
 					shuffleInterval={parseInt(props.shuffleInterval) || 3000}
-					animationDelay={parseInt(props.animationDelay) || 100}
-					backgroundColor={props.backgroundColor || '#1a1a1a'}
-					titleColor={props.titleColor || 'linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f9ca24)'}
+					animationDelay={parseInt(props.animationDelay) || 300}
+					
+					mediaWidth={parseInt(props.mediaWidth) || 220}
+					mediaHeight={parseInt(props.mediaHeight) || 165}
+					mediaWidthMobile={parseInt(props.mediaWidthMobile) || 160}
+					mediaHeightMobile={parseInt(props.mediaHeightMobile) || 120}
+					mediaSizeVariation={parseFloat(props.mediaSizeVariation) || 0.4}
 				/>
-
-			<!-- Text -->
+							<!-- Text -->
 			{:else if componentType === 'text'}
 				<div class="section-content">
 					<StoryText 
