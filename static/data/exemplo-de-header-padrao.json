@@ -21,18 +21,32 @@
   "paragraphs": [
     {
       "type": "header-caotico",
+      "medias": [
+        {
+          "type": "image",
+          "src": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/header/header4.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/header/header2.jpg"
+        },
+        {
+          "type": "image",
+          "src": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/header/header5.jpg"
+        }
+      ],
       "title": "A TRAMA DO GOLPE",
       "subtitle": "Um julgamento inédito na história brasileira",
       "titleColor": "#232323",
-      "totalDefaultMedias": "8",
       "shuffleInterval": "10000",
+      "animationDelay": "5000",
       "useCustomBackground": "true",
       "backgroundImage": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/header_mob.jpg",
       "backgroundImageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/header_mob.jpg",
-      "overlay": "false",
+      "overlay": "true",
       "overlayOpacity": "0.4",
-      "mediaWidthMobile": "200",
-      "mediaHeightMobile": "400"
+      "mediaWidthMobile": "300",
+      "mediaHeightMobile": "auto"
     },
     {
       "type": "header",
