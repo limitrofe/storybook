@@ -61,15 +61,55 @@ export function parseStoryComponents(paragraphs) {
 				component.overlay = paragraph.overlay;
 				break;
 
-			// 🔥 ADICIONE O NOVO CASE AQUI
-			case 'intertitulo-imagem':
-				component.type = 'split-title'; // O tipo que o StoryRenderer vai usar
-				component.text = paragraph.text;
-				component.image = paragraph.image;
-				component.backgroundColor = paragraph.backgroundColor;
-				component.textColor = paragraph.textColor;
-				component.underlineGif = paragraph.underlineGif;
-				break;
+case 'layout-flexivel':
+case 'flexible-layout':
+case 'layout-personalizado':
+	component.type = 'flexible-layout';
+	
+	// TEXTO
+	component.text = paragraph.text || '';
+	component.textAlign = paragraph.textAlign || 'left';
+	component.textPosition = paragraph.textPosition || 'left';
+	component.textColor = paragraph.textColor || '#ffffff';
+	component.fontSize = paragraph.fontSize || 'clamp(2rem, 5vw, 4rem)';
+	component.fontSizeMobile = paragraph.fontSizeMobile || 'clamp(1.5rem, 8vw, 2.5rem)';
+	component.textZIndex = paragraph.textZIndex || 2;
+
+	// IMAGEM 1 - Grifo/Destaque
+	component.image1Desktop = paragraph.image1Desktop || '';
+	component.image1Mobile = paragraph.image1Mobile || '';
+	component.image1Width = paragraph.image1Width || '200px';
+	component.image1Height = paragraph.image1Height || '20px';
+	component.image1WidthMobile = paragraph.image1WidthMobile || '150px';
+	component.image1HeightMobile = paragraph.image1HeightMobile || '15px';
+	component.image1X = paragraph.image1X || '0px';
+	component.image1Y = paragraph.image1Y || '0px';
+	component.image1XMobile = paragraph.image1XMobile || '0px';
+	component.image1YMobile = paragraph.image1YMobile || '0px';
+	component.image1ZIndex = paragraph.image1ZIndex || 3;
+
+	// IMAGEM 2 - Principal
+	component.image2Desktop = paragraph.image2Desktop || '';
+	component.image2Mobile = paragraph.image2Mobile || '';
+	component.image2Width = paragraph.image2Width || '400px';
+	component.image2Height = paragraph.image2Height || '500px';
+	component.image2WidthMobile = paragraph.image2WidthMobile || '300px';
+	component.image2HeightMobile = paragraph.image2HeightMobile || '400px';
+	component.image2Position = paragraph.image2Position || 'right';
+	component.image2X = paragraph.image2X || '0px';
+	component.image2Y = paragraph.image2Y || '0px';
+	component.image2XMobile = paragraph.image2XMobile || '0px';
+	component.image2YMobile = paragraph.image2YMobile || '0px';
+	component.image2ZIndex = paragraph.image2ZIndex || 1;
+
+	// LAYOUT
+	component.backgroundColor = paragraph.backgroundColor || '#1a1a1a';
+	component.minHeight = paragraph.minHeight || '80vh';
+	component.minHeightMobile = paragraph.minHeightMobile || '70vh';
+	component.padding = paragraph.padding || '2rem';
+	component.paddingMobile = paragraph.paddingMobile || '1.5rem';
+	break;
+
 
 
 

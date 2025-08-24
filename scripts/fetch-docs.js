@@ -913,56 +913,6 @@ if (['header-caotico', 'header-caótico', 'caotico', 'chaotic-header', 'caos'].i
     }
 
 
-    // ✨ CORREÇÃO FINAL E ROBUSTA PARA O INTERTÍTULO COM IMAGEM (SPLIT-TITLE)
-    if (['intertitulo-imagem', 'split-title'].includes(paragraph.type?.toLowerCase())) {
-      console.log('🖼️ Processando Intertítulo com Imagem (MÉTODO ROBUSTO)...');
-
-      const props = { type: paragraph.type }; // Inicia o objeto de propriedades
-      let remainingBlock = block; // Copia o bloco de texto para ser processado
-
-      // 1. Define todas as propriedades possíveis, exceto 'text'
-      const propKeys = [
-        'underlineLines', 'imageDesktop', 'image', 'imageMobile',
-        'underlineImageDesktop', 'underlineImageMobile', 'underlineWidthDesktop',
-        'underlineHeightDesktop', 'underlineWidthMobile', 'underlineHeightMobile',
-        'backgroundColor', 'textColor'
-      ];
-
-      // 2. Extrai cada propriedade individualmente do bloco de texto
-      propKeys.forEach(key => {
-        // Regex para encontrar "chave: valor"
-        const regex = new RegExp(`\\b${key}:\\s*([^\\n<]*)`, 'i');
-        const match = remainingBlock.match(regex);
-        
-        if (match && match[1]) {
-          // Adiciona a propriedade encontrada ao nosso objeto
-          props[key] = decodeHTMLEntities(match[1].trim());
-          // E remove a linha inteira do bloco, para não ser confundida com o texto principal
-          remainingBlock = remainingBlock.replace(match[0], '');
-        }
-      });
-
-      // 3. O que sobrou em 'remainingBlock' é o 'type' e o 'text'. Vamos extrair o texto.
-      const textMatch = remainingBlock.match(/text:\s*([\s\S]*)/si);
-      if (textMatch && textMatch[1]) {
-        const rawTextBlock = textMatch[1].trim();
-        // Converte as quebras de parágrafo <p> para <br>
-        const textWithBreaks = rawTextBlock.replace(/<p[^>]*>/gi, '').replace(/<\/p>/gi, '<br>');
-        props.text = cleanAndFormatHTML(textWithBreaks);
-      }
-      
-      // 4. Garante a compatibilidade com a propriedade "image" antiga
-      if (props.image && !props.imageDesktop) {
-        props.imageDesktop = props.image;
-      }
-
-      console.log(`   ✅ Texto: ${props.text ? 'Sim' : 'Não'} | Grifo: ${props.underlineImageDesktop ? 'Sim' : 'Não'} | Imagem: ${props.imageDesktop ? 'Sim' : 'Não'}`);
-      
-      paragraphs.push(props);
-      continue;
-    }
-
-
 
 
     // 🆕 TRATAMENTO ESPECÍFICO PARA SCROLLYFRAMES

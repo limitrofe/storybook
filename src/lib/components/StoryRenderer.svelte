@@ -30,7 +30,7 @@
 	import CrimeExplainer from './story/CrimeExplainer.svelte';
 	// 🌪️ NOVO: Header Caótico
 	import HeaderCaotico from './story/HeaderCaotico.svelte';
-import SplitTitle from './story/SplitTitle.svelte';
+  import FlexibleLayout from './story/FlexibleLayout.svelte'; 
 
 	export let storyData = {};
 
@@ -64,8 +64,10 @@ import SplitTitle from './story/SplitTitle.svelte';
 			case 'titulo':
 				return 'section-title';
 
-			case 'intertitulo-imagem':
-    	        return 'split-title';
+case 'layout-flexivel':
+case 'flexible-layout': 
+case 'layout-personalizado':
+	return 'flexible-layout';
 
 			case 'frase':
 			case 'citacao':
@@ -400,16 +402,50 @@ import SplitTitle from './story/SplitTitle.svelte';
 					overlay={stringToBoolean(props.overlay, false)}
 				/>
 
-			{:else if componentType === 'split-title'}
-            	<SplitTitle
-					text={props.text}
-					image={props.image}
-					backgroundColor={props.backgroundColor}
-					textColor={props.textColor}
-					underlineGif={props.underlineGif}
-           		 />
-
-			<!-- Photo -->
+<!-- Adicione este bloco no switch de componentes -->
+{:else if componentType === 'flexible-layout'}
+	<FlexibleLayout
+		text={props.text || ''}
+		textAlign={props.textAlign || 'left'}
+		textPosition={props.textPosition || 'left'}
+		textColor={props.textColor || '#ffffff'}
+		fontSize={props.fontSize || 'clamp(2rem, 5vw, 4rem)'}
+		fontSizeMobile={props.fontSizeMobile || 'clamp(1.5rem, 8vw, 2.5rem)'}
+		textZIndex={props.textZIndex || 2}
+		
+		image1Desktop={props.image1Desktop || ''}
+		image1Mobile={props.image1Mobile || ''}
+		image1Width={props.image1Width || '200px'}
+		image1Height={props.image1Height || '20px'}
+		image1WidthMobile={props.image1WidthMobile || '150px'}
+		image1HeightMobile={props.image1HeightMobile || '15px'}
+		image1X={props.image1X || '0px'}
+		image1Y={props.image1Y || '0px'}
+		image1XMobile={props.image1XMobile || '0px'}
+		image1YMobile={props.image1YMobile || '0px'}
+		image1ZIndex={props.image1ZIndex || 3}
+		
+		image2Desktop={props.image2Desktop || ''}
+		image2Mobile={props.image2Mobile || ''}
+		image2Width={props.image2Width || '400px'}
+		image2Height={props.image2Height || '500px'}
+		image2WidthMobile={props.image2WidthMobile || '300px'}
+		image2HeightMobile={props.image2HeightMobile || '400px'}
+		image2Position={props.image2Position || 'right'}
+		image2X={props.image2X || '0px'}
+		image2Y={props.image2Y || '0px'}
+		image2XMobile={props.image2XMobile || '0px'}
+		image2YMobile={props.image2YMobile || '0px'}
+		image2ZIndex={props.image2ZIndex || 1}
+		
+		backgroundColor={props.backgroundColor || '#1a1a1a'}
+		minHeight={props.minHeight || '80vh'}
+		minHeightMobile={props.minHeightMobile || '70vh'}
+		padding={props.padding || '2rem'}
+		paddingMobile={props.paddingMobile || '1.5rem'}
+	/>
+	
+	<!-- Photo -->
 			{:else if componentType === 'photo'}
 				<PhotoWithCaption
 					src={props.src}

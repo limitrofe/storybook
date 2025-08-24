@@ -1,17 +1,20 @@
+<!-- src/lib/components/story/SplitTitle.svelte -->
 <script>
-  // Props para controle total
+  // Props principais
   export let text = '';
+  export let image = '';
   export let underlineLines = '';
 
-  // Imagem principal (Desktop e Mobile)
+  // Imagens principais (Desktop e Mobile) 
   export let imageDesktop = '';
-  export let imageMobile = ''; // Se não for fornecida, usa a de desktop
+  export let imageMobile = '';
 
-  // Imagem do grifo (Desktop e Mobile)
+  // Sistema de grifo/destaque
   export let underlineImageDesktop = '';
-  export let underlineImageMobile = ''; // Se não for fornecida, usa a de desktop
+  export let underlineImageMobile = '';
+  export let underlineGif = '';
 
-  // Dimensões do grifo (Desktop e Mobile)
+  // Dimensões do grifo
   export let underlineWidthDesktop = '250px';
   export let underlineHeightDesktop = '20px';
   export let underlineWidthMobile = '180px';
@@ -21,93 +24,243 @@
   export let backgroundColor = '#1a1a1a';
   export let textColor = '#ffffff';
 
-  // Lógica interna para processar o texto
+  // ✅ NOVO: Controle de largura do texto
+  export let textWidth = '70%';        // Desktop
+  export let textWidthMobile = '100%'; // Mobile
+
+  // Lógica para resolver as imagens
+  $: finalImageDesktop = imageDesktop || image;
+  $: finalImageMobile = imageMobile || image || finalImageDesktop;
+  $: finalUnderlineDesktop = underlineImageDesktop || underlineGif;
+  $: finalUnderlineMobile = underlineImageMobile || underlineGif || finalUnderlineDesktop;
+
+  // Processar texto e linhas
   $: lines = text.split('<br>').map(line => line.trim());
   $: linesToUnderline = underlineLines.toString().split(',').map(n => parseInt(n.trim(), 10));
 </script>
 
-<section class="split-section" style="--bg-color: {backgroundColor};">
-
-  <div class="column text-column">
-    <div class="text-wrapper" style="--text-color: {textColor};">
-      <h2 class="title">
-        {#each lines as line, i}
-          {@const lineNumber = i + 1}
-          {@const shouldUnderline = linesToUnderline.includes(lineNumber)}
-
-          <span class:underlined-line={shouldUnderline}>
-            {@html line}
-
-            {#if shouldUnderline && underlineImageDesktop}
-              <picture class="underline-image">
-                <source media="(max-width: 799px)" srcset={underlineImageMobile || underlineImageDesktop}>
-                <source media="(min-width: 800px)" srcset={underlineImageDesktop}>
-                <img 
-                  src={underlineImageDesktop} 
-                  alt="Grifo decorativo"
-                  style:--w-desk="{underlineWidthDesktop}"
-                  style:--h-desk="{underlineHeightDesktop}"
-                  style:--w-mob="{underlineWidthMobile}"
-                  style:--h-mob="{underlineHeightMobile}"
-                />
-              </picture>
-            {/if}
-          </span>
-
-          {#if i < lines.length - 1}<br />{/if}
-        {/each}
-      </h2>
-    </div>
+<section 
+  class="split-section" 
+  style="
+    --bg-color: {backgroundColor}; 
+    --text-color: {textColor};
+    --text-width: {textWidth};
+    --text-width-mobile: {textWidthMobile};
+  "
+>
+  <!-- Imagem de fundo (fica atrás de tudo) -->
+  <div class="background-image">
+    <picture>
+      <source 
+        media="(max-width: 799px)" 
+        srcset={finalImageMobile}
+      >
+      <source 
+        media="(min-width: 800px)" 
+        srcset={finalImageDesktop}
+      >
+      <img src={finalImageDesktop} alt="Imagem de destaque" />
+    </picture>
   </div>
 
-  <div class="column image-column">
-    <picture>
-      <source media="(max-width: 799px)" srcset={imageMobile || imageDesktop}>
-      <source media="(min-width: 800px)" srcset={imageDesktop}>
-      <img src={imageDesktop} alt="Imagem de destaque" />
-    </picture>
+  <!-- Texto por cima da imagem -->
+  <div class="text-overlay">
+    <div class="text-wrapper">
+      <h2 class="title">
+        {#if text && text.trim()}
+          {#each lines as line, i}
+            {@const lineNumber = i + 1}
+            {@const shouldUnderline = linesToUnderline.includes(lineNumber)}
+
+            <span class="line-container" class:has-underline={shouldUnderline}>
+              {@html line}
+
+              {#if shouldUnderline && finalUnderlineDesktop}
+                <picture class="underline-image">
+                  <source 
+                    media="(max-width: 799px)" 
+                    srcset={finalUnderlineMobile}
+                  >
+                  <source 
+                    media="(min-width: 800px)" 
+                    srcset={finalUnderlineDesktop}
+                  >
+                  <img 
+                    src={finalUnderlineDesktop} 
+                    alt="Grifo decorativo"
+                    style="
+                      --w-desktop: {underlineWidthDesktop};
+                      --h-desktop: {underlineHeightDesktop};
+                      --w-mobile: {underlineWidthMobile};
+                      --h-mobile: {underlineHeightMobile};
+                    "
+                  />
+                </picture>
+              {/if}
+            </span>
+
+            {#if i < lines.length - 1}<br />{/if}
+          {/each}
+        {/if}
+      </h2>
+    </div>
   </div>
 </section>
 
 <style>
-  /* Layout principal (continua o mesmo, está correto) */
-  .split-section { display: flex; margin: 0; padding: 0; width: 100%; min-height: 80vh; background-color: var(--bg-color); overflow: hidden; }
-  .column { width: 50%; height: auto; display: flex; align-items: center; justify-content: center; box-sizing: border-box; }
-  .text-column { padding: 1.5rem; }
-  .image-column { padding: 0; }
-  .image-column picture, .image-column img { width: 100%; height: 100%; object-fit: cover; }
+  /* ================================
+     CONTAINER PRINCIPAL
+     ================================ */
 
-  /* Estilos do texto */
-  .title { font-family: 'obviously-compressed', sans-serif; font-size: clamp(1.8rem, 7vw, 4rem); font-weight: 700; line-height: 1.1; color: var(--text-color); text-align: left; margin: 0; }
-  
-  /* Container da linha que terá o grifo */
-  .underlined-line {
+  .split-section {
     position: relative;
-    padding-bottom: 25px; 
-    display: inline-block;
+    width: 100%;
+    min-height: 70vh;
+    background-color: var(--bg-color);
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end; /* Alinha conteúdo na base */
   }
 
-  /* O grifo (a imagem) */
-  .underline-image {
+  /* ================================
+     IMAGEM DE FUNDO
+     ================================ */
+
+  .background-image {
     position: absolute;
+    top: 0;
+    right: 0;
     bottom: 0;
-    left: 0;
-    pointer-events: none; /* Impede a imagem de ser clicável/arrastável */
+    width: 100%;
     z-index: 1;
   }
-  
-  .underline-image img {
-    /* Define as dimensões com base nas variáveis CSS vindas das props */
-    width: var(--w-desk);
-    height: var(--h-desk);
-    object-fit: contain;
+
+  .background-image picture,
+  .background-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: right bottom; /* Imagem alinhada direita e embaixo */
+    display: block;
   }
 
-  /* Regra para mobile */
-  @media (max-width: 799px) {
+  /* ================================
+     TEXTO SOBREPOSTO
+     ================================ */
+
+  .text-overlay {
+    position: relative;
+    z-index: 2;
+    width: var(--text-width-mobile);
+    padding: 2rem 1.5rem;
+    display: flex;
+    align-items: center;
+    min-height: 70vh;
+  }
+
+  .text-wrapper {
+    width: 100%;
+  }
+
+  .title {
+    font-family: 'obviously-compressed', 'Arial Black', sans-serif;
+    font-size: clamp(1.8rem, 8vw, 3.2rem);
+    font-weight: 900;
+    line-height: 1.05;
+    color: var(--text-color);
+    text-align: left;
+    margin: 0;
+  }
+
+  /* ================================
+     SISTEMA DE GRIFO/DESTAQUE
+     ================================ */
+
+  .line-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+  }
+
+  .line-container.has-underline {
+    padding-bottom: 30px;
+  }
+
+  .underline-image {
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  .underline-image img {
+    width: var(--w-mobile);
+    height: var(--h-mobile);
+    object-fit: contain;
+    display: block;
+  }
+
+  /* ================================
+     DESKTOP - 800px+
+     ================================ */
+
+  @media (min-width: 800px) {
+    .split-section {
+      min-height: 80vh;
+    }
+
+    .text-overlay {
+      width: var(--text-width);
+      padding: 3rem 2rem;
+      min-height: 80vh;
+    }
+
+    .title {
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+    }
+
+    .line-container.has-underline {
+      padding-bottom: 35px;
+    }
+
     .underline-image img {
-      width: var(--w-mob);
-      height: var(--h-mob);
+      width: var(--w-desktop);
+      height: var(--h-desktop);
+    }
+  }
+
+  /* ================================
+     ULTRA WIDE - 1200px+
+     ================================ */
+
+  @media (min-width: 1200px) {
+    .text-overlay {
+      padding: 4rem 3rem;
+    }
+
+    .title {
+      font-size: clamp(3rem, 4vw, 5rem);
+    }
+  }
+
+  /* ================================
+     ACESSIBILIDADE
+     ================================ */
+
+  @media (prefers-reduced-motion: reduce) {
+    .underline-image img {
+      animation: none !important;
+    }
+  }
+
+  @supports not (font-family: 'obviously-compressed') {
+    .title {
+      font-family: 'Arial Black', 'Helvetica', sans-serif;
+      font-weight: 900;
+      letter-spacing: -0.02em;
     }
   }
 </style>

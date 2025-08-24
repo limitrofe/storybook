@@ -49,19 +49,10 @@
       "mediaHeightMobile": "auto"
     },
     {
-      "type": "intertitulo-imagem",
-      "underlineLines": "2,3",
-      "imageDesktop": "https://s2-g1.glbimg.com/1yT8dtJD1C-bZ12duKE9lfTaqOI=/0x0:1988x1325/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/p/a/6LyzTIQ9CgvFfMvRxWpA/2021-06-24t185058z-1-lynxnpeh5n181-rtroptp-4-politica-bolsonaro-acusacoes.jpg",
-      "imageMobile": "https://s2-g1.glbimg.com/1yT8dtJD1C-bZ12duKE9lfTaqOI=/0x0:1988x1325/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/p/a/6LyzTIQ9CgvFfMvRxWpA/2021-06-24t185058z-1-lynxnpeh5n181-rtroptp-4-politica-bolsonaro-acusacoes.jpg",
-      "underlineImageDesktop": "https://www.animatedimages.org/data/media/562/animated-line-image-0124.gif",
-      "underlineImageMobile": "https://www.animatedimages.org/data/media/562/animated-line-image-0124.gif",
-      "underlineWidthDesktop": "300px",
-      "underlineHeightDesktop": "25px",
-      "underlineWidthMobile": "200px",
-      "underlineHeightMobile": "20px",
-      "backgroundColor": "#1a1a1a",
-      "textColor": "#ffffff",
-      "text": "A primeira linha é normal.<br>Esta segunda linha terá um grifo.<br>E a terceira também.<br><br><br><br><br><br><br><br><br><br><br><br><br><br>"
+      "type": "layout-flexivel",
+      "text": "Pela primeira vez, <br>um ex-presidente<br>da República senta<br>no banco dos réus<br>do Supremo Tribunal<br>Federal acusado<br>de crimes contra<br>a democracia.",
+      "textPosition": "left",
+      "textAlign": "left"
     },
     {
       "type": "header",
