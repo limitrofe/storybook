@@ -30,6 +30,7 @@
 	import CrimeExplainer from './story/CrimeExplainer.svelte';
 	// 🌪️ NOVO: Header Caótico
 	import HeaderCaotico from './story/HeaderCaotico.svelte';
+import SplitTitle from './story/SplitTitle.svelte';
 
 	export let storyData = {};
 
@@ -62,6 +63,9 @@
 			case 'intertitulo':
 			case 'titulo':
 				return 'section-title';
+
+			case 'intertitulo-imagem':
+    	        return 'split-title';
 
 			case 'frase':
 			case 'citacao':
@@ -395,6 +399,15 @@
 					textAlignMobile={props.textAlignMobile}
 					overlay={stringToBoolean(props.overlay, false)}
 				/>
+
+			{:else if componentType === 'split-title'}
+            	<SplitTitle
+					text={props.text}
+					image={props.image}
+					backgroundColor={props.backgroundColor}
+					textColor={props.textColor}
+					underlineGif={props.underlineGif}
+           		 />
 
 			<!-- Photo -->
 			{:else if componentType === 'photo'}

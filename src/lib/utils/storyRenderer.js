@@ -61,6 +61,18 @@ export function parseStoryComponents(paragraphs) {
 				component.overlay = paragraph.overlay;
 				break;
 
+			// 🔥 ADICIONE O NOVO CASE AQUI
+			case 'intertitulo-imagem':
+				component.type = 'split-title'; // O tipo que o StoryRenderer vai usar
+				component.text = paragraph.text;
+				component.image = paragraph.image;
+				component.backgroundColor = paragraph.backgroundColor;
+				component.textColor = paragraph.textColor;
+				component.underlineGif = paragraph.underlineGif;
+				break;
+
+
+
 			case 'foto':
 			case 'imagem':
 				component.type = 'photo';
