@@ -1,4 +1,4 @@
-<!-- StoryRenderer.svelte - COMPLETO com ScrollyFrames, CharacterPresentation, Curiosidades, RecommendedItems e HeaderCaotico -->
+<!-- StoryRenderer.svelte - COMPLETO com ResponsiveMediaLayout -->
 <script>
 	// Importação dos componentes da história
 	import Header from './story/Header.svelte';
@@ -30,7 +30,9 @@
 	import CrimeExplainer from './story/CrimeExplainer.svelte';
 	// 🌪️ NOVO: Header Caótico
 	import HeaderCaotico from './story/HeaderCaotico.svelte';
-  import FlexibleLayout from './story/FlexibleLayout.svelte'; 
+	import FlexibleLayout from './story/FlexibleLayout.svelte';
+	// 🎨 NOVO: ResponsiveMediaLayout
+	import ResponsiveMediaLayout from './story/ResponsiveMediaLayout.svelte';
 
 	export let storyData = {};
 
@@ -64,10 +66,17 @@
 			case 'titulo':
 				return 'section-title';
 
-case 'layout-flexivel':
-case 'flexible-layout': 
-case 'layout-personalizado':
-	return 'flexible-layout';
+			case 'layout-flexivel':
+			case 'flexible-layout': 
+			case 'layout-personalizado':
+				return 'flexible-layout';
+
+			// 🎨 NOVO: ResponsiveMediaLayout
+			case 'responsive-media':
+			case 'responsivemedia':
+			case 'responsive-layout':
+			case 'media-layout':
+				return 'responsive-media';
 
 			case 'frase':
 			case 'citacao':
@@ -298,6 +307,96 @@ case 'layout-personalizado':
 
 		return [];
 	}
+
+	/**
+	 * 🎨 NOVO: Processa array de textos para ResponsiveMediaLayout
+	 */
+	function processTextos(textos) {
+		if (!Array.isArray(textos)) return [];
+		
+		return textos.map(texto => ({
+			content: texto.content || texto.texto || '',
+			fontFamily: texto.fontFamily || texto.familia || 'inherit',
+			fontSize: {
+				desktop: texto.fontSizeDesktop || texto.fontSize?.desktop || '2rem',
+				mobile: texto.fontSizeMobile || texto.fontSize?.mobile || '1.5rem'
+			},
+			fontWeight: {
+				desktop: texto.fontWeightDesktop || texto.fontWeight?.desktop || '400',
+				mobile: texto.fontWeightMobile || texto.fontWeight?.mobile || '400'
+			},
+			lineHeight: {
+				desktop: texto.lineHeightDesktop || texto.lineHeight?.desktop || '1.2',
+				mobile: texto.lineHeightMobile || texto.lineHeight?.mobile || '1.3'
+			},
+			textAlign: {
+				desktop: texto.textAlignDesktop || texto.textAlign?.desktop || 'left',
+				mobile: texto.textAlignMobile || texto.textAlign?.mobile || 'left'
+			},
+			letterSpacing: {
+				desktop: texto.letterSpacingDesktop || texto.letterSpacing?.desktop || '0px',
+				mobile: texto.letterSpacingMobile || texto.letterSpacing?.mobile || '0px'
+			},
+			color: texto.color || texto.cor || '#ffffff',
+			position: {
+				desktop: {
+					x: texto.xDesktop || texto.position?.desktop?.x || '0',
+					y: texto.yDesktop || texto.position?.desktop?.y || '0',
+					z: texto.zDesktop || texto.position?.desktop?.z || '1'
+				},
+				mobile: {
+					x: texto.xMobile || texto.position?.mobile?.x || '0',
+					y: texto.yMobile || texto.position?.mobile?.y || '0',
+					z: texto.zMobile || texto.position?.mobile?.z || '1'
+				}
+			},
+			transform: {
+				desktop: texto.transformDesktop || texto.transform?.desktop || 'none',
+				mobile: texto.transformMobile || texto.transform?.mobile || 'none'
+			}
+		}));
+	}
+
+	/**
+	 * 🎨 NOVO: Processa array de imagens para ResponsiveMediaLayout
+	 */
+	function processImagens(imagens) {
+		if (!Array.isArray(imagens)) return [];
+		
+		return imagens.map(imagem => ({
+			srcDesktop: imagem.srcDesktop || imagem.src || '',
+			srcMobile: imagem.srcMobile || imagem.src || '',
+			alt: imagem.alt || imagem.description || '',
+			width: {
+				desktop: imagem.widthDesktop || imagem.width?.desktop || 'auto',
+				mobile: imagem.widthMobile || imagem.width?.mobile || 'auto'
+			},
+			height: {
+				desktop: imagem.heightDesktop || imagem.height?.desktop || 'auto',
+				mobile: imagem.heightMobile || imagem.height?.mobile || 'auto'
+			},
+			objectFit: {
+				desktop: imagem.objectFitDesktop || imagem.objectFit?.desktop || 'cover',
+				mobile: imagem.objectFitMobile || imagem.objectFit?.mobile || 'cover'
+			},
+			position: {
+				desktop: {
+					x: imagem.xDesktop || imagem.position?.desktop?.x || '0',
+					y: imagem.yDesktop || imagem.position?.desktop?.y || '0',
+					z: imagem.zDesktop || imagem.position?.desktop?.z || '1'
+				},
+				mobile: {
+					x: imagem.xMobile || imagem.position?.mobile?.x || '0',
+					y: imagem.yMobile || imagem.position?.mobile?.y || '0',
+					z: imagem.zMobile || imagem.position?.mobile?.z || '1'
+				}
+			},
+			transform: {
+				desktop: imagem.transformDesktop || imagem.transform?.desktop || 'none',
+				mobile: imagem.transformMobile || imagem.transform?.mobile || 'none'
+			}
+		}));
+	}
 </script>
 
 <article class="story-content">
@@ -355,7 +454,8 @@ case 'layout-personalizado':
 					mediaHeightMobile={parseInt(props.mediaHeightMobile) || 120}
 					mediaSizeVariation={parseFloat(props.mediaSizeVariation) || 0.4}
 				/>
-							<!-- Text -->
+
+			<!-- Text -->
 			{:else if componentType === 'text'}
 				<div class="section-content">
 					<StoryText 
@@ -402,50 +502,69 @@ case 'layout-personalizado':
 					overlay={stringToBoolean(props.overlay, false)}
 				/>
 
-<!-- Adicione este bloco no switch de componentes -->
-{:else if componentType === 'flexible-layout'}
-	<FlexibleLayout
-		text={props.text || ''}
-		textAlign={props.textAlign || 'left'}
-		textPosition={props.textPosition || 'left'}
-		textColor={props.textColor || '#ffffff'}
-		fontSize={props.fontSize || 'clamp(2rem, 5vw, 4rem)'}
-		fontSizeMobile={props.fontSizeMobile || 'clamp(1.5rem, 8vw, 2.5rem)'}
-		textZIndex={props.textZIndex || 2}
-		
-		image1Desktop={props.image1Desktop || ''}
-		image1Mobile={props.image1Mobile || ''}
-		image1Width={props.image1Width || '200px'}
-		image1Height={props.image1Height || '20px'}
-		image1WidthMobile={props.image1WidthMobile || '150px'}
-		image1HeightMobile={props.image1HeightMobile || '15px'}
-		image1X={props.image1X || '0px'}
-		image1Y={props.image1Y || '0px'}
-		image1XMobile={props.image1XMobile || '0px'}
-		image1YMobile={props.image1YMobile || '0px'}
-		image1ZIndex={props.image1ZIndex || 3}
-		
-		image2Desktop={props.image2Desktop || ''}
-		image2Mobile={props.image2Mobile || ''}
-		image2Width={props.image2Width || '400px'}
-		image2Height={props.image2Height || '500px'}
-		image2WidthMobile={props.image2WidthMobile || '300px'}
-		image2HeightMobile={props.image2HeightMobile || '400px'}
-		image2Position={props.image2Position || 'right'}
-		image2X={props.image2X || '0px'}
-		image2Y={props.image2Y || '0px'}
-		image2XMobile={props.image2XMobile || '0px'}
-		image2YMobile={props.image2YMobile || '0px'}
-		image2ZIndex={props.image2ZIndex || 1}
-		
-		backgroundColor={props.backgroundColor || '#1a1a1a'}
-		minHeight={props.minHeight || '80vh'}
-		minHeightMobile={props.minHeightMobile || '70vh'}
-		padding={props.padding || '2rem'}
-		paddingMobile={props.paddingMobile || '1.5rem'}
-	/>
-	
-	<!-- Photo -->
+			<!-- Flexible Layout -->
+			{:else if componentType === 'flexible-layout'}
+				<FlexibleLayout
+					text={props.text || ''}
+					textAlign={props.textAlign || 'left'}
+					textPosition={props.textPosition || 'left'}
+					textColor={props.textColor || '#ffffff'}
+					fontSize={props.fontSize || 'clamp(2rem, 5vw, 4rem)'}
+					fontSizeMobile={props.fontSizeMobile || 'clamp(1.5rem, 8vw, 2.5rem)'}
+					textZIndex={props.textZIndex || 2}
+					
+					image1Desktop={props.image1Desktop || ''}
+					image1Mobile={props.image1Mobile || ''}
+					image1Width={props.image1Width || '200px'}
+					image1Height={props.image1Height || '20px'}
+					image1WidthMobile={props.image1WidthMobile || '150px'}
+					image1HeightMobile={props.image1HeightMobile || '15px'}
+					image1X={props.image1X || '0px'}
+					image1Y={props.image1Y || '0px'}
+					image1XMobile={props.image1XMobile || '0px'}
+					image1YMobile={props.image1YMobile || '0px'}
+					image1ZIndex={props.image1ZIndex || 3}
+					
+					image2Desktop={props.image2Desktop || ''}
+					image2Mobile={props.image2Mobile || ''}
+					image2Width={props.image2Width || '400px'}
+					image2Height={props.image2Height || '500px'}
+					image2WidthMobile={props.image2WidthMobile || '300px'}
+					image2HeightMobile={props.image2HeightMobile || '400px'}
+					image2Position={props.image2Position || 'right'}
+					image2X={props.image2X || '0px'}
+					image2Y={props.image2Y || '0px'}
+					image2XMobile={props.image2XMobile || '0px'}
+					image2YMobile={props.image2YMobile || '0px'}
+					image2ZIndex={props.image2ZIndex || 1}
+					
+					backgroundColor={props.backgroundColor || '#1a1a1a'}
+					minHeight={props.minHeight || '80vh'}
+					minHeightMobile={props.minHeightMobile || '70vh'}
+					padding={props.padding || '2rem'}
+					paddingMobile={props.paddingMobile || '1.5rem'}
+				/>
+
+			<!-- 🎨 NOVO: ResponsiveMediaLayout -->
+			{:else if componentType === 'responsive-media'}
+				<ResponsiveMediaLayout 
+					heightDesktop={props.heightDesktop || props.height || '100vh'}
+					heightMobile={props.heightMobile || props.height || '100vh'}
+					backgroundType={props.backgroundType || 'color'}
+					backgroundColor={props.backgroundColor || '#000000'}
+					backgroundImageDesktop={props.backgroundImageDesktop || props.backgroundImage || ''}
+					backgroundImageMobile={props.backgroundImageMobile || props.backgroundImage || ''}
+					backgroundPositionDesktop={props.backgroundPositionDesktop || props.backgroundPosition || 'center center'}
+					backgroundPositionMobile={props.backgroundPositionMobile || props.backgroundPosition || 'center center'}
+					backgroundSizeDesktop={props.backgroundSizeDesktop || props.backgroundSize || 'cover'}
+					backgroundSizeMobile={props.backgroundSizeMobile || props.backgroundSize || 'cover'}
+					backgroundVideoDesktop={props.backgroundVideoDesktop || props.backgroundVideo || ''}
+					backgroundVideoMobile={props.backgroundVideoMobile || props.backgroundVideo || ''}
+					textos={processTextos(props.textos || props.texts || [])}
+					imagens={processImagens(props.imagens || props.images || [])}
+				/>
+
+			<!-- Photo -->
 			{:else if componentType === 'photo'}
 				<PhotoWithCaption
 					src={props.src}

@@ -1,9 +1,9 @@
-<!-- src/lib/components/story/FlexibleLayout.svelte -->
+<!-- VERSÃO DEBUG - FlexibleLayout.svelte -->
 <script>
   // TEXTO - Controle total
   export let text = '';
-  export let textAlign = 'left'; // left, right, center
-  export let textPosition = 'left'; // left, right, center (posição na tela)
+  export let textAlign = 'left';
+  export let textPosition = 'left';
   export let textColor = '#ffffff';
   export let fontSize = 'clamp(2rem, 5vw, 4rem)';
   export let fontSizeMobile = 'clamp(1.5rem, 8vw, 2.5rem)';
@@ -16,8 +16,8 @@
   export let image1Height = '20px';
   export let image1WidthMobile = '150px';
   export let image1HeightMobile = '15px';
-  export let image1X = '0px'; // Posição X
-  export let image1Y = '0px'; // Posição Y
+  export let image1X = '0px';
+  export let image1Y = '0px';
   export let image1XMobile = '0px';
   export let image1YMobile = '0px';
   export let image1ZIndex = 3;
@@ -29,7 +29,7 @@
   export let image2Height = '500px';
   export let image2WidthMobile = '300px';
   export let image2HeightMobile = '400px';
-  export let image2Position = 'right'; // left, right, center, top, middle, bottom
+  export let image2Position = 'right';
   export let image2X = '0px';
   export let image2Y = '0px';
   export let image2XMobile = '0px';
@@ -43,6 +43,35 @@
   export let padding = '2rem';
   export let paddingMobile = '1.5rem';
 
+  // 🔍 DEBUG: Verificar TUDO que está chegando
+//   $: {
+//     console.group('🔍 FLEXIBLE LAYOUT DEBUG');
+//     console.log('Props recebidas:', {
+//       image1Desktop: `"${image1Desktop}"`,
+//       image2Desktop: `"${image2Desktop}"`,
+//       image1Mobile: `"${image1Mobile}"`,
+//       image2Mobile: `"${image2Mobile}"`,
+//       image2Position: `"${image2Position}"`,
+//       text: text ? 'OK' : 'VAZIO'
+//     });
+    
+//     console.log('Condições if:', {
+//       'image1Desktop': !!image1Desktop,
+//       'image2Desktop': !!image2Desktop,
+//       'image1Desktop.length': image1Desktop ? image1Desktop.length : 0,
+//       'image2Desktop.length': image2Desktop ? image2Desktop.length : 0
+//     });
+    
+//     console.log('Valores computados:', {
+//       finalImage1Mobile: image1Mobile || image1Desktop,
+//       finalImage2Mobile: image2Mobile || image2Desktop,
+//       textPositionClass: `text-position-${textPosition}`,
+//       textAlignClass: `text-align-${textAlign}`,
+//       image2PositionClass: `image2-position-${image2Position}`
+//     });
+//     console.groupEnd();
+//   }
+
   // Lógica para processar o texto
   $: lines = text.split('<br>').map(line => line.trim());
 
@@ -53,10 +82,14 @@
   // Classes para posicionamento do texto
   $: textPositionClass = `text-position-${textPosition}`;
   $: textAlignClass = `text-align-${textAlign}`;
-
-  // Classes para posicionamento da imagem 2
   $: image2PositionClass = `image2-position-${image2Position}`;
 </script>
+
+<!-- 🚨 DEBUG ALERT NO TOPO -->
+<!-- <div style="position: fixed; top: 0; left: 0; background: red; color: white; padding: 10px; z-index: 9999; font-size: 12px;">
+  DEBUG: img1="{image1Desktop}" | img2="{image2Desktop}" | 
+  Show1={!!image1Desktop} | Show2={!!image2Desktop}
+</div> -->
 
 <section 
   class="flexible-layout"
@@ -90,24 +123,42 @@
     --image2-z-index: {image2ZIndex};
   "
 >
+  <!-- 🔍 DEBUG: SEMPRE MOSTRAR (para ver se o problema é no if) -->
+  <!-- <div style="position: absolute; top: 10px; right: 10px; background: yellow; color: black; padding: 5px; font-size: 10px; z-index: 999;">
+    IMG1: {image1Desktop ? 'SIM' : 'NÃO'} | 
+    IMG2: {image2Desktop ? 'SIM' : 'NÃO'}
+  </div> -->
+
   <!-- IMAGEM 2 - Principal (fica atrás) -->
   {#if image2Desktop}
-    <div class="image2-container {image2PositionClass}">
+    <div class="image2-container {image2PositionClass}" >
       <picture class="image2">
-        <source 
-          media="(max-width: 799px)" 
-          srcset={finalImage2Mobile}
-        >
+        {#if finalImage2Mobile && finalImage2Mobile !== image2Desktop}
+          <source 
+            media="(max-width: 799px)" 
+            srcset="{finalImage2Mobile}"
+          />
+        {/if}
         <source 
           media="(min-width: 800px)" 
-          srcset={image2Desktop}
-        >
+          srcset="{image2Desktop}"
+        />
         <img 
-          src={image2Desktop} 
-          alt="Imagem principal" 
+          src="{image2Desktop}" 
+          alt="Imagem principal"
+          loading="lazy"
+          style="border: 0;"
+          on:error={(e) => {
+            console.error('❌ Erro ao carregar imagem principal:', e.target.src);
+            e.target.style.display = 'none';
+          }}
+          on:load={(e) => {
+            console.log('✅ Imagem principal carregada:', e.target.src);
+          }}
         />
       </picture>
     </div>
+  {:else}
   {/if}
 
   <!-- TEXTO -->
@@ -128,102 +179,97 @@
   {#if image1Desktop}
     <div class="image1-container">
       <picture class="image1">
-        <source 
-          media="(max-width: 799px)" 
-          srcset={finalImage1Mobile}
-        >
+        {#if finalImage1Mobile && finalImage1Mobile !== image1Desktop}
+          <source 
+            media="(max-width: 799px)" 
+            srcset="{finalImage1Mobile}"
+          />
+        {/if}
         <source 
           media="(min-width: 800px)" 
-          srcset={image1Desktop}
-        >
+          srcset="{image1Desktop}"
+        />
         <img 
-          src={image1Desktop} 
-          alt="Destaque decorativo" 
+          src="{image1Desktop}" 
+          alt="Destaque decorativo"
+          loading="lazy"
+          on:error={(e) => {
+            console.error('❌ Erro ao carregar grifo:', e.target.src);
+            e.target.style.display = 'none';
+          }}
+          on:load={(e) => {
+            console.log('✅ Grifo carregado:', e.target.src);
+          }}
         />
       </picture>
     </div>
+  {:else}
+    <!-- 🚨 DEBUG: Mostrar quando NÃO tem imagem1 -->
+    <!-- <div>
+      ❌ IMAGEM 1 NÃO ENCONTRADA<br>
+      image1Desktop = "{image1Desktop}"<br>
+      Length: {image1Desktop ? image1Desktop.length : 'undefined'}
+    </div> -->
   {/if}
 </section>
 
 <style>
-  /* ================================
-     CONTAINER PRINCIPAL
-     ================================ */
+.flexible-layout {
+  position: relative;
+  width: 100%;
+  min-height: var(--min-height-mobile);
+  background-color: var(--bg-color);
+  padding: 0; /* O padding será movido para o container de texto */
+  margin: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+  /* display: flex; <--- REMOVER */
+  /* flex-direction: column; <--- REMOVER */
+  /* align-items: flex-start; <--- REMOVER */
+}
 
-  .flexible-layout {
-    position: relative;
-    width: 100%;
-    min-height: var(--min-height-mobile);
-    background-color: var(--bg-color);
-    padding: var(--padding-mobile);
-    margin: 0;
-    overflow: hidden;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column; /* MOBILE: vertical stack */
-    align-items: flex-start;
-  }
+.text-container {
+  /* position: relative; <--- ALTERAR */
+  position: absolute;
+  top: 3%;
+  left: 3%;
+  height: 100%; /* Para preencher a altura */
+  padding: var(--padding-mobile); /* Adicionar padding aqui */
+  box-sizing: border-box; /* Para o padding não aumentar o tamanho */
+  z-index: var(--text-z-index);
+  width: 100%;
+  display: flex;
+  /* order: 1; <--- REMOVER */
+  /* margin-bottom: 2rem; <--- REMOVER */
+}
 
-  /* ================================
-     TEXTO
-     ================================ */
-
-  .text-container {
-    position: relative;
-    z-index: var(--text-z-index);
-    width: 100%;
-    display: flex;
-    order: 1; /* MOBILE: texto primeiro */
-    margin-bottom: 2rem;
-  }
-
-  /* Posicionamento do texto na tela */
-  .text-position-left {
-    justify-content: flex-start;
-  }
-
-  .text-position-center {
-    justify-content: center;
-  }
-
-  .text-position-right {
-    justify-content: flex-end;
-  }
+  .text-position-left { justify-content: flex-start; }
+  .text-position-center { justify-content: center; }
+  .text-position-right { justify-content: flex-end; }
 
   .text-wrapper {
-    max-width: 100%;
+    max-width: 65%;
   }
 
   .title {
-    font-family: 'obviously-compressed', 'Arial Black', sans-serif;
+    font-family: 'Globotipo', 'Opensans', sans-serif;
     font-size: var(--font-size-mobile);
-    font-weight: 900;
-    line-height: 1.05;
+    font-weight: 800;
+    line-height: 1.3;
     color: var(--text-color);
     margin: 0;
+    top: 10%;
+    padding-top: 80px; 
   }
 
-  /* Alinhamento do texto dentro do wrapper */
-  .text-align-left .title {
-    text-align: left;
-  }
-
-  .text-align-center .title {
-    text-align: center;
-  }
-
-  .text-align-right .title {
-    text-align: right;
-  }
+  .text-align-left .title { text-align: left; }
+  .text-align-center .title { text-align: center; }
+  .text-align-right .title { text-align: right; }
 
   .line {
     display: inline-block;
     width: 100%;
   }
-
-  /* ================================
-     IMAGEM 1 - Grifo/Destaque
-     ================================ */
 
   .image1-container {
     position: absolute;
@@ -240,110 +286,50 @@
     display: block;
   }
 
-  /* ================================
-     IMAGEM 2 - Principal
-     ================================ */
-
-  .image2-container {
-    position: relative; /* MOBILE: posição relative */
-    z-index: var(--image2-z-index);
-    order: 2; /* MOBILE: imagem depois */
-    width: 100%;
-    max-width: 80%;
-    margin: 0 auto;
-  }
-
+.image2-container {
+  /* position: relative; <--- ALTERAR */
+  position: absolute;
+  top: var(--image2-y-mobile); /* Adicionar posicionamento */
+  left: var(--image2-x-mobile); /* Adicionar posicionamento */
+  z-index: var(--image2-z-index);
+  /* order: 2; <--- REMOVER */
+  width: var(--image2-width-mobile); /* Usar a variável de largura */
+  /* max-width: 80%; <--- REMOVER */
+  /* margin: 0 auto; <--- REMOVER */
+}
   .image2 img {
     width: 100%;
     height: auto;
-    max-height: 50vh;
     object-fit: cover;
     display: block;
   }
 
-  /* Posições pré-definidas para imagem 2 */
-  .image2-position-right {
-    right: 0;
-    left: auto;
-  }
-
-  .image2-position-center {
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .image2-position-top {
-    top: 0;
-  }
-
-  .image2-position-middle {
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  .image2-position-bottom {
-    bottom: 0;
-    top: auto;
-  }
-
-  /* ✅ NOVO: Posições combinadas que faltavam */
-  .image2-position-right-bottom {
-    right: 0;
-    bottom: 0;
-    top: auto;
-    left: auto;
-  }
-
-  .image2-position-left-bottom {
-    left: 0;
-    bottom: 0;
-    top: auto;
-    right: auto;
-  }
-
-  .image2-position-center-middle {
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  /* Combinações antigas (mantendo compatibilidade) */
-  .image2-position-right.image2-position-bottom {
-    right: 0;
-    bottom: 0;
-    top: auto;
-    left: auto;
-  }
-
-  .image2-position-center.image2-position-middle {
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  /* ================================
-     DESKTOP - 800px+
-     ================================ */
+  .image2-position-right { margin: 0; }
+  .image2-position-left {  margin: 0;}
+  .image2-position-center {  margin: 0; }
+  .image2-position-right-bottom {  margin: 0;}
 
   @media (min-width: 800px) {
     .flexible-layout {
-      min-height: var(--min-height);
-      padding: var(--padding);
-      flex-direction: row; /* DESKTOP: lado a lado */
-      align-items: center;
-    }
+  min-height: var(--min-height);
+  /* padding: var(--padding); <--- REMOVER */
+  /* flex-direction: row; <--- REMOVER */
+  /* align-items: center; <--- REMOVER */
+}
 
-    .text-container {
-      order: 1;
-      width: 60%;
-      margin-bottom: 0;
-    }
+
+.text-container {
+  /* order: 1; <--- REMOVER */
+  width: 100%; /* Manter 100% ou ajustar conforme o design */
+  /* margin-bottom: 0; <--- REMOVER */
+  padding: var(--padding); /* Adicionar padding aqui também */
+}
+
 
     .title {
       font-size: var(--font-size);
     }
 
-    /* DESKTOP: Imagem 1 absolute */
     .image1-container {
       top: var(--image1-y);
       left: var(--image1-x);
@@ -354,49 +340,29 @@
       height: var(--image1-height);
     }
 
-    /* DESKTOP: Imagem 2 absolute */
-    .image2-container {
-      position: absolute;
-      order: 2;
-      width: auto;
-      max-width: none;
-      margin: 0;
-      top: var(--image2-y);
-      left: var(--image2-x);
-    }
+.image2-container {
+  position: absolute;
+  /* order: 2; <--- REMOVER */
+  width: auto;
+  /* ... resto das propriedades está OK */
+}
 
     .image2 img {
       width: var(--image2-width);
       height: var(--image2-height);
       max-height: none;
+      object-fit: cover;
+    }
+
+.image2-position-right,
+.image2-position-left,
+.image2-position-center,
+.image2-position-right-bottom {
+  margin: 0; /* Reseta qualquer margem */
+
     }
   }
-
-  /* ================================
-     ULTRA WIDE - 1200px+
-     ================================ */
-
-  @media (min-width: 1200px) {
-    .flexible-layout {
-      padding: calc(var(--padding) * 1.2);
-    }
-  }
-
-  /* ================================
-     ACESSIBILIDADE
-     ================================ */
-
-  @media (prefers-reduced-motion: reduce) {
-    .image1 img {
-      animation: none !important;
-    }
-  }
-
-  @supports not (font-family: 'obviously-compressed') {
-    .title {
-      font-family: 'Arial Black', 'Helvetica', sans-serif;
-      font-weight: 900;
-      letter-spacing: -0.02em;
-    }
-  }
+  .text-wrapper {
+  max-width: 50%;
+}
 </style>

@@ -61,57 +61,76 @@ export function parseStoryComponents(paragraphs) {
 				component.overlay = paragraph.overlay;
 				break;
 
-case 'layout-flexivel':
-case 'flexible-layout':
-case 'layout-personalizado':
-	component.type = 'flexible-layout';
-	
-	// TEXTO
-	component.text = paragraph.text || '';
-	component.textAlign = paragraph.textAlign || 'left';
-	component.textPosition = paragraph.textPosition || 'left';
-	component.textColor = paragraph.textColor || '#ffffff';
-	component.fontSize = paragraph.fontSize || 'clamp(2rem, 5vw, 4rem)';
-	component.fontSizeMobile = paragraph.fontSizeMobile || 'clamp(1.5rem, 8vw, 2.5rem)';
-	component.textZIndex = paragraph.textZIndex || 2;
+			case 'layout-flexivel':
+			case 'flexible-layout':
+			case 'layout-personalizado':
+				component.type = 'flexible-layout';
+				
+				// TEXTO
+				component.text = paragraph.text || '';
+				component.textAlign = paragraph.textAlign || 'left';
+				component.textPosition = paragraph.textPosition || 'left';
+				component.textColor = paragraph.textColor || '#ffffff';
+				component.fontSize = paragraph.fontSize || 'clamp(2rem, 5vw, 4rem)';
+				component.fontSizeMobile = paragraph.fontSizeMobile || 'clamp(1.5rem, 8vw, 2.5rem)';
+				component.textZIndex = paragraph.textZIndex || 2;
 
-	// IMAGEM 1 - Grifo/Destaque
-	component.image1Desktop = paragraph.image1Desktop || '';
-	component.image1Mobile = paragraph.image1Mobile || '';
-	component.image1Width = paragraph.image1Width || '200px';
-	component.image1Height = paragraph.image1Height || '20px';
-	component.image1WidthMobile = paragraph.image1WidthMobile || '150px';
-	component.image1HeightMobile = paragraph.image1HeightMobile || '15px';
-	component.image1X = paragraph.image1X || '0px';
-	component.image1Y = paragraph.image1Y || '0px';
-	component.image1XMobile = paragraph.image1XMobile || '0px';
-	component.image1YMobile = paragraph.image1YMobile || '0px';
-	component.image1ZIndex = paragraph.image1ZIndex || 3;
+				// IMAGEM 1 - Grifo/Destaque
+				component.image1Desktop = paragraph.image1Desktop || '';
+				component.image1Mobile = paragraph.image1Mobile || '';
+				component.image1Width = paragraph.image1Width || '200px';
+				component.image1Height = paragraph.image1Height || '20px';
+				component.image1WidthMobile = paragraph.image1WidthMobile || '150px';
+				component.image1HeightMobile = paragraph.image1HeightMobile || '15px';
+				component.image1X = paragraph.image1X || '0px';
+				component.image1Y = paragraph.image1Y || '0px';
+				component.image1XMobile = paragraph.image1XMobile || '0px';
+				component.image1YMobile = paragraph.image1YMobile || '0px';
+				component.image1ZIndex = paragraph.image1ZIndex || 3;
 
-	// IMAGEM 2 - Principal
-	component.image2Desktop = paragraph.image2Desktop || '';
-	component.image2Mobile = paragraph.image2Mobile || '';
-	component.image2Width = paragraph.image2Width || '400px';
-	component.image2Height = paragraph.image2Height || '500px';
-	component.image2WidthMobile = paragraph.image2WidthMobile || '300px';
-	component.image2HeightMobile = paragraph.image2HeightMobile || '400px';
-	component.image2Position = paragraph.image2Position || 'right';
-	component.image2X = paragraph.image2X || '0px';
-	component.image2Y = paragraph.image2Y || '0px';
-	component.image2XMobile = paragraph.image2XMobile || '0px';
-	component.image2YMobile = paragraph.image2YMobile || '0px';
-	component.image2ZIndex = paragraph.image2ZIndex || 1;
+				// IMAGEM 2 - Principal
+				component.image2Desktop = paragraph.image2Desktop || '';
+				component.image2Mobile = paragraph.image2Mobile || '';
+				component.image2Width = paragraph.image2Width || '400px';
+				component.image2Height = paragraph.image2Height || '500px';
+				component.image2WidthMobile = paragraph.image2WidthMobile || '300px';
+				component.image2HeightMobile = paragraph.image2HeightMobile || '400px';
+				component.image2Position = paragraph.image2Position || 'right';
+				component.image2X = paragraph.image2X || '0px';
+				component.image2Y = paragraph.image2Y || '0px';
+				component.image2XMobile = paragraph.image2XMobile || '0px';
+				component.image2YMobile = paragraph.image2YMobile || '0px';
+				component.image2ZIndex = paragraph.image2ZIndex || 1;
 
-	// LAYOUT
-	component.backgroundColor = paragraph.backgroundColor || '#1a1a1a';
-	component.minHeight = paragraph.minHeight || '80vh';
-	component.minHeightMobile = paragraph.minHeightMobile || '70vh';
-	component.padding = paragraph.padding || '2rem';
-	component.paddingMobile = paragraph.paddingMobile || '1.5rem';
-	break;
+				// LAYOUT
+				component.backgroundColor = paragraph.backgroundColor || '#1a1a1a';
+				component.minHeight = paragraph.minHeight || '80vh';
+				component.minHeightMobile = paragraph.minHeightMobile || '70vh';
+				component.padding = paragraph.padding || '2rem';
+				component.paddingMobile = paragraph.paddingMobile || '1.5rem';
+				break;
 
-
-
+			// 🎨 NOVO: ResponsiveMediaLayout
+			case 'responsive-media':
+			case 'responsivemedia':
+			case 'responsive-layout':
+			case 'media-layout':
+				component.type = 'responsive-media';
+				component.heightDesktop = paragraph.heightDesktop || paragraph.height || '100vh';
+				component.heightMobile = paragraph.heightMobile || paragraph.height || '100vh';
+				component.backgroundType = paragraph.backgroundType || 'color';
+				component.backgroundColor = paragraph.backgroundColor || '#000000';
+				component.backgroundImageDesktop = paragraph.backgroundImageDesktop || paragraph.backgroundImage || '';
+				component.backgroundImageMobile = paragraph.backgroundImageMobile || paragraph.backgroundImage || '';
+				component.backgroundPositionDesktop = paragraph.backgroundPositionDesktop || paragraph.backgroundPosition || 'center center';
+				component.backgroundPositionMobile = paragraph.backgroundPositionMobile || paragraph.backgroundPosition || 'center center';
+				component.backgroundSizeDesktop = paragraph.backgroundSizeDesktop || paragraph.backgroundSize || 'cover';
+				component.backgroundSizeMobile = paragraph.backgroundSizeMobile || paragraph.backgroundSize || 'cover';
+				component.backgroundVideoDesktop = paragraph.backgroundVideoDesktop || paragraph.backgroundVideo || '';
+				component.backgroundVideoMobile = paragraph.backgroundVideoMobile || paragraph.backgroundVideo || '';
+				component.textos = paragraph.textos || paragraph.texts || [];
+				component.imagens = paragraph.imagens || paragraph.images || [];
+				break;
 
 			case 'foto':
 			case 'imagem':
@@ -403,6 +422,22 @@ export function isRecommendedItemsComponent(paragraph) {
 }
 
 /**
+ * 🎨 NOVO: Detecta se um componente é ResponsiveMediaLayout
+ */
+export function isResponsiveMediaComponent(paragraph) {
+	if (!paragraph || !paragraph.type) return false;
+	
+	const type = paragraph.type.toLowerCase().trim();
+	
+	return [
+		'responsive-media',
+		'responsivemedia', 
+		'responsive-layout',
+		'media-layout'
+	].includes(type);
+}
+
+/**
  * Valida se um componente VideoScrolly tem configuração completa
  */
 export function validateVideoScrollyComponent(component) {
@@ -575,6 +610,53 @@ export function validateRecommendedItemsComponent(component) {
 }
 
 /**
+ * 🎨 NOVO: Valida se um componente ResponsiveMediaLayout tem configuração completa
+ */
+export function validateResponsiveMediaComponent(component) {
+	const errors = [];
+	const warnings = [];
+	
+	// Verificar se tem conteúdo
+	if ((!component.textos || component.textos.length === 0) && 
+		(!component.imagens || component.imagens.length === 0)) {
+		errors.push('Componente não tem textos nem imagens');
+	}
+	
+	// Verificar textos
+	if (component.textos && component.textos.length > 0) {
+		component.textos.forEach((texto, index) => {
+			if (!texto.content && !texto.texto) {
+				errors.push(`Texto ${index + 1}: conteúdo vazio`);
+			}
+			if (!texto.position?.desktop?.x && !texto.xDesktop) {
+				warnings.push(`Texto ${index + 1}: posição X não definida para desktop`);
+			}
+			if (!texto.position?.mobile?.x && !texto.xMobile) {
+				warnings.push(`Texto ${index + 1}: posição X não definida para mobile`);
+			}
+		});
+	}
+	
+	// Verificar imagens
+	if (component.imagens && component.imagens.length > 0) {
+		component.imagens.forEach((imagem, index) => {
+			if (!imagem.srcDesktop && !imagem.src) {
+				errors.push(`Imagem ${index + 1}: sem src para desktop`);
+			}
+			if (!imagem.srcMobile && !imagem.src) {
+				warnings.push(`Imagem ${index + 1}: sem src específico para mobile`);
+			}
+		});
+	}
+	
+	return {
+		isValid: errors.length === 0,
+		errors,
+		warnings
+	};
+}
+
+/**
  * Gera configuração padrão para VideoScrolly
  */
 export function generateVideoScrollyDefaults(baseConfig = {}) {
@@ -649,6 +731,30 @@ export function generateRecommendedItemsDefaults(baseConfig = {}) {
 		backgroundColor: baseConfig.backgroundColor || baseConfig.corFundo || '#000000',
 		titleColor: baseConfig.titleColor || baseConfig.corTitulo || '#ff0000',
 		textColor: baseConfig.textColor || baseConfig.corTexto || '#ffffff',
+		...baseConfig
+	};
+}
+
+/**
+ * 🎨 NOVO: Gera configuração padrão para ResponsiveMediaLayout
+ */
+export function generateResponsiveMediaDefaults(baseConfig = {}) {
+	return {
+		type: 'responsive-media',
+		heightDesktop: baseConfig.heightDesktop || baseConfig.height || '100vh',
+		heightMobile: baseConfig.heightMobile || baseConfig.height || '100vh',
+		backgroundType: baseConfig.backgroundType || 'color',
+		backgroundColor: baseConfig.backgroundColor || '#000000',
+		backgroundImageDesktop: baseConfig.backgroundImageDesktop || baseConfig.backgroundImage || '',
+		backgroundImageMobile: baseConfig.backgroundImageMobile || baseConfig.backgroundImage || '',
+		backgroundPositionDesktop: baseConfig.backgroundPositionDesktop || baseConfig.backgroundPosition || 'center center',
+		backgroundPositionMobile: baseConfig.backgroundPositionMobile || baseConfig.backgroundPosition || 'center center',
+		backgroundSizeDesktop: baseConfig.backgroundSizeDesktop || baseConfig.backgroundSize || 'cover',
+		backgroundSizeMobile: baseConfig.backgroundSizeMobile || baseConfig.backgroundSize || 'cover',
+		backgroundVideoDesktop: baseConfig.backgroundVideoDesktop || baseConfig.backgroundVideo || '',
+		backgroundVideoMobile: baseConfig.backgroundVideoMobile || baseConfig.backgroundVideo || '',
+		textos: baseConfig.textos || baseConfig.texts || [],
+		imagens: baseConfig.imagens || baseConfig.images || [],
 		...baseConfig
 	};
 }
@@ -983,12 +1089,71 @@ export function debugRecommendedItemsComponents(paragraphs) {
 }
 
 /**
+ * 🎨 NOVO: Debug para componentes ResponsiveMediaLayout
+ */
+export function debugResponsiveMediaComponents(paragraphs) {
+	if (!paragraphs || !Array.isArray(paragraphs)) return;
+	
+	const responsiveMediaComponents = paragraphs.filter(p => isResponsiveMediaComponent(p));
+	
+	if (responsiveMediaComponents.length === 0) {
+		console.log('🎨 Nenhum componente ResponsiveMediaLayout encontrado');
+		return;
+	}
+	
+	console.log(`🎨 ${responsiveMediaComponents.length} componente(s) ResponsiveMediaLayout encontrado(s):`);
+	
+	responsiveMediaComponents.forEach((comp, index) => {
+		const validation = validateResponsiveMediaComponent(comp);
+		const status = validation.isValid ? '✅' : '⚠️';
+		const textosCount = comp.textos?.length || 0;
+		const imagensCount = comp.imagens?.length || 0;
+		
+		console.log(`  ${status} Componente ${index + 1}:`);
+		console.log(`     Tipo: ${comp.type}`);
+		console.log(`     Textos: ${textosCount}`);
+		console.log(`     Imagens: ${imagensCount}`);
+		console.log(`     Background: ${comp.backgroundType}`);
+		console.log(`     Height: ${comp.heightDesktop}/${comp.heightMobile}`);
+		
+		if (textosCount > 0) {
+			comp.textos.forEach((texto, textoIndex) => {
+				const content = (texto.content || texto.texto || '').substring(0, 30);
+				const hasPosition = !!(texto.xDesktop || texto.position?.desktop?.x);
+				const fontFamily = texto.fontFamily || texto.familia || 'inherit';
+				const fontSize = texto.fontSizeDesktop || texto.fontSize?.desktop || '2rem';
+				console.log(`     Texto ${textoIndex + 1}: "${content}..." | Font: ${fontFamily}/${fontSize} | HasPosition: ${hasPosition}`);
+			});
+		}
+		
+		if (imagensCount > 0) {
+			comp.imagens.forEach((imagem, imagemIndex) => {
+				const hasSrcDesktop = !!(imagem.srcDesktop || imagem.src);
+				const hasSrcMobile = !!(imagem.srcMobile);
+				const hasPosition = !!(imagem.xDesktop || imagem.position?.desktop?.x);
+				const width = imagem.widthDesktop || imagem.width?.desktop || 'auto';
+				console.log(`     Imagem ${imagemIndex + 1}: Desktop: ${hasSrcDesktop} | Mobile: ${hasSrcMobile} | Width: ${width} | HasPosition: ${hasPosition}`);
+			});
+		}
+		
+		if (validation.errors.length > 0) {
+			console.log(`     ❌ Erros: ${validation.errors.join(', ')}`);
+		}
+		
+		if (validation.warnings.length > 0) {
+			console.log(`     ⚠️ Avisos: ${validation.warnings.join(', ')}`);
+		}
+	});
+}
+
+/**
  * 🎯 NOVO: Debug unificado para todos os componentes de apresentação
  */
 export function debugPresentationComponents(paragraphs) {
 	debugCharacterPresentationComponents(paragraphs);
 	debugCuriosidadesComponents(paragraphs);
 	debugRecommendedItemsComponents(paragraphs);
+	debugResponsiveMediaComponents(paragraphs);
 }
 
 export default {
@@ -997,14 +1162,17 @@ export default {
 	isCuriosidadesComponent,
 	isCharacterPresentationComponent,
 	isRecommendedItemsComponent,
+	isResponsiveMediaComponent,
 	validateVideoScrollyComponent,
 	validateCuriosidadesComponent,
 	validateCharacterPresentationComponent,
 	validateRecommendedItemsComponent,
+	validateResponsiveMediaComponent,
 	generateVideoScrollyDefaults,
 	generateCuriosidadesDefaults,
 	generateCharacterPresentationDefaults,
 	generateRecommendedItemsDefaults,
+	generateResponsiveMediaDefaults,
 	parseBoolean,
 	parseNumber,
 	parseInteger,
@@ -1017,5 +1185,6 @@ export default {
 	debugCuriosidadesComponents,
 	debugCharacterPresentationComponents,
 	debugRecommendedItemsComponents,
+	debugResponsiveMediaComponents,
 	debugPresentationComponents
 };

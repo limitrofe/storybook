@@ -1,7 +1,12 @@
+import { 
+  validateResponsiveMediaComponent,
+  isResponsiveMediaComponent 
+} from '../src/lib/utils/storyRenderer.js';
 import axios from 'axios';
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -68,6 +73,53 @@ async function fetchGoogleDoc(docId) {
         }
       });
     }
+
+    // 🎨 RESPONSIVE MEDIA LAYOUT
+const responsiveMediaComponents = data.paragraphs?.filter(p => 
+  ['responsive-media', 'responsivemedia', 'responsive-layout', 'media-layout', 'flexible-layout'].includes(p.type?.toLowerCase())
+) || [];
+
+if (responsiveMediaComponents.length > 0) {
+  console.log(`🎨 Responsive Media Layout encontrados: ${responsiveMediaComponents.length}`);
+  responsiveMediaComponents.forEach((comp, index) => {
+    const textosCount = comp.textos?.length || comp.texts?.length || 0;
+    const imagensCount = comp.imagens?.length || comp.images?.length || 0;
+    const backgroundType = comp.backgroundType || 'color';
+    const heightDesktop = comp.heightDesktop || comp.height || '100vh';
+    const heightMobile = comp.heightMobile || comp.height || '100vh';
+    
+    console.log(`  ${index + 1}. Textos: ${textosCount} | Imagens: ${imagensCount} | Background: ${backgroundType} | Height: ${heightDesktop}/${heightMobile}`);
+    
+    if (textosCount === 0 && imagensCount === 0) {
+      console.warn(`⚠️ Responsive Media Layout vazio: ${comp.text?.substring(0, 50)}...`);
+    } else {
+      // Log dos textos
+      if (textosCount > 0) {
+        const textos = comp.textos || comp.texts || [];
+        textos.forEach((texto, textoIndex) => {
+          const content = (texto.content || texto.texto || '').substring(0, 30);
+          const hasPosition = !!(texto.xDesktop || texto.position?.desktop?.x);
+          const fontFamily = texto.fontFamily || texto.familia || 'inherit';
+          const fontSize = texto.fontSizeDesktop || texto.fontSize?.desktop || '2rem';
+          console.log(`     Texto ${textoIndex + 1}: "${content}..." | Font: ${fontFamily}/${fontSize} | HasPosition: ${hasPosition}`);
+        });
+      }
+      
+      // Log das imagens
+      if (imagensCount > 0) {
+        const imagens = comp.imagens || comp.images || [];
+        imagens.forEach((imagem, imagemIndex) => {
+          const hasSrcDesktop = !!(imagem.srcDesktop || imagem.src);
+          const hasSrcMobile = !!(imagem.srcMobile);
+          const hasPosition = !!(imagem.xDesktop || imagem.position?.desktop?.x);
+          const width = imagem.widthDesktop || imagem.width?.desktop || 'auto';
+          console.log(`     Imagem ${imagemIndex + 1}: Desktop: ${hasSrcDesktop} | Mobile: ${hasSrcMobile} | Width: ${width} | HasPosition: ${hasPosition}`);
+        });
+      }
+    }
+  });
+}
+
 
     // 🆕 ScrollyFrames (novo)
     const scrollyFramesComponents = data.paragraphs?.filter(p => 
@@ -912,6 +964,82 @@ if (['header-caotico', 'header-caótico', 'caotico', 'chaotic-header', 'caos'].i
       continue;
     }
 
+        // 🎨 NOVO: TRATAMENTO ESPECÍFICO PARA RESPONSIVE MEDIA LAYOUT
+    if (['responsive-media', 'responsivemedia', 'responsive-layout', 'media-layout', 'flexible-layout'].includes(paragraph.type?.toLowerCase())) {
+      console.log('🎨 Processando Responsive Media Layout...');
+      
+      // Campos específicos do responsive media
+      const responsiveMediaFields = {
+        // Arrays JSON - processar separadamente
+        textos: /textos:\s*(\[[\s\S]*?\])/i,
+        texts: /texts:\s*(\[[\s\S]*?\])/i,
+        imagens: /imagens:\s*(\[[\s\S]*?\])/i,
+        images: /images:\s*(\[[\s\S]*?\])/i,
+        
+        // Campos simples de background
+        backgroundType: /backgroundType:\s*([^\n<]+)/i,
+        backgroundColor: /backgroundColor:\s*([^\n<]+)/i,
+        backgroundImageDesktop: /backgroundImageDesktop:\s*([^\n<]+)/i,
+        backgroundImageMobile: /backgroundImageMobile:\s*([^\n<]+)/i,
+        backgroundVideo: /backgroundVideo:\s*([^\n<]+)/i,
+        backgroundVideoMobile: /backgroundVideoMobile:\s*([^\n<]+)/i,
+        backgroundPositionDesktop: /backgroundPositionDesktop:\s*([^\n<]+)/i,
+        backgroundPositionMobile: /backgroundPositionMobile:\s*([^\n<]+)/i,
+        
+        // Campos de altura
+        heightDesktop: /heightDesktop:\s*([^\n<]+)/i,
+        heightMobile: /heightMobile:\s*([^\n<]+)/i,
+        height: /height:\s*([^\n<]+)/i,
+        
+        // Outros campos
+        fullWidth: /fullWidth:\s*([^\n<]+)/i,
+        overlay: /overlay:\s*([^\n<]+)/i,
+        overlayOpacity: /overlayOpacity:\s*([^\n<]+)/i
+      };
+
+      // 🚨 PROCESSAR ARRAYS JSON PRIMEIRO (textos e imagens)
+      
+      // Processar textos
+      for (const field of ['textos', 'texts']) {
+        const regex = responsiveMediaFields[field];
+        const match = block.match(regex);
+        if (match) {
+          paragraph[field] = parseJSONField(match[1], `responsive media ${field}`);
+          console.log(`   ✅ ${paragraph[field]?.length || 0} textos processados em ${field}`);
+          break; // Usa apenas o primeiro campo encontrado
+        }
+      }
+
+      // Processar imagens  
+      for (const field of ['imagens', 'images']) {
+        const regex = responsiveMediaFields[field];
+        const match = block.match(regex);
+        if (match) {
+          paragraph[field] = parseJSONField(match[1], `responsive media ${field}`);
+          console.log(`   ✅ ${paragraph[field]?.length || 0} imagens processadas em ${field}`);
+          break; // Usa apenas o primeiro campo encontrado
+        }
+      }
+
+      // Processar outros campos simples
+      for (const [field, regex] of Object.entries(responsiveMediaFields)) {
+        if (['textos', 'texts', 'imagens', 'images'].includes(field)) continue; // Já processado acima
+        
+        const match = block.match(regex);
+        if (match) {
+          paragraph[field] = decodeHTMLEntities(match[1].trim());
+        }
+      }
+
+      // Processar campo 'text' para responsive media
+      const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:textos|texts|imagens|images|backgroundType|backgroundColor|backgroundImageDesktop|backgroundImageMobile|backgroundVideo|backgroundVideoMobile|backgroundPositionDesktop|backgroundPositionMobile|heightDesktop|heightMobile|height|fullWidth|overlay|overlayOpacity):|type:|$)/si);
+      if (textMatch) {
+        paragraph.text = cleanAndFormatHTML(textMatch[1].trim());
+      }
+
+      paragraphs.push(paragraph);
+      continue;
+    }
 
 
 
@@ -993,7 +1121,7 @@ if (['header-caotico', 'header-caótico', 'caotico', 'chaotic-header', 'caos'].i
     }
 
     // Processamento de texto para outros tipos
-    const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:backgroundImage|backgroundImageMobile|backgroundVideo|backgroundVideoMobile|backgroundPosition|backgroundPositionMobile|author|role|src|videoSrc|videoSrcMobile|caption|credit|alt|fullWidth|variant|size|orientation|autoplay|controls|poster|images|items|steps|beforeImage|afterImage|beforeLabel|afterLabel|image|height|heightMobile|speed|content|overlay|layout|columns|interval|showDots|showArrows|stickyHeight|videoId|videosIDs|id|skipDFP|skipdfp|autoPlay|startMuted|maxQuality|quality|chromeless|isLive|live|allowRestrictedContent|preventBlackBars|globoId|token|adAccountId|adCmsId|siteName|width|textPosition|textPositionMobile|textAlign|textAlignMobile|title|subtitle|date|theme|videoAspectRatio|showProgress|showTime|showControls):|type:|$)/si);
+const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:backgroundImage|backgroundImageMobile|backgroundVideo|backgroundVideoMobile|backgroundPosition|backgroundPositionMobile|author|role|src|videoSrc|videoSrcMobile|caption|credit|alt|fullWidth|variant|size|orientation|autoplay|controls|poster|images|items|steps|beforeImage|afterImage|beforeLabel|afterLabel|image|height|heightMobile|speed|content|overlay|layout|columns|interval|showDots|showArrows|stickyHeight|videoId|videosIDs|id|skipDFP|skipdfp|autoPlay|startMuted|maxQuality|quality|chromeless|isLive|live|allowRestrictedContent|preventBlackBars|globoId|token|adAccountId|adCmsId|siteName|width|textPosition|textPositionMobile|textAlign|textAlignMobile|title|subtitle|date|theme|videoAspectRatio|showProgress|showTime|showControls|textColor|fontSize|fontSizeMobile|textZIndex|image1Desktop|image1Mobile|image1Width|image1Height|image1WidthMobile|image1HeightMobile|image1X|image1Y|image1XMobile|image1YMobile|image1ZIndex|image2Desktop|image2Mobile|image2Width|image2Height|image2WidthMobile|image2HeightMobile|image2Position|image2X|image2Y|image2XMobile|image2YMobile|image2ZIndex|backgroundColor|minHeight|minHeightMobile|padding|paddingMobile):|type:|$)/si);
     if (textMatch) {
   if (['texto', 'frase', 'intro'].includes(paragraph.type)) {
   // 🔧 LIMPEZA ESPECÍFICA PARA ÚLTIMO PARÁGRAFO
@@ -1023,21 +1151,75 @@ if (['header-caotico', 'header-caótico', 'caotico', 'chaotic-header', 'caos'].i
 
     // Campos gerais (mantém sua lógica original)
     const fieldMappings = {
-      title: 'title', subtitle: 'subtitle', date: 'date', theme: 'theme',
-      backgroundImage: 'backgroundImage', backgroundImageMobile: 'backgroundImageMobile', backgroundVideo: 'backgroundVideo',
-      backgroundVideoMobile: 'backgroundVideoMobile', backgroundPosition: 'backgroundPosition', backgroundPositionMobile: 'backgroundPositionMobile',
-      textPosition: 'textPosition', textPositionMobile: 'textPositionMobile', textAlign: 'textAlign', textAlignMobile: 'textAlignMobile',
-      author: 'author', role: 'role', src: 'src', videoSrc: 'videoSrc', videoSrcMobile: 'videoSrcMobile', srcMobile: 'srcMobile', caption: 'caption', credit: 'credit', alt: 'alt', fullWidth: 'fullWidth', variant: 'variant',
-      size: 'size', orientation: 'orientation', autoplay: 'autoplay', controls: 'controls', poster: 'poster', overlay: 'overlay',
-      layout: 'layout', columns: 'columns', interval: 'interval', showDots: 'showDots', showArrows: 'showArrows',
-      stickyHeight: 'stickyHeight', beforeImage: 'beforeImage', afterImage: 'afterImage', beforeLabel: 'beforeLabel',
-      afterLabel: 'afterLabel', image: 'image', speed: 'speed', content: 'content', videoId: 'videoId', videosIDs: 'videosIDs', id: 'id',
-      skipDFP: 'skipDFP', skipdfp: 'skipdfp', autoPlay: 'autoPlay', startMuted: 'startMuted', maxQuality: 'maxQuality', quality: 'quality',
-      chromeless: 'chromeless', isLive: 'isLive', live: 'live', allowRestrictedContent: 'allowRestrictedContent',
-      preventBlackBars: 'preventBlackBars', globoId: 'globoId', token: 'token', adAccountId: 'adAccountId', adCmsId: 'adCmsId',
-      siteName: 'siteName', width: 'width', height: 'height', heightMobile: 'heightMobile', showCaption: 'showCaption',
-      alignment: 'alignment', loop: 'loop', videoAspectRatio: 'videoAspectRatio', aspectRatio: 'aspectRatio', showProgress: 'showProgress', showTime: 'showTime', showControls: 'showControls'
-    };
+  // Campos existentes
+  title: 'title', subtitle: 'subtitle', date: 'date', theme: 'theme',
+  backgroundImage: 'backgroundImage', backgroundImageMobile: 'backgroundImageMobile', 
+  backgroundVideo: 'backgroundVideo', backgroundVideoMobile: 'backgroundVideoMobile', 
+  backgroundPosition: 'backgroundPosition', backgroundPositionMobile: 'backgroundPositionMobile',
+  textPosition: 'textPosition', textPositionMobile: 'textPositionMobile', 
+  textAlign: 'textAlign', textAlignMobile: 'textAlignMobile',
+  author: 'author', role: 'role', src: 'src', videoSrc: 'videoSrc', 
+  videoSrcMobile: 'videoSrcMobile', srcMobile: 'srcMobile', caption: 'caption', 
+  credit: 'credit', alt: 'alt', fullWidth: 'fullWidth', variant: 'variant',
+  size: 'size', orientation: 'orientation', autoplay: 'autoplay', controls: 'controls', 
+  poster: 'poster', overlay: 'overlay', layout: 'layout', columns: 'columns', 
+  interval: 'interval', showDots: 'showDots', showArrows: 'showArrows',
+  stickyHeight: 'stickyHeight', beforeImage: 'beforeImage', afterImage: 'afterImage', 
+  beforeLabel: 'beforeLabel', afterLabel: 'afterLabel', image: 'image', speed: 'speed', 
+  content: 'content', videoId: 'videoId', videosIDs: 'videosIDs', id: 'id',
+  skipDFP: 'skipDFP', skipdfp: 'skipdfp', autoPlay: 'autoPlay', startMuted: 'startMuted', 
+  maxQuality: 'maxQuality', quality: 'quality', chromeless: 'chromeless', isLive: 'isLive', 
+  live: 'live', allowRestrictedContent: 'allowRestrictedContent',
+  preventBlackBars: 'preventBlackBars', globoId: 'globoId', token: 'token', 
+  adAccountId: 'adAccountId', adCmsId: 'adCmsId', siteName: 'siteName', 
+  width: 'width', height: 'height', heightMobile: 'heightMobile', 
+  showCaption: 'showCaption', alignment: 'alignment', loop: 'loop', 
+  videoAspectRatio: 'videoAspectRatio', aspectRatio: 'aspectRatio', 
+  showProgress: 'showProgress', showTime: 'showTime', showControls: 'showControls',
+
+  // 🆕 NOVOS CAMPOS PARA LAYOUT-FLEXIVEL:
+  
+  // Texto - Layout Flexível
+  textColor: 'textColor',
+  fontSize: 'fontSize',
+  fontSizeMobile: 'fontSizeMobile',
+  textZIndex: 'textZIndex',
+
+  // Imagem 1 - Grifo/Destaque
+  image1Desktop: 'image1Desktop',
+  image1Mobile: 'image1Mobile',
+  image1Width: 'image1Width',
+  image1Height: 'image1Height',
+  image1WidthMobile: 'image1WidthMobile',
+  image1HeightMobile: 'image1HeightMobile',
+  image1X: 'image1X',
+  image1Y: 'image1Y',
+  image1XMobile: 'image1XMobile',
+  image1YMobile: 'image1YMobile',
+  image1ZIndex: 'image1ZIndex',
+
+  // Imagem 2 - Principal
+  image2Desktop: 'image2Desktop',
+  image2Mobile: 'image2Mobile',
+  image2Width: 'image2Width',
+  image2Height: 'image2Height',
+  image2WidthMobile: 'image2WidthMobile',
+  image2HeightMobile: 'image2HeightMobile',
+  image2Position: 'image2Position',
+  image2X: 'image2X',
+  image2Y: 'image2Y',
+  image2XMobile: 'image2XMobile',
+  image2YMobile: 'image2YMobile',
+  image2ZIndex: 'image2ZIndex',
+
+  // Layout - Layout Flexível
+  backgroundColor: 'backgroundColor',
+  minHeight: 'minHeight',
+  minHeightMobile: 'minHeightMobile',
+  padding: 'padding',
+  paddingMobile: 'paddingMobile'
+};
+
     
     for (const [field, prop] of Object.entries(fieldMappings)) {
       const regex = new RegExp(`\\b${field}:\\s*([^\\n<]*)`, 'i');

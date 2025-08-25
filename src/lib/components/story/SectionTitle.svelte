@@ -18,7 +18,7 @@
   export let textAlign = 'center'; // left, center, right
   export let textAlignMobile = '';
   export let overlay = false;
-  export let fontFamily = 'obviously'; // ✅ NOVO: obviously, obviously-compressed, default
+  export let fontFamily = 'Globotipo'; // ✅ NOVO: obviously, obviously-compressed, default
 
   // Lógica reativa para determinar se há mídia
   $: hasMedia = !!(backgroundImage || backgroundVideo);
