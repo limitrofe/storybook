@@ -1,0 +1,201 @@
+{
+  "credits": {
+    "notes": "Esta documentação serve como referência completa para todos os componentes disponíveis no sistema de storytelling.",
+    "sources": [
+      "Sistema de Design Interno",
+      "Documentação Técnica dos Componentes",
+      "Exemplos Práticos de Uso"
+    ],
+    "authors": [
+      "Equipe de Desenvolvimento",
+      "Designers do Sistema"
+    ]
+  },
+  "paragraphs": [
+    {
+      "type": "intertitulo",
+      "text": "Julho de 2021",
+      "variant": "default",
+      "size": "small",
+      "align": "left"
+    },
+    {
+      "type": "intertitulo",
+      "text": "Live com fake news sobre urnas",
+      "variant": "default",
+      "size": "large",
+      "align": "left"
+    },
+    {
+      "type": "globovideo",
+      "caption": "*video vai fazer parte do fundo na edição colocar degrade em baixo e em cima, padrão",
+      "credit": "",
+      "fullWidth": "true",
+      "autoplay": "true",
+      "controls": "true",
+      "showCaption": "true",
+      "videoId": "13798680",
+      "autoPlay": "true"
+    },
+    {
+      "type": "section",
+      "backgroundColor": "#1a1a1a",
+      "id": "minha-ancora",
+      "padding": "0rem 0rem",
+      "children": [
+        {
+          "type": "intertitulo",
+          "text": "Julho de 2021",
+          "variant": "default",
+          "size": "small",
+          "align": "left"
+        },
+        {
+          "type": "intertitulo",
+          "text": "Live com fake news sobre urnas",
+          "variant": "default",
+          "size": "large",
+          "align": "left"
+        },
+        {
+          "type": "globovideo",
+          "caption": "*video vai fazer parte do fundo na edição colocar degrade em baixo e em cima, padrão",
+          "credit": "",
+          "fullWidth": "true",
+          "autoplay": "true",
+          "controls": "true",
+          "showCaption": "true",
+          "videoId": "13798680",
+          "autoPlay": "true"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "backgroundColor": "#1a1a1a",
+      "id": "parte2",
+      "padding": "0rem 0rem",
+      "children": [
+        {
+          "type": "absolute-canvas",
+          "elements": [
+            {
+              "type": "text",
+              "content": "No dia 29, Bolsonaro aparece em uma transmissão ao vivo ao lado do então ministro da Justiça, Anderson Torres, para apresentar supostos indícios de fraude nas eleições — acusações baseadas em informações falsas, fornecidas pelo então chefe da Abin, Alexandre Ramagem.",
+              "desktop": {
+                "x": "50%",
+                "y": "50%",
+                "z": 10,
+                "width": "auto",
+                "height": "auto",
+                "transform": "translate(-50%, -50%)"
+              },
+              "mobile": {
+                "x": "0",
+                "y": "50px",
+                "z": 10,
+                "width": "160px",
+                "height": "auto",
+                "transform": "translate(10%, -10%)"
+              },
+              "textStyles": {
+                "fontFamily": "globotipo",
+                "fontSize": {
+                  "desktop": "1.8rem",
+                  "mobile": "1.2rem"
+                },
+                "fontWeight": {
+                  "desktop": "900",
+                  "mobile": "700"
+                },
+                "lineHeight": {
+                  "desktop": "0.9rem",
+                  "mobile": "1.45rem"
+                },
+                "textAlign": {
+                  "desktop": "left",
+                  "mobile": "left"
+                },
+                "color": "#ffffff",
+                "maxWidth": {
+                  "desktop": "800px",
+                  "mobile": "160px"
+                },
+                "letterSpacing": {
+                  "desktop": "-1px",
+                  "mobile": "-0.5px"
+                },
+                "whiteSpace": {
+                  "desktop": "nowrap",
+                  "mobile": "normal"
+                }
+              }
+            },
+            {
+              "type": "image",
+              "src": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/grifo01.png",
+              "srcMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/grifo01.png",
+              "alt": "grifo01",
+              "desktop": {
+                "x": "50%",
+                "y": "50%",
+                "z": 5,
+                "width": "120px",
+                "height": "35px",
+                "transform": "translate(-150px, -10px)"
+              },
+              "mobile": {
+                "x": "0",
+                "y": "50px",
+                "z": 5,
+                "width": "150px",
+                "height": "5px",
+                "transform": "translate(10%, -10%)"
+              },
+              "imageStyles": {
+                "objectFit": {
+                  "desktop": "none",
+                  "mobile": "contain"
+                }
+              }
+            },
+            {
+              "type": "image",
+              "src": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/grifo01.png",
+              "srcMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/grifo01.png",
+              "alt": "grifo01",
+              "desktop": {
+                "x": "50%",
+                "y": "50%",
+                "z": 5,
+                "width": "120px",
+                "height": "35px",
+                "transform": "translate(-150px, -10px)"
+              },
+              "mobile": {
+                "x": "0",
+                "y": "20px",
+                "z": 5,
+                "width": "150px",
+                "height": "5px",
+                "transform": "translate(10%, -10%)"
+              },
+              "imageStyles": {
+                "objectFit": {
+                  "desktop": "none",
+                  "mobile": "contain"
+                }
+              }
+            }
+          ],
+          "heightDesktop": "100vh",
+          "heightMobile": "50vh",
+          "backgroundColor": "#1a1a1a",
+          "backgroundImage": "",
+          "backgroundImageMobile": ""
+        }
+      ]
+    }
+  ],
+  "slug": "doc-1756236072715"
+}
