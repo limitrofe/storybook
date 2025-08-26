@@ -33,6 +33,7 @@
 	import FlexibleLayout from './story/FlexibleLayout.svelte';
 	// 🎨 NOVO: ResponsiveMediaLayout
 	import ResponsiveMediaLayout from './story/ResponsiveMediaLayout.svelte';
+import AbsoluteCanvas from './story/AbsoluteCanvas.svelte';
 
 	export let storyData = {};
 
@@ -77,6 +78,9 @@
 			case 'responsive-layout':
 			case 'media-layout':
 				return 'responsive-media';
+
+				case 'absolute-canvas':
+  return 'absolute-canvas';
 
 			case 'frase':
 			case 'citacao':
@@ -357,6 +361,8 @@
 		}));
 	}
 
+	
+
 	/**
 	 * 🎨 NOVO: Processa array de imagens para ResponsiveMediaLayout
 	 */
@@ -563,6 +569,18 @@
 					textos={processTextos(props.textos || props.texts || [])}
 					imagens={processImagens(props.imagens || props.images || [])}
 				/>
+
+				{:else if componentType === 'absolute-canvas'}
+  <AbsoluteCanvas
+    heightDesktop={props.heightDesktop}
+    heightMobile={props.heightMobile}
+    backgroundColor={props.backgroundColor}
+    backgroundImage={props.backgroundImage}
+    backgroundImageMobile={props.backgroundImageMobile}
+    backgroundVideo={props.backgroundVideo}
+    backgroundVideoMobile={props.backgroundVideoMobile}
+    elements={props.elements}
+  />
 
 			<!-- Photo -->
 			{:else if componentType === 'photo'}

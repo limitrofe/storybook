@@ -106,15 +106,15 @@ function getTextStyles(texto, index) {
     lineHeight: getResponsiveValue(texto.lineHeight, 'desktop'),
     textAlign: getResponsiveValue(texto.textAlign, 'desktop'),
     letterSpacing: getResponsiveValue(texto.letterSpacing, 'desktop'),
-    left: getResponsiveValue(texto.position, 'desktop')?.x || '0',
-    top: getResponsiveValue(texto.position, 'desktop')?.y || '0',
+    left: getResponsiveValue(texto.position, 'desktop')?.x || texto.xDesktop || '0',
+    top: getResponsiveValue(texto.position, 'desktop')?.y || texto.yDesktop || '0',
     zIndex: getResponsiveValue(texto.position, 'desktop')?.z || '1',
-    transform: getResponsiveValue(texto.transform, 'desktop'),
+    transform: getResponsiveValue(texto.transform, 'desktop') || texto.transformDesktop || 'none',
     
-    // 🆕 NOVOS CAMPOS DE LARGURA
-    width: getResponsiveValue(texto.width, 'desktop') || 'auto',
-    maxWidth: getResponsiveValue(texto.maxWidth, 'desktop') || 'none',
-    minWidth: getResponsiveValue(texto.minWidth, 'desktop') || 'auto'
+    // 🔧 CORREÇÃO: Capturar maxWidth diretamente do objeto texto
+    width: texto.widthDesktop || 'auto',
+    maxWidth: texto.maxWidthDesktop || 'none',  // 📍 AQUI
+    minWidth: texto.minWidthDesktop || 'auto'
   };
 
   const mobile = {
@@ -123,15 +123,15 @@ function getTextStyles(texto, index) {
     lineHeight: getResponsiveValue(texto.lineHeight, 'mobile'),
     textAlign: getResponsiveValue(texto.textAlign, 'mobile'),
     letterSpacing: getResponsiveValue(texto.letterSpacing, 'mobile'),
-    left: getResponsiveValue(texto.position, 'mobile')?.x || '0',
-    top: getResponsiveValue(texto.position, 'mobile')?.y || '0',
+    left: getResponsiveValue(texto.position, 'mobile')?.x || texto.xMobile || '0',
+    top: getResponsiveValue(texto.position, 'mobile')?.y || texto.yMobile || '0',
     zIndex: getResponsiveValue(texto.position, 'mobile')?.z || '1',
-    transform: getResponsiveValue(texto.transform, 'mobile'),
+    transform: getResponsiveValue(texto.transform, 'mobile') || texto.transformMobile || 'none',
     
-    // 🆕 NOVOS CAMPOS DE LARGURA MOBILE
-    width: getResponsiveValue(texto.width, 'mobile') || 'auto',
-    maxWidth: getResponsiveValue(texto.maxWidth, 'mobile') || 'none',
-    minWidth: getResponsiveValue(texto.minWidth, 'mobile') || 'auto'
+    // 🔧 CORREÇÃO: Capturar maxWidth diretamente do objeto texto
+    width: texto.widthMobile || 'auto',
+    maxWidth: texto.maxWidthMobile || 'none',  // 📍 AQUI  
+    minWidth: texto.minWidthMobile || 'auto'
   };
 
   return `
@@ -144,8 +144,6 @@ function getTextStyles(texto, index) {
     --text-${index}-top-desktop: ${desktop.top};
     --text-${index}-z-index-desktop: ${desktop.zIndex};
     --text-${index}-transform-desktop: ${desktop.transform};
-    
-    /* 🆕 LARGURA DESKTOP */
     --text-${index}-width-desktop: ${desktop.width};
     --text-${index}-max-width-desktop: ${desktop.maxWidth};
     --text-${index}-min-width-desktop: ${desktop.minWidth};
@@ -159,8 +157,6 @@ function getTextStyles(texto, index) {
     --text-${index}-top-mobile: ${mobile.top};
     --text-${index}-z-index-mobile: ${mobile.zIndex};
     --text-${index}-transform-mobile: ${mobile.transform};
-    
-    /* 🆕 LARGURA MOBILE */
     --text-${index}-width-mobile: ${mobile.width};
     --text-${index}-max-width-mobile: ${mobile.maxWidth};
     --text-${index}-min-width-mobile: ${mobile.minWidth};
@@ -169,6 +165,7 @@ function getTextStyles(texto, index) {
     font-family: ${texto.fontFamily || 'inherit'};
   `;
 }
+
 
 
   // Gerar estilos para imagens
@@ -338,9 +335,9 @@ function getTextStyles(texto, index) {
     top: var(--text-1-top-mobile);
     z-index: var(--text-1-z-index-mobile);
     transform: var(--text-1-transform-mobile);
-        width: var(--text-0-width-mobile);
-    max-width: var(--text-0-max-width-mobile);
-    min-width: var(--text-0-min-width-mobile);
+        width: var(--text-1-width-mobile);
+    max-width: var(--text-1-max-width-mobile);
+    min-width: var(--text-1-min-width-mobile);
     word-wrap: break-word;
     overflow-wrap: break-word;
     box-sizing: border-box;
@@ -356,9 +353,9 @@ function getTextStyles(texto, index) {
     top: var(--text-2-top-mobile);
     z-index: var(--text-2-z-index-mobile);
     transform: var(--text-2-transform-mobile);
-        width: var(--text-0-width-mobile);
-    max-width: var(--text-0-max-width-mobile);
-    min-width: var(--text-0-min-width-mobile);
+        width: var(--text-2-width-mobile);
+    max-width: var(--text-2-max-width-mobile);
+    min-width: var(--text-2-min-width-mobile);
     word-wrap: break-word;
     overflow-wrap: break-word;
     box-sizing: border-box;
@@ -374,9 +371,9 @@ function getTextStyles(texto, index) {
     top: var(--text-3-top-mobile);
     z-index: var(--text-3-z-index-mobile);
     transform: var(--text-3-transform-mobile);
-        width: var(--text-0-width-mobile);
-    max-width: var(--text-0-max-width-mobile);
-    min-width: var(--text-0-min-width-mobile);
+        width: var(--text-3-width-mobile);
+    max-width: var(--text-3-max-width-mobile);
+    min-width: var(--text-3-min-width-mobile);
     word-wrap: break-word;
     overflow-wrap: break-word;
     box-sizing: border-box;
@@ -392,9 +389,9 @@ function getTextStyles(texto, index) {
     top: var(--text-4-top-mobile);
     z-index: var(--text-4-z-index-mobile);
     transform: var(--text-4-transform-mobile);
-        width: var(--text-0-width-mobile);
-    max-width: var(--text-0-max-width-mobile);
-    min-width: var(--text-0-min-width-mobile);
+        width: var(--text-4-width-mobile);
+    max-width: var(--text-4-max-width-mobile);
+    min-width: var(--text-4-min-width-mobile);
     word-wrap: break-word;
     overflow-wrap: break-word;
     box-sizing: border-box;
@@ -524,9 +521,9 @@ function getTextStyles(texto, index) {
       top: var(--text-1-top-desktop);
       z-index: var(--text-1-z-index-desktop);
       transform: var(--text-1-transform-desktop);
-          width: var(--text-0-width-desktop);
-    max-width: var(--text-0-max-width-desktop);
-    min-width: var(--text-0-min-width-desktop);
+          width: var(--text-1-width-desktop);
+    max-width: var(--text-1-max-width-desktop);
+    min-width: var(--text-1-min-width-desktop);
     }
 
     .text-2 {
@@ -539,9 +536,9 @@ function getTextStyles(texto, index) {
       top: var(--text-2-top-desktop);
       z-index: var(--text-2-z-index-desktop);
       transform: var(--text-2-transform-desktop);
-          width: var(--text-0-width-desktop);
-    max-width: var(--text-0-max-width-desktop);
-    min-width: var(--text-0-min-width-desktop);
+          width: var(--text-2-width-desktop);
+    max-width: var(--text-2-max-width-desktop);
+    min-width: var(--text-2-min-width-desktop);
     }
 
     .text-3 {
@@ -554,9 +551,9 @@ function getTextStyles(texto, index) {
       top: var(--text-3-top-desktop);
       z-index: var(--text-3-z-index-desktop);
       transform: var(--text-3-transform-desktop);
-          width: var(--text-0-width-desktop);
-    max-width: var(--text-0-max-width-desktop);
-    min-width: var(--text-0-min-width-desktop);
+          width: var(--text-3-width-desktop);
+    max-width: var(--text-3-max-width-desktop);
+    min-width: var(--text-3-min-width-desktop);
     }
 
     .text-4 {
@@ -569,9 +566,9 @@ function getTextStyles(texto, index) {
       top: var(--text-4-top-desktop);
       z-index: var(--text-4-z-index-desktop);
       transform: var(--text-4-transform-desktop);
-          width: var(--text-0-width-desktop);
-    max-width: var(--text-0-max-width-desktop);
-    min-width: var(--text-0-min-width-desktop);
+          width: var(--text-4-width-desktop);
+    max-width: var(--text-4-max-width-desktop);
+    min-width: var(--text-4-min-width-desktop);
     }
 
     /* Imagens Desktop */

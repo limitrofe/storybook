@@ -130,7 +130,26 @@ export function parseStoryComponents(paragraphs) {
 				component.backgroundVideoMobile = paragraph.backgroundVideoMobile || paragraph.backgroundVideo || '';
 				component.textos = paragraph.textos || paragraph.texts || [];
 				component.imagens = paragraph.imagens || paragraph.images || [];
+				component.maxWidthDesktop = paragraph.maxWidthDesktop;
+				component.maxWidthMobile = paragraph.maxWidthMobile;
+				component.widthDesktop = paragraph.widthDesktop;
+				component.widthMobile = paragraph.widthMobile;
+				component.whiteSpaceDesktop = paragraph.whiteSpaceDesktop;
+				component.whiteSpaceMobile = paragraph.whiteSpaceMobile;
 				break;
+
+			case 'absolute-canvas':
+				component.type = 'absolute-canvas';
+				component.heightDesktop = paragraph.heightDesktop || '100vh';
+				component.heightMobile = paragraph.heightMobile || '100vh';
+				component.backgroundColor = paragraph.backgroundColor || '#000000';
+				component.backgroundImage = paragraph.backgroundImage || '';
+				component.backgroundImageMobile = paragraph.backgroundImageMobile || '';
+				component.backgroundVideo = paragraph.backgroundVideo || '';
+				component.backgroundVideoMobile = paragraph.backgroundVideoMobile || '';
+				component.elements = paragraph.elements || [];
+			break;
+
 
 			case 'foto':
 			case 'imagem':

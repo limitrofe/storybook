@@ -994,7 +994,13 @@ if (['header-caotico', 'header-caótico', 'caotico', 'chaotic-header', 'caos'].i
         // Outros campos
         fullWidth: /fullWidth:\s*([^\n<]+)/i,
         overlay: /overlay:\s*([^\n<]+)/i,
-        overlayOpacity: /overlayOpacity:\s*([^\n<]+)/i
+        overlayOpacity: /overlayOpacity:\s*([^\n<]+)/i,
+        maxWidthDesktop: /maxWidthDesktop:\s*([^\n<]+)/i,
+        maxWidthMobile: /maxWidthMobile:\s*([^\n<]+)/i,
+        widthDesktop: /widthDesktop:\s*([^\n<]+)/i,
+        widthMobile: /widthMobile:\s*([^\n<]+)/i,
+        whiteSpaceDesktop: /whiteSpaceDesktop:\s*([^\n<]+)/i,
+        whiteSpaceMobile: /whiteSpaceMobile:\s*([^\n<]+)/i
       };
 
       // 🚨 PROCESSAR ARRAYS JSON PRIMEIRO (textos e imagens)
@@ -1033,6 +1039,50 @@ if (['header-caotico', 'header-caótico', 'caotico', 'chaotic-header', 'caos'].i
 
       // Processar campo 'text' para responsive media
       const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:textos|texts|imagens|images|backgroundType|backgroundColor|backgroundImageDesktop|backgroundImageMobile|backgroundVideo|backgroundVideoMobile|backgroundPositionDesktop|backgroundPositionMobile|heightDesktop|heightMobile|height|fullWidth|overlay|overlayOpacity):|type:|$)/si);
+      if (textMatch) {
+        paragraph.text = cleanAndFormatHTML(textMatch[1].trim());
+      }
+
+      paragraphs.push(paragraph);
+      continue;
+    }
+
+    // 🎨 NOVO: TRATAMENTO ESPECÍFICO PARA ABSOLUTE CANVAS
+    if (paragraph.type?.toLowerCase() === 'absolute-canvas') {
+      console.log('🎨 Processando Absolute Canvas...');
+      
+      const canvasFields = {
+        elements: /elements:\s*(\[[\s\S]*?\])/i,
+        heightDesktop: /heightDesktop:\s*([^\n<]+)/i,
+        heightMobile: /heightMobile:\s*([^\n<]+)/i,
+        backgroundColor: /backgroundColor:\s*([^\n<]+)/i,
+        backgroundImage: /backgroundImage:\s*([^\n<]+)/i,
+        backgroundImageMobile: /backgroundImageMobile:\s*([^\n<]+)/i,
+        backgroundVideo: /backgroundVideo:\s*([^\n<]+)/i,
+        backgroundVideoMobile: /backgroundVideoMobile:\s*([^\n<]+)/i,
+        backgroundSize: /backgroundSize:\s*([^\n<]+)/i,
+        backgroundPosition: /backgroundPosition:\s*([^\n<]+)/i
+      };
+
+      // Processar lista de elementos (JSON array)
+      const elementsMatch = block.match(canvasFields.elements);
+      if (elementsMatch) {
+        paragraph.elements = parseJSONField(elementsMatch[1], 'canvas elements');
+        console.log(`   ✅ ${paragraph.elements?.length || 0} elementos processados`);
+      }
+
+      // Processar outros campos simples
+      for (const [field, regex] of Object.entries(canvasFields)) {
+        if (field === 'elements') continue; // Já processado acima
+        
+        const match = block.match(regex);
+        if (match) {
+          paragraph[field] = decodeHTMLEntities(match[1].trim());
+        }
+      }
+
+      // Processar campo 'text' se existir
+      const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:elements|heightDesktop|heightMobile|backgroundColor|backgroundImage):|type:|$)/si);
       if (textMatch) {
         paragraph.text = cleanAndFormatHTML(textMatch[1].trim());
       }
