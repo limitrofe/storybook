@@ -249,7 +249,7 @@
 <style>
   .globo-player-container {
     width: 100%;
-    margin: 1.5rem auto;
+    margin: 0;
     max-width: 60rem;
   }
 
@@ -375,7 +375,7 @@
   /* Mobile optimizations */
   @media (max-width: 768px) {
     .globo-player-container {
-      margin: 1rem auto;
+      margin: 0;
     }
 
     .player-wrapper {
@@ -392,7 +392,7 @@
 
     .media-caption {
       padding: 0.5rem 0.75rem;
-      margin-top: 0.25rem;
+      margin-top: 0rem;
     }
 
     .caption-text {

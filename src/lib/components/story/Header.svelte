@@ -91,13 +91,14 @@
     background-color: var(--color-background);
     color: var(--color-text);
     text-align: center;
+    height: 100vh;
   }
 
   /* ✅ ESTILOS APLICADOS APENAS QUANDO HÁ MÍDIA */
   .story-header.has-media {
-    min-height: 60vh;
+    min-height: 100vh;
     padding: 6rem 2rem;
-    color: white;
+    color: #1a1a1a;
   }
 
   .story-header--hero.has-media {
@@ -123,7 +124,7 @@
   }
 
   .story-header__overlay {
-     background: rgba(0, 0, 0, 0.5);
+     background: rgba(0, 0, 0, 0.3);
      z-index: 2;
   }
   
@@ -134,7 +135,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-size: cover;
+  background-size: 100% auto; /* ALTERE AQUI */
     background-position: center;
     object-fit: cover;
   }
@@ -164,7 +165,7 @@
   }
   
   .story-header.has-media h1 {
-      color: white;
+      color: #1a1a1a;
   }
 
   h2 {
@@ -177,7 +178,7 @@
   }
   
   .story-header.has-media h2 {
-      color: white;
+      color: #1a1a1a;
   }
 
   .story-header__meta {
@@ -191,7 +192,7 @@
   }
   
   .story-header.has-media .story-header__meta {
-      color: white;
+      color: #1a1a1a;
   }
 
   .story-header__author {

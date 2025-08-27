@@ -23,7 +23,7 @@
 
   onMount(async () => {
     try {
-      const response = await fetch('./data/exemplo-de-header-padrao.json');
+      const response = await fetch('./data/a-trama-do-golpe.json');
       if (response.ok) {
         currentStory = await response.json();
         
