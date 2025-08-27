@@ -517,22 +517,23 @@ function parseJSONField(jsonString, fieldName) {
                                 .replace(/\s{2,}/g, ' ')
                                 .trim();
 
-  // 2. Decodifica TODAS as entidades HTML para caracteres reais usando a SUA função que já é ótima
+  // 2. Decodifica TODAS as entidades HTML para caracteres reais
   cleanedString = decodeHTMLEntities(cleanedString);
 
-  // 3. Tenta o parse. Se falhar, é provavelmente por causa de aspas não escapadas.
+  // 3. ✅ CORREÇÃO CRUCIAL: Normaliza todas as aspas para o padrão JSON
+  cleanedString = cleanedString.replace(/[“”«»„‟‶‷″‟‹›]/g, '"'); 
+  cleanedString = cleanedString.replace(/[‘’‚‛‹›]/g, "'");
+
+  // 4. Tenta o parse. Se falhar, é por causa de aspas dentro do conteúdo.
   try {
-    // Remove vírgulas finais que são um erro comum de digitação e quebram o JSON
     const validJsonString = cleanedString.replace(/,\s*([}\]])/g, '$1');
     const parsed = JSON.parse(validJsonString);
     console.log(`✅ JSON parseado com sucesso para ${fieldName}: ${Array.isArray(parsed) ? parsed.length : 1} item(s)`);
     return parsed;
   } catch (e) {
-    // Se o parse inicial falhou, o erro mais comum é "Unexpected token".
-    // Isso geralmente significa que há uma aspa (") no meio do seu texto.
-    console.warn(`⚠️  Parse inicial falhou para "${fieldName}". Tentando corrigir aspas...`);
+    console.warn(`⚠️  Parse inicial falhou para "${fieldName}". Tentando corrigir aspas no conteúdo...`);
     
-    // Fallback: Vamos tentar escapar de forma inteligente apenas as aspas que estão DENTRO do conteúdo.
+    // Fallback: Escapa as aspas que estão DENTRO do conteúdo.
     const escapedString = cleanedString.replace(/(?<![\[{,:\s])"(?![\]},:\s])/g, '\\"');
     
     try {

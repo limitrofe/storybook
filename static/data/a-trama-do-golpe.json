@@ -68,10 +68,10 @@
               "mobile": "60%"
             },
             "margin": {
-              "desktop": "0 auto 0 0"
+              "desktop": "10% 0% 10% 20%"
             },
             "padding": {
-              "desktop": "10%",
+              "desktop": "0%",
               "mobile": "5% 0% 0% 5%"
             }
           }
@@ -79,7 +79,7 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/foto01a.png",
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/foto01a-desk.png",
             "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/foto01a.png"
           },
           "alt": "Foto de Jair Bolsonaro de perfil",
@@ -117,7 +117,7 @@
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "3.4",
+              "desktop": "3.4rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -127,14 +127,14 @@
             "color": "#ffffff",
             "textAlign": "left",
             "width": {
-              "desktop": "46%",
+              "desktop": "60%",
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0 auto 0 0"
+              "desktop": "0 auto"
             },
             "padding": {
-              "desktop": "3%",
+              "desktop": "3% 0%",
               "mobile": "5% 5% 5% 5%"
             }
           }
@@ -142,7 +142,7 @@
       ],
       "backgroundColor": "#1a1a1a",
       "backgroundImage": {
-        "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bg_vermelho.png",
+        "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bg_vermelho_desk.jpg",
         "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bg_vermelho.png"
       },
       "padding": {
@@ -159,7 +159,7 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "2.5rem",
+              "desktop": "2rem",
               "mobile": "1.2rem"
             },
             "lineHeight": {
@@ -180,7 +180,7 @@
               "desktop": "0 auto 0 0"
             },
             "padding": {
-              "desktop": "5% 15%",
+              "desktop": "5% 27%",
               "mobile": "10% 5% 5% 15%"
             }
           }
@@ -202,7 +202,7 @@
               "mobile": "50px"
             },
             "margin": {
-              "desktop": "-10% 13% 0%",
+              "desktop": "-10% 25% 0%",
               "mobile": "-5rem 20px 20px 20px"
             },
             "padding": {
@@ -228,7 +228,7 @@
               "mobile": "10px"
             },
             "margin": {
-              "desktop": "10% 60% 0%",
+              "desktop": "4% 60% 0%",
               "mobile": "0rem 0px 0px 0px"
             },
             "padding": {
@@ -309,7 +309,7 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "2.5rem",
+              "desktop": "2rem",
               "mobile": "1.4rem"
             },
             "lineHeight": {
@@ -392,7 +392,7 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "2.5rem",
+              "desktop": "2rem",
               "mobile": "1.2rem"
             },
             "lineHeight": {
@@ -413,7 +413,7 @@
               "desktop": "0% auto 5% auto"
             },
             "padding": {
-              "mobile": "5% 5% 5% 5%"
+              "mobile": "10% 5% 10% 5%"
             }
           }
         }
@@ -494,7 +494,7 @@
           },
           "mobile": {
             "x": "56%",
-            "y": "50px",
+            "y": "80px",
             "z": 5,
             "width": "150px",
             "height": "40px",
@@ -522,7 +522,7 @@
           },
           "mobile": {
             "x": "50%",
-            "y": "110px",
+            "y": "150px",
             "z": 5,
             "width": "40px",
             "height": "60px",
@@ -537,7 +537,7 @@
         }
       ],
       "heightDesktop": "100vh",
-      "heightMobile": "400px",
+      "heightMobile": "300px",
       "backgroundColor": "#1a1a1a",
       "backgroundImage": "",
       "backgroundImageMobile": ""
@@ -573,7 +573,7 @@
             },
             "padding": {
               "desktop": "5% 0 2% 0%",
-              "mobile": "5% 5% 5% 5%"
+              "mobile": "5% 5% 0% 5%"
             }
           }
         },
@@ -605,14 +605,14 @@
             },
             "padding": {
               "desktop": "0% 0% 5% 0%",
-              "mobile": "5% 5% 10% 5%"
+              "mobile": "0% 5% 10% 5%"
             }
           }
         }
       ],
       "backgroundColor": "#1a1a1a",
       "backgroundImage": {
-        "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bg_vermelho.png",
+        "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bg_vermelho_desk.jpg",
         "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bg_vermelho.png"
       },
       "padding": {
@@ -625,7 +625,7 @@
       "items": [
         {
           "type": "text",
-          "content": "JULHO de 2021",
+          "content": "JULHO DE 2021",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
@@ -694,14 +694,12 @@
     },
     {
       "type": "globovideo",
-      "caption": "",
-      "credit": "",
-      "fullWidth": "true",
+      "fullWidth": "false",
       "autoplay": "true",
-      "controls": "true",
-      "videoId": "13798642",
+      "videoId": "13875117",
       "autoPlay": "true",
-      "showCaption": "false"
+      "width": "40%",
+      "aspectRatio": "16 / 9"
     },
     {
       "type": "super-flex",
@@ -740,14 +738,14 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/torres_ramagem.png",
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/torres_ramagem_desktop.png",
             "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/torres_ramagem.png"
           },
           "alt": "retângulo vermelho",
           "styles": {
             "width": {
               "desktop": "36%",
-              "mobile": "100vw"
+              "mobile": "90vw"
             },
             "height": {
               "desktop": "auto",
@@ -755,7 +753,7 @@
             },
             "margin": {
               "desktop": "-30% 60% 10%",
-              "mobile": "0rem 0px 0px 0px"
+              "mobile": "0 auto 10%"
             },
             "padding": {
               "desktop": "0rem 0 0 auto",
@@ -775,7 +773,7 @@
       "items": [
         {
           "type": "text",
-          "content": "SETEMBRO de 2021",
+          "content": "SETEMBRO DE 2021",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
@@ -841,7 +839,7 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "2.5rem",
+              "desktop": "2rem",
               "mobile": "1.2rem"
             },
             "lineHeight": {
@@ -869,13 +867,13 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/setembro_2021.png",
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/setembro_2021_desktop.png",
             "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/setembro_2021.png"
           },
           "alt": "retângulo vermelho",
           "styles": {
             "width": {
-              "desktop": "40%",
+              "desktop": "60%",
               "mobile": "100vw"
             },
             "height": {
@@ -898,7 +896,7 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "2.5rem",
+              "desktop": "2rem",
               "mobile": "1.2rem"
             },
             "lineHeight": {
@@ -950,7 +948,7 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "2.5rem",
+              "desktop": "2rem",
               "mobile": "1.4rem"
             },
             "lineHeight": {
@@ -971,7 +969,7 @@
               "desktop": "2% auto 2% auto"
             },
             "padding": {
-              "mobile": "5% 5% 5% 5%"
+              "mobile": "5% 5% 0% 5%"
             }
           }
         },
@@ -981,7 +979,7 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "2.5rem",
+              "desktop": "2rem",
               "mobile": "1.1rem"
             },
             "lineHeight": {
@@ -1033,7 +1031,7 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "2.5rem",
+              "desktop": "2rem",
               "mobile": "1.2rem"
             },
             "lineHeight": {
@@ -1064,7 +1062,7 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "2.5rem",
+              "desktop": "2rem",
               "mobile": "1.1rem"
             },
             "lineHeight": {
@@ -1166,7 +1164,7 @@
       ],
       "backgroundColor": "#1a1a1a",
       "backgroundImage": {
-        "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bg_amarelo.png",
+        "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bg_amarelo_desktop.png",
         "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bg_amarelo.png"
       },
       "padding": {
@@ -1179,7 +1177,7 @@
       "items": [
         {
           "type": "text",
-          "content": "5 de JULHO",
+          "content": "5 DE JULHO",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
@@ -1214,7 +1212,7 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "2.5rem",
+              "desktop": "2rem",
               "mobile": "1.2rem"
             },
             "lineHeight": {
@@ -1257,7 +1255,7 @@
             },
             "margin": {
               "desktop": "-20% 0% 5% 60%",
-              "mobile": "0rem 0px 0px 0px"
+              "mobile": "0 8%"
             },
             "padding": {
               "desktop": "0rem 0 0 auto",
@@ -1292,7 +1290,7 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "2.5rem",
+              "desktop": "2rem",
               "mobile": "1.2rem"
             },
             "lineHeight": {
@@ -1313,20 +1311,20 @@
               "desktop": "10% 20%"
             },
             "padding": {
-              "mobile": "0% 0% 5% 5%"
+              "mobile": "5%"
             }
           }
         },
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/augusto_heleno.png",
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/augusto_heleno_desktop.png",
             "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/augusto_heleno.png"
           },
           "alt": "retângulo vermelho",
           "styles": {
             "width": {
-              "desktop": "34%",
+              "desktop": "30%",
               "mobile": "320px"
             },
             "height": {
@@ -1335,7 +1333,7 @@
             },
             "margin": {
               "desktop": "-24% 0% 4% 50%",
-              "mobile": "0rem 0px 0px 0px"
+              "mobile": "0 auto"
             },
             "padding": {
               "desktop": "0rem 0 0 auto",
@@ -1355,11 +1353,11 @@
       "items": [
         {
           "type": "text",
-          "content": "18 de julho",
+          "content": "18 DE JULHO",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "4.5rem",
+              "desktop": "3.2rem",
               "mobile": "1.4rem"
             },
             "lineHeight": {
@@ -1377,7 +1375,7 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0 auto 0 0"
+              "desktop": "5% auto 1% auto"
             },
             "padding": {
               "mobile": "5% 5% 0% 5%"
@@ -1390,11 +1388,11 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "4.5rem",
+              "desktop": "2rem",
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "3.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -1404,11 +1402,11 @@
             "color": "#1a1a1a",
             "textAlign": "center",
             "width": {
-              "desktop": "60%",
+              "desktop": "30%",
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0 auto 0 0"
+              "desktop": "2% 20%"
             },
             "padding": {
               "mobile": "0% 0% 5% 5%"
@@ -1432,7 +1430,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "0rem 0 0 auto",
+              "desktop": "0 auto 0 5vw",
               "mobile": "0rem 0px 0px 0px"
             },
             "padding": {
@@ -1458,11 +1456,11 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "0rem 0 0 auto",
+              "desktop": "-20% 0 0 auto",
               "mobile": "0rem 0px 0px 0px"
             },
             "padding": {
-              "desktop": "0rem 0 0 auto",
+              "desktop": "0 5vw 0 0",
               "mobile": "10vw"
             }
           }
@@ -1512,10 +1510,11 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0 auto 0 0"
+              "desktop": "5% auto 1%",
+              "mobile": "5% 5%"
             },
             "padding": {
-              "mobile": "15% 5% 10% 5%"
+              "mobile": "3% 0%"
             }
           }
         },
@@ -1525,11 +1524,11 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "4.5rem",
+              "desktop": "2rem",
               "mobile": "1.6rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "3.2rem",
               "mobile": "2rem"
             },
             "fontWeight": {
@@ -1543,7 +1542,7 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0 auto 0 0"
+              "desktop": "0 auto"
             },
             "padding": {
               "mobile": "0% 5% 0% 5%"
@@ -1567,8 +1566,8 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "0rem 0 0 auto",
-              "mobile": "0rem 0px 0px 0px"
+              "desktop": "0% 5%",
+              "mobile": "0 auto"
             },
             "padding": {
               "desktop": "0rem 0 0 auto",
@@ -1582,11 +1581,11 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "4.5rem",
+              "desktop": "2rem",
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "3.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -1596,11 +1595,11 @@
             "color": "#ffffff",
             "textAlign": "left",
             "width": {
-              "desktop": "60%",
+              "desktop": "40%",
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0 auto 0 0"
+              "desktop": "-20% 50% 20%"
             },
             "padding": {
               "mobile": "0% 0% 5% 5%"
@@ -1617,7 +1616,7 @@
               "mobile": "2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "5.2rem",
               "mobile": "2rem"
             },
             "fontWeight": {
@@ -1631,7 +1630,7 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0 auto 0 0"
+              "desktop": "5% auto 1%"
             },
             "padding": {
               "mobile": "15% 5% 10% 5%"
@@ -1644,11 +1643,11 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "4.5rem",
+              "desktop": "2rem",
               "mobile": "1.6rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "3.2rem",
               "mobile": "2rem"
             },
             "fontWeight": {
@@ -1662,7 +1661,7 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0 auto 0 0"
+              "desktop": "0 auto 5%"
             },
             "padding": {
               "mobile": "0% 5% 10% 5%"
@@ -1700,11 +1699,11 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "4.5rem",
+              "desktop": "2rem",
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "3.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -1718,7 +1717,7 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0 auto 0 0"
+              "desktop": "5% auto"
             },
             "padding": {
               "mobile": "10% 5% 10% 5%"
@@ -1741,11 +1740,11 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "4.5rem",
+              "desktop": "8rem",
               "mobile": "2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "8.6rem",
               "mobile": "2rem"
             },
             "fontWeight": {
@@ -1755,7 +1754,7 @@
             "color": "#ffffff",
             "textAlign": "center",
             "width": {
-              "desktop": "60%",
+              "desktop": "50%",
               "mobile": "95%"
             },
             "height": {
@@ -1763,7 +1762,7 @@
               "mobile": "100vh"
             },
             "margin": {
-              "desktop": "0 auto 0 0"
+              "desktop": "20% 10%"
             },
             "padding": {
               "mobile": "10% 5% 10% 5%"
@@ -1805,7 +1804,7 @@
               "mobile": "2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "5.2rem",
               "mobile": "2.2rem"
             },
             "fontWeight": {
@@ -1819,7 +1818,7 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0 auto 0 0"
+              "desktop": "3% auto 1%"
             },
             "padding": {
               "mobile": "10% 5% 10% 5%"
@@ -1828,15 +1827,15 @@
         },
         {
           "type": "text",
-          "content": "1 de novembro",
+          "content": "1 DE NOVEMBRO",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "4.5rem",
+              "desktop": "3.2rem",
               "mobile": "1.4rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "3.2rem",
               "mobile": "2rem"
             },
             "fontWeight": {
@@ -1846,11 +1845,11 @@
             "color": "#1a1a1a",
             "textAlign": "left",
             "width": {
-              "desktop": "60%",
+              "desktop": "30%",
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0 auto 0 0"
+              "desktop": "8% 60% 1%"
             },
             "padding": {
               "mobile": "5% 5% 0% 5%"
@@ -1863,11 +1862,11 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "4.5rem",
+              "desktop": "2rem",
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "3.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -1877,11 +1876,11 @@
             "color": "#1a1a1a",
             "textAlign": "left",
             "width": {
-              "desktop": "60%",
+              "desktop": "30%",
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0 auto 0 0"
+              "desktop": "1% 60%"
             },
             "padding": {
               "mobile": "10% 5% 10% 5%"
@@ -1897,20 +1896,20 @@
           "alt": "retângulo vermelho",
           "styles": {
             "width": {
-              "desktop": "40%",
-              "mobile": "80vw"
+              "desktop": "25%",
+              "mobile": "100vw"
             },
             "height": {
               "desktop": "auto",
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "0rem 0 0 auto",
-              "mobile": "0rem 0px 0px 0px"
+              "desktop": "-20% 0% 6% 20%",
+              "mobile": "0 auto"
             },
             "padding": {
               "desktop": "0rem 0 0 auto",
-              "mobile": "0% 5vw 0% 5vw"
+              "mobile": "0% 0vw 0% 0vw"
             }
           }
         },
@@ -1920,11 +1919,11 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "4.5rem",
+              "desktop": "2rem",
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "3.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -1938,7 +1937,7 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0 auto 0 0"
+              "desktop": "2% auto"
             },
             "padding": {
               "mobile": "10% 5% 10% 5%"
@@ -1948,13 +1947,13 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print_mario.jpg",
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print_mario_desktop.png",
             "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print_mario.jpg"
           },
           "alt": "retângulo vermelho",
           "styles": {
             "width": {
-              "desktop": "40%",
+              "desktop": "100%",
               "mobile": "100vw"
             },
             "height": {
@@ -1962,7 +1961,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "0rem 0 0 auto",
+              "desktop": "2% 0 0 auto",
               "mobile": "0rem 0px 0px 0px"
             },
             "padding": {
@@ -1973,15 +1972,15 @@
         },
         {
           "type": "text",
-          "content": "9 de novembro",
+          "content": "9 DE NOVEMBRO",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "4.5rem",
+              "desktop": "3.2rem",
               "mobile": "1.4rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "3.2rem",
               "mobile": "2rem"
             },
             "fontWeight": {
@@ -1995,7 +1994,7 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0 auto 0 0"
+              "desktop": "2% auto"
             },
             "padding": {
               "mobile": "5% 5% 0% 5%"
@@ -2008,11 +2007,11 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "4.5rem",
+              "desktop": "2rem",
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "3.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -2026,7 +2025,7 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0 auto 0 0"
+              "desktop": "0 auto"
             },
             "padding": {
               "mobile": "10% 5% 10% 5%"
@@ -2050,7 +2049,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "0rem 0 0 auto",
+              "desktop": "5% auto",
               "mobile": "0rem 0px 0px 0px"
             },
             "padding": {
@@ -2061,6 +2060,3025 @@
         }
       ],
       "backgroundColor": "#FFF4E6",
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "super-flex",
+      "items": [
+        {
+          "type": "text",
+          "content": "12 DE NOVEMBRO",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "3.2rem",
+              "mobile": "1.4rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "2rem"
+            },
+            "fontWeight": {
+              "desktop": "600",
+              "mobile": "600"
+            },
+            "color": "#ffffff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "5% auto 1% auto"
+            },
+            "padding": {
+              "mobile": "5% 5% 0% 5%"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "Em 12 de novembro, militares se reúnem na casa de Braga Netto para discutir o assassinato de autoridades.",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "2.5rem",
+              "mobile": "1.2rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
+            "color": "#ffffff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "30%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "2% 20%"
+            },
+            "padding": {
+              "mobile": "10% 5% 10% 5%"
+            }
+          }
+        },
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/mapa_casa_braga-netto.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/mapa_casa_braga-netto.png"
+          },
+          "alt": "retângulo vermelho",
+          "styles": {
+            "width": {
+              "desktop": "25%",
+              "mobile": "80vw"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "-10% 0% 6% 50%",
+              "mobile": "0rem 0px 0px 0px"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0% 5vw 0% 5vw"
+            }
+          }
+        },
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/braga-netto.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/braga-netto.png"
+          },
+          "alt": "retângulo vermelho",
+          "styles": {
+            "width": {
+              "desktop": "15%",
+              "mobile": "320px"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "-32% 0% 4% 20%",
+              "mobile": "5% auto"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0 0 0 0"
+            }
+          }
+        }
+      ],
+      "backgroundColor": "#1a1a1a",
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "super-flex",
+      "items": [
+        {
+          "type": "text",
+          "content": "19 DE NOVEMBRO",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "3.2rem",
+              "mobile": "1.4rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "2rem"
+            },
+            "fontWeight": {
+              "desktop": "600",
+              "mobile": "600"
+            },
+            "color": "#ffffff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "15% auto 1% auto"
+            },
+            "padding": {
+              "mobile": "5% 5% 0% 5%"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "Em 19 de novembro, uma minuta de decreto prevendo novas eleições e a prisão de ministros do STF é apresentada a Bolsonaro, que pede ajustes. Versões do documento foram encontradas na sala de Bolsonaro no PL e na casa de Torres.",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "2.5rem",
+              "mobile": "1.2rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
+            "color": "#ffffff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "30%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "2% 20%"
+            },
+            "padding": {
+              "mobile": "10% 5% 10% 5%"
+            }
+          }
+        },
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print04.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print04.png"
+          },
+          "alt": "retângulo vermelho",
+          "styles": {
+            "width": {
+              "desktop": "25%",
+              "mobile": "320px"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "-13% 0% 0% 55%",
+              "mobile": "0 auto"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0 0 0 0"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "CERCO A MORAES",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "3.2rem",
+              "mobile": "1.4rem"
+            },
+            "lineHeight": {
+              "desktop": "3.2rem",
+              "mobile": "4.5rem"
+            },
+            "fontWeight": {
+              "desktop": "900",
+              "mobile": "900"
+            },
+            "color": "#ffffff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "12% auto 1% auto"
+            },
+            "padding": {
+              "mobile": "5% 5% 0% 5%"
+            }
+          }
+        },
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print05.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print05.png"
+          },
+          "alt": "retângulo vermelho",
+          "styles": {
+            "width": {
+              "desktop": "35%",
+              "mobile": "320px"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "-4% 0% 4% 50%",
+              "mobile": "0 auto"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0 0 0 0"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "Integrantes do grupo do Exército visitam locais descritos na operação para matar autoridades, como a região do apartamento do ministro Alexandre de Moraes e monitoram a agenda do ministro.",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "2.5rem",
+              "mobile": "1.2rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
+            "color": "#ffffff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "30%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "-44% 20%"
+            },
+            "padding": {
+              "mobile": "10% 5% 10% 5%"
+            }
+          }
+        },
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print06.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print06.png"
+          },
+          "alt": "retângulo vermelho",
+          "styles": {
+            "width": {
+              "desktop": "30%",
+              "mobile": "320px"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "84% 0% -8% 35%",
+              "mobile": "0 auto 3%"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0 0 0 0"
+            }
+          }
+        }
+      ],
+      "backgroundColor": "#1a1a1a",
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "super-flex",
+      "items": [
+        {
+          "type": "text",
+          "content": "22 DE NOVEMBRO",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "3.2rem",
+              "mobile": "1.4rem"
+            },
+            "lineHeight": {
+              "desktop": "3.2rem",
+              "mobile": "2rem"
+            },
+            "fontWeight": {
+              "desktop": "600",
+              "mobile": "600"
+            },
+            "color": "#1a1a1a",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "12% auto 1% auto"
+            },
+            "padding": {
+              "mobile": "5% 5% 0% 5%"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "PL pede anulação dos votos do 2&ordm; turno, sem apresentar prova nenhuma; Moraes aplica multa de R$ 23 milhões.",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "2.5rem",
+              "mobile": "1.2rem"
+            },
+            "lineHeight": {
+              "desktop": "3.2rem",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
+            "color": "#1a1a1a",
+            "textAlign": "left",
+            "width": {
+              "desktop": "40%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "1% 20%"
+            },
+            "padding": {
+              "mobile": "10% 5% 10% 5%"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "26 DE NOVEMBRO",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "3.2rem",
+              "mobile": "1.4rem"
+            },
+            "lineHeight": {
+              "desktop": "3.2rem",
+              "mobile": "2rem"
+            },
+            "fontWeight": {
+              "desktop": "600",
+              "mobile": "600"
+            },
+            "color": "#1a1a1a",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "5% auto 1% auto"
+            },
+            "padding": {
+              "mobile": "5% 5% 0% 5%"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "A PF relata que Mauro Cid ajusta o teor da e a forma de divulgação da carta golpista.",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "2.5rem",
+              "mobile": "1.2rem"
+            },
+            "lineHeight": {
+              "desktop": "3.2rem",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
+            "color": "#1a1a1a",
+            "textAlign": "left",
+            "width": {
+              "desktop": "45%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "1% 35% 10% auto"
+            },
+            "padding": {
+              "mobile": "10% 5% 10% 5%"
+            }
+          }
+        }
+      ],
+      "backgroundColor": "#FFF4E6",
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "super-flex",
+      "items": [
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print07.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print07.png"
+          },
+          "alt": "retângulo vermelho",
+          "styles": {
+            "width": {
+              "desktop": "40%",
+              "mobile": "320px"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "-10% 0% -4% 56%",
+              "mobile": "0rem 0px 0px 0px"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0 0 0 0"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "Em troca de mensagens, Cid é questionado se Bolsonaro sabia do conteúdo, e responde que sim.",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "2.5rem",
+              "mobile": "1.2rem"
+            },
+            "lineHeight": {
+              "desktop": "3.2rem",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
+            "color": "#ffffff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "20%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "-10% 55% 20% auto"
+            },
+            "padding": {
+              "mobile": "10% 5% 10% 5%"
+            }
+          }
+        }
+      ],
+      "backgroundColor": "#1a1a1a",
+      "backgroundImage": {
+        "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bg_vermelho_desk.jpg",
+        "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bg_vermelho.png"
+      },
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "globovideo",
+      "caption": "",
+      "credit": "",
+      "fullWidth": "true",
+      "autoplay": "true",
+      "controls": "true",
+      "videoId": "13798642",
+      "autoPlay": "true",
+      "showCaption": "false"
+    },
+    {
+      "type": "super-flex",
+      "items": [
+        {
+          "type": "text",
+          "content": "Em depoimento à PF, dentro de um acordo de delação premiada, Mauro Cid foi perguntado se Bolsonaro sabia da minuta e fez que sim com a cabeça. Cid afirmou também que viu o ex-presidente editando o documento.",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "2.5rem",
+              "mobile": "1.2rem"
+            },
+            "lineHeight": {
+              "desktop": "1.2",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
+            "color": "#ffffff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "40%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "-71% 35% 10% auto"
+            },
+            "padding": {
+              "mobile": "10% 5% 10% 5%"
+            }
+          }
+        }
+      ],
+      "backgroundColor": "#1a1a1a",
+      "backgroundImage": {
+        "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bg_vermelho_desk.jpg",
+        "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bg_vermelho.png"
+      },
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "super-flex",
+      "items": [
+        {
+          "type": "text",
+          "content": "6 DE DEZEMBRO",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "3.2rem",
+              "mobile": "1.4rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "2rem"
+            },
+            "fontWeight": {
+              "desktop": "600",
+              "mobile": "600"
+            },
+            "color": "#ffffff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "10% 20% 0% auto"
+            },
+            "padding": {
+              "mobile": "5% 5% 0% 5%"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "No Planalto, Mário Fernandes imprime o plano de assassinato. Bolsonaro e Mauro Cid estavam no prédio no mesmo horário.",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "2.5rem",
+              "mobile": "1.2rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
+            "color": "#ffffff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "30%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "2% 20%"
+            },
+            "padding": {
+              "mobile": "10% 5% 10% 5%"
+            }
+          }
+        },
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print08.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print08.png"
+          },
+          "alt": "retângulo vermelho",
+          "styles": {
+            "width": {
+              "desktop": "34%",
+              "mobile": "320px"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "-10% 0% -4% 56%",
+              "mobile": "5% auto"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0 0 0 0"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "7 DE DEZEMBRO",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "3.2rem",
+              "mobile": "1.4rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "2rem"
+            },
+            "fontWeight": {
+              "desktop": "600",
+              "mobile": "600"
+            },
+            "color": "#ffffff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "10% auto 1% auto"
+            },
+            "padding": {
+              "mobile": "5% 5% 0% 5%"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "Bolsonaro apresenta minuta de decreto golpista ao ministro da Defesa e aos comandantes do Exército, Freire Gomes, e da Marinha, Almir Garnier. Tércio Arnaud também foi ao Alvorada.",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "2.5rem",
+              "mobile": "1.2rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
+            "color": "#ffffff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "2% 20%",
+              "mobile": "0 auto"
+            },
+            "padding": {
+              "mobile": "10% 5% 10% 5%"
+            }
+          }
+        },
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/almir_garnier.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/almir_garnier.png"
+          },
+          "alt": "retângulo vermelho",
+          "styles": {
+            "width": {
+              "desktop": "20%",
+              "mobile": "320px"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "10% 0% 4% 60%",
+              "mobile": "0 auto"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0 0 0 0"
+            }
+          }
+        }
+      ],
+      "backgroundColor": "#1a1a1a",
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "super-flex",
+      "items": [
+        {
+          "type": "text",
+          "content": "O texto previa estado de sítio ''dentro das quatro linhas'' da Constituição.",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "2.5rem",
+              "mobile": "1.2rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
+            "color": "#ffffff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "-32% 20%"
+            },
+            "padding": {
+              "mobile": "10% 5% 10% 5%"
+            }
+          }
+        }
+      ],
+      "backgroundColor": "#1a1a1a",
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "super-flex",
+      "items": [
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print09.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print09.png"
+          },
+          "alt": "retângulo vermelho",
+          "styles": {
+            "width": {
+              "desktop": "30%",
+              "mobile": "320px"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "-25% 0% 0% 18%",
+              "mobile": "0 auto"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0 auto"
+            }
+          }
+        }
+      ],
+      "backgroundColor": "#1a1a1a",
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "super-flex",
+      "items": [
+        {
+          "type": "text",
+          "content": "Os comandantes do Exército e da Aeronáutica se posicionaram firmemente contra a proposta e se recusaram a assinar o documento. Segundo a PF, a trama golpista não foi adiante por falta desse apoio. ",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "2.5rem",
+              "mobile": "1.2rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
+            "color": "#ffffff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "8% 20% 5% auto"
+            },
+            "padding": {
+              "mobile": "10% 5% 10% 5%"
+            }
+          }
+        }
+      ],
+      "backgroundColor": "#1a1a1a",
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "super-flex",
+      "items": [
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print_10.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print_10.png"
+          },
+          "alt": "retângulo vermelho",
+          "styles": {
+            "width": {
+              "desktop": "25%",
+              "mobile": "320px"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "-1% 0% 4% 11%",
+              "mobile": "0 auto"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0 0 0 0"
+            }
+          }
+        },
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print_11.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print_11.png"
+          },
+          "alt": "retângulo vermelho",
+          "styles": {
+            "width": {
+              "desktop": "25%",
+              "mobile": "320px"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "-44% 0% 4% 38%",
+              "mobile": "0 auto"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0 0 0 0"
+            }
+          }
+        },
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print_12.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print_12.png"
+          },
+          "alt": "retângulo vermelho",
+          "styles": {
+            "width": {
+              "desktop": "25%",
+              "mobile": "320px"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "-49% 0% 22% 64%",
+              "mobile": "0 auto"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0 0 0 0"
+            }
+          }
+        }
+      ],
+      "backgroundColor": "#1a1a1a",
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "globovideo",
+      "caption": "",
+      "credit": "",
+      "fullWidth": "true",
+      "autoplay": "true",
+      "controls": "true",
+      "videoId": "13798642",
+      "autoPlay": "true",
+      "showCaption": "false"
+    },
+    {
+      "type": "super-flex",
+      "items": [
+        {
+          "type": "text",
+          "content": "9 DE DEZEMBRO",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "3.2rem",
+              "mobile": "1.4rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "2rem"
+            },
+            "fontWeight": {
+              "desktop": "600",
+              "mobile": "600"
+            },
+            "color": "#1a1a1a",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "12% auto 1% auto"
+            },
+            "padding": {
+              "mobile": "5% 5% 0% 5%"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "Em live, o presidente rompe o silêncio:",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "2.5rem",
+              "mobile": "1.2rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
+            "color": "#1a1a1a",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "2% 20%"
+            },
+            "padding": {
+              "mobile": "10% 5% 10% 5%"
+            }
+          }
+        },
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print13.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print13.png"
+          },
+          "alt": "retângulo vermelho",
+          "styles": {
+            "width": {
+              "desktop": "30%",
+              "mobile": "320px"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "-9% 0% 4% 57%",
+              "mobile": "0 auto"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0 0 0 0"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "Nos dias seguintes, a trama inclui novas reuniões sobre a adoção de uma GLO (Garantia da Lei e da Ordem) ou de estado de sítio e de defesa. E depoimento, o ex-comandante da Aeronáutica, Baptista Júnior, confirmou a presença de Bolsonaro nos encontros.   ",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "2.5rem",
+              "mobile": "1.2rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
+            "color": "#1a1a1a",
+            "textAlign": "left",
+            "width": {
+              "desktop": "29%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "-40% 20% 35% 20%"
+            },
+            "padding": {
+              "mobile": "10% 5% 10% 5%"
+            }
+          }
+        }
+      ],
+      "backgroundColor": "#FFF4E6",
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "super-flex",
+      "items": [
+        {
+          "type": "text",
+          "content": "Operação para prender ou matar Moraes",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "4.5rem",
+              "mobile": "2rem"
+            },
+            "lineHeight": {
+              "desktop": "5.2rem",
+              "mobile": "2.2rem"
+            },
+            "fontWeight": {
+              "desktop": "900",
+              "mobile": "900"
+            },
+            "color": "#ffffff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "30%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "9% 20% 1% 20%"
+            },
+            "padding": {
+              "mobile": "10% 5% 10% 5%"
+            }
+          }
+        },
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/alexandre_moraes.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/alexandre_moraes.png"
+          },
+          "alt": "retângulo vermelho",
+          "styles": {
+            "width": {
+              "desktop": "35%",
+              "mobile": "320px"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "-11% 0% 0% 50%",
+              "mobile": "0rem 0px 0px 0px"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0 0 0 0"
+            }
+          }
+        }
+      ],
+      "backgroundColor": "#1a1a1a",
+      "backgroundImage": {
+        "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bg_preto.png",
+        "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bg_preto.png"
+      },
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "super-flex",
+      "items": [
+        {
+          "type": "text",
+          "content": "Celulares que integrariam o grupoda operação batizada de Copa 2022 se deslocam. Um deles passapor ''locais de interesse da ação'', segundo a PF, incluindo ''a residência funcional do ministro Alexandrede Moraes.''",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "2.5rem",
+              "mobile": "1.2rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
+            "color": "#ffffff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "10% 20%"
+            },
+            "padding": {
+              "mobile": "10% 5% 10% 5%"
+            }
+          }
+        },
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/mapa_kids_pretos.jpg",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/mapa_kids_pretos.jpg"
+          },
+          "alt": "mapa kids pretos",
+          "styles": {
+            "width": {
+              "desktop": "30%",
+              "mobile": "100%"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "-5% 0% 4% 20%",
+              "mobile": "0% 0 10%"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0 0 0 0"
+            }
+          }
+        },
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print_carros_moraes.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print_carros_moraes.png"
+          },
+          "alt": "mapa kids pretos",
+          "styles": {
+            "width": {
+              "desktop": "30%",
+              "mobile": "320px"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "-49.25% 0% 4% 54%",
+              "mobile": "0 auto"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0 0 0 0"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "Ao menos 6 integrantes 'Kids Pretos' se posicionaram em vários pontos de Brasília. De acordo com a investigação, a operação foi abortada porque a cúpula do Exército não aderiu ao golpe e a sessão do STF no dia 15 acabou mais cedo.",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "2.5rem",
+              "mobile": "1.2rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
+            "color": "#ffffff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "24% 20% 2% 20%"
+            },
+            "padding": {
+              "mobile": "10% 5% 10% 5%"
+            }
+          }
+        },
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print14.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print14.png"
+          },
+          "alt": "print 14",
+          "styles": {
+            "width": {
+              "desktop": "30%",
+              "mobile": "320px"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "-19% 0% 4% 53%",
+              "mobile": "0 auto"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0 0 0 0"
+            }
+          }
+        }
+      ],
+      "backgroundColor": "#1a1a1a",
+      "backgroundImage": {
+        "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bg_vermelho_desk.jpg",
+        "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bg_vermelho_2.jpg"
+      },
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "super-flex",
+      "items": [
+        {
+          "type": "text",
+          "content": "Braga Netto manda pressionar chefe do Exército: 'Oferece a cabeça dele. Cagão'",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "4.5rem",
+              "mobile": "2rem"
+            },
+            "lineHeight": {
+              "desktop": "5.2rem",
+              "mobile": "2.2rem"
+            },
+            "fontWeight": {
+              "desktop": "900",
+              "mobile": "900"
+            },
+            "color": "#1a1a1a",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "3% auto 1%"
+            },
+            "padding": {
+              "mobile": "10% 5% 5% 5%"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "A pressão sobre o comandante do Exército continua, Braga Netto orienta Ailton Gomes a assediar o comandante do Exército, general Freire Gomes:",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "4.5rem",
+              "mobile": "1.2rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
+            "color": "#1a1a1a",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "0 auto 0 0"
+            },
+            "padding": {
+              "mobile": "0% 5% 0% 5%"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "''Oferece a cabeça dele. Cagão'', dizia a troca de mensagens.",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "4.5rem",
+              "mobile": "1.2rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
+            "color": "#1a1a1a",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "0 auto 0 0"
+            },
+            "padding": {
+              "mobile": "5% 5% 10% 5%"
+            }
+          }
+        },
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print15.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print15.png"
+          },
+          "alt": "print 14",
+          "styles": {
+            "width": {
+              "desktop": "30%",
+              "mobile": "320px"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "-24% 0% 4% 50%",
+              "mobile": "0 auto"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0 0 0 0"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "A trama inclui ainda o documento ''Operação 142'', que previa anulação das eleições, substituição do TSEe prorrogação de mandatos.",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "4.5rem",
+              "mobile": "1.2rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
+            "color": "#1a1a1a",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "0 auto 0 0"
+            },
+            "padding": {
+              "mobile": "10% 5% 10% 5%"
+            }
+          }
+        },
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print16.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print16.png"
+          },
+          "alt": "print 16",
+          "styles": {
+            "width": {
+              "desktop": "30%",
+              "mobile": "320px"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "-24% 0% 4% 50%",
+              "mobile": "0 auto 5%"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0 0 0 0"
+            }
+          }
+        }
+      ],
+      "backgroundColor": "#FFF4E6",
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "super-flex",
+      "items": [
+        {
+          "type": "text",
+          "content": "Bolsonaro não passa faixa para Lula",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "4.5rem",
+              "mobile": "2rem"
+            },
+            "lineHeight": {
+              "desktop": "5.2rem",
+              "mobile": "2.2rem"
+            },
+            "fontWeight": {
+              "desktop": "900",
+              "mobile": "900"
+            },
+            "color": "#ffffff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "3% auto 1%"
+            },
+            "padding": {
+              "mobile": "10% 5% 5% 5%"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "Em 30 de dezembro, Bolsonaro embarca para a Flórida, evitando passar a faixa presidencial.",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "4.5rem",
+              "mobile": "1.2rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
+            "color": "#ffffff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "0 auto 0 0"
+            },
+            "padding": {
+              "mobile": "0% 5% 10% 5%"
+            }
+          }
+        }
+      ],
+      "backgroundColor": "#1a1a1a",
+      "backgroundImage": {
+        "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bg_preto.png",
+        "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bg_preto.png"
+      },
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "video",
+      "src": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      "caption": "",
+      "credit": "",
+      "fullWidth": "true",
+      "autoplay": "true",
+      "controls": "true",
+      "autoPlay": "true",
+      "showCaption": "false",
+      "loop": "true"
+    },
+    {
+      "type": "super-flex",
+      "items": [
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bolsonaro_orlando.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bolsonaro_orlando.png"
+          },
+          "alt": "bolsonaro_orlando.png",
+          "styles": {
+            "width": {
+              "desktop": "30%",
+              "mobile": "100%"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "-24% 0% 4% 50%",
+              "mobile": "0 auto"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0 0 0 0"
+            }
+          }
+        }
+      ],
+      "backgroundColor": "#1a1a1a",
+      "backgroundImage": {
+        "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bg_vermelho_desktop.png",
+        "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bg_vermelho.png"
+      },
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "super-flex",
+      "items": [
+        {
+          "type": "text",
+          "content": "2023",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "8rem",
+              "mobile": "2rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "3.5rem"
+            },
+            "fontWeight": {
+              "desktop": "900",
+              "mobile": "900"
+            },
+            "color": "#ffffff",
+            "textAlign": "center",
+            "width": {
+              "desktop": "60%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "0 auto 0 auto"
+            },
+            "padding": {
+              "desktop": "5% 0% 2% 0%",
+              "mobile": "10% 5%"
+            }
+          }
+        }
+      ],
+      "backgroundColor": "#1a1a1a",
+      "backgroundImage": {
+        "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bg_vermelho_desktop.png",
+        "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bg_vermelho.png"
+      },
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "super-flex",
+      "items": [
+        {
+          "type": "text",
+          "content": "Posse de Lula e desfecho do plano golpista",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "4.5rem",
+              "mobile": "2rem"
+            },
+            "lineHeight": {
+              "desktop": "5.2rem",
+              "mobile": "2.2rem"
+            },
+            "fontWeight": {
+              "desktop": "900",
+              "mobile": "900"
+            },
+            "color": "#ffffff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "3% auto 1%"
+            },
+            "padding": {
+              "mobile": "10% 5% 5% 5%"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "1 DE JANEIRO DE 2023",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "4.5rem",
+              "mobile": "1.4rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "2rem"
+            },
+            "fontWeight": {
+              "desktop": "600",
+              "mobile": "600"
+            },
+            "color": "#ffffff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "0 auto 0 0"
+            },
+            "padding": {
+              "mobile": "5% 5% 0% 5%"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "No dia 1&ordm; de janeiro, Lula toma posse diante de centenas de milhares de pessoas em Brasília.",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "4.5rem",
+              "mobile": "1.2rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
+            "color": "#ffffff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "0 auto 0 0"
+            },
+            "padding": {
+              "mobile": "10% 5% 10% 5%"
+            }
+          }
+        },
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/posee_lula.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/posee_lula.png"
+          },
+          "alt": "posse lula",
+          "styles": {
+            "width": {
+              "desktop": "30%",
+              "mobile": "100%"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "-24% 0% 4% 50%",
+              "mobile": "0 auto"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0 0 0 0"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "8 DE JANEIRO DE 2023",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "4.5rem",
+              "mobile": "1.4rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "2rem"
+            },
+            "fontWeight": {
+              "desktop": "600",
+              "mobile": "600"
+            },
+            "color": "#ffffff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "0 auto 0 0"
+            },
+            "padding": {
+              "mobile": "5% 5% 0% 5%"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "STF, Planalto e Congresso são invadidos",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "4.5rem",
+              "mobile": "2rem"
+            },
+            "lineHeight": {
+              "desktop": "5.2rem",
+              "mobile": "2.2rem"
+            },
+            "fontWeight": {
+              "desktop": "900",
+              "mobile": "900"
+            },
+            "color": "#ffffff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "3% auto 1%"
+            },
+            "padding": {
+              "mobile": "10% 5% 5% 5%"
+            }
+          }
+        }
+      ],
+      "backgroundColor": "#1a1a1a",
+      "backgroundImage": {
+        "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bg_preto.png",
+        "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bg_preto.png"
+      },
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "globovideo",
+      "caption": "",
+      "credit": "",
+      "fullWidth": "true",
+      "autoplay": "true",
+      "controls": "true",
+      "videoId": "13798642",
+      "autoPlay": "true",
+      "showCaption": "false"
+    },
+    {
+      "type": "super-flex",
+      "backgroundColor": "#1a1a1a",
+      "backgroundImage": {
+        "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bg_vermelho_desktop.png",
+        "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bg_vermelho.png"
+      },
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "super-flex",
+      "items": [
+        {
+          "type": "text",
+          "content": "Na tarde de domingo, milhares de golpistas invadem o Congresso, o Palácio do Planalto e o STF. Vidraças quebradas, obras de arte destruídas, gabinetes saqueados.",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "4.5rem",
+              "mobile": "1.2rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
+            "color": "#ffffff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "0 auto 0 0"
+            },
+            "padding": {
+              "mobile": "10% 5%"
+            }
+          }
+        }
+      ],
+      "backgroundColor": "#1a1a1a",
+      "backgroundImage": {
+        "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bg_preto.png",
+        "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bg_preto.png"
+      },
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "super-flex",
+      "items": [
+        {
+          "type": "text",
+          "content": "A pauta era a mesma: intervenção militar e contestação do resultado eleitoral.",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "4.5rem",
+              "mobile": "1.2rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
+            "color": "#ffffff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "0 auto 0 0"
+            },
+            "padding": {
+              "mobile": "10% 5%"
+            }
+          }
+        }
+      ],
+      "backgroundColor": "#1a1a1a",
+      "backgroundImage": {
+        "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bg_vermelho_desktop.png",
+        "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bg_vermelho.png"
+      },
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "super-flex",
+      "items": [
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/8-janeiro-01.jpg",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/8-janeiro-01.jpg"
+          },
+          "alt": "8-janeiro-01.jpg",
+          "styles": {
+            "width": {
+              "desktop": "30%",
+              "mobile": "100%"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "-24% 0% 4% 50%",
+              "mobile": "0rem 0px 0px 0px"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0 0 0 0"
+            }
+          }
+        },
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/8-janeiro-02.jpg",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/8-janeiro-02.jpg"
+          },
+          "alt": "8-janeiro-02.jpg",
+          "styles": {
+            "width": {
+              "desktop": "30%",
+              "mobile": "100%"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "-24% 0% 4% 50%",
+              "mobile": "0rem 0px 0px 0px"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0 0 0 0"
+            }
+          }
+        },
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/8-janeiro-03.jpg",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/8-janeiro-03.jpg"
+          },
+          "alt": "8-janeiro-03.jpg",
+          "styles": {
+            "width": {
+              "desktop": "30%",
+              "mobile": "100%"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "-24% 0% 4% 50%",
+              "mobile": "0rem 0px 0px 0px"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0 0 0 0"
+            }
+          }
+        }
+      ],
+      "backgroundColor": "#FFF4E6",
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "super-flex",
+      "items": [
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/retangulo-vermelho.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/retangulo-vermelho.png"
+          },
+          "alt": "retângulo vermelho",
+          "styles": {
+            "width": {
+              "desktop": "20%",
+              "mobile": "100px"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "10px"
+            },
+            "margin": {
+              "desktop": "0% 60% 0%",
+              "mobile": "-0px 0px 0px 0px"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0 0 0 0"
+            }
+          }
+        },
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/abreaspas.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/abreaspas.png"
+          },
+          "alt": "retângulo vermelho",
+          "styles": {
+            "width": {
+              "desktop": "50px",
+              "mobile": "30px"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "6% 25% 0",
+              "mobile": "5% 0px 0px 5%"
+            },
+            "padding": {
+              "desktop": "0",
+              "mobile": "0 0 0 0"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "O comportamento de Jair Bolsonaro nas redes sociais no dia 8 de janeiro de 2023 não altera a realidade de que foi o principal responsável pela contínua radicalização e pela criação do ambiente que possibilitou a explosão de violência naquele dia. Suas posturas ambíguas e sua ausência de ação concreta para conter os ânimos inflamados por ele próprio são indícios claros de sua contribuição para a escalada de violência ",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "2rem",
+              "mobile": "1.4rem"
+            },
+            "lineHeight": {
+              "desktop": "4rem",
+              "mobile": "2.2rem"
+            },
+            "fontWeight": {
+              "desktop": "700",
+              "mobile": "700"
+            },
+            "color": "#1a1a1a",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "2% auto 2% auto"
+            },
+            "padding": {
+              "mobile": "5% 5% 5% 5%"
+            }
+          }
+        },
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/fechaaspas.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/fechaaspas.png"
+          },
+          "alt": "fecha aspas",
+          "styles": {
+            "width": {
+              "desktop": "100px",
+              "mobile": "30px"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "0% 0 0% 68%",
+              "mobile": "-5% 0px -5% 90%"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0 0 0 0"
+            }
+          }
+        },
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/paulo_gonet_frase1.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/paulo_gonet_frase1.png"
+          },
+          "alt": "Frase Paulo Gonet",
+          "styles": {
+            "width": {
+              "desktop": "35%",
+              "mobile": "100vw"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "-6% 8% 6%",
+              "mobile": "0rem 0px 0px 0px"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0 0 0 0"
+            }
+          }
+        },
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/8-janeiro.jpg",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/8-janeiro.jpg"
+          },
+          "alt": "8 DE JANEIRO",
+          "styles": {
+            "width": {
+              "desktop": "35%",
+              "mobile": "100vw"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "-6% 8% 6%",
+              "mobile": "0rem 0px 0px 0px"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0 0 0 0"
+            }
+          }
+        }
+      ],
+      "backgroundColor": "#FFF4E6",
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "super-flex",
+      "items": [
+        {
+          "type": "text",
+          "content": "Segundo o Ministério Público, os ataques de 8 de janeiro não foram um ato isolado, mas o desfecho de um plano gestado ao longo de dois anos, com articulação política, militar e digital para derrubar a democracia brasileira.",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "4.5rem",
+              "mobile": "1.2rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
+            "color": "#ffffff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "0 auto 0 0"
+            },
+            "padding": {
+              "mobile": "5%"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "Para a PGR, as ações de Jair Messias Bolsonaro não se limitaram a uma postura passiva de resistência à derrota, mas configuraram uma articulação consciente para gerar um ambiente propício à violência e ao golpe.",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "4.5rem",
+              "mobile": "1.2rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
+            "color": "#ffffff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "0 auto 0 0"
+            },
+            "padding": {
+              "mobile": "5%"
+            }
+          }
+        },
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/a-trama-do-golpe.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/a-trama-do-golpe.png"
+          },
+          "alt": "a trama do golpe",
+          "styles": {
+            "width": {
+              "desktop": "35%",
+              "mobile": "100vw"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "-6% 8% 6%",
+              "mobile": "0rem 0px 0px 0px"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0 0 0 0"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "Bolsonaro preso em casa",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "4.5rem",
+              "mobile": "2rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "2rem"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "900"
+            },
+            "color": "#ffffff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "90%"
+            },
+            "margin": {
+              "desktop": "0 auto 0 0"
+            },
+            "padding": {
+              "mobile": "5%"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "Um mês antes do início do julgamento no STF, Bolsonaro passou a cumprir prisão domiciliar por tentativa de dificultar o andamento do processo que investiga a tentativa de golpe.",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "4.5rem",
+              "mobile": "1.2rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
+            "color": "#ffffff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "90%"
+            },
+            "margin": {
+              "desktop": "0 auto 0 0"
+            },
+            "padding": {
+              "mobile": "0% 5% 5%"
+            }
+          }
+        }
+      ],
+      "backgroundColor": "#1a1a1a",
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "super-flex",
+      "items": [
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bolsonaro_prisao_domiciliar.jpg",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bolsonaro_prisao_domiciliar.jpg"
+          },
+          "alt": "Bolsonaro prisão domiciliar",
+          "styles": {
+            "width": {
+              "desktop": "35%",
+              "mobile": "100vw"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "-6% 8% 6%",
+              "mobile": "0rem 0px 0px 0px"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0 0 0 0"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "O ex-presidente e o filho, o deputado Eduardo Bolsonaro (PL-SP), foram indiciados pela PF por coação.",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "4.5rem",
+              "mobile": "1.2rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
+            "color": "#ffffff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "90%"
+            },
+            "margin": {
+              "desktop": "0 auto 0 0"
+            },
+            "padding": {
+              "mobile": "10% 5% 10% 5%"
+            }
+          }
+        }
+      ],
+      "backgroundColor": "#9A121F",
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "super-flex",
+      "items": [
+        {
+          "type": "text",
+          "content": "O que dizem os réus",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "4.5rem",
+              "mobile": "2rem"
+            },
+            "lineHeight": {
+              "desktop": "5.2rem",
+              "mobile": "2.2rem"
+            },
+            "fontWeight": {
+              "desktop": "900",
+              "mobile": "900"
+            },
+            "color": "#ffffff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "3% auto 1%"
+            },
+            "padding": {
+              "mobile": "10% 5% 10% 5%"
+            }
+          }
+        }
+      ],
+      "backgroundColor": "#1a1a1a",
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "super-flex",
+      "items": [
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/jair_bolsonaro.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/jair_bolsonaro.png"
+          },
+          "alt": "Bolsonaro prisão domiciliar",
+          "styles": {
+            "width": {
+              "desktop": "35%",
+              "mobile": "100vw"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "-6% 8% 6%",
+              "mobile": "0rem 0px 0px 0px"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0 0 0 0"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "Afirma que a acusação da PGR é ''absurda e alternativa'', sem provas que o liguem a planos golpistas ou aos atos de 8 de janeiro. Sustenta que houve uma transição regular de governo, que ele não alterou a minuta do golpe nem apresentou documentos golpistas em reuniões, e que suas críticas ao sistema eleitoral se limitaram a opiniões políticas.",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "4.5rem",
+              "mobile": "1.2rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
+            "color": "#ffffff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "90%"
+            },
+            "margin": {
+              "desktop": "0 auto 0 0"
+            },
+            "padding": {
+              "mobile": "10% 5% 10% 5%"
+            }
+          }
+        }
+      ],
+      "backgroundColor": "#1a1a1a",
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "super-flex",
+      "items": [
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/general_paulo_sergio_nogueira.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/general_paulo_sergio_nogueira.png"
+          },
+          "alt": "general_paulo_sergio_nogueira",
+          "styles": {
+            "width": {
+              "desktop": "35%",
+              "mobile": "100vw"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "-6% 8% 6%",
+              "mobile": "0rem 0px 0px 0px"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0 0 0 0"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "Nega ter atrasado o relatório das Forças Armadas e afirma que tentou, com outros comandantes, dissuadir Bolsonaro de atitudes radicais, chegando a propor um discurso de reconhecimento da derrota eleitoral.",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "4.5rem",
+              "mobile": "1.2rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
+            "color": "#ffffff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "90%"
+            },
+            "margin": {
+              "desktop": "0 auto 0 0"
+            },
+            "padding": {
+              "mobile": "10% 5% 10% 5%"
+            }
+          }
+        }
+      ],
+      "backgroundColor": "#1a1a1a",
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "super-flex",
+      "items": [
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/almirante_almir_garnier.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/almirante_almir_garnier.png"
+          },
+          "alt": "almirante_almir_garnier",
+          "styles": {
+            "width": {
+              "desktop": "35%",
+              "mobile": "100vw"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "-6% 8% 6%",
+              "mobile": "0rem 0px 0px 0px"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0 0 0 0"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "Rebate a acusação de ter disponibilizado tropas para um golpe, destacando contradições em depoimentos de outros comandantes. Afirma que não houve qualquer ato de execução e que não participou de organização criminosa.",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "4.5rem",
+              "mobile": "1.2rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
+            "color": "#ffffff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "90%"
+            },
+            "margin": {
+              "desktop": "0 auto 0 0"
+            },
+            "padding": {
+              "mobile": "10% 5% 10% 5%"
+            }
+          }
+        }
+      ],
+      "backgroundColor": "#1a1a1a",
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "super-flex",
+      "items": [
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/general_augusto_heleno.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/general_augusto_heleno.png"
+          },
+          "alt": "general_augusto_heleno",
+          "styles": {
+            "width": {
+              "desktop": "35%",
+              "mobile": "100vw"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "-6% 8% 6%",
+              "mobile": "0rem 0px 0px 0px"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0 0 0 0"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "Nega envolvimento em tentativa de ruptura institucional, alegando falta de provas que o liguem a planos de golpe. Afirma que sua atuação foi apenas ''acessória e periférica'', pois já tinha pouca influência política.",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "4.5rem",
+              "mobile": "1.2rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
+            "color": "#ffffff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "90%"
+            },
+            "margin": {
+              "desktop": "0 auto 0 0"
+            },
+            "padding": {
+              "mobile": "10% 5% 10% 5%"
+            }
+          }
+        }
+      ],
+      "backgroundColor": "#1a1a1a",
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "super-flex",
+      "items": [
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/anderson_torres_.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/anderson_torres_.png"
+          },
+          "alt": "anderson_torres_",
+          "styles": {
+            "width": {
+              "desktop": "35%",
+              "mobile": "100vw"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "-6% 8% 6%",
+              "mobile": "0rem 0px 0px 0px"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0 0 0 0"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "Nega ser autor da ''minuta do golpe'' e afirma que a presença do documento em sua casa não tem relevância penal. Rejeita a acusação de divulgar informações falsas sobre o sistema eleitoral ou de ter direcionado a PRF no 2&ordm; turno, citando testemunhos favoráveis. Alega ainda que o caso deveria tramitar na 1&ordf; instância, por não possuir foro privilegiado.",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "4.5rem",
+              "mobile": "1.2rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
+            "color": "#ffffff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "90%"
+            },
+            "margin": {
+              "desktop": "0 auto 0 0"
+            },
+            "padding": {
+              "mobile": "10% 5% 10% 5%"
+            }
+          }
+        }
+      ],
+      "backgroundColor": "#1a1a1a",
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "super-flex",
+      "items": [
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/anderson_torres_.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/anderson_torres_.png"
+          },
+          "alt": "anderson_torres_",
+          "styles": {
+            "width": {
+              "desktop": "35%",
+              "mobile": "100vw"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "-6% 8% 6%",
+              "mobile": "0rem 0px 0px 0px"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0 0 0 0"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "Nega ser autor da ''minuta do golpe'' e afirma que a presença do documento em sua casa não tem relevância penal. Rejeita a acusação de divulgar informações falsas sobre o sistema eleitoral ou de ter direcionado a PRF no 2&ordm; turno, citando testemunhos favoráveis. Alega ainda que o caso deveria tramitar na 1&ordf; instância, por não possuir foro privilegiado.",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "4.5rem",
+              "mobile": "1.2rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
+            "color": "#ffffff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "90%"
+            },
+            "margin": {
+              "desktop": "0 auto 0 0"
+            },
+            "padding": {
+              "mobile": "10% 5% 10% 5%"
+            }
+          }
+        }
+      ],
+      "backgroundColor": "#1a1a1a",
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "super-flex",
+      "items": [
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/alexandre_ramagem_.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/alexandre_ramagem_.png"
+          },
+          "alt": "alexandre_ramagem_",
+          "styles": {
+            "width": {
+              "desktop": "35%",
+              "mobile": "100vw"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "-6% 8% 6%",
+              "mobile": "0rem 0px 0px 0px"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0 0 0 0"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "Nega ter orientado Bolsonaro em ataques ao sistema eleitoral ou usado indevidamente a Abin. Afirma nunca ter integrado organização criminosa e sustenta que a radicalização ocorreu após sua saída do governo, quando foi eleito deputado.",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "4.5rem",
+              "mobile": "1.2rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
+            "color": "#ffffff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "90%"
+            },
+            "margin": {
+              "desktop": "0 auto 0 0"
+            },
+            "padding": {
+              "mobile": "10% 5% 10% 5%"
+            }
+          }
+        }
+      ],
+      "backgroundColor": "#1a1a1a",
       "padding": {
         "desktop": "4rem 2rem",
         "mobile": "3rem 1rem"

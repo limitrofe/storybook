@@ -627,21 +627,29 @@ import AbsoluteCanvas from './story/AbsoluteCanvas.svelte';
 				/>
 
 			<!-- Globo Player -->
-			{:else if componentType === 'globo-player'}
-				<GloboPlayer
-					videoId={props.videoId}
-					videosIDs={props.videosIDs}
-					caption={props.caption}
-					credit={props.credit}
-					fullWidth={stringToBoolean(props.fullWidth, false)}
-					autoplay={stringToBoolean(props.autoplay, false)}
-					startMuted={stringToBoolean(props.startMuted, true)}
-					skipDFP={stringToBoolean(props.skipDFP, false)}
-					chromeless={stringToBoolean(props.chromeless, false)}
-					showCaption={stringToBoolean(props.showCaption, true)}
-				/>
+{:else if componentType === 'globo-player'}
+    <GloboPlayer
+        videoId={props.videoId}
+        videosIDs={props.videosIDs}
 
-			<!-- Gallery -->
+        videoIdMobile={props.videoIdMobile}
+        width={props.width}
+        widthMobile={props.widthMobile}
+        containerBackgroundColor={props.containerBackgroundColor}
+        aspectRatio={props.aspectRatio}
+        aspectRatioMobile={props.aspectRatioMobile}
+        
+        caption={props.caption}
+        credit={props.credit}
+        fullWidth={stringToBoolean(props.fullWidth, false)}
+        autoplay={stringToBoolean(props.autoplay, false)}
+        startMuted={stringToBoolean(props.startMuted, true)}
+        skipDFP={stringToBoolean(props.skipDFP, false)}
+        chromeless={stringToBoolean(props.chromeless, false)}
+        showCaption={stringToBoolean(props.showCaption, true)}
+    />
+
+    <!-- Gallery -->
 			{:else if componentType === 'gallery'}
 				<PhotoGallery
 					images={props.images || []}

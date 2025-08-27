@@ -1,53 +1,48 @@
-<!-- src/lib/components/story/GloboPlayer.svelte -->
 <script>
   import { onMount, onDestroy, createEventDispatcher } from 'svelte';
   import { browser } from '$app/environment';
 
-  // Script loading shared between instances
+  // SEU CÓDIGO ORIGINAL - SEM ALTERAÇÕES
   let scriptLoadPromise = null;
-
   function loadGloboScript() {
     if (scriptLoadPromise) {
       return scriptLoadPromise;
     }
-
     scriptLoadPromise = new Promise((resolve, reject) => {
       if (window.WM && window.WM.playerAvailable) {
         return resolve();
       }
-
       const scriptUrl = 'https://s3.glbimg.com/v1/AUTH_e1b09a2d222b4900a437a46914be81e5/api/stable/web/api.min.js';
-      
       const existingScript = document.querySelector(`script[src="${scriptUrl}"]`);
       if (existingScript) {
         existingScript.addEventListener('load', () => resolve(window.WM.playerAvailable));
         existingScript.addEventListener('error', (e) => reject(new Error('Falha ao carregar script da Globo (existente).', e)));
         return;
       }
-      
       const script = document.createElement('script');
       script.src = scriptUrl;
       script.async = true;
-      
-      script.onload = () => {
-        resolve(window.WM.playerAvailable);
-      };
-      
-      script.onerror = (e) => {
-        reject(new Error('Falha ao carregar a API do player da Globo. Verifique seu Ad Blocker.', e));
-      };
-      
+      script.onload = () => { resolve(window.WM.playerAvailable); };
+      script.onerror = (e) => { reject(new Error('Falha ao carregar a API do player da Globo. Verifique seu Ad Blocker.', e)); };
       document.body.appendChild(script);
     });
-
     return scriptLoadPromise;
   }
 
-  // Props do componente
-  export let videoId = null; // ✅ CORRIGIDO: era videosIDs, agora é videoId
-  export let videosIDs = null; // ✅ MANTIDO: para backward compatibility
+  // --- Props do Componente ---
+
+  // ✅ ADIÇÃO DAS NOVAS PROPS NO TOPO DAS SUAS
+  export let videoIdMobile = null;
+  export let widthMobile = null;
+  export let containerBackgroundColor = 'transparent';
+  export let aspectRatio = '16 / 9';
+  export let aspectRatioMobile = null;
+
+  // SUAS PROPS ORIGINAIS (INTACTAS)
+  export let videoId = null;
+  export let videosIDs = null;
   export let autoPlay = false;
-  export let startMuted = false;
+  export let startMuted = true; // Modificado para true para autoplay
   export let skipDFP = false;
   export let width = '100%';
   export let height = '100%';
@@ -72,197 +67,220 @@
   export let adCustomData = null;
   export let siteName = null;
   export let ga4 = null;
-
-  // Props extras para integração com StoryRenderer
   export let caption = '';
   export let credit = '';
   export let fullWidth = false;
-  export let autoplay = false; // Alias para autoPlay
+  export let autoplay = false;
   export let controls = true;
   export let showCaption = true;
 
-  // Variáveis internas
+  // --- Variáveis Internas ---
   let playerElement;
   let playerInstance = null;
-  let isLoading = true;
+  let isLoading = false; // Alterado para false para esperar a viewport
   let error = null;
   const dispatch = createEventDispatcher();
+  
+  // ✅ ADIÇÃO DE VARIÁVEIS DE CONTROLE
+  let observer = null;
+  let hasBeenInitialized = false;
+  let isMobile = false;
 
-  // ✅ FUNÇÃO PARA RESOLVER O VIDEO ID
+  // ✅ ALTERAÇÃO: Sua função agora usa o videoIdMobile
   function getVideoId() {
+    if (browser && isMobile && videoIdMobile) {
+      return videoIdMobile;
+    }
     return videoId || videosIDs || null;
   }
 
-  function createPlayer() {
+  // SUA FUNÇÃO createPlayer (COM AJUSTE PARA AUTOPLAY)
+  function createPlayer(shouldAutoplayOnCreate = false) {
     if (!browser || !window.WM || !window.WM.Player) {
-      error = 'A API do player da Globo (WM) não está disponível.';
-      console.error(error);
+      error = new Error('A API do player da Globo (WM) não está disponível.');
       isLoading = false;
       return;
     }
-
     const actualVideoId = getVideoId();
     if (!actualVideoId) {
-      error = 'É necessário informar o videoId para criar o player!';
+      error = new Error('É necessário informar o videoId para criar o player!');
       isLoading = false;
       return;
     }
-
     if (playerInstance && typeof playerInstance.destroy === 'function') {
       playerInstance.destroy();
     }
-
     const config = {
       source: Number(actualVideoId),
-      autoPlay: autoPlay || autoplay, // ✅ SUPORTE PARA AMBAS AS PROPS
-      startMuted: startMuted,
-      skipDFP: skipDFP,
-      width,
-      height,
-      chromeless,
-      allowRestrictedContent,
-      allowLocation,
-      exitFullscreenOnEnd,
-      isLiveContent,
-      preventBlackBars,
-      includeResetStyle,
-      disasterRecoveryMode,
-      env,
-      globoId,
-      token,
-      resumeAt,
-      maxQualityLevel,
-      defaultSubtitle,
-      defaultAudio,
-      adAccountId,
-      adCmsId,
-      adUnit,
-      adCustomData,
-      siteName,
-      ga4
+      autoPlay: shouldAutoplayOnCreate,
+      startMuted, skipDFP, width: '100%', height: '100%', chromeless, allowRestrictedContent, allowLocation,
+      exitFullscreenOnEnd, isLiveContent, preventBlackBars, includeResetStyle, disasterRecoveryMode,
+      env, globoId, token, resumeAt, maxQualityLevel, defaultSubtitle, defaultAudio, adAccountId,
+      adCmsId, adUnit, adCustomData, siteName, ga4
     };
-
-    // Remove propriedades null/undefined
     Object.keys(config).forEach(key => (config[key] === null || config[key] === undefined) && delete config[key]);
-    
     config.events = {
-      onError: (err) => {
-        error = `Erro no player: ${err.message || err}`;
-        console.error('GloboPlayer Error:', error, err);
-        isLoading = false;
-        dispatch('error', err);
-      },
+      onError: (err) => { error = err; isLoading = false; dispatch('error', err); },
       onReady: () => {
         isLoading = false;
-        console.log(`✅ GloboPlayer: Player pronto para videoId ${actualVideoId}`);
+        if (shouldAutoplayOnCreate) playerInstance.play();
         dispatch('ready');
       },
       onEnded: () => dispatch('ended'),
       onPlay: () => dispatch('play'),
       onPause: () => dispatch('pause')
     };
-
     try {
-      console.log('🎬 Criando GloboPlayer com config:', config);
       playerInstance = new window.WM.Player(config);
       playerInstance.attachTo(playerElement);
     } catch (e) {
-      error = `Erro ao instanciar o player: ${e.message}`;
-      console.error('GloboPlayer Creation Error:', error, e);
+      error = e;
       isLoading = false;
     }
   }
 
-  onMount(async () => {
-    if (!browser) return;
-
-    const actualVideoId = getVideoId();
-    if (!actualVideoId) {
-      error = 'É necessário informar o videoId para criar o player!';
-      isLoading = false;
-      return;
-    }
-    
+  // ✅ ADIÇÃO DA LÓGICA DE INICIALIZAÇÃO CONTROLADA
+  async function initializePlayer(shouldPlay) {
+    if (hasBeenInitialized || !browser) return;
+    hasBeenInitialized = true;
+    isLoading = true;
     try {
-      console.log('🔄 Carregando script da Globo...');
       await loadGloboScript();
-      console.log('✅ Script carregado, criando player...');
-      createPlayer();
+      createPlayer(shouldPlay);
     } catch (err) {
-      error = err.message;
+      error = err;
       isLoading = false;
-      console.error('❌ Falha no carregamento do script do player:', err);
+    }
+  }
+
+  // ✅ SUBSTITUIÇÃO DO SEU onMount PELA VERSÃO COM IntersectionObserver
+  onMount(() => {
+    if (!browser) return;
+    const checkMobile = () => { isMobile = window.innerWidth <= 768; };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    const options = { root: null, rootMargin: '0px', threshold: 0.5 };
+    observer = new IntersectionObserver((entries) => {
+      const entry = entries[0];
+      const shouldPlayVideo = (autoPlay || autoplay);
+      if (entry.isIntersecting) {
+        if (!hasBeenInitialized) {
+          initializePlayer(shouldPlayVideo);
+        } else if (playerInstance && typeof playerInstance.play === 'function' && shouldPlayVideo) {
+          playerInstance.play();
+        }
+      } else {
+        if (playerInstance && typeof playerInstance.pause === 'function' && shouldPlayVideo) {
+          playerInstance.pause();
+        }
+      }
+    }, options);
+    if (playerElement) {
+      observer.observe(playerElement);
+    }
+    return () => {
+      window.removeEventListener('resize', checkMobile);
     }
   });
 
+  // SEU CÓDIGO onDestroy (COM ADIÇÃO DO OBSERVER)
   onDestroy(() => {
+    if (observer && playerElement) {
+      observer.unobserve(playerElement);
+    }
     if (playerInstance && typeof playerInstance.destroy === 'function') {
       playerInstance.destroy();
       console.log('🗑️ GloboPlayer destruído');
     }
   });
 
-  // Reactive - recriar player se videoId mudar
-  $: if (browser && (videoId || videosIDs) && window.WM) {
-    createPlayer();
+  // SEU CÓDIGO REATIVO (COM AJUSTE)
+  $: if (browser && (videoId || videosIDs) && hasBeenInitialized) {
+    createPlayer(false);
   }
 </script>
 
-<div class="globo-player-container" class:full-width={fullWidth}>
-  <div class="player-wrapper" bind:this={playerElement}>
-    {#if isLoading && !error}
-      <div class="feedback-state loading-state">
-        <div class="loading-spinner"></div>
-        <div class="loading-text">Carregando player Globo...</div>
-      </div>
-    {/if}
+<div class="video-section-wrapper" style="background-color: {containerBackgroundColor};">
+  <div 
+    class="globo-player-container" 
+    class:full-width={fullWidth}
+    style="--width-desktop: {width}; --width-mobile: {widthMobile || width};"
+  >
+    <div 
+      class="player-wrapper" 
+      bind:this={playerElement}
+      style="--aspect-ratio-desktop: {aspectRatio}; --aspect-ratio-mobile: {aspectRatioMobile || aspectRatio};"
+    >
+      {#if isLoading}
+        <div class="feedback-state loading-state">
+          <div class="loading-spinner"></div>
+          <div class="loading-text">Carregando player Globo...</div>
+        </div>
+      {:else if error}
+        <div class="feedback-state error-state">
+          <div class="error-icon">⚠️</div>
+          <strong>Erro no Player Globo</strong>
+          <p>{error.message || 'Ocorreu um erro.'}</p>
+          <button on:click={() => { isLoading = true; error = null; initializePlayer(false); }}>
+            Tentar novamente
+          </button>
+        </div>
+      {/if}
+    </div>
 
-    {#if error}
-      <div class="feedback-state error-state">
-        <div class="error-icon">⚠️</div>
-        <strong>Erro no Player Globo</strong>
-        <p>{error}</p>
-        <button on:click={() => { 
-          isLoading = true; 
-          error = null; 
-          createPlayer(); 
-        }}>
-          Tentar novamente
-        </button>
+    {#if showCaption && (caption || credit)}
+      <div class="media-caption">
+        {#if caption}<div class="caption-text">{@html caption}</div>{/if}
+        {#if credit}<div class="caption-credit">{@html credit}</div>{/if}
       </div>
     {/if}
   </div>
-
-  <!-- Caption/Credit -->
-  {#if showCaption && (caption || credit)}
-    <div class="media-caption">
-      {#if caption}
-        <div class="caption-text">{@html caption}</div>
-      {/if}
-      {#if credit}
-        <div class="caption-credit">{@html credit}</div>
-      {/if}
-    </div>
-  {/if}
 </div>
 
 <style>
-  .globo-player-container {
-    width: 100%;
-    margin: 0;
-    max-width: 60rem;
+  /* ✅ ADIÇÃO: Regra para o fundo da seção "escapar" e centralizar o conteúdo */
+  .video-section-wrapper {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 2rem 0;
+    display: flex;
+    justify-content: center;
   }
 
-  .globo-player-container.full-width {
-    max-width: none;
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
+  /* ✅ MODIFICAÇÃO: Sua regra original de container, agora usando as variáveis de largura */
+  .globo-player-container {
+    width: var(--width-mobile);
+    max-width: 100%;
+    margin: 0;
   }
+  
+  /* ✅ ADIÇÃO: Media query para aplicar a largura de desktop */
+  @media (min-width: 769px) {
+    .globo-player-container {
+      width: var(--width-desktop);
+    }
+  }
+  
+  /* ✅ MODIFICAÇÃO: Sua regra de full-width, corrigida para a nova estrutura */
+  .globo-player-container.full-width {
+    width: 100%;
+    max-width: none;
+  }
+
+  /* ✅ ADIÇÃO: Remove o padding da seção quando o vídeo for full-width */
+  .video-section-wrapper:has(.full-width) {
+    padding: 0;
+  }
+  
+  /* SEU CSS ORIGINAL DAQUI PARA BAIXO, COM UMA ÚNICA MUDANÇA */
 
   .player-wrapper {
     position: relative;
     width: 100%;
-    aspect-ratio: 16 / 9;
+    /* ✅ MODIFICAÇÃO: aspect-ratio agora usa as variáveis CSS */
+    aspect-ratio: var(--aspect-ratio-mobile, 16 / 9);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -270,6 +288,13 @@
     color: white;
     overflow: hidden;
     border-radius: 8px;
+  }
+
+  /* ✅ ADIÇÃO: Media query para aplicar a proporção de desktop */
+  @media (min-width: 769px) {
+    .player-wrapper {
+      aspect-ratio: var(--aspect-ratio-desktop, 16 / 9);
+    }
   }
 
   .player-wrapper :global(> div),
