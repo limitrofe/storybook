@@ -150,6 +150,14 @@ export function parseStoryComponents(paragraphs) {
 				component.elements = paragraph.elements || [];
 			break;
 
+            			case 'super-flex':
+			case 'superflex':
+				component.type = 'super-flex';
+				component.backgroundColor = paragraph.backgroundColor;
+				component.backgroundImage = paragraph.backgroundImage;
+				component.items = paragraph.items || [];
+				break;
+
 
 			case 'foto':
 			case 'imagem':

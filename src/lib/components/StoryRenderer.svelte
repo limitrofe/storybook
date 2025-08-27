@@ -34,6 +34,8 @@
 	// 🎨 NOVO: ResponsiveMediaLayout
 	import ResponsiveMediaLayout from './story/ResponsiveMediaLayout.svelte';
 import AbsoluteCanvas from './story/AbsoluteCanvas.svelte';
+	import SuperFlex from './story/SuperFlex.svelte';
+
 
 	export let storyData = {};
 
@@ -66,6 +68,11 @@ import AbsoluteCanvas from './story/AbsoluteCanvas.svelte';
 			case 'intertitulo':
 			case 'titulo':
 				return 'section-title';
+
+// ✅ NOVO: Case para o SuperFlex
+			case 'super-flex':
+			case 'superflex':
+				return 'super-flex';
 
 			case 'layout-flexivel':
 			case 'flexible-layout': 
@@ -581,6 +588,19 @@ import AbsoluteCanvas from './story/AbsoluteCanvas.svelte';
     backgroundVideoMobile={props.backgroundVideoMobile}
     elements={props.elements}
   />
+
+  			{:else if componentType === 'super-flex'}
+				<SuperFlex data={props} />
+
+			{:else if componentType === 'photo'}
+				<PhotoWithCaption
+					src={props.src}
+					alt={props.alt || ''}
+					caption={props.caption || ''}
+					credit={props.credit || ''}
+					fullWidth={stringToBoolean(props.fullWidth, false)}
+					alignment={props.alignment || 'center'}
+				/>
 
 			<!-- Photo -->
 			{:else if componentType === 'photo'}

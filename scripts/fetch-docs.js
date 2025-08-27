@@ -964,6 +964,64 @@ if (['header-caotico', 'header-caótico', 'caotico', 'chaotic-header', 'caos'].i
       continue;
     }
 
+     // ==========================================================
+    // 🚀 NOVO: SUPERFLEX LAYOUT (O filho chora e a mãe vê)
+    // ==========================================================
+    if (['super-flex', 'superflex'].includes(paragraph.type?.toLowerCase())) {
+      console.log('🚀 Processando SuperFlex Layout...');
+
+      // Campos específicos do SuperFlex
+      const superFlexFields = {
+        // Arrays JSON
+        items: /items:\s*(\[[\s\S]*?\])/i,
+        
+        // Campos de background
+        backgroundColor: /backgroundColor:\s*([^\n<]+)/i,
+        backgroundImage: /backgroundImage:\s*({[\s\S]*?})/i, // Agora espera um objeto JSON
+        
+        // Campos de espaçamento do container
+        padding: /padding:\s*({[\s\S]*?})/i,
+        margin: /margin:\s*({[\s\S]*?})/i,
+
+        // Campos de layout
+        columnsDesktop: /columnsDesktop:\s*([^\n<]+)/i,
+        columnsMobile: /columnsMobile:\s*([^\n<]+)/i,
+        gap: /gap:\s*([^\n<]+)/i
+      };
+
+      // 1. Processar o array de 'items' (o mais importante)
+      const itemsMatch = block.match(superFlexFields.items);
+      if (itemsMatch) {
+        paragraph.items = parseJSONField(itemsMatch[1], 'super-flex items');
+        console.log(`   ✅ ${paragraph.items?.length || 0} itens processados para o SuperFlex`);
+      }
+
+      // 2. Processar outros campos
+      for (const [field, regex] of Object.entries(superFlexFields)) {
+        if (field === 'items') continue; // Já processado
+        
+        const match = block.match(regex);
+        if (match) {
+          // Se o campo espera um objeto JSON (backgroundImage, padding, margin)
+          if (['backgroundImage', 'padding', 'margin'].includes(field)) {
+             paragraph[field] = parseJSONField(match[1], `super-flex ${field}`);
+          } else {
+             paragraph[field] = decodeHTMLEntities(match[1].trim());
+          }
+        }
+      }
+
+      // 3. Processar campo 'text' (se houver algum texto solto antes dos campos estruturados)
+      const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:items|backgroundColor|backgroundImage):|type:|$)/si);
+      if (textMatch) {
+        paragraph.text = cleanAndFormatHTML(textMatch[1].trim());
+      }
+      
+      paragraphs.push(paragraph);
+      continue; // Pula para o próximo bloco
+    }
+
+
         // 🎨 NOVO: TRATAMENTO ESPECÍFICO PARA RESPONSIVE MEDIA LAYOUT
     if (['responsive-media', 'responsivemedia', 'responsive-layout', 'media-layout', 'flexible-layout'].includes(paragraph.type?.toLowerCase())) {
       console.log('🎨 Processando Responsive Media Layout...');
