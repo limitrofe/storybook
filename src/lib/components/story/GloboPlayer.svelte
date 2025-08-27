@@ -1,8 +1,9 @@
+<!-- src/lib/components/story/GloboPlayer.svelte -->
 <script>
   import { onMount, onDestroy, createEventDispatcher } from 'svelte';
   import { browser } from '$app/environment';
 
-  // SEU CÓDIGO ORIGINAL - SEM ALTERAÇÕES
+  // Script Loading Promise (Singleton)
   let scriptLoadPromise = null;
   function loadGloboScript() {
     if (scriptLoadPromise) {
@@ -29,22 +30,28 @@
     return scriptLoadPromise;
   }
 
-  // --- Props do Componente ---
-
-  // ✅ ADIÇÃO DAS NOVAS PROPS NO TOPO DAS SUAS
-  export let videoIdMobile = null;
-  export let widthMobile = null;
-  export let containerBackgroundColor = 'transparent';
-  export let aspectRatio = '16 / 9';
-  export let aspectRatioMobile = null;
-
-  // SUAS PROPS ORIGINAIS (INTACTAS)
-  export let videoId = null;
-  export let videosIDs = null;
+  // --- 🎯 PROPS PRINCIPAIS (MOBILE FIRST) ---
+  
+  // ✅ IDs DE VÍDEO - MOBILE E DESKTOP SEPARADOS
+  export let videoIdMobile = null;  // ID específico para mobile
+  export let videoIdDesktop = null; // ID específico para desktop
+  export let videoId = null;        // Fallback geral (compatibilidade)
+  export let videosIDs = null;      // Outro fallback (compatibilidade)
+  
+  // ✅ COR DE FUNDO CUSTOMIZÁVEL
+  export let containerBackgroundColor = 'transparent'; // Cor do fundo da div container
+  
+  // ✅ DIMENSÕES RESPONSIVAS
+  export let widthMobile = '100%';     // Largura no mobile
+  export let widthDesktop = '100%';    // Largura no desktop
+  export let aspectRatio = '16 / 9';       // Aspect ratio desktop
+  export let aspectRatioMobile = '16 / 9'; // Aspect ratio mobile
+  
+  // Props originais mantidas para compatibilidade
   export let autoPlay = false;
-  export let startMuted = true; // Modificado para true para autoplay
+  export let startMuted = true;
   export let skipDFP = false;
-  export let width = '100%';
+  export let width = '100%';  // Deprecated, usar widthMobile/widthDesktop
   export let height = '100%';
   export let chromeless = false;
   export let allowRestrictedContent = true;
@@ -74,53 +81,100 @@
   export let controls = true;
   export let showCaption = true;
 
-  // --- Variáveis Internas ---
+  // --- VARIÁVEIS INTERNAS ---
   let playerElement;
   let playerInstance = null;
-  let isLoading = false; // Alterado para false para esperar a viewport
+  let isLoading = false;
   let error = null;
   const dispatch = createEventDispatcher();
   
-  // ✅ ADIÇÃO DE VARIÁVEIS DE CONTROLE
+  // Controle de estado
   let observer = null;
   let hasBeenInitialized = false;
   let isMobile = false;
 
-  // ✅ ALTERAÇÃO: Sua função agora usa o videoIdMobile
+  // ✅ LÓGICA MOBILE FIRST - DETERMINA O ID CORRETO
   function getVideoId() {
-    if (browser && isMobile && videoIdMobile) {
-      return videoIdMobile;
+    if (!browser) return null;
+    
+    // Mobile first: sempre verificar mobile primeiro
+    if (isMobile) {
+      // Se tem ID específico para mobile, usa ele
+      if (videoIdMobile) return videoIdMobile;
+      // Senão, fallback para o geral
+      if (videoIdDesktop) return videoIdDesktop;
+    } else {
+      // Desktop: usa ID específico ou fallback
+      if (videoIdDesktop) return videoIdDesktop;
+      if (videoIdMobile) return videoIdMobile;
     }
+    
+    // Fallbacks de compatibilidade
     return videoId || videosIDs || null;
   }
 
-  // SUA FUNÇÃO createPlayer (COM AJUSTE PARA AUTOPLAY)
+  // Criar o player
   function createPlayer(shouldAutoplayOnCreate = false) {
     if (!browser || !window.WM || !window.WM.Player) {
       error = new Error('A API do player da Globo (WM) não está disponível.');
       isLoading = false;
       return;
     }
+    
     const actualVideoId = getVideoId();
     if (!actualVideoId) {
       error = new Error('É necessário informar o videoId para criar o player!');
       isLoading = false;
       return;
     }
+    
+    // Destruir player anterior se existir
     if (playerInstance && typeof playerInstance.destroy === 'function') {
       playerInstance.destroy();
     }
+    
     const config = {
       source: Number(actualVideoId),
       autoPlay: shouldAutoplayOnCreate,
-      startMuted, skipDFP, width: '100%', height: '100%', chromeless, allowRestrictedContent, allowLocation,
-      exitFullscreenOnEnd, isLiveContent, preventBlackBars, includeResetStyle, disasterRecoveryMode,
-      env, globoId, token, resumeAt, maxQualityLevel, defaultSubtitle, defaultAudio, adAccountId,
-      adCmsId, adUnit, adCustomData, siteName, ga4
+      startMuted,
+      skipDFP,
+      width: '100%',
+      height: '100%',
+      chromeless,
+      allowRestrictedContent,
+      allowLocation,
+      exitFullscreenOnEnd,
+      isLiveContent,
+      preventBlackBars,
+      includeResetStyle,
+      disasterRecoveryMode,
+      env,
+      globoId,
+      token,
+      resumeAt,
+      maxQualityLevel,
+      defaultSubtitle,
+      defaultAudio,
+      adAccountId,
+      adCmsId,
+      adUnit,
+      adCustomData,
+      siteName,
+      ga4
     };
-    Object.keys(config).forEach(key => (config[key] === null || config[key] === undefined) && delete config[key]);
+    
+    // Limpar propriedades nulas
+    Object.keys(config).forEach(key => 
+      (config[key] === null || config[key] === undefined) && delete config[key]
+    );
+    
+    // Eventos
     config.events = {
-      onError: (err) => { error = err; isLoading = false; dispatch('error', err); },
+      onError: (err) => {
+        error = err;
+        isLoading = false;
+        dispatch('error', err);
+      },
       onReady: () => {
         isLoading = false;
         if (shouldAutoplayOnCreate) playerInstance.play();
@@ -130,6 +184,7 @@
       onPlay: () => dispatch('play'),
       onPause: () => dispatch('pause')
     };
+    
     try {
       playerInstance = new window.WM.Player(config);
       playerInstance.attachTo(playerElement);
@@ -139,11 +194,12 @@
     }
   }
 
-  // ✅ ADIÇÃO DA LÓGICA DE INICIALIZAÇÃO CONTROLADA
+  // Inicializar player
   async function initializePlayer(shouldPlay) {
     if (hasBeenInitialized || !browser) return;
     hasBeenInitialized = true;
     isLoading = true;
+    
     try {
       await loadGloboScript();
       createPlayer(shouldPlay);
@@ -153,16 +209,28 @@
     }
   }
 
-  // ✅ SUBSTITUIÇÃO DO SEU onMount PELA VERSÃO COM IntersectionObserver
+  // ✅ DETECTAR MOBILE E CONFIGURAR OBSERVER
   onMount(() => {
     if (!browser) return;
-    const checkMobile = () => { isMobile = window.innerWidth <= 768; };
+    
+    // Mobile detection (mobile first)
+    const checkMobile = () => {
+      isMobile = window.innerWidth <= 768;
+    };
     checkMobile();
     window.addEventListener('resize', checkMobile);
-    const options = { root: null, rootMargin: '0px', threshold: 0.5 };
+    
+    // Intersection Observer para lazy loading
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.5
+    };
+    
     observer = new IntersectionObserver((entries) => {
       const entry = entries[0];
       const shouldPlayVideo = (autoPlay || autoplay);
+      
       if (entry.isIntersecting) {
         if (!hasBeenInitialized) {
           initializePlayer(shouldPlayVideo);
@@ -175,15 +243,17 @@
         }
       }
     }, options);
+    
     if (playerElement) {
       observer.observe(playerElement);
     }
+    
     return () => {
       window.removeEventListener('resize', checkMobile);
-    }
+    };
   });
 
-  // SEU CÓDIGO onDestroy (COM ADIÇÃO DO OBSERVER)
+  // Cleanup
   onDestroy(() => {
     if (observer && playerElement) {
       observer.unobserve(playerElement);
@@ -194,22 +264,23 @@
     }
   });
 
-  // SEU CÓDIGO REATIVO (COM AJUSTE)
-  $: if (browser && (videoId || videosIDs) && hasBeenInitialized) {
+  // Reativo: recriar player quando IDs mudarem
+  $: if (browser && (videoIdMobile || videoIdDesktop || videoId || videosIDs) && hasBeenInitialized) {
     createPlayer(false);
   }
 </script>
 
+<!-- ✅ CONTAINER COM BACKGROUND CUSTOMIZÁVEL -->
 <div class="video-section-wrapper" style="background-color: {containerBackgroundColor};">
   <div 
     class="globo-player-container" 
     class:full-width={fullWidth}
-    style="--width-desktop: {width}; --width-mobile: {widthMobile || width};"
+    style="--width-desktop: {widthDesktop}; --width-mobile: {widthMobile};"
   >
     <div 
       class="player-wrapper" 
       bind:this={playerElement}
-      style="--aspect-ratio-desktop: {aspectRatio}; --aspect-ratio-mobile: {aspectRatioMobile || aspectRatio};"
+      style="--aspect-ratio-desktop: {aspectRatio}; --aspect-ratio-mobile: {aspectRatioMobile};"
     >
       {#if isLoading}
         <div class="feedback-state loading-state">
@@ -238,7 +309,7 @@
 </div>
 
 <style>
-  /* ✅ ADIÇÃO: Regra para o fundo da seção "escapar" e centralizar o conteúdo */
+  /* ✅ WRAPPER COM FUNDO CUSTOMIZÁVEL */
   .video-section-wrapper {
     width: 100vw;
     position: relative;
@@ -247,185 +318,141 @@
     padding: 2rem 0;
     display: flex;
     justify-content: center;
+    /* A cor de fundo é aplicada via style inline */
   }
 
-  /* ✅ MODIFICAÇÃO: Sua regra original de container, agora usando as variáveis de largura */
+  /* ✅ CONTAINER RESPONSIVO MOBILE FIRST */
   .globo-player-container {
     width: var(--width-mobile);
     max-width: 100%;
-    margin: 0;
+    margin: 0 auto;
+    position: relative;
   }
   
-  /* ✅ ADIÇÃO: Media query para aplicar a largura de desktop */
+  /* ✅ DESKTOP: aplica largura de desktop */
   @media (min-width: 769px) {
     .globo-player-container {
       width: var(--width-desktop);
     }
   }
   
-  /* ✅ MODIFICAÇÃO: Sua regra de full-width, corrigida para a nova estrutura */
+  /* ✅ FULL WIDTH: remove limitações */
   .globo-player-container.full-width {
-    width: 100%;
+    width: 100% !important;
     max-width: none;
   }
 
-  /* ✅ ADIÇÃO: Remove o padding da seção quando o vídeo for full-width */
+  /* ✅ REMOVE PADDING QUANDO FULL WIDTH */
   .video-section-wrapper:has(.full-width) {
     padding: 0;
   }
   
-  /* SEU CSS ORIGINAL DAQUI PARA BAIXO, COM UMA ÚNICA MUDANÇA */
-
+  /* ✅ PLAYER WRAPPER COM ASPECT RATIO RESPONSIVO */
   .player-wrapper {
-    position: relative;
     width: 100%;
-    /* ✅ MODIFICAÇÃO: aspect-ratio agora usa as variáveis CSS */
-    aspect-ratio: var(--aspect-ratio-mobile, 16 / 9);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #000;
-    color: white;
+    aspect-ratio: var(--aspect-ratio-mobile);
+    position: relative;
+    background: #000;
+    border-radius: 4px;
     overflow: hidden;
-    border-radius: 8px;
   }
-
-  /* ✅ ADIÇÃO: Media query para aplicar a proporção de desktop */
+  
+  /* ✅ DESKTOP: aspect ratio diferente */
   @media (min-width: 769px) {
     .player-wrapper {
-      aspect-ratio: var(--aspect-ratio-desktop, 16 / 9);
+      aspect-ratio: var(--aspect-ratio-desktop);
     }
   }
-
-  .player-wrapper :global(> div),
-  .player-wrapper :global(> iframe) {
+  
+  /* ✅ ESTADOS DE FEEDBACK */
+  .feedback-state {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  /* Loading State */
-  .feedback-state {
+    right: 0;
+    bottom: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
+    background: #f5f5f5;
+    color: #333;
     text-align: center;
-    position: absolute;
-    z-index: 10;
-    width: 100%;
-    height: 100%;
+    padding: 1rem;
   }
-
+  
   .loading-state {
-    background: rgba(0, 0, 0, 0.8);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
   }
-
+  
+  .error-state {
+    background: #fee;
+    color: #d33;
+    border: 2px solid #fcc;
+  }
+  
+  .error-state button {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background: #d33;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+  
+  .error-state button:hover {
+    background: #b22;
+  }
+  
+  /* ✅ LOADING SPINNER */
   .loading-spinner {
     width: 40px;
     height: 40px;
-    border: 3px solid rgba(255, 255, 255, 0.3);
-    border-top: 3px solid white;
+    border: 4px solid rgba(255,255,255,0.3);
     border-radius: 50%;
-    animation: spin 1s linear infinite;
+    border-top-color: white;
+    animation: spin 1s ease-in-out infinite;
     margin-bottom: 1rem;
   }
-
+  
   @keyframes spin {
     to { transform: rotate(360deg); }
   }
-
+  
   .loading-text {
-    font-size: 1rem;
-    opacity: 0.9;
-  }
-
-  /* Error State */
-  .error-state {
-    background: rgba(220, 38, 38, 0.9);
-    gap: 0.5rem;
-  }
-
-  .error-icon {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .error-state p {
     font-size: 0.9rem;
     opacity: 0.9;
-    margin: 0.5rem 0 1rem 0;
-    max-width: 300px;
   }
-
-  .error-state button {
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background 0.2s ease;
-  }
-
-  .error-state button:hover {
-    background: rgba(255, 255, 255, 0.3);
-  }
-
-  /* Caption */
+  
+  /* ✅ LEGENDAS */
   .media-caption {
-    padding: 0.75rem 1rem;
-    background: rgba(0, 0, 0, 0.02);
-    border-left: 3px solid #e5e7eb;
-    margin-top: 0.5rem;
-    border-radius: 0 4px 4px 0;
-  }
-
-  .caption-text {
+    margin-top: 0.75rem;
     font-size: 0.9rem;
-    color: #374151;
-    line-height: 1.5;
+    line-height: 1.4;
+  }
+  
+  .caption-text {
+    color: #666;
     margin-bottom: 0.25rem;
   }
-
+  
   .caption-credit {
+    color: #999;
     font-size: 0.8rem;
-    color: #6b7280;
     font-style: italic;
   }
-
-  /* Mobile optimizations */
-  @media (max-width: 768px) {
-    .globo-player-container {
-      margin: 0;
+  
+  /* ✅ RESPONSIVIDADE ADICIONAL */
+  @media (max-width: 480px) {
+    .video-section-wrapper {
+      padding: 1rem 0;
     }
-
-    .player-wrapper {
-      border-radius: 4px;
-    }
-
-    .feedback-state {
-      padding: 1.5rem;
-    }
-
-    .loading-text {
-      font-size: 0.9rem;
-    }
-
+    
     .media-caption {
-      padding: 0.5rem 0.75rem;
-      margin-top: 0rem;
-    }
-
-    .caption-text {
       font-size: 0.85rem;
-    }
-
-    .caption-credit {
-      font-size: 0.75rem;
     }
   }
 </style>

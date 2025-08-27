@@ -626,19 +626,19 @@ import AbsoluteCanvas from './story/AbsoluteCanvas.svelte';
 					showCaption={stringToBoolean(props.showCaption, true)}
 				/>
 
-			<!-- Globo Player -->
+<!-- Globo Player -->
 {:else if componentType === 'globo-player'}
     <GloboPlayer
         videoId={props.videoId}
         videosIDs={props.videosIDs}
-
         videoIdMobile={props.videoIdMobile}
-        width={props.width}
+        videoIdDesktop={props.videoIdDesktop}
         widthMobile={props.widthMobile}
+        widthDesktop={props.widthDesktop}
+        width={props.width}
         containerBackgroundColor={props.containerBackgroundColor}
         aspectRatio={props.aspectRatio}
         aspectRatioMobile={props.aspectRatioMobile}
-        
         caption={props.caption}
         credit={props.credit}
         fullWidth={stringToBoolean(props.fullWidth, false)}
@@ -647,7 +647,30 @@ import AbsoluteCanvas from './story/AbsoluteCanvas.svelte';
         skipDFP={stringToBoolean(props.skipDFP, false)}
         chromeless={stringToBoolean(props.chromeless, false)}
         showCaption={stringToBoolean(props.showCaption, true)}
+        controls={stringToBoolean(props.controls, true)}
+        autoPlay={stringToBoolean(props.autoPlay, false)}
+        allowRestrictedContent={stringToBoolean(props.allowRestrictedContent, true)}
+        allowLocation={stringToBoolean(props.allowLocation, true)}
+        exitFullscreenOnEnd={stringToBoolean(props.exitFullscreenOnEnd, true)}
+        isLiveContent={stringToBoolean(props.isLiveContent, false)}
+        preventBlackBars={stringToBoolean(props.preventBlackBars, false)}
+        includeResetStyle={stringToBoolean(props.includeResetStyle, true)}
+        disasterRecoveryMode={stringToBoolean(props.disasterRecoveryMode, false)}
+        env={props.env || 'production'}
+        globoId={props.globoId}
+        token={props.token}
+        resumeAt={props.resumeAt}
+        maxQualityLevel={props.maxQualityLevel}
+        defaultSubtitle={props.defaultSubtitle}
+        defaultAudio={props.defaultAudio}
+        adAccountId={props.adAccountId}
+        adCmsId={props.adCmsId}
+        adUnit={props.adUnit}
+        adCustomData={props.adCustomData}
+        siteName={props.siteName}
+        ga4={props.ga4}
     />
+
 
     <!-- Gallery -->
 			{:else if componentType === 'gallery'}

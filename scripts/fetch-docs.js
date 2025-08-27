@@ -1235,7 +1235,31 @@ const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:backgroundImage|backgroundI
   interval: 'interval', showDots: 'showDots', showArrows: 'showArrows',
   stickyHeight: 'stickyHeight', beforeImage: 'beforeImage', afterImage: 'afterImage', 
   beforeLabel: 'beforeLabel', afterLabel: 'afterLabel', image: 'image', speed: 'speed', 
-  content: 'content', videoId: 'videoId', videosIDs: 'videosIDs', id: 'id',
+  content: 'content', 
+    // IDs de vídeo específicos
+  videoIdMobile: 'videoIdMobile',
+  videoIdDesktop: 'videoIdDesktop',
+  'videoId-mobile': 'videoIdMobile',    // Alias
+  'videoId-desktop': 'videoIdDesktop',  // Alias
+  'video-id-mobile': 'videoIdMobile',   // Alias
+  'video-id-desktop': 'videoIdDesktop', // Alias
+  
+  // Dimensões responsivas
+  widthMobile: 'widthMobile',
+  widthDesktop: 'widthDesktop',
+  'width-mobile': 'widthMobile',      // Alias
+  'width-desktop': 'widthDesktop',    // Alias
+  
+  // Cor de fundo
+  containerBackgroundColor: 'containerBackgroundColor',
+  backgroundColor: 'containerBackgroundColor',  // Alias
+  'background-color': 'containerBackgroundColor', // Alias
+  'container-background': 'containerBackgroundColor', 
+  aspectRatio: 'aspectRatio',
+  aspectRatioMobile: 'aspectRatioMobile',
+  'aspect-ratio': 'aspectRatio',           
+  'aspect-ratio-mobile': 'aspectRatioMobile', 
+  videoId: 'videoId', videosIDs: 'videosIDs', id: 'id',
   skipDFP: 'skipDFP', skipdfp: 'skipdfp', autoPlay: 'autoPlay', startMuted: 'startMuted', 
   maxQuality: 'maxQuality', quality: 'quality', chromeless: 'chromeless', isLive: 'isLive', 
   live: 'live', allowRestrictedContent: 'allowRestrictedContent',

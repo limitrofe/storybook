@@ -693,13 +693,17 @@
       }
     },
     {
-      "type": "globovideo",
-      "fullWidth": "false",
+      "type": "globoplayer",
+      "caption": "",
       "autoplay": "true",
-      "videoId": "13875117",
-      "autoPlay": "true",
-      "width": "40%",
-      "aspectRatio": "16 / 9"
+      "videoIdMobile": "13875117",
+      "videoIdDesktop": "13878202",
+      "widthMobile": "100%",
+      "widthDesktop": "60%",
+      "containerBackgroundColor": "#1a1a1a",
+      "aspectRatio": "16 / 9",
+      "aspectRatioMobile": "9 / 16",
+      "autoPlay": "true"
     },
     {
       "type": "super-flex",
@@ -929,15 +933,17 @@
       }
     },
     {
-      "type": "globovideo",
+      "type": "globoplayer",
       "caption": "",
-      "credit": "",
-      "fullWidth": "true",
       "autoplay": "true",
-      "controls": "true",
-      "videoId": "13798642",
-      "autoPlay": "true",
-      "showCaption": "false"
+      "videoIdMobile": "13875149",
+      "videoIdDesktop": "13875149",
+      "widthMobile": "100%",
+      "widthDesktop": "60%",
+      "containerBackgroundColor": "#FFF4E6",
+      "aspectRatio": "16 / 9",
+      "aspectRatioMobile": "16 / 9",
+      "autoPlay": "true"
     },
     {
       "type": "super-flex",
@@ -1438,32 +1444,6 @@
               "mobile": "10vw"
             }
           }
-        },
-        {
-          "type": "image",
-          "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/18_julho_02.png",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/18_julho_02.png"
-          },
-          "alt": "retângulo vermelho",
-          "styles": {
-            "width": {
-              "desktop": "40%",
-              "mobile": "80vw"
-            },
-            "height": {
-              "desktop": "auto",
-              "mobile": "auto"
-            },
-            "margin": {
-              "desktop": "-20% 0 0 auto",
-              "mobile": "0rem 0px 0px 0px"
-            },
-            "padding": {
-              "desktop": "0 5vw 0 0",
-              "mobile": "10vw"
-            }
-          }
         }
       ],
       "backgroundColor": "#FFF4E6",
@@ -1602,7 +1582,7 @@
               "desktop": "-20% 50% 20%"
             },
             "padding": {
-              "mobile": "0% 0% 5% 5%"
+              "mobile": "5% 0% 5% 5%"
             }
           }
         },
@@ -3372,7 +3352,7 @@
             "color": "#ffffff",
             "textAlign": "left",
             "width": {
-              "desktop": "60%",
+              "desktop": "30%",
               "mobile": "80%"
             },
             "margin": {
@@ -3460,7 +3440,7 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "4.5rem",
+              "desktop": "2.5rem",
               "mobile": "1.2rem"
             },
             "lineHeight": {
@@ -3482,37 +3462,6 @@
             },
             "padding": {
               "mobile": "0% 5% 0% 5%"
-            }
-          }
-        },
-        {
-          "type": "text",
-          "content": "''Oferece a cabeça dele. Cagão'', dizia a troca de mensagens.",
-          "styles": {
-            "fontFamily": "globotipo",
-            "fontSize": {
-              "desktop": "4.5rem",
-              "mobile": "1.2rem"
-            },
-            "lineHeight": {
-              "desktop": "1.0",
-              "mobile": "1.5rem"
-            },
-            "fontWeight": {
-              "desktop": "400",
-              "mobile": "400"
-            },
-            "color": "#1a1a1a",
-            "textAlign": "left",
-            "width": {
-              "desktop": "60%",
-              "mobile": "80%"
-            },
-            "margin": {
-              "desktop": "0 auto 0 0"
-            },
-            "padding": {
-              "mobile": "5% 5% 10% 5%"
             }
           }
         },
@@ -4598,13 +4547,13 @@
             "textAlign": "left",
             "width": {
               "desktop": "60%",
-              "mobile": "80%"
+              "mobile": "100%"
             },
             "margin": {
               "desktop": "3% auto 1%"
             },
             "padding": {
-              "mobile": "10% 5% 10% 5%"
+              "mobile": "10% 5% 5% 5%"
             }
           }
         }
@@ -4671,7 +4620,7 @@
               "desktop": "0 auto 0 0"
             },
             "padding": {
-              "mobile": "10% 5% 10% 5%"
+              "mobile": "5% 5% 10% 5%"
             }
           }
         }
@@ -4738,7 +4687,7 @@
               "desktop": "0 auto 0 0"
             },
             "padding": {
-              "mobile": "10% 5% 10% 5%"
+              "mobile": "5% 5% 10% 5%"
             }
           }
         }
@@ -4805,7 +4754,7 @@
               "desktop": "0 auto 0 0"
             },
             "padding": {
-              "mobile": "10% 5% 10% 5%"
+              "mobile": "5% 5% 10% 5%"
             }
           }
         }
@@ -4872,7 +4821,7 @@
               "desktop": "0 auto 0 0"
             },
             "padding": {
-              "mobile": "10% 5% 10% 5%"
+              "mobile": "5% 5% 10% 5%"
             }
           }
         }
@@ -4939,74 +4888,7 @@
               "desktop": "0 auto 0 0"
             },
             "padding": {
-              "mobile": "10% 5% 10% 5%"
-            }
-          }
-        }
-      ],
-      "backgroundColor": "#1a1a1a",
-      "padding": {
-        "desktop": "4rem 2rem",
-        "mobile": "3rem 1rem"
-      }
-    },
-    {
-      "type": "super-flex",
-      "items": [
-        {
-          "type": "image",
-          "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/anderson_torres_.png",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/anderson_torres_.png"
-          },
-          "alt": "anderson_torres_",
-          "styles": {
-            "width": {
-              "desktop": "35%",
-              "mobile": "100vw"
-            },
-            "height": {
-              "desktop": "auto",
-              "mobile": "auto"
-            },
-            "margin": {
-              "desktop": "-6% 8% 6%",
-              "mobile": "0rem 0px 0px 0px"
-            },
-            "padding": {
-              "desktop": "0rem 0 0 auto",
-              "mobile": "0 0 0 0"
-            }
-          }
-        },
-        {
-          "type": "text",
-          "content": "Nega ser autor da ''minuta do golpe'' e afirma que a presença do documento em sua casa não tem relevância penal. Rejeita a acusação de divulgar informações falsas sobre o sistema eleitoral ou de ter direcionado a PRF no 2&ordm; turno, citando testemunhos favoráveis. Alega ainda que o caso deveria tramitar na 1&ordf; instância, por não possuir foro privilegiado.",
-          "styles": {
-            "fontFamily": "globotipo",
-            "fontSize": {
-              "desktop": "4.5rem",
-              "mobile": "1.2rem"
-            },
-            "lineHeight": {
-              "desktop": "1.0",
-              "mobile": "1.5rem"
-            },
-            "fontWeight": {
-              "desktop": "400",
-              "mobile": "400"
-            },
-            "color": "#ffffff",
-            "textAlign": "left",
-            "width": {
-              "desktop": "60%",
-              "mobile": "90%"
-            },
-            "margin": {
-              "desktop": "0 auto 0 0"
-            },
-            "padding": {
-              "mobile": "10% 5% 10% 5%"
+              "mobile": "5% 5% 10% 5%"
             }
           }
         }
@@ -5070,7 +4952,7 @@
               "mobile": "90%"
             },
             "margin": {
-              "desktop": "0 auto 0 0"
+              "desktop": "0          0 0"
             },
             "padding": {
               "mobile": "10% 5% 10% 5%"
