@@ -505,85 +505,45 @@ function decodeHTMLEntities(text) {
   return decoded;
 }
 
+// ==================================================================
+// ✅ FUNÇÃO SUBSTITUÍDA: Versão mais inteligente para parsear JSON
+// ==================================================================
 function parseJSONField(jsonString, fieldName) {
   if (!jsonString) return null;
-  
-  try {
-    let cleanJson = jsonString
-      .replace(/<[^>]*>/g, '') 
-      .replace(/&quot;/g, '"')
-      .replace(/&amp;/g, '&')
-      .replace(/&lt;/g, '<')
-      .replace(/&gt;/g, '>')
-      .replace(/&#39;/g, "'")
-      .replace(/&nbsp;/g, ' ')
-      // 🔧 CORREÇÃO: Adicionar tratamento para aspas especiais
-      .replace(/&lsquo;/g, "'")
-      .replace(/&rsquo;/g, "'")
-      .replace(/&ldquo;/g, '"')
-      .replace(/&rdquo;/g, '"')
-      .replace(/&#8216;/g, "'")
-      .replace(/&#8217;/g, "'")
-      .replace(/&#8220;/g, '"')
-      .replace(/&#8221;/g, '"')
-      .replace(/\n/g, ' ')
-      .replace(/\r/g, ' ')
-      .replace(/\s+/g, ' ')
-.replace(/\.{2,}/g, '.')  // Remove pontos duplos
-.replace(/\.\s*\.\s*$/g, '.')  // Remove pontos duplos no final
-.replace(/\s+\.\s*$/g, '.')  // Remove espaços antes do ponto final
-      .replace(/,\s*\]/g, ']')
-      .replace(/,\s*}/g, '}')
-      .replace(/["""„‟«»"‶‷"″‟‹›]/g, '"') 
-      .replace(/\[/g, '[')  // Preserva colchetes de abertura
-      .replace(/\]/g, ']')  // Preserva colchetes de fechamento
-      .replace(/['''‚‛‹›]/g, "'") 
-      .replace(/\s*:\s*/g, ': ')  // Mantém espaço após dois pontos
-      .replace(/,(?!\s)/g, ', ')  // Adiciona espaço após vírgula se não houver
-      .replace(/https:\s+\/\//g, 'https://')  // Remove espaços em https: //
-.replace(/http:\s+\/\//g, 'http://')    // Remove espaços em http: //
-.replace(/:\s+\/\//g, '://')            // Remove espaços genéricos em protocolos
 
-      .trim();
-    
-    let parsed = JSON.parse(cleanJson);
-    
-    if (Array.isArray(parsed)) {
-      parsed = parsed.map(item => {
-        if (typeof item === 'object' && item !== null) {
-          Object.keys(item).forEach(key => {
-            if (typeof item[key] === 'string') {
-              item[key] = decodeHTMLEntities(item[key]);
-              if (['text', 'caption', 'content', 'title', 'nome', 'name', 'descricao', 'description'].includes(key)) {
-                item[key] = cleanAndFormatHTML(item[key]);
-              }
-            }
-          });
-        }
-        return item;
-      });
-    }
-    
+  // 1. Limpeza inicial de HTML, quebras de linha e espaços extras
+  let cleanedString = jsonString.replace(/<[^>]*>/g, '')
+                                .replace(/(\r\n|\n|\r)/gm, ' ')
+                                .replace(/\s{2,}/g, ' ')
+                                .trim();
+
+  // 2. Decodifica TODAS as entidades HTML para caracteres reais usando a SUA função que já é ótima
+  cleanedString = decodeHTMLEntities(cleanedString);
+
+  // 3. Tenta o parse. Se falhar, é provavelmente por causa de aspas não escapadas.
+  try {
+    // Remove vírgulas finais que são um erro comum de digitação e quebram o JSON
+    const validJsonString = cleanedString.replace(/,\s*([}\]])/g, '$1');
+    const parsed = JSON.parse(validJsonString);
     console.log(`✅ JSON parseado com sucesso para ${fieldName}: ${Array.isArray(parsed) ? parsed.length : 1} item(s)`);
     return parsed;
+  } catch (e) {
+    // Se o parse inicial falhou, o erro mais comum é "Unexpected token".
+    // Isso geralmente significa que há uma aspa (") no meio do seu texto.
+    console.warn(`⚠️  Parse inicial falhou para "${fieldName}". Tentando corrigir aspas...`);
     
-  } catch (error) {
-    console.warn(`⚠️ Erro ao parsear ${fieldName}:`, error.message);
-    console.log('JSON problemático:', jsonString.substring(0, 200));
+    // Fallback: Vamos tentar escapar de forma inteligente apenas as aspas que estão DENTRO do conteúdo.
+    const escapedString = cleanedString.replace(/(?<![\[{,:\s])"(?![\]},:\s])/g, '\\"');
     
     try {
-      let fallbackJson = jsonString
-        .replace(/[^\[\]{}":,\w\s\-\.\/\?=&]/g, ' ')
-        .replace(/\s+/g, ' ')
-        .trim();
-      
-      let fallbackParsed = JSON.parse(fallbackJson);
-      console.log(`🔄 Fallback parse funcionou para ${fieldName}`);
-      return fallbackParsed;
-      
-    } catch (fallbackError) {
-      console.error(`❌ Fallback também falhou para ${fieldName}:`, fallbackError.message);
-      return [];
+        const validJsonString = escapedString.replace(/,\s*([}\]])/g, '$1');
+        const parsed = JSON.parse(validJsonString);
+        console.log(`✅ JSON parseado com sucesso para ${fieldName} (com fallback de aspas)`);
+        return parsed;
+    } catch (e2) {
+        console.error(`❌ Fallback de escape de aspas também falhou para "${fieldName}":`, e2.message);
+        console.log("   JSON problemático:", cleanedString.substring(0, 300));
+        return null;
     }
   }
 }

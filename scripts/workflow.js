@@ -66,7 +66,7 @@ class ProjectWorkflow {
   }
 
   /**
-   * 2. PROCESSAR VÍDEOS
+   * 2. PROCESSAR VÍDEOS (MODIFICADO PARA SER OPCIONAL)
    */
   async processVideos() {
     console.log('\n🎬 PROCESSAMENTO DE VÍDEOS');
@@ -74,12 +74,22 @@ class ProjectWorkflow {
     
     // Verificar se existem vídeos
     const videosDir = path.join(rootDir, 'static/videos');
-    const files = await fs.readdir(videosDir).catch(() => []);
+    let files = [];
+    
+    try {
+      files = await fs.readdir(videosDir);
+    } catch (error) {
+      // Pasta não existe ou não pode ser lida
+      files = [];
+    }
     
     if (files.length === 0) {
       console.log('⚠️  Nenhum vídeo encontrado em static/videos/');
-      console.log('   Adicione vídeos com nomes como: intro_desktop.mp4 e intro_mobile.mp4');
-      return false;
+      console.log('   📝 Para usar vídeos, adicione arquivos como:');
+      console.log('      • intro_desktop.mp4 e intro_mobile.mp4');
+      console.log('      • video1_desktop.mp4 e video1_mobile.mp4');
+      console.log('   ✅ Pulando processamento de vídeos...');
+      return true; // ✅ MUDANÇA: retorna true ao invés de false
     }
     
     // Processar todos os vídeos
@@ -87,6 +97,7 @@ class ProjectWorkflow {
     const quality = this.config.frames.quality;
     
     console.log(`⚙️  Configuração: ${fps} FPS, ${quality}% qualidade`);
+    console.log(`📹 Processando ${files.length} arquivo(s)...`);
     
     const success = this.exec(
       `node scripts/extract-frames.js --process-all --fps ${fps} --quality ${quality}`
@@ -96,7 +107,7 @@ class ProjectWorkflow {
   }
 
   /**
-   * 3. FAZER UPLOAD DOS FRAMES
+   * 3. FAZER UPLOAD DOS FRAMES (MODIFICADO PARA SER OPCIONAL)
    */
   async uploadFrames() {
     console.log('\n☁️  UPLOAD DE FRAMES PARA O VAULT');
@@ -106,12 +117,26 @@ class ProjectWorkflow {
     
     try {
       // Listar pastas de frames
-      const desktopDirs = await fs.readdir(path.join(framesBase, 'desktop')).catch(() => []);
-      const mobileDirs = await fs.readdir(path.join(framesBase, 'mobile')).catch(() => []);
+      let desktopDirs = [];
+      let mobileDirs = [];
+      
+      try {
+        desktopDirs = await fs.readdir(path.join(framesBase, 'desktop'));
+      } catch {
+        // Pasta não existe ou vazia
+      }
+      
+      try {
+        mobileDirs = await fs.readdir(path.join(framesBase, 'mobile'));
+      } catch {
+        // Pasta não existe ou vazia
+      }
       
       if (desktopDirs.length === 0 && mobileDirs.length === 0) {
         console.log('⚠️  Nenhum frame encontrado para upload');
-        return false;
+        console.log('   📝 Frames são gerados automaticamente quando você processa vídeos');
+        console.log('   ✅ Pulando upload de frames...');
+        return true; // ✅ MUDANÇA: retorna true ao invés de false
       }
       
       console.log(`📦 Encontrados: ${desktopDirs.length} vídeos para upload`);
@@ -149,7 +174,7 @@ class ProjectWorkflow {
   }
 
   /**
-   * 4. GERAR CONFIGURAÇÃO PARA GOOGLE DOCS
+   * 4. GERAR CONFIGURAÇÃO PARA GOOGLE DOCS (MODIFICADO PARA SER OPCIONAL)
    */
   async generateDocsConfig() {
     console.log('\n📄 CONFIGURAÇÃO PARA GOOGLE DOCS');
@@ -159,7 +184,20 @@ class ProjectWorkflow {
     const configs = [];
     
     try {
-      const desktopDirs = await fs.readdir(path.join(framesBase, 'desktop')).catch(() => []);
+      let desktopDirs = [];
+      
+      try {
+        desktopDirs = await fs.readdir(path.join(framesBase, 'desktop'));
+      } catch {
+        // Pasta não existe ou vazia
+      }
+      
+      if (desktopDirs.length === 0) {
+        console.log('⚠️  Nenhum frame encontrado para gerar configuração');
+        console.log('   📝 Configuração é gerada quando você tem vídeos processados');
+        console.log('   ✅ Pulando geração de configuração...');
+        return true; // ✅ MUDANÇA: retorna true ao invés de array vazio
+      }
       
       for (const videoName of desktopDirs) {
         // Contar frames
@@ -183,11 +221,11 @@ class ProjectWorkflow {
       await fs.writeFile(configPath, JSON.stringify(configs, null, 2));
       console.log(`\n💾 Configurações salvas em: frames-config.json`);
       
-      return configs;
+      return true;
       
     } catch (error) {
       console.error('❌ Erro:', error.message);
-      return [];
+      return false;
     }
   }
 
@@ -394,7 +432,7 @@ class ProjectWorkflow {
   }
 
   /**
-   * WORKFLOW COMPLETO (AGORA COM CACHE!)
+   * WORKFLOW COMPLETO (AGORA COM STEPS OPCIONAIS!)
    */
   async runComplete() {
     console.log('\n');
@@ -405,15 +443,15 @@ class ProjectWorkflow {
     console.log('=' .repeat(70));
     
     const steps = [
-      { name: 'Setup', fn: () => this.setup() },
-      { name: 'Processar Vídeos', fn: () => this.processVideos() },
-      { name: 'Upload Frames', fn: () => this.uploadFrames() },
-      { name: 'Gerar Config', fn: () => this.generateDocsConfig() },
-      { name: 'Fetch Docs', fn: () => this.fetchDocs() },
-      { name: 'Build', fn: () => this.build() },
-      { name: 'Deploy', fn: () => this.deploy() },
-      { name: 'Gerar Cache', fn: () => this.generateCache() },
-      { name: 'Aquecer Cache', fn: () => this.warmCache() }
+      { name: 'Setup', fn: () => this.setup(), required: true },
+      { name: 'Processar Vídeos', fn: () => this.processVideos(), required: false },
+      { name: 'Upload Frames', fn: () => this.uploadFrames(), required: false },
+      { name: 'Gerar Config', fn: () => this.generateDocsConfig(), required: false },
+      { name: 'Fetch Docs', fn: () => this.fetchDocs(), required: false },
+      { name: 'Build', fn: () => this.build(), required: true },
+      { name: 'Deploy', fn: () => this.deploy(), required: true },
+      { name: 'Gerar Cache', fn: () => this.generateCache(), required: false },
+      { name: 'Aquecer Cache', fn: () => this.warmCache(), required: false }
     ];
     
     for (let i = 0; i < steps.length; i++) {
@@ -422,14 +460,14 @@ class ProjectWorkflow {
       
       const success = await step.fn();
       
-      // Cache é opcional - não falha o workflow se der erro
-      if (!success && !['Fetch Docs', 'Gerar Cache', 'Aquecer Cache'].includes(step.name)) {
-        console.error(`\n❌ Falha em: ${step.name}`);
+      // ✅ MUDANÇA: Diferenciar entre steps obrigatórios e opcionais
+      if (!success && step.required) {
+        console.error(`\n❌ Falha em step obrigatório: ${step.name}`);
         process.exit(1);
       }
       
-      if (!success && ['Gerar Cache', 'Aquecer Cache'].includes(step.name)) {
-        console.log(`⚠️ ${step.name} falhou, mas continuando...`);
+      if (!success && !step.required) {
+        console.log(`⚠️ ${step.name} pulado/falhou (opcional), mas continuando...`);
       }
     }
     
@@ -443,14 +481,15 @@ class ProjectWorkflow {
     console.log(`   📁 Projeto: ${this.config.projectName}`);
     console.log(`   🌐 URL: ${this.config.baseProjectUrl}`);
     console.log(`   🎛️ Vault: ${this.config.urls.vault}`);
-    console.log(`   🔥 Cache: Aquecido automaticamente`);
+    console.log(`   🔥 Cache: Processo automático`);
     
     console.log('\n💡 PRÓXIMOS PASSOS:');
-    console.log('   1. Copie as configurações para o Google Docs');
-    console.log('   2. Execute: npm run workflow:update');
-    console.log('   3. Acesse a página publicada');
+    console.log('   1. Para usar vídeos: adicione em static/videos/');
+    console.log('   2. Copie as configurações para o Google Docs (se houver)');
+    console.log('   3. Execute: npm run workflow:update');
+    console.log('   4. Acesse a página publicada');
     
-    console.log('\n🎉 Tudo pronto com cache aquecido!');
+    console.log('\n🎉 Tudo pronto! Mobile-first sempre! 📱✨');
   }
 
   /**
@@ -495,18 +534,19 @@ Comandos:
 
 Workflow Completo (NOVO):
   1. Setup (cria pastas)
-  2. Processa vídeos (extrai frames)
-  3. Upload frames para Vault
-  4. Gera configuração para Google Docs
-  5. Fetch do Google Docs
-  6. Build
-  7. Deploy
-  8. 🆕 Gerar lista de cache
-  9. 🆕 Aquecer cache da CDN
+  2. Processa vídeos (extrai frames) - OPCIONAL
+  3. Upload frames para Vault - OPCIONAL
+  4. Gera configuração para Google Docs - OPCIONAL
+  5. Fetch do Google Docs - OPCIONAL
+  6. Build - OBRIGATÓRIO
+  7. Deploy - OBRIGATÓRIO
+  8. 🆕 Gerar lista de cache - OPCIONAL
+  9. 🆕 Aquecer cache da CDN - OPCIONAL
 
 IMPORTANTE:
   Configure primeiro em project.config.js!
   Cache agora é AUTOMÁTICO! 🔥
+  Mobile-first sempre! 📱✨
     `);
     process.exit(0);
   }

@@ -35,26 +35,26 @@
       "items": [
         {
           "type": "text",
-          "content": "Pela primeira vez, <br>um ex-presidente da República senta no banco dos réus do Supremo Tribunal Federal acusado de crimes contra a democracia.",
+          "content": "Pela primeira vez,<br>um ex-presidente da República senta no banco dos réus do Supremo Tribunal Federal acusado de crimes contra a democracia.",
           "grifo": {
             "src": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/grifo01.png",
             "width": {
-              "desktop": "300px",
+              "desktop": "610px",
               "mobile": "170px"
             },
             "offsetY": {
-              "desktop": "3.5rem",
+              "desktop": "18.5rem",
               "mobile": "2.2rem"
             }
           },
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "4.5rem",
+              "desktop": "2.8rem",
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "1.2",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -64,13 +64,14 @@
             "color": "#ffffff",
             "textAlign": "left",
             "width": {
-              "desktop": "60%",
+              "desktop": "30%",
               "mobile": "60%"
             },
             "margin": {
               "desktop": "0 auto 0 0"
             },
             "padding": {
+              "desktop": "10%",
               "mobile": "5% 0% 0% 5%"
             }
           }
@@ -84,14 +85,14 @@
           "alt": "Foto de Jair Bolsonaro de perfil",
           "styles": {
             "width": {
-              "desktop": "40%",
+              "desktop": "35%",
               "mobile": "60%"
             },
             "height": {
               "desktop": "auto"
             },
             "margin": {
-              "desktop": "0rem 0 0 auto",
+              "desktop": "-40rem 0 0% auto",
               "mobile": "-4rem 0 0 auto"
             }
           }
@@ -112,11 +113,11 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "4.5rem",
+              "desktop": "2.4rem",
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "3.4",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -126,13 +127,14 @@
             "color": "#ffffff",
             "textAlign": "left",
             "width": {
-              "desktop": "60%",
+              "desktop": "46%",
               "mobile": "80%"
             },
             "margin": {
               "desktop": "0 auto 0 0"
             },
             "padding": {
+              "desktop": "3%",
               "mobile": "5% 5% 5% 5%"
             }
           }
@@ -153,15 +155,15 @@
       "items": [
         {
           "type": "text",
-          "content": "Ao seu lado, outros sete acusados — civis e militares, inclusive um ex-comandante da Marinha — enfrentam o mesmo julgamento.",
+          "content": "Ao seu lado, outros sete acusados — civis e militares, inclusive um ex-comandante da Marinha — enfrentam o mesmo julgamento. ",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "4.5rem",
+              "desktop": "2.5rem",
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "3.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -178,6 +180,7 @@
               "desktop": "0 auto 0 0"
             },
             "padding": {
+              "desktop": "5% 15%",
               "mobile": "10% 5% 5% 15%"
             }
           }
@@ -191,7 +194,7 @@
           "alt": "retângulo vermelho",
           "styles": {
             "width": {
-              "desktop": "40%",
+              "desktop": "14px",
               "mobile": "10px"
             },
             "height": {
@@ -199,11 +202,11 @@
               "mobile": "50px"
             },
             "margin": {
-              "desktop": "0rem 0 0 auto",
+              "desktop": "-10% 13% 0%",
               "mobile": "-5rem 20px 20px 20px"
             },
             "padding": {
-              "desktop": "0rem 0 0 auto",
+              "desktop": "0",
               "mobile": "0 0 20px"
             }
           }
@@ -217,7 +220,7 @@
           "alt": "retângulo vermelho",
           "styles": {
             "width": {
-              "desktop": "40%",
+              "desktop": "20%",
               "mobile": "100px"
             },
             "height": {
@@ -225,11 +228,11 @@
               "mobile": "10px"
             },
             "margin": {
-              "desktop": "0rem 0 0 auto",
+              "desktop": "10% 60% 0%",
               "mobile": "0rem 0px 0px 0px"
             },
             "padding": {
-              "desktop": "0rem 0 0 auto",
+              "desktop": "0",
               "mobile": "0 0 0 0"
             }
           }
@@ -257,7 +260,7 @@
           "alt": "retângulo vermelho",
           "styles": {
             "width": {
-              "desktop": "40%",
+              "desktop": "20%",
               "mobile": "100px"
             },
             "height": {
@@ -265,7 +268,7 @@
               "mobile": "10px"
             },
             "margin": {
-              "desktop": "0rem 0 0 auto",
+              "desktop": "0% 60% 0%",
               "mobile": "-0px 0px 0px 0px"
             },
             "padding": {
@@ -283,7 +286,7 @@
           "alt": "retângulo vermelho",
           "styles": {
             "width": {
-              "desktop": "40%",
+              "desktop": "50px",
               "mobile": "30px"
             },
             "height": {
@@ -291,26 +294,26 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "0rem 0 0 auto",
+              "desktop": "6% 25% 0",
               "mobile": "5% 0px 0px 5%"
             },
             "padding": {
-              "desktop": "0rem 0 0 auto",
+              "desktop": "0",
               "mobile": "0 0 0 0"
             }
           }
         },
         {
           "type": "text",
-          "content": "Um chefe de Estado detém uma capacidade singular de influenciar a opinião pública e mobilizar parcelas da sociedade.Dessa forma, suas declarações, especialmente quando hostise desprovidas de base factual, transcendem o campo da crítica legítima e adquirem caráter de incitação e de desestabilizaçãoda democracia",
+          "content": "Um chefe de Estado detém uma capacidade singular de influenciar a opinião pública e mobilizar parcelas da sociedade.Dessa forma, suas declarações, especialmente quando hostise desprovidas de base factual, transcendem o campo da crítica legítima e adquirem caráter de incitação e de desestabilizaçãoda democracia ",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "4.5rem",
+              "desktop": "2.5rem",
               "mobile": "1.4rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "4rem",
               "mobile": "2.2rem"
             },
             "fontWeight": {
@@ -324,7 +327,7 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0 auto 0 0"
+              "desktop": "2% auto 2% auto"
             },
             "padding": {
               "mobile": "5% 5% 5% 5%"
@@ -340,7 +343,7 @@
           "alt": "fecha aspas",
           "styles": {
             "width": {
-              "desktop": "40%",
+              "desktop": "100px",
               "mobile": "30px"
             },
             "height": {
@@ -348,7 +351,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "0rem 0 0 auto",
+              "desktop": "0% 0 0% 68%",
               "mobile": "-5% 0px -5% 90%"
             },
             "padding": {
@@ -366,7 +369,7 @@
           "alt": "Frase Paulo Gonet",
           "styles": {
             "width": {
-              "desktop": "40%",
+              "desktop": "35%",
               "mobile": "100vw"
             },
             "height": {
@@ -374,7 +377,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "0rem 0 0 auto",
+              "desktop": "-6% 8% 6%",
               "mobile": "0rem 0px 0px 0px"
             },
             "padding": {
@@ -385,15 +388,15 @@
         },
         {
           "type": "text",
-          "content": "Segundo a Procuradoria, Bolsonaro liderou uma organização criminosa armada voltada a desacreditar o sistema eleitoral, incitar ataques a instituições democráticas e articular medidas de exceção. O ex-presidente, afirma a PGR, era o principal beneficiário dessa organização.",
+          "content": "Segundo a Procuradoria, Bolsonaro liderou uma organização criminosa armada voltada a desacreditar o sistema eleitoral, incitar ataques a instituições democráticas e articular medidas de exceção. O ex-presidente, afirma a PGR, era o principal beneficiário dessa organização. ",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "4.5rem",
+              "desktop": "2.5rem",
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "3.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -407,7 +410,7 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0 auto 0 0"
+              "desktop": "0% auto 5% auto"
             },
             "padding": {
               "mobile": "5% 5% 5% 5%"
@@ -426,7 +429,7 @@
       "elements": [
         {
           "type": "text",
-          "content": "Os 5 crimes pelos quais Bolsonaro responde",
+          "content": "<p>Os 5 crimes pelos quais Bolsonaro responde</p>",
           "desktop": {
             "x": "50%",
             "y": "50%",
@@ -446,7 +449,7 @@
           "textStyles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "1.8rem",
+              "desktop": "4rem",
               "mobile": "2rem"
             },
             "fontWeight": {
@@ -548,7 +551,7 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "4.5rem",
+              "desktop": "8rem",
               "mobile": "2rem"
             },
             "lineHeight": {
@@ -566,9 +569,10 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0 auto 0 0"
+              "desktop": "0 auto 0 auto"
             },
             "padding": {
+              "desktop": "5% 0 2% 0%",
               "mobile": "5% 5% 5% 5%"
             }
           }
@@ -579,11 +583,11 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "4.5rem",
+              "desktop": "3.6rem",
               "mobile": "1.6rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "4rem",
               "mobile": "2rem"
             },
             "fontWeight": {
@@ -597,9 +601,10 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0 auto 0 0"
+              "desktop": "0 auto 0 auto"
             },
             "padding": {
+              "desktop": "0% 0% 5% 0%",
               "mobile": "5% 5% 10% 5%"
             }
           }
@@ -624,7 +629,7 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "4.5rem",
+              "desktop": "3.2rem",
               "mobile": "1.4rem"
             },
             "lineHeight": {
@@ -642,7 +647,7 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0 auto 0 0"
+              "desktop": "5% auto 1% auto"
             },
             "padding": {
               "mobile": "5% 5% 0% 5%"
@@ -655,11 +660,11 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "4.5rem",
+              "desktop": "8rem",
               "mobile": "1.8rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "8rem",
               "mobile": "2rem"
             },
             "fontWeight": {
@@ -673,7 +678,7 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0 auto 0 0"
+              "desktop": "0 auto 2% auto"
             },
             "padding": {
               "mobile": "0% 0% 5% 5%"
@@ -703,15 +708,15 @@
       "items": [
         {
           "type": "text",
-          "content": "No dia 29, Bolsonaro aparece em uma transmissão ao vivo ao lado do então ministro da Justiça, Anderson Torres, para apresentar supostos indícios de fraude nas eleições — acusações baseadas em informações falsas, fornecidas pelo então chefe da Abin, Alexandre Ramagem.",
+          "content": "No dia 29, Bolsonaro aparece em uma transmissão ao vivo ao lado do então ministro da Justiça, Anderson Torres, para apresentar supostos indícios de fraude nas eleições — acusações baseadas em informações falsas, fornecidas pelo então chefe da Abin, Alexandre Ramagem. ",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "4.5rem",
+              "desktop": "3.5rem",
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "4.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -721,11 +726,11 @@
             "color": "#ffffff",
             "textAlign": "left",
             "width": {
-              "desktop": "60%",
+              "desktop": "30%",
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0 auto 0 0"
+              "desktop": "5% 20%"
             },
             "padding": {
               "mobile": "5% 5% 5% 5%"
@@ -741,7 +746,7 @@
           "alt": "retângulo vermelho",
           "styles": {
             "width": {
-              "desktop": "40%",
+              "desktop": "36%",
               "mobile": "100vw"
             },
             "height": {
@@ -749,7 +754,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "0rem 0 0 auto",
+              "desktop": "-30% 60% 10%",
               "mobile": "0rem 0px 0px 0px"
             },
             "padding": {
@@ -774,7 +779,7 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "4.5rem",
+              "desktop": "3.2rem",
               "mobile": "1.4rem"
             },
             "lineHeight": {
@@ -792,7 +797,7 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0 auto 0 0"
+              "desktop": "5% auto 1% auto"
             },
             "padding": {
               "mobile": "5% 5% 0% 5%"
@@ -805,11 +810,11 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "4.5rem",
+              "desktop": "8rem",
               "mobile": "1.8rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "8rem",
               "mobile": "2rem"
             },
             "fontWeight": {
@@ -823,7 +828,7 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0 auto 0 0"
+              "desktop": "2% auto 0% auto"
             },
             "padding": {
               "mobile": "0% 0% 5% 5%"
@@ -836,11 +841,11 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "4.5rem",
+              "desktop": "2.5rem",
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "3.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -854,7 +859,7 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0 auto 0 0"
+              "desktop": "0 auto"
             },
             "padding": {
               "mobile": "5% 5% 5% 5%"
@@ -878,7 +883,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "0rem 0 0 auto",
+              "desktop": "3% auto",
               "mobile": "0rem 0px 0px 0px"
             },
             "padding": {
@@ -893,11 +898,11 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "4.5rem",
+              "desktop": "2.5rem",
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "3.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -911,7 +916,7 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0 auto 0 0"
+              "desktop": "0 auto 3%"
             },
             "padding": {
               "mobile": "5% 5% 5% 5%"
@@ -945,12 +950,12 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "4.5rem",
-              "mobile": "1.2rem"
+              "desktop": "2.5rem",
+              "mobile": "1.4rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
-              "mobile": "2rem"
+              "desktop": "4rem",
+              "mobile": "2.2rem"
             },
             "fontWeight": {
               "desktop": "700",
@@ -963,10 +968,10 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0 auto 0 0"
+              "desktop": "2% auto 2% auto"
             },
             "padding": {
-              "mobile": "5% 5% 0% 5%"
+              "mobile": "5% 5% 5% 5%"
             }
           }
         },
@@ -976,7 +981,7 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "4.5rem",
+              "desktop": "2.5rem",
               "mobile": "1.1rem"
             },
             "lineHeight": {
@@ -994,7 +999,7 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0 auto 0 0"
+              "desktop": "0% auto 5% auto"
             },
             "padding": {
               "mobile": "5% 0% 5% 5%"
@@ -1024,15 +1029,15 @@
       "items": [
         {
           "type": "text",
-          "content": "Ou esse ministro se enquadra ou ele pede para sair. Não se pode admitir que uma pessoa apenas, um homem apenas turve a nossa liberdade. Dizer a esse ministro que ele tem tempo ainda parase redimir, tem tempo aindade arquivar seus inquéritos. Sai, Alexandre de Moraes. Deixa de ser canalha. Deixa de oprimir o povo brasileiro, deixe de censurar o seu povo. Mais do que isso, nós devemos, sim, porque eu falo em nome de vocês, determinar que todos os presos políticos sejam postos em liberdade",
+          "content": "Ou esse ministro se enquadra ou ele pede para sair. Não se pode admitir que uma pessoa apenas, um homem apenas turve a nossa liberdade. Dizer a esse ministro que ele tem tempo ainda parase redimir, tem tempo ainda de arquivar seus inquéritos. Sai, Alexandre de Moraes. Deixa de ser canalha. Deixa de oprimir o povo brasileiro, deixe de censurar o seu povo. Mais do que isso, nós devemos, sim, porque eu falo em nome de vocês, determinar que todos os presos políticos sejam postos em liberdade",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "4.5rem",
+              "desktop": "2.5rem",
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "4rem",
               "mobile": "2rem"
             },
             "fontWeight": {
@@ -1046,7 +1051,7 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0 auto 0 0"
+              "desktop": "2% auto 2% auto"
             },
             "padding": {
               "mobile": "5% 5% 0% 5%"
@@ -1059,7 +1064,7 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "4.5rem",
+              "desktop": "2.5rem",
               "mobile": "1.1rem"
             },
             "lineHeight": {
@@ -1077,7 +1082,7 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0 auto 0 0"
+              "desktop": "0% auto 5% auto"
             },
             "padding": {
               "mobile": "5% 0% 5% 5%"
@@ -1100,7 +1105,7 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "4.5rem",
+              "desktop": "8rem",
               "mobile": "2rem"
             },
             "lineHeight": {
@@ -1118,9 +1123,10 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0 auto 0 0"
+              "desktop": "0 auto 0 auto"
             },
             "padding": {
+              "desktop": "5% 0 2% 0%",
               "mobile": "5% 5% 0% 5%"
             }
           }
@@ -1149,9 +1155,10 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0 auto 0 0"
+              "desktop": "0 auto 0 auto"
             },
             "padding": {
+              "desktop": "0% 0 2% 0%",
               "mobile": "0% 5% 10% 5%"
             }
           }
@@ -1172,11 +1179,11 @@
       "items": [
         {
           "type": "text",
-          "content": "5 de jULHO",
+          "content": "5 de JULHO",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "4.5rem",
+              "desktop": "3.2rem",
               "mobile": "1.4rem"
             },
             "lineHeight": {
@@ -1194,7 +1201,7 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0 auto 0 0"
+              "desktop": "5% auto 1% auto"
             },
             "padding": {
               "mobile": "5% 5% 0% 5%"
@@ -1207,11 +1214,11 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "4.5rem",
+              "desktop": "2.5rem",
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "3.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -1221,11 +1228,11 @@
             "color": "#ffffff",
             "textAlign": "center",
             "width": {
-              "desktop": "60%",
+              "desktop": "30%",
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0 auto 0 0"
+              "desktop": "2% 20%"
             },
             "padding": {
               "mobile": "0% 0% 5% 5%"
@@ -1241,7 +1248,7 @@
           "alt": "retângulo vermelho",
           "styles": {
             "width": {
-              "desktop": "40%",
+              "desktop": "30%",
               "mobile": "260px"
             },
             "height": {
@@ -1249,7 +1256,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "0rem 0 0 auto",
+              "desktop": "-20% 0% 5% 60%",
               "mobile": "0rem 0px 0px 0px"
             },
             "padding": {
@@ -1281,15 +1288,15 @@
       "items": [
         {
           "type": "text",
-          "content": "O general Augusto Heleno fala em virar a mesa antes das eleições, e Bolsonaro é explícito: Vai ter um caos no Brasil se o PT vencer.",
+          "content": "O general Augusto Heleno fala em virar a mesa antes das eleições, e Bolsonaro é explícito: Vai ter um caos no Brasil se o PT vencer. ",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "4.5rem",
+              "desktop": "2.5rem",
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "3.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -1299,11 +1306,11 @@
             "color": "#ffffff",
             "textAlign": "center",
             "width": {
-              "desktop": "60%",
+              "desktop": "30%",
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0 auto 0 0"
+              "desktop": "10% 20%"
             },
             "padding": {
               "mobile": "0% 0% 5% 5%"
@@ -1319,7 +1326,7 @@
           "alt": "retângulo vermelho",
           "styles": {
             "width": {
-              "desktop": "40%",
+              "desktop": "34%",
               "mobile": "320px"
             },
             "height": {
@@ -1327,7 +1334,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "0rem 0 0 auto",
+              "desktop": "-24% 0% 4% 50%",
               "mobile": "0rem 0px 0px 0px"
             },
             "padding": {
@@ -1430,7 +1437,7 @@
             },
             "padding": {
               "desktop": "0rem 0 0 auto",
-              "mobile": "0 0 0 0"
+              "mobile": "10vw"
             }
           }
         },
@@ -1456,7 +1463,7 @@
             },
             "padding": {
               "desktop": "0rem 0 0 auto",
-              "mobile": "0 0 0 0"
+              "mobile": "10vw"
             }
           }
         }
@@ -1492,7 +1499,7 @@
             },
             "lineHeight": {
               "desktop": "1.0",
-              "mobile": "3.5rem"
+              "mobile": "2rem"
             },
             "fontWeight": {
               "desktop": "900",
@@ -1508,7 +1515,7 @@
               "desktop": "0 auto 0 0"
             },
             "padding": {
-              "mobile": "5% 5% 0% 5%"
+              "mobile": "15% 5% 10% 5%"
             }
           }
         },
@@ -1539,7 +1546,7 @@
               "desktop": "0 auto 0 0"
             },
             "padding": {
-              "mobile": "0% 5% 10% 5%"
+              "mobile": "0% 5% 0% 5%"
             }
           }
         },
@@ -1565,13 +1572,13 @@
             },
             "padding": {
               "desktop": "0rem 0 0 auto",
-              "mobile": "0 0"
+              "mobile": "0% 5vw 0% 5vw"
             }
           }
         },
         {
           "type": "text",
-          "content": "Ele confirma que não houve fraude, mas a narrativa pública contrária ao sistema é mantida com a utilização de influencers, militares e o Partido Liberal.",
+          "content": "Ele confirma que não houve fraude, mas a narrativa pública contrária ao sistema é mantida com a utilização de influencers, militares e o Partido Liberal. ",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
@@ -1611,7 +1618,7 @@
             },
             "lineHeight": {
               "desktop": "1.0",
-              "mobile": "3.5rem"
+              "mobile": "2rem"
             },
             "fontWeight": {
               "desktop": "900",
@@ -1627,7 +1634,7 @@
               "desktop": "0 auto 0 0"
             },
             "padding": {
-              "mobile": "5% 5% 0% 5%"
+              "mobile": "15% 5% 10% 5%"
             }
           }
         },
@@ -1714,12 +1721,346 @@
               "desktop": "0 auto 0 0"
             },
             "padding": {
-              "mobile": "0% 5% 10% 5%"
+              "mobile": "10% 5% 10% 5%"
             }
           }
         }
       ],
       "backgroundColor": "#1a1a1a",
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "super-flex",
+      "items": [
+        {
+          "type": "text",
+          "content": "No dia 30 de outubro, Lula vence com 50,9% dos votos",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "4.5rem",
+              "mobile": "2rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "2rem"
+            },
+            "fontWeight": {
+              "desktop": "900",
+              "mobile": "900"
+            },
+            "color": "#ffffff",
+            "textAlign": "center",
+            "width": {
+              "desktop": "60%",
+              "mobile": "95%"
+            },
+            "height": {
+              "desktop": "100vh",
+              "mobile": "100vh"
+            },
+            "margin": {
+              "desktop": "0 auto 0 0"
+            },
+            "padding": {
+              "mobile": "10% 5% 10% 5%"
+            }
+          }
+        }
+      ],
+      "backgroundColor": "#1a1a1a",
+      "backgroundImage": {
+        "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
+        "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg"
+      },
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "globovideo",
+      "caption": "",
+      "credit": "",
+      "fullWidth": "true",
+      "autoplay": "true",
+      "controls": "true",
+      "videoId": "13798642",
+      "autoPlay": "true",
+      "showCaption": "false"
+    },
+    {
+      "type": "super-flex",
+      "items": [
+        {
+          "type": "text",
+          "content": "Minuta do golpe dentro das quatro linhas e plano para matar Lula, Alckmin e Moraes",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "4.5rem",
+              "mobile": "2rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "2.2rem"
+            },
+            "fontWeight": {
+              "desktop": "900",
+              "mobile": "900"
+            },
+            "color": "#1a1a1a",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "0 auto 0 0"
+            },
+            "padding": {
+              "mobile": "10% 5% 10% 5%"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "1 de novembro",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "4.5rem",
+              "mobile": "1.4rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "2rem"
+            },
+            "fontWeight": {
+              "desktop": "600",
+              "mobile": "600"
+            },
+            "color": "#1a1a1a",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "0 auto 0 0"
+            },
+            "padding": {
+              "mobile": "5% 5% 0% 5%"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "No dia 1&ordm; de novembro, começam os acampamentos golpistas em frente a quartéis, com faixas pedindo intervenção militar e prisão de ministros do STF.",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "4.5rem",
+              "mobile": "1.2rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
+            "color": "#1a1a1a",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "0 auto 0 0"
+            },
+            "padding": {
+              "mobile": "10% 5% 10% 5%"
+            }
+          }
+        },
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/mapa_novembro.jpg",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/mapa_novembro.jpg"
+          },
+          "alt": "retângulo vermelho",
+          "styles": {
+            "width": {
+              "desktop": "40%",
+              "mobile": "80vw"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0rem 0px 0px 0px"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0% 5vw 0% 5vw"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "O general Mário Fernandes, então secretário-executivo da Presidência, visita acampamento em Brasília e tira selfies no local. Os registros se repetem ao longo dos dias. Mauro Cid orça custos para levar mais manifestantes para os acampamentos. ",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "4.5rem",
+              "mobile": "1.2rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
+            "color": "#1a1a1a",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "0 auto 0 0"
+            },
+            "padding": {
+              "mobile": "10% 5% 10% 5%"
+            }
+          }
+        },
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print_mario.jpg",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print_mario.jpg"
+          },
+          "alt": "retângulo vermelho",
+          "styles": {
+            "width": {
+              "desktop": "40%",
+              "mobile": "100vw"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0rem 0px 0px 0px"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "9 de novembro",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "4.5rem",
+              "mobile": "1.4rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "2rem"
+            },
+            "fontWeight": {
+              "desktop": "600",
+              "mobile": "600"
+            },
+            "color": "#1a1a1a",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "0 auto 0 0"
+            },
+            "padding": {
+              "mobile": "5% 5% 0% 5%"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "No dia 9, no Planalto, o general Mário Fernandes produz o documento Punhal Verde e Amarelo, que detalha plano para sequestrar ou matar Alexandre de Moraes, Lula e Alckmin. ",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "4.5rem",
+              "mobile": "1.2rem"
+            },
+            "lineHeight": {
+              "desktop": "1.0",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
+            "color": "#1a1a1a",
+            "textAlign": "left",
+            "width": {
+              "desktop": "60%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "0 auto 0 0"
+            },
+            "padding": {
+              "mobile": "10% 5% 10% 5%"
+            }
+          }
+        },
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/punhal.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/punhal.png"
+          },
+          "alt": "retângulo vermelho",
+          "styles": {
+            "width": {
+              "desktop": "40%",
+              "mobile": "100vw"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0rem 0px 0px 0px"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0"
+            }
+          }
+        }
+      ],
+      "backgroundColor": "#FFF4E6",
       "padding": {
         "desktop": "4rem 2rem",
         "mobile": "3rem 1rem"
