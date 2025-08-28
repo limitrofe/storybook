@@ -1219,7 +1219,7 @@ const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:backgroundImage|backgroundI
     }
 
     // Campos gerais (mantém sua lógica original)
-    const fieldMappings = {
+const fieldMappings = {
   // Campos existentes
   title: 'title', subtitle: 'subtitle', date: 'date', theme: 'theme',
   backgroundImage: 'backgroundImage', backgroundImageMobile: 'backgroundImageMobile', 
@@ -1228,15 +1228,39 @@ const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:backgroundImage|backgroundI
   textPosition: 'textPosition', textPositionMobile: 'textPositionMobile', 
   textAlign: 'textAlign', textAlignMobile: 'textAlignMobile',
   author: 'author', role: 'role', src: 'src', videoSrc: 'videoSrc', 
-  videoSrcMobile: 'videoSrcMobile', srcMobile: 'srcMobile', caption: 'caption', 
+  videoSrcMobile: 'videoSrcMobile', 
+  
+  // 🎬 VIDEO PLAYER - Props atualizadas
+  srcMobile: 'srcMobile',
+  'src-mobile': 'srcMobile', // Alias
+  poster: 'poster',
+  posterDesktop: 'poster', // Alias para desktop
+  'poster-desktop': 'poster', // Alias para desktop
+  posterMobile: 'posterMobile', 
+  'poster-mobile': 'posterMobile', // Alias
+  customWidth: 'customWidth',
+  'custom-width': 'customWidth', // Alias
+  customWidthDesktop: 'customWidthDesktop',
+  'custom-width-desktop': 'customWidthDesktop', // Alias
+  customWidthMobile: 'customWidthMobile',
+  'custom-width-mobile': 'customWidthMobile', // Alias
+  aspectRatio: 'aspectRatio',
+  'aspect-ratio': 'aspectRatio', // Alias
+  aspectRatioMobile: 'aspectRatioMobile',
+  'aspect-ratio-mobile': 'aspectRatioMobile', // Alias
+  fullWidthBackground: 'fullWidthBackground',
+'full-width-background': 'fullWidthBackground', // Alias
+
+  caption: 'caption', 
   credit: 'credit', alt: 'alt', fullWidth: 'fullWidth', variant: 'variant',
   size: 'size', orientation: 'orientation', autoplay: 'autoplay', controls: 'controls', 
-  poster: 'poster', overlay: 'overlay', layout: 'layout', columns: 'columns', 
+  overlay: 'overlay', layout: 'layout', columns: 'columns', 
   interval: 'interval', showDots: 'showDots', showArrows: 'showArrows',
   stickyHeight: 'stickyHeight', beforeImage: 'beforeImage', afterImage: 'afterImage', 
   beforeLabel: 'beforeLabel', afterLabel: 'afterLabel', image: 'image', speed: 'speed', 
   content: 'content', 
-    // IDs de vídeo específicos
+
+  // IDs de vídeo específicos
   videoIdMobile: 'videoIdMobile',
   videoIdDesktop: 'videoIdDesktop',
   'videoId-mobile': 'videoIdMobile',    // Alias
@@ -1250,10 +1274,10 @@ const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:backgroundImage|backgroundI
   'width-mobile': 'widthMobile',      // Alias
   'width-desktop': 'widthDesktop',    // Alias
   
-  // Cor de fundo
+  // Cor de fundo - ATUALIZADO
   containerBackgroundColor: 'containerBackgroundColor',
-  backgroundColor: 'containerBackgroundColor',  // Alias
-  'background-color': 'containerBackgroundColor', // Alias
+  backgroundColor: 'backgroundColor', // MUDOU: era 'containerBackgroundColor'
+  'background-color': 'backgroundColor', // MUDOU: era 'containerBackgroundColor'
   'container-background': 'containerBackgroundColor', 
   aspectRatio: 'aspectRatio',
   aspectRatioMobile: 'aspectRatioMobile',
@@ -1270,7 +1294,7 @@ const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:backgroundImage|backgroundI
   videoAspectRatio: 'videoAspectRatio', aspectRatio: 'aspectRatio', 
   showProgress: 'showProgress', showTime: 'showTime', showControls: 'showControls',
 
-  // 🆕 NOVOS CAMPOS PARA LAYOUT-FLEXIVEL:
+  // NOVOS CAMPOS PARA LAYOUT-FLEXIVEL:
   
   // Texto - Layout Flexível
   textColor: 'textColor',
@@ -1306,13 +1330,11 @@ const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:backgroundImage|backgroundI
   image2ZIndex: 'image2ZIndex',
 
   // Layout - Layout Flexível
-  backgroundColor: 'backgroundColor',
   minHeight: 'minHeight',
   minHeightMobile: 'minHeightMobile',
   padding: 'padding',
   paddingMobile: 'paddingMobile'
 };
-
     
     for (const [field, prop] of Object.entries(fieldMappings)) {
       const regex = new RegExp(`\\b${field}:\\s*([^\\n<]*)`, 'i');

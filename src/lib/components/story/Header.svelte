@@ -36,6 +36,7 @@
 <header 
   class="story-header story-header--{variant}"
   class:has-media={hasMedia}
+  class:has-overlay={hasMedia && overlay}
 >
   {#if hasMedia}
   <div class="story-header__media-container">
@@ -85,9 +86,10 @@
   .story-header {
     position: relative;
     display: flex;
-    align-items: center;
+    align-items: flex-start; /* 🔥 Muda para flex-start para posicionar no topo */
     justify-content: center;
-    padding: 4rem 2rem; /* Padding padrão para header sem imagem */
+    padding: 4rem 2rem;
+    padding-top: 20%; /* 🔥 Mais padding-top para empurrar conteúdo para baixo do topo */
     background-color: var(--color-background);
     color: var(--color-text);
     text-align: center;
@@ -97,8 +99,8 @@
   /* ✅ ESTILOS APLICADOS APENAS QUANDO HÁ MÍDIA */
   .story-header.has-media {
     min-height: 100vh;
-    padding: 6rem 2rem;
-    color: #1a1a1a;
+    padding: 20% 2rem;
+    /* 🔥 REMOVIDO: color: #1a1a1a; - estava deixando texto escuro */
   }
 
   .story-header--hero.has-media {
@@ -106,7 +108,7 @@
   }
   
   .story-header--minimal {
-    min-height: auto; /* Minimal não precisa de altura mínima */
+    min-height: auto;
     padding: 2rem 0;
   }
   
@@ -114,18 +116,24 @@
      min-height: 30vh;
   }
 
-  .story-header__media-container, .story-header__overlay {
+  /* 🔥 Z-INDEX CORRIGIDO */
+  .story-header__media-container {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1;
+    z-index: 1; /* Mídia atrás */
   }
 
   .story-header__overlay {
-     background: rgba(0, 0, 0, 0.3);
-     z-index: 2;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.7); /* 🔥 Overlay BRANCO semi-transparente */
+    z-index: 2; /* Overlay no meio */
   }
   
   .story-header__background,
@@ -135,7 +143,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-  background-size: 100% auto; /* ALTERE AQUI */
+    background-size: cover;
     background-position: center;
     object-fit: cover;
   }
@@ -145,9 +153,10 @@
     display: none; /* Mobile first: esconde desktop */
   }
   
+  /* 🔥 CONTENT COM Z-INDEX ALTO */
   .story-header__content {
     position: relative;
-    z-index: 3;
+    z-index: 10; /* 🔥 Conteúdo sempre na frente */
     width: 100%;
   }
 
@@ -156,19 +165,22 @@
     margin: 0 auto;
   }
 
+  /* 🔥 TÍTULOS SEMPRE VISÍVEIS */
   h1 {
     font-size: var(--font-size-120);
     font-weight: 800;
-    color: var(--color-primary);
+    color: var(--color-primary); /* Cor padrão sem mídia */
     margin: 0 0 1rem 0;
     line-height: 1.2;
   }
   
+  /* 🔥 QUANDO TEM MÍDIA: cor escura #1a1a1a */
   .story-header.has-media h1 {
-      color: #1a1a1a;
+    color: #1a1a1a !important; /* 🔥 COR ESCURA FORÇADA */
+    text-shadow: 2px 2px 4px rgba(255,255,255,0.9); /* 🔥 Sombra BRANCA para contraste */
   }
 
-  h2 {
+  .story-header__subtitle {
     font-size: var(--font-size-80);
     color: var(--color-secondary);
     font-weight: 400;
@@ -177,8 +189,9 @@
     opacity: 0.9;
   }
   
-  .story-header.has-media h2 {
-      color: #1a1a1a;
+  .story-header.has-media .story-header__subtitle {
+    color: #1a1a1a !important; /* 🔥 COR ESCURA FORÇADA */
+    text-shadow: 2px 2px 4px rgba(255,255,255,0.9); /* 🔥 Sombra BRANCA */
   }
 
   .story-header__meta {
@@ -192,7 +205,8 @@
   }
   
   .story-header.has-media .story-header__meta {
-      color: #1a1a1a;
+    color: #1a1a1a !important; /* 🔥 COR ESCURA FORÇADA */
+    text-shadow: 1px 1px 2px rgba(255,255,255,0.9); /* 🔥 Sombra BRANCA */
   }
 
   .story-header__author {
@@ -201,10 +215,13 @@
 
   @media (max-width: 768px) {
     .story-header {
-      padding: 3rem 1rem;
+      padding: 2rem 1rem; /* 🔥 Menos padding geral */
+      padding-top: 12rem; /* 🔥 Conteúdo mais próximo do topo */
+      align-items: flex-start; /* 🔥 Garante alinhamento no topo */
     }
     .story-header.has-media {
-      padding: 5rem 1rem;
+      padding: 2rem 1rem;
+      padding-top: 6rem; /* 🔥 Mesmo padding com mídia */
     }
     .story-header__meta {
       flex-direction: column;
@@ -212,8 +229,29 @@
     }
   }
 
-  /* Lógica de exibição de mídia para Desktop */
+  /* Desktop - ALINHAMENTO À ESQUERDA */
   @media (min-width: 769px) {
+    /* 🔥 ALINHAMENTO À ESQUERDA NO DESKTOP */
+    .story-header {
+      text-align: left; /* 🔥 Alinha à esquerda */
+      justify-content: flex-start; /* 🔥 Justifica à esquerda */
+      padding: 4rem 2rem;
+    }
+
+    .story-header.has-media {
+      padding: 6rem 2rem;
+    }
+
+    .story-header__container {
+      margin: 0; /* 🔥 Remove centralização */
+      max-width: none; /* 🔥 Remove limitação de largura */
+    }
+
+    .story-header__meta {
+      justify-content: flex-start; /* 🔥 Meta à esquerda também */
+    }
+
+    /* Troca mídia mobile por desktop */
     .story-header__background--mobile,
     .story-header__video--mobile {
       display: none;
@@ -228,7 +266,7 @@
       font-size: var(--font-size-140);
     }
     
-    h2 {
+    .story-header__subtitle {
       font-size: var(--font-size-90);
     }
   }

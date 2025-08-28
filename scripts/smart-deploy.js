@@ -4,7 +4,7 @@ import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
-import BaseUploader from './BaseUploader.js';
+// import BaseUploader from './BaseUploader.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -17,9 +17,9 @@ class SmartDeploy {
     this.projectName = projectName;
     this.uploader = null;
     this.buildDir = path.join(__dirname, '../build');
-class MeuUploader extends BaseUploader {
-  // Herda toda configuração central
-}
+// class MeuUploader extends BaseUploader {
+//   // Herda toda configuração central
+// }
 
   }
 

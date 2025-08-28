@@ -613,17 +613,29 @@ import AbsoluteCanvas from './story/AbsoluteCanvas.svelte';
 					alignment={props.alignment || 'center'}
 				/>
 
-			<!-- Video -->
+<!-- Video - ATUALIZADO COM NOVAS PROPS -->
+<!-- Video - ATUALIZADO COM NOVAS PROPS -->
 			{:else if componentType === 'video'}
 				<VideoPlayer
 					src={props.src}
+					srcMobile={props.srcMobile || props.src} 
+					poster={props.poster}
+					posterMobile={props.posterMobile || props.poster}
 					caption={props.caption}
 					credit={props.credit}
 					fullWidth={stringToBoolean(props.fullWidth, false)}
-					autoplay={stringToBoolean(props.autoplay, false)}
-					controls={stringToBoolean(props.controls, true)}
+					autoplay={stringToBoolean(props.autoplay, true)}
+					controls={stringToBoolean(props.controls, false)}
 					loop={stringToBoolean(props.loop, false)}
 					showCaption={stringToBoolean(props.showCaption, true)}
+					customWidth={props.customWidth || props.width || '800px'}
+					customWidthDesktop={props.customWidthDesktop || ''}
+					customWidthMobile={props.customWidthMobile || ''}
+					aspectRatio={props.aspectRatio || '16/9'}
+					aspectRatioMobile={props.aspectRatioMobile || '9/16'}
+					backgroundColor={props.backgroundColor || props.containerBackgroundColor || 'rgba(0, 0, 0, 0.05)'}
+					alignment={props.alignment || 'center'}
+                    fullWidthBackground={stringToBoolean(props.fullWidthBackground, false)}
 				/>
 
 <!-- Globo Player -->
