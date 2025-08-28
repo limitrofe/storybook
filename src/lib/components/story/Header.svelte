@@ -89,17 +89,17 @@
     align-items: flex-start; /* 🔥 Muda para flex-start para posicionar no topo */
     justify-content: center;
     padding: 4rem 2rem;
-    padding-top: 20%; /* 🔥 Mais padding-top para empurrar conteúdo para baixo do topo */
+    padding-top: 35%; /* 🔥 Mais padding-top para empurrar conteúdo para baixo do topo */
     background-color: var(--color-background);
     color: var(--color-text);
-    text-align: center;
+    text-align: left;
     height: 100vh;
   }
 
   /* ✅ ESTILOS APLICADOS APENAS QUANDO HÁ MÍDIA */
   .story-header.has-media {
     min-height: 100vh;
-    padding: 20% 2rem;
+    padding: 10% 2rem;
     /* 🔥 REMOVIDO: color: #1a1a1a; - estava deixando texto escuro */
   }
 
@@ -158,18 +158,19 @@
     position: relative;
     z-index: 10; /* 🔥 Conteúdo sempre na frente */
     width: 100%;
+    padding-top: 5%;
   }
 
   .story-header__container {
-    max-width: 800px;
+    max-width: none;
     margin: 0 auto;
   }
 
   /* 🔥 TÍTULOS SEMPRE VISÍVEIS */
   h1 {
-    font-size: var(--font-size-120);
-    font-weight: 800;
-    color: var(--color-primary); /* Cor padrão sem mídia */
+    font-size: 4rem;
+    font-weight: 900;
+    color: #1a1a1a; /* Cor padrão sem mídia */
     margin: 0 0 1rem 0;
     line-height: 1.2;
   }
@@ -178,6 +179,10 @@
   .story-header.has-media h1 {
     color: #1a1a1a !important; /* 🔥 COR ESCURA FORÇADA */
     text-shadow: 2px 2px 4px rgba(255,255,255,0.9); /* 🔥 Sombra BRANCA para contraste */
+    font-size: 5rem;
+    width: 90%;
+    padding-top: 5%;
+    font-weight: 900;
   }
 
   .story-header__subtitle {
@@ -199,7 +204,7 @@
     gap: 1rem;
     justify-content: center;
     align-items: center;
-    font-size: var(--font-size-40);
+    font-size: 4rem;
     color: var(--color-subtle-text);
     opacity: 0.8;
   }
@@ -213,6 +218,7 @@
     font-weight: 600;
   }
 
+
   @media (max-width: 768px) {
     .story-header {
       padding: 2rem 1rem; /* 🔥 Menos padding geral */
@@ -221,12 +227,18 @@
     }
     .story-header.has-media {
       padding: 2rem 1rem;
-      padding-top: 6rem; /* 🔥 Mesmo padding com mídia */
+      padding-top: 3rem; /* 🔥 Mesmo padding com mídia */
     }
     .story-header__meta {
       flex-direction: column;
       gap: 0.5rem;
     }
+      .story-header.has-media h1 {
+    color: #1a1a1a !important; /* 🔥 COR ESCURA FORÇADA */
+    text-shadow: 2px 2px 4px rgba(255,255,255,0.9); /* 🔥 Sombra BRANCA para contraste */
+    width: 90%;
+    font-size: 4rem;
+  }
   }
 
   /* Desktop - ALINHAMENTO À ESQUERDA */
@@ -235,11 +247,11 @@
     .story-header {
       text-align: left; /* 🔥 Alinha à esquerda */
       justify-content: flex-start; /* 🔥 Justifica à esquerda */
-      padding: 4rem 2rem;
+      padding: 4rem 6rem;
     }
 
     .story-header.has-media {
-      padding: 6rem 2rem;
+      padding: 8rem 2rem;
     }
 
     .story-header__container {
@@ -263,11 +275,20 @@
     }
     
     h1 {
-      font-size: var(--font-size-140);
+      font-size: 6rem;
+      padding-top: 4%;
     }
     
     .story-header__subtitle {
-      font-size: var(--font-size-90);
+        font-size: 2rem;
+        width: 400px;
     }
+
+      .story-header.has-media h1 {
+    color: #1a1a1a !important; /* 🔥 COR ESCURA FORÇADA */
+    text-shadow: 2px 2px 4px rgba(255,255,255,0.9); /* 🔥 Sombra BRANCA para contraste */
+    font-size: 6rem;
+    width: 40%;
+  }
   }
 </style>
