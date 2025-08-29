@@ -437,7 +437,7 @@
               "mobile": "2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "4rem",
               "mobile": "3.5rem"
             },
             "fontWeight": {
@@ -454,7 +454,7 @@
               "desktop": "0 auto 0 auto"
             },
             "padding": {
-              "desktop": "5% 0 0% 0%",
+              "desktop": "5% 0 5% 0%",
               "mobile": "5% 5% 0% 5%"
             }
           }
@@ -468,7 +468,7 @@
           "alt": "crime tentativa de golpe",
           "styles": {
             "width": {
-              "desktop": "20%",
+              "desktop": "19%",
               "mobile": "90vw"
             },
             "height": {
@@ -494,7 +494,7 @@
           "alt": "crime de tentativa de abolição violenta",
           "styles": {
             "width": {
-              "desktop": "20%",
+              "desktop": "19%",
               "mobile": "90vw"
             },
             "height": {
@@ -502,7 +502,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "0% 0 0% 0%",
+              "desktop": "-25.5% 9% 6% 20%",
               "mobile": "0"
             },
             "padding": {
@@ -528,7 +528,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "0% 0 0% 0%",
+              "desktop": "-32.1% 7% 3% 40%",
               "mobile": "0"
             },
             "padding": {
@@ -546,7 +546,7 @@
           "alt": "crime dano qualificado",
           "styles": {
             "width": {
-              "desktop": "20%",
+              "desktop": "19%",
               "mobile": "90vw"
             },
             "height": {
@@ -554,7 +554,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "0% 0 0% 0%",
+              "desktop": "-29.5% 7% 3% 60%",
               "mobile": "0"
             },
             "padding": {
@@ -572,7 +572,7 @@
           "alt": "crime deterioração",
           "styles": {
             "width": {
-              "desktop": "20%",
+              "desktop": "19%",
               "mobile": "90vw"
             },
             "height": {
@@ -580,7 +580,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "0% 0 0% 0%",
+              "desktop": "-29.3% 7% 3% 80%",
               "mobile": "0"
             },
             "padding": {
@@ -609,7 +609,7 @@
               "mobile": "2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "3.5rem"
             },
             "fontWeight": {
@@ -623,7 +623,7 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0 auto 0 auto"
+              "desktop": "5% auto 5% auto"
             },
             "padding": {
               "desktop": "5% 0 0% 0%",
@@ -662,32 +662,6 @@
               "mobile": "0% 5% 10% 5%"
             }
           }
-        },
-        {
-          "type": "image",
-          "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/fechaaspas.png",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/fechaaspas.png"
-          },
-          "alt": "fecha aspas",
-          "styles": {
-            "width": {
-              "desktop": "70px",
-              "mobile": "30px"
-            },
-            "height": {
-              "desktop": "auto",
-              "mobile": "auto"
-            },
-            "margin": {
-              "desktop": "0% 0 0% 60%",
-              "mobile": "-5% 0px -5% 90%"
-            },
-            "padding": {
-              "desktop": "0rem 0 0 auto",
-              "mobile": "0 0 0 0"
-            }
-          }
         }
       ],
       "backgroundColor": "#1a1a1a",
@@ -713,7 +687,7 @@
               "mobile": "1.4rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "2rem"
             },
             "fontWeight": {
@@ -865,7 +839,7 @@
               "mobile": "1.4rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "2rem"
             },
             "fontWeight": {
@@ -1195,7 +1169,7 @@
               "mobile": "2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "3.5rem"
             },
             "fontWeight": {
@@ -1273,7 +1247,7 @@
               "mobile": "1.4rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "2rem"
             },
             "fontWeight": {
@@ -1451,7 +1425,7 @@
               "mobile": "1.4rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "2rem"
             },
             "fontWeight": {
@@ -1820,6 +1794,7 @@
               "desktop": "30% 20%"
             },
             "padding": {
+              "desktop": "20% 20%",
               "mobile": "100% 5% 10% 5%"
             }
           }
@@ -2106,7 +2081,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "-19% 20% 5% auto",
+              "desktop": "-10% 20% 5% auto",
               "mobile": "0rem 0px 0px 0px"
             },
             "padding": {
@@ -2135,7 +2110,7 @@
               "mobile": "1.4rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "2rem"
             },
             "fontWeight": {
@@ -2166,7 +2141,7 @@
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -2285,7 +2260,7 @@
               "mobile": "1.4rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "2rem"
             },
             "fontWeight": {
@@ -2316,7 +2291,7 @@
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -2404,7 +2379,7 @@
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -2734,7 +2709,7 @@
               "mobile": "1.4rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "2rem"
             },
             "fontWeight": {
@@ -2765,7 +2740,7 @@
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -2822,7 +2797,7 @@
               "mobile": "1.4rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "2rem"
             },
             "fontWeight": {
@@ -2853,7 +2828,7 @@
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -2911,7 +2886,7 @@
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -2988,7 +2963,7 @@
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -2998,11 +2973,11 @@
             "color": "#ffffff",
             "textAlign": "left",
             "width": {
-              "desktop": "60%",
+              "desktop": "30%",
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "8% 20% 5% auto"
+              "desktop": "8% auto 5% auto"
             },
             "padding": {
               "mobile": "10% 5% 10% 5%"
@@ -3022,8 +2997,8 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print_10.png",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print_10.png"
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print_10.jpg",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print_10.jpg"
           },
           "alt": "retângulo vermelho",
           "styles": {
@@ -3048,8 +3023,8 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print_11.png",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print_11.png"
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print_11.jpg",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print_11.jpg"
           },
           "alt": "retângulo vermelho",
           "styles": {
@@ -3074,8 +3049,8 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print_12.png",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print_12.png"
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print_12.jpg",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print_12.jpg"
           },
           "alt": "retângulo vermelho",
           "styles": {
@@ -3099,7 +3074,7 @@
         },
         {
           "type": "text",
-          "content": "Em depoimento ao STF, em maio de 2025, o ex-comandante da Aeronáutica confirmou que Bolsonaro participou do plano para permanecer no poder e disse que o então chefe do Ecército ameaçou prender Bolsonaro se continuasse na tentativa de golpe. ",
+          "content": "Em depoimento ao STF, em maio de 2025, o ex-comandante da Aeronáutica confirmou que Bolsonaro participou do plano para permanecer no poder e disse que o então chefe do Exército ameaçou prender Bolsonaro se continuasse na tentativa de golpe. ",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
@@ -3107,7 +3082,7 @@
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -3121,7 +3096,7 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "8% 20% 5% auto"
+              "desktop": "-5% auto 5%"
             },
             "padding": {
               "mobile": "10% 5% 10% 5%"
@@ -3161,7 +3136,7 @@
               "mobile": "1.4rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "2rem"
             },
             "fontWeight": {
@@ -3188,11 +3163,11 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "2.5rem",
+              "desktop": "1.4rem",
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -3222,7 +3197,7 @@
           "alt": "retângulo vermelho",
           "styles": {
             "width": {
-              "desktop": "20%",
+              "desktop": "25%",
               "mobile": "320px"
             },
             "height": {
@@ -3230,7 +3205,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "-9% 0% 4% 57%",
+              "desktop": "1% 0% 4% 20%",
               "mobile": "0 auto"
             },
             "padding": {
@@ -3241,7 +3216,7 @@
         },
         {
           "type": "text",
-          "content": "E hoje estão vivendo um momento crucial. Uma encruzilhada. Um destino que o povo tem que tomar. Quem decide o meu futuro, pra onde eu vou são vocês! Quem decide para onde vão as Forças Armadas são vocês!",
+          "content": "'E hoje estão vivendo um momento crucial. Uma encruzilhada. Um destino que o povo tem que tomar. Quem decide o meu futuro, pra onde eu vou são vocês! Quem decide para onde vão as Forças Armadas são vocês!'",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
@@ -3249,7 +3224,7 @@
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -3259,14 +3234,45 @@
             "color": "#1a1a1a",
             "textAlign": "left",
             "width": {
-              "desktop": "29%",
+              "desktop": "30%",
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "-40% 20% 35% 20%"
+              "desktop": "-37% 52% 35%"
             },
             "padding": {
               "mobile": "10% 5% 10% 5%"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "Jair Bolsonaro",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "1.4rem",
+              "mobile": "1.1rem"
+            },
+            "lineHeight": {
+              "desktop": "2.2rem",
+              "mobile": "2rem"
+            },
+            "fontWeight": {
+              "desktop": "700",
+              "mobile": "700"
+            },
+            "color": "#1a1a1a",
+            "textAlign": "right",
+            "width": {
+              "desktop": "40%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "0% auto 5% auto"
+            },
+            "padding": {
+              "mobile": "5% 0% 5% 5%"
             }
           }
         },
@@ -3280,7 +3286,7 @@
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -3290,14 +3296,40 @@
             "color": "#1a1a1a",
             "textAlign": "left",
             "width": {
-              "desktop": "29%",
+              "desktop": "30%",
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0% 0% 4% 30%"
+              "desktop": "-30% 18% 10% auto"
             },
             "padding": {
               "mobile": "0% 5% 10% 5%"
+            }
+          }
+        },
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/paulo_sergio.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/paulo_sergio.png"
+          },
+          "alt": "retângulo vermelho",
+          "styles": {
+            "width": {
+              "desktop": "20%",
+              "mobile": "320px"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "0% 26% 10% auto",
+              "mobile": "0 auto"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0 0 0 0"
             }
           }
         }
@@ -3321,7 +3353,7 @@
               "mobile": "2rem"
             },
             "lineHeight": {
-              "desktop": "5.2rem",
+              "desktop": "4rem",
               "mobile": "2.2rem"
             },
             "fontWeight": {
@@ -3392,7 +3424,7 @@
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -3406,7 +3438,7 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "10% 20%"
+              "desktop": "10% auto"
             },
             "padding": {
               "mobile": "10% 5% 10% 5%"
@@ -3430,7 +3462,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "-7% 0% 4% 20%",
+              "desktop": "-7% 25% 4%",
               "mobile": "0% 0 10%"
             },
             "padding": {
@@ -3456,7 +3488,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "-34.25% 0% 4% 46%",
+              "desktop": "-34.25% 50% 4%",
               "mobile": "0 auto"
             },
             "padding": {
@@ -3475,7 +3507,7 @@
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -3485,11 +3517,11 @@
             "color": "#ffffff",
             "textAlign": "left",
             "width": {
-              "desktop": "30%",
+              "desktop": "20%",
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "24% 20% 2% 20%"
+              "desktop": "18% 26% 2%"
             },
             "padding": {
               "mobile": "10% 5% 10% 5%"
@@ -3513,7 +3545,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "-34.25% 0% 4% 46%",
+              "desktop": "-26.25% 51% 4%",
               "mobile": "0 auto"
             },
             "padding": {
@@ -3546,7 +3578,7 @@
               "mobile": "2rem"
             },
             "lineHeight": {
-              "desktop": "5.2rem",
+              "desktop": "4rem",
               "mobile": "2.2rem"
             },
             "fontWeight": {
@@ -3577,7 +3609,7 @@
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -3634,7 +3666,7 @@
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -3701,7 +3733,7 @@
               "mobile": "2rem"
             },
             "lineHeight": {
-              "desktop": "5.2rem",
+              "desktop": "4rem",
               "mobile": "2.2rem"
             },
             "fontWeight": {
@@ -3715,7 +3747,7 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "5% 20%"
+              "desktop": "5% 20% 0%"
             },
             "padding": {
               "mobile": "10% 5% 5% 5%"
@@ -3728,11 +3760,11 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "3rem",
+              "desktop": "1.4rem",
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -3742,11 +3774,11 @@
             "color": "#ffffff",
             "textAlign": "left",
             "width": {
-              "desktop": "60%",
+              "desktop": "30%",
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0 auto 0 0"
+              "desktop": "2% 20%"
             },
             "padding": {
               "mobile": "0% 5% 10% 5%"
@@ -3770,7 +3802,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "0 auto 0 5vw",
+              "desktop": "-12% 50% 5%",
               "mobile": "0rem 0px 0px 0px"
             },
             "padding": {
@@ -3839,7 +3871,7 @@
               "mobile": "2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "3.5rem"
             },
             "fontWeight": {
@@ -3885,7 +3917,7 @@
               "mobile": "2rem"
             },
             "lineHeight": {
-              "desktop": "5.2rem",
+              "desktop": "4rem",
               "mobile": "2.2rem"
             },
             "fontWeight": {
@@ -3916,7 +3948,7 @@
               "mobile": "1.4rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "2rem"
             },
             "fontWeight": {
@@ -3930,7 +3962,7 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0% auto 1% auto"
+              "desktop": "0% auto 0% auto"
             },
             "padding": {
               "mobile": "5% 5% 0% 5%"
@@ -3947,7 +3979,7 @@
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -3957,7 +3989,7 @@
             "color": "#ffffff",
             "textAlign": "left",
             "width": {
-              "desktop": "60%",
+              "desktop": "30%",
               "mobile": "80%"
             },
             "margin": {
@@ -4004,7 +4036,7 @@
               "mobile": "1.4rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "2rem"
             },
             "fontWeight": {
@@ -4101,11 +4133,11 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "3rem",
+              "desktop": "1.4rem",
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -4119,7 +4151,7 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "5% 20%"
+              "desktop": "5% auto 10%"
             },
             "padding": {
               "mobile": "10% 5%"
@@ -4146,11 +4178,11 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "3.2rem",
+              "desktop": "1.4rem",
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -4160,11 +4192,11 @@
             "color": "#ffffff",
             "textAlign": "left",
             "width": {
-              "desktop": "60%",
+              "desktop": "40%",
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "5% 20% 50%"
+              "desktop": "5% auto 30%"
             },
             "padding": {
               "mobile": "10% 5%"
@@ -4339,8 +4371,8 @@
               "mobile": "2.2rem"
             },
             "fontWeight": {
-              "desktop": "700",
-              "mobile": "700"
+              "desktop": "500",
+              "mobile": "500"
             },
             "color": "#1a1a1a",
             "textAlign": "left",
@@ -4399,7 +4431,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "-6% 52% 6%",
+              "desktop": "-4% 45% 6%",
               "mobile": "0rem 0px 0px 0px"
             },
             "padding": {
@@ -4454,7 +4486,7 @@
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -4468,7 +4500,7 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "4% 20%"
+              "desktop": "5% 20% 3%"
             },
             "padding": {
               "mobile": "5%"
@@ -4481,25 +4513,25 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "3.2rem",
+              "desktop": "1.4rem",
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
-              "desktop": "500",
-              "mobile": "500"
+              "desktop": "600",
+              "mobile": "600"
             },
             "color": "#ffffff",
             "textAlign": "left",
             "width": {
-              "desktop": "60%",
+              "desktop": "30%",
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "5% 20% 5% 20%"
+              "desktop": "0% 20% 0%"
             },
             "padding": {
               "mobile": "5%"
@@ -4542,7 +4574,7 @@
               "mobile": "2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "2rem"
             },
             "fontWeight": {
@@ -4556,7 +4588,7 @@
               "mobile": "90%"
             },
             "margin": {
-              "desktop": "8% 15% 2% 15%"
+              "desktop": "8% 20% 0%"
             },
             "padding": {
               "mobile": "5%"
@@ -4569,11 +4601,11 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "3rem",
+              "desktop": "1.4rem",
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -4583,11 +4615,11 @@
             "color": "#ffffff",
             "textAlign": "left",
             "width": {
-              "desktop": "60%",
+              "desktop": "30%",
               "mobile": "90%"
             },
             "margin": {
-              "desktop": "2% 15% 5% 15%"
+              "desktop": "2% 20% 5%"
             },
             "padding": {
               "mobile": "0% 5% 5%"
@@ -4621,7 +4653,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "3% 50% 6%",
+              "desktop": "3% 10% 6%",
               "mobile": "0rem 0px 0px 0px"
             },
             "padding": {
@@ -4640,7 +4672,7 @@
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -4654,7 +4686,7 @@
               "mobile": "90%"
             },
             "margin": {
-              "desktop": "-34% 21% 26%"
+              "desktop": "-39% 62% 3%"
             },
             "padding": {
               "mobile": "10px"
@@ -4695,7 +4727,7 @@
               "mobile": "100%"
             },
             "margin": {
-              "desktop": "4% 20%"
+              "desktop": "35% auto 3%"
             },
             "padding": {
               "mobile": "10% 5% 5% 5%"
@@ -4748,7 +4780,7 @@
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -4815,7 +4847,7 @@
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -4882,7 +4914,7 @@
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -4949,7 +4981,7 @@
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -5016,7 +5048,7 @@
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -5083,7 +5115,7 @@
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "1.0",
+              "desktop": "2.2rem",
               "mobile": "1.5rem"
             },
             "fontWeight": {

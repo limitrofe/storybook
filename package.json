@@ -28,6 +28,7 @@
     
   
     "// === 🧹 CACHE MANAGEMENT ===": "",
+    "cache:complete": "node scripts/enhanced-cache-generator.js && ./warm-cache.sh",
     "cache:generate": "node scripts/auto-cache-generator.js",
     "cache:warm": "./warm-cache.sh",
     "cache:batch": "./warm-cache-batch.sh",
