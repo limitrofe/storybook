@@ -311,11 +311,11 @@
 <style>
   /* ✅ WRAPPER COM FUNDO CUSTOMIZÁVEL */
   .video-section-wrapper {
-    width: 100vw;
+    width: 100%;
     position: relative;
     left: 50%;
     transform: translateX(-50%);
-    padding: 2rem 0;
+    padding: 0;
     display: flex;
     justify-content: center;
     /* A cor de fundo é aplicada via style inline */
