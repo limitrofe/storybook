@@ -7,6 +7,9 @@
   export let backgroundImageMobile = '';
   export let backgroundVideo = '';
   export let backgroundVideoMobile = '';
+    export let posterImage = ''; 
+  export let posterImageMobile = '';
+
   export let overlay = true;
   export let variant = 'default'; // 'default', 'minimal', 'hero'
 
@@ -168,18 +171,18 @@
 
   /* 🔥 TÍTULOS SEMPRE VISÍVEIS */
   h1 {
-    font-size: 4rem;
+    font-size: 3rem;
     font-weight: 900;
     color: #1a1a1a; /* Cor padrão sem mídia */
     margin: 0 0 1rem 0;
-    line-height: 1.2;
+    line-height: 3.3rem;
   }
   
   /* 🔥 QUANDO TEM MÍDIA: cor escura #1a1a1a */
   .story-header.has-media h1 {
     color: #1a1a1a !important; /* 🔥 COR ESCURA FORÇADA */
-    text-shadow: 2px 2px 4px rgba(255,255,255,0.9); /* 🔥 Sombra BRANCA para contraste */
-    font-size: 5rem;
+    /* text-shadow: 2px 2px 4px rgba(255,255,255,0.9); 🔥 Sombra BRANCA para contraste */
+    font-size: 3rem;
     width: 90%;
     padding-top: 5%;
     font-weight: 900;
@@ -188,7 +191,7 @@
   .story-header__subtitle {
     font-size: var(--font-size-80);
     color: var(--color-secondary);
-    font-weight: 400;
+    font-weight: 600;
     margin: 0 0 2rem 0;
     line-height: 1.4;
     opacity: 0.9;
@@ -196,7 +199,7 @@
   
   .story-header.has-media .story-header__subtitle {
     color: #1a1a1a !important; /* 🔥 COR ESCURA FORÇADA */
-    text-shadow: 2px 2px 4px rgba(255,255,255,0.9); /* 🔥 Sombra BRANCA */
+    /* text-shadow: 2px 2px 4px rgba(255,255,255,0.9); 🔥 Sombra BRANCA */
   }
 
   .story-header__meta {
@@ -204,14 +207,14 @@
     gap: 1rem;
     justify-content: center;
     align-items: center;
-    font-size: 4rem;
+    font-size: 3rem;
     color: var(--color-subtle-text);
     opacity: 0.8;
   }
   
   .story-header.has-media .story-header__meta {
     color: #1a1a1a !important; /* 🔥 COR ESCURA FORÇADA */
-    text-shadow: 1px 1px 2px rgba(255,255,255,0.9); /* 🔥 Sombra BRANCA */
+    /* text-shadow: 1px 1px 2px rgba(255,255,255,0.9); 🔥 Sombra BRANCA */
   }
 
   .story-header__author {
@@ -235,7 +238,7 @@
     }
       .story-header.has-media h1 {
     color: #1a1a1a !important; /* 🔥 COR ESCURA FORÇADA */
-    text-shadow: 2px 2px 4px rgba(255,255,255,0.9); /* 🔥 Sombra BRANCA para contraste */
+    /* text-shadow: 2px 2px 4px rgba(255,255,255,0.9); 🔥 Sombra BRANCA para contraste */
     width: 90%;
     font-size: 4rem;
   }
@@ -277,6 +280,7 @@
     h1 {
       font-size: 6rem;
       padding-top: 4%;
+      line-height: 6rem;
     }
     
     .story-header__subtitle {
@@ -286,9 +290,10 @@
 
       .story-header.has-media h1 {
     color: #1a1a1a !important; /* 🔥 COR ESCURA FORÇADA */
-    text-shadow: 2px 2px 4px rgba(255,255,255,0.9); /* 🔥 Sombra BRANCA para contraste */
+    /* text-shadow: 2px 2px 4px rgba(255,255,255,0.9); 🔥 Sombra BRANCA para contraste */
     font-size: 6rem;
     width: 40%;
+    line-height: 6rem;
   }
   }
 </style>

@@ -19,7 +19,7 @@ async function fixAbsoluteUrls() {
   }
   
   // Usar URL base dinâmica do projeto
-  const BASE_URL = PROJECT_CONFIG.baseProjectUrl;
+const baseUrl = 'https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe';
   
   console.log(`📁 Projeto: ${PROJECT_CONFIG.projectName}`);
   console.log(`🌐 URL Base: ${BASE_URL}`);

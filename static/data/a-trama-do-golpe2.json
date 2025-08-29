@@ -30,8 +30,6 @@
       "backgroundVideo": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/videos/header_desk.mp4",
       "backgroundVideoMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/videos/header_mob.mp4",
       "author": "",
-      "poster": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/poster_desk.jpg",
-      "posterMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/poster_mob.jpg",
       "variant": "hero",
       "overlay": "false"
     },
@@ -69,14 +67,14 @@
             "color": "#ffffff",
             "textAlign": "left",
             "width": {
-              "desktop": "650px",
+              "desktop": "500px",
               "mobile": "60%"
             },
             "margin": {
-              "desktop": "20% 20% 20% 20%"
+              "desktop": "14% 20%"
             },
             "padding": {
-              "desktop": "0% 5px 5% 0%",
+              "desktop": "0%",
               "mobile": "5% 0% 0% 5%"
             }
           }
@@ -178,7 +176,7 @@
             "color": "#ffffff",
             "textAlign": "left",
             "width": {
-              "desktop": "40%",
+              "desktop": "20%",
               "mobile": "80%"
             },
             "margin": {
@@ -213,6 +211,32 @@
             "padding": {
               "desktop": "0",
               "mobile": "0 0 20px"
+            }
+          }
+        },
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/retangulo-vermelho.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/retangulo-vermelho.png"
+          },
+          "alt": "retângulo vermelho",
+          "styles": {
+            "width": {
+              "desktop": "15%",
+              "mobile": "100px"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "10px"
+            },
+            "margin": {
+              "desktop": "-32% 20% 25%",
+              "mobile": "0rem 0px 0px 0px"
+            },
+            "padding": {
+              "desktop": "0",
+              "mobile": "0 0 0 0"
             }
           }
         }
@@ -736,8 +760,6 @@
       "widthMobile": "100%",
       "widthDesktop": "60%",
       "containerBackgroundColor": "#1a1a1a",
-      "skipDFP": "true",
-      "skipdfp": "true",
       "autoPlay": "true"
     },
     {
@@ -978,8 +1000,6 @@
       "widthMobile": "100%",
       "widthDesktop": "60%",
       "containerBackgroundColor": "#FFF4E6",
-      "skipDFP": "true",
-      "skipdfp": "true",
       "autoPlay": "true"
     },
     {
@@ -1065,8 +1085,6 @@
       "widthMobile": "100%",
       "widthDesktop": "60%",
       "containerBackgroundColor": "#1a1a1a",
-      "skipDFP": "true",
-      "skipdfp": "true",
       "autoPlay": "true"
     },
     {
@@ -1328,8 +1346,6 @@
       "widthMobile": "100%",
       "widthDesktop": "60%",
       "containerBackgroundColor": "#1a1a1a",
-      "skipDFP": "true",
-      "skipdfp": "true",
       "autoPlay": "true"
     },
     {
@@ -1376,7 +1392,7 @@
           "styles": {
             "width": {
               "desktop": "20%",
-              "mobile": "100vw"
+              "mobile": "320px"
             },
             "height": {
               "desktop": "auto",
@@ -1704,8 +1720,6 @@
       "widthMobile": "100%",
       "widthDesktop": "60%",
       "containerBackgroundColor": "#1a1a1a",
-      "skipDFP": "true",
-      "skipdfp": "true",
       "autoPlay": "true"
     },
     {
@@ -1759,11 +1773,11 @@
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
-              "desktop": "3rem",
+              "desktop": "4rem",
               "mobile": "2rem"
             },
             "lineHeight": {
-              "desktop": "3.4rem",
+              "desktop": "5.4rem",
               "mobile": "2rem"
             },
             "fontWeight": {
@@ -1773,15 +1787,15 @@
             "color": "#ffffff",
             "textAlign": "center",
             "width": {
-              "desktop": "25%",
-              "mobile": "65%"
+              "desktop": "40%",
+              "mobile": "95%"
             },
             "margin": {
               "desktop": "8% 2% 0 0rem"
             },
             "padding": {
-              "desktop": "2%   0% 0 40%",
-              "mobile": "10% 5% 10% 5%"
+              "desktop": "2% 35%",
+              "mobile": "100% 5% 10% 5%"
             }
           }
         },
@@ -1802,7 +1816,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "-20% 0rem 0rem 15%",
+              "desktop": "-30rem 0rem 0rem 15%",
               "mobile": "0"
             },
             "padding": {
@@ -1829,8 +1843,6 @@
       "widthMobile": "100%",
       "widthDesktop": "60%",
       "containerBackgroundColor": "#1a1a1a",
-      "skipDFP": "true",
-      "skipdfp": "true",
       "autoPlay": "true"
     },
     {
@@ -2332,7 +2344,7 @@
           "styles": {
             "width": {
               "desktop": "30%",
-              "mobile": "100vw"
+              "mobile": "320px"
             },
             "height": {
               "desktop": "auto",
@@ -2659,8 +2671,6 @@
       "widthMobile": "100%",
       "widthDesktop": "60%",
       "containerBackgroundColor": "#1a1a1a",
-      "skipDFP": "true",
-      "skipdfp": "true",
       "autoPlay": "true"
     },
     {
@@ -2676,7 +2686,7 @@
               "mobile": "1.2rem"
             },
             "lineHeight": {
-              "desktop": "2.2rem",
+              "desktop": "1.2",
               "mobile": "1.5rem"
             },
             "fontWeight": {
@@ -2690,7 +2700,7 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "-55% 30% 10% auto"
+              "desktop": "-42% 30% 10% auto"
             },
             "padding": {
               "mobile": "10% 5% 10% 5%"
@@ -2851,14 +2861,14 @@
             "textAlign": "left",
             "width": {
               "desktop": "40%",
-              "mobile": "69%"
+              "mobile": "100%"
             },
             "margin": {
               "desktop": "2% auto",
-              "mobile": "0"
+              "mobile": "0 auto"
             },
             "padding": {
-              "mobile": "4% 0 0 5%"
+              "mobile": "10% 5% 10% 5%"
             }
           }
         },
@@ -2872,7 +2882,7 @@
           "styles": {
             "width": {
               "desktop": "20%",
-              "mobile": "100vw"
+              "mobile": "320px"
             },
             "height": {
               "desktop": "auto",
@@ -3133,8 +3143,6 @@
       "widthMobile": "100%",
       "widthDesktop": "60%",
       "containerBackgroundColor": "#1a1a1a",
-      "skipDFP": "true",
-      "skipdfp": "true",
       "autoPlay": "true"
     },
     {
@@ -3212,7 +3220,7 @@
           "styles": {
             "width": {
               "desktop": "25%",
-              "mobile": "100vw"
+              "mobile": "320px"
             },
             "height": {
               "desktop": "auto",
@@ -3252,7 +3260,7 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "-54% 52% 35%"
+              "desktop": "-34% 52% 35%"
             },
             "padding": {
               "mobile": "10% 5% 10% 5%"
@@ -3332,14 +3340,14 @@
           "styles": {
             "width": {
               "desktop": "20%",
-              "mobile": "100vw"
+              "mobile": "320px"
             },
             "height": {
               "desktop": "auto",
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "-7% 26% 10% auto",
+              "desktop": "-12% 26% 10% auto",
               "mobile": "0 auto"
             },
             "padding": {
@@ -3399,7 +3407,7 @@
           "styles": {
             "width": {
               "desktop": "20%",
-              "mobile": "100vw"
+              "mobile": "320px"
             },
             "height": {
               "desktop": "auto",
@@ -3496,7 +3504,7 @@
           "styles": {
             "width": {
               "desktop": "20%",
-              "mobile": "100vw"
+              "mobile": "320px"
             },
             "height": {
               "desktop": "auto",
@@ -3553,7 +3561,7 @@
           "styles": {
             "width": {
               "desktop": "20%",
-              "mobile": "100vw"
+              "mobile": "320px"
             },
             "height": {
               "desktop": "auto",
@@ -3655,7 +3663,7 @@
           "styles": {
             "width": {
               "desktop": "30%",
-              "mobile": "100vw"
+              "mobile": "320px"
             },
             "height": {
               "desktop": "auto",
@@ -3712,7 +3720,7 @@
           "styles": {
             "width": {
               "desktop": "30%",
-              "mobile": "100vw"
+              "mobile": "320px"
             },
             "height": {
               "desktop": "auto",
@@ -4125,8 +4133,6 @@
       "widthMobile": "100%",
       "widthDesktop": "60%",
       "containerBackgroundColor": "#1a1a1a",
-      "skipDFP": "true",
-      "skipdfp": "true",
       "autoPlay": "true"
     },
     {
@@ -4701,7 +4707,7 @@
             "fontFamily": "globotipo",
             "fontSize": {
               "desktop": "3rem",
-              "mobile": "1.5rem"
+              "mobile": "2rem"
             },
             "lineHeight": {
               "desktop": "5.2rem",
@@ -4721,7 +4727,7 @@
               "desktop": "35% auto 3%"
             },
             "padding": {
-              "mobile": "2% 0 0 0"
+              "mobile": "10% 5% 5% 5%"
             }
           }
         }

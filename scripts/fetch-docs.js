@@ -1250,6 +1250,12 @@ const fieldMappings = {
   'aspect-ratio-mobile': 'aspectRatioMobile', // Alias
   fullWidthBackground: 'fullWidthBackground',
 'full-width-background': 'fullWidthBackground', // Alias
+  poster: 'poster',
+  posterImage: 'poster', // Alias para poster
+  posterDesktop: 'poster', // Alias para poster
+  posterMobile: 'posterMobile',
+  'poster-mobile': 'posterMobile', // Alias
+
 
   caption: 'caption', 
   credit: 'credit', alt: 'alt', fullWidth: 'fullWidth', variant: 'variant',

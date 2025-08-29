@@ -1,7 +1,7 @@
 #!/bin/bash
 # 🔥 CACHE COMPLETO - TUDO EXCETO JSON
 # Projeto: a-trama-do-golpe
-# Gerado: 8/28/2025, 9:51:18 PM
+# Gerado: 8/29/2025, 3:17:55 AM
 # Total: 73 arquivos
 
 echo "🔥 AQUECENDO CACHE COMPLETO"

@@ -9,7 +9,7 @@
 
   onMount(async () => {
     try {
-      const response = await fetch('./data/a-trama-do-golpe.json');
+const response = await fetch('https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/data/a-trama-do-golpe.json');
       if (response.ok) {
         currentStory = await response.json();
         console.log('📖 Story carregada com sucesso!');

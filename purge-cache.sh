@@ -1,9 +1,9 @@
 #!/bin/bash
-# Script para purgar cache do projeto dias-perfeitos
-# Gerado automaticamente em: 8/13/2025, 10:47:12 PM
+# Script para purgar cache do projeto a-trama-do-golpe
+# Gerado automaticamente em: 8/29/2025, 12:49:36 AM
 
-echo "🧹 Purgando cache do projeto: dias-perfeitos"
-echo "📊 Total de URLs: 1291"
+echo "🧹 Purgando cache do projeto: a-trama-do-golpe"
+echo "📊 Total de URLs: 73"
 echo "🌐 CDN Base: https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35"
 echo ""
 
@@ -33,12 +33,12 @@ echo ""
 # Processar URLs em paralelo (5 de cada vez)
 cat cache-list.txt 2>/dev/null | xargs -P 5 -I {} bash -c 'purge_url "{}"' || {
   echo "⚠️ cache-list.txt não encontrado - purgando apenas arquivos principais"
-  echo "g1/dias-perfeitos/index.html" | xargs -I {} bash -c 'purge_url "{}"'
-  echo "g1/dias-perfeitos/app.css" | xargs -I {} bash -c 'purge_url "{}"'
-  echo "g1/dias-perfeitos/app.js" | xargs -I {} bash -c 'purge_url "{}"'
+  echo "g1/a-trama-do-golpe/index.html" | xargs -I {} bash -c 'purge_url "{}"'
+  echo "g1/a-trama-do-golpe/app.css" | xargs -I {} bash -c 'purge_url "{}"'
+  echo "g1/a-trama-do-golpe/app.js" | xargs -I {} bash -c 'purge_url "{}"'
 }
 
 echo ""
 echo "✅ Purge concluído!"
-echo "🎯 Projeto: dias-perfeitos"
+echo "🎯 Projeto: a-trama-do-golpe"
 echo "🕒 Cache pode levar alguns minutos para ser totalmente limpo"

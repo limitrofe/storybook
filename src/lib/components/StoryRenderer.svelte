@@ -427,20 +427,21 @@ import AbsoluteCanvas from './story/AbsoluteCanvas.svelte';
 			{@const props = getComponentProps(paragraph)}
 
 			<!-- Header -->
-			{#if componentType === 'header'}
-				<Header
-					title={props.title}
-					subtitle={props.subtitle}
-					author={props.author}
-					date={props.date}
-					backgroundImage={props.backgroundImage}
-					backgroundImageMobile={props.backgroundImageMobile}
-					backgroundVideo={props.backgroundVideo}
-					backgroundVideoMobile={props.backgroundVideoMobile}
-					variant={props.variant || 'default'}
-					overlay={stringToBoolean(props.overlay, true)}
-				/>
-
+{#if componentType === 'header'}
+  <Header
+    title={props.title}
+    subtitle={props.subtitle}
+    author={props.author}
+    date={props.date}
+    backgroundImage={props.backgroundImage}
+    backgroundImageMobile={props.backgroundImageMobile}
+    backgroundVideo={props.backgroundVideo}
+    backgroundVideoMobile={props.backgroundVideoMobile}
+    variant={props.variant || 'default'}
+    overlay={stringToBoolean(props.overlay, true)}
+    posterImage={props.poster}
+    posterImageMobile={props.posterMobile}
+  />
 			<!-- 🌪️ Header Caótico -->
 			{:else if componentType === 'header-caotico'}
 				<HeaderCaotico
