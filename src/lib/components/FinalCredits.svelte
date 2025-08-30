@@ -49,23 +49,26 @@
       </ul>
     {/if}
   </div>
-
-
 </footer>
 
 <style>
   .final-credits {
-    background-color: var(--color-highlight-bg); /* Usa a cor de fundo de destaque do tema */
-    color: var(--color-text); /* Usa a cor de texto padrão do tema */
-    padding: 4rem 2rem; /* Aumenta o espaçamento vertical */
+    background-color: var(--color-highlight-bg);
+    color: var(--color-text);
+    padding: 4rem 2rem 8rem 2rem; /* 🔧 Padding bottom maior para webview */
     margin-top: 4rem;
-    border-top: 1px solid var(--color-border); /* Usa a cor de borda do tema */
-    /* A mudança principal: alinhamento à esquerda */
+    margin-bottom: 4rem; /* 🔧 Margem bottom garantida */
+    border-top: 1px solid var(--color-border);
     text-align: left;
+    
+    /* 🔧 Garantir que sempre apareça */
+    position: relative;
+    z-index: 10;
+    min-height: 200px; /* Altura mínima garantida */
   }
 
   .credits-section {
-    max-width: 700px; /* Um pouco mais estreito para conforto de leitura */
+    max-width: 700px;
     margin: 0 auto;
     padding-bottom: 2rem;
     border-bottom: 1px solid var(--color-border);
@@ -73,25 +76,24 @@
   }
 
   h3 {
-    font-size: var(--font-size-60); /* Tamanho de título mais sutil */
-    font-weight: 700; /* Negrito para destaque */
-    color: var(--color-text); /* Cor de texto normal para um look mais sóbrio */
-    margin-top: 2.5rem; /* Aumenta o espaço entre seções */
+    font-size: var(--font-size-60);
+    font-weight: 700;
+    color: var(--color-text);
+    margin-top: 2.5rem;
     margin-bottom: 1rem;
-    text-transform: none; /* Remove o 'uppercase' */
-    letter-spacing: normal; /* Remove o espaçamento extra */
+    text-transform: none;
+    letter-spacing: normal;
   }
 
-  /* Estilo para o primeiro H3, para não ter margem extra no topo */
   .credits-section > h3:first-child {
     margin-top: 0;
   }
 
   p {
-    font-size: var(--font-size-60); /* Usa token de fonte */
-    line-height: 1.7; /* Altura de linha para legibilidade */
+    font-size: var(--font-size-60);
+    line-height: 1.7;
     margin-bottom: 1rem;
-    color: var(--color-secondary); /* Usa a cor secundária do tema */
+    color: var(--color-secondary);
   }
 
   .credits-list {
@@ -101,31 +103,56 @@
   }
 
   .credits-list li {
-    font-size: var(--font-size-60); /* Mesmo tamanho do parágrafo para consistência */
+    font-size: var(--font-size-60);
     line-height: 1.7;
     color: var(--color-text);
-    margin-bottom: 0.5rem; /* Espaçamento entre os nomes */
+    margin-bottom: 0.5rem;
   }
 
   .credits-powered-by {
     max-width: 700px;
     margin: 0 auto;
-    font-size: var(--font-size-40); /* Usa token de fonte */
-    color: var(--color-subtle-text); /* Usa a cor de texto sutil do tema */
+    font-size: var(--font-size-40);
+    color: var(--color-subtle-text);
   }
 
-  /* Ajustes para Mobile */
+  /* Ajustes para Mobile e WebView */
   @media (max-width: 768px) {
     .final-credits {
-      padding: 2.5rem 1rem;
+      padding: 2.5rem 1rem 12rem 1rem; /* 🔧 Padding bottom ainda maior no mobile/webview */
+      margin-bottom: 8rem; /* 🔧 Margem extra no mobile */
     }
 
     h3 {
-      font-size: var(--font-size-50); /* Ajuste de token para mobile */
+      font-size: var(--font-size-50);
     }
 
     p, .credits-list li {
       font-size: var(--font-size-50);
     }
+  }
+
+  /* 🔧 FIX para telas baixas (webview comum) */
+  @media screen and (max-height: 800px) {
+    .final-credits {
+      padding-bottom: 15rem; /* Espaço extra para telas baixas */
+      margin-bottom: 10rem;
+    }
+  }
+
+  /* 🔧 FIX específico para iOS WebView */
+  @supports (-webkit-touch-callout: none) {
+    .final-credits {
+      padding-bottom: 18rem; /* Máximo espaço para iOS WebView */
+      margin-bottom: 12rem;
+    }
+  }
+
+  /* 🔧 Espaço invisível extra no final */
+  .final-credits::after {
+    content: '';
+    display: block;
+    height: 100px;
+    width: 100%;
   }
 </style>

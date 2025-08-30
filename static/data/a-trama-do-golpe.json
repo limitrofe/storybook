@@ -1,19 +1,4 @@
 {
-  "credits": {
-    "sources": [
-      "Polícia Federal, Procuradoria-Geral da República, Supremo Tribunal Federal e acervo TV Globo"
-    ],
-    "authors": [
-      "Edição de Conteúdo: Felipe Turioni",
-      "Edição de Vídeo: Cadu Lando e Juliene Moretti",
-      "Pesquisa: Cadu Lando, Felipe Turioni, Juliene Moretti e Pedro Gomes",
-      "Direção de Arte, Interface E Infografia: Bruna Azevedo, Gabs, Gui Sousa e Thalita Ferraz",
-      "Motion: Thalita Ferraz",
-      "Desenvolvimento: Guilherme Gomes",
-      "Coordenação (Conteúdo): Vitor Sorano",
-      "Coordenação (Design e Desenvolvimento): Guilherme Gomes"
-    ]
-  },
   "type": "header",
   "title": "A trama do Golpe",
   "subtitle": "Um julgamento inédito na história brasileira",
@@ -24,7 +9,7 @@
   "paragraphs": [
     {
       "type": "header",
-      "title": "A trama do Golpe",
+      "title": "A trama do golpe",
       "subtitle": "Um julgamento inédito na história brasileira",
       "date": "",
       "backgroundVideo": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/videos/header_desk.mp4",
@@ -160,7 +145,7 @@
       "items": [
         {
           "type": "text",
-          "content": "Ao seu lado, outros sete acusados — civis e militares de alta patente — enfrentam o mesmo julgamento",
+          "content": "Ao seu lado, outros sete acusados (civis e militares de alta patente) enfrentam o mesmo julgamento",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
@@ -284,7 +269,7 @@
         },
         {
           "type": "text",
-          "content": "Um chefe de Estado detém uma capacidade singular de influenciar a opinião pública e mobilizar parcelas da sociedade. Dessa forma, suas declarações, especialmente quando hostis e desprovidas de base factual, transcendem o campo da crítica legítima e adquirem caráter de incitação e de desestabilização da democracia ",
+          "content": "Um chefe de Estado detém uma capacidade singular de influenciar a opinião pública e mobilizar parcelas da sociedade. Dessa forma, suas declarações, especialmente quando hostis e desprovidas de base factual, transcendem o campo da crítica legítima e adquirem caráter de incitação e de desestabilização da democracia.",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
@@ -367,7 +352,7 @@
         },
         {
           "type": "text",
-          "content": "Segundo a Procuradoria, Bolsonaro liderou o núcleo crucial da tentativa de golpe, voltado a desacreditar o sistema eleitoral, incitar ataques a instituições democráticas e articular medidas de exceção. O ex-presidente, afirma a PGR, era o principal beneficiário dessa organização",
+          "content": "Segundo a Procuradoria, Bolsonaro liderou o núcleo crucial do golpe de estado, voltado a desacreditar o sistema eleitoral, incitar ataques a instituições democráticas e articular medidas de exceção. O ex-presidente, afirma a PGR, era o principal beneficiário dessa organização.",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
@@ -734,11 +719,12 @@
       "videoIdMobile": "13878202",
       "videoIdDesktop": "13875117",
       "widthMobile": "100%",
-      "widthDesktop": "60%",
+      "widthDesktop": "50%",
       "containerBackgroundColor": "#1a1a1a",
       "skipDFP": "true",
       "skipdfp": "true",
-      "autoPlay": "true"
+      "autoPlay": "true",
+      "width": "50%"
     },
     {
       "type": "super-flex",
@@ -763,11 +749,11 @@
             "color": "#ffffff",
             "textAlign": "left",
             "width": {
-              "desktop": "40%",
+              "desktop": "30%",
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "5% 20%"
+              "desktop": "5% 30%"
             },
             "padding": {
               "mobile": "5% 5% 5% 5%"
@@ -777,13 +763,13 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/torres_ramagem_desktop.png",
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/torres_ramagem.png",
             "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/torres_ramagem.png"
           },
           "alt": "retângulo vermelho",
           "styles": {
             "width": {
-              "desktop": "20%",
+              "desktop": "24%",
               "mobile": "90vw"
             },
             "height": {
@@ -791,7 +777,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "-9% 50% 10%",
+              "desktop": "-16% 55% 10%",
               "mobile": "0 auto 10%"
             },
             "padding": {
@@ -973,8 +959,8 @@
       "aspectRatioMobile": "16 / 9",
       "caption": "",
       "autoplay": "true",
-      "videoIdMobile": "13875149",
-      "videoIdDesktop": "13875149",
+      "videoIdMobile": "13875228",
+      "videoIdDesktop": "13875228",
       "widthMobile": "100%",
       "widthDesktop": "60%",
       "containerBackgroundColor": "#FFF4E6",
@@ -987,7 +973,7 @@
       "items": [
         {
           "type": "text",
-          "content": "''Dizer a vocês, que qualquer decisão do senhor Alexandre de Moraes, esse presidente não mais cumprirá. A paciência do nosso povo já se esgotou, ele tem tempo ainda de pedir o seu boné e ir cuidar da sua vida. Ele, para nós, não existe mais.''",
+          "content": "''Sai, Alexandre de Moraes. Deixa de ser canalha. Deixa de oprimir o povo brasileiro, deixe de censurar o seu povo. Mais do que isso, nós devemos, sim, porque eu falo em nome de vocês, determinar que todos os presos políticos sejam postos em liberdade. Dizer a vocês, que qualquer decisão do senhor Alexandre de Moraes, esse presidente não mais cumprirá. A paciência do nosso povo já se esgotou, ele tem tempo ainda de pedir o seu boné e ir cuidar da sua vida. Ele, para nós, não existe mais.''",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
@@ -1018,94 +1004,7 @@
         },
         {
           "type": "text",
-          "content": "Jair Bolsonaro",
-          "styles": {
-            "fontFamily": "globotipo",
-            "fontSize": {
-              "desktop": "1.4rem",
-              "mobile": "1.1rem"
-            },
-            "lineHeight": {
-              "desktop": "2.2rem",
-              "mobile": "2rem"
-            },
-            "fontWeight": {
-              "desktop": "700",
-              "mobile": "700"
-            },
-            "color": "#ffffff",
-            "textAlign": "right",
-            "width": {
-              "desktop": "40%",
-              "mobile": "80%"
-            },
-            "margin": {
-              "desktop": "0% auto 5% auto"
-            },
-            "padding": {
-              "mobile": "5% 0% 5% 5%"
-            }
-          }
-        }
-      ],
-      "backgroundColor": "#1a1a1a",
-      "padding": {
-        "desktop": "4rem 2rem",
-        "mobile": "3rem 1rem"
-      }
-    },
-    {
-      "type": "globoplayer",
-      "aspectRatio": "16 / 9",
-      "aspectRatioMobile": "16 / 9",
-      "caption": "",
-      "autoplay": "true",
-      "videoIdMobile": "13875228",
-      "videoIdDesktop": "13875228",
-      "widthMobile": "100%",
-      "widthDesktop": "60%",
-      "containerBackgroundColor": "#1a1a1a",
-      "skipDFP": "true",
-      "skipdfp": "true",
-      "autoPlay": "true"
-    },
-    {
-      "type": "super-flex",
-      "items": [
-        {
-          "type": "text",
-          "content": "''Ou esse ministro se enquadra ou ele pede para sair. Não se pode admitir que uma pessoa apenas, um homem apenas turve a nossa liberdade. Dizer a esse ministro que ele tem tempo ainda parase redimir, tem tempo ainda de arquivar seus inquéritos. Sai, Alexandre de Moraes. Deixa de ser canalha. Deixa de oprimir o povo brasileiro, deixe de censurar o seu povo. Mais do que isso, nós devemos, sim, porque eu falo em nome de vocês, determinar que todos os presos políticos sejam postos em liberdade''",
-          "styles": {
-            "fontFamily": "globotipo",
-            "fontSize": {
-              "desktop": "1.4rem",
-              "mobile": "1.2rem"
-            },
-            "lineHeight": {
-              "desktop": "2.2rem",
-              "mobile": "2rem"
-            },
-            "fontWeight": {
-              "desktop": "500",
-              "mobile": "500"
-            },
-            "color": "#ffffff",
-            "textAlign": "left",
-            "width": {
-              "desktop": "40%",
-              "mobile": "80%"
-            },
-            "margin": {
-              "desktop": "2% auto 2% auto"
-            },
-            "padding": {
-              "mobile": "5% 5% 0% 5%"
-            }
-          }
-        },
-        {
-          "type": "text",
-          "content": "Jair Bolsonaro",
+          "content": "Jair Bolsonaro, em discurso na Avendida Paulista",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
@@ -1211,8 +1110,8 @@
       ],
       "backgroundColor": "#1a1a1a",
       "backgroundImage": {
-        "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bg_amarelo_desktop.png",
-        "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bg_amarelo.png"
+        "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bg_amarelo_desktop.jpg",
+        "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bg_amarelo.jpg"
       },
       "padding": {
         "desktop": "4rem 2rem",
@@ -1369,8 +1268,8 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/augusto_heleno_desktop.png",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/augusto_heleno.png"
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/augusto_heleno_v2.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/augusto_heleno_v2.png"
           },
           "alt": "retângulo vermelho",
           "styles": {
@@ -1383,7 +1282,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "-13% 0% 5% 50%",
+              "desktop": "-22% 0% 5% 60%",
               "mobile": "0 auto"
             },
             "padding": {
@@ -1566,8 +1465,8 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print1turno.png",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print1turno.png"
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print1turno_desk.webp",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print1turno_mob.webp"
           },
           "alt": "retângulo vermelho",
           "styles": {
@@ -1735,7 +1634,7 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "3% 0% 0 5%"
+              "desktop": "5% 0% 5% 5%"
             },
             "padding": {
               "desktop": "2% 0% 0 35%",
@@ -1869,7 +1768,7 @@
         },
         {
           "type": "text",
-          "content": "1 DE NOVEMBRO",
+          "content": "1&ordm; DE NOVEMBRO",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
@@ -1891,7 +1790,7 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "8% 60% 1%"
+              "desktop": "8% 30% 1%"
             },
             "padding": {
               "mobile": "5% 5% 0% 5%"
@@ -1900,7 +1799,7 @@
         },
         {
           "type": "text",
-          "content": "No dia 1&ordm; de novembro, começam os acampamentos golpistas em frente a quartéis, com faixas pedindo intervenção militar e prisão de ministros do STF.",
+          "content": "Começam os acampamentos golpistas em frente a quartéis, com faixas pedindo intervenção militar e prisão de ministros do STF.",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
@@ -1922,7 +1821,7 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "1% 60%"
+              "desktop": "1% 30%"
             },
             "padding": {
               "mobile": "10% 5% 10% 5%"
@@ -1932,13 +1831,13 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/mapa_novembro.jpg",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/mapa_novembro.jpg"
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print_mario_desk.webp",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print_mario_mob.webp"
           },
           "alt": "retângulo vermelho",
           "styles": {
             "width": {
-              "desktop": "25%",
+              "desktop": "100%",
               "mobile": "100vw"
             },
             "height": {
@@ -1946,12 +1845,12 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "-20% 0% 6% 20%",
-              "mobile": "0 auto"
+              "desktop": "2% 0 0 auto",
+              "mobile": "0rem 0px 0px 0px"
             },
             "padding": {
               "desktop": "0rem 0 0 auto",
-              "mobile": "0% 0vw 0% 0vw"
+              "mobile": "0"
             }
           }
         },
@@ -1983,32 +1882,6 @@
             },
             "padding": {
               "mobile": "10% 5% 10% 5%"
-            }
-          }
-        },
-        {
-          "type": "image",
-          "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print_mario_desktop.png",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print_mario.jpg"
-          },
-          "alt": "retângulo vermelho",
-          "styles": {
-            "width": {
-              "desktop": "100%",
-              "mobile": "100vw"
-            },
-            "height": {
-              "desktop": "auto",
-              "mobile": "auto"
-            },
-            "margin": {
-              "desktop": "2% 0 0 auto",
-              "mobile": "0rem 0px 0px 0px"
-            },
-            "padding": {
-              "desktop": "0rem 0 0 auto",
-              "mobile": "0"
             }
           }
         },
@@ -2045,7 +1918,7 @@
         },
         {
           "type": "text",
-          "content": "No dia 9, no Planalto, o general Mário Fernandes produz o documento Punhal Verde e Amarelo, que detalha plano para sequestrar ou matar Alexandre de Moraes, Lula e Alckmin. ",
+          "content": "No Planalto, o general Mário Fernandes produz o documento Punhal Verde e Amarelo, que detalha plano para sequestrar ou matar Alexandre de Moraes, Lula e Alckmin. ",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
@@ -2077,8 +1950,8 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/punhal.png",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/punhal.png"
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/punhal_desk.webp",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/punhal_mob.webp"
           },
           "alt": "retângulo vermelho",
           "styles": {
@@ -2143,7 +2016,7 @@
         },
         {
           "type": "text",
-          "content": "Em 12 de novembro, militares se reúnem na casa de Braga Netto para discutir o assassinato de autoridades.",
+          "content": "Militares se reúnem na casa de Braga Netto para discutir o assassinato de autoridades.",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
@@ -2161,7 +2034,7 @@
             "color": "#ffffff",
             "textAlign": "left",
             "width": {
-              "desktop": "30%",
+              "desktop": "20%",
               "mobile": "80%"
             },
             "margin": {
@@ -2175,13 +2048,13 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/mapa_casa_braga-netto.png",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/mapa_casa_braga-netto.png"
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/mapa_casa_braga-netto.webp",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/mapa_casa_braga-netto.webp"
           },
           "alt": "retângulo vermelho",
           "styles": {
             "width": {
-              "desktop": "20%",
+              "desktop": "35%",
               "mobile": "100vw"
             },
             "height": {
@@ -2189,7 +2062,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "-10% 0% 6% 50%",
+              "desktop": "-10% 0% 6% 55%",
               "mobile": "0rem 0px 0px 0px"
             },
             "padding": {
@@ -2207,7 +2080,7 @@
           "alt": "retângulo vermelho",
           "styles": {
             "width": {
-              "desktop": "15%",
+              "desktop": "26%",
               "mobile": "280px"
             },
             "height": {
@@ -2215,7 +2088,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "-26% 0% 4% 20%",
+              "desktop": "-50% 0% 4% 20%",
               "mobile": "5% auto"
             },
             "padding": {
@@ -2227,8 +2100,8 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print04.png",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print04.png"
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print04_desk.webp",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print04_mob.webp"
           },
           "alt": "retângulo vermelho",
           "styles": {
@@ -2241,7 +2114,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "4% 0% 4% 20%",
+              "desktop": "0% 0% 4% 20%",
               "mobile": "0 auto"
             },
             "padding": {
@@ -2293,7 +2166,7 @@
         },
         {
           "type": "text",
-          "content": "Em 19 de novembro, uma minuta de decreto prevendo novas eleições e a prisão de ministros do STF é apresentada a Bolsonaro, que pede ajustes. Versões do documento foram encontradas na sala de Bolsonaro no PL e na casa de Torres.",
+          "content": "Uma minuta de decreto prevendo novas eleições e a prisão de ministros do STF é apresentada a Bolsonaro, que pede ajustes. Versões do documento foram encontradas na sala de Bolsonaro no PL e na casa de Torres.",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
@@ -2325,8 +2198,8 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print05.png",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print05.png"
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print05_desk.webp",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print05_mob.webp"
           },
           "alt": "retângulo vermelho",
           "styles": {
@@ -2372,7 +2245,7 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "12% 20% 1%"
+              "desktop": "0% 20% 1%"
             },
             "padding": {
               "mobile": "5% 5% 0% 5%"
@@ -2381,7 +2254,7 @@
         },
         {
           "type": "text",
-          "content": "Integrantes do grupo do Exército visitam locais descritos na operação para matar autoridades, como a região do apartamento do ministro Alexandre de Moraes e monitoram a agenda do ministro.",
+          "content": "Integrantes do grupo do Exército visitam locais descritos na operação para matar autoridades, como a região do apartamento do ministro Alexandre de Moraes, e monitoram a agenda do ministro.",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
@@ -2413,8 +2286,8 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print06.png",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print06.png"
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print06_desk.webp",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print06_mob.webp"
           },
           "alt": "retângulo vermelho",
           "styles": {
@@ -2427,7 +2300,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "1% auto -9% auto",
+              "desktop": "-12% 15% -9% auto",
               "mobile": "0 auto 3%"
             },
             "padding": {
@@ -2470,7 +2343,7 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "20% auto 0% auto"
+              "desktop": "8% auto 0% auto"
             },
             "padding": {
               "mobile": "5% 5% 0% 5%"
@@ -2563,7 +2436,7 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "1% 30% 10%"
+              "desktop": "1% 30% 5%"
             },
             "padding": {
               "mobile": "10% 5% 10% 5%"
@@ -2583,13 +2456,13 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print07.png",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print07.png"
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print07_desk.webp",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print07_mob.webp"
           },
           "alt": "retângulo vermelho",
           "styles": {
             "width": {
-              "desktop": "25%",
+              "desktop": "35%",
               "mobile": "100vw"
             },
             "height": {
@@ -2597,7 +2470,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "-10% 0% -4% 56%",
+              "desktop": "-15% 0% -8% 56%",
               "mobile": "0rem 0px 0px 0px"
             },
             "padding": {
@@ -2608,7 +2481,7 @@
         },
         {
           "type": "text",
-          "content": "Em troca de mensagens, Cid é questionado se Bolsonaro sabia do conteúdo, e responde que sim.",
+          "content": "Em troca de mensagens, Cid é questionado, por um militar que chama Bolsonaro de '01', se o então presidente sabia do conteúdo e responde que sim.",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
@@ -2626,11 +2499,11 @@
             "color": "#ffffff",
             "textAlign": "left",
             "width": {
-              "desktop": "20%",
+              "desktop": "30%",
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0% 50% 20% auto"
+              "desktop": "0% 40% 20% auto"
             },
             "padding": {
               "mobile": "10% 5% 10% 5%"
@@ -2690,7 +2563,7 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "-55% 30% 10% auto"
+              "desktop": "-52% 30% 10% auto"
             },
             "padding": {
               "mobile": "10% 5% 10% 5%"
@@ -2744,7 +2617,7 @@
         },
         {
           "type": "text",
-          "content": "No Planalto, Mário Fernandes imprime o plano de assassinato. Bolsonaro e Mauro Cid estavam no prédio no mesmo horário.",
+          "content": "No Planalto, Mário Fernandes imprime o plano de assassinato. Bolsonaro e Mauro Cid estavam no palácio no mesmo horário.",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
@@ -2776,8 +2649,8 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print08.png",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print08.png"
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print08_desk.webp",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print08_mob.webp"
           },
           "alt": "retângulo vermelho",
           "styles": {
@@ -2832,7 +2705,7 @@
         },
         {
           "type": "text",
-          "content": "Bolsonaro apresenta minuta de decreto golpista ao ministro da Defesa e aos comandantes do Exército, Freire Gomes, e da Marinha, Almir Garnier. Tércio Arnaud também foi ao Alvorada.",
+          "content": "Bolsonaro apresenta minuta de decreto golpista ao ministro da Defesa e aos comandantes do Exército, Freire Gomes, e da Marinha, Almir Garnier.",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
@@ -2854,7 +2727,7 @@
               "mobile": "69%"
             },
             "margin": {
-              "desktop": "2% auto",
+              "desktop": "2% auto 1%",
               "mobile": "0"
             },
             "padding": {
@@ -2863,34 +2736,8 @@
           }
         },
         {
-          "type": "image",
-          "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/almir_garnier.png",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/almir_garnier.png"
-          },
-          "alt": "retângulo vermelho",
-          "styles": {
-            "width": {
-              "desktop": "20%",
-              "mobile": "100vw"
-            },
-            "height": {
-              "desktop": "auto",
-              "mobile": "auto"
-            },
-            "margin": {
-              "desktop": "5% 26% 4% auto",
-              "mobile": "0 auto"
-            },
-            "padding": {
-              "desktop": "0rem 0 0 auto",
-              "mobile": "0 0 0 0"
-            }
-          }
-        },
-        {
           "type": "text",
-          "content": "O texto previa estado de sítio ''dentro das quatro linhas'' da Constituição.",
+          "content": "O texto previa estado de sítio ''dentro das quatro linhas'' da Constituição. O termo era usado com frequência por Bolsonaro para tentar dar ares de legalidade aos atos dele de ataque ao Estado democrático de Direito.",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
@@ -2912,10 +2759,36 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "-23% auto 0%"
+              "desktop": "0% 30%"
             },
             "padding": {
               "mobile": "10% 5% 10% 5%"
+            }
+          }
+        },
+        {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/almir_garnier.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/almir_garnier.png"
+          },
+          "alt": "retângulo vermelho",
+          "styles": {
+            "width": {
+              "desktop": "20%",
+              "mobile": "80vw"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "2% 26% 0% auto",
+              "mobile": "0 auto"
+            },
+            "padding": {
+              "desktop": "0rem 0 0 auto",
+              "mobile": "0 0 0 0"
             }
           }
         }
@@ -2932,8 +2805,8 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print09.png",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print09.png"
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print09_desk.webp",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print09_mob.webp"
           },
           "alt": "retângulo vermelho",
           "styles": {
@@ -2946,7 +2819,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "4% 52% 0% auto",
+              "desktop": "-7% 30% 5%",
               "mobile": "0 auto"
             },
             "padding": {
@@ -2985,11 +2858,11 @@
             "color": "#ffffff",
             "textAlign": "left",
             "width": {
-              "desktop": "30%",
+              "desktop": "20%",
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "8% auto 5% auto"
+              "desktop": "8% 30%"
             },
             "padding": {
               "mobile": "10% 5% 10% 5%"
@@ -3009,8 +2882,8 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print_10.jpg",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print_10.jpg"
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print10_desk.webp",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print10_mob.webp"
           },
           "alt": "retângulo vermelho",
           "styles": {
@@ -3035,8 +2908,8 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print_11.jpg",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print_11.jpg"
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print11_desk.webp",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print11_mob.webp"
           },
           "alt": "retângulo vermelho",
           "styles": {
@@ -3061,8 +2934,8 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print_12.jpg",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print_12.jpg"
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print12_desk.webp",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print12_mob.webp"
           },
           "alt": "retângulo vermelho",
           "styles": {
@@ -3086,7 +2959,7 @@
         },
         {
           "type": "text",
-          "content": "Em depoimento ao STF, em maio de 2025, o ex-comandante da Aeronáutica confirmou que Bolsonaro participou do plano para permanecer no poder e disse que o então chefe do Exército ameaçou prender Bolsonaro se continuasse na tentativa de golpe. ",
+          "content": "Em depoimento ao STF, em maio de 2025, o então comandante da Aeronáutica confirmou que Bolsonaro participou do plano para permanecer no poder e disse que o então chefe do Exército ameaçou prender Bolsonaro se continuasse com o golpe de estado. ",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
@@ -3205,8 +3078,8 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print13.png",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print13.png"
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print13_desk.webp",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print13_mob.webp"
           },
           "alt": "retângulo vermelho",
           "styles": {
@@ -3255,7 +3128,7 @@
               "desktop": "-54% 52% 35%"
             },
             "padding": {
-              "mobile": "10% 5% 10% 5%"
+              "mobile": "10% 5% 0% 5%"
             }
           }
         },
@@ -3287,7 +3160,7 @@
               "mobile": "1%"
             },
             "padding": {
-              "mobile": "5% 0% 5% 5%"
+              "mobile": "2% 0% 5% 5%"
             }
           }
         },
@@ -3331,15 +3204,15 @@
           "alt": "retângulo vermelho",
           "styles": {
             "width": {
-              "desktop": "20%",
-              "mobile": "100vw"
+              "desktop": "28%",
+              "mobile": "80vw"
             },
             "height": {
               "desktop": "auto",
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "-7% 26% 10% auto",
+              "desktop": "-7% 22% 10% auto",
               "mobile": "0 auto"
             },
             "padding": {
@@ -3489,8 +3362,8 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print_carros_moraes.png",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print_carros_moraes.png"
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print_carros_moraes_desk.webp",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print_carros_moraes_mob.webp"
           },
           "alt": "mapa kids pretos",
           "styles": {
@@ -3514,7 +3387,7 @@
         },
         {
           "type": "text",
-          "content": "Ao menos 6 integrantes 'Kids Pretos' se posicionaram em vários pontos de Brasília. De acordo com a investigação, a operação foi abortada porque a cúpula do Exército não aderiu ao golpe e a sessão do STF no dia 15 acabou mais cedo.",
+          "content": "Ao menos 6 integrantes 'Kids Pretos' — militares de elite do Exército — se posicionaram em vários pontos de Brasília. De acordo com a investigação, a operação foi abortada porque a cúpula do Exército não aderiu ao golpe e a sessão do STF no dia 15 acabou mais cedo.",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
@@ -3536,7 +3409,7 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "18% 26% 2%"
+              "desktop": "18% 26% 17%"
             },
             "padding": {
               "mobile": "10% 5% 10% 5%"
@@ -3546,8 +3419,8 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print14.png",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print14.png"
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print14_desk.webp",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print14_mob.webp"
           },
           "alt": "print 14",
           "styles": {
@@ -3560,7 +3433,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "-26.25% 51% 4%",
+              "desktop": "-35% 51% 4%",
               "mobile": "0 auto"
             },
             "padding": {
@@ -3648,8 +3521,8 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print15.png",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print15.png"
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print15_desk.webp",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print15_mob.webp"
           },
           "alt": "print 14",
           "styles": {
@@ -3662,7 +3535,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "-25% 0% 4% 53%",
+              "desktop": "-25% 0% -8% 53%",
               "mobile": "0 auto"
             },
             "padding": {
@@ -3705,8 +3578,8 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print16.png",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print16.png"
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print16_desk.webp",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/print16_mob.webp"
           },
           "alt": "print 16",
           "styles": {
@@ -3955,7 +3828,7 @@
         },
         {
           "type": "text",
-          "content": "1 DE JANEIRO DE 2023",
+          "content": "1&ordm; DE JANEIRO DE 2023",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
@@ -3986,7 +3859,7 @@
         },
         {
           "type": "text",
-          "content": "No dia 1&ordm; de janeiro, Lula toma posse diante de centenas de milhares de pessoas em Brasília.",
+          "content": "Lula toma posse diante de centenas de milhares de pessoas em Brasília.",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
@@ -4146,7 +4019,7 @@
       "items": [
         {
           "type": "text",
-          "content": "Na tarde de domingo, milhares de golpistas invadem o Congresso, o Palácio do Planalto e o STF. Vidraças quebradas, obras de arte destruídas, gabinetes saqueados.",
+          "content": "Na tarde de domingo, milhares de golpistas invadem o Congresso, o Palácio do Planalto e o STF. Eles quebraram vidraças, destruíram obras de arte e saquearam gabinetes.",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
@@ -4376,7 +4249,7 @@
         },
         {
           "type": "text",
-          "content": "O comportamento de Jair Bolsonaro nas redes sociais no dia 8 de janeiro de 2023 não altera a realidade de que foi o principal responsável pela contínua radicalização e pela criação do ambiente que possibilitou a explosão de violência naquele dia. Suas posturas ambíguas e sua ausência de ação concreta para conter os ânimos inflamados por ele próprio são indícios claros de sua contribuição para a escalada de violência ",
+          "content": "O comportamento de Jair Bolsonaro nas redes sociais, no dia 8 de janeiro de 2023, não altera a realidade de que foi o principal responsável pela contínua radicalização e pela criação do ambiente que possibilitou a explosão de violência naquele dia. Suas posturas ambíguas e sua ausência de ação concreta para conter os ânimos inflamados por ele próprio são indícios claros de sua contribuição para a escalada de violência.",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
@@ -4548,13 +4421,69 @@
               "mobile": "80%"
             },
             "margin": {
-              "desktop": "0% 20% 0%"
+              "desktop": "0% 20% 4%"
             },
             "padding": {
               "mobile": "5%"
             }
           }
-        },
+        }
+      ],
+      "backgroundColor": "#1a1a1a",
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "super-flex",
+      "items": [
+        {
+          "type": "text",
+          "content": "2025",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "5rem",
+              "mobile": "2rem"
+            },
+            "lineHeight": {
+              "desktop": "2.2rem",
+              "mobile": "3.5rem"
+            },
+            "fontWeight": {
+              "desktop": "900",
+              "mobile": "900"
+            },
+            "color": "#ffffff",
+            "textAlign": "center",
+            "width": {
+              "desktop": "60%",
+              "mobile": "80%"
+            },
+            "margin": {
+              "desktop": "5% 20% 5% 20%"
+            },
+            "padding": {
+              "desktop": "5% 0% 2% 0%",
+              "mobile": "10% 5%"
+            }
+          }
+        }
+      ],
+      "backgroundColor": "#1a1a1a",
+      "backgroundImage": {
+        "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bg_vermelho_desk.jpg",
+        "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/bg_vermelho.png"
+      },
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "super-flex",
+      "items": [
         {
           "type": "text",
           "content": "Bolsonaro preso em casa",
@@ -4588,7 +4517,7 @@
         },
         {
           "type": "text",
-          "content": "Um mês antes do início do julgamento no STF, Bolsonaro passou a cumprir prisão domiciliar por tentativa de dificultar o andamento do processo que investiga a tentativa de golpe.",
+          "content": "Um mês antes do início do julgamento no STF, Bolsonaro passou a cumprir prisão domiciliar por tentativa de dificultar o andamento do processo que investiga o golpe de estado.",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
@@ -4696,6 +4625,62 @@
       "items": [
         {
           "type": "text",
+          "content": "",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "1.4rem",
+              "mobile": "1.2rem"
+            },
+            "lineHeight": {
+              "desktop": "2.2rem",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
+            "color": "#ffffff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "30%",
+              "mobile": "90%"
+            },
+            "margin": {
+              "desktop": "35% auto 0%"
+            },
+            "padding": {
+              "mobile": "10px"
+            }
+          }
+        }
+      ],
+      "backgroundColor": "#1a1a1a",
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "globoplayer",
+      "aspectRatio": "16 / 9",
+      "aspectRatioMobile": "9 / 16",
+      "caption": "",
+      "autoplay": "true",
+      "videoIdMobile": "13885749",
+      "videoIdDesktop": "13885749",
+      "widthMobile": "100%",
+      "widthDesktop": "50%",
+      "containerBackgroundColor": "#1a1a1a",
+      "skipDFP": "true",
+      "skipdfp": "true",
+      "autoPlay": "true"
+    },
+    {
+      "type": "super-flex",
+      "items": [
+        {
+          "type": "text",
           "content": "O que dizem os réus",
           "styles": {
             "fontFamily": "globotipo",
@@ -4718,7 +4703,7 @@
               "mobile": "100%"
             },
             "margin": {
-              "desktop": "35% auto 3%"
+              "desktop": "3% auto 3%"
             },
             "padding": {
               "mobile": "2% 0 0 0"
@@ -5129,6 +5114,142 @@
         }
       ],
       "backgroundColor": "#1a1a1a",
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "super-flex",
+      "items": [
+        {
+          "type": "text",
+          "content": "Créditos",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "1.8rem",
+              "mobile": "1.5rem"
+            },
+            "lineHeight": {
+              "desktop": "2.2rem",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "700",
+              "mobile": "700"
+            },
+            "color": "#1a1a1a",
+            "textAlign": "left",
+            "width": {
+              "desktop": "100%",
+              "mobile": "90%"
+            },
+            "margin": {
+              "desktop": "0"
+            },
+            "padding": {
+              "desktop": "1% 1% 1% 35%",
+              "mobile": "5% 5% 5% 5%"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "Edição de conteúdo: Felipe Turioni<br>Edição de vídeo: Cadu Lando e Juliene Moretti<br>Pesquisa: Cadu Lando, Felipe Turioni, Juliene Moretti e Pedro Henrique Gomes<br>Direção de arte, interface e infografia: Bruna Azevedo, Gabs, Gui Sousa e Thalita Ferraz<br>Motion: Thalita Ferraz<br>Desenvolvimento: Guilherme Gomes<br>Coordenação (Conteúdo): Vitor Sorano<br>Coordenação (Design e Desenvolvimento): Guilherme Gomes",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "1.4rem",
+              "mobile": "1.2rem"
+            },
+            "lineHeight": {
+              "desktop": "2.2rem",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
+            "color": "#1a1a1a",
+            "textAlign": "left",
+            "width": {
+              "desktop": "30%",
+              "mobile": "90%"
+            },
+            "margin": {
+              "desktop": "auto"
+            },
+            "padding": {
+              "mobile": "0% 5% 5% 5%"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "Fontes",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "1.8rem",
+              "mobile": "1.5rem"
+            },
+            "lineHeight": {
+              "desktop": "2.2rem",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "700",
+              "mobile": "700"
+            },
+            "color": "#1a1a1a",
+            "textAlign": "left",
+            "width": {
+              "desktop": "30%",
+              "mobile": "90%"
+            },
+            "margin": {
+              "desktop": "auto"
+            },
+            "padding": {
+              "desktop": "30px 0px 10px 10px",
+              "mobile": "0% 5% 5% 5%"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "content": "Polícia Federal, Procuradoria-Geral da República, Supremo Tribunal Federal e acervo TV Globo",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "1.4rem",
+              "mobile": "1.2rem"
+            },
+            "lineHeight": {
+              "desktop": "2.2rem",
+              "mobile": "1.5rem"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
+            "color": "#1a1a1a",
+            "textAlign": "left",
+            "width": {
+              "desktop": "30%",
+              "mobile": "90%"
+            },
+            "margin": {
+              "desktop": "auto"
+            },
+            "padding": {
+              "mobile": "0 5% 5% 5%"
+            }
+          }
+        }
+      ],
+      "backgroundColor": "#ffffff",
       "padding": {
         "desktop": "4rem 2rem",
         "mobile": "3rem 1rem"
