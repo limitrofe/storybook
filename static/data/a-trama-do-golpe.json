@@ -9,8 +9,8 @@
   "paragraphs": [
     {
       "type": "header",
-      "title": "A trama do golpe",
-      "subtitle": "Um julgamento inédito na história brasileira",
+      "title": "O julgamento",
+      "subtitle": "7 condenados e suas sentenças",
       "date": "",
       "backgroundVideo": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/videos/header_desk.mp4",
       "backgroundVideoMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/videos/header_mob.mp4",
@@ -25,6 +25,7 @@
       "items": [
         {
           "type": "text",
+          "tag": "h3",
           "content": "Pela primeira vez,<br>um ex-presidente da República senta no banco dos réus do Supremo Tribunal Federal acusado de crimes contra a democracia.",
           "grifo": {
             "src": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/grifo01.png",
@@ -38,19 +39,6 @@
             }
           },
           "styles": {
-            "fontFamily": "globotipo",
-            "fontSize": {
-              "desktop": "2rem",
-              "mobile": "1.2rem"
-            },
-            "lineHeight": {
-              "desktop": "2.5rem",
-              "mobile": "1.5rem"
-            },
-            "fontWeight": {
-              "desktop": "400",
-              "mobile": "400"
-            },
             "color": "#ffffff",
             "textAlign": "left",
             "width": {
@@ -145,7 +133,7 @@
       "items": [
         {
           "type": "text",
-          "content": "Ao seu lado, outros sete acusados (civis e militares de alta patente) enfrentam o mesmo julgamento",
+          "content": "Ao seu lado, outros sete acusados (civis e militares de alta patente) enfrentam o mesmo julgamento. Todos os denunciados negam participação na tentativa de golpe",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
@@ -192,7 +180,7 @@
               "mobile": "50px"
             },
             "margin": {
-              "desktop": "-12% 28% 20%",
+              "desktop": "-13% 26% 20%",
               "mobile": "-5rem 20px 20px 20px"
             },
             "padding": {
@@ -1004,7 +992,7 @@
         },
         {
           "type": "text",
-          "content": "Jair Bolsonaro, em discurso na Avendida Paulista",
+          "content": "Jair Bolsonaro, em discurso na Avenida Paulista",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {
@@ -4663,14 +4651,14 @@
     },
     {
       "type": "globoplayer",
-      "aspectRatio": "16 / 9",
+      "aspectRatio": "9 / 16",
       "aspectRatioMobile": "9 / 16",
       "caption": "",
       "autoplay": "true",
       "videoIdMobile": "13885749",
       "videoIdDesktop": "13885749",
       "widthMobile": "100%",
-      "widthDesktop": "50%",
+      "widthDesktop": "25%",
       "containerBackgroundColor": "#1a1a1a",
       "skipDFP": "true",
       "skipdfp": "true",

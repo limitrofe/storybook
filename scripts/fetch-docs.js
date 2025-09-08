@@ -935,6 +935,10 @@ if (['header-caotico', 'header-caótico', 'caotico', 'chaotic-header', 'caos'].i
       const superFlexFields = {
         // Arrays JSON
         items: /items:\s*(\[[\s\S]*?\])/i,
+
+                // Adicione o campo 'tag' aqui
+        tag: /tag:\s*([^\n<]+)/i,
+
         
         // Campos de background
         backgroundColor: /backgroundColor:\s*([^\n<]+)/i,

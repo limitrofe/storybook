@@ -52,7 +52,9 @@
     {#each data.items as item}
 
       {#if item.type === 'text'}
-        <div
+        <!-- svelte-ignore missing-declaration -->
+        <svelte:element
+          this={item.tag || 'div'}
           class="flex-item text-item"
           style={`
             position: ${item.grifo ? 'relative' : 'static'};
@@ -90,7 +92,7 @@
               `}
             />
           {/if}
-        </div>
+        </svelte:element>
       {/if}
 
       {#if item.type === 'image' && item.src}
@@ -199,11 +201,12 @@
   }
 
   .text-item {
-    font-family: var(--font-family, inherit);
-    color: var(--color, inherit);
-    font-size: var(--font-size-mobile, var(--font-size-desktop, inherit));
-    font-weight: var(--font-weight-mobile, var(--font-weight-desktop, normal));
-    line-height: var(--line-height-mobile, var(--line-height-desktop, normal));
+    /* CORREÇÃO APLICADA AQUI: Removidos os valores padrão */
+    font-family: var(--font-family);
+    color: var(--color);
+    font-size: var(--font-size-mobile, var(--font-size-desktop));
+    font-weight: var(--font-weight-mobile, var(--font-weight-desktop));
+    line-height: var(--line-height-mobile, var(--line-height-desktop));
   }
   
   .image-item, .video-item {
@@ -237,9 +240,10 @@
     }
     
     .text-item {
-      font-size: var(--font-size-desktop, inherit);
-      font-weight: var(--font-weight-desktop, normal);
-      line-height: var(--line-height-desktop, normal);
+      /* CORREÇÃO APLICADA AQUI: Removidos os valores padrão */
+      font-size: var(--font-size-desktop);
+      font-weight: var(--font-weight-desktop);
+      line-height: var(--line-height-desktop);
     }
   }
 
