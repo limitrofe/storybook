@@ -240,8 +240,13 @@
     color: #1a1a1a !important; /* 🔥 COR ESCURA FORÇADA */
     /* text-shadow: 2px 2px 4px rgba(255,255,255,0.9); 🔥 Sombra BRANCA para contraste */
     width: 90%;
-    font-size: 4rem;
+    font-size: 3rem;
   }
+      h1 {
+      font-size: 2.5rem;
+      padding-top: 4%;
+      line-height: 3rem;
+    }
   }
 
   /* Desktop - ALINHAMENTO À ESQUERDA */
