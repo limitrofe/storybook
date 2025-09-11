@@ -9,7 +9,7 @@
 
   onMount(async () => {
     try {
-const response = await fetch('/data/a-trama-do-golpe.json');
+const response = await fetch('https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/data/o-julgamento.json');
       if (response.ok) {
         currentStory = await response.json();
         console.log('📖 Story carregada com sucesso!');
@@ -22,11 +22,11 @@ const response = await fetch('/data/a-trama-do-golpe.json');
 </script>
 
 <svelte:head>
-  <title>{currentStory ? currentStory.title : 'Sistema de Jornalismo'}</title>
+  <title>{currentStory ? currentStory.title : 'O julgamento'}</title>
   {#if currentStory}
-    <meta name="description" content={currentStory.subtitle || currentStory.intro?.text || 'Sistema de jornalismo digital'} />
+    <meta name="description" content={currentStory.subtitle || currentStory.intro?.text || 'O julgamento'} />
     <meta property="og:title" content={currentStory.title} />
-    <meta property="og:description" content={currentStory.subtitle || 'História do sistema de jornalismo'} />
+    <meta property="og:description" content={currentStory.subtitle || 'Por X votos a X, 1 Turma do STF declarou ex-presidente e sete aliados culpados por tentativa de golpe. Veja sentenças de todos os réus e as justificativas dos ministros.'} />
     <meta property="og:type" content="article" />
     {#if currentStory.author}
       <meta name="author" content={currentStory.author} />

@@ -99,23 +99,28 @@
         </div>
 
         <div slot="foreground" class="steps-foreground">
-            <section class="spacer-top"></section>
-            {#each validSteps as step, i}
-                <!-- 🆕 CONDICIONAL: Usa StepEnhanced se tem textConfig.elements, senão usa Step original -->
-                {#if hasAdvancedConfig(step)}
-                    <StepEnhanced 
-                        {step} 
-                        {isMobile}
-                        stepIndex={i}
-                        totalSteps={validSteps.length - 1}
-                    />
-                {:else}
-                    <!-- Mantém o comportamento original para compatibilidade -->
-                    <Step stepText={`<h3>${step.title || ''}</h3><div>${step.text || ''}</div>`} length={validSteps.length - 1} {i} />
-                {/if}
-            {/each}
-            <section class="spacer-bottom"></section>
-        </div>
+    <section class="spacer-top"></section>
+    {#each validSteps as step, i}
+        <!-- 🆕 CONDICIONAL: Usa StepEnhanced se tem textConfig.elements, senão usa Step original -->
+        {#if hasAdvancedConfig(step)}
+            <StepEnhanced 
+                {step} 
+                {isMobile}
+                stepIndex={i}
+                totalSteps={validSteps.length - 1}
+            />
+        {:else}
+            <!-- Mantém o comportamento original para compatibilidade COM POSITION -->
+            <Step 
+                stepText={`<h3>${step.title || ''}</h3><div>${step.text || ''}</div>`} 
+                length={validSteps.length - 1} 
+                {i}
+                position={step.position || 'right'}
+            />
+        {/if}
+    {/each}
+    <section class="spacer-bottom"></section>
+</div>
 
     </Scroller>
     

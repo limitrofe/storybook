@@ -1,7 +1,7 @@
 {
   "type": "header",
-  "title": "A trama do Golpe",
-  "subtitle": "Um julgamento inédito na história brasileira",
+  "title": "O julgamento",
+  "subtitle": "Por X votos a X, 1 Turma do STF declarou ex-presidente e sete aliados culpados por tentativa de golpe. Veja sentenças de todos os réus e as justificativas dos ministros.",
   "backgroundImage": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/header_mobi.jpg",
   "author": "",
   "variant": "default",
@@ -924,5 +924,5 @@
       }
     }
   ],
-  "slug": "a-trama-do-golpe"
+  "slug": "o-julgamento"
 }
