@@ -40,13 +40,50 @@
       video.pause();
     }
   }
+
+  // ✅ CORREÇÃO: Função para obter a melhor imagem de background
+  function getBackgroundImageUrl(backgroundImage) {
+    if (!backgroundImage) return 'none';
+    
+    // Se for string simples, retorna como URL
+    if (typeof backgroundImage === 'string') {
+      return backgroundImage ? `url(${backgroundImage})` : 'none';
+    }
+    
+    // Se for objeto com desktop/mobile
+    if (typeof backgroundImage === 'object') {
+      return backgroundImage.desktop ? `url(${backgroundImage.desktop})` : 'none';
+    }
+    
+    return 'none';
+  }
+
+  function getMobileBackgroundImageUrl(backgroundImage) {
+    if (!backgroundImage) return 'none';
+    
+    // Se for string simples, usa como fallback
+    if (typeof backgroundImage === 'string') {
+      return backgroundImage ? `url(${backgroundImage})` : 'none';
+    }
+    
+    // Se for objeto, prioriza mobile mas usa desktop como fallback
+    if (typeof backgroundImage === 'object') {
+      if (backgroundImage.mobile) {
+        return `url(${backgroundImage.mobile})`;
+      } else if (backgroundImage.desktop) {
+        return `url(${backgroundImage.desktop})`;
+      }
+    }
+    
+    return 'none';
+  }
 </script>
 
 <section
   class="super-flex-container"
   style:--background-color={data.backgroundColor || 'transparent'}
-  style:--background-image-desktop={data.backgroundImage?.desktop ? `url(${data.backgroundImage.desktop})` : 'none'}
-  style:--background-image-mobile={data.backgroundImage?.mobile ? `url(${data.backgroundImage.mobile})` : "var(--background-image-desktop)"}
+  style:--background-image-desktop={getBackgroundImageUrl(data.backgroundImage)}
+  style:--background-image-mobile={getMobileBackgroundImageUrl(data.backgroundImage)}
 >
   {#if data.items && Array.isArray(data.items)}
     {#each data.items as item}
@@ -96,35 +133,64 @@
       {/if}
 
       {#if item.type === 'image' && item.src}
-        <img
-          class="flex-item image-item"
-          src={item.src.mobile || item.src.desktop}
-          srcset={item.src.desktop && item.src.mobile ? `${item.src.mobile} 767w, ${item.src.desktop} 1920w` : null}
-          sizes="(max-width: 767px) 100vw, 100vw"
-          alt={item.alt || ''}
-          style={`
-            --max-width-desktop: ${item.styles?.maxWidth?.desktop || 'none'};
-            --max-width-mobile: ${item.styles?.maxWidth?.mobile || 'none'};
-            --width-desktop: ${item.styles?.width?.desktop || 'auto'};
-            --width-mobile: ${item.styles?.width?.mobile || 'auto'};
-            --margin-desktop: ${item.styles?.margin?.desktop || '0'};
-            --margin-mobile: ${item.styles?.margin?.mobile || '0'};
-            --padding-desktop: ${item.styles?.padding?.desktop || '0'};
-            --padding-mobile: ${item.styles?.padding?.mobile || '0'};
-            --text-align-desktop: ${item.styles?.textAlign?.desktop || 'left'};
-            --text-align-mobile: ${item.styles?.textAlign?.mobile || 'left'};
-          `}
-          loading="lazy"
-        />
+        <!-- ✅ CORREÇÃO: Usando picture para melhor responsividade -->
+        <picture class="flex-item image-item">
+          <!-- Source para mobile se existir -->
+          {#if item.src.mobile}
+            <source 
+              media="(max-width: 768px)" 
+              srcset={item.src.mobile}
+            />
+          {/if}
+          
+          <!-- Source para desktop -->
+          {#if item.src.desktop}
+            <source 
+              media="(min-width: 769px)" 
+              srcset={item.src.desktop}
+            />
+          {/if}
+          
+          <!-- Fallback img -->
+          <img
+            src={item.src.mobile || item.src.desktop || item.src}
+            alt={item.alt || ''}
+            style={`
+              --max-width-desktop: ${item.styles?.maxWidth?.desktop || 'none'};
+              --max-width-mobile: ${item.styles?.maxWidth?.mobile || 'none'};
+              --width-desktop: ${item.styles?.width?.desktop || 'auto'};
+              --width-mobile: ${item.styles?.width?.mobile || 'auto'};
+              --margin-desktop: ${item.styles?.margin?.desktop || '0'};
+              --margin-mobile: ${item.styles?.margin?.mobile || '0'};
+              --padding-desktop: ${item.styles?.padding?.desktop || '0'};
+              --padding-mobile: ${item.styles?.padding?.mobile || '0'};
+            `}
+            loading="lazy"
+            on:error={(e) => {
+              console.error('❌ Erro ao carregar imagem:', e.target.src);
+              // Fallback logic
+              const mobile = item.src.mobile;
+              const desktop = item.src.desktop;
+              
+              if (e.target.src === mobile && desktop) {
+                console.log('📱➡️🖥️ Mudando de mobile para desktop');
+                e.target.src = desktop;
+              } else if (e.target.src === desktop && mobile) {
+                console.log('🖥️➡️📱 Mudando de desktop para mobile');  
+                e.target.src = mobile;
+              } else {
+                console.log('❌ Ocultando imagem sem fallback válido');
+                e.target.style.display = 'none';
+              }
+            }}
+          />
+        </picture>
       {/if}
 
       {#if item.type === 'video' && item.src}
         <video
           class="flex-item video-item"
-          controls={item.controls || false}
-          muted={item.autoplay || false}
-          loop={item.loop || false}
-          playsinline
+          src={item.src.mobile || item.src.desktop || item.src}
           style={`
             --max-width-desktop: ${item.styles?.maxWidth?.desktop || 'none'};
             --max-width-mobile: ${item.styles?.maxWidth?.mobile || 'none'};
@@ -134,44 +200,37 @@
             --margin-mobile: ${item.styles?.margin?.mobile || '0'};
             --padding-desktop: ${item.styles?.padding?.desktop || '0'};
             --padding-mobile: ${item.styles?.padding?.mobile || '0'};
-            --text-align-desktop: ${item.styles?.textAlign?.desktop || 'left'};
-            --text-align-mobile: ${item.styles?.textAlign?.mobile || 'left'};
           `}
-          data-autoplay-in-view={item.autoplay || false}
+          loop={item.loop || false}
+          muted={item.muted || false}
+          autoplay={item.autoplay || false}
+          playsinline
+          data-autoplay-in-view={item.autoplayInView || false}
           use:viewport
           on:enterViewport={handleEnterViewport}
           on:exitViewport={handleExitViewport}
-          preload="metadata"
         >
-          {#if item.src.desktop}
-            <source src={item.src.desktop} type="video/mp4" media="(min-width: 768px)">
-          {/if}
-          {#if item.src.mobile}
-            <source src={item.src.mobile} type="video/mp4">
-          {:else if item.src.desktop}
-            <source src={item.src.desktop} type="video/mp4">
-          {/if}
+          Seu navegador não suporta vídeos.
         </video>
       {/if}
 
       {#if item.type === 'audio' && item.src}
-        <div class="flex-item audio-wrapper" 
-          style={`
-            --max-width-desktop: ${item.styles?.maxWidth?.desktop || 'none'};
-            --max-width-mobile: ${item.styles?.maxWidth?.mobile || 'none'};
-            --width-desktop: ${item.styles?.width?.desktop || 'auto'};
-            --width-mobile: ${item.styles?.width?.mobile || 'auto'};
-            --margin-desktop: ${item.styles?.margin?.desktop || '0'};
-            --margin-mobile: ${item.styles?.margin?.mobile || '0'};
-            --padding-desktop: ${item.styles?.padding?.desktop || '0'};
-            --padding-mobile: ${item.styles?.padding?.mobile || '0'};
-            --text-align-desktop: ${item.styles?.textAlign?.desktop || 'left'};
-            --text-align-mobile: ${item.styles?.textAlign?.mobile || 'left'};
-          `}
-        >
-          {#if item.title}<p class="audio-title">{item.title}</p>{/if}
-          <audio controls src={item.src}>
-            Seu navegador não suporta o elemento de áudio.
+        <div class="flex-item audio-wrapper">
+          <audio
+            src={item.src.desktop || item.src.mobile || item.src}
+            controls
+            style={`
+              --max-width-desktop: ${item.styles?.maxWidth?.desktop || 'none'};
+              --max-width-mobile: ${item.styles?.maxWidth?.mobile || 'none'};
+              --width-desktop: ${item.styles?.width?.desktop || 'auto'};
+              --width-mobile: ${item.styles?.width?.mobile || 'auto'};
+              --margin-desktop: ${item.styles?.margin?.desktop || '0'};
+              --margin-mobile: ${item.styles?.margin?.mobile || '0'};
+              --padding-desktop: ${item.styles?.padding?.desktop || '0'};
+              --padding-mobile: ${item.styles?.padding?.mobile || '0'};
+            `}
+          >
+            Seu navegador não suporta áudio.
           </audio>
         </div>
       {/if}
@@ -189,6 +248,7 @@
     background-image: var(--background-image-mobile);
     background-size: cover;
     background-position: center;
+    background-attachment: local; /* ✅ NOVO: Melhora performance mobile */
   }
 
   .flex-item {
@@ -212,6 +272,13 @@
   .image-item, .video-item {
     height: auto;
     display: block;
+  }
+
+  /* ✅ CORREÇÃO: Melhor estilo para picture */
+  .image-item img {
+    width: 100%;
+    height: auto;
+    max-width: var(--max-width-mobile, var(--max-width-desktop, 100%));
   }
 
   .audio-wrapper {
@@ -244,6 +311,11 @@
       font-size: var(--font-size-desktop);
       font-weight: var(--font-weight-desktop);
       line-height: var(--line-height-desktop);
+    }
+
+    /* ✅ CORREÇÃO: Melhor estilo para picture em desktop */
+    .image-item img {
+      max-width: var(--max-width-desktop, 100%);
     }
   }
 
