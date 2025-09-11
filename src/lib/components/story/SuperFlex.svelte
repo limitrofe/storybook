@@ -191,7 +191,7 @@
         <video
           class="flex-item video-item"
           src={item.src.mobile || item.src.desktop || item.src}
-          style={`
+            style={`
             --max-width-desktop: ${item.styles?.maxWidth?.desktop || 'none'};
             --max-width-mobile: ${item.styles?.maxWidth?.mobile || 'none'};
             --width-desktop: ${item.styles?.width?.desktop || 'auto'};
@@ -200,6 +200,22 @@
             --margin-mobile: ${item.styles?.margin?.mobile || '0'};
             --padding-desktop: ${item.styles?.padding?.desktop || '0'};
             --padding-mobile: ${item.styles?.padding?.mobile || '0'};
+            --position-desktop: ${item.styles?.position?.desktop || 'static'};
+            --position-mobile: ${item.styles?.position?.mobile || 'static'};
+            --z-index-desktop: ${item.styles?.zIndex?.desktop || 'auto'};
+            --z-index-mobile: ${item.styles?.zIndex?.mobile || 'auto'};
+            --top-desktop: ${item.styles?.top?.desktop || 'auto'};
+            --top-mobile: ${item.styles?.top?.mobile || 'auto'};
+            --left-desktop: ${item.styles?.left?.desktop || 'auto'};
+            --left-mobile: ${item.styles?.left?.mobile || 'auto'};
+            --right-desktop: ${item.styles?.right?.desktop || 'auto'};
+            --right-mobile: ${item.styles?.right?.mobile || 'auto'};
+            --bottom-desktop: ${item.styles?.bottom?.desktop || 'auto'};
+            --bottom-mobile: ${item.styles?.bottom?.mobile || 'auto'};
+            --transform-desktop: ${item.styles?.transform?.desktop || 'none'};
+            --transform-mobile: ${item.styles?.transform?.mobile || 'none'};
+            --box-sizing-desktop: ${item.styles?.boxSizing?.desktop || 'content-box'};
+            --box-sizing-mobile: ${item.styles?.boxSizing?.mobile || 'content-box'};
           `}
           loop={item.loop || false}
           muted={item.muted || false}
@@ -315,7 +331,12 @@
 
     /* ✅ CORREÇÃO: Melhor estilo para picture em desktop */
     .image-item img {
+      width: var(--width-desktop, auto);
+      height: var(--height-desktop, auto);
       max-width: var(--max-width-desktop, 100%);
+      margin: var(--margin-desktop, 0);
+      padding: var(--padding-desktop, 0);
+      box-sizing: var(--box-sizing-desktop, content-box);
     }
   }
 

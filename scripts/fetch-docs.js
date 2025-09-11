@@ -958,63 +958,81 @@ if (['header-caotico', 'header-caótico', 'caotico', 'chaotic-header', 'caos'].i
      // ==========================================================
     // 🚀 NOVO: SUPERFLEX LAYOUT (O filho chora e a mãe vê)
     // ==========================================================
-    if (['super-flex', 'superflex'].includes(paragraph.type?.toLowerCase())) {
-      console.log('🚀 Processando SuperFlex Layout...');
 
-      // Campos específicos do SuperFlex
-      const superFlexFields = {
-        // Arrays JSON
-        items: /items:\s*(\[[\s\S]*?\])/i,
+if (['super-flex', 'superflex'].includes(paragraph.type?.toLowerCase())) {
+  console.log('🚀 Processando SuperFlex Layout...');
 
-                // Adicione o campo 'tag' aqui
-        tag: /tag:\s*([^\n<]+)/i,
+  // Campos específicos do SuperFlex
+  const superFlexFields = {
+    // Arrays JSON
+    items: /items:\s*(\[[\s\S]*?\])/i,
+    tag: /tag:\s*([^\n<]+)/i,
+    
+    // Campos de background
+    backgroundColor: /backgroundColor:\s*([^\n<]+)/i,
+    backgroundImage: /backgroundImage:\s*({[\s\S]*?})/i,
+    
+    // Campos de espaçamento do container
+    padding: /padding:\s*({[\s\S]*?})/i,
+    margin: /margin:\s*({[\s\S]*?})/i,
 
-        
-        // Campos de background
-        backgroundColor: /backgroundColor:\s*([^\n<]+)/i,
-        backgroundImage: /backgroundImage:\s*({[\s\S]*?})/i, // Agora espera um objeto JSON
-        
-        // Campos de espaçamento do container
-        padding: /padding:\s*({[\s\S]*?})/i,
-        margin: /margin:\s*({[\s\S]*?})/i,
+    // Campos de layout
+    columnsDesktop: /columnsDesktop:\s*([^\n<]+)/i,
+    columnsMobile: /columnsMobile:\s*([^\n<]+)/i,
+    gap: /gap:\s*([^\n<]+)/i
+  };
 
-        // Campos de layout
-        columnsDesktop: /columnsDesktop:\s*([^\n<]+)/i,
-        columnsMobile: /columnsMobile:\s*([^\n<]+)/i,
-        gap: /gap:\s*([^\n<]+)/i
-      };
-
-      // 1. Processar o array de 'items' (o mais importante)
-      const itemsMatch = block.match(superFlexFields.items);
-      if (itemsMatch) {
-        paragraph.items = parseJSONField(itemsMatch[1], 'super-flex items');
-        console.log(`   ✅ ${paragraph.items?.length || 0} itens processados para o SuperFlex`);
-      }
-
-      // 2. Processar outros campos
-      for (const [field, regex] of Object.entries(superFlexFields)) {
-        if (field === 'items') continue; // Já processado
-        
-        const match = block.match(regex);
-        if (match) {
-          // Se o campo espera um objeto JSON (backgroundImage, padding, margin)
-          if (['backgroundImage', 'padding', 'margin'].includes(field)) {
-             paragraph[field] = parseJSONField(match[1], `super-flex ${field}`);
-          } else {
-             paragraph[field] = decodeHTMLEntities(match[1].trim());
+  // 1. Processar o array de 'items' (o mais importante)
+  const itemsMatch = block.match(superFlexFields.items);
+  if (itemsMatch) {
+    // ✅ NOVO: Processa items com normalização de estilos
+    paragraph.items = parseJSONField(itemsMatch[1], 'super-flex items');
+    
+    // ✅ NOVO: Normaliza estilos de posicionamento nos items
+    if (paragraph.items && Array.isArray(paragraph.items)) {
+      paragraph.items = paragraph.items.map(item => {
+        if (item.styles) {
+          // Normaliza campos de posicionamento para objetos responsivos
+          const positionFields = ['position', 'zIndex', 'top', 'left', 'right', 'bottom', 'transform', 'textShadow', 'boxSizing'];
+          
+          for (const field of positionFields) {
+            if (item.styles[field] && typeof item.styles[field] === 'string') {
+              item.styles[field] = {
+                desktop: item.styles[field],
+                mobile: item.styles[field]
+              };
+            }
           }
         }
-      }
-
-      // 3. Processar campo 'text' (se houver algum texto solto antes dos campos estruturados)
-      const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:items|backgroundColor|backgroundImage):|type:|$)/si);
-      if (textMatch) {
-        paragraph.text = cleanAndFormatHTML(textMatch[1].trim());
-      }
-      
-      paragraphs.push(paragraph);
-      continue; // Pula para o próximo bloco
+        return item;
+      });
     }
+    
+    console.log(`   ✅ ${paragraph.items?.length || 0} itens processados para o SuperFlex`);
+  }
+
+  // 2. Resto continua igual...
+  for (const [field, regex] of Object.entries(superFlexFields)) {
+    if (field === 'items') continue; // Já processado
+    
+    const match = block.match(regex);
+    if (match) {
+      if (['backgroundImage', 'padding', 'margin'].includes(field)) {
+         paragraph[field] = parseJSONField(match[1], `super-flex ${field}`);
+      } else {
+         paragraph[field] = decodeHTMLEntities(match[1].trim());
+      }
+    }
+  }
+
+  const textMatch = block.match(/text:\s*(.*?)(?=\s*(?:items|backgroundColor|backgroundImage):|type:|$)/si);
+  if (textMatch) {
+    paragraph.text = cleanAndFormatHTML(textMatch[1].trim());
+  }
+  
+  paragraphs.push(paragraph);
+  continue;
+}
 
 
         // 🎨 NOVO: TRATAMENTO ESPECÍFICO PARA RESPONSIVE MEDIA LAYOUT
