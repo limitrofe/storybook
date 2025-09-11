@@ -12,11 +12,11 @@
       "title": "O julgamento",
       "subtitle": "Por X votos a X, 1 Turma do STF declarou ex-presidente e sete aliados culpados por tentativa de golpe. Veja sentenças de todos os réus e as justificativas dos ministros.",
       "date": "",
-      "backgroundImage": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/bg-header-horizontal.jpg",
-      "backgroundImageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/bg_header_mobile.webp",
+      "backgroundVideo": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/resumo.mp4",
+      "backgroundVideoMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/resumo.mp4",
       "author": "",
       "variant": "hero",
-      "overlay": "false"
+      "overlay": "true"
     },
     {
       "type": "super-flex",
@@ -27,6 +27,18 @@
           "content": "TRAMA GOLPISTA: <br>A SENTENÇA DO STF",
           "styles": {
             "textAlign": "left",
+            "fontSize": {
+              "desktop": "40px",
+              "mobile": "28px"
+            },
+            "lineHeight": {
+              "desktop": "60px",
+              "mobile": "32px"
+            },
+            "fontWeight": {
+              "desktop": "1000",
+              "mobile": "1000"
+            },
             "width": {
               "desktop": "650px",
               "mobile": "90%"
@@ -37,7 +49,7 @@
             },
             "padding": {
               "desktop": "0%",
-              "mobile": "5% 0% 0% 5%"
+              "mobile": "0"
             }
           }
         }
@@ -80,13 +92,25 @@
           "styles": {
             "color": "#1A1A1A",
             "textAlign": "left",
+            "fontSize": {
+              "desktop": "40px",
+              "mobile": "28px"
+            },
+            "lineHeight": {
+              "desktop": "60px",
+              "mobile": "30px"
+            },
+            "fontWeight": {
+              "desktop": "800",
+              "mobile": "800"
+            },
             "width": {
               "desktop": "650px",
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "-220px 40% 0%",
-              "mobile": "-220px 42% 0%"
+              "desktop": "-230px 40% 0%",
+              "mobile": "-230px 42% 0%"
             },
             "padding": {
               "desktop": "0%",
@@ -101,13 +125,25 @@
           "styles": {
             "color": "#1A1A1A",
             "textAlign": "left",
+            "fontSize": {
+              "desktop": "20px",
+              "mobile": "16px"
+            },
+            "lineHeight": {
+              "desktop": "",
+              "mobile": "24px"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
             "width": {
               "desktop": "650px",
-              "mobile": "auto"
+              "mobile": "200px"
             },
             "margin": {
-              "desktop": "0% 40% 0%",
-              "mobile": "0px 42% 0%"
+              "desktop": "-.5% 40% 0%",
+              "mobile": "-1% auto 0% 42%"
             },
             "padding": {
               "desktop": "0%",
@@ -127,8 +163,8 @@
               "mobile": "90%"
             },
             "margin": {
-              "desktop": "4% 40% 2%",
-              "mobile": "90px auto 0px"
+              "desktop": "3% 40% 2%",
+              "mobile": "70px auto -2px"
             },
             "padding": {
               "desktop": "0%",
@@ -155,7 +191,7 @@
           "alt": "bg crimes de bolsonaro",
           "styles": {
             "width": {
-              "desktop": "100%",
+              "desktop": "1280px",
               "mobile": "100%"
             },
             "height": {
@@ -186,241 +222,7 @@
             },
             "margin": {
               "desktop": "-330px auto 100px",
-              "mobile": "-355px 0% 0px"
-            }
-          }
-        }
-      ],
-      "backgroundColor": "#FFF4E6",
-      "padding": {
-        "desktop": "4rem 2rem",
-        "mobile": "3rem 1rem"
-      }
-    },
-    {
-      "type": "super-flex",
-      "items": [
-        {
-          "type": "image",
-          "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/card-mauro-cid-crimes-desktop.png",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/card-bolsonaro-crimes-mobile.png"
-          },
-          "alt": "Foto de Mauro Cid",
-          "styles": {
-            "width": {
-              "desktop": "60%",
-              "mobile": "100%"
-            },
-            "height": {
-              "desktop": "auto",
-              "mobile": "auto"
-            },
-            "margin": {
-              "desktop": "0% auto -1px",
-              "mobile": "2rem 0 0 auto"
-            }
-          }
-        }
-      ],
-      "backgroundColor": "#FFF4E6",
-      "padding": {
-        "desktop": "4rem 2rem",
-        "mobile": "3rem 1rem"
-      }
-    },
-    {
-      "type": "super-flex",
-      "items": [
-        {
-          "type": "image",
-          "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/crimes-bolsonaro-desktop.png",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/crimes-bolsonaro-mobile.png"
-          },
-          "alt": "crimes de bolsonaro",
-          "styles": {
-            "width": {
-              "desktop": "50%",
-              "mobile": "100%"
-            },
-            "height": {
-              "desktop": "auto",
-              "mobile": "auto"
-            },
-            "margin": {
-              "desktop": "64px auto",
-              "mobile": "16px 0%"
-            }
-          }
-        }
-      ],
-      "backgroundColor": "#1a1a1a",
-      "backgroundImage": {
-        "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/bg_crimes_mobile.jpg",
-        "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/bg_crimes_mobile.jpg"
-      },
-      "padding": {
-        "desktop": "4rem 2rem",
-        "mobile": "3rem 1rem"
-      }
-    },
-    {
-      "type": "super-flex",
-      "items": [
-        {
-          "type": "image",
-          "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/card-alexandre-ramagem-desktop.png",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/card-bolsonaro-crimes-mobile.png"
-          },
-          "alt": "Foto de Alexandre Ramagem",
-          "styles": {
-            "width": {
-              "desktop": "60%",
-              "mobile": "100%"
-            },
-            "height": {
-              "desktop": "auto",
-              "mobile": "auto"
-            },
-            "margin": {
-              "desktop": "0% auto -1px",
-              "mobile": "2rem 0 0 auto"
-            }
-          }
-        }
-      ],
-      "backgroundColor": "#FFF4E6",
-      "padding": {
-        "desktop": "4rem 2rem",
-        "mobile": "3rem 1rem"
-      }
-    },
-    {
-      "type": "super-flex",
-      "items": [
-        {
-          "type": "image",
-          "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/crimes-bolsonaro-desktop.png",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/crimes-bolsonaro-mobile.png"
-          },
-          "alt": "crimes de bolsonaro",
-          "styles": {
-            "width": {
-              "desktop": "50%",
-              "mobile": "100%"
-            },
-            "height": {
-              "desktop": "auto",
-              "mobile": "auto"
-            },
-            "margin": {
-              "desktop": "64px auto",
-              "mobile": "16px 0%"
-            }
-          }
-        }
-      ],
-      "backgroundColor": "#1a1a1a",
-      "backgroundImage": {
-        "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/bg_crimes_mobile.jpg",
-        "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/bg_crimes_mobile.jpg"
-      },
-      "padding": {
-        "desktop": "4rem 2rem",
-        "mobile": "3rem 1rem"
-      }
-    },
-    {
-      "type": "super-flex",
-      "items": [
-        {
-          "type": "image",
-          "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/card-almir-garnier-crimes-desktop.png",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/card-bolsonaro-crimes-mobile.png"
-          },
-          "alt": "Foto de Almir Garnier",
-          "styles": {
-            "width": {
-              "desktop": "60%",
-              "mobile": "100%"
-            },
-            "height": {
-              "desktop": "auto",
-              "mobile": "auto"
-            },
-            "margin": {
-              "desktop": "64px auto -1px",
-              "mobile": "2rem 0 0 auto"
-            }
-          }
-        }
-      ],
-      "backgroundColor": "#FFF4E6",
-      "padding": {
-        "desktop": "4rem 2rem",
-        "mobile": "3rem 1rem"
-      }
-    },
-    {
-      "type": "super-flex",
-      "items": [
-        {
-          "type": "image",
-          "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/crimes-bolsonaro-desktop.png",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/crimes-bolsonaro-mobile.png"
-          },
-          "alt": "crimes de bolsonaro",
-          "styles": {
-            "width": {
-              "desktop": "50%",
-              "mobile": "100%"
-            },
-            "height": {
-              "desktop": "auto",
-              "mobile": "auto"
-            },
-            "margin": {
-              "desktop": "64px auto",
-              "mobile": "16px 0%"
-            }
-          }
-        }
-      ],
-      "backgroundColor": "#1a1a1a",
-      "backgroundImage": {
-        "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/bg_crimes_mobile.jpg",
-        "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/bg_crimes_mobile.jpg"
-      },
-      "padding": {
-        "desktop": "4rem 2rem",
-        "mobile": "3rem 1rem"
-      }
-    },
-    {
-      "type": "super-flex",
-      "items": [
-        {
-          "type": "text",
-          "tag": "h1",
-          "content": "COMO OS MINISTROS <br>VOTARAM",
-          "styles": {
-            "color": "#1a1a1a",
-            "textAlign": "left",
-            "width": {
-              "desktop": "40%",
-              "mobile": "80%"
-            },
-            "margin": {
-              "desktop": "2% auto 2% auto",
-              "mobile": "0% 0% 0% 5%"
-            },
-            "padding": {
-              "mobile": "0% 0% 0% 5%"
+              "mobile": "-355px 0% 64px"
             }
           }
         }
@@ -441,7 +243,7 @@
           "contentType": "p",
           "position": "right",
           "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/desk_moraes.webp",
-          "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/mob_moraes.webp",
+          "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/mobile_moraes.webp",
           "alt": "Paisagem inicial, ampla e deslumbrante"
         },
         {
@@ -509,27 +311,6 @@
           "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/desk_lucia.webp",
           "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/mob_lucia.webp",
           "alt": "Detalhe de balões de ar quente com zoom"
-        },
-        {
-          "title": "Perspectiva Inesperada: Deslocamento Lateral",
-          "text": "Agora, sinta a imagem se mover sutilmente para o lado. Essa pequena mudança de perspectiva cria uma sensação de profundidade e exploração contínua, mantendo o usuário engajado em uma coreografia perfeita.",
-          "textPosition": "left",
-          "image": "https://s2-g1.glbimg.com/gxr1so9qCY025b4OgYdZ10CVpaY=/0x0:1920x1165/1600x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/K/U/lrdBNXRCmytDvLWsQYrw/cena1-chegada-pos.jpg",
-          "alt": "Paisagem com deslocamento lateral suave"
-        },
-        {
-          "title": "Aprofundando a Narrativa: Opacidade e Escala",
-          "text": "À medida que o texto avança, o visual de fundo pode reagir de maneiras diferentes – talvez diminuindo um pouco a opacidade ou se expandindo ainda mais, guiando o olhar do usuário.",
-          "textPosition": "right",
-          "image": "https://s2-g1.glbimg.com/FlOe9prOlMOy2ughX-9n_ejmack=/0x0:1920x1080/1600x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/j/I/6Ppg4eTCyCEgGwobKkmA/dia-01-cena-02-cova-desktop-v2.jpg",
-          "alt": "Cores vibrantes do oceano"
-        },
-        {
-          "title": "Finalização Grandiosa: Vídeo Imersivo",
-          "text": "Para a grande final, um vídeo envolvente pode surgir e preencher a tela, oferecendo uma conclusão dramática e visualmente rica para sua narrativa de scroll.",
-          "textPosition": "right",
-          "image": "https://s2-g1.glbimg.com/BzDf6YS5VXIUK_p__YLYY607Ew8=/0x0:1920x1080/1600x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/7/3/R8t2RsTRmZunBONsgoiw/dia-01-cena-03-trilha-noturna-pos-desktop.jpg",
-          "alt": "Vídeo de uma pequena cachoeira para final imersivo"
         }
       ],
       "fullWidth": "false"
@@ -538,9 +319,41 @@
       "type": "super-flex",
       "items": [
         {
+          "type": "image",
+          "src": {
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/botao-link-trama-do-golpe-desk.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/botao-link-trama-do-golpe-mobi.png"
+          },
+          "alt": "Foto de Jair Bolsonaro de perfil",
+          "styles": {
+            "width": {
+              "desktop": "100%",
+              "mobile": "100%"
+            },
+            "height": {
+              "desktop": "auto",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "32px auto 0px",
+              "mobile": "64px auto 0px"
+            }
+          }
+        }
+      ],
+      "backgroundColor": "#FFF4E6",
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "super-flex",
+      "items": [
+        {
           "type": "text",
           "tag": "h1",
-          "content": "ATAQUES À DELAÇÃO DE CID E RECLAMAÇÕES SOBRE PROVAS: O QUE DISSERAM AS DEFESAS",
+          "content": "O QUE DISSERAM AS DEFESAS",
           "styles": {
             "textAlign": "left",
             "fontSize": {
@@ -560,15 +373,57 @@
               "mobile": "90%"
             },
             "margin": {
-              "desktop": "64px auto",
+              "desktop": "64px auto 4px",
               "mobile": "0"
             },
             "padding": {
               "desktop": "0",
-              "mobile": "5% 0% 0% 5%"
+              "mobile": "10% 0% 0% 5%"
             }
           }
         },
+        {
+          "type": "text",
+          "tag": "p",
+          "content": "Advogados dos réus atacaram delação de Mauro Cid, reclamaram das provas e defenderam que o crime mais grave, o de golpe de Estado, engloba o de abolição.",
+          "styles": {
+            "textAlign": "left",
+            "fontSize": {
+              "desktop": "20px",
+              "mobile": "16px"
+            },
+            "lineHeight": {
+              "desktop": "28px",
+              "mobile": "24px"
+            },
+            "fontWeight": {
+              "desktop": "500",
+              "mobile": "500"
+            },
+            "width": {
+              "desktop": "50%",
+              "mobile": "90%"
+            },
+            "margin": {
+              "desktop": "24px auto 64px",
+              "mobile": "0"
+            },
+            "padding": {
+              "desktop": "0",
+              "mobile": "6% 0% 0% 5%"
+            }
+          }
+        }
+      ],
+      "backgroundColor": "#FFF4E6",
+      "padding": {
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 1rem"
+      }
+    },
+    {
+      "type": "super-flex",
+      "items": [
         {
           "type": "image",
           "src": {
@@ -619,7 +474,7 @@
             },
             "padding": {
               "desktop": "0%",
-              "mobile": "10% 0% 10% 5%"
+              "mobile": "0%"
             }
           }
         }
@@ -636,7 +491,7 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/header-defesa-bolsonaro-desktop.png",
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/header-defesa-mauro-cid-desktop.png",
             "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/header-defesa-mauro-cid.png"
           },
           "alt": "Header de defesa do Mauro Cid",
@@ -683,7 +538,7 @@
             },
             "padding": {
               "desktop": "0%",
-              "mobile": "10% 0% 10% 5%"
+              "mobile": "0%"
             }
           }
         }
@@ -700,8 +555,8 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/header-defesa-bolsonaro-desktop.png",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/header-defesa-mauro-cid.png"
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/header-defesa-alexandre-ramagem-desktop.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/header-defesa-alexandre-ramagem.png"
           },
           "alt": "Header de defesa do Alexandre Ramagem",
           "styles": {
@@ -747,7 +602,7 @@
             },
             "padding": {
               "desktop": "0%",
-              "mobile": "10% 0% 10% 5%"
+              "mobile": "0%"
             }
           }
         }
@@ -764,8 +619,8 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/header-defesa-bolsonaro-desktop.png",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/header-defesa-mauro-cid.png"
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/header-defesa-almir-garnier-desktop.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/header-defesa-almir-garnier.png"
           },
           "alt": "Header de defesa do Almir Garnier",
           "styles": {
@@ -811,7 +666,7 @@
             },
             "padding": {
               "desktop": "0%",
-              "mobile": "10% 0% 10% 5%"
+              "mobile": "0%"
             }
           }
         }
@@ -828,8 +683,8 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/header-defesa-bolsonaro-desktop.png",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/header-defesa-mauro-cid.png"
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/header-defesa-anderson-torres-desktop.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/header-defesa-anderson-torres.png"
           },
           "alt": "Header de defesa do Anderson Torres",
           "styles": {
@@ -875,7 +730,7 @@
             },
             "padding": {
               "desktop": "0%",
-              "mobile": "10% 0% 10% 5%"
+              "mobile": "0%"
             }
           }
         }
@@ -892,8 +747,8 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/header-defesa-bolsonaro-desktop.png",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/header-defesa-mauro-cid.png"
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/header-defesa-walter-braga-desktop.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/header-defesa-walter-braga.png"
           },
           "alt": "Header de defesa do Braga Netto",
           "styles": {
@@ -939,7 +794,7 @@
             },
             "padding": {
               "desktop": "0%",
-              "mobile": "10% 0% 10% 5%"
+              "mobile": "0%"
             }
           }
         }
@@ -956,8 +811,8 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/header-defesa-bolsonaro-desktop.png",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/header-defesa-mauro-cid.png"
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/header-defesa-augusto-heleno-desktop.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/header-defesa-augusto-heleno.png"
           },
           "alt": "Header de defesa do Augusto Heleno",
           "styles": {
@@ -1003,7 +858,7 @@
             },
             "padding": {
               "desktop": "0%",
-              "mobile": "10% 0% 10% 5%"
+              "mobile": "0%"
             }
           }
         }
@@ -1020,8 +875,8 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/header-defesa-bolsonaro-desktop.png",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/header-defesa-mauro-cid.png"
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/header-defesa-paulo-sergio-desktop.png",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/header-defesa-paulo-sergio.png"
           },
           "alt": "Header de defesa do Paulo Sergio",
           "styles": {
@@ -1067,7 +922,7 @@
             },
             "padding": {
               "desktop": "0%",
-              "mobile": "10% 0% 10% 5%"
+              "mobile": "0%"
             }
           }
         }

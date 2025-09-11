@@ -67,9 +67,17 @@ async function fetchGoogleDoc(docId) {
         if (stepsCount === 0) {
           console.warn(`⚠️ ScrollyTelling sem steps: ${comp.text?.substring(0, 50)}...`);
         } else {
-          comp.steps.forEach((step, stepIndex) => {
-            console.log(`     Step ${stepIndex + 1}: "${step.title?.substring(0, 30)}..." | Imagem: ${!!step.image} | Vídeo: ${!!step.video}`);
-          });
+comp.steps.forEach((step, stepIndex) => {
+  // 🔧 LOG CORRIGIDO - AGORA MOSTRA MOBILE TAMBÉM
+  const hasImage = !!step.image;
+  const hasImageMobile = !!step.imageMobile;
+  const hasVideo = !!step.video;
+  const hasVideoMobile = !!step.videoMobile;
+  
+  console.log(`     Step ${stepIndex + 1}: "${step.title?.substring(0, 30)}..."`);
+  console.log(`        Desktop - Imagem: ${hasImage ? '✅' : '❌'} | Vídeo: ${hasVideo ? '✅' : '❌'}`);
+  console.log(`        Mobile  - Imagem: ${hasImageMobile ? '✅' : '❌'} | Vídeo: ${hasVideoMobile ? '✅' : '❌'}`);
+});
         }
       });
     }
@@ -525,11 +533,33 @@ function parseJSONField(jsonString, fieldName) {
   cleanedString = cleanedString.replace(/[‘’‚‛‹›]/g, "'");
 
   // 4. Tenta o parse. Se falhar, é por causa de aspas dentro do conteúdo.
-  try {
-    const validJsonString = cleanedString.replace(/,\s*([}\]])/g, '$1');
-    const parsed = JSON.parse(validJsonString);
+try {
+  const validJsonString = cleanedString.replace(/,\s*([}\]])/g, '$1');
+  const parsed = JSON.parse(validJsonString);
+  
+  // 🔧 VALIDAÇÃO ESPECÍFICA PARA STEPS DE SCROLLYTELLING
+  if (fieldName === 'steps' && Array.isArray(parsed)) {
+    console.log(`✅ JSON parseado com sucesso para ${fieldName}: ${parsed.length} step(s)`);
+    
+    // Verifica se os steps têm campos mobile
+    let stepsMobileCount = 0;
+    parsed.forEach((step, index) => {
+      if (step.imageMobile || step.videoMobile) {
+        stepsMobileCount++;
+      }
+    });
+    
+    if (stepsMobileCount > 0) {
+      console.log(`   📱 Steps com conteúdo mobile: ${stepsMobileCount}/${parsed.length}`);
+    } else {
+      console.warn(`   ⚠️  Nenhum step possui imageMobile ou videoMobile configurado!`);
+      console.warn(`   💡 Adicione campos "imageMobile" e/ou "videoMobile" nos steps para suporte mobile`);
+    }
+  } else {
     console.log(`✅ JSON parseado com sucesso para ${fieldName}: ${Array.isArray(parsed) ? parsed.length : 1} item(s)`);
-    return parsed;
+  }
+  
+  return parsed;
   } catch (e) {
     console.warn(`⚠️  Parse inicial falhou para "${fieldName}". Tentando corrigir aspas no conteúdo...`);
     

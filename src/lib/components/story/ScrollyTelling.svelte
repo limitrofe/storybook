@@ -2,6 +2,7 @@
     import { onMount } from 'svelte';
     import Scroller from './shared/Scroller.svelte';
     import Step from './shared/Step.svelte';
+    import StepEnhanced from './shared/StepEnhanced.svelte';
     
     export let steps = [];
     export let fullWidth = false;
@@ -26,7 +27,7 @@
         return Math.min(currentStepIndex, validSteps.length - 1);
     })();
 
-    // ✨ FUNÇÃO getMediaSource MAIS CLARA E EXPLÍCITA
+    // FUNÇÃO getMediaSource MAIS CLARA E EXPLÍCITA
     function getMediaSource(step) {
         if (!step) {
             return { type: null, src: null };
@@ -42,21 +43,40 @@
         if (step.video) return { type: 'video', src: step.video };
         if (step.image) return { type: 'image', src: step.image };
         
-        // Se nada for encontrado
         return { type: null, src: null };
     }
 
-    // ✨ VARIÁVEL REATIVA para garantir que a mídia seja atualizada quando `isMobile` mudar
-    $: mediaSources = validSteps.map(step => getMediaSource(step));
+    // VARIÁVEL REATIVA para garantir que a mídia seja atualizada quando `isMobile` mudar
+    $: mediaSources = validSteps.map(step => {
+        console.log('🔄 Recalculando mediaSources para isMobile:', isMobile);
+        return getMediaSource(step);
+    });
+
+    // 🆕 NOVA FUNÇÃO: Verifica se o step usa formato avançado
+    function hasAdvancedConfig(step) {
+        return step.textConfig && step.textConfig.elements && Array.isArray(step.textConfig.elements);
+    }
 
     // Debug
     $: {
+        console.log('🔍 Debug dos steps carregados:', validSteps);
+        validSteps.forEach((step, index) => {
+            console.log(`Step ${index}:`, {
+                title: step.title,
+                hasImage: !!step.image,
+                hasImageMobile: !!step.imageMobile,
+                image: step.image,
+                imageMobile: step.imageMobile,
+                hasAdvancedConfig: hasAdvancedConfig(step) // 🆕 NOVO DEBUG
+            });
+        });
+        
         console.log('📜 ScrollyTelling Debug:', {
             isMobile,
             currentStepIndex,
             scrollProgress,
             activeMediaIndex,
-            activeMediaSrc: mediaSources[activeMediaIndex]?.src, // Debug do src ativo
+            activeMediaSrc: mediaSources[activeMediaIndex]?.src,
         });
     }
 </script>
@@ -81,7 +101,18 @@
         <div slot="foreground" class="steps-foreground">
             <section class="spacer-top"></section>
             {#each validSteps as step, i}
-                <Step stepText={`<h3>${step.title || ''}</h3><div>${step.text || ''}</div>`} length={validSteps.length - 1} {i} />
+                <!-- 🆕 CONDICIONAL: Usa StepEnhanced se tem textConfig.elements, senão usa Step original -->
+                {#if hasAdvancedConfig(step)}
+                    <StepEnhanced 
+                        {step} 
+                        {isMobile}
+                        stepIndex={i}
+                        totalSteps={validSteps.length - 1}
+                    />
+                {:else}
+                    <!-- Mantém o comportamento original para compatibilidade -->
+                    <Step stepText={`<h3>${step.title || ''}</h3><div>${step.text || ''}</div>`} length={validSteps.length - 1} {i} />
+                {/if}
             {/each}
             <section class="spacer-bottom"></section>
         </div>
@@ -120,7 +151,7 @@
         width: 100%;
         height: 100%;
         opacity: 0;
-        transition: opacity 0.5s ease-in-out; /* Adicionado para suavizar a troca */
+        /* transition: opacity 0.5s ease-in-out; Adicionado para suavizar a troca */
     }
     
     .media-wrapper.active {
