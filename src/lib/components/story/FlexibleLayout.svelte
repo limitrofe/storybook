@@ -1,95 +1,79 @@
-<!-- VERSÃO DEBUG - FlexibleLayout.svelte -->
 <script>
-  // TEXTO - Controle total
   export let text = '';
-  export let textAlign = 'left';
-  export let textPosition = 'left';
+  export let textPosition = 'center';
+  export let textAlign = 'center';
+  export let backgroundColor = '#000000';
   export let textColor = '#ffffff';
-  export let fontSize = 'clamp(2rem, 5vw, 4rem)';
-  export let fontSizeMobile = 'clamp(1.5rem, 8vw, 2.5rem)';
-  export let textZIndex = 2;
+  export let fontSize = '3rem';
+  export let fontSizeMobile = '2rem';
+  export let minHeight = '100vh';
+  export let minHeightMobile = '100vh';
+  export let padding = '2rem';
+  export let paddingMobile = '1rem';
+  export let textZIndex = '10';
 
-  // IMAGEM 1 - Grifo/Destaque
+  // Imagem 1 (grifo/destaque)
   export let image1Desktop = '';
   export let image1Mobile = '';
-  export let image1Width = '200px';
-  export let image1Height = '20px';
-  export let image1WidthMobile = '150px';
-  export let image1HeightMobile = '15px';
-  export let image1X = '0px';
-  export let image1Y = '0px';
-  export let image1XMobile = '0px';
-  export let image1YMobile = '0px';
-  export let image1ZIndex = 3;
+  export let image1Width = '300px';
+  export let image1Height = 'auto';
+  export let image1WidthMobile = '200px';
+  export let image1HeightMobile = 'auto';
+  export let image1X = '50%';
+  export let image1Y = '50%';
+  export let image1XMobile = '50%';
+  export let image1YMobile = '50%';
+  export let image1ZIndex = '5';
 
-  // IMAGEM 2 - Principal
+  // Imagem 2 (principal/fundo)
   export let image2Desktop = '';
   export let image2Mobile = '';
-  export let image2Width = '400px';
-  export let image2Height = '500px';
+  export let image2Width = '500px';
+  export let image2Height = 'auto';
   export let image2WidthMobile = '300px';
-  export let image2HeightMobile = '400px';
-  export let image2Position = 'right';
-  export let image2X = '0px';
-  export let image2Y = '0px';
-  export let image2XMobile = '0px';
-  export let image2YMobile = '0px';
-  export let image2ZIndex = 1;
-
-  // LAYOUT
-  export let backgroundColor = '#1a1a1a';
-  export let minHeight = '80vh';
-  export let minHeightMobile = '70vh';
-  export let padding = '2rem';
-  export let paddingMobile = '1.5rem';
-
-  // 🔍 DEBUG: Verificar TUDO que está chegando
-//   $: {
-//     console.group('🔍 FLEXIBLE LAYOUT DEBUG');
-//     console.log('Props recebidas:', {
-//       image1Desktop: `"${image1Desktop}"`,
-//       image2Desktop: `"${image2Desktop}"`,
-//       image1Mobile: `"${image1Mobile}"`,
-//       image2Mobile: `"${image2Mobile}"`,
-//       image2Position: `"${image2Position}"`,
-//       text: text ? 'OK' : 'VAZIO'
-//     });
-    
-//     console.log('Condições if:', {
-//       'image1Desktop': !!image1Desktop,
-//       'image2Desktop': !!image2Desktop,
-//       'image1Desktop.length': image1Desktop ? image1Desktop.length : 0,
-//       'image2Desktop.length': image2Desktop ? image2Desktop.length : 0
-//     });
-    
-//     console.log('Valores computados:', {
-//       finalImage1Mobile: image1Mobile || image1Desktop,
-//       finalImage2Mobile: image2Mobile || image2Desktop,
-//       textPositionClass: `text-position-${textPosition}`,
-//       textAlignClass: `text-align-${textAlign}`,
-//       image2PositionClass: `image2-position-${image2Position}`
-//     });
-//     console.groupEnd();
-//   }
+  export let image2HeightMobile = 'auto';
+  export let image2X = '20%';
+  export let image2Y = '20%';
+  export let image2XMobile = '10%';
+  export let image2YMobile = '10%';
+  export let image2ZIndex = '1';
+  export let image2Position = 'left';
 
   // Lógica para processar o texto
   $: lines = text.split('<br>').map(line => line.trim());
 
-  // Resolver imagens com fallback
-  $: finalImage1Mobile = image1Mobile || image1Desktop;
-  $: finalImage2Mobile = image2Mobile || image2Desktop;
+  // ✅ RESOLVER IMAGENS COM MÚLTIPLOS FALLBACKS
+  $: finalImage1Mobile = image1Mobile || image1Desktop || '';
+  $: finalImage2Mobile = image2Mobile || image2Desktop || '';
+  
+  // ✅ GARANTIR QUE SEMPRE TEMOS UM SRC VÁLIDO
+  $: safeSrcImage1 = finalImage1Mobile || image1Desktop || '';
+  $: safeSrcImage2 = finalImage2Mobile || image2Desktop || '';
 
-  // Classes para posicionamento do texto
+  // Classes para posicionamento
   $: textPositionClass = `text-position-${textPosition}`;
   $: textAlignClass = `text-align-${textAlign}`;
   $: image2PositionClass = `image2-position-${image2Position}`;
-</script>
 
-<!-- 🚨 DEBUG ALERT NO TOPO -->
-<!-- <div style="position: fixed; top: 0; left: 0; background: red; color: white; padding: 10px; z-index: 9999; font-size: 12px;">
-  DEBUG: img1="{image1Desktop}" | img2="{image2Desktop}" | 
-  Show1={!!image1Desktop} | Show2={!!image2Desktop}
-</div> -->
+  // ✅ FUNÇÃO PARA DETECTAR SE É MOBILE
+  function isMobileDevice() {
+    if (typeof window === 'undefined') return false;
+    return window.innerWidth <= 768;
+  }
+
+  // ✅ FUNÇÃO PARA ESCOLHER A MELHOR IMAGEM
+  function getBestImageSrc(desktopSrc, mobileSrc) {
+    if (!desktopSrc && !mobileSrc) return '';
+    
+    // Se estamos no mobile e existe versão mobile, use mobile
+    if (isMobileDevice() && mobileSrc) {
+      return mobileSrc;
+    }
+    
+    // Senão, use desktop como fallback
+    return desktopSrc || mobileSrc || '';
+  }
+</script>
 
 <section 
   class="flexible-layout"
@@ -123,34 +107,48 @@
     --image2-z-index: {image2ZIndex};
   "
 >
-  <!-- 🔍 DEBUG: SEMPRE MOSTRAR (para ver se o problema é no if) -->
-  <!-- <div style="position: absolute; top: 10px; right: 10px; background: yellow; color: black; padding: 5px; font-size: 10px; z-index: 999;">
-    IMG1: {image1Desktop ? 'SIM' : 'NÃO'} | 
-    IMG2: {image2Desktop ? 'SIM' : 'NÃO'}
-  </div> -->
 
-  <!-- IMAGEM 2 - Principal (fica atrás) -->
-  {#if image2Desktop}
-    <div class="image2-container {image2PositionClass}" >
+  <!-- ✅ IMAGEM 2 - Principal (fica atrás) -->
+  {#if image2Desktop || image2Mobile}
+    <div class="image2-container {image2PositionClass}">
       <picture class="image2">
-        {#if finalImage2Mobile && finalImage2Mobile !== image2Desktop}
+        <!-- ✅ SEMPRE RENDERIZAR SOURCE MOBILE SE EXISTIR -->
+        {#if finalImage2Mobile}
           <source 
-            media="(max-width: 799px)" 
+            media="(max-width: 768px)" 
             srcset="{finalImage2Mobile}"
           />
         {/if}
-        <source 
-          media="(min-width: 800px)" 
-          srcset="{image2Desktop}"
-        />
+        
+        <!-- ✅ SOURCE DESKTOP -->
+        {#if image2Desktop}
+          <source 
+            media="(min-width: 769px)" 
+            srcset="{image2Desktop}"
+          />
+        {/if}
+        
+        <!-- ✅ IMG COM MELHOR FALLBACK -->
         <img 
-          src="{image2Desktop}" 
+          src="{safeSrcImage2}" 
           alt="Imagem principal"
           loading="lazy"
           style="border: 0;"
           on:error={(e) => {
             console.error('❌ Erro ao carregar imagem principal:', e.target.src);
-            e.target.style.display = 'none';
+            console.log('🔍 Tentando fallback...');
+            
+            // ✅ FALLBACK INTELIGENTE
+            if (e.target.src === finalImage2Mobile && image2Desktop) {
+              console.log('📱➡️🖥️ Mudando de mobile para desktop');
+              e.target.src = image2Desktop;
+            } else if (e.target.src === image2Desktop && finalImage2Mobile) {
+              console.log('🖥️➡️📱 Mudando de desktop para mobile');
+              e.target.src = finalImage2Mobile;
+            } else {
+              console.log('❌ Nenhum fallback disponível, ocultando imagem');
+              e.target.style.display = 'none';
+            }
           }}
           on:load={(e) => {
             console.log('✅ Imagem principal carregada:', e.target.src);
@@ -158,7 +156,6 @@
         />
       </picture>
     </div>
-  {:else}
   {/if}
 
   <!-- TEXTO -->
@@ -175,27 +172,46 @@
     </div>
   </div>
 
-  <!-- IMAGEM 1 - Grifo/Destaque (fica na frente) -->
-  {#if image1Desktop}
+  <!-- ✅ IMAGEM 1 - Grifo/Destaque (fica na frente) -->
+  {#if image1Desktop || image1Mobile}
     <div class="image1-container">
       <picture class="image1">
-        {#if finalImage1Mobile && finalImage1Mobile !== image1Desktop}
+        <!-- ✅ SEMPRE RENDERIZAR SOURCE MOBILE SE EXISTIR -->
+        {#if finalImage1Mobile}
           <source 
-            media="(max-width: 799px)" 
+            media="(max-width: 768px)" 
             srcset="{finalImage1Mobile}"
           />
         {/if}
-        <source 
-          media="(min-width: 800px)" 
-          srcset="{image1Desktop}"
-        />
+        
+        <!-- ✅ SOURCE DESKTOP -->
+        {#if image1Desktop}
+          <source 
+            media="(min-width: 769px)" 
+            srcset="{image1Desktop}"
+          />
+        {/if}
+        
+        <!-- ✅ IMG COM MELHOR FALLBACK -->
         <img 
-          src="{image1Desktop}" 
+          src="{safeSrcImage1}" 
           alt="Destaque decorativo"
           loading="lazy"
           on:error={(e) => {
             console.error('❌ Erro ao carregar grifo:', e.target.src);
-            e.target.style.display = 'none';
+            console.log('🔍 Tentando fallback...');
+            
+            // ✅ FALLBACK INTELIGENTE
+            if (e.target.src === finalImage1Mobile && image1Desktop) {
+              console.log('📱➡️🖥️ Mudando de mobile para desktop');
+              e.target.src = image1Desktop;
+            } else if (e.target.src === image1Desktop && finalImage1Mobile) {
+              console.log('🖥️➡️📱 Mudando de desktop para mobile');
+              e.target.src = finalImage1Mobile;
+            } else {
+              console.log('❌ Nenhum fallback disponível, ocultando grifo');
+              e.target.style.display = 'none';
+            }
           }}
           on:load={(e) => {
             console.log('✅ Grifo carregado:', e.target.src);
@@ -203,166 +219,168 @@
         />
       </picture>
     </div>
-  {:else}
-    <!-- 🚨 DEBUG: Mostrar quando NÃO tem imagem1 -->
-    <!-- <div>
-      ❌ IMAGEM 1 NÃO ENCONTRADA<br>
-      image1Desktop = "{image1Desktop}"<br>
-      Length: {image1Desktop ? image1Desktop.length : 'undefined'}
-    </div> -->
   {/if}
+
 </section>
 
 <style>
-.flexible-layout {
-  position: relative;
-  width: 100%;
-  min-height: var(--min-height-mobile);
-  background-color: var(--bg-color);
-  padding: 0; /* O padding será movido para o container de texto */
-  margin: 0;
-  overflow: hidden;
-  box-sizing: border-box;
-  /* display: flex; <--- REMOVER */
-  /* flex-direction: column; <--- REMOVER */
-  /* align-items: flex-start; <--- REMOVER */
-}
-
-.text-container {
-  /* position: relative; <--- ALTERAR */
-  position: absolute;
-  top: 3%;
-  left: 3%;
-  height: 100%; /* Para preencher a altura */
-  padding: var(--padding-mobile); /* Adicionar padding aqui */
-  box-sizing: border-box; /* Para o padding não aumentar o tamanho */
-  z-index: var(--text-z-index);
-  width: 100%;
-  display: flex;
-  /* order: 1; <--- REMOVER */
-  /* margin-bottom: 2rem; <--- REMOVER */
-}
-
-  .text-position-left { justify-content: flex-start; }
-  .text-position-center { justify-content: center; }
-  .text-position-right { justify-content: flex-end; }
-
-  .text-wrapper {
-    max-width: 65%;
-  }
-
-  .title {
-    font-family: 'Globotipo', 'Opensans', sans-serif;
-    font-size: var(--font-size-mobile);
-    font-weight: 800;
-    line-height: 1.3;
-    color: var(--text-color);
-    margin: 0;
-    top: 10%;
-    padding-top: 80px; 
-  }
-
-  .text-align-left .title { text-align: left; }
-  .text-align-center .title { text-align: center; }
-  .text-align-right .title { text-align: right; }
-
-  .line {
-    display: inline-block;
+  .flexible-layout {
+    position: relative;
     width: 100%;
+    min-height: var(--min-height);
+    background-color: var(--bg-color);
+    padding: var(--padding);
+    box-sizing: border-box;
+    overflow: hidden;
   }
 
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .flexible-layout {
+      min-height: var(--min-height-mobile);
+      padding: var(--padding-mobile);
+    }
+  }
+
+  /* ===== IMAGEM 2 (PRINCIPAL/FUNDO) ===== */
+  .image2-container {
+    position: absolute;
+    width: var(--image2-width);
+    height: var(--image2-height);
+    left: var(--image2-x);
+    top: var(--image2-y);
+    z-index: var(--image2-z-index);
+    transform: translate(-50%, -50%);
+  }
+
+  .image2-container.image2-position-left {
+    left: var(--image2-x);
+    transform: translate(0, -50%);
+  }
+
+  .image2-container.image2-position-right {
+    right: var(--image2-x);
+    left: auto;
+    transform: translate(0, -50%);
+  }
+
+  .image2-container.image2-position-center {
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  @media (max-width: 768px) {
+    .image2-container {
+      width: var(--image2-width-mobile);
+      height: var(--image2-height-mobile);
+      left: var(--image2-x-mobile);
+      top: var(--image2-y-mobile);
+    }
+  }
+
+  .image2 {
+    width: 100%;
+    height: 100%;
+  }
+
+  .image2 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 0;
+  }
+
+  /* ===== IMAGEM 1 (GRIFO/DESTAQUE) ===== */
   .image1-container {
     position: absolute;
+    width: var(--image1-width);
+    height: var(--image1-height);
+    left: var(--image1-x);
+    top: var(--image1-y);
     z-index: var(--image1-z-index);
-    top: var(--image1-y-mobile);
-    left: var(--image1-x-mobile);
-    pointer-events: none;
+    transform: translate(-50%, -50%);
+  }
+
+  @media (max-width: 768px) {
+    .image1-container {
+      width: var(--image1-width-mobile);
+      height: var(--image1-height-mobile);
+      left: var(--image1-x-mobile);
+      top: var(--image1-y-mobile);
+    }
+  }
+
+  .image1 {
+    width: 100%;
+    height: 100%;
   }
 
   .image1 img {
-    width: var(--image1-width-mobile);
-    height: var(--image1-height-mobile);
-    object-fit: contain;
-    display: block;
-  }
-
-.image2-container {
-  /* position: relative; <--- ALTERAR */
-  position: absolute;
-  top: var(--image2-y-mobile); /* Adicionar posicionamento */
-  left: var(--image2-x-mobile); /* Adicionar posicionamento */
-  z-index: var(--image2-z-index);
-  /* order: 2; <--- REMOVER */
-  width: var(--image2-width-mobile); /* Usar a variável de largura */
-  /* max-width: 80%; <--- REMOVER */
-  /* margin: 0 auto; <--- REMOVER */
-}
-  .image2 img {
     width: 100%;
-    height: auto;
-    object-fit: cover;
-    display: block;
+    height: 100%;
+    object-fit: contain;
+    border: 0;
   }
 
-  .image2-position-right { margin: 0; }
-  .image2-position-left {  margin: 0;}
-  .image2-position-center {  margin: 0; }
-  .image2-position-right-bottom {  margin: 0;}
+  /* ===== TEXTO ===== */
+  .text-container {
+    position: absolute;
+    z-index: var(--text-z-index);
+    color: var(--text-color);
+  }
 
-  @media (min-width: 800px) {
-    .flexible-layout {
-  min-height: var(--min-height);
-  /* padding: var(--padding); <--- REMOVER */
-  /* flex-direction: row; <--- REMOVER */
-  /* align-items: center; <--- REMOVER */
-}
+  .text-position-center {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+  }
 
+  .text-position-top {
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 80%;
+  }
 
-.text-container {
-  /* order: 1; <--- REMOVER */
-  width: 100%; /* Manter 100% ou ajustar conforme o design */
-  /* margin-bottom: 0; <--- REMOVER */
-  padding: var(--padding); /* Adicionar padding aqui também */
-}
+  .text-position-bottom {
+    bottom: 10%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 80%;
+  }
 
+  .text-position-left {
+    top: 50%;
+    left: 10%;
+    transform: translate(0, -50%);
+    width: 40%;
+  }
 
+  .text-position-right {
+    top: 50%;
+    right: 10%;
+    transform: translate(0, -50%);
+    width: 40%;
+  }
+
+  .text-align-center { text-align: center; }
+  .text-align-left { text-align: left; }
+  .text-align-right { text-align: right; }
+
+  .title {
+    font-size: var(--font-size);
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  @media (max-width: 768px) {
     .title {
-      font-size: var(--font-size);
-    }
-
-    .image1-container {
-      top: var(--image1-y);
-      left: var(--image1-x);
-    }
-
-    .image1 img {
-      width: var(--image1-width);
-      height: var(--image1-height);
-    }
-
-.image2-container {
-  position: absolute;
-  /* order: 2; <--- REMOVER */
-  width: auto;
-  /* ... resto das propriedades está OK */
-}
-
-    .image2 img {
-      width: var(--image2-width);
-      height: var(--image2-height);
-      max-height: none;
-      object-fit: cover;
-    }
-
-.image2-position-right,
-.image2-position-left,
-.image2-position-center,
-.image2-position-right-bottom {
-  margin: 0; /* Reseta qualquer margem */
-
+      font-size: var(--font-size-mobile);
     }
   }
-  .text-wrapper {
-  max-width: 50%;
-}
+
+  .line {
+    display: inline-block;
+  }
 </style>

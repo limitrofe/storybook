@@ -1,67 +1,90 @@
-<!-- src/lib/components/story/SplitTitle.svelte -->
 <script>
-  // Props principais
   export let text = '';
-  export let image = '';
-  export let underlineLines = '';
-
-  // Imagens principais (Desktop e Mobile) 
   export let imageDesktop = '';
   export let imageMobile = '';
-
-  // Sistema de grifo/destaque
-  export let underlineImageDesktop = '';
-  export let underlineImageMobile = '';
-  export let underlineGif = '';
-
-  // Dimensões do grifo
-  export let underlineWidthDesktop = '250px';
+  export let linesToUnderline = [];
+  export let underlineDesktop = '';
+  export let underlineMobile = '';
+  export let underlineWidthDesktop = '100px';
   export let underlineHeightDesktop = '20px';
-  export let underlineWidthMobile = '180px';
-  export let underlineHeightMobile = '18px';
+  export let underlineWidthMobile = '80px';
+  export let underlineHeightMobile = '15px';
 
-  // Cores
-  export let backgroundColor = '#1a1a1a';
-  export let textColor = '#ffffff';
+  // ✅ RESOLVER IMAGENS COM MÚLTIPLOS FALLBACKS
+  $: finalImageDesktop = imageDesktop || imageMobile || '';
+  $: finalImageMobile = imageMobile || imageDesktop || '';
+  $: finalUnderlineDesktop = underlineDesktop || underlineMobile || '';
+  $: finalUnderlineMobile = underlineMobile || underlineDesktop || '';
 
-  // ✅ NOVO: Controle de largura do texto
-  export let textWidth = '70%';        // Desktop
-  export let textWidthMobile = '100%'; // Mobile
+  // ✅ GARANTIR QUE SEMPRE TEMOS UM SRC VÁLIDO
+  $: safeSrcImage = finalImageMobile || finalImageDesktop || '';
+  $: safeSrcUnderline = finalUnderlineMobile || finalUnderlineDesktop || '';
 
-  // Lógica para resolver as imagens
-  $: finalImageDesktop = imageDesktop || image;
-  $: finalImageMobile = imageMobile || image || finalImageDesktop;
-  $: finalUnderlineDesktop = underlineImageDesktop || underlineGif;
-  $: finalUnderlineMobile = underlineImageMobile || underlineGif || finalUnderlineDesktop;
+  // ✅ FUNÇÃO PARA ESCOLHER A MELHOR IMAGEM
+  function getBestImageSrc(desktopSrc, mobileSrc) {
+    if (!desktopSrc && !mobileSrc) return '';
+    
+    if (typeof window !== 'undefined' && window.innerWidth <= 768 && mobileSrc) {
+      return mobileSrc;
+    }
+    
+    return desktopSrc || mobileSrc || '';
+  }
 
-  // Processar texto e linhas
-  $: lines = text.split('<br>').map(line => line.trim());
-  $: linesToUnderline = underlineLines.toString().split(',').map(n => parseInt(n.trim(), 10));
+  // Processar texto em linhas
+  $: lines = text.split('<br>').map(line => line.trim()).filter(line => line.length > 0);
 </script>
 
-<section 
-  class="split-section" 
-  style="
-    --bg-color: {backgroundColor}; 
-    --text-color: {textColor};
-    --text-width: {textWidth};
-    --text-width-mobile: {textWidthMobile};
-  "
->
-  <!-- Imagem de fundo (fica atrás de tudo) -->
-  <div class="background-image">
-    <picture>
-      <source 
-        media="(max-width: 799px)" 
-        srcset={finalImageMobile}
-      >
-      <source 
-        media="(min-width: 800px)" 
-        srcset={finalImageDesktop}
-      >
-      <img src={finalImageDesktop} alt="Imagem de destaque" />
-    </picture>
-  </div>
+<!-- Container principal -->
+<section class="split-title">
+  
+  <!-- ✅ IMAGEM DE FUNDO CORRIGIDA -->
+  {#if imageDesktop || imageMobile}
+    <div class="background-image">
+      <picture>
+        <!-- ✅ SEMPRE RENDERIZAR SOURCE MOBILE SE EXISTIR -->
+        {#if finalImageMobile}
+          <source 
+            media="(max-width: 768px)" 
+            srcset={finalImageMobile}
+          >
+        {/if}
+        
+        <!-- ✅ SOURCE DESKTOP -->
+        {#if finalImageDesktop}
+          <source 
+            media="(min-width: 769px)" 
+            srcset={finalImageDesktop}
+          >
+        {/if}
+        
+        <!-- ✅ IMG COM MELHOR FALLBACK -->
+        <img 
+          src={safeSrcImage} 
+          alt="Imagem de destaque" 
+          on:error={(e) => {
+            console.error('❌ Erro ao carregar imagem de fundo:', e.target.src);
+            console.log('🔍 Tentando fallback...');
+            
+            // ✅ FALLBACK INTELIGENTE
+            if (e.target.src === finalImageMobile && finalImageDesktop) {
+              console.log('📱➡️🖥️ Mudando de mobile para desktop');
+              e.target.src = finalImageDesktop;
+            } else if (e.target.src === finalImageDesktop && finalImageMobile) {
+              console.log('🖥️➡️📱 Mudando de desktop para mobile');
+              e.target.src = finalImageMobile;
+            } else {
+              console.log('❌ Nenhum fallback disponível, ocultando imagem');
+              e.target.style.display = 'none';
+            }
+          }}
+          on:load={(e) => {
+            console.log('✅ Imagem de fundo carregada:', e.target.src);
+          }}
+        />
+      </picture>
+    </div>
+  {/if}
 
   <!-- Texto por cima da imagem -->
   <div class="text-overlay">
@@ -75,18 +98,28 @@
             <span class="line-container" class:has-underline={shouldUnderline}>
               {@html line}
 
-              {#if shouldUnderline && finalUnderlineDesktop}
+              <!-- ✅ GRIFO DECORATIVO CORRIGIDO -->
+              {#if shouldUnderline && (underlineDesktop || underlineMobile)}
                 <picture class="underline-image">
-                  <source 
-                    media="(max-width: 799px)" 
-                    srcset={finalUnderlineMobile}
-                  >
-                  <source 
-                    media="(min-width: 800px)" 
-                    srcset={finalUnderlineDesktop}
-                  >
+                  <!-- ✅ SEMPRE RENDERIZAR SOURCE MOBILE SE EXISTIR -->
+                  {#if finalUnderlineMobile}
+                    <source 
+                      media="(max-width: 768px)" 
+                      srcset={finalUnderlineMobile}
+                    >
+                  {/if}
+                  
+                  <!-- ✅ SOURCE DESKTOP -->
+                  {#if finalUnderlineDesktop}
+                    <source 
+                      media="(min-width: 769px)" 
+                      srcset={finalUnderlineDesktop}
+                    >
+                  {/if}
+                  
+                  <!-- ✅ IMG COM MELHOR FALLBACK -->
                   <img 
-                    src={finalUnderlineDesktop} 
+                    src={safeSrcUnderline} 
                     alt="Grifo decorativo"
                     style="
                       --w-desktop: {underlineWidthDesktop};
@@ -94,173 +127,160 @@
                       --w-mobile: {underlineWidthMobile};
                       --h-mobile: {underlineHeightMobile};
                     "
+                    on:error={(e) => {
+                      console.error('❌ Erro ao carregar grifo:', e.target.src);
+                      console.log('🔍 Tentando fallback...');
+                      
+                      // ✅ FALLBACK INTELIGENTE
+                      if (e.target.src === finalUnderlineMobile && finalUnderlineDesktop) {
+                        console.log('📱➡️🖥️ Grifo: Mudando de mobile para desktop');
+                        e.target.src = finalUnderlineDesktop;
+                      } else if (e.target.src === finalUnderlineDesktop && finalUnderlineMobile) {
+                        console.log('🖥️➡️📱 Grifo: Mudando de desktop para mobile');
+                        e.target.src = finalUnderlineMobile;
+                      } else {
+                        console.log('❌ Nenhum fallback disponível para grifo, ocultando');
+                        e.target.style.display = 'none';
+                      }
+                    }}
+                    on:load={(e) => {
+                      console.log('✅ Grifo carregado:', e.target.src);
+                    }}
                   />
                 </picture>
               {/if}
             </span>
-
+            
             {#if i < lines.length - 1}<br />{/if}
           {/each}
         {/if}
       </h2>
     </div>
   </div>
+
 </section>
 
 <style>
-  /* ================================
-     CONTAINER PRINCIPAL
-     ================================ */
-
-  .split-section {
+  .split-title {
     position: relative;
     width: 100%;
-    min-height: 70vh;
-    background-color: var(--bg-color);
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
+    min-height: 100vh;
     display: flex;
-    align-items: flex-end; /* Alinha conteúdo na base */
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
   }
 
-  /* ================================
-     IMAGEM DE FUNDO
-     ================================ */
-
+  /* ===== IMAGEM DE FUNDO ===== */
   .background-image {
     position: absolute;
     top: 0;
-    right: 0;
-    bottom: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
     z-index: 1;
   }
 
-  .background-image picture,
+  .background-image picture {
+    width: 100%;
+    height: 100%;
+  }
+
   .background-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: right bottom; /* Imagem alinhada direita e embaixo */
-    display: block;
+    border: 0;
   }
 
-  /* ================================
-     TEXTO SOBREPOSTO
-     ================================ */
-
+  /* ===== OVERLAY DE TEXTO ===== */
   .text-overlay {
     position: relative;
-    z-index: 2;
-    width: var(--text-width-mobile);
-    padding: 2rem 1.5rem;
-    display: flex;
-    align-items: center;
-    min-height: 70vh;
+    z-index: 10;
+    width: 100%;
+    max-width: 1200px;
+    padding: 2rem;
+    box-sizing: border-box;
   }
 
   .text-wrapper {
-    width: 100%;
+    text-align: center;
   }
 
   .title {
-    font-family: 'obviously-compressed', 'Arial Black', sans-serif;
-    font-size: clamp(1.8rem, 8vw, 3.2rem);
-    font-weight: 900;
-    line-height: 1.05;
-    color: var(--text-color);
-    text-align: left;
+    font-size: 4rem;
+    font-weight: bold;
+    color: #ffffff;
     margin: 0;
+    line-height: 1.2;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   }
 
-  /* ================================
-     SISTEMA DE GRIFO/DESTAQUE
-     ================================ */
+  @media (max-width: 768px) {
+    .title {
+      font-size: 2.5rem;
+    }
+    
+    .text-overlay {
+      padding: 1rem;
+    }
+  }
 
+  @media (max-width: 480px) {
+    .title {
+      font-size: 2rem;
+    }
+  }
+
+  /* ===== LINHAS DE TEXTO ===== */
   .line-container {
     position: relative;
     display: inline-block;
-    width: 100%;
   }
 
   .line-container.has-underline {
-    padding-bottom: 30px;
+    position: relative;
   }
 
+  /* ===== GRIFO DECORATIVO ===== */
   .underline-image {
     position: absolute;
-    bottom: -5px;
-    left: 0;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: -1;
     pointer-events: none;
-    z-index: 3;
   }
 
   .underline-image img {
-    width: var(--w-mobile);
-    height: var(--h-mobile);
+    width: var(--w-desktop);
+    height: var(--h-desktop);
     object-fit: contain;
-    display: block;
+    border: 0;
   }
 
-  /* ================================
-     DESKTOP - 800px+
-     ================================ */
-
-  @media (min-width: 800px) {
-    .split-section {
-      min-height: 80vh;
-    }
-
-    .text-overlay {
-      width: var(--text-width);
-      padding: 3rem 2rem;
-      min-height: 80vh;
-    }
-
-    .title {
-      font-size: clamp(2.5rem, 5vw, 4.5rem);
-    }
-
-    .line-container.has-underline {
-      padding-bottom: 35px;
-    }
-
+  @media (max-width: 768px) {
     .underline-image img {
-      width: var(--w-desktop);
-      height: var(--h-desktop);
+      width: var(--w-mobile);
+      height: var(--h-mobile);
+    }
+    
+    .underline-image {
+      bottom: -5px;
     }
   }
 
-  /* ================================
-     ULTRA WIDE - 1200px+
-     ================================ */
-
-  @media (min-width: 1200px) {
-    .text-overlay {
-      padding: 4rem 3rem;
-    }
-
-    .title {
-      font-size: clamp(3rem, 4vw, 5rem);
-    }
-  }
-
-  /* ================================
-     ACESSIBILIDADE
-     ================================ */
-
+  /* ===== ACESSIBILIDADE ===== */
   @media (prefers-reduced-motion: reduce) {
+    .background-image img,
     .underline-image img {
-      animation: none !important;
+      animation: none;
     }
   }
 
-  @supports not (font-family: 'obviously-compressed') {
-    .title {
-      font-family: 'Arial Black', 'Helvetica', sans-serif;
-      font-weight: 900;
-      letter-spacing: -0.02em;
-    }
+  /* ===== PERFORMANCE ===== */
+  .background-image img,
+  .underline-image img {
+    will-change: auto;
   }
 </style>
