@@ -1,20 +1,20 @@
 {
   "type": "header",
   "title": "BOLSONARO CONDENADO",
-  "subtitle": "Em decisão inédita na história brasileira, 1 turma do STF condena ex-presidente e militares por trama golpista. Veja sentenças dos 8 réus e as justificativas dos ministros.",
+  "subtitle": "Em decisão inédita na história brasileira, 1ª turma do STF condena ex-presidente e militares por trama golpista. Veja sentenças dos 8 réus e as justificativas dos ministros.",
   "backgroundImage": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/header_mob.jpg",
-  "author": "teste",
+  "author": "",
   "variant": "default",
   "overlay": "true",
   "paragraphs": [
     {
       "type": "header",
       "title": "BOLSONARO CONDENADO",
-      "subtitle": "Em decisão inédita na história brasileira, 1 turma do STF condena ex-presidente e militares por trama golpista. Veja sentenças dos 8 réus e as justificativas dos ministros.",
-      "date": "12/09/2025",
+      "subtitle": "Em decisão inédita na história brasileira, 1ª turma do STF condena ex-presidente e militares por trama golpista. Veja sentenças dos 8 réus e as justificativas dos ministros.",
+      "date": "",
       "backgroundVideo": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/videos/header_desk.mp4",
       "backgroundVideoMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/videos/header_mob.mp4",
-      "author": "teste",
+      "author": "",
       "poster": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/poster_desk.jpg",
       "posterMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/poster_mob.jpg",
       "variant": "hero",
@@ -125,7 +125,7 @@
             },
             "margin": {
               "desktop": "-230px 40% 0%",
-              "mobile": "-230px 42% 0%"
+              "mobile": "-190px 42% 0%"
             },
             "padding": {
               "desktop": "0%",
@@ -168,7 +168,7 @@
         {
           "type": "text",
           "tag": "p",
-          "content": "Nunc interdum, diam ac tristique eleifend, leo quam vehicula neque, non tristique neque nisl in neque.",
+          "content": "Condenado a 24 anos de prisão",
           "styles": {
             "color": "#fff",
             "textAlign": "left",
@@ -189,8 +189,8 @@
               "mobile": "90%"
             },
             "margin": {
-              "desktop": "2% 40% 1.5%",
-              "mobile": "42px auto -6px"
+              "desktop": "5.3% 40% 1.5%",
+              "mobile": "60px auto -6px"
             },
             "padding": {
               "desktop": "0%",
@@ -212,7 +212,7 @@
           "type": "image",
           "src": {
             "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-desktop-geral.webp",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-mobile-geral.webp"
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-mobile-bolsonaro.webp"
           },
           "alt": "crimes de JAIR BOLSONARO",
           "styles": {
@@ -305,7 +305,7 @@
             },
             "margin": {
               "desktop": "-230px 40% 0%",
-              "mobile": "-230px 42% 0%"
+              "mobile": "-190px 42% 0%"
             },
             "padding": {
               "desktop": "0%",
@@ -348,7 +348,7 @@
         {
           "type": "text",
           "tag": "p",
-          "content": "Nunc interdum, diam ac tristique eleifend, leo quam vehicula neque, non tristique neque nisl in neque.",
+          "content": "Pena única de 2 anos em regime aberto",
           "styles": {
             "color": "#fff",
             "textAlign": "left",
@@ -369,8 +369,8 @@
               "mobile": "90%"
             },
             "margin": {
-              "desktop": "2% 40% 1.5%",
-              "mobile": "42px auto -6px"
+              "desktop": "5.3% 40% 1.5%",
+              "mobile": "60px auto -6px"
             },
             "padding": {
               "desktop": "0%",
@@ -383,55 +383,6 @@
       "padding": {
         "desktop": "50px 0 0 0",
         "mobile": "0"
-      }
-    },
-    {
-      "type": "super-flex",
-      "items": [
-        {
-          "type": "image",
-          "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-desktop-geral.webp",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-mobile-geral.webp"
-          },
-          "alt": "crimes de bolsonaro",
-          "styles": {
-            "width": {
-              "desktop": "min(880px, calc(100% - 24px))",
-              "mobile": "auto"
-            },
-            "maxWidth": {
-              "desktop": "100%",
-              "mobile": "auto"
-            },
-            "height": {
-              "desktop": "auto",
-              "mobile": "auto"
-            },
-            "margin": {
-              "desktop": "0 auto",
-              "mobile": "0 auto"
-            },
-            "padding": {
-              "desktop": "4px",
-              "mobile": "4px"
-            },
-            "boxSizing": {
-              "desktop": "border-box",
-              "mobile": "border-box"
-            },
-            "display": "block"
-          }
-        }
-      ],
-      "backgroundColor": "#FFF4E6",
-      "backgroundImage": {
-        "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/bg-crimes.webp",
-        "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/bg_crimes_mobile.webp"
-      },
-      "padding": {
-        "desktop": "4rem 2rem",
-        "mobile": "3rem 0rem"
       }
     },
     {
@@ -455,7 +406,7 @@
             },
             "margin": {
               "desktop": "0 auto",
-              "mobile": "0 auto"
+              "mobile": "10% 0% 0%"
             },
             "display": "block"
           }
@@ -485,7 +436,7 @@
             },
             "margin": {
               "desktop": "-230px 40% 0%",
-              "mobile": "-230px 42% 0%"
+              "mobile": "-180px 42% 0%"
             },
             "padding": {
               "desktop": "0%",
@@ -528,7 +479,7 @@
         {
           "type": "text",
           "tag": "p",
-          "content": "Nunc interdum, diam ac tristique eleifend, leo quam vehicula neque, non tristique neque nisl in neque.",
+          "content": "Pena única de 2 anos em regime aberto",
           "styles": {
             "color": "#fff",
             "textAlign": "left",
@@ -549,8 +500,8 @@
               "mobile": "90%"
             },
             "margin": {
-              "desktop": "2% 40% 1.5%",
-              "mobile": "18px auto -6px"
+              "desktop": "5.3% 40% 1.5%",
+              "mobile": "28px auto -6px"
             },
             "padding": {
               "desktop": "0%",
@@ -635,7 +586,7 @@
             },
             "margin": {
               "desktop": "0 auto",
-              "mobile": "0 auto"
+              "mobile": "5% 0% 0%0"
             },
             "display": "block"
           }
@@ -665,7 +616,7 @@
             },
             "margin": {
               "desktop": "-230px 40% 0%",
-              "mobile": "-230px 42% 0%"
+              "mobile": "-190px 42% 0%"
             },
             "padding": {
               "desktop": "0%",
@@ -708,7 +659,7 @@
         {
           "type": "text",
           "tag": "p",
-          "content": "Nunc interdum, diam ac tristique eleifend, leo quam vehicula neque, non tristique neque nisl in neque.",
+          "content": "Condenado a 24 anos de prisão",
           "styles": {
             "color": "#fff",
             "textAlign": "left",
@@ -729,8 +680,8 @@
               "mobile": "90%"
             },
             "margin": {
-              "desktop": "2% 40% 1.5%",
-              "mobile": "42px auto -6px"
+              "desktop": "5.3% 40% 1.5%",
+              "mobile": "60px auto -6px"
             },
             "padding": {
               "desktop": "0%",
@@ -751,8 +702,8 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-desktop-geral.webp",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-desktop-geral.webp"
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-desktop-almir-garnier.webp",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-mobile-almir-garnier.webp"
           },
           "alt": "crimes de Almir Garnier",
           "styles": {
@@ -845,7 +796,7 @@
             },
             "margin": {
               "desktop": "-230px 40% 0%",
-              "mobile": "-230px 42% 0%"
+              "mobile": "-190px 42% 0%"
             },
             "padding": {
               "desktop": "0%",
@@ -888,7 +839,7 @@
         {
           "type": "text",
           "tag": "p",
-          "content": "Nunc interdum, diam ac tristique eleifend, leo quam vehicula neque, non tristique neque nisl in neque.",
+          "content": "Condenado a 24 anos de prisão",
           "styles": {
             "color": "#fff",
             "textAlign": "left",
@@ -909,8 +860,8 @@
               "mobile": "90%"
             },
             "margin": {
-              "desktop": "2% 40% 1.5%",
-              "mobile": "42px auto -6px"
+              "desktop": "5.3% 40% 1.5%",
+              "mobile": "60px auto -6px"
             },
             "padding": {
               "desktop": "0%",
@@ -932,7 +883,7 @@
           "type": "image",
           "src": {
             "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-desktop-alexandre-ramagem.webp",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-mobile-alexandre-ramagem.webp"
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-mobile-anderson-torres.webp"
           },
           "alt": "crimes de Alexandre Ramagem",
           "styles": {
@@ -1025,7 +976,7 @@
             },
             "margin": {
               "desktop": "-230px 40% 0%",
-              "mobile": "-230px 42% 0%"
+              "mobile": "-190px 42% 0%"
             },
             "padding": {
               "desktop": "0%",
@@ -1068,7 +1019,7 @@
         {
           "type": "text",
           "tag": "p",
-          "content": "Nunc interdum, diam ac tristique eleifend, leo quam vehicula neque, non tristique neque nisl in neque.",
+          "content": "Condenado a 26 anos e 6 meses de prisão",
           "styles": {
             "color": "#fff",
             "textAlign": "left",
@@ -1086,11 +1037,11 @@
             },
             "width": {
               "desktop": "650px",
-              "mobile": "90%"
+              "mobile": "100%"
             },
             "margin": {
-              "desktop": "2% 40% 1.5%",
-              "mobile": "32px auto -6px"
+              "desktop": "5.3% 40% 1.5%",
+              "mobile": "50px 0% -6px 5%"
             },
             "padding": {
               "desktop": "0%",
@@ -1112,7 +1063,7 @@
           "type": "image",
           "src": {
             "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-desktop-geral.webp",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-desktop-geral.webp"
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-mobile-walter-braga.webp"
           },
           "alt": "crimes de Walter Braga Netto",
           "styles": {
@@ -1205,7 +1156,7 @@
             },
             "margin": {
               "desktop": "-230px 40% 0%",
-              "mobile": "-230px 42% 0%"
+              "mobile": "-190px 42% 0%"
             },
             "padding": {
               "desktop": "0%",
@@ -1248,7 +1199,7 @@
         {
           "type": "text",
           "tag": "p",
-          "content": "Nunc interdum, diam ac tristique eleifend, leo quam vehicula neque, non tristique neque nisl in neque.",
+          "content": "Condenado a 21 anos de prisão",
           "styles": {
             "color": "#fff",
             "textAlign": "left",
@@ -1269,8 +1220,8 @@
               "mobile": "90%"
             },
             "margin": {
-              "desktop": "2% 40% 1.5%",
-              "mobile": "42px auto -6px"
+              "desktop": "5.3% 40% 1.5%",
+              "mobile": "60px auto -6px"
             },
             "padding": {
               "desktop": "0%",
@@ -1292,7 +1243,7 @@
           "type": "image",
           "src": {
             "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-desktop-geral.webp",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-mobile-geral.webp"
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-mobile-augusto-heleno.webp"
           },
           "alt": "crimes de AUGUSTO HELENO",
           "styles": {
@@ -1385,7 +1336,7 @@
             },
             "margin": {
               "desktop": "-230px 40% 0%",
-              "mobile": "-230px 42% 0%"
+              "mobile": "-190px 42% 0%"
             },
             "padding": {
               "desktop": "0%",
@@ -1428,7 +1379,7 @@
         {
           "type": "text",
           "tag": "p",
-          "content": "Nunc interdum, diam ac tristique eleifend, leo quam vehicula neque, non tristique neque nisl in neque.",
+          "content": "Condenado a 19 anos de prisão",
           "styles": {
             "color": "#fff",
             "textAlign": "left",
@@ -1449,8 +1400,8 @@
               "mobile": "90%"
             },
             "margin": {
-              "desktop": "2% 40% 1.5%",
-              "mobile": "42px auto -6px"
+              "desktop": "5.3% 40% 1.5%",
+              "mobile": "50px auto -6px"
             },
             "padding": {
               "desktop": "0%",
@@ -1472,7 +1423,7 @@
           "type": "image",
           "src": {
             "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-desktop-geral.webp",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-desktop-geral.webp"
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-mobile-paulo-sergio.webp"
           },
           "alt": "crimes de Paulo Sérgio Nogueira",
           "styles": {
@@ -1516,7 +1467,7 @@
     },
     {
       "type": "texto",
-      "text": "Além de sentenças que preveem prisão, também foram determinadas: a perda do mandato de Alexandre Ramagem na Câmara dos Deputados e a perda de cargos dos militares condenados."
+      "text": "Além de sentenças que preveem prisão, também foram determinadas: a perda do mandato de Alexandre Ramagem na Câmara dos Deputados e a perda de cargos dos militares condenados. Bolsonaro também foi declarado inelegível pela 2ª vez."
     },
     {
       "type": "super-flex",
@@ -1577,14 +1528,14 @@
         },
         {
           "text": "<blockquote>'O Brasil quase volta a uma ditadura porque uma organização criminosa, constituída por um grupo político, não sabe perder as eleições'</blockquote>",
-          "position": "left",
+          "position": "right",
           "variant": "destaque",
           "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_02.jpg",
           "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-VERTICAL_02.jpg",
           "alt": "Paisagem inicial, ampla e deslumbrante"
         },
         {
-          "text": "O ministro listou o que chamou de 'provas cabais' apresentadas pela PGR: a live de 2021 contra as urnas, a reunião ministerial de 2022, o encontro com embaixadores, operações da Polícia Rodoviária Federal (PRF) no 2&ordm; turno, o plano de assassinar Lula e outras autoridades e outros eventos que culminaram na invasão de 8 de janeiro.",
+          "text": "O ministro listou o que chamou de 'provas cabais' apresentadas pela PGR: a live de 2021 contra as urnas, a reunião ministerial de 2022, o encontro com embaixadores, operações da Polícia Rodoviária Federal (PRF) no 2º turno, o plano de assassinar Lula e outras autoridades e outros eventos que culminaram na invasão de 8 de janeiro.",
           "position": "right",
           "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_02.jpg",
           "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-VERTICAL_02.jpg",
@@ -1600,40 +1551,48 @@
         {
           "text": "<h3>Dino vê diferentes graus de culpa e critica anistia</h3><div>Em seu voto, o ministro Flávio Dino afirmou que os 'níveis de culpabilidade' dos réus são diferentes e que Bolsonaro e o general Walter Braga Netto têm papel de maior relevância na tentativa de golpe. </div>",
           "position": "left",
+          "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_02.jpg",
+          "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-VERTICAL_02.jpg",
+          "alt": "Paisagem inicial, ampla e deslumbrante"
+        },
+        {
+          "text": "<blockquote>'Em relação a Bolsonaro e Braga Netto, a culpabilidade é alta'</blockquote>",
+          "position": "left",
+          "variant": "destaque",
           "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_03.jpg",
           "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-VERTICAL_03.jpg",
           "alt": "Paisagem inicial, ampla e deslumbrante"
         },
         {
-          "text": "<blockquote>Em relação a Bolsonaro e Braga Netto, a culpabilidade é alta</blockquote>",
+          "text": "Dino defendeu penas menores para três dos réus ao avaliar que Ramagem deixou o governo em março de 2022, que Heleno não praticou atos golpistas depois da eleição, e que Paulo Sérgio Nogueira chegou a tentar dissuadir Bolsonaro de adotar medidas de exceção, como afirmou a defesa do general.",
           "position": "left",
           "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_03.jpg",
           "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-VERTICAL_03.jpg",
           "alt": "Paisagem inicial, ampla e deslumbrante"
         },
         {
-          "text": "Dino defendeu penas menores para três dos réus ao avaliar que <strong>Ramagem</strong> deixou o governo em março de 2022, que <strong>Heleno</strong> não praticou atos golpistas no 2&ordm; semestre daquele ano, e que <strong>Paulo Sérgio Nogueira</strong> chegou a tentar dissuadir Bolsonaro de adotar medidas de exceção, como afirmou a defesa do general. <p>Ainda durante o voto, Dino deu recado ao Congresso e afirmou que não cabe anistia aos condenados. </p>",
+          "text": "Ainda durante o voto, Dino deu recado ao Congresso e afirmou que não cabe anistia aos condenados.",
           "position": "left",
           "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_03.jpg",
           "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-VERTICAL_03.jpg",
           "alt": "Paisagem inicial, ampla e deslumbrante"
         },
         {
-          "text": "<h3>Fux absolveu Bolsonaro, condenou Cid e Braga Netto e abriu divergência</h3><div>Em um voto de mais de 12 horas, o ministro Luiz Fux abriu divergência em diversos pontos expostos por Moraes e apresentou questões jurídicas centrais do processo, como o papel da delação de Cid, o direito de defesa dos réus e o enquadramento nos crimes. </div>",
+          "text": "<h3>Fux absolveu Bolsonaro, condenou Cid e Braga Netto e abriu divergência</h3><div>Em um voto de mais de 12 horas, o ministro Luiz Fux abriu divergência em diversos pontos expostos por Moraes e apresentou questões jurídicas centrais do processo, como o papel da delação de Cid, o direito de defesa dos réus e o enquadramento nos crimes.</div>",
           "position": "left",
-          "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/SCROLL-JURI-HORIZONTAL_03.jpg",
-          "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/SCROLL-JURI-VERTICAL_03.jpg",
+          "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_03.jpg",
+          "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-VERTICAL_03.jpg",
           "alt": "Paisagem inicial, ampla e deslumbrante"
         },
         {
-          "text": "<p>Assim como Moraes e Dino, validou o acordo firmado por Cid com investigadores. Mas divergiu em outros pontos:</p><ul><li><strong>Incompetência do STF:</strong> defendeu que os réus não têm foro por prerrogativa de função, e que o caso deveria ser julgado na 1&ordf; instância.</li><li><strong>Direito de defesa:</strong> alegou que o ritmo do processo foi obstáculo para o trabalho dos advogados e destacou a existência de 70 terabytes de documentos.</li><li><strong>Organização criminosa:</strong> Fux discordou do que afirma a PGR e argumentou que os réus não usaram armas nem atuaram de forma coordenada.</li><li><strong>Crimes contra a democracia:</strong> entendeu que é aplicável o princípio do direito penal que permite unificar os crimes de golpe de Estado e de abolição violenta. Fux também afirmou que não há golpe sem deposição de governo.</li><li><strong>Dano qualificado:</strong> afirmou que a PGR não demonstrou a ligação dos réus com os ataques de 8 de janeiro.</li></ul>",
+          "text": "<p>Assim como Moraes e Dino, validou o acordo firmado por Cid com investigadores. Mas divergiu em outros pontos:</p><ul><li><strong>Incompetência do STF:</strong> defendeu que os réus não têm foro por prerrogativa de função, e que o caso deveria ser julgado na 1ª instância.</li><li><strong>Direito de defesa:</strong> alegou que o ritmo do processo foi obstáculo para o trabalho dos advogados e destacou a existência de 70 terabytes de documentos.</li><li><strong>Organização criminosa:</strong> Fux discordou do que afirma a PGR e argumentou que os réus não usaram armas nem atuaram de forma coordenada.</li><li><strong>Crimes contra a democracia:</strong> entendeu que é aplicável o princípio do direito penal que permite unificar os crimes de golpe de Estado e de abolição violenta. Fux também afirmou que não há golpe sem deposição de governo.</li><li><strong>Dano qualificado:</strong> afirmou que a PGR não demonstrou a ligação dos réus com os ataques de 8 de janeiro.</li></ul>",
           "position": "left",
           "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_04.jpg",
           "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-VERTICAL_04.jpg",
           "alt": "Paisagem inicial, ampla e deslumbrante"
         },
         {
-          "text": "Fux votou para absolver Bolsonaro e mais 6 réus e para condenar Mauro Cid e Braga Netto por um dos crimes, o de abolição violenta do Estado. Ao votar pela absolvição de Bolsonaro, Fux afirmou que <b>críticas às urnas não configuram crime, minimizou a minuta do golpe</b>, argumentou que ele <b>não tinha obrigação de desmobilizar manifestantes, negou comando direto</b> do ex-presidente sobre a operação da PRF no 2&ordm; turno e afirmou que a <b>PGR não conseguiu provar</b> que Bolsonaro deu aval ao plano para matar autoridades.",
+          "text": "Fux votou para absolver Bolsonaro e mais 6 réus e para condenar Mauro Cid e Braga Netto por um dos crimes, o de abolição violenta do Estado.<br>Ao votar pela absolvição de Bolsonaro, Fux afirmou que <b>críticas às urnas não configuram crime, minimizou a minuta do golpe</b>, argumentou que ele <b>não tinha obrigação de desmobilizar manifestantes, negou comando direto</b> do ex-presidente sobre a operação da PRF no 2º turno e afirmou que a <b>PGR não conseguiu provar</b> que Bolsonaro deu aval ao plano para matar autoridades.",
           "position": "left",
           "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_04.jpg",
           "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-VERTICAL_04.jpg",
@@ -1645,6 +1604,78 @@
           "variant": "destaque",
           "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_04.jpg",
           "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-VERTICAL_04.jpg",
+          "alt": "Paisagem inicial, ampla e deslumbrante"
+        },
+        {
+          "text": "<h3>Voto decisivo de Cármen Lúcia </h3><div>No início de seu voto, Cármen Lúcia rejeitou as questões processuais, afirmou que os advogados tiveram acesso às provas e ao processo e que o STF é a instância adequada. Defendeu uma resposta rápida do Judiciário e destacou que ficou comprovada a organização dos réus para atacar a democracia e o sistema eleitoral.</div>",
+          "position": "right",
+          "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_04.jpg",
+          "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-VERTICAL_04.jpg",
+          "alt": "Paisagem inicial, ampla e deslumbrante"
+        },
+        {
+          "text": "Na sequência, Moraes interrompeu o voto da ministra para fazer um aparte e, sem citar Fux, fez um contraponto ao voto do ministro. Reafirmou que Bolsonaro liderou uma organização criminosa que ameaçou, usou violência e praticou diversos crimes para tentar se manter no poder, em uma linha de fatos fartamente comprovada.",
+          "position": "right",
+          "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_05.jpg",
+          "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-VERTICAL_05.jpg",
+          "alt": "Paisagem inicial, ampla e deslumbrante"
+        },
+        {
+          "text": "O ministro prosseguiu exibindo vídeos e fotos para demonstrar que manifestações seguiam um mesmo roteiro: pedir uma intervenção militar com a permanência de Jair Bolsonaro no poder.",
+          "position": "right",
+          "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_05.jpg",
+          "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-VERTICAL_05.jpg",
+          "alt": "Paisagem inicial, ampla e deslumbrante"
+        },
+        {
+          "text": "Em seguida, Cármen Lúcia retomou o voto e afirmou que Bolsonaro comandava a organização que atuou com o objetivo de se perpetuar no poder.",
+          "position": "right",
+          "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_05.jpg",
+          "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-VERTICAL_05.jpg",
+          "alt": "Paisagem inicial, ampla e deslumbrante"
+        },
+        {
+          "text": "<blockquote>'Ele é o causador, ele é o líder de uma organização que promovia todas as formas de articulação alinhada para que se chegasse ao objetivo da manutenção ou tomada do poder. Então, eu tenho para mim que há um acervo enorme de provas a indicar os planos de tomada do poder pela ruptura institucional ou pela permanência forçada, o que não ficou no mundo das ideias, nem de registros particulares'</blockquote>",
+          "position": "right",
+          "variant": "destaque",
+          "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_05.jpg",
+          "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-VERTICAL_05.jpg",
+          "alt": "Paisagem inicial, ampla e deslumbrante"
+        },
+        {
+          "text": "A ministra, então, deu o voto decisivo que formou maioria para condenar todos os réus pela trama golpista.",
+          "position": "right",
+          "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_05.jpg",
+          "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-VERTICAL_05.jpg",
+          "alt": "Paisagem inicial, ampla e deslumbrante"
+        },
+        {
+          "text": "<h3>Zanin afirma que foi comprovado o uso da violência</h3><div>O último a votar e concluir o julgamento foi o presidente da 1ª Turma, o ministro Cristiano Zanin. Segundo ele, o uso da violência ficou comprovado e a responsabilização dos réus é necessária.</div>",
+          "position": "left",
+          "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_05.jpg",
+          "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-VERTICAL_05.jpg",
+          "alt": "Paisagem inicial, ampla e deslumbrante"
+        },
+        {
+          "text": "<blockquote>'A Procuradoria-Geral da República conseguiu descrever satisfatoriamente uma organização criminosa armada, estruturada hierarquicamente, com divisão de tarefas entre seus integrantes e orientada a perseguir um projeto de poder do qual participavam os seus integrantes'</blockquote>",
+          "position": "left",
+          "variant": "destaque",
+          "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_06.jpg",
+          "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-VERTICAL_06.jpg",
+          "alt": "Paisagem inicial, ampla e deslumbrante"
+        },
+        {
+          "text": "Zanin acolheu integralmente as acusações para condenar Bolsonaro por todos os crimes imputados pela Procuradoria-Geral da República e, também, os outros réus pelos crimes a que respondiam.",
+          "position": "left",
+          "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_06.jpg",
+          "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-VERTICAL_06.jpg",
+          "alt": "Paisagem inicial, ampla e deslumbrante"
+        },
+        {
+          "text": "<h2>O placar ficou em 4 votos a 1 pela punição que consolida um dos mais importantes julgamentos da história do país.</h2>",
+          "position": "left",
+          "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_06.jpg",
+          "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-VERTICAL_06.jpg",
           "alt": "Paisagem inicial, ampla e deslumbrante"
         }
       ],
@@ -2275,7 +2306,7 @@
       "items": [
         {
           "type": "text",
-          "content": "Edição: <b>Felipe Turioni</b><br>Direção de arte, interface e infografia: <b>Bruna Azevedo, Gabs</b><br>Desenvolvimento: <b>Gabs, Guilherme Gomes</b><br>Coordenação (Conteúdo): <b>Vitor Sorano</b><br>Coordenação (Design e Desenvolvimento): <b>Guilherme Gomes</b>",
+          "content": "Edição: <b>Felipe Turioni</b><br>Direção de arte, interface e infografia: <b>Bruna Azevedo e Gabs</b><br>Desenvolvimento: <b>Gabs e Guilherme Gomes</b><br>Coordenação (Conteúdo): <b>Vitor Sorano</b><br>Coordenação (Design e Desenvolvimento): <b>Guilherme Gomes</b>",
           "styles": {
             "fontFamily": "globotipo",
             "fontSize": {

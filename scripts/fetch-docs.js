@@ -460,6 +460,11 @@ function decodeHTMLEntities(text) {
     // Básicas
     '&amp;': '&', '&lt;': '<', '&gt;': '>', '&quot;': '"', '&#39;': "'", '&nbsp;': ' ',
     
+        // 🔧 ADICIONADO: Ordinais (masculino e feminino)
+    '&ordf;': 'ª',  // Símbolo ordinal feminino (1ª, 2ª, etc.)
+    '&ordm;': 'º',  // Símbolo ordinal masculino (1º, 2º, etc.)
+    
+
     // Aspas e citações - PROBLEMA PRINCIPAL
     '&lsquo;': "'", '&rsquo;': "'", '&ldquo;': '"', '&rdquo;': '"',
     '&laquo;': '«', '&raquo;': '»', '&sbquo;': '‚', '&bdquo;': '„',
@@ -482,6 +487,13 @@ function decodeHTMLEntities(text) {
     '&Uacute;': 'Ú', '&Ugrave;': 'Ù', '&Ucirc;': 'Û', '&Uuml;': 'Ü',
     '&Ccedil;': 'Ç', '&Ntilde;': 'Ñ',
     
+        // Símbolos matemáticos e especiais comuns
+    '&frac12;': '½', '&frac14;': '¼', '&frac34;': '¾',
+    '&sup1;': '¹', '&sup2;': '²', '&sup3;': '³',
+    '&plusmn;': '±', '&times;': '×', '&divide;': '÷',
+    '&sect;': '§', '&para;': '¶', '&micro;': 'µ',
+    
+
     // Outros símbolos comuns
     '&mdash;': '—', '&ndash;': '–', '&hellip;': '…', '&middot;': '·',
     '&bull;': '•', '&dagger;': '†', '&Dagger;': '‡', '&permil;': '‰',
