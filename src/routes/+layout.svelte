@@ -10,11 +10,11 @@
 <style>
   /* Aplica as cores do tema padrão (:root) para todo o site */
   :global(html) {
-    background-color: var(--color-background);
+    background-color: #FFF4E6;
   }
 
   :global(body) {
-    background-color: var(--color-background);
+    background-color: #FFF4E6;
     color: var(--color-text);
     font-family: 'Globotipo', -apple-system, sans-serif;
     margin: 0;

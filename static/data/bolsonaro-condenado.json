@@ -1,19 +1,24 @@
 {
   "type": "header",
   "title": "BOLSONARO CONDENADO",
-  "subtitle": "Por X votos a X, 1 Turma do STF declarou ex-presidente e sete aliados culpados por tentativa de golpe. Veja sentenças de todos os réus e as justificativas dos ministros.",
-  "backgroundImage": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/header_mobi.jpg",
-  "author": "",
+  "subtitle": "Em decisão inédita na história brasileira, 1 turma do STF condena ex-presidente e militares por trama golpista. Veja sentenças dos 8 réus e as justificativas dos ministros.",
+  "backgroundImage": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/header_mob.jpg",
+  "author": "teste",
   "variant": "default",
   "overlay": "true",
   "paragraphs": [
     {
       "type": "header",
-      "title": "",
-      "subtitle": "",
-      "date": "",
-      "author": "",
-      "variant": "hero"
+      "title": "BOLSONARO CONDENADO",
+      "subtitle": "Em decisão inédita na história brasileira, 1 turma do STF condena ex-presidente e militares por trama golpista. Veja sentenças dos 8 réus e as justificativas dos ministros.",
+      "date": "12/09/2025",
+      "backgroundVideo": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/videos/header_desk.mp4",
+      "backgroundVideoMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/videos/header_mob.mp4",
+      "author": "teste",
+      "poster": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/poster_desk.jpg",
+      "posterMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/poster_mob.jpg",
+      "variant": "hero",
+      "overlay": "false"
     },
     {
       "type": "texto",

@@ -4,7 +4,7 @@
 export async function load({ fetch }) {
   try {
     // Busca o único JSON que este projeto vai usar, com o link completo e fixo.
-    const response = await fetch('https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/data/o-julgamento.json');
+    const response = await fetch('https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/data/bolsonaro-condenado.json');
 
     if (response.ok) {
       const story = await response.json();

@@ -9,7 +9,7 @@
 
   onMount(async () => {
     try {
-const response = await fetch('/data/bolsonaro-condenado.json');
+const response = await fetch('https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/data/bolsonaro-condenado.json');
       if (response.ok) {
         currentStory = await response.json();
         console.log('📖 Story carregada com sucesso!');
@@ -22,11 +22,11 @@ const response = await fetch('/data/bolsonaro-condenado.json');
 </script>
 
 <svelte:head>
-  <title>{currentStory ? currentStory.title : 'O julgamento'}</title>
+  <title>{currentStory ? currentStory.title : 'BOLSONARO CONDENADO'}</title>
   {#if currentStory}
-    <meta name="description" content={currentStory.subtitle || currentStory.intro?.text || 'O julgamento'} />
+    <meta name="description" content={currentStory.subtitle || currentStory.intro?.text || 'BOLSONARO CONDENADO'} />
     <meta property="og:title" content={currentStory.title} />
-    <meta property="og:description" content={currentStory.subtitle || 'Por X votos a X, 1 Turma do STF declarou ex-presidente e sete aliados culpados por tentativa de golpe. Veja sentenças de todos os réus e as justificativas dos ministros.'} />
+    <meta property="og:description" content={currentStory.subtitle || 'Em decisão inédita na história brasileira, 1ª turma do STF condena ex-presidente e militares por trama golpista. Veja sentenças dos 8 réus e as justificativas dos ministros.'} />
     <meta property="og:type" content="article" />
     {#if currentStory.author}
       <meta name="author" content={currentStory.author} />
