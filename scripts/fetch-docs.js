@@ -987,8 +987,6 @@ if (['super-flex', 'superflex'].includes(paragraph.type?.toLowerCase())) {
   const itemsMatch = block.match(superFlexFields.items);
   if (itemsMatch) {
     // ✅ NOVO: Processa items com normalização de estilos
-    console.log('🔍 Regex capturou para items:', itemsMatch[1]);
-
     paragraph.items = parseJSONField(itemsMatch[1], 'super-flex items');
     
     // ✅ NOVO: Normaliza estilos de posicionamento nos items
@@ -1284,6 +1282,33 @@ const fieldMappings = {
   textAlign: 'textAlign', textAlignMobile: 'textAlignMobile',
   author: 'author', role: 'role', src: 'src', videoSrc: 'videoSrc', 
   videoSrcMobile: 'videoSrcMobile', 
+  
+  // Dimensionamento da foto
+  width: 'width',                           // Largura (já existe)
+  height: 'height',                         // Altura (já existe)
+  maxWidth: 'maxWidth',                     // Largura máxima
+  maxHeight: 'maxHeight',                   // Altura máxima
+  
+  // Posicionamento e alinhamento
+  alignment: 'alignment',                   // Alinhamento (já existe)
+  position: 'position',                     // Posição da foto
+  
+  // Estilos específicos da foto
+  borderRadius: 'borderRadius',             // Borda arredondada
+  shadow: 'shadow',                         // Sombra
+  border: 'border',                         // Borda
+  filter: 'filter',                         // Filtros CSS
+  
+  // Comportamento
+  lazy: 'lazy',                             // Lazy loading
+  loading: 'loading',                       // Tipo de loading
+  clickable: 'clickable',                   // Se é clicável
+  zoomable: 'zoomable',                     // Se permite zoom
+  
+  // Layout
+  fullWidth: 'fullWidth',                   // Largura total (já existe)
+  containerClass: 'containerClass',         // Classe CSS do container
+  imageClass: 'imageClass',                 // Classe CSS da imagem
   
   // 🎬 VIDEO PLAYER - Props atualizadas
   srcMobile: 'srcMobile',

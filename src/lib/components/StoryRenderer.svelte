@@ -593,27 +593,16 @@ import AbsoluteCanvas from './story/AbsoluteCanvas.svelte';
   			{:else if componentType === 'super-flex'}
 				<SuperFlex data={props} />
 
-			{:else if componentType === 'photo'}
-				<PhotoWithCaption
-					src={props.src}
-					alt={props.alt || ''}
-					caption={props.caption || ''}
-					credit={props.credit || ''}
-					fullWidth={stringToBoolean(props.fullWidth, false)}
-					alignment={props.alignment || 'center'}
-				/>
-
-			<!-- Photo -->
-			{:else if componentType === 'photo'}
-				<PhotoWithCaption
-					src={props.src}
-					alt={props.alt || ''}
-					caption={props.caption || ''}
-					credit={props.credit || ''}
-					fullWidth={stringToBoolean(props.fullWidth, false)}
-					alignment={props.alignment || 'center'}
-				/>
-
+{:else if componentType === 'photo'}
+	<PhotoWithCaption
+		src={props.src}
+		srcMobile={props.srcMobile || props.src}
+		alt={props.alt || ''}
+		caption={props.caption || ''}
+		credit={props.credit || ''}
+		fullWidth={stringToBoolean(props.fullWidth, false)}
+		alignment={props.alignment || 'center'}
+	/>
 <!-- Video - ATUALIZADO COM NOVAS PROPS -->
 <!-- Video - ATUALIZADO COM NOVAS PROPS -->
 			{:else if componentType === 'video'}

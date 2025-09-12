@@ -1635,7 +1635,9 @@
             "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/botao-link-trama-do-golpe-desk.webp",
             "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/botao-link-trama-do-golpe-mobi.webp"
           },
-          "alt": "Foto de Jair Bolsonaro de perfil",
+          "alt": "Link para a trama do golpe",
+          "link": "https://g1.globo.com/politica/julgamento-bolsonaro-no-stf-trama-do-golpe/",
+          "target": "_blank",
           "styles": {
             "width": {
               "desktop": "100%",
