@@ -1,18 +1,19 @@
-<!-- src/lib/components/story/shared/Step.svelte -->
 <script>
   export let stepText;
   export let i;
   export let length;
-  export let position = 'right'; // NOVO: posição do step
+  export let position = 'right';
+  export let variant = '';
 </script>
 
 <section class="step-container position-{position}" class:last-section={i === length}>
-  <div class="step-content">
+  <div class="step-content" class:destaque={variant === 'destaque'}>
     {@html stepText}
   </div>
 </section>
 
 <style>
+
     .step-container {
         display: flex;
         align-items: center;
@@ -75,4 +76,35 @@
             max-width: 90%;
         }
     }
+    /* Cole no final do <style> em Step.svelte */
+
+.step-content.destaque {
+    background-color: rgba(255, 255, 255, 0.9); /* Fundo mais claro e opaco */
+    border-left: 5px solid var(--color-primary, #C4170C); /* Borda vermelha à esquerda */
+    color: #1a1a1a; /* Texto escuro para contraste */
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+/* Como o conteúdo vem via {@html}, usamos :global() para estilizar 
+  as tags que estão dentro do .step-content.destaque 
+*/
+:global(.step-content.destaque h3) {
+    color: #1a1a1a; /* Título escuro */
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+:global(.step-content.destaque div),
+:global(.step-content.destaque blockquote) {
+    font-family: "globotipo", sans-serif; /* Fonte diferente para dar um ar de citação */
+    font-size: 1.5rem; /* Fonte um pouco maior */
+    line-height: 1.5;
+    font-style: italic;
+    color: #333;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
 </style>

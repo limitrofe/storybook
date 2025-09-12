@@ -111,12 +111,13 @@
             />
         {:else}
             <!-- Mantém o comportamento original para compatibilidade COM POSITION -->
-            <Step 
-                stepText={`<h3>${step.title || ''}</h3><div>${step.text || ''}</div>`} 
-                length={validSteps.length - 1} 
-                {i}
-                position={step.position || 'right'}
-            />
+<Step 
+    stepText={`<h3>${step.title || ''}</h3><div>${step.text || ''}</div>`} 
+    length={validSteps.length - 1} 
+    {i}
+    position={step.position || 'right'}
+    variant={step.variant || ''} 
+/>
         {/if}
     {/each}
     <section class="spacer-bottom"></section>

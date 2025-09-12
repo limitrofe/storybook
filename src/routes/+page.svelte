@@ -9,7 +9,7 @@
 
   onMount(async () => {
     try {
-const response = await fetch('/data/o-julgamento.json');
+const response = await fetch('/data/bolsonaro-condenado.json');
       if (response.ok) {
         currentStory = await response.json();
         console.log('📖 Story carregada com sucesso!');
