@@ -161,7 +161,7 @@
     position: relative;
     z-index: 10; /* 🔥 Conteúdo sempre na frente */
     width: 100%;
-    padding-top: 5%;
+    padding-top: 0%;
   }
 
   .story-header__container {

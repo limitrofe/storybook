@@ -2,7 +2,7 @@
   "type": "header",
   "title": "BOLSONARO CONDENADO",
   "subtitle": "Em decisão inédita na história brasileira, 1ª turma do STF condena ex-presidente e militares por trama golpista. Veja sentenças dos 8 réus e as justificativas dos ministros.",
-  "backgroundImage": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/header_mob.jpg",
+  "backgroundImage": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/img/capa-share.jpg",
   "author": "",
   "variant": "default",
   "overlay": "true",
@@ -12,11 +12,11 @@
       "title": "BOLSONARO CONDENADO",
       "subtitle": "Em decisão inédita na história brasileira, 1ª turma do STF condena ex-presidente e militares por trama golpista. Veja sentenças dos 8 réus e as justificativas dos ministros.",
       "date": "",
-      "backgroundVideo": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/videos/header_desk.mp4",
-      "backgroundVideoMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/videos/header_mob.mp4",
+      "backgroundVideo": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/videos/pagina-sentenca-golpe_documentos_desk3.mp4",
+      "backgroundVideoMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/videos/pagina-sentenca-golpe_documentos_mob.mp4",
       "author": "",
-      "poster": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/poster_desk.jpg",
-      "posterMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/poster_mob.jpg",
+      "poster": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/poster_desk.jpg",
+      "posterMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/poster_mob.jpg",
       "variant": "hero",
       "overlay": "false"
     },
@@ -30,7 +30,7 @@
     },
     {
       "type": "texto",
-      "text": "Mas a prisão não será imediata. Os advogados podem apresentar recursos, que precisam ser analisados pelo STF antes do cumprimento das penas."
+      "text": "Mas a <strong>prisão não será imediata.</strong> Os advogados podem apresentar recursos, que precisam ser analisados pelo STF antes do cumprimento das penas."
     },
     {
       "type": "super-flex",
@@ -54,12 +54,12 @@
               "mobile": "1000"
             },
             "width": {
-              "desktop": "650px",
+              "desktop": "700px",
               "mobile": "90%"
             },
             "margin": {
-              "desktop": "5% 30%",
-              "mobile": "5% 0% 0% 5%"
+              "desktop": "5% auto 2%",
+              "mobile": "0%"
             },
             "padding": {
               "desktop": "0%",
@@ -70,8 +70,8 @@
       ],
       "backgroundColor": "#FFF4E6",
       "padding": {
-        "desktop": "4rem 2rem",
-        "mobile": "3rem 1rem"
+        "desktop": "0rem 2rem",
+        "mobile": "3rem 1rem 1rem"
       }
     },
     {
@@ -189,7 +189,7 @@
               "mobile": "90%"
             },
             "margin": {
-              "desktop": "5.3% 40% 1.5%",
+              "desktop": "100px 40% .5%",
               "mobile": "60px auto -6px"
             },
             "padding": {
@@ -211,7 +211,7 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-desktop-geral.webp",
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-desktop-bolsonaro.webp",
             "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-mobile-bolsonaro.webp"
           },
           "alt": "crimes de JAIR BOLSONARO",
@@ -304,7 +304,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "-230px 40% 0%",
+              "desktop": "-230px 41% 0%",
               "mobile": "-190px 42% 0%"
             },
             "padding": {
@@ -336,7 +336,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "-.5% 40% 0%",
+              "desktop": "-.5% 41% 0%",
               "mobile": "-1% auto 0% 42%"
             },
             "padding": {
@@ -369,7 +369,7 @@
               "mobile": "90%"
             },
             "margin": {
-              "desktop": "5.3% 40% 1.5%",
+              "desktop": "100px 41% .5%",
               "mobile": "60px auto -6px"
             },
             "padding": {
@@ -435,7 +435,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "-230px 40% 0%",
+              "desktop": "-230px 41% 0%",
               "mobile": "-180px 42% 0%"
             },
             "padding": {
@@ -467,7 +467,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "-.5% 40% 0%",
+              "desktop": "-.5% 41% 0%",
               "mobile": "-1% auto 0% 42%"
             },
             "padding": {
@@ -500,7 +500,7 @@
               "mobile": "90%"
             },
             "margin": {
-              "desktop": "5.3% 40% 1.5%",
+              "desktop": "100px 41% .5%",
               "mobile": "28px auto -6px"
             },
             "padding": {
@@ -615,7 +615,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "-230px 40% 0%",
+              "desktop": "-230px 41% 0%",
               "mobile": "-190px 42% 0%"
             },
             "padding": {
@@ -647,7 +647,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "-.5% 40% 0%",
+              "desktop": "-.5% 41% 0%",
               "mobile": "-1% auto 0% 42%"
             },
             "padding": {
@@ -680,12 +680,12 @@
               "mobile": "90%"
             },
             "margin": {
-              "desktop": "5.3% 40% 1.5%",
+              "desktop": "100px 41% .5%",
               "mobile": "60px auto -6px"
             },
             "padding": {
-              "desktop": "0%",
-              "mobile": "-20px 0 0 20px"
+              "desktop": "10px",
+              "mobile": "20px"
             }
           }
         }
@@ -795,7 +795,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "-230px 40% 0%",
+              "desktop": "-230px 41% 0%",
               "mobile": "-190px 42% 0%"
             },
             "padding": {
@@ -827,7 +827,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "-.5% 40% 0%",
+              "desktop": "-.5% 41% 0%",
               "mobile": "-1% auto 0% 42%"
             },
             "padding": {
@@ -860,7 +860,7 @@
               "mobile": "90%"
             },
             "margin": {
-              "desktop": "5.3% 40% 1.5%",
+              "desktop": "100px 41% .5%",
               "mobile": "60px auto -6px"
             },
             "padding": {
@@ -882,7 +882,7 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-desktop-alexandre-ramagem.webp",
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-desktop-anderson-torres.webp",
             "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-mobile-anderson-torres.webp"
           },
           "alt": "crimes de Alexandre Ramagem",
@@ -975,7 +975,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "-230px 40% 0%",
+              "desktop": "-230px 41% 0%",
               "mobile": "-190px 42% 0%"
             },
             "padding": {
@@ -1007,7 +1007,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "-.5% 40% 0%",
+              "desktop": "-.5% 41% 0%",
               "mobile": "-1% auto 0% 42%"
             },
             "padding": {
@@ -1037,10 +1037,10 @@
             },
             "width": {
               "desktop": "650px",
-              "mobile": "100%"
+              "mobile": "95%"
             },
             "margin": {
-              "desktop": "5.3% 40% 1.5%",
+              "desktop": "100px 41% .5%",
               "mobile": "50px 0% -6px 5%"
             },
             "padding": {
@@ -1062,7 +1062,7 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-desktop-geral.webp",
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-desktop-walter-braga.webp",
             "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-mobile-walter-braga.webp"
           },
           "alt": "crimes de Walter Braga Netto",
@@ -1155,7 +1155,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "-230px 40% 0%",
+              "desktop": "-230px 41% 0%",
               "mobile": "-190px 42% 0%"
             },
             "padding": {
@@ -1187,7 +1187,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "-.5% 40% 0%",
+              "desktop": "-.5% 41% 0%",
               "mobile": "-1% auto 0% 42%"
             },
             "padding": {
@@ -1220,7 +1220,7 @@
               "mobile": "90%"
             },
             "margin": {
-              "desktop": "5.3% 40% 1.5%",
+              "desktop": "100px 41% .5%",
               "mobile": "60px auto -6px"
             },
             "padding": {
@@ -1242,7 +1242,7 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-desktop-geral.webp",
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-desktop-augusto-heleno.webp",
             "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-mobile-augusto-heleno.webp"
           },
           "alt": "crimes de AUGUSTO HELENO",
@@ -1335,7 +1335,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "-230px 40% 0%",
+              "desktop": "-230px 42% 0%",
               "mobile": "-190px 42% 0%"
             },
             "padding": {
@@ -1367,7 +1367,7 @@
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "-.5% 40% 0%",
+              "desktop": "-.5% 42% 0%",
               "mobile": "-1% auto 0% 42%"
             },
             "padding": {
@@ -1400,7 +1400,7 @@
               "mobile": "90%"
             },
             "margin": {
-              "desktop": "5.3% 40% 1.5%",
+              "desktop": "100px 42% .5%",
               "mobile": "50px auto -6px"
             },
             "padding": {
@@ -1422,7 +1422,7 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-desktop-geral.webp",
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-desktop-paulo-sergio.webp",
             "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-mobile-paulo-sergio.webp"
           },
           "alt": "crimes de Paulo Sérgio Nogueira",
@@ -1491,12 +1491,12 @@
               "mobile": "1000"
             },
             "width": {
-              "desktop": "650px",
+              "desktop": "700px",
               "mobile": "90%"
             },
             "margin": {
-              "desktop": "5% 30%",
-              "mobile": "10% 0% 0% 5%"
+              "desktop": "5% auto 0%",
+              "mobile": "0%"
             },
             "padding": {
               "desktop": "0%",
@@ -1507,8 +1507,8 @@
       ],
       "backgroundColor": "#FFF4E6",
       "padding": {
-        "desktop": "4rem 2rem",
-        "mobile": "3rem 1rem"
+        "desktop": "0rem 2rem",
+        "mobile": "3rem 1rem 0rem"
       }
     },
     {
@@ -1685,17 +1685,20 @@
       "type": "super-flex",
       "items": [
         {
-          "type": "image",
+          "type": "video",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/botao-link-trama-do-golpe-desk.webp",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/botao-link-trama-do-golpe-mobi.webp"
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/videos/a-trama-desk.mp4",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/videos/a-trama-mob.mp4"
           },
-          "alt": "Link para a trama do golpe",
+          "autoplay": true,
+          "autoplayInView": true,
+          "loop": true,
+          "muted": true,
           "link": "https://g1.globo.com/politica/julgamento-bolsonaro-no-stf-trama-do-golpe/",
           "target": "_blank",
           "styles": {
             "width": {
-              "desktop": "100%",
+              "desktop": "60%",
               "mobile": "100%"
             },
             "height": {
@@ -1711,8 +1714,8 @@
       ],
       "backgroundColor": "#FFF4E6",
       "padding": {
-        "desktop": "4rem 2rem",
-        "mobile": "3rem 1rem"
+        "desktop": "0",
+        "mobile": "0rem"
       }
     },
     {
@@ -1741,12 +1744,12 @@
               "mobile": "90%"
             },
             "margin": {
-              "desktop": "64px auto 4px",
+              "desktop": "0px auto 4px",
               "mobile": "0"
             },
             "padding": {
               "desktop": "0",
-              "mobile": "10% 0% 0% 5%"
+              "mobile": "0%"
             }
           }
         },
@@ -1773,20 +1776,20 @@
               "mobile": "90%"
             },
             "margin": {
-              "desktop": "24px auto 64px",
+              "desktop": "24px auto 0px",
               "mobile": "0"
             },
             "padding": {
               "desktop": "0",
-              "mobile": "6% 0% 0% 5%"
+              "mobile": "6% 0% 0%"
             }
           }
         }
       ],
       "backgroundColor": "#FFF4E6",
       "padding": {
-        "desktop": "4rem 2rem",
-        "mobile": "3rem 1rem"
+        "desktop": "4rem 0rem 4rem",
+        "mobile": "3rem 1rem 1rem"
       }
     },
     {
@@ -1849,8 +1852,8 @@
       ],
       "backgroundColor": "#FFF4E6",
       "padding": {
-        "desktop": "4rem 2rem",
-        "mobile": "3rem 1rem"
+        "desktop": "0rem 0rem 2rem",
+        "mobile": "0rem"
       }
     },
     {
@@ -1913,8 +1916,8 @@
       ],
       "backgroundColor": "#FFF4E6",
       "padding": {
-        "desktop": "4rem 2rem",
-        "mobile": "3rem 1rem"
+        "desktop": "0rem 0rem 2rem",
+        "mobile": "0rem"
       }
     },
     {
@@ -1977,8 +1980,8 @@
       ],
       "backgroundColor": "#FFF4E6",
       "padding": {
-        "desktop": "4rem 2rem",
-        "mobile": "3rem 1rem"
+        "desktop": "0rem 0rem 2rem",
+        "mobile": "0rem"
       }
     },
     {
@@ -2041,8 +2044,8 @@
       ],
       "backgroundColor": "#FFF4E6",
       "padding": {
-        "desktop": "4rem 2rem",
-        "mobile": "3rem 1rem"
+        "desktop": "0rem 0rem 2rem",
+        "mobile": "0rem"
       }
     },
     {
@@ -2105,8 +2108,8 @@
       ],
       "backgroundColor": "#FFF4E6",
       "padding": {
-        "desktop": "4rem 2rem",
-        "mobile": "3rem 1rem"
+        "desktop": "0rem 0rem 2rem",
+        "mobile": "0rem"
       }
     },
     {
@@ -2169,8 +2172,8 @@
       ],
       "backgroundColor": "#FFF4E6",
       "padding": {
-        "desktop": "4rem 2rem",
-        "mobile": "3rem 1rem"
+        "desktop": "0rem 0rem 2rem",
+        "mobile": "0rem"
       }
     },
     {
@@ -2233,8 +2236,8 @@
       ],
       "backgroundColor": "#FFF4E6",
       "padding": {
-        "desktop": "4rem 2rem",
-        "mobile": "3rem 1rem"
+        "desktop": "0rem 0rem 2rem",
+        "mobile": "0rem"
       }
     },
     {
@@ -2297,8 +2300,8 @@
       ],
       "backgroundColor": "#FFF4E6",
       "padding": {
-        "desktop": "4rem 2rem",
-        "mobile": "3rem 1rem"
+        "desktop": "0rem 2rem 4rem",
+        "mobile": "0rem"
       }
     },
     {

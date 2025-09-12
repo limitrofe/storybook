@@ -243,32 +243,79 @@
         {/if}
       {/if}
 
-      {#if item.type === 'video' && item.src}
-        <video
-          class="flex-item video-item"
-          src={item.src.mobile || item.src.desktop || item.src}
-            style={`
-            --max-width-desktop: ${item.styles?.maxWidth?.desktop || 'none'};
-            --max-width-mobile: ${item.styles?.maxWidth?.mobile || 'none'};
-            --width-desktop: ${item.styles?.width?.desktop || 'auto'};
-            --width-mobile: ${item.styles?.width?.mobile || 'auto'};
-            --margin-desktop: ${item.styles?.margin?.desktop || '0'};
-            --margin-mobile: ${item.styles?.margin?.mobile || '0'};
-            --padding-desktop: ${item.styles?.padding?.desktop || '0'};
-            --padding-mobile: ${item.styles?.padding?.mobile || '0'};
-          `}
-          loop={item.loop || false}
-          muted={item.muted || false}
-          autoplay={item.autoplay || false}
-          playsinline
-          data-autoplay-in-view={item.autoplayInView || false}
-          use:viewport
-          on:enterViewport={handleEnterViewport}
-          on:exitViewport={handleExitViewport}
-        >
-          Seu navegador não suporta vídeos.
-        </video>
+{#if item.type === 'video' && item.src}
+  {#if item.link}
+    <a 
+      href={item.link} 
+      target={item.target || '_self'} 
+      style="display: block; text-decoration: none;"
+    >
+      <video
+        class="flex-item video-item"
+        style={`
+        --max-width-desktop: ${item.styles?.maxWidth?.desktop || 'none'};
+        --max-width-mobile: ${item.styles?.maxWidth?.mobile || 'none'};
+        --width-desktop: ${item.styles?.width?.desktop || 'auto'};
+        --width-mobile: ${item.styles?.width?.mobile || 'auto'};
+        --margin-desktop: ${item.styles?.margin?.desktop || '0'};
+        --margin-mobile: ${item.styles?.margin?.mobile || '0'};
+        --padding-desktop: ${item.styles?.padding?.desktop || '0'};
+        --padding-mobile: ${item.styles?.padding?.mobile || '0'};
+      `}
+        loop={item.loop || false}
+        muted={item.muted || false}
+        autoplay={item.autoplay || false}
+        playsinline
+        data-autoplay-in-view={item.autoplayInView || false}
+        use:viewport
+        on:enterViewport={handleEnterViewport}
+        on:exitViewport={handleExitViewport}
+      >
+        {#if typeof item.src === 'object'}
+          {#if item.src.mobile}
+            <source src={item.src.mobile} type="video/mp4" media="(max-width: 768px)" />
+          {/if}
+          {#if item.src.desktop}
+            <source src={item.src.desktop} type="video/mp4" media="(min-width: 769px)" />
+          {/if}
+        {/if}
+        Seu navegador não suporta vídeos.
+      </video>
+    </a>
+  {:else}
+    <video
+      class="flex-item video-item"
+      style={`
+      --max-width-desktop: ${item.styles?.maxWidth?.desktop || 'none'};
+      --max-width-mobile: ${item.styles?.maxWidth?.mobile || 'none'};
+      --width-desktop: ${item.styles?.width?.desktop || 'auto'};
+      --width-mobile: ${item.styles?.width?.mobile || 'auto'};
+      --margin-desktop: ${item.styles?.margin?.desktop || '0'};
+      --margin-mobile: ${item.styles?.margin?.mobile || '0'};
+      --padding-desktop: ${item.styles?.padding?.desktop || '0'};
+      --padding-mobile: ${item.styles?.padding?.mobile || '0'};
+    `}
+      loop={item.loop || false}
+      muted={item.muted || false}
+      autoplay={item.autoplay || false}
+      playsinline
+      data-autoplay-in-view={item.autoplayInView || false}
+      use:viewport
+      on:enterViewport={handleEnterViewport}
+      on:exitViewport={handleExitViewport}
+    >
+      {#if typeof item.src === 'object'}
+        {#if item.src.mobile}
+          <source src={item.src.mobile} type="video/mp4" media="(max-width: 768px)" />
+        {/if}
+        {#if item.src.desktop}
+          <source src={item.src.desktop} type="video/mp4" media="(min-width: 769px)" />
+        {/if}
       {/if}
+      Seu navegador não suporta vídeos.
+    </video>
+  {/if}
+{/if}
 
       {#if item.type === 'audio' && item.src}
         <div class="flex-item audio-wrapper">

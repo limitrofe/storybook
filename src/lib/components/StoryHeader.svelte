@@ -163,7 +163,7 @@
     }
 
     .story-header.has-media {
-      padding: 6rem 2rem;
+      padding: 2rem 2rem 2rem 4rem;
     }
 
     /* Esconde mídia mobile e exibe mídia desktop */
@@ -184,5 +184,6 @@
     h2 {
       font-size: var(--font-size-90);
     }
+
   }
 </style>
