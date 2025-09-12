@@ -9,11 +9,11 @@
   "paragraphs": [
     {
       "type": "header",
-      "title": "O julgamento",
-      "subtitle": "Por X votos a X, 1 Turma do STF declarou ex-presidente e sete aliados culpados por tentativa de golpe. Veja sentenças de todos os réus e as justificativas dos ministros.",
+      "title": "",
+      "subtitle": "",
       "date": "",
-      "backgroundVideo": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/resumo.mp4",
-      "backgroundVideoMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/resumo.mp4",
+      "backgroundVideo": "",
+      "backgroundVideoMobile": "",
       "author": "",
       "variant": "hero",
       "overlay": "true"
@@ -69,14 +69,14 @@
             "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/card-bolsonaro-crimes-mobile.webp",
             "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/card-bolsonaro-crimes-desktop.webp"
           },
-          "alt": "Card Bolsonaro",
+          "alt": "Card JAIR Bolsonaro",
           "styles": {
             "width": {
-              "desktop": "1080px",
+              "desktop": "100%",
               "mobile": "100%"
             },
             "maxWidth": {
-              "desktop": "100%",
+              "desktop": "1080px",
               "mobile": "100%"
             },
             "margin": {
@@ -85,12 +85,110 @@
             },
             "display": "block"
           }
+        },
+        {
+          "type": "text",
+          "tag": "h1",
+          "content": "JAIR BOLSONARO",
+          "styles": {
+            "color": "#1A1A1A",
+            "textAlign": "left",
+            "fontSize": {
+              "desktop": "40px",
+              "mobile": "28px"
+            },
+            "lineHeight": {
+              "desktop": "60px",
+              "mobile": "30px"
+            },
+            "fontWeight": {
+              "desktop": "1000",
+              "mobile": "1000"
+            },
+            "width": {
+              "desktop": "650px",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "-230px 40% 0%",
+              "mobile": "-230px 42% 0%"
+            },
+            "padding": {
+              "desktop": "0%",
+              "mobile": "20px 0 0 10px"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "tag": "p",
+          "content": "ex-presidente da república",
+          "styles": {
+            "color": "#1A1A1A",
+            "textAlign": "left",
+            "fontSize": {
+              "desktop": "20px",
+              "mobile": "16px"
+            },
+            "lineHeight": {
+              "mobile": "24px"
+            },
+            "fontWeight": {
+              "desktop": "600",
+              "mobile": "600"
+            },
+            "width": {
+              "desktop": "650px",
+              "mobile": "auto"
+            },
+            "margin": {
+              "desktop": "-.5% 40% 0%",
+              "mobile": "-1% auto 0% 42%"
+            },
+            "padding": {
+              "desktop": "0%",
+              "mobile": "0% 0 0 10px"
+            }
+          }
+        },
+        {
+          "type": "text",
+          "tag": "p",
+          "content": "Nunc interdum, diam ac tristique eleifend, leo quam vehicula neque, non tristique neque nisl in neque.",
+          "styles": {
+            "color": "#fff",
+            "textAlign": "left",
+            "fontSize": {
+              "desktop": "22px",
+              "mobile": "18px"
+            },
+            "lineHeight": {
+              "desktop": "32px",
+              "mobile": "24px"
+            },
+            "fontWeight": {
+              "desktop": "600",
+              "mobile": "600"
+            },
+            "width": {
+              "desktop": "650px",
+              "mobile": "90%"
+            },
+            "margin": {
+              "desktop": "2% 40% 1.5%",
+              "mobile": "42px auto -6px"
+            },
+            "padding": {
+              "desktop": "0%",
+              "mobile": "-20px 0 0 20px"
+            }
+          }
         }
       ],
       "backgroundColor": "#FFF4E6",
       "padding": {
         "desktop": "0",
-        "mobile": "3rem 1rem"
+        "mobile": "0"
       }
     },
     {
@@ -102,15 +200,15 @@
             "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-desktop-geral.webp",
             "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-mobile-geral.webp"
           },
-          "alt": "crimes de bolsonaro",
+          "alt": "crimes de JAIR BOLSONARO",
           "styles": {
             "width": {
               "desktop": "min(880px, calc(100% - 24px))",
-              "mobile": "calc(100% - 24px)"
+              "mobile": "auto"
             },
             "maxWidth": {
               "desktop": "100%",
-              "mobile": "100%"
+              "mobile": "auto"
             },
             "height": {
               "desktop": "auto",
@@ -121,8 +219,8 @@
               "mobile": "0 auto"
             },
             "padding": {
-              "desktop": "12px",
-              "mobile": "12px"
+              "desktop": "4px",
+              "mobile": "4px"
             },
             "boxSizing": {
               "desktop": "border-box",
@@ -139,7 +237,7 @@
       },
       "padding": {
         "desktop": "4rem 2rem",
-        "mobile": "3rem 1rem"
+        "mobile": "3rem 0rem"
       }
     },
     {
@@ -151,20 +249,21 @@
             "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/card-mauro-cid-crimes-mobile.webp",
             "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/card-mauro-cid-crimes-desktop.webp"
           },
-          "alt": "Foto de Mauro Cid",
+          "alt": "Card MAURO CID",
           "styles": {
             "width": {
-              "desktop": "1080px",
+              "desktop": "100%",
               "mobile": "100%"
             },
-            "height": {
-              "desktop": "auto",
-              "mobile": "auto"
+            "maxWidth": {
+              "desktop": "1080px",
+              "mobile": "100%"
             },
             "margin": {
               "desktop": "0 auto",
               "mobile": "0 auto"
-            }
+            },
+            "display": "block"
           }
         },
         {
@@ -196,7 +295,7 @@
             },
             "padding": {
               "desktop": "0%",
-              "mobile": "0%"
+              "mobile": "20px 0 0 0"
             }
           }
         },
@@ -212,7 +311,6 @@
               "mobile": "16px"
             },
             "lineHeight": {
-              "desktop": "",
               "mobile": "24px"
             },
             "fontWeight": {
@@ -221,7 +319,7 @@
             },
             "width": {
               "desktop": "650px",
-              "mobile": "200px"
+              "mobile": "auto"
             },
             "margin": {
               "desktop": "-.5% 40% 0%",
@@ -258,46 +356,24 @@
             },
             "margin": {
               "desktop": "2% 40% 1.5%",
-              "mobile": "62px auto -6px"
+              "mobile": "42px auto -6px"
             },
             "padding": {
               "desktop": "0%",
-              "mobile": "0%"
+              "mobile": "-20px 0 0 20px"
             }
           }
         }
       ],
       "backgroundColor": "#FFF4E6",
       "padding": {
-        "desktop": "0",
-        "mobile": "3rem 1rem"
+        "desktop": "50px 0 0 0",
+        "mobile": "0"
       }
     },
     {
       "type": "super-flex",
       "items": [
-        {
-          "type": "image",
-          "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/bg-crimes.webp",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/bg_crimes_mobile.webp"
-          },
-          "alt": "bg crimes de bolsonaro",
-          "styles": {
-            "width": {
-              "desktop": "1280px",
-              "mobile": "100%"
-            },
-            "height": {
-              "desktop": "auto",
-              "mobile": "auto"
-            },
-            "margin": {
-              "desktop": "0 auto",
-              "mobile": "0 auto"
-            }
-          }
-        },
         {
           "type": "image",
           "src": {
@@ -307,32 +383,41 @@
           "alt": "crimes de bolsonaro",
           "styles": {
             "width": {
-              "desktop": "880px",
-              "mobile": "100%"
+              "desktop": "min(880px, calc(100% - 24px))",
+              "mobile": "auto"
+            },
+            "maxWidth": {
+              "desktop": "100%",
+              "mobile": "auto"
             },
             "height": {
               "desktop": "auto",
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "-330px auto 100px",
-              "mobile": "-355px auto 10px"
+              "desktop": "0 auto",
+              "mobile": "0 auto"
             },
             "padding": {
-              "desktop": "12px",
-              "mobile": "12px"
+              "desktop": "4px",
+              "mobile": "4px"
             },
             "boxSizing": {
               "desktop": "border-box",
               "mobile": "border-box"
-            }
+            },
+            "display": "block"
           }
         }
       ],
       "backgroundColor": "#FFF4E6",
+      "backgroundImage": {
+        "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/bg-crimes.webp",
+        "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/bg_crimes_mobile.webp"
+      },
       "padding": {
-        "desktop": "0",
-        "mobile": "3rem 1rem"
+        "desktop": "4rem 2rem",
+        "mobile": "3rem 0rem"
       }
     },
     {
@@ -344,20 +429,21 @@
             "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/card-alexandre-ramagem-crimes-mobile.webp",
             "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/card-alexandre-ramagem-desktop.webp"
           },
-          "alt": "Foto de Jair Bolsonaro de perfil",
+          "alt": "Card ALEXANDRE RAMAGEM",
           "styles": {
             "width": {
+              "desktop": "100%",
+              "mobile": "100%"
+            },
+            "maxWidth": {
               "desktop": "1080px",
               "mobile": "100%"
             },
-            "height": {
-              "desktop": "auto",
-              "mobile": "auto"
-            },
             "margin": {
-              "desktop": "0% auto",
-              "mobile": "2rem 0 0 auto"
-            }
+              "desktop": "0 auto",
+              "mobile": "0 auto"
+            },
+            "display": "block"
           }
         },
         {
@@ -385,11 +471,11 @@
             },
             "margin": {
               "desktop": "-230px 40% 0%",
-              "mobile": "-250px 42% 0%"
+              "mobile": "-230px 42% 0%"
             },
             "padding": {
               "desktop": "0%",
-              "mobile": "0%"
+              "mobile": "20px 0 0 20px"
             }
           }
         },
@@ -405,7 +491,6 @@
               "mobile": "16px"
             },
             "lineHeight": {
-              "desktop": "",
               "mobile": "24px"
             },
             "fontWeight": {
@@ -414,7 +499,7 @@
             },
             "width": {
               "desktop": "650px",
-              "mobile": "200px"
+              "mobile": "auto"
             },
             "margin": {
               "desktop": "-.5% 40% 0%",
@@ -422,7 +507,7 @@
             },
             "padding": {
               "desktop": "0%",
-              "mobile": "0%"
+              "mobile": "0px 0 0 20px"
             }
           }
         },
@@ -451,19 +536,19 @@
             },
             "margin": {
               "desktop": "2% 40% 1.5%",
-              "mobile": "52px auto -6px"
+              "mobile": "18px auto -6px"
             },
             "padding": {
               "desktop": "0%",
-              "mobile": "0%"
+              "mobile": "-20px 0 0 20px"
             }
           }
         }
       ],
       "backgroundColor": "#FFF4E6",
       "padding": {
-        "desktop": "4rem 2rem",
-        "mobile": "3rem 1rem"
+        "desktop": "50px 0 0 0",
+        "mobile": "0"
       }
     },
     {
@@ -472,52 +557,47 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/bg_crimes_desktop-alexandre.webp",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/bg_crimes_mobile-alexandre.webp"
-          },
-          "alt": "bg crimes de bolsonaro",
-          "styles": {
-            "width": {
-              "desktop": "1280px",
-              "mobile": "100%"
-            },
-            "height": {
-              "desktop": "auto",
-              "mobile": "auto"
-            },
-            "margin": {
-              "desktop": "0px auto",
-              "mobile": "16px 0%"
-            }
-          }
-        },
-        {
-          "type": "image",
-          "src": {
             "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-desktop-alexandre-ramagem.webp",
             "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-mobile-alexandre-ramagem.webp"
           },
-          "alt": "crimes de bolsonaro",
+          "alt": "crimes de Alexandre Ramagem",
           "styles": {
             "width": {
-              "desktop": "880px",
-              "mobile": "100%"
+              "desktop": "min(880px, calc(100% - 24px))",
+              "mobile": "auto"
+            },
+            "maxWidth": {
+              "desktop": "100%",
+              "mobile": "auto"
             },
             "height": {
               "desktop": "auto",
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "-260px auto 100px",
-              "mobile": "-210px 0% 10px"
-            }
+              "desktop": "0 auto",
+              "mobile": "0 auto"
+            },
+            "padding": {
+              "desktop": "4px",
+              "mobile": "4px"
+            },
+            "boxSizing": {
+              "desktop": "border-box",
+              "mobile": "border-box"
+            },
+            "display": "block"
           }
         }
       ],
       "backgroundColor": "#FFF4E6",
+      "backgroundImage": {
+        "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/bg-crimes.webp",
+        "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/bg_crimes_mobile.webp"
+      },
       "padding": {
         "desktop": "4rem 2rem",
-        "mobile": "3rem 1rem"
+        "mobile": "3rem 0rem"
       }
     },
     {
@@ -529,20 +609,21 @@
             "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/card-almir-garnier-crimes-mobile.webp",
             "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/card-almir-garnier-desktop.webp"
           },
-          "alt": "Foto de Jair Bolsonaro de perfil",
+          "alt": "Card Almir Garnier",
           "styles": {
             "width": {
+              "desktop": "100%",
+              "mobile": "100%"
+            },
+            "maxWidth": {
               "desktop": "1080px",
               "mobile": "100%"
             },
-            "height": {
-              "desktop": "auto",
-              "mobile": "auto"
-            },
             "margin": {
-              "desktop": "0% auto",
-              "mobile": "2rem 0 0 auto"
-            }
+              "desktop": "0 auto",
+              "mobile": "0 auto"
+            },
+            "display": "block"
           }
         },
         {
@@ -574,7 +655,7 @@
             },
             "padding": {
               "desktop": "0%",
-              "mobile": "0%"
+              "mobile": "20px 0 0 0"
             }
           }
         },
@@ -590,7 +671,6 @@
               "mobile": "16px"
             },
             "lineHeight": {
-              "desktop": "28px",
               "mobile": "24px"
             },
             "fontWeight": {
@@ -599,7 +679,7 @@
             },
             "width": {
               "desktop": "650px",
-              "mobile": "200px"
+              "mobile": "auto"
             },
             "margin": {
               "desktop": "-.5% 40% 0%",
@@ -636,19 +716,19 @@
             },
             "margin": {
               "desktop": "2% 40% 1.5%",
-              "mobile": "62px auto -6px"
+              "mobile": "42px auto -6px"
             },
             "padding": {
               "desktop": "0%",
-              "mobile": "0%"
+              "mobile": "-20px 0 0 20px"
             }
           }
         }
       ],
       "backgroundColor": "#FFF4E6",
       "padding": {
-        "desktop": "4rem 2rem",
-        "mobile": "3rem 1rem"
+        "desktop": "50px 0 0 0",
+        "mobile": "0"
       }
     },
     {
@@ -657,52 +737,47 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/bg-crimes.webp",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/bg_crimes_mobile.webp"
-          },
-          "alt": "bg crimes de bolsonaro",
-          "styles": {
-            "width": {
-              "desktop": "1280px",
-              "mobile": "100%"
-            },
-            "height": {
-              "desktop": "auto",
-              "mobile": "auto"
-            },
-            "margin": {
-              "desktop": "0px auto",
-              "mobile": "16px 0%"
-            }
-          }
-        },
-        {
-          "type": "image",
-          "src": {
             "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-desktop-geral.webp",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-mobile-geral.webp"
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-desktop-geral.webp"
           },
-          "alt": "crimes de bolsonaro",
+          "alt": "crimes de Almir Garnier",
           "styles": {
             "width": {
-              "desktop": "880px",
-              "mobile": "100%"
+              "desktop": "min(880px, calc(100% - 24px))",
+              "mobile": "auto"
+            },
+            "maxWidth": {
+              "desktop": "100%",
+              "mobile": "auto"
             },
             "height": {
               "desktop": "auto",
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "-330px auto 100px",
-              "mobile": "-355px 0% 10px"
-            }
+              "desktop": "0 auto",
+              "mobile": "0 auto"
+            },
+            "padding": {
+              "desktop": "4px",
+              "mobile": "4px"
+            },
+            "boxSizing": {
+              "desktop": "border-box",
+              "mobile": "border-box"
+            },
+            "display": "block"
           }
         }
       ],
       "backgroundColor": "#FFF4E6",
+      "backgroundImage": {
+        "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/bg-crimes.webp",
+        "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/bg_crimes_mobile.webp"
+      },
       "padding": {
         "desktop": "4rem 2rem",
-        "mobile": "3rem 1rem"
+        "mobile": "3rem 0rem"
       }
     },
     {
@@ -714,20 +789,21 @@
             "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/card-anderson-torres-crimes-mobile.webp",
             "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/card-anderson-torres-crimes-desktop.webp"
           },
-          "alt": "Foto de Jair Bolsonaro de perfil",
+          "alt": "Card Anderson Torres",
           "styles": {
             "width": {
+              "desktop": "100%",
+              "mobile": "100%"
+            },
+            "maxWidth": {
               "desktop": "1080px",
               "mobile": "100%"
             },
-            "height": {
-              "desktop": "auto",
-              "mobile": "auto"
-            },
             "margin": {
-              "desktop": "0% auto",
-              "mobile": "2rem 0 0 auto"
-            }
+              "desktop": "0 auto",
+              "mobile": "0 auto"
+            },
+            "display": "block"
           }
         },
         {
@@ -759,7 +835,7 @@
             },
             "padding": {
               "desktop": "0%",
-              "mobile": "0%"
+              "mobile": "20px 0 0 0"
             }
           }
         },
@@ -775,7 +851,6 @@
               "mobile": "16px"
             },
             "lineHeight": {
-              "desktop": "28px",
               "mobile": "24px"
             },
             "fontWeight": {
@@ -784,7 +859,7 @@
             },
             "width": {
               "desktop": "650px",
-              "mobile": "200px"
+              "mobile": "auto"
             },
             "margin": {
               "desktop": "-.5% 40% 0%",
@@ -821,19 +896,19 @@
             },
             "margin": {
               "desktop": "2% 40% 1.5%",
-              "mobile": "62px auto -6px"
+              "mobile": "42px auto -6px"
             },
             "padding": {
               "desktop": "0%",
-              "mobile": "0%"
+              "mobile": "-20px 0 0 20px"
             }
           }
         }
       ],
       "backgroundColor": "#FFF4E6",
       "padding": {
-        "desktop": "4rem 2rem",
-        "mobile": "3rem 1rem"
+        "desktop": "50px 0 0 0",
+        "mobile": "0"
       }
     },
     {
@@ -842,52 +917,47 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/bg-crimes.webp",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/bg_crimes_mobile.webp"
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-desktop-alexandre-ramagem.webp",
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-mobile-alexandre-ramagem.webp"
           },
-          "alt": "bg crimes de bolsonaro",
+          "alt": "crimes de Alexandre Ramagem",
           "styles": {
             "width": {
-              "desktop": "1280px",
-              "mobile": "100%"
+              "desktop": "min(880px, calc(100% - 24px))",
+              "mobile": "auto"
+            },
+            "maxWidth": {
+              "desktop": "100%",
+              "mobile": "auto"
             },
             "height": {
               "desktop": "auto",
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "0px auto",
-              "mobile": "16px 0%"
-            }
-          }
-        },
-        {
-          "type": "image",
-          "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-desktop-geral.webp",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-mobile-geral.webp"
-          },
-          "alt": "crimes de bolsonaro",
-          "styles": {
-            "width": {
-              "desktop": "880px",
-              "mobile": "100%"
+              "desktop": "0 auto",
+              "mobile": "0 auto"
             },
-            "height": {
-              "desktop": "auto",
-              "mobile": "auto"
+            "padding": {
+              "desktop": "4px",
+              "mobile": "4px"
             },
-            "margin": {
-              "desktop": "-330px auto 100px",
-              "mobile": "-355px 0% 10px"
-            }
+            "boxSizing": {
+              "desktop": "border-box",
+              "mobile": "border-box"
+            },
+            "display": "block"
           }
         }
       ],
       "backgroundColor": "#FFF4E6",
+      "backgroundImage": {
+        "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/bg-crimes.webp",
+        "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/bg_crimes_mobile.webp"
+      },
       "padding": {
         "desktop": "4rem 2rem",
-        "mobile": "3rem 1rem"
+        "mobile": "3rem 0rem"
       }
     },
     {
@@ -899,20 +969,21 @@
             "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/card-walter-braga-crimes-mobile.webp",
             "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/card-walter-braga-crimes-desktop.webp"
           },
-          "alt": "Foto de Walter Braga Netto",
+          "alt": "Card Walter Braga Netto",
           "styles": {
             "width": {
+              "desktop": "100%",
+              "mobile": "100%"
+            },
+            "maxWidth": {
               "desktop": "1080px",
               "mobile": "100%"
             },
-            "height": {
-              "desktop": "auto",
-              "mobile": "auto"
-            },
             "margin": {
-              "desktop": "0% auto",
-              "mobile": "2rem 0 0 auto"
-            }
+              "desktop": "0 auto",
+              "mobile": "0 auto"
+            },
+            "display": "block"
           }
         },
         {
@@ -936,15 +1007,15 @@
             },
             "width": {
               "desktop": "650px",
-              "mobile": "200px"
+              "mobile": "auto"
             },
             "margin": {
               "desktop": "-230px 40% 0%",
-              "mobile": "-230px auto 0% 42%"
+              "mobile": "-230px 42% 0%"
             },
             "padding": {
               "desktop": "0%",
-              "mobile": "0%"
+              "mobile": "0px 0 0 20px"
             }
           }
         },
@@ -960,7 +1031,6 @@
               "mobile": "16px"
             },
             "lineHeight": {
-              "desktop": "28px",
               "mobile": "24px"
             },
             "fontWeight": {
@@ -969,7 +1039,7 @@
             },
             "width": {
               "desktop": "650px",
-              "mobile": "200px"
+              "mobile": "auto"
             },
             "margin": {
               "desktop": "-.5% 40% 0%",
@@ -977,7 +1047,7 @@
             },
             "padding": {
               "desktop": "0%",
-              "mobile": "0%"
+              "mobile": "0px 0 0 20px"
             }
           }
         },
@@ -1006,19 +1076,19 @@
             },
             "margin": {
               "desktop": "2% 40% 1.5%",
-              "mobile": "62px auto -6px"
+              "mobile": "32px auto -6px"
             },
             "padding": {
               "desktop": "0%",
-              "mobile": "0%"
+              "mobile": "-20px 0 0 20px"
             }
           }
         }
       ],
       "backgroundColor": "#FFF4E6",
       "padding": {
-        "desktop": "4rem 2rem",
-        "mobile": "3rem 1rem"
+        "desktop": "50px 0 0 0",
+        "mobile": "0"
       }
     },
     {
@@ -1027,52 +1097,47 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/bg-crimes.webp",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/bg_crimes_mobile.webp"
-          },
-          "alt": "bg crimes de bolsonaro",
-          "styles": {
-            "width": {
-              "desktop": "1280px",
-              "mobile": "100%"
-            },
-            "height": {
-              "desktop": "auto",
-              "mobile": "auto"
-            },
-            "margin": {
-              "desktop": "0px auto",
-              "mobile": "16px 0%"
-            }
-          }
-        },
-        {
-          "type": "image",
-          "src": {
             "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-desktop-geral.webp",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-mobile-geral.webp"
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-desktop-geral.webp"
           },
-          "alt": "crimes de bolsonaro",
+          "alt": "crimes de Walter Braga Netto",
           "styles": {
             "width": {
-              "desktop": "880px",
-              "mobile": "100%"
+              "desktop": "min(880px, calc(100% - 24px))",
+              "mobile": "auto"
+            },
+            "maxWidth": {
+              "desktop": "100%",
+              "mobile": "auto"
             },
             "height": {
               "desktop": "auto",
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "-330px auto 100px",
-              "mobile": "-355px 0% 10px"
-            }
+              "desktop": "0 auto",
+              "mobile": "0 auto"
+            },
+            "padding": {
+              "desktop": "4px",
+              "mobile": "4px"
+            },
+            "boxSizing": {
+              "desktop": "border-box",
+              "mobile": "border-box"
+            },
+            "display": "block"
           }
         }
       ],
       "backgroundColor": "#FFF4E6",
+      "backgroundImage": {
+        "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/bg-crimes.webp",
+        "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/bg_crimes_mobile.webp"
+      },
       "padding": {
         "desktop": "4rem 2rem",
-        "mobile": "3rem 1rem"
+        "mobile": "3rem 0rem"
       }
     },
     {
@@ -1084,20 +1149,21 @@
             "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/card-augusto-heleno-crimes-mobile.webp",
             "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/card-augusto-heleno-crimes-desktop.webp"
           },
-          "alt": "Foto de Augusto Heleno",
+          "alt": "Card AUGUSTO HELENO",
           "styles": {
             "width": {
+              "desktop": "100%",
+              "mobile": "100%"
+            },
+            "maxWidth": {
               "desktop": "1080px",
               "mobile": "100%"
             },
-            "height": {
-              "desktop": "auto",
-              "mobile": "auto"
-            },
             "margin": {
-              "desktop": "0% auto",
-              "mobile": "2rem 0 0 auto"
-            }
+              "desktop": "0 auto",
+              "mobile": "0 auto"
+            },
+            "display": "block"
           }
         },
         {
@@ -1121,15 +1187,15 @@
             },
             "width": {
               "desktop": "650px",
-              "mobile": "200px"
+              "mobile": "auto"
             },
             "margin": {
               "desktop": "-230px 40% 0%",
-              "mobile": "-250px auto 0% 42%"
+              "mobile": "-230px 42% 0%"
             },
             "padding": {
               "desktop": "0%",
-              "mobile": "0%"
+              "mobile": "20px 0 0 20px"
             }
           }
         },
@@ -1145,7 +1211,6 @@
               "mobile": "16px"
             },
             "lineHeight": {
-              "desktop": "28px",
               "mobile": "24px"
             },
             "fontWeight": {
@@ -1154,7 +1219,7 @@
             },
             "width": {
               "desktop": "650px",
-              "mobile": "200px"
+              "mobile": "auto"
             },
             "margin": {
               "desktop": "-.5% 40% 0%",
@@ -1162,7 +1227,7 @@
             },
             "padding": {
               "desktop": "0%",
-              "mobile": "0%"
+              "mobile": "0px 0 0 20px"
             }
           }
         },
@@ -1191,19 +1256,19 @@
             },
             "margin": {
               "desktop": "2% 40% 1.5%",
-              "mobile": "82px auto -6px"
+              "mobile": "42px auto -6px"
             },
             "padding": {
               "desktop": "0%",
-              "mobile": "0%"
+              "mobile": "-20px 0 0 20px"
             }
           }
         }
       ],
       "backgroundColor": "#FFF4E6",
       "padding": {
-        "desktop": "4rem 2rem",
-        "mobile": "3rem 1rem"
+        "desktop": "50px 0 0 0",
+        "mobile": "0"
       }
     },
     {
@@ -1212,52 +1277,47 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/bg-crimes.webp",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/bg_crimes_mobile.webp"
-          },
-          "alt": "bg crimes de bolsonaro",
-          "styles": {
-            "width": {
-              "desktop": "1280px",
-              "mobile": "100%"
-            },
-            "height": {
-              "desktop": "auto",
-              "mobile": "auto"
-            },
-            "margin": {
-              "desktop": "0px auto",
-              "mobile": "16px 0%"
-            }
-          }
-        },
-        {
-          "type": "image",
-          "src": {
             "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-desktop-geral.webp",
             "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-mobile-geral.webp"
           },
-          "alt": "crimes de bolsonaro",
+          "alt": "crimes de AUGUSTO HELENO",
           "styles": {
             "width": {
-              "desktop": "880px",
-              "mobile": "100%"
+              "desktop": "min(880px, calc(100% - 24px))",
+              "mobile": "auto"
+            },
+            "maxWidth": {
+              "desktop": "100%",
+              "mobile": "auto"
             },
             "height": {
               "desktop": "auto",
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "-330px auto 100px",
-              "mobile": "-355px 0% 10px"
-            }
+              "desktop": "0 auto",
+              "mobile": "0 auto"
+            },
+            "padding": {
+              "desktop": "4px",
+              "mobile": "4px"
+            },
+            "boxSizing": {
+              "desktop": "border-box",
+              "mobile": "border-box"
+            },
+            "display": "block"
           }
         }
       ],
       "backgroundColor": "#FFF4E6",
+      "backgroundImage": {
+        "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/bg-crimes.webp",
+        "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/bg_crimes_mobile.webp"
+      },
       "padding": {
         "desktop": "4rem 2rem",
-        "mobile": "3rem 1rem"
+        "mobile": "3rem 0rem"
       }
     },
     {
@@ -1269,20 +1329,21 @@
             "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/card-paulo-sergio-crimes-mobile.webp",
             "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/card-paulo-sergio-crimes-desktop.webp"
           },
-          "alt": "Foto de Paulo Sérgio Nogueira",
+          "alt": "Card Paulo Sérgio Nogueira",
           "styles": {
             "width": {
+              "desktop": "100%",
+              "mobile": "100%"
+            },
+            "maxWidth": {
               "desktop": "1080px",
               "mobile": "100%"
             },
-            "height": {
-              "desktop": "auto",
-              "mobile": "auto"
-            },
             "margin": {
-              "desktop": "0% auto",
-              "mobile": "2rem 0 0 auto"
-            }
+              "desktop": "0 auto",
+              "mobile": "0 auto"
+            },
+            "display": "block"
           }
         },
         {
@@ -1306,15 +1367,15 @@
             },
             "width": {
               "desktop": "650px",
-              "mobile": "300px"
+              "mobile": "auto"
             },
             "margin": {
               "desktop": "-230px 40% 0%",
-              "mobile": "-230px auto 0% 42%"
+              "mobile": "-230px 42% 0%"
             },
             "padding": {
               "desktop": "0%",
-              "mobile": "0%"
+              "mobile": "0px 0 0 20px"
             }
           }
         },
@@ -1330,7 +1391,6 @@
               "mobile": "16px"
             },
             "lineHeight": {
-              "desktop": "28px",
               "mobile": "24px"
             },
             "fontWeight": {
@@ -1339,7 +1399,7 @@
             },
             "width": {
               "desktop": "650px",
-              "mobile": "200px"
+              "mobile": "auto"
             },
             "margin": {
               "desktop": "-.5% 40% 0%",
@@ -1347,7 +1407,7 @@
             },
             "padding": {
               "desktop": "0%",
-              "mobile": "0%"
+              "mobile": "0 0 0 20px"
             }
           }
         },
@@ -1376,19 +1436,19 @@
             },
             "margin": {
               "desktop": "2% 40% 1.5%",
-              "mobile": "62px auto -6px"
+              "mobile": "42px auto -6px"
             },
             "padding": {
               "desktop": "0%",
-              "mobile": "0%"
+              "mobile": "-20px 0 0 20px"
             }
           }
         }
       ],
       "backgroundColor": "#FFF4E6",
       "padding": {
-        "desktop": "4rem 2rem",
-        "mobile": "3rem 1rem"
+        "desktop": "50px 0 0 0",
+        "mobile": "0"
       }
     },
     {
@@ -1397,52 +1457,47 @@
         {
           "type": "image",
           "src": {
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/bg-crimes.webp",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/bg_crimes_mobile.webp"
-          },
-          "alt": "bg crimes de bolsonaro",
-          "styles": {
-            "width": {
-              "desktop": "1280px",
-              "mobile": "100%"
-            },
-            "height": {
-              "desktop": "auto",
-              "mobile": "auto"
-            },
-            "margin": {
-              "desktop": "0px auto",
-              "mobile": "16px 0%"
-            }
-          }
-        },
-        {
-          "type": "image",
-          "src": {
             "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-desktop-geral.webp",
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-mobile-geral.webp"
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-desktop-geral.webp"
           },
-          "alt": "crimes de bolsonaro",
+          "alt": "crimes de Paulo Sérgio Nogueira",
           "styles": {
             "width": {
-              "desktop": "880px",
-              "mobile": "100%"
+              "desktop": "min(880px, calc(100% - 24px))",
+              "mobile": "auto"
+            },
+            "maxWidth": {
+              "desktop": "100%",
+              "mobile": "auto"
             },
             "height": {
               "desktop": "auto",
               "mobile": "auto"
             },
             "margin": {
-              "desktop": "-330px auto 100px",
-              "mobile": "-355px 0% 10px"
-            }
+              "desktop": "0 auto",
+              "mobile": "0 auto"
+            },
+            "padding": {
+              "desktop": "4px",
+              "mobile": "4px"
+            },
+            "boxSizing": {
+              "desktop": "border-box",
+              "mobile": "border-box"
+            },
+            "display": "block"
           }
         }
       ],
       "backgroundColor": "#FFF4E6",
+      "backgroundImage": {
+        "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/bg-crimes.webp",
+        "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/bg_crimes_mobile.webp"
+      },
       "padding": {
         "desktop": "4rem 2rem",
-        "mobile": "3rem 1rem"
+        "mobile": "3rem 0rem"
       }
     },
     {
@@ -2191,7 +2246,40 @@
     },
     {
       "type": "super-flex",
-      "items": null,
+      "items": [
+        {
+          "type": "text",
+          "content": "Edição: <b>Felipe Turioni</b><br>Direção de arte, interface e infografia: <b>Bruna Azevedo, Gabs</b><br>Desenvolvimento: <b>Gabs, Guilherme Gomes</b><br>Coordenação (Conteúdo): <b>Vitor Sorano</b><br>Coordenação (Design e Desenvolvimento): <b>Guilherme Gomes</b>",
+          "styles": {
+            "fontFamily": "globotipo",
+            "fontSize": {
+              "desktop": "1.4rem",
+              "mobile": "18px"
+            },
+            "lineHeight": {
+              "desktop": "2.6rem",
+              "mobile": "32px"
+            },
+            "fontWeight": {
+              "desktop": "400",
+              "mobile": "400"
+            },
+            "color": "#fff",
+            "textAlign": "left",
+            "width": {
+              "desktop": "40%",
+              "mobile": "90%"
+            },
+            "margin": {
+              "desktop": "auto"
+            },
+            "padding": {
+              "desktop": "64px 0 128px",
+              "mobile": "32px 4% 64px"
+            }
+          }
+        }
+      ],
       "backgroundColor": "#1A1A1A",
       "padding": {
         "desktop": "4rem 2rem",

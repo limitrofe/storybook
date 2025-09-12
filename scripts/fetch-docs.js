@@ -513,6 +513,7 @@ function decodeHTMLEntities(text) {
   return decoded;
 }
 
+
 // ==================================================================
 // ✅ FUNÇÃO SUBSTITUÍDA: Versão mais inteligente para parsear JSON
 // ==================================================================
@@ -986,6 +987,8 @@ if (['super-flex', 'superflex'].includes(paragraph.type?.toLowerCase())) {
   const itemsMatch = block.match(superFlexFields.items);
   if (itemsMatch) {
     // ✅ NOVO: Processa items com normalização de estilos
+    console.log('🔍 Regex capturou para items:', itemsMatch[1]);
+
     paragraph.items = parseJSONField(itemsMatch[1], 'super-flex items');
     
     // ✅ NOVO: Normaliza estilos de posicionamento nos items

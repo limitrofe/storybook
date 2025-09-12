@@ -77,6 +77,36 @@
     
     return 'none';
   }
+
+  // ✅ NOVA FUNÇÃO: Para obter padding responsivo
+  function getPadding(padding, device) {
+    if (!padding) return '0';
+    
+    if (typeof padding === 'string') {
+      return padding;
+    }
+    
+    if (typeof padding === 'object') {
+      return padding[device] || padding.desktop || padding.mobile || '0';
+    }
+    
+    return '0';
+  }
+
+  // ✅ NOVA FUNÇÃO: Para obter margin responsivo  
+  function getMargin(margin, device) {
+    if (!margin) return '0';
+    
+    if (typeof margin === 'string') {
+      return margin;
+    }
+    
+    if (typeof margin === 'object') {
+      return margin[device] || margin.desktop || margin.mobile || '0';
+    }
+    
+    return '0';
+  }
 </script>
 
 <section
@@ -84,6 +114,10 @@
   style:--background-color={data.backgroundColor || 'transparent'}
   style:--background-image-desktop={getBackgroundImageUrl(data.backgroundImage)}
   style:--background-image-mobile={getMobileBackgroundImageUrl(data.backgroundImage)}
+  style:--container-padding-desktop={getPadding(data.padding, 'desktop')}
+  style:--container-padding-mobile={getPadding(data.padding, 'mobile')}
+  style:--container-margin-desktop={getMargin(data.margin, 'desktop')}
+  style:--container-margin-mobile={getMargin(data.margin, 'mobile')}
 >
   {#if data.items && Array.isArray(data.items)}
     {#each data.items as item}
@@ -133,9 +167,22 @@
       {/if}
 
       {#if item.type === 'image' && item.src}
-        <!-- ✅ CORREÇÃO: Usando picture para melhor responsividade -->
-        <picture class="flex-item image-item">
-          <!-- Source para mobile se existir -->
+        <picture 
+          class="flex-item image-item"
+          style={`
+            --max-width-desktop: ${item.styles?.maxWidth?.desktop || 'none'};
+            --max-width-mobile: ${item.styles?.maxWidth?.mobile || 'none'};
+            --width-desktop: ${item.styles?.width?.desktop || 'auto'};
+            --width-mobile: ${item.styles?.width?.mobile || 'auto'};
+            --margin-desktop: ${item.styles?.margin?.desktop || '0'};
+            --margin-mobile: ${item.styles?.margin?.mobile || '0'};
+            --padding-desktop: ${item.styles?.padding?.desktop || '0'};
+            --padding-mobile: ${item.styles?.padding?.mobile || '0'};
+            --display: ${item.styles?.display || 'block'};
+            --text-align-desktop: ${item.styles?.textAlign?.desktop || item.styles?.align?.desktop || 'left'};
+            --text-align-mobile: ${item.styles?.textAlign?.mobile || item.styles?.align?.mobile || 'left'};
+          `}
+        >
           {#if item.src.mobile}
             <source 
               media="(max-width: 768px)" 
@@ -143,7 +190,6 @@
             />
           {/if}
           
-          <!-- Source para desktop -->
           {#if item.src.desktop}
             <source 
               media="(min-width: 769px)" 
@@ -151,24 +197,12 @@
             />
           {/if}
           
-          <!-- Fallback img -->
           <img
             src={item.src.mobile || item.src.desktop || item.src}
             alt={item.alt || ''}
-            style={`
-              --max-width-desktop: ${item.styles?.maxWidth?.desktop || 'none'};
-              --max-width-mobile: ${item.styles?.maxWidth?.mobile || 'none'};
-              --width-desktop: ${item.styles?.width?.desktop || 'auto'};
-              --width-mobile: ${item.styles?.width?.mobile || 'auto'};
-              --margin-desktop: ${item.styles?.margin?.desktop || '0'};
-              --margin-mobile: ${item.styles?.margin?.mobile || '0'};
-              --padding-desktop: ${item.styles?.padding?.desktop || '0'};
-              --padding-mobile: ${item.styles?.padding?.mobile || '0'};
-            `}
             loading="lazy"
             on:error={(e) => {
               console.error('❌ Erro ao carregar imagem:', e.target.src);
-              // Fallback logic
               const mobile = item.src.mobile;
               const desktop = item.src.desktop;
               
@@ -200,22 +234,6 @@
             --margin-mobile: ${item.styles?.margin?.mobile || '0'};
             --padding-desktop: ${item.styles?.padding?.desktop || '0'};
             --padding-mobile: ${item.styles?.padding?.mobile || '0'};
-            --position-desktop: ${item.styles?.position?.desktop || 'static'};
-            --position-mobile: ${item.styles?.position?.mobile || 'static'};
-            --z-index-desktop: ${item.styles?.zIndex?.desktop || 'auto'};
-            --z-index-mobile: ${item.styles?.zIndex?.mobile || 'auto'};
-            --top-desktop: ${item.styles?.top?.desktop || 'auto'};
-            --top-mobile: ${item.styles?.top?.mobile || 'auto'};
-            --left-desktop: ${item.styles?.left?.desktop || 'auto'};
-            --left-mobile: ${item.styles?.left?.mobile || 'auto'};
-            --right-desktop: ${item.styles?.right?.desktop || 'auto'};
-            --right-mobile: ${item.styles?.right?.mobile || 'auto'};
-            --bottom-desktop: ${item.styles?.bottom?.desktop || 'auto'};
-            --bottom-mobile: ${item.styles?.bottom?.mobile || 'auto'};
-            --transform-desktop: ${item.styles?.transform?.desktop || 'none'};
-            --transform-mobile: ${item.styles?.transform?.mobile || 'none'};
-            --box-sizing-desktop: ${item.styles?.boxSizing?.desktop || 'content-box'};
-            --box-sizing-mobile: ${item.styles?.boxSizing?.mobile || 'content-box'};
           `}
           loop={item.loop || false}
           muted={item.muted || false}
@@ -259,25 +277,25 @@
   .super-flex-container {
     display: flex;
     flex-direction: column;
-    width: 100%;
     background-color: var(--background-color);
     background-image: var(--background-image-mobile);
     background-size: cover;
     background-position: center;
-    background-attachment: local; /* ✅ NOVO: Melhora performance mobile */
+    background-attachment: local;
+    padding: var(--container-padding-mobile, var(--container-padding-desktop, 0));
+    margin: var(--container-margin-mobile, var(--container-margin-desktop, 0));
   }
 
   .flex-item {
-    /* Estilos Mobile primeiro */
     max-width: var(--max-width-mobile, var(--max-width-desktop, 100%));
     width: var(--width-mobile, var(--width-desktop, auto));
     margin: var(--margin-mobile, var(--margin-desktop, 0));
     padding: var(--padding-mobile, var(--padding-desktop, 0));
     text-align: var(--text-align-mobile, var(--text-align-desktop, left));
+    box-sizing: border-box;
   }
 
   .text-item {
-    /* CORREÇÃO APLICADA AQUI: Removidos os valores padrão */
     font-family: var(--font-family);
     color: var(--color);
     font-size: var(--font-size-mobile, var(--font-size-desktop));
@@ -287,14 +305,16 @@
   
   .image-item, .video-item {
     height: auto;
-    display: block;
+    display: var(--display, block);
   }
 
-  /* ✅ CORREÇÃO: Melhor estilo para picture */
   .image-item img {
     width: 100%;
     height: auto;
-    max-width: var(--max-width-mobile, var(--max-width-desktop, 100%));
+    display: block;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
 
   .audio-wrapper {
@@ -308,10 +328,23 @@
     max-width: 500px;
   }
   
+  .grifo-decorator {
+    position: absolute;
+    top: var(--grifo-offsetY-mobile, var(--grifo-offsetY-desktop, 3.5rem));
+    left: 50%;
+    transform: translateX(-50%);
+    width: var(--grifo-width-mobile, var(--grifo-width-desktop, 220px));
+    height: auto;
+    pointer-events: none;
+    z-index: -1;
+  }
+  
   /* Media Query para Desktop */
   @media (min-width: 768px) {
     .super-flex-container {
       background-image: var(--background-image-desktop);
+      padding: var(--container-padding-desktop, 0);
+      margin: var(--container-margin-desktop, 0);
     }
 
     .flex-item {
@@ -323,43 +356,14 @@
     }
     
     .text-item {
-      /* CORREÇÃO APLICADA AQUI: Removidos os valores padrão */
-      font-size: var(--font-size-desktop);
-      font-weight: var(--font-weight-desktop);
-      line-height: var(--line-height-desktop);
+      font-size: var(--font-size-desktop, inherit);
+      font-weight: var(--font-weight-desktop, normal);
+      line-height: var(--line-height-desktop, normal);
     }
 
-    /* ✅ CORREÇÃO: Melhor estilo para picture em desktop */
-    .image-item img {
-      width: var(--width-desktop, auto);
-      height: var(--height-desktop, auto);
-      max-width: var(--max-width-desktop, 100%);
-      margin: var(--margin-desktop, 0);
-      padding: var(--padding-desktop, 0);
-      box-sizing: var(--box-sizing-desktop, content-box);
+    .grifo-decorator {
+      top: var(--grifo-offsetY-desktop, 3.5rem);
+      width: var(--grifo-width-desktop, 300px);
     }
   }
-
-  /* Estilos para o Grifo */
-  .grifo-decorator {
-      position: absolute;
-      left: 0;
-      top: 0;
-      z-index: 1;
-      pointer-events: none;
-      height: auto;
-      
-      /* Estilos Mobile */
-      width: var(--grifo-width-mobile);
-      transform: translateY(var(--grifo-offsetY-mobile));
-      transition: all 0.2s ease-in-out;
-    }
-
-    @media (min-width: 768px) {
-      .grifo-decorator {
-        /* Estilos Desktop */
-        width: var(--grifo-width-desktop);
-        transform: translateY(var(--grifo-offsetY-desktop));
-      }
-    }
 </style>
