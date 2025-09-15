@@ -1,25 +1,24 @@
-// svelte.config.js - Versão Simples para Static Hosting
+// svelte.config.js
 import adapter from '@sveltejs/adapter-static';
 
-/** @type {import('@sveltejs/kit').Config} */
 const config = {
   kit: {
     adapter: adapter({
       pages: 'build',
       assets: 'build',
-      fallback: null,
-      precompress: false
+      fallback: undefined,
+      precompress: false,
+      strict: true
     }),
     
-    // 🎯 CORREÇÃO: URLs relativas (mais compatível)
     paths: {
-      base: '',
-      assets: ''
+      base: process.env.NODE_ENV === 'production' ? '' : ''
     },
     
     prerender: {
       handleHttpError: 'warn',
-      handleMissingId: 'warn'
+      handleMissingId: 'warn',
+      entries: ['*']
     }
   }
 };

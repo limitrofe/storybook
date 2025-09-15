@@ -10,23 +10,21 @@
     "prepare": "svelte-kit sync || echo ''",
     "format": "prettier --write .",
     "lint": "prettier --check .",
-    
+    "// === 🎨 VISUAL BUILDER ===": "",
+    "visual-builder": "vite dev --mode builder",
+    "builder": "vite dev --mode builder --open /builder",
     "// === 🚀 WORKFLOW PRINCIPAL ===": "",
     "start": "node scripts/workflow.js",
     "workflow": "node scripts/workflow.js",
     "workflow:update": "node scripts/workflow.js update",
     "workflow:config": "node scripts/workflow.js config",
-    
     "// === 🔧 FIX PARA EMBED S3 ===": "",
     "fix-urls": "node scripts/fix-absolute-urls.js",
     "build-embed": "npm run build && npm run fix-urls",
-    
     "// === 📹 FRAMES ===": "",
     "extract": "node scripts/extract-frames.js",
     "extract:all": "node scripts/extract-frames.js --process-all",
     "extract:list": "node scripts/extract-frames.js --list-videos",
-    
-  
     "// === 🧹 CACHE MANAGEMENT ===": "",
     "cache:complete": "node scripts/enhanced-cache-generator.js && ./warm-cache.sh",
     "cache:generate": "node scripts/auto-cache-generator.js",
@@ -39,27 +37,31 @@
     "cache:clear": "npm run cache:purge",
     "cache:check": "node scripts/check-cache-status.js",
     "cache:check:file": "node scripts/check-cache-status.js --file",
-
-
     "// === 📄 GOOGLE DOCS ===": "",
     "fetch": "node scripts/fetch-docs.js",
-    
     "// === ☁️ UPLOAD/DEPLOY ===": "",
     "upload": "node scripts/upload-globo-storage.js",
     "deploy": "node scripts/smart-deploy.js",
-    
     "// === 🎥 VÍDEOS ===": "",
     "download-video": "node scripts/video-downloader.js"
   },
   "devDependencies": {
+    "@storybook/addon-controls": "^9.0.8",
+    "@storybook/svelte-vite": "^9.1.6",
     "@sveltejs/adapter-auto": "^6.0.0",
     "@sveltejs/adapter-node": "^5.2.13",
     "@sveltejs/adapter-static": "^3.0.8",
     "@sveltejs/kit": "^2.22.0",
     "@sveltejs/vite-plugin-svelte": "^6.0.0",
+    "@tailwindcss/forms": "^0.5.10",
+    "autoprefixer": "^10.4.21",
+    "daisyui": "^4.12.24",
+    "lucide-svelte": "^0.344.0",
+    "postcss": "^8.5.6",
     "prettier": "^3.4.2",
     "prettier-plugin-svelte": "^3.3.3",
     "svelte": "^5.0.0",
+    "tailwindcss": "^3.4.17",
     "vite": "^7.0.4"
   },
   "dependencies": {
