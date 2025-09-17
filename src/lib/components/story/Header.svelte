@@ -12,11 +12,48 @@
 
   export let overlay = true;
   export let variant = 'default'; // 'default', 'minimal', 'hero'
+  export let titleFontSizeDesktop = '';
+  export let titleFontSizeMobile = '';
+  export let titleLineHeightDesktop = '';
+  export let titleLineHeightMobile = '';
+  export let subtitleFontSizeDesktop = '';
+  export let subtitleFontSizeMobile = '';
+  export let subtitleLineHeightDesktop = '';
+  export let subtitleLineHeightMobile = '';
 
   // Verificações de mídia mais rigorosas
   $: hasDesktopMedia = !!(backgroundImage?.trim() || backgroundVideo?.trim());
   $: hasMobileMedia = !!(backgroundImageMobile?.trim() || backgroundVideoMobile?.trim());
   $: hasMedia = hasDesktopMedia || hasMobileMedia;
+
+  const titleFallbackDesktop = 'var(--typography-h1-desktop-font-size, 4.5rem)';
+  const titleFallbackMobile = 'var(--typography-h1-mobile-font-size, 3rem)';
+  const titleLineFallbackDesktop = 'var(--typography-h1-desktop-line-height, 1.05)';
+  const titleLineFallbackMobile = 'var(--typography-h1-mobile-line-height, 1.12)';
+  const subtitleFallbackDesktop = 'var(--typography-lead-desktop-font-size, 1.5rem)';
+  const subtitleFallbackMobile = 'var(--typography-lead-mobile-font-size, 1.3rem)';
+  const subtitleLineFallbackDesktop = 'var(--typography-lead-desktop-line-height, 1.6)';
+  const subtitleLineFallbackMobile = 'var(--typography-lead-mobile-line-height, 1.6)';
+
+  $: computedTitleDesktop = titleFontSizeDesktop || titleFallbackDesktop;
+  $: computedTitleMobile = titleFontSizeMobile || titleFallbackMobile;
+  $: computedTitleLineDesktop = titleLineHeightDesktop || titleLineFallbackDesktop;
+  $: computedTitleLineMobile = titleLineHeightMobile || titleLineFallbackMobile;
+  $: computedSubtitleDesktop = subtitleFontSizeDesktop || subtitleFallbackDesktop;
+  $: computedSubtitleMobile = subtitleFontSizeMobile || subtitleFallbackMobile;
+  $: computedSubtitleLineDesktop = subtitleLineHeightDesktop || subtitleLineFallbackDesktop;
+  $: computedSubtitleLineMobile = subtitleLineHeightMobile || subtitleLineFallbackMobile;
+
+  $: typographyStyle = [
+    `--story-header-title-size-desktop:${computedTitleDesktop}`,
+    `--story-header-title-size-mobile:${computedTitleMobile}`,
+    `--story-header-title-line-desktop:${computedTitleLineDesktop}`,
+    `--story-header-title-line-mobile:${computedTitleLineMobile}`,
+    `--story-header-subtitle-size-desktop:${computedSubtitleDesktop}`,
+    `--story-header-subtitle-size-mobile:${computedSubtitleMobile}`,
+    `--story-header-subtitle-line-desktop:${computedSubtitleLineDesktop}`,
+    `--story-header-subtitle-line-mobile:${computedSubtitleLineMobile}`
+  ].join('; ');
 
   function formatDate(dateStr) {
     if (!dateStr) return '';
@@ -63,7 +100,7 @@
     <div class="story-header__overlay"></div>
   {/if}
   
-  <div class="story-header__content">
+  <div class="story-header__content" style={typographyStyle}>
     <div class="story-header__container">
       <h1>{title}</h1>
       
@@ -91,19 +128,19 @@
     display: flex;
     align-items: flex-start; /* 🔥 Muda para flex-start para posicionar no topo */
     justify-content: center;
+    width: 100%;
+    min-height: 100vh;
     padding: 4rem 2rem;
-    padding-top: 35%; /* 🔥 Mais padding-top para empurrar conteúdo para baixo do topo */
-    background-color: var(--color-background);
-    color: var(--color-text);
+    padding-top: 35%;
+    background-color: var(--color-background, transparent);
+    color: var(--color-text, #f8fafc);
     text-align: left;
-    height: 100vh;
   }
 
   /* ✅ ESTILOS APLICADOS APENAS QUANDO HÁ MÍDIA */
   .story-header.has-media {
     min-height: 100vh;
     padding: 10% 2rem;
-    /* 🔥 REMOVIDO: color: #1a1a1a; - estava deixando texto escuro */
   }
 
   .story-header--hero.has-media {
@@ -135,8 +172,8 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.7); /* 🔥 Overlay BRANCO semi-transparente */
-    z-index: 2; /* Overlay no meio */
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.25));
+    z-index: 2;
   }
   
   .story-header__background,
@@ -173,33 +210,28 @@
   h1 {
     font-size: 3rem;
     font-weight: 900;
-    color: #1a1a1a; /* Cor padrão sem mídia */
+    color: var(--color-text, #f8fafc);
     margin: 0 0 1rem 0;
     line-height: 3.3rem;
   }
   
-  /* 🔥 QUANDO TEM MÍDIA: cor escura #1a1a1a */
   .story-header.has-media h1 {
-    color: #1a1a1a !important; /* 🔥 COR ESCURA FORÇADA */
-    /* text-shadow: 2px 2px 4px rgba(255,255,255,0.9); 🔥 Sombra BRANCA para contraste */
-    font-size: 3rem;
+    color: var(--color-text, #f8fafc);
     width: 90%;
     padding-top: 5%;
-    font-weight: 900;
   }
 
   .story-header__subtitle {
-    font-size: var(--font-size-80);
-    color: var(--color-secondary);
+    font-size: var(--story-header-subtitle-size-desktop, var(--typography-lead-desktop-font-size, 1.5rem));
+    color: var(--color-text, #f8fafc);
     font-weight: 600;
     margin: 0 0 2rem 0;
-    line-height: 1.4;
+    line-height: var(--story-header-subtitle-line-desktop, var(--typography-lead-desktop-line-height, 1.6));
     opacity: 0.9;
   }
-  
+
   .story-header.has-media .story-header__subtitle {
-    color: #1a1a1a !important; /* 🔥 COR ESCURA FORÇADA */
-    /* text-shadow: 2px 2px 4px rgba(255,255,255,0.9); 🔥 Sombra BRANCA */
+    color: var(--color-text, #f8fafc);
   }
 
   .story-header__meta {
@@ -207,14 +239,9 @@
     gap: 1rem;
     justify-content: center;
     align-items: center;
-    font-size: 3rem;
-    color: var(--color-subtle-text);
-    opacity: 0.8;
-  }
-  
-  .story-header.has-media .story-header__meta {
-    color: #1a1a1a !important; /* 🔥 COR ESCURA FORÇADA */
-    /* text-shadow: 1px 1px 2px rgba(255,255,255,0.9); 🔥 Sombra BRANCA */
+    font-size: var(--typography-small-desktop-font-size, 0.9rem);
+    color: var(--color-subtle-text, rgba(148, 157, 166, 0.9));
+    opacity: 0.85;
   }
 
   .story-header__author {
@@ -237,7 +264,7 @@
       gap: 0.5rem;
     }
       .story-header.has-media h1 {
-    color: #1a1a1a !important; /* 🔥 COR ESCURA FORÇADA */
+    color: var(--color-text, #f8fafc);
     /* text-shadow: 2px 2px 4px rgba(255,255,255,0.9); 🔥 Sombra BRANCA para contraste */
     width: 90%;
     font-size: 3rem;
@@ -294,11 +321,35 @@
     }
 
       .story-header.has-media h1 {
-    color: #1a1a1a !important; /* 🔥 COR ESCURA FORÇADA */
+    color: var(--color-text, #f8fafc);
     /* text-shadow: 2px 2px 4px rgba(255,255,255,0.9); 🔥 Sombra BRANCA para contraste */
     font-size: 6rem;
     width: 40%;
     line-height: 6rem;
   }
   }
+
+  @media (max-width: 768px) {
+    .story-header {
+      padding: 3rem 1.5rem;
+      padding-top: 30%;
+    }
+
+    .story-header__container h1 {
+      font-size: var(--story-header-title-size-mobile, var(--typography-h1-mobile-font-size, 3rem));
+      line-height: var(--story-header-title-line-mobile, var(--typography-h1-mobile-line-height, 1.12));
+    }
+
+    .story-header__subtitle {
+      font-size: var(--story-header-subtitle-size-mobile, var(--typography-lead-mobile-font-size, 1.3rem));
+      line-height: var(--story-header-subtitle-line-mobile, var(--typography-lead-mobile-line-height, 1.6));
+    }
+
+    .story-header__meta {
+      font-size: var(--typography-small-mobile-font-size, 0.8rem);
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+
 </style>

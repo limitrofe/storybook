@@ -1,8 +1,8 @@
 <!-- src/lib/components/builder/editors/SuperFlexEditor.svelte -->
 <script>
   import { createEventDispatcher } from 'svelte';
-  import DeviceToggle from '../controls/DeviceToggle.svelte';
-  import ColorPicker from '../controls/ColorPicker.svelte';
+  import DeviceToggle from '$lib/components/builder/controls/DeviceToggle.svelte';
+  import ColorPicker from '$lib/components/builder/controls/ColorPicker.svelte';
   
   const dispatch = createEventDispatcher();
   

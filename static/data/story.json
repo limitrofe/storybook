@@ -1,0 +1,448 @@
+{
+  "title": "Nova matéria",
+  "subtitle": "Subtítulo descritivo da matéria",
+  "description": "",
+  "author": "",
+  "date": "",
+  "slug": "",
+  "theme": "dark",
+  "tags": [],
+  "share": {
+    "title": "",
+    "description": "",
+    "image": "",
+    "imageSquare": "",
+    "imageTwitter": "",
+    "imageGoogle": ""
+  },
+  "seo": {
+    "canonicalUrl": "",
+    "keywords": [],
+    "readingTime": "",
+    "ogType": "article"
+  },
+  "appearance": {
+    "colorScheme": "dark",
+    "backgroundColor": "#0b0d17",
+    "backgroundColorMobile": "#0b0d17",
+    "surfaceColor": "#111827",
+    "textColor": "#f8fafc",
+    "accentColor": "#f97316",
+    "pagePadding": {
+      "desktop": "0",
+      "mobile": "0"
+    },
+    "useGradient": false,
+    "gradient": "linear-gradient(180deg, #020617 0%, #0f172a 100%)",
+    "customCSS": "",
+    "typography": {
+      "h1": {
+        "fontFamily": "\"Globotipo\", sans-serif",
+        "fontWeight": "900",
+        "textTransform": "uppercase",
+        "letterSpacing": "-0.02em",
+        "color": "#f8fafc",
+        "desktop": {
+          "fontSize": "clamp(3.5rem, 5vw, 4.5rem)",
+          "lineHeight": "1.05"
+        },
+        "mobile": {
+          "fontSize": "clamp(2.4rem, 8vw, 3rem)",
+          "lineHeight": "1.12"
+        }
+      },
+      "h2": {
+        "fontFamily": "\"Globotipo\", sans-serif",
+        "fontWeight": "800",
+        "textTransform": "none",
+        "letterSpacing": "-0.015em",
+        "color": "#f8fafc",
+        "desktop": {
+          "fontSize": "clamp(2.8rem, 4.5vw, 3.2rem)",
+          "lineHeight": "1.1"
+        },
+        "mobile": {
+          "fontSize": "clamp(2.1rem, 7vw, 2.5rem)",
+          "lineHeight": "1.15"
+        }
+      },
+      "h3": {
+        "fontFamily": "\"Globotipo\", sans-serif",
+        "fontWeight": "700",
+        "textTransform": "none",
+        "letterSpacing": "-0.01em",
+        "color": "#f8fafc",
+        "desktop": {
+          "fontSize": "clamp(2.2rem, 4vw, 2.6rem)",
+          "lineHeight": "1.22"
+        },
+        "mobile": {
+          "fontSize": "clamp(1.7rem, 6.5vw, 2.1rem)",
+          "lineHeight": "1.22"
+        }
+      },
+      "h4": {
+        "fontFamily": "\"Globotipo\", sans-serif",
+        "fontWeight": "600",
+        "textTransform": "none",
+        "color": "#f8fafc",
+        "desktop": {
+          "fontSize": "1.9rem",
+          "lineHeight": "1.3"
+        },
+        "mobile": {
+          "fontSize": "1.55rem",
+          "lineHeight": "1.35"
+        }
+      },
+      "h5": {
+        "fontFamily": "\"Globotipo\", sans-serif",
+        "fontWeight": "600",
+        "textTransform": "uppercase",
+        "letterSpacing": "0.08em",
+        "color": "#e2e8f0",
+        "desktop": {
+          "fontSize": "1.35rem",
+          "lineHeight": "1.4"
+        },
+        "mobile": {
+          "fontSize": "1.15rem",
+          "lineHeight": "1.45"
+        }
+      },
+      "h6": {
+        "fontFamily": "\"Globotipo\", sans-serif",
+        "fontWeight": "500",
+        "textTransform": "uppercase",
+        "letterSpacing": "0.1em",
+        "color": "#cbd5f5",
+        "desktop": {
+          "fontSize": "1.05rem",
+          "lineHeight": "1.5"
+        },
+        "mobile": {
+          "fontSize": "0.95rem",
+          "lineHeight": "1.55"
+        }
+      },
+      "body": {
+        "fontFamily": "\"Globotipo\", sans-serif",
+        "fontWeight": "400",
+        "color": "#d1d5db",
+        "desktop": {
+          "fontSize": "1.1rem",
+          "lineHeight": "1.8"
+        },
+        "mobile": {
+          "fontSize": "1rem",
+          "lineHeight": "1.7"
+        }
+      },
+      "lead": {
+        "fontFamily": "\"Globotipo\", sans-serif",
+        "fontWeight": "500",
+        "color": "#f1f5f9",
+        "desktop": {
+          "fontSize": "1.5rem",
+          "lineHeight": "1.6"
+        },
+        "mobile": {
+          "fontSize": "1.3rem",
+          "lineHeight": "1.6"
+        }
+      },
+      "small": {
+        "fontFamily": "\"Globotipo\", sans-serif",
+        "fontWeight": "400",
+        "color": "#94a3b8",
+        "desktop": {
+          "fontSize": "0.875rem",
+          "lineHeight": "1.4"
+        },
+        "mobile": {
+          "fontSize": "0.82rem",
+          "lineHeight": "1.4"
+        }
+      },
+      "caption": {
+        "fontFamily": "\"Globotipo\", sans-serif",
+        "fontWeight": "400",
+        "color": "#e2e8f0",
+        "desktop": {
+          "fontSize": "0.95rem",
+          "lineHeight": "1.45"
+        },
+        "mobile": {
+          "fontSize": "0.9rem",
+          "lineHeight": "1.45"
+        }
+      },
+      "annotation": {
+        "fontFamily": "\"Globotipo\", sans-serif",
+        "fontWeight": "500",
+        "textTransform": "uppercase",
+        "letterSpacing": "0.12em",
+        "color": "#f97316",
+        "desktop": {
+          "fontSize": "0.8rem",
+          "lineHeight": "1.4"
+        },
+        "mobile": {
+          "fontSize": "0.75rem",
+          "lineHeight": "1.4"
+        }
+      },
+      "blockquote": {
+        "fontFamily": "\"Globotipo\", sans-serif",
+        "fontWeight": "700",
+        "fontStyle": "italic",
+        "color": "#f8fafc",
+        "accentColor": "#f97316",
+        "background": "rgba(15, 23, 42, 0.7)",
+        "borderColor": "rgba(249, 115, 22, 0.35)",
+        "desktop": {
+          "fontSize": "2rem",
+          "lineHeight": "1.4"
+        },
+        "mobile": {
+          "fontSize": "1.6rem",
+          "lineHeight": "1.45"
+        }
+      }
+    }
+  },
+  "analytics": {
+    "ga4": "",
+    "gtm": "",
+    "datalayerProject": ""
+  },
+  "intro": {
+    "text": ""
+  },
+  "credits": {
+    "notes": "",
+    "sources": [],
+    "authors": [],
+    "editedBy": [],
+    "additionalGraphics": []
+  },
+  "paragraphs": [
+    {
+      "type": "header",
+      "title": "teste",
+      "subtitle": "teste do teste",
+      "author": "g1",
+      "date": "15/09/2025",
+      "backgroundImage": "",
+      "backgroundImageMobile": "",
+      "backgroundVideo": "",
+      "backgroundVideoMobile": "",
+      "poster": "",
+      "posterMobile": "",
+      "variant": "hero",
+      "overlay": true
+    },
+    {
+      "type": "scrolly",
+      "steps": [
+        {
+          "title": "asdfasdf",
+          "text": "asdfasdfas fasdf asdf asdf asdf asdf asd f",
+          "position": "right",
+          "variant": "default",
+          "backgroundColor": "#ffffff",
+          "overlayColor": "rgba(0, 0, 0, 0.35)",
+          "textColor": "#0070e0",
+          "accentColor": "#C4170C",
+          "borderColor": "#f50000",
+          "padding": "2rem",
+          "maxWidth": "460px",
+          "maxWidthMobile": "92%",
+          "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_06.jpg",
+          "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_06.jpg",
+          "video": "",
+          "videoMobile": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "title": "weqrtweqte",
+          "text": "qewtqet vqgtqewtqwetqwt",
+          "position": "right",
+          "variant": "default",
+          "backgroundColor": "#78b5f2",
+          "overlayColor": "rgba(0, 0, 0, 0.35)",
+          "textColor": "#F9FAFB",
+          "accentColor": "#C4170C",
+          "borderColor": "rgba(255, 255, 255, 0.12)",
+          "padding": "2rem",
+          "maxWidth": "460px",
+          "maxWidthMobile": "92%",
+          "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_06.jpg",
+          "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_06.jpg",
+          "video": "",
+          "videoMobile": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "title": "",
+          "text": "",
+          "position": "right",
+          "variant": "default",
+          "backgroundColor": "rgba(15, 23, 42, 0.82)",
+          "overlayColor": "rgba(0, 0, 0, 0.35)",
+          "textColor": "#F9FAFB",
+          "accentColor": "#C4170C",
+          "borderColor": "rgba(255, 255, 255, 0.12)",
+          "padding": "2rem",
+          "maxWidth": "460px",
+          "maxWidthMobile": "92%",
+          "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_06.jpg",
+          "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_06.jpg",
+          "video": "",
+          "videoMobile": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "title": "",
+          "text": "",
+          "position": "right",
+          "variant": "default",
+          "backgroundColor": "rgba(15, 23, 42, 0.82)",
+          "overlayColor": "rgba(0, 0, 0, 0.35)",
+          "textColor": "#F9FAFB",
+          "accentColor": "#C4170C",
+          "borderColor": "rgba(255, 255, 255, 0.12)",
+          "padding": "2rem",
+          "maxWidth": "460px",
+          "maxWidthMobile": "92%",
+          "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_06.jpg",
+          "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_06.jpg",
+          "video": "",
+          "videoMobile": "",
+          "alt": "",
+          "caption": ""
+        }
+      ],
+      "fullWidth": true
+    },
+    {
+      "type": "super-flex",
+      "container": {
+        "backgroundColor": "#0b0d17",
+        "backgroundImage": {
+          "desktop": "",
+          "mobile": ""
+        },
+        "backgroundVideo": {
+          "desktop": "",
+          "mobile": ""
+        },
+        "height": {
+          "desktop": "100vh",
+          "mobile": "80vh"
+        },
+        "padding": {
+          "desktop": "3rem",
+          "mobile": "1.5rem"
+        },
+        "alignItems": {
+          "desktop": "center",
+          "mobile": "center"
+        },
+        "justifyContent": {
+          "desktop": "center",
+          "mobile": "center"
+        },
+        "gap": {
+          "desktop": "2rem",
+          "mobile": "1.25rem"
+        },
+        "flexDirection": {
+          "desktop": "row",
+          "mobile": "column"
+        }
+      },
+      "items": []
+    },
+    {
+      "type": "texto",
+      "text": "<p>Escreva aqui o texto do parágrafo.</p>",
+      "variant": "body",
+      "align": "left",
+      "maxWidth": "720px"
+    },
+    {
+      "type": "video",
+      "src": "",
+      "srcMobile": "",
+      "poster": "",
+      "posterMobile": "",
+      "caption": "",
+      "credit": "",
+      "autoplay": false,
+      "controls": true,
+      "loop": false,
+      "showCaption": true,
+      "alignment": "center",
+      "customWidthDesktop": "960px",
+      "customWidthMobile": "360px",
+      "backgroundColor": "#0f172a",
+      "fullWidth": false,
+      "fullWidthBackground": false
+    },
+    {
+      "type": "carousel",
+      "items": [
+        {
+          "type": "image",
+          "src": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-desktop-anderson-torres.webp",
+          "srcMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/lista-crimes-desktop-anderson-torres.webp",
+          "alt": "",
+          "caption": "",
+          "credit": "",
+          "content": ""
+        },
+        {
+          "type": "image",
+          "src": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_06.jpg",
+          "srcMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_06.jpg",
+          "alt": "",
+          "caption": "",
+          "credit": "",
+          "content": ""
+        }
+      ],
+      "autoplay": false,
+      "interval": 4000,
+      "showDots": true,
+      "showArrows": true
+    },
+    {
+      "type": "galeria",
+      "images": [
+        {
+          "src": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_06.jpg",
+          "srcMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_06.jpg",
+          "alt": "",
+          "caption": "",
+          "credit": ""
+        }
+      ],
+      "layout": "grid",
+      "columns": 3,
+      "lightbox": true
+    },
+    {
+      "type": "parallax",
+      "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_06.jpg",
+      "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_06.jpg",
+      "height": "65vh",
+      "speed": 0.45,
+      "overlay": true,
+      "content": "<b>sf;lja ;sdlkfj asl;dfkj ;asldfk</b>"
+    }
+  ]
+}

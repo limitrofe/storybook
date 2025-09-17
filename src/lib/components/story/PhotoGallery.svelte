@@ -27,8 +27,13 @@
 
 <div class="gallery gallery--{layout}" style="--columns: {columns}">
   {#each images as image, index}
-    <div class="gallery-item" on:click={() => openLightbox(index)}>
-      <img src={image.src} alt={image.alt || ''} loading="lazy" />
+    <button class="gallery-item" type="button" on:click={() => openLightbox(index)}>
+      <picture>
+        {#if image.srcMobile}
+          <source srcset={image.srcMobile} media="(max-width: 768px)" />
+        {/if}
+        <img src={image.src} alt={image.alt || ''} loading="lazy" />
+      </picture>
       {#if image.caption}
         <div class="gallery-caption">
           <p>{image.caption}</p>
@@ -37,13 +42,24 @@
           {/if}
         </div>
       {/if}
-    </div>
+    </button>
   {/each}
 </div>
 
 {#if showLightbox}
-  <div class="lightbox" on:click={closeLightbox}>
-    <div class="lightbox-content" on:click|stopPropagation>
+  <div
+    class="lightbox"
+    role="dialog"
+    aria-modal="true"
+    tabindex="-1"
+    on:click={closeLightbox}
+    on:keydown={(event) => {
+      if (event.key === 'Escape') closeLightbox();
+      if (event.key === 'ArrowLeft') { event.preventDefault(); prevImage(); }
+      if (event.key === 'ArrowRight') { event.preventDefault(); nextImage(); }
+    }}
+  >
+    <div class="lightbox-content" role="document" on:click|stopPropagation>
       <button class="lightbox-close" on:click={closeLightbox}>×</button>
       
       {#if images.length > 1}
@@ -51,7 +67,12 @@
         <button class="lightbox-nav lightbox-next" on:click={nextImage}>›</button>
       {/if}
       
-      <img src={images[currentIndex].src} alt={images[currentIndex].alt || ''} />
+      <picture>
+        {#if images[currentIndex].srcMobile}
+          <source srcset={images[currentIndex].srcMobile} media="(max-width: 768px)" />
+        {/if}
+        <img src={images[currentIndex].src} alt={images[currentIndex].alt || ''} />
+      </picture>
       
       {#if images[currentIndex].caption}
         <div class="lightbox-caption">
@@ -89,12 +110,21 @@
     break-inside: avoid;
     margin-bottom: 1rem;
     transition: transform 0.3s ease;
+    border: none;
+    background: transparent;
+    padding: 0;
+  }
+
+  .gallery-item:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 4px;
   }
 
   .gallery--grid .gallery-item:hover {
     transform: scale(1.02);
   }
 
+  .gallery-item picture,
   .gallery-item img {
     width: 100%;
     height: auto;

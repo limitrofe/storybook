@@ -1,15 +1,16 @@
 <!-- src/routes/builder/+page.svelte -->
 <script>
-  import VisualBuilder from '../VisualBuilder.svelte';
+  import BuilderShell from '$lib/builder/components/BuilderShell.svelte';
 </script>
 
 <svelte:head>
-  <title>Visual Builder - Editor de Componentes</title>
-  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.6.0/dist/full.css" rel="stylesheet" type="text/css" />
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Story Builder Viewer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 </svelte:head>
 
-<VisualBuilder />
+<BuilderShell />
 
 <style>
   :global(body) {

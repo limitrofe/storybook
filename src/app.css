@@ -85,11 +85,29 @@
 }
 
 /* --- Estilos Globais --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: 'Globotipo', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-wrap: balance; 
+  text-wrap: balance;
+  background: var(--color-background, #0b0d17);
+  color: var(--color-text, #f8fafc);
+}
+
+#svelte, #svelte > * {
+  width: 100%;
+  min-height: 100%;
 }
 
 

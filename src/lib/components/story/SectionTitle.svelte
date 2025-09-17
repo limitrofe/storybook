@@ -59,6 +59,26 @@
     backgroundColor ? `background-color: ${backgroundColor} !important` : ''
   ].filter(Boolean).join('; ');
 
+  $: titleSizeDesktop = titleFontSizeDesktop || 'var(--typography-h2-desktop-font-size, 3rem)';
+  $: titleSizeMobile = titleFontSizeMobile || 'var(--typography-h2-mobile-font-size, 2.4rem)';
+  $: titleLineDesktop = titleLineHeightDesktop || 'var(--typography-h2-desktop-line-height, 1.1)';
+  $: titleLineMobile = titleLineHeightMobile || 'var(--typography-h2-mobile-line-height, 1.15)';
+  $: subtitleSizeDesktop = subtitleFontSizeDesktop || 'var(--typography-lead-desktop-font-size, 1.5rem)';
+  $: subtitleSizeMobile = subtitleFontSizeMobile || 'var(--typography-lead-mobile-font-size, 1.3rem)';
+  $: subtitleLineDesktop = subtitleLineHeightDesktop || 'var(--typography-lead-desktop-line-height, 1.6)';
+  $: subtitleLineMobile = subtitleLineHeightMobile || 'var(--typography-lead-mobile-line-height, 1.6)';
+
+  $: typographyStyle = [
+    `--section-title-title-size-desktop:${titleSizeDesktop}`,
+    `--section-title-title-line-desktop:${titleLineDesktop}`,
+    `--section-title-title-size-mobile:${titleSizeMobile}`,
+    `--section-title-title-line-mobile:${titleLineMobile}`,
+    `--section-title-subtitle-size-desktop:${subtitleSizeDesktop}`,
+    `--section-title-subtitle-line-desktop:${subtitleLineDesktop}`,
+    `--section-title-subtitle-size-mobile:${subtitleSizeMobile}`,
+    `--section-title-subtitle-line-mobile:${subtitleLineMobile}`
+  ].join('; ');
+
   // Debug para desenvolvimento
   $: if (import.meta.env.DEV) {
     console.log('🎨 SectionTitle Debug:', {
@@ -121,7 +141,7 @@
     <div class="section-title__overlay"></div>
   {/if}
 
-  <div class="section-title__content" style={textStyle}>
+  <div class="section-title__content" style={`${textStyle}; ${typographyStyle}`}> 
     <div class="section-title__container">
       <h2 class="section-title__title" style={textColor ? `color: ${textColor} !important` : ''}>{title}</h2>
       {#if subtitle}
@@ -245,7 +265,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.15));
     z-index: 2;
   }
 
@@ -301,31 +321,25 @@
   .section-title:not(.has-media):not(.has-mobile-media):not(.section-title--minimal) {
     background: transparent;
     border: none;
-    color: var(--color-text);
+    color: var(--color-text, #f8fafc);
   }
 
   /* Typography */
   .section-title__title {
-    font-size: var(--font-size-120, 2.5rem);
+    font-size: var(--section-title-title-size-desktop, var(--typography-h2-desktop-font-size, 3rem));
+    line-height: var(--section-title-title-line-desktop, var(--typography-h2-desktop-line-height, 1.1));
     font-weight: 800;
-    line-height: 1.2;
     margin: 0 0 1rem 0;
-  }
-
-  .section-title--small .section-title__title {
-    font-size: var(--font-size-100, 2rem);
-  }
-
-  .section-title--large .section-title__title {
-    font-size: var(--font-size-140, 3rem);
+    color: inherit;
   }
 
   .section-title__subtitle {
-    font-size: var(--font-size-90, 1.125rem);
+    font-size: var(--section-title-subtitle-size-desktop, var(--typography-lead-desktop-font-size, 1.5rem));
+    line-height: var(--section-title-subtitle-line-desktop, var(--typography-lead-desktop-line-height, 1.6));
     font-weight: 400;
-    line-height: 1.4;
     margin: 0;
     opacity: 0.9;
+    color: inherit;
   }
 
   /* Text positioning */
@@ -379,15 +393,13 @@
     }
 
     .section-title__title {
-      font-size: var(--font-size-110, 2.25rem);
+      font-size: var(--section-title-title-size-mobile, var(--typography-h2-mobile-font-size, 2.4rem));
+      line-height: var(--section-title-title-line-mobile, var(--typography-h2-mobile-line-height, 1.15));
     }
 
-    .section-title--small .section-title__title {
-      font-size: var(--font-size-100, 2rem);
-    }
-
-    .section-title--large .section-title__title {
-      font-size: var(--font-size-120, 2.5rem);
+    .section-title__subtitle {
+      font-size: var(--section-title-subtitle-size-mobile, var(--typography-lead-mobile-font-size, 1.3rem));
+      line-height: var(--section-title-subtitle-line-mobile, var(--typography-lead-mobile-line-height, 1.6));
     }
 
     /* Mobile text positioning */

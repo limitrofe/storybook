@@ -3,7 +3,13 @@
   import { onMount } from 'svelte';
   
   export let beforeImage = '';
+  export let beforeImageMobile = '';
+  export let beforeCaption = '';
+  export let beforeCredit = '';
   export let afterImage = '';
+  export let afterImageMobile = '';
+  export let afterCaption = '';
+  export let afterCredit = '';
   export let beforeLabel = 'Antes';
   export let afterLabel = 'Depois';
   export let orientation = 'vertical'; // 'vertical' or 'horizontal'
@@ -59,6 +65,28 @@
     isDragging = true;
     updateSliderPosition(event.type === 'touchstart' ? event.touches[0] : event);
   }
+
+  function handleKey(event) {
+    const step = event.shiftKey ? 5 : 2;
+    if (orientation === 'vertical') {
+      if (event.key === 'ArrowLeft') {
+        sliderPosition = Math.max(0, sliderPosition - step);
+      } else if (event.key === 'ArrowRight') {
+        sliderPosition = Math.min(100, sliderPosition + step);
+      } else {
+        return;
+      }
+    } else {
+      if (event.key === 'ArrowUp') {
+        sliderPosition = Math.max(0, sliderPosition - step);
+      } else if (event.key === 'ArrowDown') {
+        sliderPosition = Math.min(100, sliderPosition + step);
+      } else {
+        return;
+      }
+    }
+    event.preventDefault();
+  }
 </script>
 
 <div 
@@ -67,10 +95,21 @@
 >
   <!-- Before Image -->
   <div class="before-after__before">
-    <img src={beforeImage} alt={beforeLabel} />
+    <picture>
+      {#if beforeImageMobile}
+        <source srcset={beforeImageMobile} media="(max-width: 768px)" />
+      {/if}
+      <img src={beforeImage} alt={beforeLabel} loading="lazy" />
+    </picture>
     <div class="before-after__label before-after__label--before">
       {beforeLabel}
     </div>
+    {#if beforeCaption || beforeCredit}
+      <div class="before-after__caption">
+        {#if beforeCaption}<p>{@html beforeCaption}</p>{/if}
+        {#if beforeCredit}<small>{@html beforeCredit}</small>{/if}
+      </div>
+    {/if}
   </div>
 
   <!-- After Image -->
@@ -81,10 +120,21 @@
       : `clip-path: inset(${sliderPosition}% 0 0 0)`
     }
   >
-    <img src={afterImage} alt={afterLabel} />
+    <picture>
+      {#if afterImageMobile}
+        <source srcset={afterImageMobile} media="(max-width: 768px)" />
+      {/if}
+      <img src={afterImage} alt={afterLabel} loading="lazy" />
+    </picture>
     <div class="before-after__label before-after__label--after">
       {afterLabel}
     </div>
+    {#if afterCaption || afterCredit}
+      <div class="before-after__caption">
+        {#if afterCaption}<p>{@html afterCaption}</p>{/if}
+        {#if afterCredit}<small>{@html afterCredit}</small>{/if}
+      </div>
+    {/if}
   </div>
 
   <!-- Slider -->
@@ -96,6 +146,13 @@
     }
     on:mousedown={handleSliderStart}
     on:touchstart={handleSliderStart}
+    role="slider"
+    tabindex="0"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow={Math.round(sliderPosition)}
+    aria-label="Comparador antes e depois"
+    on:keydown={handleKey}
   >
     <div class="before-after__handle">
       {#if orientation === 'vertical'}
@@ -161,6 +218,28 @@
     position: absolute;
     z-index: 20;
     cursor: pointer;
+  }
+
+  .before-after__caption {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    background: rgba(0, 0, 0, 0.6);
+    color: #f1f5f9;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    max-width: 320px;
+    font-size: var(--font-size-40);
+  }
+
+  .before-after__caption p {
+    margin: 0 0 0.35rem 0;
+  }
+
+  .before-after__caption small {
+    display: block;
+    opacity: 0.8;
+    font-size: var(--font-size-30);
   }
 
   .before-after--vertical .before-after__slider {

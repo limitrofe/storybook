@@ -1,0 +1,450 @@
+import { storyDefaults } from './story-defaults.js';
+import { getComponentDefinition } from './component-registry.js';
+
+let blockCounter = 0;
+
+function mergeTypography(defaultValue = {}, incoming = {}) {
+  const result = {};
+  const keys = new Set([
+    ...Object.keys(defaultValue || {}),
+    ...Object.keys(incoming || {})
+  ]);
+
+  for (const key of keys) {
+    const base = defaultValue?.[key] || {};
+    const override = incoming?.[key] || {};
+    result[key] = {
+      ...base,
+      ...override,
+      desktop: {
+        ...(base.desktop || {}),
+        ...(override.desktop || {})
+      },
+      mobile: {
+        ...(base.mobile || {}),
+        ...(override.mobile || {})
+      }
+    };
+  }
+
+  return result;
+}
+
+function ensureMediaVariants(paragraph = {}) {
+  if (!paragraph || typeof paragraph !== 'object') return paragraph;
+  const clone = { ...paragraph };
+  const type = (clone.type || '').toLowerCase();
+
+  const ensure = (obj, target, source) => {
+    if (!obj) return;
+    if (!obj[target] && obj[source]) {
+      obj[target] = obj[source];
+    }
+  };
+
+  const ensurePair = (obj, a, b) => {
+    ensure(obj, a, b);
+    ensure(obj, b, a);
+  };
+
+  switch (type) {
+    case 'header':
+      ensurePair(clone, 'backgroundImageMobile', 'backgroundImage');
+      ensurePair(clone, 'backgroundVideoMobile', 'backgroundVideo');
+      ensurePair(clone, 'posterMobile', 'poster');
+      ensurePair(clone, 'posterImageMobile', 'posterImage');
+      break;
+    case 'header-caotico':
+      ensurePair(clone, 'backgroundImageMobile', 'backgroundImage');
+      ensurePair(clone, 'backgroundVideoMobile', 'backgroundVideo');
+      break;
+    case 'foto':
+    case 'imagem':
+    case 'photo':
+      ensurePair(clone, 'srcMobile', 'src');
+      break;
+    case 'video':
+      ensurePair(clone, 'srcMobile', 'src');
+      ensurePair(clone, 'posterMobile', 'poster');
+      break;
+    case 'globovideo':
+    case 'globo-video':
+    case 'globoplayer':
+    case 'globo-player':
+    case 'globo':
+      ensurePair(clone, 'videoIdMobile', 'videoIdDesktop');
+      if (!clone.videoId && clone.videoIdDesktop) clone.videoId = clone.videoIdDesktop;
+      if (!clone.videoId && clone.videoIdMobile) clone.videoId = clone.videoIdMobile;
+      break;
+    case 'parallax':
+      ensurePair(clone, 'imageMobile', 'image');
+      break;
+    case 'scrollyframes':
+    case 'videoscrollytelling':
+      ensurePair(clone, 'imagePrefixMobile', 'imagePrefix');
+      ensurePair(clone, 'imageSuffixMobile', 'imageSuffix');
+      break;
+    case 'antes-depois':
+    case 'before-after':
+      ensurePair(clone, 'beforeImageMobile', 'beforeImage');
+      ensurePair(clone, 'afterImageMobile', 'afterImage');
+      break;
+    case 'scrolly': {
+      if (Array.isArray(clone.steps)) {
+        clone.steps = clone.steps.map((step) => {
+          if (!step || typeof step !== 'object') return step;
+          const stepClone = { ...step };
+          ensurePair(stepClone, 'imageMobile', 'image');
+          ensurePair(stepClone, 'videoMobile', 'video');
+          return stepClone;
+        });
+      }
+      break;
+    }
+    case 'flexible-layout':
+      ensurePair(clone, 'image1Mobile', 'image1Desktop');
+      ensurePair(clone, 'image2Mobile', 'image2Desktop');
+      break;
+    case 'responsive-media':
+      ensurePair(clone, 'backgroundImageMobile', 'backgroundImageDesktop');
+      ensurePair(clone, 'backgroundVideoMobile', 'backgroundVideoDesktop');
+      break;
+    case 'galeria':
+    case 'gallery':
+      if (Array.isArray(clone.images)) {
+        clone.images = clone.images.map((item) => {
+          if (!item || typeof item !== 'object') return item;
+          const next = { ...item };
+          ensurePair(next, 'srcMobile', 'src');
+          return next;
+        });
+      }
+      break;
+    case 'carousel':
+      if (Array.isArray(clone.items)) {
+        clone.items = clone.items.map((item) => {
+          if (!item || typeof item !== 'object') return item;
+          const next = { ...item };
+          ensurePair(next, 'srcMobile', 'src');
+          return next;
+        });
+      }
+      break;
+    case 'super-flex': {
+      if (clone.container && typeof clone.container === 'object') {
+        const container = { ...clone.container };
+        const bgImage = container.backgroundImage ? { ...container.backgroundImage } : undefined;
+        const bgVideo = container.backgroundVideo ? { ...container.backgroundVideo } : undefined;
+        if (bgImage) {
+          ensurePair(bgImage, 'mobile', 'desktop');
+          container.backgroundImage = bgImage;
+        }
+        if (bgVideo) {
+          ensurePair(bgVideo, 'mobile', 'desktop');
+          container.backgroundVideo = bgVideo;
+        }
+        clone.container = container;
+      }
+      break;
+    }
+  }
+
+  return clone;
+}
+
+export function createBlockInstance(type) {
+  const definition = getComponentDefinition(type);
+  const baseData = definition?.defaultData
+    ? structuredClone(definition.defaultData)
+    : { type };
+
+  return {
+    __id: `${type}-${Date.now()}-${blockCounter++}`,
+    ...baseData
+  };
+}
+
+export function cloneStory(value = {}) {
+  return structuredClone({
+    ...storyDefaults,
+    ...value,
+    share: {
+      ...storyDefaults.share,
+      ...(value?.share || {})
+    },
+    seo: {
+      ...storyDefaults.seo,
+      ...(value?.seo || {})
+    },
+    appearance: {
+      ...storyDefaults.appearance,
+      ...(value?.appearance || {}),
+      pagePadding: {
+        ...storyDefaults.appearance.pagePadding,
+        ...(value?.appearance?.pagePadding || {})
+      },
+      typography: mergeTypography(
+        storyDefaults.appearance.typography,
+        value?.appearance?.typography
+      )
+    },
+    analytics: {
+      ...storyDefaults.analytics,
+      ...(value?.analytics || {})
+    },
+    intro: {
+      ...storyDefaults.intro,
+      ...(value?.intro || {})
+    },
+    credits: {
+      ...storyDefaults.credits,
+      ...(value?.credits || {}),
+      sources: Array.isArray(value?.credits?.sources)
+        ? structuredClone(value.credits.sources)
+        : [...storyDefaults.credits.sources],
+      authors: Array.isArray(value?.credits?.authors)
+        ? structuredClone(value.credits.authors)
+        : [...storyDefaults.credits.authors],
+      editedBy: Array.isArray(value?.credits?.editedBy)
+        ? structuredClone(value.credits.editedBy)
+        : [...storyDefaults.credits.editedBy],
+      additionalGraphics: Array.isArray(value?.credits?.additionalGraphics)
+        ? structuredClone(value.credits.additionalGraphics)
+        : [...storyDefaults.credits.additionalGraphics]
+    },
+    paragraphs: []
+  });
+}
+
+export function normalizeStory(value = {}) {
+  const story = cloneStory(value);
+
+  const paragraphs = Array.isArray(value?.paragraphs) ? value.paragraphs : [];
+  story.paragraphs = paragraphs.map((paragraph) => ({
+    __id: paragraph.__id || `${paragraph.type || 'block'}-${Date.now()}-${blockCounter++}`,
+    ...paragraph
+  }));
+
+  return story;
+}
+
+export function getByPath(target, path) {
+  if (!path) return target;
+  return path.split('.').reduce((acc, segment) => {
+    if (acc && typeof acc === 'object') {
+      return acc[segment];
+    }
+    return undefined;
+  }, target);
+}
+
+export function setByPath(target, path, value) {
+  const segments = path.split('.');
+  const last = segments.pop();
+  let current = target;
+
+  for (const segment of segments) {
+    if (!current[segment] || typeof current[segment] !== 'object') {
+      current[segment] = {};
+    }
+    current = current[segment];
+  }
+
+  current[last] = value;
+}
+
+export function removeInternalFields(data) {
+  if (Array.isArray(data)) {
+    return data.map((item) => removeInternalFields(item));
+  }
+
+  if (data && typeof data === 'object') {
+    const result = {};
+    for (const [key, value] of Object.entries(data)) {
+      if (key === '__id') continue;
+      result[key] = removeInternalFields(value);
+    }
+    return result;
+  }
+
+  return data;
+}
+
+export function sanitizeStoryForExport(data) {
+  const sanitized = removeInternalFields(data);
+  if (!Array.isArray(sanitized.paragraphs)) {
+    sanitized.paragraphs = [];
+  } else {
+    sanitized.paragraphs = sanitized.paragraphs.map(ensureMediaVariants);
+  }
+  return sanitized;
+}
+
+export function parseJsonField(value, fallback) {
+  if (value === '' || value === undefined || value === null) {
+    return fallback;
+  }
+  if (typeof value !== 'string') {
+    return value;
+  }
+  try {
+    return JSON.parse(value);
+  } catch (error) {
+    return fallback;
+  }
+}
+
+function buildHeadingCSS(selector, config = {}) {
+  if (!config) return '';
+  const baseRules = [];
+  const mobileRules = [];
+
+  if (config.fontFamily) baseRules.push(`font-family: ${config.fontFamily};`);
+  if (config.fontWeight) baseRules.push(`font-weight: ${config.fontWeight};`);
+  if (config.textTransform) baseRules.push(`text-transform: ${config.textTransform};`);
+  if (config.color) baseRules.push(`color: ${config.color};`);
+  if (config.desktop?.fontSize) baseRules.push(`font-size: ${config.desktop.fontSize};`);
+  if (config.desktop?.lineHeight) baseRules.push(`line-height: ${config.desktop.lineHeight};`);
+  if (config.desktop?.letterSpacing) baseRules.push(`letter-spacing: ${config.desktop.letterSpacing};`);
+
+  if (config.mobile?.fontSize) mobileRules.push(`font-size: ${config.mobile.fontSize};`);
+  if (config.mobile?.lineHeight) mobileRules.push(`line-height: ${config.mobile.lineHeight};`);
+  if (config.mobile?.letterSpacing) mobileRules.push(`letter-spacing: ${config.mobile.letterSpacing};`);
+  if (config.mobile?.color) mobileRules.push(`color: ${config.mobile.color};`);
+
+  let css = '';
+  if (baseRules.length) {
+    css += `${selector} { ${baseRules.join(' ')} }\n`;
+  }
+  if (mobileRules.length) {
+    css += `@media (max-width: 768px) { ${selector} { ${mobileRules.join(' ')} } }\n`;
+  }
+  return css;
+}
+
+function buildBlockquoteCSS(scope, config = {}) {
+  if (!config) return '';
+  const scopePrefix = scope && scope.length ? `${scope} ` : '';
+  const textSelector = `${scopePrefix}:global(.quote-text)`;
+  const containerSelector = `${scopePrefix}:global(.quote-container)`;
+  const authorSelector = `${scopePrefix}:global(.quote-attribution .author-name)`;
+  const lineSelector = `${scopePrefix}:global(.attribution-line)`;
+
+  const baseTextRules = [];
+  const mobileTextRules = [];
+
+  if (config.fontFamily) baseTextRules.push(`font-family: ${config.fontFamily};`);
+  if (config.color) baseTextRules.push(`color: ${config.color};`);
+  if (config.desktop?.fontSize) baseTextRules.push(`font-size: ${config.desktop.fontSize};`);
+  if (config.desktop?.lineHeight) baseTextRules.push(`line-height: ${config.desktop.lineHeight};`);
+
+  if (config.mobile?.fontSize) mobileTextRules.push(`font-size: ${config.mobile.fontSize};`);
+  if (config.mobile?.lineHeight) mobileTextRules.push(`line-height: ${config.mobile.lineHeight};`);
+  if (config.mobile?.color) mobileTextRules.push(`color: ${config.mobile.color};`);
+
+  const containerRules = [];
+  if (config.background) containerRules.push(`background: ${config.background};`);
+  if (config.borderColor) containerRules.push(`border-color: ${config.borderColor};`);
+
+  let css = '';
+  if (baseTextRules.length) {
+    css += `${textSelector} { ${baseTextRules.join(' ')} }\n`;
+  }
+  if (mobileTextRules.length) {
+    css += `@media (max-width: 768px) { ${textSelector} { ${mobileTextRules.join(' ')} } }\n`;
+  }
+  if (containerRules.length) {
+    css += `${containerSelector} { ${containerRules.join(' ')} }\n`;
+  }
+  if (config.accentColor) {
+    css += `${authorSelector} { color: ${config.accentColor}; }\n`;
+    css += `${lineSelector} { background: linear-gradient(90deg, ${config.accentColor}, transparent); }\n`;
+  }
+  return css;
+}
+
+function buildVariantCSS(selector, config = {}) {
+  if (!config) return '';
+  const baseRules = [];
+  const mobileRules = [];
+
+  if (config.fontFamily) baseRules.push(`font-family: ${config.fontFamily};`);
+  if (config.fontWeight) baseRules.push(`font-weight: ${config.fontWeight};`);
+  if (config.fontStyle) baseRules.push(`font-style: ${config.fontStyle};`);
+  if (config.textTransform) baseRules.push(`text-transform: ${config.textTransform};`);
+  if (config.letterSpacing) baseRules.push(`letter-spacing: ${config.letterSpacing};`);
+  if (config.color) baseRules.push(`color: ${config.color};`);
+  if (config.desktop?.fontSize) baseRules.push(`font-size: ${config.desktop.fontSize};`);
+  if (config.desktop?.lineHeight) baseRules.push(`line-height: ${config.desktop.lineHeight};`);
+  if (config.desktop?.letterSpacing) baseRules.push(`letter-spacing: ${config.desktop.letterSpacing};`);
+
+  if (config.mobile?.fontSize) mobileRules.push(`font-size: ${config.mobile.fontSize};`);
+  if (config.mobile?.lineHeight) mobileRules.push(`line-height: ${config.mobile.lineHeight};`);
+  if (config.mobile?.letterSpacing) mobileRules.push(`letter-spacing: ${config.mobile.letterSpacing};`);
+  if (config.mobile?.color) mobileRules.push(`color: ${config.mobile.color};`);
+
+  let css = '';
+  if (baseRules.length) {
+    css += `${selector} { ${baseRules.join(' ')} }\n`;
+  }
+  if (mobileRules.length) {
+    css += `@media (max-width: 768px) { ${selector} { ${mobileRules.join(' ')} } }\n`;
+  }
+  return css;
+}
+
+export function buildTypographyCSS(typography = {}, scope = '.story-page') {
+  if (!typography || typeof typography !== 'object') return '';
+  const effectiveScope = scope && scope.trim().length ? scope.trim() : '';
+  const selectorFor = (tag) => effectiveScope ? `${effectiveScope} :global(${tag})` : `:global(${tag})`;
+
+  const headings = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+  let css = '';
+
+  for (const tag of headings) {
+    const config = typography[tag];
+    if (!config) continue;
+    css += buildHeadingCSS(selectorFor(tag), config);
+  }
+
+  if (typography.blockquote) {
+    css += buildBlockquoteCSS(effectiveScope || '', typography.blockquote);
+  }
+
+  if (typography.body) {
+    const selector = effectiveScope
+      ? `${effectiveScope} :global(p), ${effectiveScope} :global(.story-text--body .story-text__content)`
+      : `:global(p), :global(.story-text--body .story-text__content)`;
+    css += buildVariantCSS(selector, typography.body);
+  }
+
+  if (typography.lead) {
+    const selector = effectiveScope
+      ? `${effectiveScope} :global(.story-text--lead .story-text__content)`
+      : `:global(.story-text--lead .story-text__content)`;
+    css += buildVariantCSS(selector, typography.lead);
+  }
+
+  if (typography.small) {
+    const selector = effectiveScope
+      ? `${effectiveScope} :global(.text-small), ${effectiveScope} :global(small)`
+      : `:global(.text-small), :global(small)`;
+    css += buildVariantCSS(selector, typography.small);
+  }
+
+  if (typography.caption) {
+    const selector = effectiveScope
+      ? `${effectiveScope} :global(figcaption), ${effectiveScope} :global(.caption)`
+      : `:global(figcaption), :global(.caption)`;
+    css += buildVariantCSS(selector, typography.caption);
+  }
+
+  if (typography.annotation) {
+    const selector = effectiveScope
+      ? `${effectiveScope} :global(.annotation), ${effectiveScope} :global(.note)`
+      : `:global(.annotation), :global(.note)`;
+    css += buildVariantCSS(selector, typography.annotation);
+  }
+
+  return css.trim();
+}

@@ -1,0 +1,215 @@
+<script>
+  import { createEventDispatcher } from 'svelte';
+  import ScrollyStepsEditor from './editors/ScrollyStepsEditor.svelte';
+  import GalleryItemsEditor from './editors/GalleryItemsEditor.svelte';
+  import CarouselItemsEditor from './editors/CarouselItemsEditor.svelte';
+  import RichTextEditor from './RichTextEditor.svelte';
+
+  export let field;
+  export let value;
+
+  const dispatch = createEventDispatcher();
+  let jsonText = field.type === 'json' && value ? JSON.stringify(value, null, 2) : '';
+  let jsonError = '';
+  let isEditingJson = false;
+
+  const handleInput = (event) => {
+    const inputValue = event.currentTarget.value;
+
+    switch (field.type) {
+      case 'number': {
+        const parsed = inputValue === '' ? '' : Number(inputValue);
+        dispatch('change', { value: Number.isNaN(parsed) ? null : parsed });
+        break;
+      }
+      case 'boolean': {
+        dispatch('change', { value: event.currentTarget.checked });
+        break;
+      }
+      default: {
+        dispatch('change', { value: inputValue });
+      }
+    }
+  };
+
+  const handleSelect = (event) => {
+    dispatch('change', { value: event.currentTarget.value });
+  };
+
+  const handleColor = (event) => {
+    dispatch('change', { value: event.currentTarget.value });
+  };
+
+  const handleJsonBlur = () => {
+    isEditingJson = false;
+    try {
+      if (!jsonText?.trim()) {
+        jsonError = '';
+        dispatch('change', { value: field.emptyValue ?? [] });
+        return;
+      }
+      const parsed = JSON.parse(jsonText);
+      jsonError = '';
+      dispatch('change', { value: parsed });
+    } catch (error) {
+      jsonError = 'JSON inválido: ' + error.message;
+    }
+  };
+
+  const handleJsonFocus = () => {
+    isEditingJson = true;
+  };
+
+  $: if (field.type === 'json' && !isEditingJson) {
+    jsonText = value ? JSON.stringify(value, null, 2) : '';
+  }
+</script>
+
+<div class="field-editor">
+  <label>
+    <span>{field.label}</span>
+    {#if field.type === 'text' || field.type === 'url'}
+      <input
+        type={field.type === 'url' ? 'url' : 'text'}
+        value={value ?? ''}
+        placeholder={field.placeholder}
+        required={field.required}
+        on:input={handleInput}
+      />
+    {:else if field.type === 'number'}
+      <input
+        type="number"
+        value={value ?? ''}
+        min={field.min}
+        max={field.max}
+        step={field.step}
+        placeholder={field.placeholder}
+        required={field.required}
+        on:input={handleInput}
+      />
+    {:else if field.type === 'textarea'}
+      <textarea
+        rows={field.rows || 3}
+        placeholder={field.placeholder}
+        value={value ?? ''}
+        required={field.required}
+        on:input={handleInput}
+      ></textarea>
+    {:else if field.type === 'richtext'}
+      <RichTextEditor
+        value={value ?? ''}
+        placeholder={field.placeholder}
+        on:change={(event) => dispatch('change', { value: event.detail.value })}
+      />
+    {:else if field.type === 'select'}
+      <select on:change={handleSelect} value={value ?? ''} required={field.required}>
+        {#each field.options || [] as option}
+          <option value={option.value}>{option.label}</option>
+        {/each}
+      </select>
+    {:else if field.type === 'boolean'}
+      <div class="boolean-field">
+        <input type="checkbox" checked={Boolean(value)} on:change={handleInput} />
+        {#if field.helpText}
+          <span>{field.helpText}</span>
+        {/if}
+      </div>
+    {:else if field.type === 'color'}
+      <input type="color" value={value || '#000000'} on:input={handleColor} />
+    {:else if field.type === 'scrolly-steps'}
+      <ScrollyStepsEditor
+        value={value ?? []}
+        on:change={(event) => dispatch('change', { value: event.detail.value })}
+      />
+    {:else if field.type === 'gallery-items'}
+      <GalleryItemsEditor
+        value={value ?? []}
+        on:change={(event) => dispatch('change', { value: event.detail.value })}
+      />
+    {:else if field.type === 'carousel-items'}
+      <CarouselItemsEditor
+        value={value ?? []}
+        on:change={(event) => dispatch('change', { value: event.detail.value })}
+      />
+    {:else if field.type === 'json'}
+      <textarea
+        class:invalid={jsonError}
+        rows={field.rows || 6}
+        bind:value={jsonText}
+        placeholder={field.placeholder}
+        on:focus={handleJsonFocus}
+        on:blur={handleJsonBlur}
+      ></textarea>
+      {#if jsonError}
+        <small class="error">{jsonError}</small>
+      {/if}
+    {/if}
+  </label>
+  {#if field.description}
+    <small class="description">{field.description}</small>
+  {/if}
+</div>
+
+<style>
+  .field-editor {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  label {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.75rem;
+    gap: 0.35rem;
+    color: #1e293b;
+  }
+
+  input,
+  textarea,
+  select {
+    border: 1px solid #cbd5f5;
+    border-radius: 8px;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    background: #fff;
+    transition: border-color 0.2s ease;
+  }
+
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  }
+
+  textarea.richtext {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  .boolean-field {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .boolean-field input[type='checkbox'] {
+    width: 16px;
+    height: 16px;
+  }
+
+  .description {
+    color: #64748b;
+    font-size: 0.7rem;
+  }
+
+  .error {
+    color: #dc2626;
+    font-size: 0.7rem;
+  }
+
+  .invalid {
+    border-color: #dc2626;
+  }
+</style>

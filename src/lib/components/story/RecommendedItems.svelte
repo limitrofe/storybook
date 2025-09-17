@@ -51,12 +51,7 @@
 
 <section 
   class="recommended-items" 
-  style="
-    --bg-color: {backgroundColor}; 
-    --title-color: {titleColor}; 
-    --text-color: {textColor};
-    --columns: {columns};
-  "
+  style={`--bg-color:${backgroundColor || 'transparent'}; --title-color:${titleColor || 'var(--color-text)'}; --text-color:${textColor || 'var(--color-text)'}; --columns:${columns}; --title-font-size-desktop:${titleFontSizeDesktop || ''}; --title-font-size-mobile:${titleFontSizeMobile || ''}; --item-title-font-size-desktop:${itemTitleFontSizeDesktop || ''}; --item-title-font-size-mobile:${itemTitleFontSizeMobile || ''}; --item-text-font-size-desktop:${itemTextFontSizeDesktop || ''}; --item-text-font-size-mobile:${itemTextFontSizeMobile || ''};`}
 >
   {#if showTitle && title}
     <h2 class="recommended-title">{title}</h2>
@@ -130,18 +125,18 @@
 </section>
 
 <style>
- .recommended-items {
+.recommended-items {
   padding: 2rem 0;
-  background-color: var(--bg-color);
-  color: var(--text-color);
+  background-color: var(--bg-color, transparent);
+  color: var(--text-color, var(--color-text));
   margin: 2rem 0;
-  text-align: center; /* Centraliza título e textos */
+  text-align: center;
 }
 
 .recommended-title {
-font-size: var(--font-size-140, 3rem);
+  font-size: var(--title-font-size-desktop, var(--typography-h3-desktop-font-size, 2.6rem));
   font-weight: 600;
-color: var(--color-text);
+  color: var(--title-color, var(--color-text));
   margin: 0 0 1.5rem 0;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -191,7 +186,7 @@ color: var(--color-text);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border-radius: 8px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--recommended-card-bg, transparent);
   backdrop-filter: blur(10px);
 }
 
@@ -264,11 +259,11 @@ color: var(--color-text);
 }
 
 .item-title {
-  font-size: 1rem;
+  font-size: var(--item-title-font-size-desktop, 1rem);
   font-weight: 600;
   margin: 0 0 0.5rem 0;
   line-height: 1.2;
-  color: var(--text-color);
+  color: var(--text-color, var(--color-text));
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -286,7 +281,7 @@ color: var(--color-text);
 }
 
 .item-description {
-  font-size: 0.75rem;
+  font-size: var(--item-text-font-size-desktop, 0.75rem);
   color: rgba(255, 255, 255, 0.7);
   margin: 0 0 0.75rem 0;
   line-height: 1.3;
@@ -329,37 +324,35 @@ color: var(--color-text);
   .items-container--grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   .recommended-title {
-        font-size: var(--font-size-120, 2.5rem);
-        }
-  
+    font-size: var(--title-font-size-mobile, var(--typography-h3-mobile-font-size, 2.2rem));
+  }
+
   .item-content {
     padding: 0.75rem;
   }
-  
-  /* Centralização específica para mobile */
+
   .recommended-item {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
   }
-  
+
   .item-image {
-    width: 60%; /* Pode ajustar este valor para deixar ainda menor */
+    width: 60%;
   }
-  
-  .item-content {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+
+  .item-title {
+    font-size: var(--item-title-font-size-mobile, 0.95rem);
   }
-  
-  .item-title,
+
+  .item-description {
+    font-size: var(--item-text-font-size-mobile, 0.75rem);
+  }
+
   .item-subtitle,
-  .item-description,
   .item-category {
     text-align: center;
     width: 100%;

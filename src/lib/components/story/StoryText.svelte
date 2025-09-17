@@ -6,10 +6,41 @@
   export let maxWidth = '700px';
   export let author = '';
   export let role = '';
+  export let fontSizeDesktop = '';
+  export let fontSizeMobile = '';
+  export let lineHeightDesktop = '';
+  export let lineHeightMobile = '';
+  export let textColor = '';
+
+  const FALLBACKS = {
+    body: { sizeDesktop: '1.1rem', sizeMobile: '1rem', lineDesktop: '1.8', lineMobile: '1.7' },
+    lead: { sizeDesktop: '1.5rem', sizeMobile: '1.3rem', lineDesktop: '1.6', lineMobile: '1.6' },
+    blockquote: { sizeDesktop: '2rem', sizeMobile: '1.6rem', lineDesktop: '1.4', lineMobile: '1.45' }
+  };
+
+  const variantMap = {
+    body: 'body',
+    lead: 'lead',
+    quote: 'blockquote'
+  };
+
+  $: variantKey = variantMap[variant] || 'body';
+  $: fallback = FALLBACKS[variantKey] || FALLBACKS.body;
+  $: computedFontSizeDesktop = fontSizeDesktop || `var(--typography-${variantKey}-desktop-font-size, ${fallback.sizeDesktop})`;
+  $: computedFontSizeMobile = fontSizeMobile || `var(--typography-${variantKey}-mobile-font-size, ${fallback.sizeMobile})`;
+  $: computedLineHeightDesktop = lineHeightDesktop || `var(--typography-${variantKey}-desktop-line-height, ${fallback.lineDesktop})`;
+  $: computedLineHeightMobile = lineHeightMobile || `var(--typography-${variantKey}-mobile-line-height, ${fallback.lineMobile})`;
+  $: contentStyle = [
+    `--story-text-font-size-desktop:${computedFontSizeDesktop}`,
+    `--story-text-line-height-desktop:${computedLineHeightDesktop}`,
+    `--story-text-font-size-mobile:${computedFontSizeMobile}`,
+    `--story-text-line-height-mobile:${computedLineHeightMobile}`,
+    textColor ? `--story-text-color:${textColor}` : ''
+  ].filter(Boolean).join('; ');
 </script>
 
 <div class="story-text story-text--{variant}" style="text-align: {align}; max-width: {maxWidth};">
-  <div class="story-text__content">
+  <div class="story-text__content text-variant-{variant}" style={contentStyle}>
     {#if variant === 'quote'}
       <div class="quote-container">
         <blockquote class="modern-quote">
@@ -40,39 +71,51 @@
   .story-text {
     margin: 2rem auto;
     padding: 0 1rem;
-    color: var(--color-text);
+    color: var(--story-text-color, var(--color-text));
   }
 
   .story-text__content {
     width: 100%;
+    font-size: var(--story-text-font-size-desktop, var(--typography-body-desktop-font-size, 1.1rem));
+    line-height: var(--story-text-line-height-desktop, var(--typography-body-desktop-line-height, 1.8));
+    color: var(--story-text-color, var(--color-text));
   }
 
-  /* Variant: Body Text */
-  .story-text--body {
-    font-size: var(--font-size-70);
-    line-height: 1.7;
-    font-weight: 400;
+  .story-text--lead .story-text__content {
+    color: var(--story-text-color, var(--typography-lead-color, var(--color-secondary)));
   }
 
-  /* Variant: Lead Text */
-  .story-text--lead {
-    font-size: var(--font-size-90);
-    line-height: 1.6;
-    font-weight: 500;
-    color: var(--color-secondary);
+  @media (max-width: 768px) {
+    .story-text__content {
+      font-size: var(--story-text-font-size-mobile, var(--typography-body-mobile-font-size, 1rem));
+      line-height: var(--story-text-line-height-mobile, var(--typography-body-mobile-line-height, 1.7));
+    }
   }
 
-  /* Variant: Quote - Design Moderno */
+  /* Variant: Quote */
   .story-text--quote {
     margin: 3rem auto;
   }
 
+  .story-text--quote .story-text__content {
+    font-size: var(--story-text-font-size-desktop, var(--typography-blockquote-desktop-font-size, 2rem));
+    line-height: var(--story-text-line-height-desktop, var(--typography-blockquote-desktop-line-height, 1.4));
+    color: var(--story-text-color, var(--typography-blockquote-color, var(--color-text)));
+  }
+
+  @media (max-width: 768px) {
+    .story-text--quote .story-text__content {
+      font-size: var(--story-text-font-size-mobile, var(--typography-blockquote-mobile-font-size, 1.6rem));
+      line-height: var(--story-text-line-height-mobile, var(--typography-blockquote-mobile-line-height, 1.45));
+    }
+  }
+
   .quote-container {
     position: relative;
-    background: var(--color-highlight-bg);
+    background: var(--typography-blockquote-background, var(--color-highlight-bg));
     border-radius: 24px;
     padding: 2.5rem;
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--typography-blockquote-border-color, var(--color-border));
     transition: all 0.3s ease;
   }
 
@@ -80,33 +123,8 @@
     transform: translateY(-2px);
   }
 
-  .quote-icon {
-    position: absolute;
-    top: -12px;
-    left: 2rem;
-    width: 48px;
-    height: 36px;
-    background: var(--color-primary);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    box-shadow: 0 4px 12px rgba(196, 23, 12, 0.3);
-  }
-
-  .modern-quote {
-    margin: 0;
-    padding: 0;
-    border: none;
-  }
-
   .quote-text {
-    font-size: var(--font-size-110);
-    line-height: 1.4;
-    font-weight: 600;
-    color: var(--color-text);
-    margin-top: 0;
+    margin: 0;
     font-style: normal;
   }
 
@@ -120,47 +138,57 @@
   .attribution-line {
     width: 40px;
     height: 2px;
-    background: linear-gradient(90deg, var(--color-primary), transparent);
+    background: linear-gradient(90deg, var(--typography-blockquote-accent-color, var(--color-primary)), transparent);
     border-radius: 1px;
-  }
-
-  .attribution-content {
-    flex: 1;
   }
 
   .author-name {
     font-style: normal;
     font-weight: 700;
-    font-size: var(--font-size-60);
-    color: var(--color-primary);
+    font-size: var(--typography-small-desktop-font-size, 0.95rem);
+    color: var(--typography-blockquote-accent-color, var(--color-primary));
     display: block;
     margin-bottom: 0.25rem;
   }
 
   .author-role {
-    font-size: var(--font-size-50);
-    color: var(--color-secondary);
+    font-size: var(--typography-small-desktop-font-size, 0.9rem);
+    color: var(--story-text-color, var(--color-secondary));
     font-weight: 500;
     opacity: 0.8;
   }
 
-  /* Global text styling within content */
+  @media (max-width: 768px) {
+    .quote-container {
+      padding: 2rem 1.5rem;
+      border-radius: 20px;
+    }
+
+    .author-name {
+      font-size: var(--typography-small-mobile-font-size, 0.85rem);
+    }
+
+    .author-role {
+      font-size: var(--typography-small-mobile-font-size, 0.82rem);
+    }
+  }
+
   .story-text :global(p) {
     margin: 1.5rem 0;
   }
 
   .story-text :global(strong) {
     font-weight: 700;
-    color: var(--color-primary);
+    color: var(--story-text-color, var(--color-primary));
   }
 
   .story-text :global(em) {
-    color: var(--color-accent);
+    color: var(--story-text-color, var(--color-accent));
     font-style: italic;
   }
 
   .story-text :global(a) {
-    color: var(--color-primary);
+    color: var(--story-text-color, var(--color-primary));
     text-decoration: none;
     border-bottom: 1px solid currentColor;
     transition: all 0.3s ease;
@@ -169,75 +197,5 @@
   .story-text :global(a:hover) {
     opacity: 0.8;
     transform: translateY(-1px);
-  }
-
-  /* Quote text specific styling */
-  .quote-text :global(strong) {
-    color: var(--color-primary);
-    font-weight: 700;
-  }
-
-  .quote-text :global(em) {
-    color: var(--color-secondary);
-    font-style: italic;
-    opacity: 0.9;
-  }
-
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .story-text--body {
-      font-size: var(--font-size-60);
-    }
-
-    .story-text--lead {
-      font-size: var(--font-size-80);
-    }
-
-    .quote-container {
-      padding: 2rem 1.5rem;
-      border-radius: 20px;
-      margin: 2rem 0;
-    }
-
-    .quote-text {
-      font-size: var(--font-size-90);
-      margin-top: 0;
-    }
-
-    .attribution-line {
-      width: 30px;
-    }
-
-    .author-name {
-      font-size: var(--font-size-55);
-    }
-
-    .author-role {
-      font-size: var(--font-size-45);
-    }
-  }
-
-  /* Dark mode adjustments */
-  @media (prefers-color-scheme: dark) {
-    .quote-container {
-      background: transparent;
-      border-color: transparent;
-    }
-  }
-
-  /* Animation for quote entrance */
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .quote-container {
-    animation: fadeInUp 0.6s ease-out;
   }
 </style>

@@ -51,7 +51,10 @@
 </script>
 
 <div 
-  class="carousel" 
+  class="carousel"
+  role="region"
+  aria-roledescription="carousel"
+  aria-label="Galeria de slides"
   bind:this={carouselElement}
   on:mouseenter={stopAutoplay}
   on:mouseleave={() => autoplay && startAutoplay()}
@@ -60,10 +63,20 @@
     {#each items as item, index}
       <div class="carousel-slide">
         {#if item.type === 'image'}
-          <img src={item.src} alt={item.alt || ''} />
+          <picture>
+            {#if item.srcMobile}
+              <source srcset={item.srcMobile} media="(max-width: 768px)" />
+            {/if}
+            <img src={item.src} alt={item.alt || ''} loading="lazy" />
+          </picture>
         {:else if item.type === 'video'}
-          <video controls>
-            <source src={item.src} type="video/mp4" />
+          <video controls playsinline>
+            {#if item.srcMobile}
+              <source src={item.srcMobile} type="video/mp4" media="(max-width: 768px)" />
+            {/if}
+            {#if item.src}
+              <source src={item.src} type="video/mp4" />
+            {/if}
           </video>
         {:else if item.type === 'content'}
           <div class="carousel-content">
@@ -95,6 +108,7 @@
           class="carousel-dot" 
           class:active={currentIndex === index}
           on:click={() => goTo(index)}
+          aria-label={`Ir para slide ${index + 1}`}
         ></button>
       {/each}
     </div>
