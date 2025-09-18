@@ -22,8 +22,8 @@
     "ogType": "article"
   },
   "appearance": {
-    "colorScheme": "dark",
-    "backgroundColor": "#0b0d17",
+    "colorScheme": "natureza",
+    "backgroundColor": "#ffffff",
     "backgroundColorMobile": "#0b0d17",
     "surfaceColor": "#111827",
     "textColor": "#f8fafc",
@@ -229,18 +229,25 @@
   "paragraphs": [
     {
       "type": "header",
-      "title": "teste",
-      "subtitle": "teste do teste",
-      "author": "g1",
-      "date": "15/09/2025",
-      "backgroundImage": "",
-      "backgroundImageMobile": "",
+      "title": "juan, o designer",
+      "subtitle": "o designer juan é um designer que faz design",
+      "author": "juan, o designer",
+      "date": "17/09/2025",
+      "backgroundImage": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
+      "backgroundImageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
       "backgroundVideo": "",
       "backgroundVideoMobile": "",
       "poster": "",
       "posterMobile": "",
       "variant": "hero",
       "overlay": true
+    },
+    {
+      "type": "texto",
+      "text": "<p><i><b>Escreva aqui o texto do parágrafo.</b></i></p><p>Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo.</p>",
+      "variant": "lead",
+      "align": "left",
+      "maxWidth": "720px"
     },
     {
       "type": "scrolly",
@@ -278,17 +285,17 @@
           "padding": "2rem",
           "maxWidth": "460px",
           "maxWidthMobile": "92%",
-          "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_06.jpg",
-          "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_06.jpg",
+          "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_05.jpg",
+          "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_05.jpg",
           "video": "",
           "videoMobile": "",
           "alt": "",
           "caption": ""
         },
         {
-          "title": "",
-          "text": "",
-          "position": "right",
+          "title": "antonio",
+          "text": "se liga",
+          "position": "left",
           "variant": "default",
           "backgroundColor": "rgba(15, 23, 42, 0.82)",
           "overlayColor": "rgba(0, 0, 0, 0.35)",
@@ -298,18 +305,18 @@
           "padding": "2rem",
           "maxWidth": "460px",
           "maxWidthMobile": "92%",
-          "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_06.jpg",
-          "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_06.jpg",
+          "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_04.jpg",
+          "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_04.jpg",
           "video": "",
           "videoMobile": "",
           "alt": "",
           "caption": ""
         },
         {
-          "title": "",
+          "title": "viu?",
           "text": "",
-          "position": "right",
-          "variant": "default",
+          "position": "left",
+          "variant": "destaque",
           "backgroundColor": "rgba(15, 23, 42, 0.82)",
           "overlayColor": "rgba(0, 0, 0, 0.35)",
           "textColor": "#F9FAFB",
@@ -318,8 +325,8 @@
           "padding": "2rem",
           "maxWidth": "460px",
           "maxWidthMobile": "92%",
-          "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_06.jpg",
-          "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_06.jpg",
+          "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_03.jpg",
+          "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_03.jpg",
           "video": "",
           "videoMobile": "",
           "alt": "",
@@ -327,6 +334,97 @@
         }
       ],
       "fullWidth": true
+    },
+    {
+      "type": "texto",
+      "text": "<p><i><b>Escreva aqui o texto do parágrafo.</b></i></p><p>Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo.</p>",
+      "variant": "body",
+      "align": "left",
+      "maxWidth": "720px",
+      "fontSizeDesktop": "",
+      "fontSizeMobile": "",
+      "lineHeightDesktop": "",
+      "lineHeightMobile": "",
+      "textColor": ""
+    },
+    {
+      "type": "video",
+      "src": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/videos/pagina-sentenca-golpe_documentos_mob.mp4",
+      "srcMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/videos/pagina-sentenca-golpe_documentos_mob.mp4",
+      "poster": "",
+      "posterMobile": "",
+      "caption": "",
+      "credit": "",
+      "autoplay": true,
+      "controls": true,
+      "loop": true,
+      "showCaption": true,
+      "alignment": "center",
+      "customWidthDesktop": "960px",
+      "customWidthMobile": "360px",
+      "backgroundColor": "#0f172a",
+      "fullWidth": false,
+      "fullWidthBackground": false
+    },
+    {
+      "type": "texto",
+      "text": "<p><i><b>Escreva aqui o texto do parágrafo.</b></i></p><p>Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo.</p>",
+      "variant": "body",
+      "align": "left",
+      "maxWidth": "720px",
+      "fontSizeDesktop": "",
+      "fontSizeMobile": "",
+      "lineHeightDesktop": "",
+      "lineHeightMobile": "",
+      "textColor": ""
+    },
+    {
+      "type": "galeria",
+      "images": [
+        {
+          "src": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_06.jpg",
+          "srcMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_06.jpg",
+          "alt": "",
+          "caption": "",
+          "credit": ""
+        },
+        {
+          "src": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
+          "srcMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
+          "alt": "",
+          "caption": "",
+          "credit": ""
+        },
+        {
+          "src": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
+          "srcMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
+          "alt": "",
+          "caption": "",
+          "credit": ""
+        },
+        {
+          "src": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
+          "srcMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
+          "alt": "",
+          "caption": "",
+          "credit": ""
+        }
+      ],
+      "layout": "grid",
+      "columns": 4,
+      "lightbox": true
+    },
+    {
+      "type": "texto",
+      "text": "<p><i><b>Escreva aqui o texto do parágrafo.</b></i></p><p>Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo.</p>",
+      "variant": "body",
+      "align": "left",
+      "maxWidth": "720px",
+      "fontSizeDesktop": "",
+      "fontSizeMobile": "",
+      "lineHeightDesktop": "",
+      "lineHeightMobile": "",
+      "textColor": ""
     },
     {
       "type": "super-flex",
@@ -347,6 +445,10 @@
         "padding": {
           "desktop": "3rem",
           "mobile": "1.5rem"
+        },
+        "margin": {
+          "desktop": "0",
+          "mobile": "0"
         },
         "alignItems": {
           "desktop": "center",
@@ -369,29 +471,15 @@
     },
     {
       "type": "texto",
-      "text": "<p>Escreva aqui o texto do parágrafo.</p>",
+      "text": "<p><i><b>Escreva aqui o texto do parágrafo.</b></i></p><p>Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo.</p>",
       "variant": "body",
       "align": "left",
-      "maxWidth": "720px"
-    },
-    {
-      "type": "video",
-      "src": "",
-      "srcMobile": "",
-      "poster": "",
-      "posterMobile": "",
-      "caption": "",
-      "credit": "",
-      "autoplay": false,
-      "controls": true,
-      "loop": false,
-      "showCaption": true,
-      "alignment": "center",
-      "customWidthDesktop": "960px",
-      "customWidthMobile": "360px",
-      "backgroundColor": "#0f172a",
-      "fullWidth": false,
-      "fullWidthBackground": false
+      "maxWidth": "720px",
+      "fontSizeDesktop": "",
+      "fontSizeMobile": "",
+      "lineHeightDesktop": "",
+      "lineHeightMobile": "",
+      "textColor": ""
     },
     {
       "type": "carousel",
@@ -421,19 +509,16 @@
       "showArrows": true
     },
     {
-      "type": "galeria",
-      "images": [
-        {
-          "src": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_06.jpg",
-          "srcMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_06.jpg",
-          "alt": "",
-          "caption": "",
-          "credit": ""
-        }
-      ],
-      "layout": "grid",
-      "columns": 3,
-      "lightbox": true
+      "type": "texto",
+      "text": "<p><i><b>Escreva aqui o texto do parágrafo.</b></i></p><p>Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo.</p>",
+      "variant": "body",
+      "align": "left",
+      "maxWidth": "720px",
+      "fontSizeDesktop": "",
+      "fontSizeMobile": "",
+      "lineHeightDesktop": "",
+      "lineHeightMobile": "",
+      "textColor": ""
     },
     {
       "type": "parallax",
@@ -443,6 +528,49 @@
       "speed": 0.45,
       "overlay": true,
       "content": "<b>sf;lja ;sdlkfj asl;dfkj ;asldfk</b>"
+    },
+    {
+      "type": "texto",
+      "text": "<p><i><b>Escreva aqui o texto do parágrafo.</b></i></p><p>Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo.</p>",
+      "variant": "body",
+      "align": "left",
+      "maxWidth": "720px",
+      "fontSizeDesktop": "",
+      "fontSizeMobile": "",
+      "lineHeightDesktop": "",
+      "lineHeightMobile": "",
+      "textColor": ""
+    },
+    {
+      "type": "globo-player",
+      "videoIdDesktop": "13925534",
+      "videoIdMobile": "13925534",
+      "videoId": "13925534",
+      "containerBackgroundColor": "#000000",
+      "widthDesktop": "100%",
+      "widthMobile": "100%",
+      "aspectRatio": "16 / 9",
+      "aspectRatioMobile": "9 / 16",
+      "autoPlay": true,
+      "startMuted": true,
+      "skipDFP": true,
+      "controls": true,
+      "showCaption": true,
+      "caption": "",
+      "credit": "",
+      "fullWidth": false
+    },
+    {
+      "type": "texto",
+      "text": "<p><i><b>Escreva aqui o texto do parágrafo.</b></i></p><p>Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo.</p>",
+      "variant": "body",
+      "align": "left",
+      "maxWidth": "720px",
+      "fontSizeDesktop": "",
+      "fontSizeMobile": "",
+      "lineHeightDesktop": "",
+      "lineHeightMobile": "",
+      "textColor": ""
     }
   ]
 }

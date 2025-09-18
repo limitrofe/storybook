@@ -7,7 +7,14 @@
   export let value = 'desktop';
   export let size = 'normal'; // 'small', 'normal', 'large'
   export let variant = 'default'; // 'default', 'compact'
-  
+
+  const deviceOptions = [
+    { id: 'mobile', icon: '📱', label: 'Mobile' },
+    { id: 'tablet', icon: '📲', label: 'Tablet' },
+    { id: 'desktop', icon: '💻', label: 'Desktop' },
+    { id: 'wide', icon: '🖥️', label: 'Wide' }
+  ];
+
   function handleChange(newValue) {
     value = newValue;
     dispatch('change', { value: newValue });
@@ -15,25 +22,17 @@
 </script>
 
 <div class="device-toggle" class:compact={variant === 'compact'} class:size-{size}>
-  <button 
-    class="device-btn desktop-btn" 
-    class:active={value === 'desktop'}
-    on:click={() => handleChange('desktop')}
-    title="Configurações para Desktop"
-  >
-    <span class="icon">🖥️</span>
-    <span class="label">Desktop</span>
-  </button>
-  
-  <button 
-    class="device-btn mobile-btn" 
-    class:active={value === 'mobile'}
-    on:click={() => handleChange('mobile')}
-    title="Configurações para Mobile"
-  >
-    <span class="icon">📱</span>
-    <span class="label">Mobile</span>
-  </button>
+  {#each deviceOptions as option}
+    <button 
+      class={`device-btn device-${option.id}`}
+      class:active={value === option.id}
+      on:click={() => handleChange(option.id)}
+      title={`Configurações para ${option.label}`}
+    >
+      <span class="icon">{option.icon}</span>
+      <span class="label">{option.label}</span>
+    </button>
+  {/each}
 </div>
 
 <style>

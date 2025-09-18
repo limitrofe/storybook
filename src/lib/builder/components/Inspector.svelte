@@ -1,6 +1,7 @@
 <script>
   import { get } from 'svelte/store';
   import FieldEditor from './FieldEditor.svelte';
+  import SuperFlexEditor from './editors/SuperFlexEditor.svelte';
   import { storyStore, selectedBlock, selectedBlockId } from '../stores/storyStore.js';
   import { metadataFields, creditsFields } from '../story-defaults.js';
   import { getComponentDefinition } from '../component-registry.js';
@@ -9,11 +10,25 @@
   let activeSection = 'block';
   let rawJson = '';
   let jsonError = '';
+  let superFlexDraft = null;
+
+  const clone = (value) => {
+    try {
+      return structuredClone(value);
+    } catch (error) {
+      return JSON.parse(JSON.stringify(value));
+    }
+  };
 
   $: block = $selectedBlock;
   $: definition = block ? getComponentDefinition(block.type) : null;
   $: if (block) {
     rawJson = JSON.stringify(removeInternalFields(block), null, 2);
+    if (block.type === 'super-flex') {
+      superFlexDraft = clone(block);
+    } else {
+      superFlexDraft = null;
+    }
   }
 
   const handleMetadataChange = (path, event) => {
@@ -37,6 +52,16 @@
     } catch (error) {
       jsonError = error.message;
     }
+  };
+
+  const commitSuperFlexChanges = () => {
+    if (!block || block.type !== 'super-flex' || !superFlexDraft) return;
+    const blockId = get(selectedBlockId);
+    if (!blockId) return;
+
+    const draft = clone(superFlexDraft);
+    const { __id, type, ...rest } = draft;
+    storyStore.replaceBlock(blockId, { ...rest, type: 'super-flex' });
   };
 </script>
 
@@ -90,7 +115,9 @@
           </button>
         </header>
 
-        {#if definition.fields?.length}
+        {#if block.type === 'super-flex'}
+          <SuperFlexEditor bind:data={superFlexDraft} on:update={commitSuperFlexChanges} />
+        {:else if definition.fields?.length}
           <div class="fields">
             {#each definition.fields as field}
               <FieldEditor

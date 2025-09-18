@@ -11,6 +11,16 @@
     let currentStepIndex = 0;
     let isMobile = false;
     let scrollProgress = 0;
+    let stepElements = [];
+
+    const registerStep = (node, index) => {
+        stepElements[index] = node;
+        return {
+            destroy() {
+                stepElements[index] = null;
+            }
+        };
+    };
 
     $: validSteps = Array.isArray(steps) ? steps : [];
 
@@ -21,10 +31,34 @@
         return () => { window.removeEventListener('resize', checkScreenSize); };
     });
 
+    function getMostVisibleStepIndex(fallbackIndex = 0) {
+        if (typeof window === 'undefined') return fallbackIndex;
+
+        const viewportHeight = window.innerHeight || 1;
+        let bestIndex = Math.min(fallbackIndex, validSteps.length - 1);
+        let bestVisible = 0;
+
+        stepElements.forEach((el, idx) => {
+            if (!el) return;
+            const rect = el.getBoundingClientRect();
+            const visibleTop = Math.max(rect.top, 0);
+            const visibleBottom = Math.min(rect.bottom, viewportHeight);
+            const visibleHeight = visibleBottom - visibleTop;
+
+            if (visibleHeight > bestVisible) {
+                bestVisible = visibleHeight;
+                bestIndex = idx;
+            }
+        });
+
+        return bestIndex;
+    }
+
     $: activeMediaIndex = (() => {
-        if (scrollProgress < 0.1) return 0;
-        if (scrollProgress > 0.9) return validSteps.length - 1;
-        return Math.min(currentStepIndex, validSteps.length - 1);
+        if (!validSteps.length) return 0;
+        const fallback = Math.min(currentStepIndex, validSteps.length - 1);
+        const mostVisible = getMostVisibleStepIndex(fallback);
+        return Math.max(0, Math.min(mostVisible, validSteps.length - 1));
     })();
 
     // FUNÇÃO getMediaSource MAIS CLARA E EXPLÍCITA
@@ -101,16 +135,17 @@
         <div slot="foreground" class="steps-foreground">
     <section class="spacer-top"></section>
     {#each validSteps as step, i}
-        <!-- 🆕 CONDICIONAL: Usa StepEnhanced se tem textConfig.elements, senão usa Step original -->
-        {#if hasAdvancedConfig(step)}
-            <StepEnhanced 
-                {step} 
-                {isMobile}
-                stepIndex={i}
-                totalSteps={validSteps.length - 1}
-            />
-        {:else}
-            <!-- Mantém o comportamento original para compatibilidade COM POSITION -->
+        <div class="step-wrapper" use:registerStep={i}>
+            <!-- 🆕 CONDICIONAL: Usa StepEnhanced se tem textConfig.elements, senão usa Step original -->
+            {#if hasAdvancedConfig(step)}
+                <StepEnhanced 
+                    {step} 
+                    {isMobile}
+                    stepIndex={i}
+                    totalSteps={validSteps.length - 1}
+                />
+            {:else}
+                <!-- Mantém o comportamento original para compatibilidade COM POSITION -->
 <Step 
     stepText={`<h3>${step.title || ''}</h3><div>${step.text || ''}</div>`} 
     length={validSteps.length - 1} 
@@ -118,7 +153,8 @@
     position={step.position || 'right'}
     variant={step.variant || ''} 
 />
-        {/if}
+            {/if}
+        </div>
     {/each}
     <section class="spacer-bottom"></section>
 </div>
