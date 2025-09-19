@@ -568,7 +568,7 @@
     },
     {
       "container": {
-        "backgroundColor": "#ffffff",
+        "backgroundColor": "#ff0000",
         "backgroundImage": {
           "mobile": "",
           "tablet": "",
@@ -620,45 +620,127 @@
         "flexDirection": {
           "mobile": "column",
           "tablet": "column",
-          "desktop": "row",
+          "desktop": "column",
           "wide": "column"
         },
-        "fullWidth": false
+        "fullWidth": false,
+        "background": {
+          "color": "#ff0000",
+          "image": {
+            "mobile": "",
+            "tablet": "",
+            "desktop": "",
+            "wide": ""
+          },
+          "video": {
+            "mobile": "",
+            "tablet": "",
+            "desktop": "",
+            "wide": ""
+          },
+          "size": {
+            "mobile": "cover",
+            "tablet": "cover",
+            "desktop": "cover",
+            "wide": "cover"
+          },
+          "position": {
+            "mobile": "center center",
+            "tablet": "center center",
+            "desktop": "center center",
+            "wide": "center center"
+          },
+          "repeat": {
+            "mobile": "no-repeat",
+            "tablet": "no-repeat",
+            "desktop": "no-repeat",
+            "wide": "no-repeat"
+          },
+          "overlayColor": "transparent",
+          "overlayOpacity": "0"
+        },
+        "width": {
+          "mobile": "100vw",
+          "tablet": "100vw",
+          "desktop": "100vw",
+          "wide": "100vw"
+        }
       },
       "items": [
         {
-          "id": "el-1758165592421-779689",
-          "type": "text",
-          "tag": "p",
-          "content": "Escreva aqui o conteúdo do texto. Escreva aqui o conteúdo do texto. Escreva aqui o conteúdo do texto.",
+          "id": "el-1758252321146-141742",
+          "type": "title",
+          "tag": "h2",
+          "content": "Título do super flex",
+          "backgroundColor": "transparent",
+          "background": {
+            "color": "transparent",
+            "image": {
+              "mobile": "",
+              "tablet": "",
+              "desktop": "",
+              "wide": ""
+            },
+            "video": {
+              "mobile": "",
+              "tablet": "",
+              "desktop": "",
+              "wide": ""
+            },
+            "size": {
+              "mobile": "cover",
+              "tablet": "cover",
+              "desktop": "cover",
+              "wide": "cover"
+            },
+            "position": {
+              "mobile": "center center",
+              "tablet": "center center",
+              "desktop": "center center",
+              "wide": "center center"
+            },
+            "repeat": {
+              "mobile": "no-repeat",
+              "tablet": "no-repeat",
+              "desktop": "no-repeat",
+              "wide": "no-repeat"
+            },
+            "overlayColor": "transparent",
+            "overlayOpacity": "0"
+          },
           "styles": {
             "margin": {
               "mobile": "0",
               "tablet": "0",
-              "desktop": "0",
+              "desktop": "0 1rem 2rem 1rem",
               "wide": "0"
             },
             "padding": {
               "mobile": "0",
               "tablet": "0",
-              "desktop": "0",
+              "desktop": "0 1rem 2rem 1rem",
               "wide": "0"
             },
             "width": {
               "mobile": "auto",
               "tablet": "auto",
-              "desktop": "30vw",
+              "desktop": "auto",
+              "wide": "auto"
+            },
+            "height": {
+              "mobile": "auto",
+              "tablet": "auto",
+              "desktop": "auto",
               "wide": "auto"
             },
             "textAlign": {
               "mobile": "left",
               "tablet": "left",
-              "desktop": "center",
+              "desktop": "left",
               "wide": "left"
             },
-            "color": "#156ec6"
+            "color": "#0054a8"
           },
-          "backgroundColor": "#44ff00",
           "position": {
             "mobile": {
               "mode": "relative",
@@ -666,7 +748,8 @@
               "right": "auto",
               "bottom": "auto",
               "left": "auto",
-              "zIndex": "auto"
+              "zIndex": "auto",
+              "transform": "none"
             },
             "tablet": {
               "mode": "relative",
@@ -674,7 +757,8 @@
               "right": "auto",
               "bottom": "auto",
               "left": "auto",
-              "zIndex": "auto"
+              "zIndex": "auto",
+              "transform": "none"
             },
             "desktop": {
               "mode": "relative",
@@ -682,7 +766,8 @@
               "right": "auto",
               "bottom": "auto",
               "left": "auto",
-              "zIndex": "4"
+              "zIndex": "auto",
+              "transform": "none"
             },
             "wide": {
               "mode": "relative",
@@ -690,15 +775,64 @@
               "right": "auto",
               "bottom": "auto",
               "left": "auto",
-              "zIndex": "auto"
+              "zIndex": "auto",
+              "transform": "none"
             }
+          },
+          "backgroundImage": {
+            "mobile": "",
+            "tablet": "",
+            "desktop": "",
+            "wide": ""
+          },
+          "backgroundVideo": {
+            "mobile": "",
+            "tablet": "",
+            "desktop": "",
+            "wide": ""
           }
         },
         {
-          "id": "el-1758165602499-176939",
-          "type": "title",
-          "tag": "h2",
-          "content": "Título do super flex Escreva aqui o conteúdo do texto.",
+          "id": "el-1758252322330-324406",
+          "type": "text",
+          "tag": "p",
+          "content": "Escreva aqui o conteúdo do texto.",
+          "backgroundColor": "transparent",
+          "background": {
+            "color": "transparent",
+            "image": {
+              "mobile": "",
+              "tablet": "",
+              "desktop": "",
+              "wide": ""
+            },
+            "video": {
+              "mobile": "",
+              "tablet": "",
+              "desktop": "",
+              "wide": ""
+            },
+            "size": {
+              "mobile": "cover",
+              "tablet": "cover",
+              "desktop": "cover",
+              "wide": "cover"
+            },
+            "position": {
+              "mobile": "center center",
+              "tablet": "center center",
+              "desktop": "center center",
+              "wide": "center center"
+            },
+            "repeat": {
+              "mobile": "no-repeat",
+              "tablet": "no-repeat",
+              "desktop": "no-repeat",
+              "wide": "no-repeat"
+            },
+            "overlayColor": "transparent",
+            "overlayOpacity": "0"
+          },
           "styles": {
             "margin": {
               "mobile": "0",
@@ -718,15 +852,20 @@
               "desktop": "auto",
               "wide": "auto"
             },
+            "height": {
+              "mobile": "auto",
+              "tablet": "auto",
+              "desktop": "auto",
+              "wide": "auto"
+            },
             "textAlign": {
               "mobile": "left",
               "tablet": "left",
-              "desktop": "left",
+              "desktop": "right",
               "wide": "left"
             },
-            "color": "#f8fafc"
+            "color": "#0e3053"
           },
-          "backgroundColor": "transparent",
           "position": {
             "mobile": {
               "mode": "relative",
@@ -734,7 +873,8 @@
               "right": "auto",
               "bottom": "auto",
               "left": "auto",
-              "zIndex": "auto"
+              "zIndex": "auto",
+              "transform": "none"
             },
             "tablet": {
               "mode": "relative",
@@ -742,7 +882,8 @@
               "right": "auto",
               "bottom": "auto",
               "left": "auto",
-              "zIndex": "auto"
+              "zIndex": "auto",
+              "transform": "none"
             },
             "desktop": {
               "mode": "relative",
@@ -750,7 +891,8 @@
               "right": "auto",
               "bottom": "auto",
               "left": "auto",
-              "zIndex": "auto"
+              "zIndex": "auto",
+              "transform": "none"
             },
             "wide": {
               "mode": "relative",
@@ -758,8 +900,318 @@
               "right": "auto",
               "bottom": "auto",
               "left": "auto",
-              "zIndex": "auto"
+              "zIndex": "auto",
+              "transform": "none"
             }
+          },
+          "backgroundImage": {
+            "mobile": "",
+            "tablet": "",
+            "desktop": "",
+            "wide": ""
+          },
+          "backgroundVideo": {
+            "mobile": "",
+            "tablet": "",
+            "desktop": "",
+            "wide": ""
+          }
+        },
+        {
+          "id": "el-1758252357949-774391",
+          "type": "image",
+          "tag": "h2",
+          "content": {
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
+            "tablet": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
+            "wide": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg"
+          },
+          "backgroundColor": "transparent",
+          "background": {
+            "color": "transparent",
+            "image": {
+              "mobile": "",
+              "tablet": "",
+              "desktop": "",
+              "wide": ""
+            },
+            "video": {
+              "mobile": "",
+              "tablet": "",
+              "desktop": "",
+              "wide": ""
+            },
+            "size": {
+              "mobile": "cover",
+              "tablet": "cover",
+              "desktop": "cover",
+              "wide": "cover"
+            },
+            "position": {
+              "mobile": "center center",
+              "tablet": "center center",
+              "desktop": "center center",
+              "wide": "center center"
+            },
+            "repeat": {
+              "mobile": "no-repeat",
+              "tablet": "no-repeat",
+              "desktop": "no-repeat",
+              "wide": "no-repeat"
+            },
+            "overlayColor": "transparent",
+            "overlayOpacity": "0"
+          },
+          "styles": {
+            "margin": {
+              "mobile": "0",
+              "tablet": "0",
+              "desktop": "0 1rem 2rem 1rem",
+              "wide": "0"
+            },
+            "padding": {
+              "mobile": "0",
+              "tablet": "0",
+              "desktop": "0 5rem 2rem 1rem",
+              "wide": "0"
+            },
+            "width": {
+              "mobile": "320px",
+              "tablet": "320px",
+              "desktop": "320px",
+              "wide": "320px"
+            },
+            "height": {
+              "mobile": "auto",
+              "tablet": "auto",
+              "desktop": "auto",
+              "wide": "auto"
+            },
+            "textAlign": {
+              "mobile": "center",
+              "tablet": "center",
+              "desktop": "center",
+              "wide": "center"
+            },
+            "color": "#f8fafc"
+          },
+          "position": {
+            "mobile": {
+              "mode": "relative",
+              "top": "auto",
+              "right": "auto",
+              "bottom": "auto",
+              "left": "auto",
+              "zIndex": "2",
+              "transform": "none"
+            },
+            "tablet": {
+              "mode": "relative",
+              "top": "auto",
+              "right": "auto",
+              "bottom": "auto",
+              "left": "auto",
+              "zIndex": "2",
+              "transform": "none"
+            },
+            "desktop": {
+              "mode": "relative",
+              "top": "auto",
+              "right": "auto",
+              "bottom": "auto",
+              "left": "auto",
+              "zIndex": "2",
+              "transform": "none"
+            },
+            "wide": {
+              "mode": "relative",
+              "top": "auto",
+              "right": "auto",
+              "bottom": "auto",
+              "left": "auto",
+              "zIndex": "2",
+              "transform": "none"
+            }
+          },
+          "backgroundImage": {
+            "mobile": "",
+            "tablet": "",
+            "desktop": "",
+            "wide": ""
+          },
+          "backgroundVideo": {
+            "mobile": "",
+            "tablet": "",
+            "desktop": "",
+            "wide": ""
+          },
+          "src": {
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
+            "tablet": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
+            "wide": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg"
+          },
+          "caption": {
+            "mobile": "",
+            "tablet": "",
+            "desktop": "",
+            "wide": ""
+          },
+          "credit": {
+            "mobile": "",
+            "tablet": "",
+            "desktop": "",
+            "wide": ""
+          },
+          "alt": ""
+        },
+        {
+          "id": "el-1758252764270-407521",
+          "type": "image",
+          "src": {
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
+            "tablet": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
+            "wide": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg"
+          },
+          "alt": "",
+          "caption": {
+            "mobile": "",
+            "tablet": "",
+            "desktop": "",
+            "wide": ""
+          },
+          "credit": {
+            "mobile": "",
+            "tablet": "",
+            "desktop": "",
+            "wide": ""
+          },
+          "backgroundColor": "transparent",
+          "background": {
+            "color": "transparent",
+            "image": {
+              "mobile": "",
+              "tablet": "",
+              "desktop": "",
+              "wide": ""
+            },
+            "video": {
+              "mobile": "",
+              "tablet": "",
+              "desktop": "",
+              "wide": ""
+            },
+            "size": {
+              "mobile": "cover",
+              "tablet": "cover",
+              "desktop": "cover",
+              "wide": "cover"
+            },
+            "position": {
+              "mobile": "center center",
+              "tablet": "center center",
+              "desktop": "center center",
+              "wide": "center center"
+            },
+            "repeat": {
+              "mobile": "no-repeat",
+              "tablet": "no-repeat",
+              "desktop": "no-repeat",
+              "wide": "no-repeat"
+            },
+            "overlayColor": "transparent",
+            "overlayOpacity": "0"
+          },
+          "styles": {
+            "margin": {
+              "mobile": "0",
+              "tablet": "0",
+              "desktop": "0 3rem 4rem 2rem",
+              "wide": "0"
+            },
+            "padding": {
+              "mobile": "0",
+              "tablet": "0",
+              "desktop": "0",
+              "wide": "0"
+            },
+            "width": {
+              "mobile": "320px",
+              "tablet": "320px",
+              "desktop": "320px",
+              "wide": "320px"
+            },
+            "height": {
+              "mobile": "auto",
+              "tablet": "auto",
+              "desktop": "auto",
+              "wide": "auto"
+            },
+            "textAlign": {
+              "mobile": "center",
+              "tablet": "center",
+              "desktop": "center",
+              "wide": "center"
+            },
+            "color": "#f8fafc"
+          },
+          "position": {
+            "mobile": {
+              "mode": "relative",
+              "top": "auto",
+              "right": "auto",
+              "bottom": "auto",
+              "left": "auto",
+              "zIndex": "1",
+              "transform": "none"
+            },
+            "tablet": {
+              "mode": "relative",
+              "top": "auto",
+              "right": "auto",
+              "bottom": "auto",
+              "left": "auto",
+              "zIndex": "1",
+              "transform": "none"
+            },
+            "desktop": {
+              "mode": "relative",
+              "top": "auto",
+              "right": "auto",
+              "bottom": "auto",
+              "left": "auto",
+              "zIndex": "1",
+              "transform": "none"
+            },
+            "wide": {
+              "mode": "relative",
+              "top": "auto",
+              "right": "auto",
+              "bottom": "auto",
+              "left": "auto",
+              "zIndex": "1",
+              "transform": "none"
+            }
+          },
+          "backgroundImage": {
+            "mobile": "",
+            "tablet": "",
+            "desktop": "",
+            "wide": ""
+          },
+          "backgroundVideo": {
+            "mobile": "",
+            "tablet": "",
+            "desktop": "",
+            "wide": ""
+          },
+          "content": {
+            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
+            "tablet": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
+            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
+            "wide": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg"
           }
         }
       ],
