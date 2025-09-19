@@ -585,7 +585,7 @@
           "mobile": "80vh",
           "tablet": "auto",
           "desktop": "100vh",
-          "wide": "auto"
+          "wide": "100vh"
         },
         "padding": {
           "mobile": "1.5rem",
@@ -620,7 +620,7 @@
         "flexDirection": {
           "mobile": "column",
           "tablet": "column",
-          "desktop": "column",
+          "desktop": "row",
           "wide": "column"
         },
         "fullWidth": false,
@@ -998,7 +998,7 @@
           },
           "position": {
             "mobile": {
-              "mode": "relative",
+              "mode": "absolute",
               "top": "auto",
               "right": "auto",
               "bottom": "auto",
@@ -1007,7 +1007,7 @@
               "transform": "none"
             },
             "tablet": {
-              "mode": "relative",
+              "mode": "absolute",
               "top": "auto",
               "right": "auto",
               "bottom": "auto",
@@ -1016,20 +1016,20 @@
               "transform": "none"
             },
             "desktop": {
-              "mode": "relative",
-              "top": "auto",
+              "mode": "absolute",
+              "top": "29%",
               "right": "auto",
               "bottom": "auto",
-              "left": "auto",
+              "left": "30%",
               "zIndex": "2",
               "transform": "none"
             },
             "wide": {
-              "mode": "relative",
-              "top": "auto",
+              "mode": "absolute",
+              "top": "29%",
               "right": "auto",
               "bottom": "auto",
-              "left": "auto",
+              "left": "30%",
               "zIndex": "2",
               "transform": "none"
             }
@@ -1159,16 +1159,16 @@
           },
           "position": {
             "mobile": {
-              "mode": "relative",
-              "top": "auto",
+              "mode": "absolute",
+              "top": "3%",
               "right": "auto",
               "bottom": "auto",
-              "left": "auto",
+              "left": "22%",
               "zIndex": "1",
               "transform": "none"
             },
             "tablet": {
-              "mode": "relative",
+              "mode": "absolute",
               "top": "auto",
               "right": "auto",
               "bottom": "auto",
@@ -1177,20 +1177,20 @@
               "transform": "none"
             },
             "desktop": {
-              "mode": "relative",
-              "top": "auto",
+              "mode": "absolute",
+              "top": "15%",
               "right": "auto",
               "bottom": "auto",
-              "left": "auto",
+              "left": "22%",
               "zIndex": "1",
               "transform": "none"
             },
             "wide": {
-              "mode": "relative",
-              "top": "auto",
+              "mode": "absolute",
+              "top": "15%",
               "right": "auto",
               "bottom": "auto",
-              "left": "auto",
+              "left": "22%",
               "zIndex": "1",
               "transform": "none"
             }
