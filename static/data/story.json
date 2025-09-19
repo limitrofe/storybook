@@ -22,7 +22,7 @@
     "ogType": "article"
   },
   "appearance": {
-    "colorScheme": "natureza",
+    "colorScheme": "default",
     "backgroundColor": "#ffffff",
     "backgroundColorMobile": "#0b0d17",
     "surfaceColor": "#111827",
@@ -244,10 +244,21 @@
     },
     {
       "type": "texto",
-      "text": "<p><i><b>Escreva aqui o texto do parágrafo.</b></i></p><p>Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo.</p>",
+      "text": "<p><i><b>Escreva aqui o texto do parágrafo.</b></i></p><p></p><ol><li><span style=\"font-size: 0.95rem; text-wrap-mode: initial;\">Escreva aqui o texto do </span><span style=\"font-size: 0.95rem; text-wrap-mode: initial;\">parágrafo</span><span style=\"font-size: 0.95rem; text-wrap-mode: initial;\">. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escr<font color=\"#6d3636\">eva aqui o </font></span><span style=\"font-size: 0.95rem; text-wrap-mode: initial;\"><font color=\"#6d3636\">texto</font></span><span style=\"font-size: 0.95rem; text-wrap-mode: initial;\"><font color=\"#6d3636\"> do parágrafo. E</font>screva aqui o texto do parágrafo. <font color=\"#e70d0d\" style=\"\">Escreva aqui </font>o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo.</span></li></ol><span style=\"text-wrap-mode: initial;\"><div><span style=\"text-wrap-mode: initial;\"><br></span></div></span><ul><li><span style=\"font-size: 0.95rem; text-wrap-mode: initial;\">asdfasdf</span></li></ul><ol><li><b style=\"text-wrap-mode: initial;\"><i><u><strike>asdfasdf</strike></u></i></b></li></ol><span style=\"text-wrap-mode: initial;\"></span><p></p>",
       "variant": "lead",
       "align": "left",
       "maxWidth": "720px"
+    },
+    {
+      "type": "citacao",
+      "text": "<p>\"Uma fala marcante para destacar na matéria.\"</p>",
+      "author": "teste",
+      "role": "teste",
+      "fontSizeDesktop": "",
+      "fontSizeMobile": "",
+      "lineHeightDesktop": "",
+      "lineHeightMobile": "",
+      "textColor": ""
     },
     {
       "type": "scrolly",
@@ -336,8 +347,35 @@
       "fullWidth": true
     },
     {
+      "type": "intertitulo",
+      "text": "Intertítulo impactante",
+      "subtitle": "se quiser tem",
+      "backgroundColor": "",
+      "textColor": "",
+      "fontFamily": "globotipo",
+      "variant": "default",
+      "size": "large",
+      "overlay": false,
+      "textAlign": "center",
+      "textPosition": "center",
+      "titleFontSizeDesktop": "",
+      "titleFontSizeMobile": "",
+      "titleLineHeightDesktop": "",
+      "titleLineHeightMobile": "",
+      "subtitleFontSizeDesktop": "",
+      "subtitleFontSizeMobile": "",
+      "subtitleLineHeightDesktop": "",
+      "subtitleLineHeightMobile": "",
+      "height": "30vh",
+      "textAlignMobile": "center"
+    },
+    {
+      "type": "ancora",
+      "id": "bloco-1"
+    },
+    {
       "type": "texto",
-      "text": "<p><i><b>Escreva aqui o texto do parágrafo.</b></i></p><p>Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo.</p>",
+      "text": "<p><i><b>Escreva aqui o texto do parágrafo.</b></i></p><p>Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo.</p><p><br></p><ul><li><span style=\"font-size: 0.95rem; text-wrap-mode: initial;\"><br></span></li><li><span style=\"font-size: 0.95rem; text-wrap-mode: initial;\">safsadf</span></li><li><span style=\"font-size: 15.2px;\"><br></span></li></ul><p></p>",
       "variant": "body",
       "align": "left",
       "maxWidth": "720px",
@@ -346,6 +384,92 @@
       "lineHeightDesktop": "",
       "lineHeightMobile": "",
       "textColor": ""
+    },
+    {
+      "type": "scrolly",
+      "steps": [
+        {
+          "title": "asdfasdf",
+          "text": "asdfasdfas fasdf asdf asdf asdf asdf asd f",
+          "position": "right",
+          "variant": "default",
+          "backgroundColor": "#ffffff",
+          "overlayColor": "rgba(0, 0, 0, 0.35)",
+          "textColor": "#0070e0",
+          "accentColor": "#C4170C",
+          "borderColor": "#f50000",
+          "padding": "2rem",
+          "maxWidth": "460px",
+          "maxWidthMobile": "92%",
+          "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_06.jpg",
+          "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_06.jpg",
+          "video": "",
+          "videoMobile": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "title": "weqrtweqte",
+          "text": "qewtqet vqgtqewtqwetqwt",
+          "position": "right",
+          "variant": "default",
+          "backgroundColor": "#78b5f2",
+          "overlayColor": "rgba(0, 0, 0, 0.35)",
+          "textColor": "#F9FAFB",
+          "accentColor": "#C4170C",
+          "borderColor": "rgba(255, 255, 255, 0.12)",
+          "padding": "2rem",
+          "maxWidth": "460px",
+          "maxWidthMobile": "92%",
+          "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_05.jpg",
+          "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_05.jpg",
+          "video": "",
+          "videoMobile": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "title": "antonio",
+          "text": "se liga",
+          "position": "left",
+          "variant": "default",
+          "backgroundColor": "rgba(15, 23, 42, 0.82)",
+          "overlayColor": "rgba(0, 0, 0, 0.35)",
+          "textColor": "#F9FAFB",
+          "accentColor": "#C4170C",
+          "borderColor": "rgba(255, 255, 255, 0.12)",
+          "padding": "2rem",
+          "maxWidth": "460px",
+          "maxWidthMobile": "92%",
+          "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_04.jpg",
+          "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_04.jpg",
+          "video": "",
+          "videoMobile": "",
+          "alt": "",
+          "caption": ""
+        },
+        {
+          "title": "viu?",
+          "text": "",
+          "position": "left",
+          "variant": "destaque",
+          "backgroundColor": "rgba(15, 23, 42, 0.82)",
+          "overlayColor": "rgba(0, 0, 0, 0.35)",
+          "textColor": "#F9FAFB",
+          "accentColor": "#C4170C",
+          "borderColor": "rgba(255, 255, 255, 0.12)",
+          "padding": "2rem",
+          "maxWidth": "460px",
+          "maxWidthMobile": "92%",
+          "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_03.jpg",
+          "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_03.jpg",
+          "video": "",
+          "videoMobile": "",
+          "alt": "",
+          "caption": ""
+        }
+      ],
+      "fullWidth": true
     },
     {
       "type": "video",
@@ -368,7 +492,7 @@
     },
     {
       "type": "texto",
-      "text": "<p><i><b>Escreva aqui o texto do parágrafo.</b></i></p><p>Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo.</p>",
+      "text": "<p><i><b>Escreva aqui o texto do parágrafo.</b></i></p><p>Escreva aqui o texto do parágrafo. Escreva aqui o <font color=\"#e60000\"><b>texto</b></font> do parágrafo. Escreva aqui o texto do parágrafo. Escreva <u>aqui</u> o texto do <strike>parágrafo</strike>. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo.</p>",
       "variant": "body",
       "align": "left",
       "maxWidth": "720px",
@@ -385,32 +509,48 @@
           "src": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_06.jpg",
           "srcMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_06.jpg",
           "alt": "",
-          "caption": "",
-          "credit": ""
+          "caption": "alskdhf lkasjhdf lkajsdfh",
+          "captionDesktop": "alskdhf lkasjhdf lkajsdfh",
+          "captionMobile": "dlkasjhfkljahsdf",
+          "credit": "lksadjf",
+          "creditDesktop": "lksadjf",
+          "creditMobile": "slkdafh"
         },
         {
           "src": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
           "srcMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
           "alt": "",
-          "caption": "",
-          "credit": ""
+          "caption": "sklfhd lkahjs",
+          "captionDesktop": "sklfhd lkahjs",
+          "captionMobile": "kdfasho",
+          "credit": "klshdafk",
+          "creditDesktop": "klshdafk",
+          "creditMobile": "hfoisahfduia"
         },
         {
           "src": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
           "srcMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
           "alt": "",
-          "caption": "",
-          "credit": ""
+          "caption": "sdflkjhasldf lkajshdf lkasd",
+          "captionDesktop": "sdflkjhasldf lkajshdf lkasd",
+          "captionMobile": "ldskajhf lkashjdf lkajsdhf lkasjdf",
+          "credit": "lakjshf lkh aklsdfjh",
+          "creditDesktop": "lakjshf lkh aklsdfjh",
+          "creditMobile": "lksfdjha lkdfjh aklsdhf kasd flk"
         },
         {
           "src": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
           "srcMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
           "alt": "",
-          "caption": "",
-          "credit": ""
+          "caption": "wqiuh fl;aksjhfd ;klashd flkjasd flkjahdfs lkajhdsf lkajshdf lkjahds fkajhs fdlkjasdkfals",
+          "captionDesktop": "wqiuh fl;aksjhfd ;klashd flkjasd flkjahdfs lkajhdsf lkajshdf lkjahds fkajhs fdlkjasdkfals",
+          "captionMobile": "ldkfsjah ",
+          "credit": "lksjahf lkasjh fd",
+          "creditDesktop": "lksjahf lkasjh fd",
+          "creditMobile": "dfslakj flaksjdhf lkasdjhf lkas dhlkjas dfh"
         }
       ],
-      "layout": "grid",
+      "layout": "masonry",
       "columns": 4,
       "lightbox": true
     },
@@ -427,47 +567,203 @@
       "textColor": ""
     },
     {
-      "type": "super-flex",
       "container": {
-        "backgroundColor": "#0b0d17",
+        "backgroundColor": "#ffffff",
         "backgroundImage": {
+          "mobile": "",
+          "tablet": "",
           "desktop": "",
-          "mobile": ""
+          "wide": ""
         },
         "backgroundVideo": {
+          "mobile": "",
+          "tablet": "",
           "desktop": "",
-          "mobile": ""
+          "wide": ""
         },
         "height": {
+          "mobile": "80vh",
+          "tablet": "auto",
           "desktop": "100vh",
-          "mobile": "80vh"
+          "wide": "auto"
         },
         "padding": {
+          "mobile": "1.5rem",
+          "tablet": "2rem",
           "desktop": "3rem",
-          "mobile": "1.5rem"
+          "wide": "2rem"
         },
         "margin": {
+          "mobile": "0",
+          "tablet": "0",
           "desktop": "0",
-          "mobile": "0"
+          "wide": "0"
         },
         "alignItems": {
+          "mobile": "center",
+          "tablet": "center",
           "desktop": "center",
-          "mobile": "center"
+          "wide": "center"
         },
         "justifyContent": {
+          "mobile": "center",
+          "tablet": "center",
           "desktop": "center",
-          "mobile": "center"
+          "wide": "center"
         },
         "gap": {
+          "mobile": "1.25rem",
+          "tablet": "1.5rem",
           "desktop": "2rem",
-          "mobile": "1.25rem"
+          "wide": "1.5rem"
         },
         "flexDirection": {
+          "mobile": "column",
+          "tablet": "column",
           "desktop": "row",
-          "mobile": "column"
-        }
+          "wide": "column"
+        },
+        "fullWidth": false
       },
-      "items": []
+      "items": [
+        {
+          "id": "el-1758165592421-779689",
+          "type": "text",
+          "tag": "p",
+          "content": "Escreva aqui o conteúdo do texto. Escreva aqui o conteúdo do texto. Escreva aqui o conteúdo do texto.",
+          "styles": {
+            "margin": {
+              "mobile": "0",
+              "tablet": "0",
+              "desktop": "0",
+              "wide": "0"
+            },
+            "padding": {
+              "mobile": "0",
+              "tablet": "0",
+              "desktop": "0",
+              "wide": "0"
+            },
+            "width": {
+              "mobile": "auto",
+              "tablet": "auto",
+              "desktop": "30vw",
+              "wide": "auto"
+            },
+            "textAlign": {
+              "mobile": "left",
+              "tablet": "left",
+              "desktop": "center",
+              "wide": "left"
+            },
+            "color": "#156ec6"
+          },
+          "backgroundColor": "#44ff00",
+          "position": {
+            "mobile": {
+              "mode": "relative",
+              "top": "auto",
+              "right": "auto",
+              "bottom": "auto",
+              "left": "auto",
+              "zIndex": "auto"
+            },
+            "tablet": {
+              "mode": "relative",
+              "top": "auto",
+              "right": "auto",
+              "bottom": "auto",
+              "left": "auto",
+              "zIndex": "auto"
+            },
+            "desktop": {
+              "mode": "relative",
+              "top": "auto",
+              "right": "auto",
+              "bottom": "auto",
+              "left": "auto",
+              "zIndex": "4"
+            },
+            "wide": {
+              "mode": "relative",
+              "top": "auto",
+              "right": "auto",
+              "bottom": "auto",
+              "left": "auto",
+              "zIndex": "auto"
+            }
+          }
+        },
+        {
+          "id": "el-1758165602499-176939",
+          "type": "title",
+          "tag": "h2",
+          "content": "Título do super flex Escreva aqui o conteúdo do texto.",
+          "styles": {
+            "margin": {
+              "mobile": "0",
+              "tablet": "0",
+              "desktop": "0",
+              "wide": "0"
+            },
+            "padding": {
+              "mobile": "0",
+              "tablet": "0",
+              "desktop": "0",
+              "wide": "0"
+            },
+            "width": {
+              "mobile": "auto",
+              "tablet": "auto",
+              "desktop": "auto",
+              "wide": "auto"
+            },
+            "textAlign": {
+              "mobile": "left",
+              "tablet": "left",
+              "desktop": "left",
+              "wide": "left"
+            },
+            "color": "#f8fafc"
+          },
+          "backgroundColor": "transparent",
+          "position": {
+            "mobile": {
+              "mode": "relative",
+              "top": "auto",
+              "right": "auto",
+              "bottom": "auto",
+              "left": "auto",
+              "zIndex": "auto"
+            },
+            "tablet": {
+              "mode": "relative",
+              "top": "auto",
+              "right": "auto",
+              "bottom": "auto",
+              "left": "auto",
+              "zIndex": "auto"
+            },
+            "desktop": {
+              "mode": "relative",
+              "top": "auto",
+              "right": "auto",
+              "bottom": "auto",
+              "left": "auto",
+              "zIndex": "auto"
+            },
+            "wide": {
+              "mode": "relative",
+              "top": "auto",
+              "right": "auto",
+              "bottom": "auto",
+              "left": "auto",
+              "zIndex": "auto"
+            }
+          }
+        }
+      ],
+      "type": "super-flex"
     },
     {
       "type": "texto",
@@ -527,7 +823,7 @@
       "height": "65vh",
       "speed": 0.45,
       "overlay": true,
-      "content": "<b>sf;lja ;sdlkfj asl;dfkj ;asldfk</b>"
+      "content": "<b>sf;lja ;</b>sdlkfj<b> asl;dfkj ;asldfk</b>"
     },
     {
       "type": "texto",

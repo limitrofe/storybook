@@ -15,9 +15,18 @@
     '#ec4899', '#f43f5e', '#84cc16', '#10b981'
   ];
   
+  $: {
+    if (typeof value !== 'string') {
+      value = '#000000';
+    }
+  }
+
+  $: normalizedValue = typeof value === 'string' ? value : '#000000';
+
   function handleChange(newValue) {
-    value = newValue;
-    dispatch('change', { value: newValue });
+    const next = typeof newValue === 'string' ? newValue : '#000000';
+    value = next;
+    dispatch('change', { value: next });
   }
   
   function selectPreset(color) {
@@ -32,18 +41,18 @@
   
   <div class="color-controls">
     <div class="color-input-group">
-      <input 
-        type="color" 
-        bind:value={value}
-        on:input={(e) => handleChange(e.target.value)}
-        class="color-swatch"
-        title="Selecionar cor"
-      />
+        <input 
+          type="color" 
+          value={normalizedValue}
+          on:input={(e) => handleChange(e.target.value)}
+          class="color-swatch"
+          title="Selecionar cor"
+        />
       
       {#if showInput}
         <input 
           type="text" 
-          bind:value={value}
+          value={normalizedValue}
           on:input={(e) => handleChange(e.target.value)}
           class="color-text"
           placeholder="#000000"
@@ -57,12 +66,12 @@
         {#each presets as preset}
           <button 
             class="color-preset" 
-            class:active={value.toLowerCase() === preset.toLowerCase()}
+            class:active={normalizedValue.toLowerCase() === preset.toLowerCase()}
             style="background-color: {preset}"
             on:click={() => selectPreset(preset)}
             title={preset}
           >
-            {#if value.toLowerCase() === preset.toLowerCase()}
+            {#if normalizedValue.toLowerCase() === preset.toLowerCase()}
               <span class="check-mark">✓</span>
             {/if}
           </button>

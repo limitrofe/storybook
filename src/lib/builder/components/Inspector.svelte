@@ -7,10 +7,11 @@
   import { getComponentDefinition } from '../component-registry.js';
   import { getByPath, removeInternalFields } from '../utils.js';
 
-  let activeSection = 'block';
+  let activeSection = 'project';
   let rawJson = '';
   let jsonError = '';
   let superFlexDraft = null;
+  let lastSelectedBlockId = null;
 
   const clone = (value) => {
     try {
@@ -24,10 +25,17 @@
   $: definition = block ? getComponentDefinition(block.type) : null;
   $: if (block) {
     rawJson = JSON.stringify(removeInternalFields(block), null, 2);
-    if (block.type === 'super-flex') {
-      superFlexDraft = clone(block);
-    } else {
-      superFlexDraft = null;
+    superFlexDraft = block.type === 'super-flex' ? clone(block) : null;
+    if (block.__id !== lastSelectedBlockId) {
+      activeSection = 'block';
+      lastSelectedBlockId = block.__id;
+    }
+  } else {
+    rawJson = '';
+    superFlexDraft = null;
+    lastSelectedBlockId = null;
+    if (activeSection !== 'project') {
+      activeSection = 'project';
     }
   }
 
@@ -54,6 +62,8 @@
     }
   };
 
+  const blockHasAdvancedFields = (definition) => Boolean(definition?.fields?.length);
+
   const commitSuperFlexChanges = () => {
     if (!block || block.type !== 'super-flex' || !superFlexDraft) return;
     const blockId = get(selectedBlockId);
@@ -66,138 +76,238 @@
 </script>
 
 <div class="inspector">
-  <div class="tabs">
-    <button class:active={activeSection === 'block'} on:click={() => (activeSection = 'block')}>
-      Bloco selecionado
+  <div class="peek">
+    <button
+      class:active={activeSection === 'project'}
+      type="button"
+      on:click={() => (activeSection = 'project')}
+    >
+      Projeto
     </button>
-    <button class:active={activeSection === 'story'} on:click={() => (activeSection = 'story')}>
-      Metadados
+    <button
+      class:active={activeSection === 'block'}
+      class:disabled={!block}
+      type="button"
+      on:click={() => block && (activeSection = 'block')}
+      disabled={!block}
+    >
+      Bloco
     </button>
   </div>
 
-  {#if activeSection === 'story'}
-    <section>
-      <h3>Informações da história</h3>
-      <div class="fields">
-        {#each metadataFields as field}
-          <FieldEditor
-            {field}
-            value={getByPath($storyStore, field.path)}
-            on:change={(event) => handleMetadataChange(field.path, event)}
-          />
-        {/each}
-      </div>
-
-      <h4>Créditos</h4>
-      <div class="fields">
-        {#each creditsFields as field}
-          <FieldEditor
-            {field}
-            value={getByPath($storyStore, field.path)}
-            on:change={(event) => handleMetadataChange(field.path, event)}
-          />
-        {/each}
-      </div>
-    </section>
-  {:else}
-    <section>
-      {#if block && definition}
-        <header class="section-header">
-          <div class="title">
-            <span class="icon">{definition.icon}</span>
-            <div>
-              <h3>{definition.label}</h3>
-              <small>{block.type}</small>
-            </div>
+  <div class="pane-container">
+    {#if activeSection === 'project'}
+      <section class="pane pane--project" aria-label="Informações do projeto">
+        <header class="pane-head">
+          <div>
+            <h3>Projeto</h3>
+            <p>Ajustes globais para título, SEO e compartilhamento.</p>
           </div>
-          <button class="clear-selection" type="button" on:click={() => selectedBlockId.set(null)}>
-            limpar seleção
-          </button>
         </header>
 
-        {#if block.type === 'super-flex'}
-          <SuperFlexEditor bind:data={superFlexDraft} on:update={commitSuperFlexChanges} />
-        {:else if definition.fields?.length}
-          <div class="fields">
-            {#each definition.fields as field}
-              <FieldEditor
-                {field}
-                value={getByPath(block, field.path)}
-                on:change={(event) => handleBlockFieldChange(field.path, event)}
-              />
-            {/each}
-          </div>
-        {:else}
-          <p>Este componente não tem um formulário configurado. Edite via JSON bruto abaixo.</p>
-        {/if}
-
-        <details class="advanced">
-          <summary>Edição avançada (JSON)</summary>
-          <textarea rows="10" bind:value={rawJson} on:blur={handleBlockJsonBlur}></textarea>
-          {#if jsonError}
-            <small class="error">{jsonError}</small>
-          {/if}
-        </details>
-      {:else}
-        <div class="empty-state">
-          <p>Selecione um bloco na área central para editar as configurações.</p>
+        <div class="fields card">
+          {#each metadataFields as field}
+            <FieldEditor
+              {field}
+              value={getByPath($storyStore, field.path)}
+              on:change={(event) => handleMetadataChange(field.path, event)}
+            />
+          {/each}
         </div>
-      {/if}
-    </section>
-  {/if}
+
+        <div class="fields card">
+          <h4>Créditos</h4>
+          {#each creditsFields as field}
+            <FieldEditor
+              {field}
+              value={getByPath($storyStore, field.path)}
+              on:change={(event) => handleMetadataChange(field.path, event)}
+            />
+          {/each}
+        </div>
+      </section>
+    {:else}
+      <section class="pane pane--block" aria-live="polite" aria-label="Configurações do bloco selecionado">
+        {#if block && definition}
+          <header class="pane-head">
+            <div class="badge">
+              <span class="icon">{definition.icon}</span>
+              <div>
+                <strong>{definition.label}</strong>
+                <small>ID {block.__id}</small>
+              </div>
+            </div>
+            <button class="ghost" type="button" on:click={() => selectedBlockId.set(null)}>
+              limpar seleção
+            </button>
+          </header>
+
+          {#if block.type === 'super-flex'}
+            <SuperFlexEditor bind:data={superFlexDraft} on:update={commitSuperFlexChanges} />
+          {:else if blockHasAdvancedFields(definition)}
+            <div class="fields card">
+              {#each definition.fields as field}
+                <FieldEditor
+                  {field}
+                  value={getByPath(block, field.path)}
+                  on:change={(event) => handleBlockFieldChange(field.path, event)}
+                />
+              {/each}
+            </div>
+          {:else}
+            <div class="info-card">
+              <h4>Sem campos configuráveis</h4>
+              <p>
+                Este bloco não possui campos extras além dos exibidos no editor principal. Clique em “Avançado” para editar o JSON bruto.
+              </p>
+            </div>
+          {/if}
+
+          <details class="advanced" open>
+            <summary>JSON completo do bloco</summary>
+            <textarea
+              bind:value={rawJson}
+              on:blur={handleBlockJsonBlur}
+              class:error={jsonError}
+              aria-invalid={Boolean(jsonError)}
+              aria-describedby={jsonError ? 'json-error' : undefined}
+            ></textarea>
+            {#if jsonError}
+              <p id="json-error" class="error">{jsonError}</p>
+            {/if}
+          </details>
+        {:else}
+          <div class="empty">
+            <h4>Selecione um bloco</h4>
+            <p>Escolha um item no painel central para editar suas configurações.</p>
+          </div>
+        {/if}
+      </section>
+    {/if}
+  </div>
 </div>
 
 <style>
   .inspector {
-    width: 340px;
     display: flex;
     flex-direction: column;
-    border-left: 1px solid #e2e8f0;
-    background: #ffffff;
-    max-height: calc(100vh - 80px);
+    gap: 1rem;
+    padding: 1.5rem 1.75rem 2rem;
+    min-height: 0;
+    height: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
   }
 
-  .tabs {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    border-bottom: 1px solid #e2e8f0;
+  .peek {
+    display: inline-flex;
+    gap: 0.5rem;
+    background: rgba(226, 232, 240, 0.6);
+    padding: 0.3rem;
+    border-radius: 999px;
+    align-self: center;
   }
 
-  .tabs button {
-    padding: 0.75rem 1rem;
+  .peek button {
     border: none;
     background: transparent;
-    cursor: pointer;
-    font-size: 0.85rem;
-    font-weight: 500;
     color: #475569;
+    font-weight: 600;
+    padding: 0.45rem 1rem;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
   }
 
-  .tabs button.active {
-    background: #edf2ff;
-    color: #1d4ed8;
-    position: relative;
+  .peek button.active {
+    background: #1d4ed8;
+    color: white;
+    box-shadow: 0 10px 22px rgba(37, 99, 235, 0.25);
   }
 
-  section {
-    padding: 1.25rem;
-    overflow-y: auto;
+  .peek button.disabled,
+  .peek button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .pane-container {
     flex: 1;
+    min-height: 0;
+    display: flex;
+  }
+
+  .pane {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.25rem;
+    width: 100%;
   }
 
-  h3 {
+  .pane--project {
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 18px;
+    padding: 1.25rem;
+    box-shadow: 0 16px 32px rgba(148, 163, 184, 0.18);
+    border: 1px solid rgba(226, 232, 240, 0.6);
+    overflow-y: auto;
+  }
+
+  .pane--block {
+    overflow-y: auto;
+    padding-right: 0.5rem;
+  }
+
+  .pane-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .pane-head h3 {
+    margin: 0;
     font-size: 1rem;
-    margin: 0 0 0.75rem;
-    color: #111827;
+    color: #0f172a;
   }
 
-  h4 {
+  .pane-head p {
+    margin: 0;
+    color: #64748b;
     font-size: 0.85rem;
-    margin: 0 0 0.5rem;
-    color: #1f2937;
+  }
+
+  .badge {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.25);
+  }
+
+  .badge .icon {
+    font-size: 1.5rem;
+  }
+
+  .badge strong {
+    display: block;
+    font-size: 0.95rem;
+    color: #0f172a;
+  }
+
+  .badge small {
+    color: #94a3b8;
+    font-size: 0.75rem;
+  }
+
+  .ghost {
+    border: none;
+    background: transparent;
+    color: #64748b;
+    font-size: 0.75rem;
+    cursor: pointer;
   }
 
   .fields {
@@ -206,42 +316,33 @@
     gap: 1rem;
   }
 
-  .section-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  .card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 16px;
+    padding: 1rem;
+    box-shadow: 0 12px 28px rgba(148, 163, 184, 0.18);
+    border: 1px solid rgba(226, 232, 240, 0.6);
   }
 
-  .title {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
+  .card h4 {
+    margin: 0 0 0.5rem;
+    font-size: 0.85rem;
+    color: #334155;
   }
 
-  .title h3 {
-    margin: 0;
-    font-size: 0.95rem;
+  .info-card {
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 14px;
+    padding: 1rem;
+    color: #475569;
+    font-size: 0.85rem;
+    border: 1px dashed rgba(148, 163, 184, 0.5);
   }
 
-  .title small {
-    color: #94a3b8;
-    font-size: 0.75rem;
-  }
-
-  .icon {
-    font-size: 1.3rem;
-  }
-
-  .clear-selection {
-    border: none;
-    background: transparent;
-    font-size: 0.75rem;
-    color: #64748b;
-    cursor: pointer;
-  }
-
-  .clear-selection:hover {
-    color: #1d4ed8;
+  .info-card h4 {
+    margin: 0 0 0.35rem;
+    font-size: 0.9rem;
+    color: #1f2937;
   }
 
   .advanced {
@@ -249,33 +350,55 @@
     padding-top: 1rem;
   }
 
-  .advanced textarea {
-    width: 100%;
-    margin-top: 0.5rem;
-    border-radius: 8px;
-    padding: 0.5rem;
-    border: 1px solid #cbd5f5;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.8rem;
-    background: #0f172a;
-    color: #e2e8f0;
-  }
-
   .advanced summary {
     cursor: pointer;
-    font-size: 0.85rem;
+    font-weight: 600;
     color: #1d4ed8;
   }
 
-  .error {
-    color: #dc2626;
+  textarea {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid #cbd5f5;
+    padding: 0.75rem;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.85rem;
+    background: rgba(255, 255, 255, 0.85);
   }
 
-  .empty-state {
-    border: 2px dashed #94a3b8;
-    padding: 2rem 1rem;
+  textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+  }
+
+  textarea.error {
+    border-color: #dc2626;
+  }
+
+  .error {
+    display: block;
+    margin-top: 0.5rem;
+    color: #dc2626;
+    font-size: 0.75rem;
+  }
+
+  .empty {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
     text-align: center;
+    color: #475569;
+  }
+
+  .empty h4 {
+    margin: 0 0 0.5rem;
+    color: #1f2937;
+  }
+
+  .empty p {
+    margin: 0;
+    font-size: 0.9rem;
     color: #64748b;
-    border-radius: 12px;
   }
 </style>

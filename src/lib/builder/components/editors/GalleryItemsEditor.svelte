@@ -1,4 +1,3 @@
-
 <script>
   import { createEventDispatcher } from 'svelte';
 
@@ -13,41 +12,58 @@
     srcMobile: '',
     alt: '',
     caption: '',
-    credit: ''
+    captionDesktop: '',
+    captionMobile: '',
+    credit: '',
+    creditDesktop: '',
+    creditMobile: ''
   });
 
   $: if (!isUpdating) {
     items = Array.isArray(value) && value.length
-      ? value.map((item) => ({ ...buildDefaults(), ...structuredClone(item) }))
+      ? value.map((item) => {
+          const base = buildDefaults();
+          const clone = structuredClone(item || {});
+          return {
+            ...base,
+            ...clone,
+            caption: clone.caption ?? clone.captionDesktop ?? '',
+            captionDesktop: clone.captionDesktop ?? clone.caption ?? '',
+            captionMobile: clone.captionMobile ?? clone.caption ?? '',
+            credit: clone.credit ?? clone.creditDesktop ?? '',
+            creditDesktop: clone.creditDesktop ?? clone.credit ?? '',
+            creditMobile: clone.creditMobile ?? clone.credit ?? ''
+          };
+        })
       : [buildDefaults()];
   }
 
-  function emit(updated) {
+  const emit = (updated) => {
     isUpdating = true;
     dispatch('change', { value: updated });
     Promise.resolve().then(() => {
       isUpdating = false;
     });
-  }
+  };
 
-  function addItem() {
+  const addItem = () => {
     const updated = [...items, buildDefaults()];
     items = updated;
     emit(updated);
-  }
+  };
 
-  function duplicateItem(index) {
-    const clone = { ...items[index] };
+  const duplicateItem = (index) => {
+    const clone = structuredClone(items[index]);
     const updated = [
       ...items.slice(0, index + 1),
-      { ...clone },
+      clone,
       ...items.slice(index + 1)
     ];
     items = updated;
     emit(updated);
-  }
+  };
 
-  function removeItem(index) {
+  const removeItem = (index) => {
     if (items.length === 1) {
       const updated = [buildDefaults()];
       items = updated;
@@ -57,9 +73,9 @@
     const updated = items.filter((_, i) => i !== index);
     items = updated;
     emit(updated);
-  }
+  };
 
-  function moveItem(index, direction) {
+  const moveItem = (index, direction) => {
     const target = index + direction;
     if (target < 0 || target >= items.length) return;
     const updated = [...items];
@@ -67,23 +83,42 @@
     updated.splice(target, 0, item);
     items = updated;
     emit(updated);
-  }
+  };
 
-  function updateItem(index, key, value) {
-    const updated = items.map((item, i) => (i === index ? { ...item, [key]: value } : item));
+  const updateItem = (index, key, value) => {
+    const updated = items.map((item, i) => {
+      if (i !== index) return item;
+      const next = { ...item };
+      switch (key) {
+        case 'caption':
+          next.caption = value;
+          next.captionDesktop = value;
+          break;
+        case 'captionMobile':
+          next.captionMobile = value;
+          break;
+        case 'credit':
+          next.credit = value;
+          next.creditDesktop = value;
+          break;
+        case 'creditMobile':
+          next.creditMobile = value;
+          break;
+        default:
+          next[key] = value;
+      }
+      return next;
+    });
     items = updated;
     emit(updated);
-  }
+  };
 </script>
 
 <div class="items-editor">
   {#each items as item, index}
-    <article class="item-card">
+    <article class="photo-card">
       <header>
-        <div>
-          <strong>Imagem {index + 1}</strong>
-          <span>{item.caption || item.alt || item.src || 'Sem dados'}</span>
-        </div>
+        <strong>Foto {index + 1}</strong>
         <div class="actions">
           <button type="button" on:click={() => moveItem(index, -1)} title="Mover para cima" disabled={index === 0}>↑</button>
           <button type="button" on:click={() => moveItem(index, +1)} title="Mover para baixo" disabled={index === items.length - 1}>↓</button>
@@ -92,37 +127,52 @@
         </div>
       </header>
 
-      <div class="fields">
-        <div class="grid">
-          <label>
-            <span>Imagem desktop</span>
-            <input type="url" value={item.src} placeholder="https://..." on:input={(event) => updateItem(index, 'src', event.currentTarget.value)} />
-          </label>
-          <label>
-            <span>Imagem mobile</span>
-            <input type="url" value={item.srcMobile} placeholder="https://..." on:input={(event) => updateItem(index, 'srcMobile', event.currentTarget.value)} />
-          </label>
+      <div class="photo-section">
+        <div class="photo-row">
+          <span class="photo-tag">Desk</span>
+          <div class="photo-fields">
+            <label>
+              <span>Imagem</span>
+              <input type="url" value={item.src} placeholder="https://..." on:input={(event) => updateItem(index, 'src', event.currentTarget.value)} />
+            </label>
+            <label>
+              <span>Legenda</span>
+              <input type="text" value={item.caption} placeholder="Legenda" on:input={(event) => updateItem(index, 'caption', event.currentTarget.value)} />
+            </label>
+            <label>
+              <span>Crédito</span>
+              <input type="text" value={item.credit} placeholder="Crédito" on:input={(event) => updateItem(index, 'credit', event.currentTarget.value)} />
+            </label>
+          </div>
         </div>
 
-        <label>
-          <span>Texto alternativo</span>
-          <input type="text" value={item.alt} on:input={(event) => updateItem(index, 'alt', event.currentTarget.value)} />
-        </label>
-
-        <label>
-          <span>Legenda</span>
-          <textarea rows="2" value={item.caption} on:input={(event) => updateItem(index, 'caption', event.currentTarget.value)}></textarea>
-        </label>
-
-        <label>
-          <span>Crédito</span>
-          <input type="text" value={item.credit} on:input={(event) => updateItem(index, 'credit', event.currentTarget.value)} />
-        </label>
+        <div class="photo-row">
+          <span class="photo-tag">Mobile</span>
+          <div class="photo-fields">
+            <label>
+              <span>Imagem</span>
+              <input type="url" value={item.srcMobile} placeholder="https://..." on:input={(event) => updateItem(index, 'srcMobile', event.currentTarget.value)} />
+            </label>
+            <label>
+              <span>Legenda</span>
+              <input type="text" value={item.captionMobile} placeholder="Legenda mobile" on:input={(event) => updateItem(index, 'captionMobile', event.currentTarget.value)} />
+            </label>
+            <label>
+              <span>Crédito</span>
+              <input type="text" value={item.creditMobile} placeholder="Crédito mobile" on:input={(event) => updateItem(index, 'creditMobile', event.currentTarget.value)} />
+            </label>
+          </div>
+        </div>
       </div>
+
+      <label class="alt-field">
+        <span>Texto alternativo</span>
+        <input type="text" value={item.alt} placeholder="Descrição para acessibilidade" on:input={(event) => updateItem(index, 'alt', event.currentTarget.value)} />
+      </label>
     </article>
   {/each}
 
-  <button type="button" class="add-item" on:click={addItem}>Adicionar imagem</button>
+  <button type="button" class="add-item" on:click={addItem}>Adicionar mais fotos</button>
 </div>
 
 <style>
@@ -132,15 +182,15 @@
     gap: 1.5rem;
   }
 
-  .item-card {
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    padding: 1rem 1.25rem;
-    background: #fff;
-    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.07);
+  .photo-card {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    border: 1px solid rgba(226, 232, 240, 0.7);
+    border-radius: 14px;
+    padding: 1rem 1.25rem;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
   }
 
   header {
@@ -151,15 +201,8 @@
   }
 
   header strong {
-    display: block;
     font-size: 0.95rem;
     color: #0f172a;
-  }
-
-  header span {
-    display: block;
-    font-size: 0.8rem;
-    color: #6b7280;
   }
 
   .actions {
@@ -186,10 +229,36 @@
     color: #b91c1c;
   }
 
-  .fields {
+  .photo-section {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+  }
+
+  .photo-row {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    gap: 0.75rem;
+    align-items: start;
+  }
+
+  .photo-tag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.35rem 0.5rem;
+    background: #e2e8f0;
+    color: #1f2937;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .photo-fields {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 0.6rem;
   }
 
   label {
@@ -201,36 +270,34 @@
   }
 
   input[type='text'],
-  input[type='url'],
-  textarea {
+  input[type='url'] {
     border: 1px solid #cbd5f5;
     border-radius: 8px;
     padding: 0.45rem 0.6rem;
     font-size: 0.85rem;
+    background: #fff;
   }
 
-  textarea {
-    resize: vertical;
+  .alt-field {
+    margin-top: 0.5rem;
   }
 
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 0.75rem;
+  .alt-field input {
+    width: 100%;
   }
 
   .add-item {
     align-self: flex-start;
-    border: 1px dashed #94a3b8;
-    background: #f8fafc;
-    border-radius: 10px;
-    padding: 0.6rem 1rem;
+    border: none;
+    background: #1d4ed8;
+    color: #fff;
+    border-radius: 999px;
+    padding: 0.45rem 1.4rem;
     font-size: 0.85rem;
     cursor: pointer;
-    color: #334155;
   }
 
   .add-item:hover {
-    background: #e2e8f0;
+    background: #1e40af;
   }
 </style>

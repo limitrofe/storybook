@@ -17,6 +17,8 @@
   export let alignment = 'center';
   export let customWidthDesktop = '800px';
   export let customWidthMobile = '350px';
+  export let aspectRatioDesktop = '16/9';
+  export let aspectRatioMobile = '9/16';
   export let backgroundColor = '#1a1a1a';
   export let fullWidthBackground = false;
   
@@ -160,7 +162,14 @@
   $: currentSrc = (isMobile && srcMobile) ? srcMobile : src;
   $: currentPoster = (isMobile && posterMobile) ? posterMobile : poster;
   $: currentWidth = isMobile ? customWidthMobile : customWidthDesktop;
-  $: currentAspectRatio = isMobile ? '9/16' : '16/9';
+  const fallbackAspectDesktop = '16/9';
+  const fallbackAspectMobile = '9/16';
+
+  $: normalizedAspectDesktop = (aspectRatioDesktop || '').trim();
+  $: normalizedAspectMobile = (aspectRatioMobile || '').trim();
+  $: currentAspectRatio = isMobile
+    ? (normalizedAspectMobile || fallbackAspectMobile)
+    : (normalizedAspectDesktop || fallbackAspectDesktop);
 
   // Estilos
   $: wrapperStyles = fullWidthBackground 
@@ -172,6 +181,10 @@
     : fullWidthBackground
       ? `width: 100%; max-width: ${currentWidth}; margin: 0 auto;`
       : `width: 100%; max-width: ${currentWidth}; margin: 2rem auto; background-color: ${backgroundColor}; padding: 1rem; border-radius: 16px;`;
+
+  $: containerAspectStyle = currentAspectRatio ? `aspect-ratio: ${currentAspectRatio};` : '';
+  $: containerBackgroundStyle = fullWidthBackground ? 'background-color: transparent;' : `background-color: ${backgroundColor};`;
+  $: containerInlineStyle = `${containerAspectStyle} ${containerBackgroundStyle}`.trim();
 </script>
 
 <section 
@@ -186,7 +199,7 @@
   >
     <div 
       class="video-player__container" 
-      style="aspect-ratio: {currentAspectRatio}; background-color: {fullWidthBackground ? 'transparent' : backgroundColor};"
+      style={containerInlineStyle}
     >
       {#if mounted}
         <video

@@ -1,6 +1,7 @@
 
 <script>
   import { createEventDispatcher } from 'svelte';
+  import RichTextEditor from '../RichTextEditor.svelte';
 
   export let value = [];
 
@@ -141,7 +142,12 @@
         {:else}
           <label>
             <span>Conteúdo HTML</span>
-            <textarea rows="4" value={item.content} on:input={(event) => updateItem(index, 'content', event.currentTarget.value)}></textarea>
+            <RichTextEditor
+              value={item.content || ''}
+              rows={4}
+              placeholder="Conteúdo do slide"
+              on:change={(event) => updateItem(index, 'content', event.detail.value)}
+            />
           </label>
         {/if}
 

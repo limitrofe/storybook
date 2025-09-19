@@ -198,4 +198,22 @@
     opacity: 0.8;
     transform: translateY(-1px);
   }
+
+  .story-text :global(ul),
+  .story-text :global(ol) {
+    margin: 1.5rem 0;
+    padding-left: 1.5rem;
+  }
+
+  .story-text :global(ul) {
+    list-style: disc inside;
+  }
+
+  .story-text :global(ol) {
+    list-style: decimal inside;
+  }
+
+  .story-text :global(li) {
+    margin: 0.5rem 0;
+  }
 </style>

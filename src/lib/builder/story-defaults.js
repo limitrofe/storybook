@@ -1,5 +1,5 @@
 const fontOptions = [
-  { label: 'Globotipo', value: '"Globotipo", sans-serif' }
+  { label: 'Globotipo (padrão)', value: '"Globotipo", sans-serif' }
 ];
 
 const colorSchemeOptions = [

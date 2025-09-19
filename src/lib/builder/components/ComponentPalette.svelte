@@ -16,42 +16,62 @@
   };
 </script>
 
-<div class="palette">
-  {#each entries as [category, components]}
-    <section class="category">
-      <h3>{category}</h3>
-      <div class="components">
-        {#each components as component}
-          <button
-            class="component-card"
-            draggable
-            on:dragstart={(event) => handleDragStart(event, component)}
-            on:click={() => handleAddClick(component)}
-            title={component.description}
-          >
-            <span class="icon">{component.icon}</span>
-            <div class="info">
-              <strong>{component.label}</strong>
-              <small>{component.description}</small>
-            </div>
-          </button>
-        {/each}
-      </div>
-    </section>
-  {/each}
+<div class="palette-wrapper">
+  <div class="palette-scroll">
+    {#each entries as [category, components]}
+      <section class="category">
+        <header>
+          <h3>{category}</h3>
+        </header>
+        <div class="components">
+          {#each components as component}
+            <button
+              class="component-card"
+              draggable
+              on:dragstart={(event) => handleDragStart(event, component)}
+              on:click={() => handleAddClick(component)}
+              title={component.description}
+            >
+              <span class="icon">{component.icon}</span>
+              <div class="info">
+                <strong>{component.label}</strong>
+                <small>{component.description}</small>
+              </div>
+            </button>
+          {/each}
+        </div>
+      </section>
+    {/each}
+  </div>
 </div>
 
 <style>
-  .palette {
+  .palette-wrapper {
+    padding: 1.5rem;
+    height: 100%;
+    box-sizing: border-box;
+  }
+
+  .palette-scroll {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    padding: 1.5rem;
-    overflow-y: auto;
-    max-height: calc(100vh - 120px);
+    padding-right: 0.25rem;
+    height: 100%;
   }
 
-  .category h3 {
+  .category {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 16px;
+    padding: 1rem;
+    box-shadow: 0 14px 32px rgba(15, 23, 42, 0.14);
+    border: 1px solid rgba(226, 232, 240, 0.7);
+  }
+
+  .category header h3 {
     font-size: 0.9rem;
     font-weight: 600;
     color: #1f2937;
@@ -61,22 +81,23 @@
   }
 
   .components {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.75rem;
   }
 
   .component-card {
     display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+    padding: 0.8rem 0.7rem;
     border: 1px solid #e2e8f0;
-    border-radius: 10px;
-    background: white;
-    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 12px 30px -20px rgba(15, 23, 42, 0.35);
     cursor: grab;
-    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
     text-align: left;
   }
 
@@ -96,16 +117,23 @@
   .info {
     display: flex;
     flex-direction: column;
-    gap: 0.2rem;
+    gap: 0.15rem;
   }
 
   .info strong {
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     color: #0f172a;
   }
 
   .info small {
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     color: #64748b;
+    line-height: 1.25;
+  }
+
+  @media (max-width: 1200px) {
+    .components {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

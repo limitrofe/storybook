@@ -161,7 +161,7 @@ export const componentRegistry = [
       subtitle: '',
       backgroundColor: '',
       textColor: '',
-      fontFamily: 'obviously',
+      fontFamily: 'globotipo',
       variant: 'default',
       size: 'medium',
       overlay: false,
@@ -199,11 +199,17 @@ export const componentRegistry = [
           { label: 'Grande', value: 'large' }
         ]
       },
-      { path: 'fontFamily', label: 'Fonte', type: 'select', options: [
-        { label: 'Obviously', value: 'obviously' },
-        { label: 'Serif', value: 'serif' },
-        { label: 'Sans Serif', value: 'sans' }
-      ] },
+      {
+        path: 'fontFamily',
+        label: 'Fonte',
+        type: 'select',
+        options: [
+          { label: 'Globotipo', value: 'globotipo' },
+          { label: 'Obviously', value: 'obviously' },
+          { label: 'Serif', value: 'serif' },
+          { label: 'Sans Serif', value: 'sans' }
+        ]
+      },
       { path: 'backgroundColor', label: 'Cor de fundo', type: 'color' },
       { path: 'textColor', label: 'Cor do texto', type: 'color' },
       { path: 'backgroundImage', label: 'Imagem desktop', type: 'url' },
@@ -373,6 +379,8 @@ export const componentRegistry = [
       alignment: 'center',
       customWidthDesktop: '960px',
       customWidthMobile: '360px',
+      aspectRatioDesktop: '16/9',
+      aspectRatioMobile: '9/16',
       backgroundColor: '#0f172a',
       fullWidth: false,
       fullWidthBackground: false
@@ -400,6 +408,8 @@ export const componentRegistry = [
       },
       { path: 'customWidthDesktop', label: 'Largura desktop', type: 'text', placeholder: '960px' },
       { path: 'customWidthMobile', label: 'Largura mobile', type: 'text', placeholder: '360px' },
+      { path: 'aspectRatioDesktop', label: 'Proporção desktop', type: 'text', placeholder: '16/9' },
+      { path: 'aspectRatioMobile', label: 'Proporção mobile', type: 'text', placeholder: '9/16' },
       { path: 'backgroundColor', label: 'Cor de fundo', type: 'color' },
       { path: 'fullWidth', label: 'Ocupar toda a largura', type: 'boolean' },
       { path: 'fullWidthBackground', label: 'Fundo em largura total', type: 'boolean' }
@@ -465,19 +475,21 @@ export const componentRegistry = [
           srcMobile: '',
           alt: '',
           caption: '',
-          credit: ''
+          captionMobile: '',
+          credit: '',
+          creditMobile: ''
         }
       ],
       layout: 'grid',
       columns: 3,
-      lightbox: true
+      gap: '1rem',
+      lightbox: true,
+      backgroundColor: '',
+      backgroundImage: '',
+      backgroundVideo: ''
     },
     fields: [
-      {
-        path: 'images',
-        label: 'Imagens',
-        type: 'gallery-items'
-      },
+      { path: 'images', label: 'Imagens', type: 'gallery-items' },
       {
         path: 'layout',
         label: 'Layout',
@@ -488,7 +500,11 @@ export const componentRegistry = [
         ]
       },
       { path: 'columns', label: 'Colunas', type: 'number', min: 1, max: 6 },
-      { path: 'lightbox', label: 'Ativar lightbox', type: 'boolean' }
+      { path: 'gap', label: 'Espaçamento entre fotos', type: 'text', placeholder: '1rem' },
+      { path: 'lightbox', label: 'Ativar lightbox', type: 'boolean' },
+      { path: 'backgroundColor', label: 'Cor de fundo', type: 'color' },
+      { path: 'backgroundImage', label: 'Imagem de fundo', type: 'url' },
+      { path: 'backgroundVideo', label: 'Vídeo de fundo (mp4)', type: 'url' }
     ]
   },
   {

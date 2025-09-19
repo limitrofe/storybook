@@ -19,6 +19,14 @@
   export let textAlignMobile = '';
   export let overlay = false;
   export let fontFamily = 'Globotipo'; // ✅ NOVO: obviously, obviously-compressed, default
+  export let titleFontSizeDesktop = '';
+  export let titleFontSizeMobile = '';
+  export let titleLineHeightDesktop = '';
+  export let titleLineHeightMobile = '';
+  export let subtitleFontSizeDesktop = '';
+  export let subtitleFontSizeMobile = '';
+  export let subtitleLineHeightDesktop = '';
+  export let subtitleLineHeightMobile = '';
 
   // Lógica reativa para determinar se há mídia
   $: hasMedia = !!(backgroundImage || backgroundVideo);
@@ -189,6 +197,12 @@
   .font-obviously .section-title__subtitle {
     font-family: "obviously", sans-serif;
     font-weight: 400;
+  }
+
+  .font-globotipo .section-title__title,
+  .font-globotipo .section-title__subtitle {
+    font-family: 'Globotipo', sans-serif;
+    font-weight: inherit;
   }
 
   .font-obviously-compressed .section-title__title {

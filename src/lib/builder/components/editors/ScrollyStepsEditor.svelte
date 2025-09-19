@@ -1,6 +1,7 @@
 
 <script>
   import { createEventDispatcher } from 'svelte';
+  import RichTextEditor from '../RichTextEditor.svelte';
 
   export let value = [];
 
@@ -124,7 +125,12 @@
 
         <label>
           <span>Texto (HTML permitido)</span>
-          <textarea rows="4" value={step.text} on:input={(event) => updateStep(index, 'text', event.currentTarget.value)}></textarea>
+          <RichTextEditor
+            value={step.text || ''}
+            rows={4}
+            placeholder="Conteúdo do step"
+            on:change={(event) => updateStep(index, 'text', event.detail.value)}
+          />
         </label>
 
         <div class="grid">

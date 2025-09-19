@@ -1,13 +1,23 @@
 <script>
+  import { createEventDispatcher } from 'svelte';
   import { get } from 'svelte/store';
+  import SuperFlexEditor from './editors/SuperFlexEditor.svelte';
+  import RichTextEditor from './RichTextEditor.svelte';
+  import ScrollyStepsEditor from './editors/ScrollyStepsEditor.svelte';
+  import GalleryItemsEditor from './editors/GalleryItemsEditor.svelte';
   import StoryRenderer from '$lib/components/StoryRenderer.svelte';
   import { storyParagraphs, storyStore, selectedBlockId } from '../stores/storyStore.js';
   import { getComponentDefinition } from '../component-registry.js';
   import { sanitizeStoryForExport, buildTypographyCSS } from '../utils.js';
 
+  export let mode = 'content';
+
+  const dispatch = createEventDispatcher();
   const paragraphs = storyParagraphs;
-  let activeView = 'structure';
+
+  let activeView = mode;
   let previewDevice = 'desktop';
+  let drafts = {};
 
   $: exportedStory = sanitizeStoryForExport($storyStore);
   $: appearance = exportedStory.appearance || {};
@@ -26,8 +36,15 @@
     selectedBlockId.set(id);
   };
 
+  $: activeView = mode;
+
+  const changeMode = (nextMode) => {
+    if (nextMode === activeView) return;
+    dispatch('modeChange', { mode: nextMode });
+  };
+
   const handlePaletteDrop = (event, insertIndex = null) => {
-    if (activeView !== 'structure') return;
+    if (activeView !== 'content') return;
     event.preventDefault();
     const componentType = event.dataTransfer.getData('application/x-builder-component');
     const blockId = event.dataTransfer.getData('application/x-builder-block');
@@ -48,7 +65,7 @@
   };
 
   const handleDragOver = (event) => {
-    if (activeView !== 'structure') return;
+    if (activeView !== 'content') return;
     event.preventDefault();
     event.dataTransfer.dropEffect = 'move';
   };
@@ -95,6 +112,59 @@
     if (block.subtitle) return block.subtitle;
     return 'Sem conteúdo configurado ainda';
   };
+
+  const safeClone = (value) => {
+    try {
+      if (typeof structuredClone === 'function') {
+        return structuredClone(value);
+      }
+    } catch (error) {
+      // fallback abaixo
+    }
+    return JSON.parse(JSON.stringify(value));
+  };
+
+  const ensureDraftForBlock = (block) => {
+    if (block.type !== 'super-flex') return;
+    if (!drafts[block.__id]) {
+      drafts = {
+        ...drafts,
+        [block.__id]: safeClone(block)
+      };
+    }
+  };
+
+  const pruneDrafts = () => {
+    const currentIds = new Set($paragraphs.map((block) => block.__id));
+    const updated = { ...drafts };
+    let changed = false;
+    for (const id in drafts) {
+      if (!currentIds.has(id)) {
+        delete updated[id];
+        changed = true;
+      }
+    }
+    if (changed) {
+      drafts = updated;
+    }
+  };
+
+  $: {
+    pruneDrafts();
+    $paragraphs.forEach((block) => ensureDraftForBlock(block));
+  }
+
+  const commitSuperFlex = (block) => {
+    const draft = drafts[block.__id];
+    if (!draft) return;
+    const payload = safeClone(draft);
+    delete payload.__id;
+    storyStore.replaceBlock(block.__id, { ...payload, type: 'super-flex' });
+  };
+
+  const updateBlockFieldValue = (block, path, value) => {
+    storyStore.updateBlockField(block.__id, path, value);
+  };
 </script>
 
 <div
@@ -104,12 +174,12 @@
   on:dragover|preventDefault={handleDragOver}
   on:drop={handlePaletteDrop}
 >
-  <div class="canvas-header">
-    <div class="view-toggle">
-      <button class:active={activeView === 'structure'} on:click={() => (activeView = 'structure')}>
-        Estrutura
+  <div class="canvas-toolbar">
+    <div class="mode-toggle">
+      <button class:active={activeView === 'content'} on:click={() => changeMode('content')}>
+        Conteúdo
       </button>
-      <button class:active={activeView === 'preview'} on:click={() => (activeView = 'preview')}>
+      <button class:active={activeView === 'preview'} on:click={() => changeMode('preview')}>
         Preview
       </button>
     </div>
@@ -126,14 +196,14 @@
     {/if}
   </div>
 
-  {#if activeView === 'structure'}
+  {#if activeView === 'content'}
     {#if $paragraphs.length === 0}
       <div class="empty-state">
-        <p>Arraste um componente para cá ou clique no catálogo à esquerda.</p>
+        <p>Arraste um componente da coluna esquerda para começar sua história.</p>
       </div>
     {/if}
 
-    {#each $paragraphs as block, index}
+    {#each $paragraphs as block, index (block.__id)}
       <div
         class="dropzone"
         role="presentation"
@@ -144,7 +214,7 @@
       {@const definition = getComponentDefinition(block.type)}
 
       <article
-        class="block"
+        class="block-card"
         class:selected={$selectedBlockId === block.__id}
         draggable
         role="listitem"
@@ -154,36 +224,370 @@
         on:drop|stopPropagation={(event) => handlePaletteDrop(event, index + 1)}
         on:dragover|preventDefault={handleDragOver}
       >
-        <div
-          class="block-body"
-          role="button"
-          tabindex="0"
-          on:click={() => selectBlock(block.__id)}
-          on:keydown={(event) => {
-            if (event.key === 'Enter' || event.key === ' ') {
-              event.preventDefault();
-              selectBlock(block.__id);
-            }
-          }}
-        >
-          <header>
-            <div class="title">
-              <span class="icon">{definition?.icon || '📦'}</span>
-              <div>
-                <strong>{definition?.label || block.type}</strong>
-                <small>#{index + 1} · {block.type}</small>
+        <header class="block-head">
+          <div
+            class="block-meta"
+            role="button"
+            tabindex="0"
+            on:click={() => selectBlock(block.__id)}
+            on:keydown={(event) => {
+              if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                selectBlock(block.__id);
+              }
+            }}
+          >
+            <span class="glyph">{definition?.icon || '✨'}</span>
+            <div>
+              <strong>{definition?.label || block.type}</strong>
+              <small>#{index + 1} · {block.type}</small>
+            </div>
+          </div>
+          <div class="block-actions" aria-label="Ações do bloco">
+            <button type="button" on:click|stopPropagation={() => moveUp(index)} title="Mover para cima">↑</button>
+            <button type="button" on:click|stopPropagation={() => moveDown(index)} title="Mover para baixo">↓</button>
+            <button type="button" on:click|stopPropagation={() => duplicateBlock(block.__id)} title="Duplicar">⧉</button>
+            <button type="button" class="danger" on:click|stopPropagation={() => removeBlock(block.__id)} title="Remover">✕</button>
+          </div>
+        </header>
+
+        <div class="block-body">
+          {#if block.type === 'super-flex'}
+            {#if drafts[block.__id]}
+              <SuperFlexEditor bind:data={drafts[block.__id]} on:update={() => commitSuperFlex(block)} />
+            {:else}
+              <p class="loading">Carregando editor...</p>
+            {/if}
+          {:else if block.type === 'header'}
+            <div class="inline-editor">
+              <div class="inline-richtext">
+                <span class="inline-label">Título (HTML)</span>
+                <RichTextEditor
+                  value={block.title || ''}
+                  rows={4}
+                  placeholder="Digite o título principal"
+                  on:change={(event) => updateBlockFieldValue(block, 'title', event.detail.value)}
+                />
+              </div>
+              <div class="inline-richtext">
+                <span class="inline-label">Linha fina / subtítulo</span>
+                <RichTextEditor
+                  value={block.subtitle || ''}
+                  rows={3}
+                  placeholder="Explique em uma linha o contexto do título"
+                  on:change={(event) => updateBlockFieldValue(block, 'subtitle', event.detail.value)}
+                />
+              </div>
+              <div class="inline-grid">
+                <label>
+                  Autor(a)
+                  <input
+                    type="text"
+                    value={block.author || ''}
+                    placeholder="Quem assina a matéria"
+                    on:input={(event) => updateBlockFieldValue(block, 'author', event.currentTarget.value)}
+                  />
+                </label>
+                <label>
+                  Data
+                  <input
+                    type="text"
+                    value={block.date || ''}
+                    placeholder="ex: 18/09/2025"
+                    on:input={(event) => updateBlockFieldValue(block, 'date', event.currentTarget.value)}
+                  />
+                </label>
               </div>
             </div>
-          </header>
-          <div class="summary">
-            <p>{renderSummary(block)}</p>
-          </div>
-        </div>
-        <div class="actions">
-          <button type="button" on:click|stopPropagation={() => moveUp(index)} title="Mover para cima">↑</button>
-          <button type="button" on:click|stopPropagation={() => moveDown(index)} title="Mover para baixo">↓</button>
-          <button type="button" on:click|stopPropagation={() => duplicateBlock(block.__id)} title="Duplicar">⧉</button>
-          <button type="button" class="danger" on:click|stopPropagation={() => removeBlock(block.__id)} title="Remover">✕</button>
+          {:else if block.type === 'galeria'}
+            <div class="inline-editor">
+              <GalleryItemsEditor
+                value={block.images || []}
+                on:change={(event) => updateBlockFieldValue(block, 'images', event.detail.value)}
+              />
+            </div>
+          {:else if block.type === 'scrolly'}
+            <div class="inline-editor scrolly-block">
+              <div class="scrolly-summary">
+                <h3>Steps do scrollytelling</h3>
+                <p>{(block.steps?.length || 0)} passo(s) configurado(s)</p>
+              </div>
+              <ScrollyStepsEditor
+                value={block.steps || []}
+                on:change={(event) => updateBlockFieldValue(block, 'steps', event.detail.value)}
+              />
+            </div>
+          {:else if block.type === 'intertitulo'}
+            <div class="inline-editor">
+              <div class="inline-richtext">
+                <span class="inline-label">Intertítulo (HTML)</span>
+                <RichTextEditor
+                  value={block.text || ''}
+                  rows={4}
+                  placeholder="Escreva o intertítulo"
+                  on:change={(event) => updateBlockFieldValue(block, 'text', event.detail.value)}
+                />
+              </div>
+              <div class="inline-grid">
+                <label>
+                  Linha fina
+                  <RichTextEditor
+                    value={block.subtitle || ''}
+                    rows={3}
+                    placeholder="Complemento opcional"
+                    on:change={(event) => updateBlockFieldValue(block, 'subtitle', event.detail.value)}
+                  />
+                </label>
+                <label>
+                  Alinhamento
+                  <select value={block.align || 'center'} on:change={(event) => updateBlockFieldValue(block, 'align', event.target.value)}>
+                    <option value="left">Esquerda</option>
+                    <option value="center">Centro</option>
+                    <option value="right">Direita</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+          {:else if block.type === 'texto'}
+            <div class="inline-editor">
+              <div class="inline-richtext">
+                <span class="inline-label">Conteúdo (HTML)</span>
+                <RichTextEditor
+                  value={block.text || ''}
+                  rows={8}
+                  placeholder="Digite o texto do parágrafo"
+                  on:change={(event) => updateBlockFieldValue(block, 'text', event.detail.value)}
+                />
+              </div>
+
+              <div class="inline-grid">
+                <label>
+                  Estilo
+                  <select value={block.variant} on:change={(event) => updateBlockFieldValue(block, 'variant', event.target.value)}>
+                    <option value="body">Corpo</option>
+                    <option value="lead">Lead</option>
+                    <option value="quote">Citação</option>
+                  </select>
+                </label>
+                <label>
+                  Alinhamento
+                  <select value={block.align} on:change={(event) => updateBlockFieldValue(block, 'align', event.target.value)}>
+                    <option value="left">Esquerda</option>
+                    <option value="center">Centro</option>
+                    <option value="right">Direita</option>
+                    <option value="justify">Justificado</option>
+                  </select>
+                </label>
+                <label>
+                  Largura máxima
+                  <input
+                    type="text"
+                    value={block.maxWidth}
+                    placeholder="720px"
+                    on:input={(event) => updateBlockFieldValue(block, 'maxWidth', event.target.value)}
+                  />
+                </label>
+              </div>
+            </div>
+          {:else if block.type === 'citacao'}
+            <div class="inline-editor">
+              <div class="inline-richtext">
+                <span class="inline-label">Texto da citação (HTML)</span>
+                <RichTextEditor
+                  value={block.text || ''}
+                  rows={6}
+                  placeholder="Digite o texto da citação"
+                  on:change={(event) => updateBlockFieldValue(block, 'text', event.detail.value)}
+                />
+              </div>
+              <div class="inline-grid">
+                <label>
+                  Autor(a)
+                  <input
+                    type="text"
+                    value={block.author}
+                    on:input={(event) => updateBlockFieldValue(block, 'author', event.target.value)}
+                  />
+                </label>
+                <label>
+                  Cargo/Função
+                  <input
+                    type="text"
+                    value={block.role}
+                    on:input={(event) => updateBlockFieldValue(block, 'role', event.target.value)}
+                  />
+                </label>
+              </div>
+            </div>
+          {:else if block.type === 'foto'}
+            <div class="inline-editor">
+              <div class="inline-grid">
+                <label>
+                  Imagem desktop
+                  <input
+                    type="url"
+                    value={block.src}
+                    on:input={(event) => updateBlockFieldValue(block, 'src', event.target.value)}
+                    placeholder="https://..."
+                  />
+                </label>
+                <label>
+                  Imagem mobile
+                  <input
+                    type="url"
+                    value={block.srcMobile}
+                    on:input={(event) => updateBlockFieldValue(block, 'srcMobile', event.target.value)}
+                    placeholder="https://..."
+                  />
+                </label>
+              </div>
+              <label>
+                Texto alternativo
+                <input
+                  type="text"
+                  value={block.alt}
+                  on:input={(event) => updateBlockFieldValue(block, 'alt', event.target.value)}
+                />
+              </label>
+              <div class="inline-richtext">
+                <span class="inline-label">Legenda (HTML)</span>
+                <RichTextEditor
+                  value={block.caption || ''}
+                  rows={4}
+                  placeholder="Escreva a legenda da imagem"
+                  on:change={(event) => updateBlockFieldValue(block, 'caption', event.detail.value)}
+                />
+              </div>
+              <label class="toggle">
+                <input
+                  type="checkbox"
+                  checked={block.fullWidth}
+                  on:change={(event) => updateBlockFieldValue(block, 'fullWidth', event.target.checked)}
+                />
+                Ocupar largura total
+              </label>
+            </div>
+          {:else if block.type === 'video'}
+            <div class="inline-editor">
+              <div class="video-grid">
+                <label>
+                  Vídeo desktop (mp4)
+                  <input
+                    type="url"
+                    value={block.src}
+                    on:input={(event) => updateBlockFieldValue(block, 'src', event.target.value)}
+                    placeholder="https://..."
+                  />
+                </label>
+                <label>
+                  Poster desktop
+                  <input
+                    type="url"
+                    value={block.poster}
+                    on:input={(event) => updateBlockFieldValue(block, 'poster', event.target.value)}
+                    placeholder="https://..."
+                  />
+                </label>
+                <label>
+                  Vídeo mobile (mp4)
+                  <input
+                    type="url"
+                    value={block.srcMobile}
+                    on:input={(event) => updateBlockFieldValue(block, 'srcMobile', event.target.value)}
+                    placeholder="https://..."
+                  />
+                </label>
+                <label>
+                  Poster mobile
+                  <input
+                    type="url"
+                    value={block.posterMobile}
+                    on:input={(event) => updateBlockFieldValue(block, 'posterMobile', event.target.value)}
+                    placeholder="https://..."
+                  />
+                </label>
+              </div>
+              <div class="video-grid">
+                <label>
+                  Largura desktop
+                  <input
+                    type="text"
+                    value={block.customWidthDesktop || ''}
+                    placeholder="960px"
+                    on:input={(event) => updateBlockFieldValue(block, 'customWidthDesktop', event.target.value)}
+                  />
+                </label>
+                <label>
+                  Proporção desktop
+                  <input
+                    type="text"
+                    value={block.aspectRatioDesktop || ''}
+                    placeholder="16/9"
+                    on:input={(event) => updateBlockFieldValue(block, 'aspectRatioDesktop', event.target.value)}
+                  />
+                </label>
+                <label>
+                  Largura mobile
+                  <input
+                    type="text"
+                    value={block.customWidthMobile || ''}
+                    placeholder="360px"
+                    on:input={(event) => updateBlockFieldValue(block, 'customWidthMobile', event.target.value)}
+                  />
+                </label>
+                <label>
+                  Proporção mobile
+                  <input
+                    type="text"
+                    value={block.aspectRatioMobile || ''}
+                    placeholder="9/16"
+                    on:input={(event) => updateBlockFieldValue(block, 'aspectRatioMobile', event.target.value)}
+                  />
+                </label>
+              </div>
+              <div class="inline-richtext">
+                <span class="inline-label">Legenda (HTML)</span>
+                <RichTextEditor
+                  value={block.caption || ''}
+                  rows={4}
+                  placeholder="Descreva o vídeo"
+                  on:change={(event) => updateBlockFieldValue(block, 'caption', event.detail.value)}
+                />
+              </div>
+              <label>
+                <span>Crédito</span>
+                <input
+                  type="text"
+                  value={block.credit || ''}
+                  placeholder="Ex: Autor / Agência"
+                  on:input={(event) => updateBlockFieldValue(block, 'credit', event.target.value)}
+                />
+              </label>
+              <div class="inline-toggle-row">
+                <label class="pill-toggle">
+                  <input type="checkbox" checked={block.autoplay} on:change={(event) => updateBlockFieldValue(block, 'autoplay', event.target.checked)} />
+                  Autoplay
+                </label>
+                <label class="pill-toggle">
+                  <input type="checkbox" checked={block.controls} on:change={(event) => updateBlockFieldValue(block, 'controls', event.target.checked)} />
+                  Controles
+                </label>
+                <label class="pill-toggle">
+                  <input type="checkbox" checked={block.loop} on:change={(event) => updateBlockFieldValue(block, 'loop', event.target.checked)} />
+                  Loop
+                </label>
+                <label class="pill-toggle">
+                  <input type="checkbox" checked={block.showCaption} on:change={(event) => updateBlockFieldValue(block, 'showCaption', event.target.checked)} />
+                  Mostrar legenda
+                </label>
+              </div>
+            </div>
+          {:else}
+            <div class="placeholder">
+              <p>{renderSummary(block)}</p>
+              <button type="button" on:click={() => selectBlock(block.__id)}>Abrir ajustes avançados →</button>
+            </div>
+          {/if}
         </div>
       </article>
     {/each}
@@ -215,21 +619,28 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding: 1.25rem;
-    gap: 0.75rem;
+    padding: 1.5rem;
+    gap: 1rem;
     overflow-y: auto;
-    background: #f8fafc;
+    min-height: 0;
+    background: radial-gradient(circle at top, #eef2ff 0%, #f8fafc 60%);
   }
 
-  .canvas-header {
+  .canvas-toolbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid #e2e8f0;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 0.5rem 0.75rem;
+    border-radius: 999px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    backdrop-filter: blur(12px);
   }
 
-  .view-toggle,
+  .mode-toggle,
   .device-toggle {
     display: inline-flex;
     gap: 0.5rem;
@@ -238,165 +649,329 @@
     border-radius: 999px;
   }
 
-  .view-toggle button,
+  .mode-toggle button,
   .device-toggle button {
     border: none;
     background: transparent;
-    padding: 0.35rem 0.9rem;
+    color: #1e293b;
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 0.35rem 0.7rem;
     border-radius: 999px;
-    font-size: 0.8rem;
-    color: #475569;
     cursor: pointer;
-    transition: background 0.15s ease, color 0.15s ease;
+    transition: background 0.2s, color 0.2s;
   }
 
-  .view-toggle button.active,
+  .mode-toggle button.active,
   .device-toggle button.active {
-    background: #111827;
-    color: #f8fafc;
-  }
-
-  .empty-state {
-    border: 2px dashed #94a3b8;
-    border-radius: 12px;
-    padding: 2rem;
-    text-align: center;
-    color: #64748b;
-    font-size: 0.95rem;
-    background: #fff;
+    background: #1d4ed8;
+    color: white;
+    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.25);
   }
 
   .dropzone {
-    height: 16px;
+    height: 12px;
+    border-radius: 999px;
+    margin: 0.5rem 0;
     border: 2px dashed transparent;
-    transition: background 0.1s ease;
+    transition: border 0.2s ease, background 0.2s ease;
   }
 
   .dropzone:hover,
-  .dropzone.drag-over {
-    background: rgba(37, 99, 235, 0.1);
-    border-color: rgba(37, 99, 235, 0.4);
+  .dropzone:focus,
+  .dropzone:focus-visible {
+    border-color: #bfdbfe;
+    background: rgba(191, 219, 254, 0.25);
   }
 
-  .block {
-    background: white;
-    border-radius: 12px;
-    border: 1px solid #e2e8f0;
-    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+  .block-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(226, 232, 240, 0.6);
+    border-radius: 18px;
+    padding: 1.25rem 1.5rem;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    gap: 1rem;
+    box-shadow: 0 20px 40px -25px rgba(15, 23, 42, 0.45);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border 0.18s ease;
   }
 
-  .block-body {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    padding: 1rem 1.25rem 0.5rem;
-    text-align: left;
-    cursor: pointer;
+  .block-card:hover {
+    transform: translateY(-2px) scale(1.002);
+    box-shadow: 0 24px 64px -28px rgba(15, 23, 42, 0.5);
   }
 
-  .block-body:focus {
-    outline: none;
-  }
-
-  .block:hover {
-    border-color: #cbd5f5;
-    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
-  }
-
-  .block.selected {
+  .block-card.selected {
     border-color: #2563eb;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+    box-shadow: 0 28px 68px -28px rgba(37, 99, 235, 0.45);
   }
 
-  header {
+  .block-head {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
   }
 
-  .title {
+  .block-meta {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.85rem;
   }
 
-  .icon {
-    font-size: 1.35rem;
+  .block-meta:hover {
+    opacity: 0.85;
   }
 
-  .summary p {
-    margin: 0;
-    color: #475569;
-    font-size: 0.85rem;
+  .glyph {
+    font-size: 1.8rem;
   }
 
-  .actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 0.25rem;
-    padding: 0 1.25rem 0.75rem;
+  .block-meta strong {
+    font-size: 1.05rem;
+    color: #0f172a;
   }
 
-  .actions button {
+  .block-meta small {
+    color: #64748b;
+    font-size: 0.78rem;
+    display: block;
+  }
+
+  .block-actions {
+    display: inline-flex;
+    gap: 0.4rem;
+  }
+
+  .block-actions button {
     border: none;
     background: #e2e8f0;
-    border-radius: 6px;
-    padding: 0.25rem 0.5rem;
+    color: #1f2937;
+    font-size: 0.75rem;
+    padding: 0.35rem 0.5rem;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 0.8rem;
+    transition: background 0.15s ease, transform 0.15s ease;
   }
 
-  .actions button:hover {
+  .block-actions button:hover {
     background: #cbd5f5;
+    transform: translateY(-2px);
   }
 
-  .actions .danger {
+  .block-actions .danger {
     background: #fee2e2;
     color: #b91c1c;
   }
 
+  .block-body {
+    border-radius: 14px;
+    background: #f8fafc;
+    padding: 1rem;
+    border: 1px solid rgba(226, 232, 240, 0.7);
+  }
+
+  .inline-editor {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .inline-richtext {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .inline-richtext .inline-label {
+    font-weight: 600;
+    color: #1f2937;
+    font-size: 0.82rem;
+  }
+
+  .video-dimensions {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 0.7rem;
+  }
+
+  .scrolly-block {
+    gap: 1.25rem;
+  }
+
+  .scrolly-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    background: rgba(226, 232, 240, 0.4);
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+  }
+
+  .scrolly-summary h3 {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #0f172a;
+  }
+
+  .scrolly-summary p {
+    margin: 0;
+    font-size: 0.82rem;
+    color: #475569;
+  }
+
+  .inline-editor label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    font-weight: 600;
+    color: #1f2937;
+    font-size: 0.85rem;
+  }
+
+  .inline-editor textarea,
+  .inline-editor input,
+  .inline-editor select {
+    border: 1px solid #cbd5f5;
+    border-radius: 10px;
+    padding: 0.6rem 0.75rem;
+    font-family: inherit;
+    font-size: 0.88rem;
+    background: white;
+  }
+
+  .inline-editor textarea:focus,
+  .inline-editor input:focus,
+  .inline-editor select:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+  }
+
+  .inline-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .inline-toggle-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    margin-top: 0.75rem;
+  }
+
+  .pill-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: #475569;
+  }
+
+  .pill-toggle input[type='checkbox'] {
+    appearance: none;
+    width: 34px;
+    height: 20px;
+    border-radius: 999px;
+    background: #e2e8f0;
+    border: 1px solid #cbd5f5;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+
+  .pill-toggle input[type='checkbox']::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    border-right: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+    transition: border-color 0.2s ease;
+  }
+
+  .pill-toggle input[type='checkbox']:checked {
+    background: #2563eb;
+    border-color: #1d4ed8;
+  }
+
+  .pill-toggle input[type='checkbox']:checked::after {
+    border-color: #fff;
+    transform: translate(-40%, -45%) rotate(45deg);
+  }
+
+  .pill-toggle input[type='checkbox']:focus-visible {
+    outline: 3px solid rgba(37, 99, 235, 0.35);
+    outline-offset: 2px;
+  }
+
+  .placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .placeholder p {
+    margin: 0;
+    color: #475569;
+    font-size: 0.9rem;
+  }
+
+  .placeholder button {
+    border: none;
+    background: #1d4ed8;
+    color: #ffffff;
+    border-radius: 999px;
+    padding: 0.35rem 0.85rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 2rem;
+    border: 2px dashed #cbd5f5;
+    border-radius: 16px;
+    color: #64748b;
+    background: rgba(255, 255, 255, 0.7);
+  }
+
+  .loading {
+    text-align: center;
+    color: #475569;
+  }
+
   .preview-surface {
-    flex: 1;
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    overflow: auto;
-    border-radius: 16px;
-    border: 1px solid #e2e8f0;
-    box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.08);
-    background: #0f172a;
-  }
-
-  .preview-surface.desktop {
-    padding: 2rem 3rem;
-  }
-
-  .preview-surface.mobile {
-    padding: 2rem 1.5rem;
+    padding: 2rem 0;
   }
 
   .preview-frame {
-    width: 100%;
-    max-width: 1280px;
-    border-radius: 28px;
-    min-height: 80vh;
-    box-shadow: 0 25px 40px rgba(15, 23, 42, 0.2);
-    box-sizing: border-box;
+    background: #0b0d17;
+    color: #f8fafc;
+    width: min(860px, 100%);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 24px 80px rgba(15, 23, 42, 0.35);
   }
 
   .preview-surface.mobile .preview-frame {
-    max-width: 420px;
+    width: min(420px, 100%);
     border-radius: 32px;
-    overflow: hidden;
-    box-shadow: 0 30px 45px rgba(15, 23, 42, 0.3);
-  }
-
-  .preview-frame :global(article.story-content) {
-    margin: 0 auto;
   }
 </style>

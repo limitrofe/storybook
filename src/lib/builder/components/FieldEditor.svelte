@@ -3,6 +3,7 @@
   import ScrollyStepsEditor from './editors/ScrollyStepsEditor.svelte';
   import GalleryItemsEditor from './editors/GalleryItemsEditor.svelte';
   import CarouselItemsEditor from './editors/CarouselItemsEditor.svelte';
+  import ListItemsEditor from './editors/ListItemsEditor.svelte';
   import RichTextEditor from './RichTextEditor.svelte';
 
   export let field;
@@ -12,6 +13,8 @@
   let jsonText = field.type === 'json' && value ? JSON.stringify(value, null, 2) : '';
   let jsonError = '';
   let isEditingJson = false;
+
+  const isEmpty = (val) => val === undefined || val === null || val === '';
 
   const handleInput = (event) => {
     const inputValue = event.currentTarget.value;
@@ -63,19 +66,42 @@
   $: if (field.type === 'json' && !isEditingJson) {
     jsonText = value ? JSON.stringify(value, null, 2) : '';
   }
+
+  $: if (field.type === 'select' && isEmpty(value) && field.options?.length) {
+    const fallback = field.defaultValue ?? field.options[0]?.value;
+    if (!isEmpty(fallback) && fallback !== value) {
+      dispatch('change', { value: fallback });
+    }
+  }
 </script>
 
-<div class="field-editor">
-  <label>
-    <span>{field.label}</span>
-    {#if field.type === 'text' || field.type === 'url'}
-      <input
-        type={field.type === 'url' ? 'url' : 'text'}
+{#if field.type === 'richtext'}
+  <div class="field-editor">
+    <div class="richtext-field">
+      <span class="field-label">{field.label}</span>
+      <RichTextEditor
         value={value ?? ''}
         placeholder={field.placeholder}
-        required={field.required}
-        on:input={handleInput}
+        rows={field.rows || 6}
+        on:change={(event) => dispatch('change', { value: event.detail.value })}
       />
+    </div>
+    {#if field.description}
+      <small class="description">{field.description}</small>
+    {/if}
+  </div>
+{:else}
+  <div class="field-editor">
+    <label>
+      <span>{field.label}</span>
+      {#if field.type === 'text' || field.type === 'url'}
+        <input
+          type={field.type === 'url' ? 'url' : 'text'}
+          value={value ?? ''}
+          placeholder={field.placeholder}
+          required={field.required}
+          on:input={handleInput}
+        />
     {:else if field.type === 'number'}
       <input
         type="number"
@@ -95,14 +121,12 @@
         required={field.required}
         on:input={handleInput}
       ></textarea>
-    {:else if field.type === 'richtext'}
-      <RichTextEditor
-        value={value ?? ''}
-        placeholder={field.placeholder}
-        on:change={(event) => dispatch('change', { value: event.detail.value })}
-      />
     {:else if field.type === 'select'}
-      <select on:change={handleSelect} value={value ?? ''} required={field.required}>
+      <select
+        on:change={handleSelect}
+        value={isEmpty(value) ? (field.defaultValue ?? field.options?.[0]?.value ?? '') : value}
+        required={field.required}
+      >
         {#each field.options || [] as option}
           <option value={option.value}>{option.label}</option>
         {/each}
@@ -118,6 +142,11 @@
       <input type="color" value={value || '#000000'} on:input={handleColor} />
     {:else if field.type === 'scrolly-steps'}
       <ScrollyStepsEditor
+        value={value ?? []}
+        on:change={(event) => dispatch('change', { value: event.detail.value })}
+      />
+    {:else if field.type === 'list-items'}
+      <ListItemsEditor
         value={value ?? []}
         on:change={(event) => dispatch('change', { value: event.detail.value })}
       />
@@ -145,16 +174,29 @@
       {/if}
     {/if}
   </label>
-  {#if field.description}
-    <small class="description">{field.description}</small>
-  {/if}
-</div>
+    {#if field.description}
+      <small class="description">{field.description}</small>
+    {/if}
+  </div>
+{/if}
 
 <style>
   .field-editor {
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
+  }
+
+  .richtext-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    color: #1e293b;
+    font-size: 0.75rem;
+  }
+
+  .richtext-field .field-label {
+    font-weight: 600;
   }
 
   label {
