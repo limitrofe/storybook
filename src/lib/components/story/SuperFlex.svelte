@@ -1,4 +1,5 @@
 <script>
+	import { createEventDispatcher } from 'svelte';
 	import Header from './Header.svelte';
 	import HeaderCaotico from './HeaderCaotico.svelte';
 	import StoryText from './StoryText.svelte';
@@ -29,6 +30,9 @@
 	import { parseStoryComponents } from '$lib/utils/storyRenderer.js';
 
 	export let data;
+	export let builderMode = false;
+	export let builderDevice = null;
+	export let builderSelectedId = null;
 
 	const DEVICES = ['mobile', 'tablet', 'desktop', 'wide'];
 
@@ -60,6 +64,8 @@
 
 	let container = data?.container || {};
 	$: container = data?.container || {};
+
+	const builderDispatch = createEventDispatcher();
 
 	function toResponsiveObject(source, fallbackDesktop = '', fallbackMobile = fallbackDesktop) {
 		if (source === null || source === undefined) {
@@ -558,10 +564,35 @@
 
 		return { component: Component, props };
 	}
+
+	function builderRegister(node, { item }) {
+		if (!builderMode || !item) return {};
+
+		builderDispatch('builderitemmount', { id: item.id, node });
+
+		return {
+			destroy() {
+				builderDispatch('builderitemunmount', { id: item.id, node });
+			}
+		};
+	}
+
+	function handleBuilderPointerDown(event, item) {
+		if (!builderMode) return;
+		event.preventDefault();
+		event.stopPropagation();
+		builderDispatch('builderitempointerdown', {
+			id: item.id,
+			pointerId: event.pointerId,
+			clientX: event.clientX,
+			clientY: event.clientY
+		});
+	}
 </script>
 
 <section
 	class="super-flex-container"
+	data-builder-device={builderDevice || undefined}
 	style:--background-color={containerBackgroundColor}
 	style:--background-image-mobile={containerBackgroundImages.mobile}
 	style:--background-image-tablet={containerBackgroundImages.tablet}
@@ -648,7 +679,17 @@
 			{#each data.items as item}
 				{#if item}
 					{@const background = getBackground(item)}
-					<div class={`flex-item type-${item.type || 'custom'}`} style={buildBaseStyle(item)}>
+					<div
+						class={`flex-item type-${item.type || 'custom'} ${
+							builderMode ? 'builder-item' : ''
+						} ${builderMode && item.id === builderSelectedId ? 'builder-selected' : ''}`}
+						data-builder-id={builderMode ? item.id : undefined}
+						style={buildBaseStyle(item)}
+						use:builderRegister={{ item }}
+						on:pointerdown={builderMode
+							? (event) => handleBuilderPointerDown(event, item)
+							: undefined}
+					>
 						{#if hasBackgroundVideo(item) || hasBackgroundOverlay(item)}
 							<div class="item-background">
 								{#if hasBackgroundVideo(item)}
@@ -1034,6 +1075,278 @@
 		box-shadow: var(--box-shadow, none);
 		border-radius: var(--border-radius-mobile, 0);
 		box-sizing: border-box;
+	}
+
+	.flex-item.builder-item {
+		cursor: grab;
+		transition: outline 0.2s ease;
+	}
+
+	.flex-item.builder-item:active {
+		cursor: grabbing;
+	}
+
+	.flex-item.builder-selected {
+		outline: 2px dashed #2563eb;
+		outline-offset: 4px;
+	}
+
+	.super-flex-container[data-builder-device='mobile'] {
+		background-image: var(--background-image-mobile, none);
+		padding: var(--container-padding-mobile, 0);
+		margin: var(--container-margin-mobile, 0);
+		gap: var(--container-gap-mobile, 0);
+		min-height: var(--container-height-mobile, auto);
+		flex-direction: var(--container-flex-direction-mobile, column);
+		justify-content: var(--container-justify-mobile, center);
+		align-items: var(--container-align-mobile, center);
+		width: var(--container-width-mobile, 100vw);
+	}
+
+	.super-flex-container[data-builder-device='mobile'] .flex-item {
+		max-width: var(--max-width-mobile, 100%);
+		width: var(--width-mobile, auto);
+		height: var(--height-mobile, auto);
+		max-height: var(--max-height-mobile, none);
+		margin: var(--margin-mobile, 0);
+		padding: var(--padding-mobile, 0);
+		text-align: var(--text-align-mobile, left);
+		position: var(--position-mobile, relative);
+		top: var(--top-mobile, auto);
+		right: var(--right-mobile, auto);
+		bottom: var(--bottom-mobile, auto);
+		left: var(--left-mobile, auto);
+		transform: var(--transform-mobile, none);
+		z-index: var(--z-index-mobile, auto);
+		display: var(--display-mobile, block);
+		align-self: var(--align-self-mobile, auto);
+		opacity: var(--opacity-mobile, 1);
+		background-image: var(--item-background-image-mobile, none);
+		background-size: var(--item-background-size-mobile, cover);
+		background-position: var(--item-background-position-mobile, center center);
+		background-repeat: var(--item-background-repeat-mobile, no-repeat);
+		border-radius: var(--border-radius-mobile, 0);
+	}
+
+	.super-flex-container[data-builder-device='mobile'] .text-element {
+		font-size: var(--font-size-mobile, inherit);
+		font-weight: var(--font-weight-mobile, normal);
+		line-height: var(--line-height-mobile, normal);
+		letter-spacing: var(--letter-spacing-mobile, normal);
+	}
+
+	.super-flex-container[data-builder-device='mobile'] .image-element img,
+	.super-flex-container[data-builder-device='mobile'] .video-element {
+		border-radius: var(--border-radius-mobile, 0);
+	}
+
+	.super-flex-container[data-builder-device='mobile'] .caption-mobile,
+	.super-flex-container[data-builder-device='mobile'] .credit-mobile {
+		display: block;
+	}
+
+	.super-flex-container[data-builder-device='tablet'] {
+		background-image: var(--background-image-tablet, var(--background-image-mobile, none));
+		padding: var(--container-padding-tablet, var(--container-padding-mobile, 0));
+		margin: var(--container-margin-tablet, var(--container-margin-mobile, 0));
+		gap: var(--container-gap-tablet, var(--container-gap-mobile, 0));
+		min-height: var(--container-height-tablet, var(--container-height-mobile, auto));
+		flex-direction: var(
+			--container-flex-direction-tablet,
+			var(--container-flex-direction-mobile, column)
+		);
+		justify-content: var(--container-justify-tablet, var(--container-justify-mobile, center));
+		align-items: var(--container-align-tablet, var(--container-align-mobile, center));
+		width: var(--container-width-tablet, var(--container-width-mobile, 100vw));
+	}
+
+	.super-flex-container[data-builder-device='tablet'] .flex-item {
+		max-width: var(--max-width-tablet, var(--max-width-mobile, 100%));
+		width: var(--width-tablet, var(--width-mobile, auto));
+		height: var(--height-tablet, var(--height-mobile, auto));
+		max-height: var(--max-height-tablet, var(--max-height-mobile, none));
+		margin: var(--margin-tablet, var(--margin-mobile, 0));
+		padding: var(--padding-tablet, var(--padding-mobile, 0));
+		text-align: var(--text-align-tablet, var(--text-align-mobile, left));
+		position: var(--position-tablet, var(--position-mobile, relative));
+		top: var(--top-tablet, var(--top-mobile, auto));
+		right: var(--right-tablet, var(--right-mobile, auto));
+		bottom: var(--bottom-tablet, var(--bottom-mobile, auto));
+		left: var(--left-tablet, var(--left-mobile, auto));
+		transform: var(--transform-tablet, var(--transform-mobile, none));
+		z-index: var(--z-index-tablet, var(--z-index-mobile, auto));
+		display: var(--display-tablet, var(--display-mobile, block));
+		align-self: var(--align-self-tablet, var(--align-self-mobile, auto));
+		opacity: var(--opacity-tablet, var(--opacity-mobile, 1));
+		background-image: var(
+			--item-background-image-tablet,
+			var(--item-background-image-mobile, none)
+		);
+		background-size: var(--item-background-size-tablet, var(--item-background-size-mobile, cover));
+		background-position: var(
+			--item-background-position-tablet,
+			var(--item-background-position-mobile, center center)
+		);
+		background-repeat: var(
+			--item-background-repeat-tablet,
+			var(--item-background-repeat-mobile, no-repeat)
+		);
+		border-radius: var(--border-radius-tablet, var(--border-radius-mobile, 0));
+	}
+
+	.super-flex-container[data-builder-device='tablet'] .text-element {
+		font-size: var(--font-size-tablet, var(--font-size-mobile, inherit));
+		font-weight: var(--font-weight-tablet, var(--font-weight-mobile, normal));
+		line-height: var(--line-height-tablet, var(--line-height-mobile, normal));
+		letter-spacing: var(--letter-spacing-tablet, var(--letter-spacing-mobile, normal));
+	}
+
+	.super-flex-container[data-builder-device='tablet'] .image-element img,
+	.super-flex-container[data-builder-device='tablet'] .video-element {
+		border-radius: var(--border-radius-tablet, var(--border-radius-mobile, 0));
+	}
+
+	.super-flex-container[data-builder-device='tablet'] .caption-tablet,
+	.super-flex-container[data-builder-device='tablet'] .credit-tablet {
+		display: block;
+	}
+
+	.super-flex-container[data-builder-device='desktop'] {
+		background-image: var(--background-image-desktop, var(--background-image-tablet, none));
+		padding: var(--container-padding-desktop, var(--container-padding-tablet, 0));
+		margin: var(--container-margin-desktop, var(--container-margin-tablet, 0));
+		gap: var(--container-gap-desktop, var(--container-gap-tablet, 0));
+		min-height: var(--container-height-desktop, var(--container-height-tablet, auto));
+		flex-direction: var(
+			--container-flex-direction-desktop,
+			var(--container-flex-direction-tablet, column)
+		);
+		justify-content: var(--container-justify-desktop, var(--container-justify-tablet, center));
+		align-items: var(--container-align-desktop, var(--container-align-tablet, center));
+		width: var(
+			--container-width-desktop,
+			var(--container-width-tablet, var(--container-width-mobile, 100vw))
+		);
+	}
+
+	.super-flex-container[data-builder-device='desktop'] .flex-item {
+		max-width: var(--max-width-desktop, var(--max-width-tablet, 100%));
+		width: var(--width-desktop, var(--width-tablet, auto));
+		height: var(--height-desktop, var(--height-tablet, auto));
+		max-height: var(--max-height-desktop, var(--max-height-tablet, none));
+		margin: var(--margin-desktop, var(--margin-tablet, 0));
+		padding: var(--padding-desktop, var(--padding-tablet, 0));
+		text-align: var(--text-align-desktop, var(--text-align-tablet, left));
+		position: var(--position-desktop, var(--position-tablet, relative));
+		top: var(--top-desktop, var(--top-tablet, auto));
+		right: var(--right-desktop, var(--right-tablet, auto));
+		bottom: var(--bottom-desktop, var(--bottom-tablet, auto));
+		left: var(--left-desktop, var(--left-tablet, auto));
+		transform: var(--transform-desktop, var(--transform-tablet, none));
+		z-index: var(--z-index-desktop, var(--z-index-tablet, auto));
+		display: var(--display-desktop, var(--display-tablet, block));
+		align-self: var(--align-self-desktop, var(--align-self-tablet, auto));
+		opacity: var(--opacity-desktop, var(--opacity-tablet, 1));
+		background-image: var(
+			--item-background-image-desktop,
+			var(--item-background-image-tablet, none)
+		);
+		background-size: var(--item-background-size-desktop, var(--item-background-size-tablet, cover));
+		background-position: var(
+			--item-background-position-desktop,
+			var(--item-background-position-tablet, center center)
+		);
+		background-repeat: var(
+			--item-background-repeat-desktop,
+			var(--item-background-repeat-tablet, no-repeat)
+		);
+		border-radius: var(--border-radius-desktop, var(--border-radius-tablet, 0));
+	}
+
+	.super-flex-container[data-builder-device='desktop'] .text-element {
+		font-size: var(--font-size-desktop, var(--font-size-tablet, inherit));
+		font-weight: var(--font-weight-desktop, var(--font-weight-tablet, normal));
+		line-height: var(--line-height-desktop, var(--line-height-tablet, normal));
+		letter-spacing: var(--letter-spacing-desktop, var(--letter-spacing-tablet, normal));
+	}
+
+	.super-flex-container[data-builder-device='desktop'] .image-element img,
+	.super-flex-container[data-builder-device='desktop'] .video-element {
+		border-radius: var(--border-radius-desktop, var(--border-radius-tablet, 0));
+	}
+
+	.super-flex-container[data-builder-device='desktop'] .caption-desktop,
+	.super-flex-container[data-builder-device='desktop'] .credit-desktop {
+		display: block;
+	}
+
+	.super-flex-container[data-builder-device='wide'] {
+		background-image: var(--background-image-wide, var(--background-image-desktop, none));
+		padding: var(--container-padding-wide, var(--container-padding-desktop, 0));
+		margin: var(--container-margin-wide, var(--container-margin-desktop, 0));
+		gap: var(--container-gap-wide, var(--container-gap-desktop, 0));
+		min-height: var(--container-height-wide, var(--container-height-desktop, auto));
+		flex-direction: var(
+			--container-flex-direction-wide,
+			var(--container-flex-direction-desktop, column)
+		);
+		justify-content: var(--container-justify-wide, var(--container-justify-desktop, center));
+		align-items: var(--container-align-wide, var(--container-align-desktop, center));
+		width: var(
+			--container-width-wide,
+			var(
+				--container-width-desktop,
+				var(--container-width-tablet, var(--container-width-mobile, 100vw))
+			)
+		);
+	}
+
+	.super-flex-container[data-builder-device='wide'] .flex-item {
+		max-width: var(--max-width-wide, var(--max-width-desktop, 100%));
+		width: var(--width-wide, var(--width-desktop, auto));
+		height: var(--height-wide, var(--height-desktop, auto));
+		max-height: var(--max-height-wide, var(--max-height-desktop, none));
+		margin: var(--margin-wide, var(--margin-desktop, 0));
+		padding: var(--padding-wide, var(--padding-desktop, 0));
+		text-align: var(--text-align-wide, var(--text-align-desktop, left));
+		position: var(--position-wide, var(--position-desktop, relative));
+		top: var(--top-wide, var(--top-desktop, auto));
+		right: var(--right-wide, var(--right-desktop, auto));
+		bottom: var(--bottom-wide, var(--bottom-desktop, auto));
+		left: var(--left-wide, var(--left-desktop, auto));
+		transform: var(--transform-wide, var(--transform-desktop, none));
+		z-index: var(--z-index-wide, var(--z-index-desktop, auto));
+		display: var(--display-wide, var(--display-desktop, block));
+		align-self: var(--align-self-wide, var(--align-self-desktop, auto));
+		opacity: var(--opacity-wide, var(--opacity-desktop, 1));
+		background-image: var(--item-background-image-wide, var(--item-background-image-desktop, none));
+		background-size: var(--item-background-size-wide, var(--item-background-size-desktop, cover));
+		background-position: var(
+			--item-background-position-wide,
+			var(--item-background-position-desktop, center center)
+		);
+		background-repeat: var(
+			--item-background-repeat-wide,
+			var(--item-background-repeat-desktop, no-repeat)
+		);
+		border-radius: var(--border-radius-wide, var(--border-radius-desktop, 0));
+	}
+
+	.super-flex-container[data-builder-device='wide'] .text-element {
+		font-size: var(--font-size-wide, var(--font-size-desktop, inherit));
+		font-weight: var(--font-weight-wide, var(--font-weight-desktop, normal));
+		line-height: var(--line-height-wide, var(--line-height-desktop, normal));
+		letter-spacing: var(--letter-spacing-wide, var(--letter-spacing-desktop, normal));
+	}
+
+	.super-flex-container[data-builder-device='wide'] .image-element img,
+	.super-flex-container[data-builder-device='wide'] .video-element {
+		border-radius: var(--border-radius-wide, var(--border-radius-desktop, 0));
+	}
+
+	.super-flex-container[data-builder-device='wide'] .caption-wide,
+	.super-flex-container[data-builder-device='wide'] .credit-wide {
+		display: block;
 	}
 
 	.item-background {

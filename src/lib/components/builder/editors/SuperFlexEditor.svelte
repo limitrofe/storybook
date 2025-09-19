@@ -1,5 +1,6 @@
 <script>
 	import { createEventDispatcher } from 'svelte';
+	import SuperFlex from '$lib/components/story/SuperFlex.svelte';
 
 	export let data = {};
 
@@ -11,6 +12,13 @@
 		tablet: 'Tablet',
 		desktop: 'Desktop',
 		wide: 'Wide'
+	};
+
+	const PREVIEW_WIDTHS = {
+		mobile: 414,
+		tablet: 834,
+		desktop: 1280,
+		wide: 1600
 	};
 
 	const FLEX_OPTIONS = [
@@ -412,6 +420,12 @@
 
 	let currentDevice = 'desktop';
 	let selectedElementId = null;
+	let previewWidth = PREVIEW_WIDTHS[currentDevice] || 1280;
+
+	const itemNodes = new Map();
+	let dragging = null;
+	let pendingUpdate = null;
+	let rafHandle = null;
 
 	$: ensureStructure();
 	$: selectedElement = data.items.find((item) => item.id === selectedElementId) || null;
@@ -420,6 +434,7 @@
 			selectedElementId = data.items[0].id;
 		}
 	}
+	$: previewWidth = PREVIEW_WIDTHS[currentDevice] || 1280;
 
 	function addElement(type) {
 		ensureStructure();
@@ -459,9 +474,172 @@
 	}
 
 	$: ensureMediaForElement(selectedElement);
+
+	function handlePreviewItemMount(event) {
+		if (!event?.detail) return;
+		itemNodes.set(event.detail.id, event.detail.node);
+	}
+
+	function handlePreviewItemUnmount(event) {
+		if (!event?.detail) return;
+		itemNodes.delete(event.detail.id);
+	}
+
+	function schedulePositionCommit(payload) {
+		pendingUpdate = payload;
+		if (!rafHandle) {
+			rafHandle = requestAnimationFrame(() => {
+				if (pendingUpdate) {
+					commitPositionUpdate(pendingUpdate);
+					pendingUpdate = null;
+				}
+				rafHandle = null;
+			});
+		}
+	}
+
+	function commitPositionUpdate({ id, device, left, top }) {
+		if (!id || !device) return;
+
+		const roundedLeft = Math.round(left);
+		const roundedTop = Math.round(top);
+
+		data = {
+			...data,
+			items: data.items.map((item) => {
+				if (item.id !== id) return item;
+
+				const basePosition = { ...(item.position || createPosition()) };
+				const devicePosition = {
+					...POSITION_DEFAULT,
+					...(basePosition[device] || {}),
+					mode: 'absolute',
+					left: `${roundedLeft}px`,
+					top: `${roundedTop}px`,
+					right: 'auto',
+					bottom: 'auto'
+				};
+
+				basePosition[device] = devicePosition;
+
+				return {
+					...item,
+					position: basePosition
+				};
+			})
+		};
+	}
+
+	function handlePreviewItemPointerDown(event) {
+		if (!event?.detail) return;
+		const { id, pointerId, clientX, clientY } = event.detail;
+		if (!id) return;
+
+		const node = itemNodes.get(id);
+		if (!node) return;
+
+		const container = node.closest('.super-flex-container');
+		if (!container) return;
+
+		selectedElementId = id;
+		const containerRect = container.getBoundingClientRect();
+		const itemRect = node.getBoundingClientRect();
+
+		dragging = {
+			id,
+			pointerId,
+			offsetX: clientX - itemRect.left,
+			offsetY: clientY - itemRect.top,
+			device: currentDevice,
+			container
+		};
+
+		window.addEventListener('pointermove', handlePreviewPointerMove);
+		window.addEventListener('pointerup', handlePreviewPointerUp);
+		window.addEventListener('pointercancel', handlePreviewPointerUp);
+	}
+
+	function handlePreviewPointerMove(event) {
+		if (!dragging || event.pointerId !== dragging.pointerId) return;
+
+		const containerRect = dragging.container.getBoundingClientRect();
+		const left = event.clientX - containerRect.left - dragging.offsetX;
+		const top = event.clientY - containerRect.top - dragging.offsetY;
+
+		schedulePositionCommit({
+			id: dragging.id,
+			device: dragging.device,
+			left,
+			top
+		});
+	}
+
+	function handlePreviewPointerUp(event) {
+		if (!dragging || event.pointerId !== dragging.pointerId) return;
+
+		const containerRect = dragging.container.getBoundingClientRect();
+		const left = event.clientX - containerRect.left - dragging.offsetX;
+		const top = event.clientY - containerRect.top - dragging.offsetY;
+
+		commitPositionUpdate({
+			id: dragging.id,
+			device: dragging.device,
+			left,
+			top
+		});
+
+		pendingUpdate = null;
+		if (rafHandle) {
+			cancelAnimationFrame(rafHandle);
+			rafHandle = null;
+		}
+
+		dragging = null;
+
+		window.removeEventListener('pointermove', handlePreviewPointerMove);
+		window.removeEventListener('pointerup', handlePreviewPointerUp);
+		window.removeEventListener('pointercancel', handlePreviewPointerUp);
+
+		emitUpdate();
+	}
 </script>
 
 <div class="superflex-simple">
+	<section class="preview-panel">
+		<header>
+			<h2>Preview</h2>
+			<div class="preview-devices">
+				{#each DEVICES as device}
+					<button
+						type="button"
+						class:active={currentDevice === device}
+						on:click={() => (currentDevice = device)}
+					>
+						{DEVICE_LABELS[device]}
+					</button>
+				{/each}
+			</div>
+		</header>
+
+		<div class="preview-viewport">
+			<div class="preview-canvas" style={`width:${previewWidth}px`}>
+				<SuperFlex
+					{data}
+					builderMode={true}
+					builderDevice={currentDevice}
+					builderSelectedId={selectedElementId}
+					on:builderitemmount={handlePreviewItemMount}
+					on:builderitemunmount={handlePreviewItemUnmount}
+					on:builderitempointerdown={handlePreviewItemPointerDown}
+				/>
+			</div>
+		</div>
+
+		<p class="preview-hint">
+			Arraste os elementos para ajustar posição neste breakpoint. Valores são aplicados ao soltar.
+		</p>
+	</section>
+
 	<section>
 		<header>
 			<h2>Container</h2>
@@ -978,6 +1156,74 @@
 		display: flex;
 		flex-direction: column;
 		gap: 1rem;
+	}
+
+	.preview-panel {
+		background: #0f172a;
+		border-color: #1f2937;
+		color: #f8fafc;
+	}
+
+	.preview-panel header {
+		align-items: flex-start;
+	}
+
+	.preview-devices {
+		display: flex;
+		gap: 0.5rem;
+		flex-wrap: wrap;
+	}
+
+	.preview-devices button {
+		border: 1px solid rgba(148, 163, 184, 0.4);
+		background: rgba(30, 41, 59, 0.9);
+		color: inherit;
+		padding: 0.4rem 0.75rem;
+		border-radius: 9999px;
+		font-size: 12px;
+		cursor: pointer;
+		transition:
+			background 0.2s ease,
+			color 0.2s ease,
+			border-color 0.2s ease;
+	}
+
+	.preview-devices button.active {
+		background: #2563eb;
+		border-color: #2563eb;
+		color: #ffffff;
+	}
+
+	.preview-devices button:hover:not(.active) {
+		border-color: rgba(148, 163, 184, 0.8);
+	}
+
+	.preview-viewport {
+		background: #0b1120;
+		border: 1px solid rgba(148, 163, 184, 0.2);
+		border-radius: 12px;
+		padding: 1.25rem;
+		overflow: auto;
+	}
+
+	.preview-canvas {
+		position: relative;
+		margin: 0 auto;
+		background: repeating-conic-gradient(#1e293b 0% 25%, #111827 0% 50%) 0 0 / 32px 32px;
+		border-radius: 12px;
+		padding: 2rem;
+		box-sizing: border-box;
+		min-height: 480px;
+	}
+
+	.preview-canvas :global(.super-flex-container) {
+		margin: 0 auto;
+	}
+
+	.preview-hint {
+		margin: 0;
+		font-size: 12px;
+		color: rgba(226, 232, 240, 0.7);
 	}
 
 	header {
