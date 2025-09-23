@@ -4,9 +4,10 @@
   export let length;
   export let position = 'right';
   export let variant = '';
+  export let active = false;
 </script>
 
-<section class="step-container position-{position}" class:last-section={i === length}>
+<section class="step-container position-{position}" class:last-section={i === length} class:active>
   <div class="step-content" class:destaque={variant === 'destaque'}>
     {@html stepText}
   </div>
@@ -14,13 +15,23 @@
 
 <style>
 
+
     .step-container {
         display: flex;
         align-items: center;
         min-height: 100vh;
         padding: 2rem 5vw;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(40px);
+        transition: opacity 0.35s ease, transform 0.35s ease;
     }
 
+    .step-container.active {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
     /* NOVO: Posicionamentos baseados na classe */
     .position-left {
         justify-content: flex-start;
@@ -45,6 +56,8 @@
         max-width: 450px;
         width: 100%;
         box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        position: sticky;
+        top: min(18vh, 120px);
     }
 
     :global(.step-content h3) {
@@ -74,6 +87,7 @@
         
         .step-content {
             max-width: 90%;
+            top: 12vh;
         }
     }
     /* Cole no final do <style> em Step.svelte */

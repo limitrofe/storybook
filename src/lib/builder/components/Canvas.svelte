@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   import { get } from 'svelte/store';
-  import SuperFlexEditor from './editors/SuperFlexEditor.svelte';
+  import FreeCanvasEditor from './editors/FreeCanvasEditor.svelte';
   import RichTextEditor from './RichTextEditor.svelte';
   import ScrollyStepsEditor from './editors/ScrollyStepsEditor.svelte';
   import GalleryItemsEditor from './editors/GalleryItemsEditor.svelte';
@@ -18,6 +18,7 @@
   let activeView = mode;
   let previewDevice = 'desktop';
   let drafts = {};
+  const DRAFTABLE_TYPES = new Set(['free-canvas']);
 
   $: exportedStory = sanitizeStoryForExport($storyStore);
   $: appearance = exportedStory.appearance || {};
@@ -125,7 +126,7 @@
   };
 
   const ensureDraftForBlock = (block) => {
-    if (block.type !== 'super-flex') return;
+    if (!DRAFTABLE_TYPES.has(block.type)) return;
     if (!drafts[block.__id]) {
       drafts = {
         ...drafts,
@@ -154,12 +155,27 @@
     $paragraphs.forEach((block) => ensureDraftForBlock(block));
   }
 
-  const commitSuperFlex = (block) => {
-    const draft = drafts[block.__id];
+  const commitDraft = (block, nextData = null) => {
+    if (!DRAFTABLE_TYPES.has(block.type)) return;
+    const draft = nextData ?? drafts[block.__id];
     if (!draft) return;
+
     const payload = safeClone(draft);
     delete payload.__id;
-    storyStore.replaceBlock(block.__id, { ...payload, type: 'super-flex' });
+
+    storyStore.replaceBlock(block.__id, { ...payload, type: block.type });
+  };
+
+  const handleFreeCanvasUpdate = (block, detail) => {
+    const updated = detail ? safeClone(detail) : safeClone(drafts[block.__id] || {});
+    if (!updated) return;
+
+    drafts = {
+      ...drafts,
+      [block.__id]: updated
+    };
+
+    commitDraft(block, updated);
   };
 
   const updateBlockFieldValue = (block, path, value) => {
@@ -252,9 +268,12 @@
         </header>
 
         <div class="block-body">
-          {#if block.type === 'super-flex'}
+          {#if block.type === 'free-canvas'}
             {#if drafts[block.__id]}
-              <SuperFlexEditor bind:data={drafts[block.__id]} on:update={() => commitSuperFlex(block)} />
+              <FreeCanvasEditor
+                data={drafts[block.__id]}
+                on:update={(event) => handleFreeCanvasUpdate(block, event.detail)}
+              />
             {:else}
               <p class="loading">Carregando editor...</p>
             {/if}
@@ -608,7 +627,7 @@
         {#if typographyCSS}
           {@html `<style>${typographyCSS}</style>`}
         {/if}
-        <StoryRenderer storyData={exportedStory} />
+        <StoryRenderer storyData={exportedStory} previewDevice={previewDevice} />
       </div>
     </div>
   {/if}

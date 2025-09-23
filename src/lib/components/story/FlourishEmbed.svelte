@@ -1,7 +1,7 @@
 <!-- FlourishEmbed.svelte - CORRIGIDO -->
 <script>
-  import { onMount } from 'svelte';
-  import { loadFlourishScript } from '$lib/utils/flourish.js';
+  import { afterUpdate, onMount } from 'svelte';
+  import { loadFlourishScript, waitForFlourish } from '$lib/utils/flourish.js';
 
   export let src = '';
   export let url = ''; // Alias para src
@@ -12,19 +12,34 @@
   // Resolver src (pode vir como 'src' ou 'url')
   $: actualSrc = src || url;
 
-  onMount(async () => {
-    if (!actualSrc) {
-      console.warn('⚠️ FlourishEmbed: src não definido');
-      return;
-    }
+  let lastRenderedKey = '';
+
+  function buildRenderKey() {
+    return `${actualSrc}::${height}`;
+  }
+
+  async function hydrateFlourish() {
+    if (!actualSrc) return;
+
+    const renderKey = buildRenderKey();
+    if (renderKey === lastRenderedKey) return;
 
     try {
       console.log('🔄 Carregando script Flourish...');
       await loadFlourishScript();
-      console.log('✅ Script Flourish carregado');
+      await waitForFlourish();
+      window.Flourish?.Live?.renderAll();
+      console.log('✅ Flourish renderizado');
+      lastRenderedKey = renderKey;
     } catch (error) {
       console.error('❌ Erro ao carregar Flourish:', error);
     }
+  }
+
+  onMount(hydrateFlourish);
+
+  afterUpdate(() => {
+    hydrateFlourish();
   });
 </script>
 
@@ -144,4 +159,3 @@
     font-style: italic;
   }
 </style>
-

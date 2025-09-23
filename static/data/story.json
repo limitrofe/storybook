@@ -567,657 +567,6 @@
       "textColor": ""
     },
     {
-      "container": {
-        "backgroundColor": "#ff0000",
-        "backgroundImage": {
-          "mobile": "",
-          "tablet": "",
-          "desktop": "",
-          "wide": ""
-        },
-        "backgroundVideo": {
-          "mobile": "",
-          "tablet": "",
-          "desktop": "",
-          "wide": ""
-        },
-        "height": {
-          "mobile": "80vh",
-          "tablet": "auto",
-          "desktop": "100vh",
-          "wide": "100vh"
-        },
-        "padding": {
-          "mobile": "1.5rem",
-          "tablet": "2rem",
-          "desktop": "3rem",
-          "wide": "2rem"
-        },
-        "margin": {
-          "mobile": "0",
-          "tablet": "0",
-          "desktop": "0",
-          "wide": "0"
-        },
-        "alignItems": {
-          "mobile": "center",
-          "tablet": "center",
-          "desktop": "center",
-          "wide": "center"
-        },
-        "justifyContent": {
-          "mobile": "center",
-          "tablet": "center",
-          "desktop": "center",
-          "wide": "center"
-        },
-        "gap": {
-          "mobile": "1.25rem",
-          "tablet": "1.5rem",
-          "desktop": "2rem",
-          "wide": "1.5rem"
-        },
-        "flexDirection": {
-          "mobile": "column",
-          "tablet": "column",
-          "desktop": "row",
-          "wide": "column"
-        },
-        "fullWidth": false,
-        "background": {
-          "color": "#ff0000",
-          "image": {
-            "mobile": "",
-            "tablet": "",
-            "desktop": "",
-            "wide": ""
-          },
-          "video": {
-            "mobile": "",
-            "tablet": "",
-            "desktop": "",
-            "wide": ""
-          },
-          "size": {
-            "mobile": "cover",
-            "tablet": "cover",
-            "desktop": "cover",
-            "wide": "cover"
-          },
-          "position": {
-            "mobile": "center center",
-            "tablet": "center center",
-            "desktop": "center center",
-            "wide": "center center"
-          },
-          "repeat": {
-            "mobile": "no-repeat",
-            "tablet": "no-repeat",
-            "desktop": "no-repeat",
-            "wide": "no-repeat"
-          },
-          "overlayColor": "transparent",
-          "overlayOpacity": "0"
-        },
-        "width": {
-          "mobile": "100vw",
-          "tablet": "100vw",
-          "desktop": "100vw",
-          "wide": "100vw"
-        }
-      },
-      "items": [
-        {
-          "id": "el-1758252321146-141742",
-          "type": "title",
-          "tag": "h2",
-          "content": "Título do super flex",
-          "backgroundColor": "transparent",
-          "background": {
-            "color": "transparent",
-            "image": {
-              "mobile": "",
-              "tablet": "",
-              "desktop": "",
-              "wide": ""
-            },
-            "video": {
-              "mobile": "",
-              "tablet": "",
-              "desktop": "",
-              "wide": ""
-            },
-            "size": {
-              "mobile": "cover",
-              "tablet": "cover",
-              "desktop": "cover",
-              "wide": "cover"
-            },
-            "position": {
-              "mobile": "center center",
-              "tablet": "center center",
-              "desktop": "center center",
-              "wide": "center center"
-            },
-            "repeat": {
-              "mobile": "no-repeat",
-              "tablet": "no-repeat",
-              "desktop": "no-repeat",
-              "wide": "no-repeat"
-            },
-            "overlayColor": "transparent",
-            "overlayOpacity": "0"
-          },
-          "styles": {
-            "margin": {
-              "mobile": "0",
-              "tablet": "0",
-              "desktop": "0 1rem 2rem 1rem",
-              "wide": "0"
-            },
-            "padding": {
-              "mobile": "0",
-              "tablet": "0",
-              "desktop": "0 1rem 2rem 1rem",
-              "wide": "0"
-            },
-            "width": {
-              "mobile": "auto",
-              "tablet": "auto",
-              "desktop": "auto",
-              "wide": "auto"
-            },
-            "height": {
-              "mobile": "auto",
-              "tablet": "auto",
-              "desktop": "auto",
-              "wide": "auto"
-            },
-            "textAlign": {
-              "mobile": "left",
-              "tablet": "left",
-              "desktop": "left",
-              "wide": "left"
-            },
-            "color": "#0054a8"
-          },
-          "position": {
-            "mobile": {
-              "mode": "relative",
-              "top": "auto",
-              "right": "auto",
-              "bottom": "auto",
-              "left": "auto",
-              "zIndex": "auto",
-              "transform": "none"
-            },
-            "tablet": {
-              "mode": "relative",
-              "top": "auto",
-              "right": "auto",
-              "bottom": "auto",
-              "left": "auto",
-              "zIndex": "auto",
-              "transform": "none"
-            },
-            "desktop": {
-              "mode": "relative",
-              "top": "auto",
-              "right": "auto",
-              "bottom": "auto",
-              "left": "auto",
-              "zIndex": "auto",
-              "transform": "none"
-            },
-            "wide": {
-              "mode": "relative",
-              "top": "auto",
-              "right": "auto",
-              "bottom": "auto",
-              "left": "auto",
-              "zIndex": "auto",
-              "transform": "none"
-            }
-          },
-          "backgroundImage": {
-            "mobile": "",
-            "tablet": "",
-            "desktop": "",
-            "wide": ""
-          },
-          "backgroundVideo": {
-            "mobile": "",
-            "tablet": "",
-            "desktop": "",
-            "wide": ""
-          }
-        },
-        {
-          "id": "el-1758252322330-324406",
-          "type": "text",
-          "tag": "p",
-          "content": "Escreva aqui o conteúdo do texto.",
-          "backgroundColor": "transparent",
-          "background": {
-            "color": "transparent",
-            "image": {
-              "mobile": "",
-              "tablet": "",
-              "desktop": "",
-              "wide": ""
-            },
-            "video": {
-              "mobile": "",
-              "tablet": "",
-              "desktop": "",
-              "wide": ""
-            },
-            "size": {
-              "mobile": "cover",
-              "tablet": "cover",
-              "desktop": "cover",
-              "wide": "cover"
-            },
-            "position": {
-              "mobile": "center center",
-              "tablet": "center center",
-              "desktop": "center center",
-              "wide": "center center"
-            },
-            "repeat": {
-              "mobile": "no-repeat",
-              "tablet": "no-repeat",
-              "desktop": "no-repeat",
-              "wide": "no-repeat"
-            },
-            "overlayColor": "transparent",
-            "overlayOpacity": "0"
-          },
-          "styles": {
-            "margin": {
-              "mobile": "0",
-              "tablet": "0",
-              "desktop": "0",
-              "wide": "0"
-            },
-            "padding": {
-              "mobile": "0",
-              "tablet": "0",
-              "desktop": "0",
-              "wide": "0"
-            },
-            "width": {
-              "mobile": "auto",
-              "tablet": "auto",
-              "desktop": "auto",
-              "wide": "auto"
-            },
-            "height": {
-              "mobile": "auto",
-              "tablet": "auto",
-              "desktop": "auto",
-              "wide": "auto"
-            },
-            "textAlign": {
-              "mobile": "left",
-              "tablet": "left",
-              "desktop": "right",
-              "wide": "left"
-            },
-            "color": "#0e3053"
-          },
-          "position": {
-            "mobile": {
-              "mode": "relative",
-              "top": "auto",
-              "right": "auto",
-              "bottom": "auto",
-              "left": "auto",
-              "zIndex": "auto",
-              "transform": "none"
-            },
-            "tablet": {
-              "mode": "relative",
-              "top": "auto",
-              "right": "auto",
-              "bottom": "auto",
-              "left": "auto",
-              "zIndex": "auto",
-              "transform": "none"
-            },
-            "desktop": {
-              "mode": "relative",
-              "top": "auto",
-              "right": "auto",
-              "bottom": "auto",
-              "left": "auto",
-              "zIndex": "auto",
-              "transform": "none"
-            },
-            "wide": {
-              "mode": "relative",
-              "top": "auto",
-              "right": "auto",
-              "bottom": "auto",
-              "left": "auto",
-              "zIndex": "auto",
-              "transform": "none"
-            }
-          },
-          "backgroundImage": {
-            "mobile": "",
-            "tablet": "",
-            "desktop": "",
-            "wide": ""
-          },
-          "backgroundVideo": {
-            "mobile": "",
-            "tablet": "",
-            "desktop": "",
-            "wide": ""
-          }
-        },
-        {
-          "id": "el-1758252357949-774391",
-          "type": "image",
-          "tag": "h2",
-          "content": {
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
-            "tablet": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
-            "wide": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg"
-          },
-          "backgroundColor": "transparent",
-          "background": {
-            "color": "transparent",
-            "image": {
-              "mobile": "",
-              "tablet": "",
-              "desktop": "",
-              "wide": ""
-            },
-            "video": {
-              "mobile": "",
-              "tablet": "",
-              "desktop": "",
-              "wide": ""
-            },
-            "size": {
-              "mobile": "cover",
-              "tablet": "cover",
-              "desktop": "cover",
-              "wide": "cover"
-            },
-            "position": {
-              "mobile": "center center",
-              "tablet": "center center",
-              "desktop": "center center",
-              "wide": "center center"
-            },
-            "repeat": {
-              "mobile": "no-repeat",
-              "tablet": "no-repeat",
-              "desktop": "no-repeat",
-              "wide": "no-repeat"
-            },
-            "overlayColor": "transparent",
-            "overlayOpacity": "0"
-          },
-          "styles": {
-            "margin": {
-              "mobile": "0",
-              "tablet": "0",
-              "desktop": "0 1rem 2rem 1rem",
-              "wide": "0"
-            },
-            "padding": {
-              "mobile": "0",
-              "tablet": "0",
-              "desktop": "0 5rem 2rem 1rem",
-              "wide": "0"
-            },
-            "width": {
-              "mobile": "320px",
-              "tablet": "320px",
-              "desktop": "320px",
-              "wide": "320px"
-            },
-            "height": {
-              "mobile": "auto",
-              "tablet": "auto",
-              "desktop": "auto",
-              "wide": "auto"
-            },
-            "textAlign": {
-              "mobile": "center",
-              "tablet": "center",
-              "desktop": "center",
-              "wide": "center"
-            },
-            "color": "#f8fafc"
-          },
-          "position": {
-            "mobile": {
-              "mode": "absolute",
-              "top": "auto",
-              "right": "auto",
-              "bottom": "auto",
-              "left": "auto",
-              "zIndex": "2",
-              "transform": "none"
-            },
-            "tablet": {
-              "mode": "absolute",
-              "top": "auto",
-              "right": "auto",
-              "bottom": "auto",
-              "left": "auto",
-              "zIndex": "2",
-              "transform": "none"
-            },
-            "desktop": {
-              "mode": "absolute",
-              "top": "29%",
-              "right": "auto",
-              "bottom": "auto",
-              "left": "30%",
-              "zIndex": "2",
-              "transform": "none"
-            },
-            "wide": {
-              "mode": "absolute",
-              "top": "29%",
-              "right": "auto",
-              "bottom": "auto",
-              "left": "30%",
-              "zIndex": "2",
-              "transform": "none"
-            }
-          },
-          "backgroundImage": {
-            "mobile": "",
-            "tablet": "",
-            "desktop": "",
-            "wide": ""
-          },
-          "backgroundVideo": {
-            "mobile": "",
-            "tablet": "",
-            "desktop": "",
-            "wide": ""
-          },
-          "src": {
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
-            "tablet": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
-            "wide": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg"
-          },
-          "caption": {
-            "mobile": "",
-            "tablet": "",
-            "desktop": "",
-            "wide": ""
-          },
-          "credit": {
-            "mobile": "",
-            "tablet": "",
-            "desktop": "",
-            "wide": ""
-          },
-          "alt": ""
-        },
-        {
-          "id": "el-1758252764270-407521",
-          "type": "image",
-          "src": {
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
-            "tablet": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
-            "wide": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg"
-          },
-          "alt": "",
-          "caption": {
-            "mobile": "",
-            "tablet": "",
-            "desktop": "",
-            "wide": ""
-          },
-          "credit": {
-            "mobile": "",
-            "tablet": "",
-            "desktop": "",
-            "wide": ""
-          },
-          "backgroundColor": "transparent",
-          "background": {
-            "color": "transparent",
-            "image": {
-              "mobile": "",
-              "tablet": "",
-              "desktop": "",
-              "wide": ""
-            },
-            "video": {
-              "mobile": "",
-              "tablet": "",
-              "desktop": "",
-              "wide": ""
-            },
-            "size": {
-              "mobile": "cover",
-              "tablet": "cover",
-              "desktop": "cover",
-              "wide": "cover"
-            },
-            "position": {
-              "mobile": "center center",
-              "tablet": "center center",
-              "desktop": "center center",
-              "wide": "center center"
-            },
-            "repeat": {
-              "mobile": "no-repeat",
-              "tablet": "no-repeat",
-              "desktop": "no-repeat",
-              "wide": "no-repeat"
-            },
-            "overlayColor": "transparent",
-            "overlayOpacity": "0"
-          },
-          "styles": {
-            "margin": {
-              "mobile": "0",
-              "tablet": "0",
-              "desktop": "0 3rem 4rem 2rem",
-              "wide": "0"
-            },
-            "padding": {
-              "mobile": "0",
-              "tablet": "0",
-              "desktop": "0",
-              "wide": "0"
-            },
-            "width": {
-              "mobile": "320px",
-              "tablet": "320px",
-              "desktop": "320px",
-              "wide": "320px"
-            },
-            "height": {
-              "mobile": "auto",
-              "tablet": "auto",
-              "desktop": "auto",
-              "wide": "auto"
-            },
-            "textAlign": {
-              "mobile": "center",
-              "tablet": "center",
-              "desktop": "center",
-              "wide": "center"
-            },
-            "color": "#f8fafc"
-          },
-          "position": {
-            "mobile": {
-              "mode": "absolute",
-              "top": "3%",
-              "right": "auto",
-              "bottom": "auto",
-              "left": "22%",
-              "zIndex": "1",
-              "transform": "none"
-            },
-            "tablet": {
-              "mode": "absolute",
-              "top": "auto",
-              "right": "auto",
-              "bottom": "auto",
-              "left": "auto",
-              "zIndex": "1",
-              "transform": "none"
-            },
-            "desktop": {
-              "mode": "absolute",
-              "top": "15%",
-              "right": "auto",
-              "bottom": "auto",
-              "left": "22%",
-              "zIndex": "1",
-              "transform": "none"
-            },
-            "wide": {
-              "mode": "absolute",
-              "top": "15%",
-              "right": "auto",
-              "bottom": "auto",
-              "left": "22%",
-              "zIndex": "1",
-              "transform": "none"
-            }
-          },
-          "backgroundImage": {
-            "mobile": "",
-            "tablet": "",
-            "desktop": "",
-            "wide": ""
-          },
-          "backgroundVideo": {
-            "mobile": "",
-            "tablet": "",
-            "desktop": "",
-            "wide": ""
-          },
-          "content": {
-            "mobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
-            "tablet": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
-            "desktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
-            "wide": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg"
-          }
-        }
-      ],
-      "type": "super-flex"
-    },
-    {
       "type": "texto",
       "text": "<p><i><b>Escreva aqui o texto do parágrafo.</b></i></p><p>Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo.</p>",
       "variant": "body",
@@ -1319,6 +668,297 @@
       "lineHeightDesktop": "",
       "lineHeightMobile": "",
       "textColor": ""
+    },
+    {
+      "type": "foto",
+      "src": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_03.jpg",
+      "srcMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_03.jpg",
+      "alt": "Descrição da imagem laksj fkjha dlkjahsdf",
+      "caption": "legenda da foto bla bla bla",
+      "credit": "",
+      "fullWidth": false,
+      "link": "",
+      "target": "_blank"
+    },
+    {
+      "type": "texto",
+      "text": "<p><i><b>Escreva aqui o texto do parágrafo.</b></i></p><p>Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo.</p>",
+      "variant": "body",
+      "align": "left",
+      "maxWidth": "720px",
+      "fontSizeDesktop": "",
+      "fontSizeMobile": "",
+      "lineHeightDesktop": "",
+      "lineHeightMobile": "",
+      "textColor": ""
+    },
+    {
+      "type": "foto",
+      "src": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_03.jpg",
+      "srcMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_03.jpg",
+      "alt": "Descrição da imagem laksj fkjha dlkjahsdf",
+      "caption": "legenda da foto bla bla bla",
+      "credit": "",
+      "fullWidth": true,
+      "link": "",
+      "target": "_blank"
+    },
+    {
+      "type": "texto",
+      "text": "<p><i><b>Escreva aqui o texto do parágrafo.</b></i></p><p>Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo.</p>",
+      "variant": "body",
+      "align": "left",
+      "maxWidth": "720px",
+      "fontSizeDesktop": "",
+      "fontSizeMobile": "",
+      "lineHeightDesktop": "",
+      "lineHeightMobile": "",
+      "textColor": ""
+    },
+    {
+      "type": "free-canvas",
+      "minHeightDesktop": 400,
+      "maxHeightDesktop": null,
+      "minHeightMobile": 400,
+      "maxHeightMobile": null,
+      "baseWidthDesktop": 1440,
+      "baseWidthMobile": 375,
+      "backgroundColor": "#000000",
+      "items": [
+        {
+          "id": "311db866-2c1c-4011-a74a-131fb87fce3e",
+          "type": "text",
+          "content": "Seu texto aqui",
+          "src": "",
+          "srcMobile": "",
+          "textStyles": {
+            "fontFamily": "",
+            "fontSize": "",
+            "fontSizeMobile": "",
+            "lineHeight": "",
+            "lineHeightMobile": "",
+            "textAlign": "left",
+            "textAlignMobile": "left",
+            "color": "",
+            "fontWeight": "",
+            "typography": ""
+          },
+          "desktop": {
+            "x": 56.127744727126476,
+            "y": 61.077844443092694,
+            "width": 260,
+            "height": 140,
+            "z": 1,
+            "opacity": 1
+          },
+          "mobile": {
+            "x": 0,
+            "y": 17.125748502994014,
+            "width": 220,
+            "height": 140,
+            "z": 1,
+            "opacity": 1
+          }
+        },
+        {
+          "id": "d180ebeb-a93f-4dd6-a871-ff918563e387",
+          "type": "text",
+          "content": "Seu texto aqui",
+          "src": "",
+          "srcMobile": "",
+          "textStyles": {
+            "fontFamily": "",
+            "fontSize": "",
+            "fontSizeMobile": "",
+            "lineHeight": "",
+            "lineHeightMobile": "",
+            "textAlign": "left",
+            "textAlignMobile": "left",
+            "color": "",
+            "fontWeight": "",
+            "typography": "h3"
+          },
+          "desktop": {
+            "x": 1178.8823215290058,
+            "y": 232.53494902569122,
+            "width": 260,
+            "height": 140,
+            "z": 1,
+            "opacity": 1
+          },
+          "mobile": {
+            "x": 155,
+            "y": 0,
+            "width": 220,
+            "height": 140,
+            "z": 1,
+            "opacity": 1
+          }
+        },
+        {
+          "id": "e5219b07-70e3-4965-be19-f93a3586142e",
+          "type": "text",
+          "content": "Seu texto aqui",
+          "src": "",
+          "srcMobile": "",
+          "textStyles": {
+            "fontFamily": "",
+            "fontSize": "",
+            "fontSizeMobile": "",
+            "lineHeight": "",
+            "lineHeightMobile": "",
+            "textAlign": "left",
+            "textAlignMobile": "left",
+            "color": "",
+            "fontWeight": "",
+            "typography": "h1"
+          },
+          "desktop": {
+            "x": 357.52494929599845,
+            "y": 225.74850256846975,
+            "width": 260,
+            "height": 140,
+            "z": 1,
+            "opacity": 1
+          },
+          "mobile": {
+            "x": 40.99800399201597,
+            "y": 141.87624750499003,
+            "width": 220,
+            "height": 140,
+            "z": 1,
+            "opacity": 1
+          }
+        },
+        {
+          "id": "48970307-5d47-4f6c-9337-92af7fa1b8dc",
+          "type": "text",
+          "content": "Seu texto aqui",
+          "src": "",
+          "srcMobile": "",
+          "textStyles": {
+            "fontFamily": "",
+            "fontSize": "",
+            "fontSizeMobile": "",
+            "lineHeight": "",
+            "lineHeightMobile": "",
+            "textAlign": "left",
+            "textAlignMobile": "left",
+            "color": "",
+            "fontWeight": "",
+            "typography": "blockquote"
+          },
+          "desktop": {
+            "x": 781.6767004464948,
+            "y": 28.143706738842198,
+            "width": 260,
+            "height": 140,
+            "z": 1,
+            "opacity": 1
+          },
+          "mobile": {
+            "x": 155,
+            "y": 235.688622754491,
+            "width": 220,
+            "height": 140,
+            "z": 1,
+            "opacity": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "texto",
+      "text": "<p><i><b>Escreva aqui o texto do parágrafo.</b></i></p><p>Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo.</p>",
+      "variant": "body",
+      "align": "left",
+      "maxWidth": "720px",
+      "fontSizeDesktop": "",
+      "fontSizeMobile": "",
+      "lineHeightDesktop": "",
+      "lineHeightMobile": "",
+      "textColor": ""
+    },
+    {
+      "type": "flourish",
+      "src": "visualisation/19202353",
+      "height": "600px",
+      "caption": "",
+      "credit": ""
+    },
+    {
+      "type": "texto",
+      "text": "<p><i><b>Escreva aqui o texto do parágrafo.</b></i></p><p>Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo.</p>",
+      "variant": "body",
+      "align": "left",
+      "maxWidth": "720px",
+      "fontSizeDesktop": "",
+      "fontSizeMobile": "",
+      "lineHeightDesktop": "",
+      "lineHeightMobile": "",
+      "textColor": ""
+    },
+    {
+      "type": "antes-depois",
+      "beforeImage": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_03.jpg",
+      "beforeImageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_03.jpg",
+      "beforeCaption": "isso aparece em algum lugar?",
+      "beforeCredit": "sei la",
+      "afterImage": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_04.jpg",
+      "afterImageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_04.jpg",
+      "afterCaption": "o que por aqui?",
+      "afterCredit": "não seiQ",
+      "beforeLabel": "Antes",
+      "afterLabel": "Depois",
+      "orientation": "vertical"
+    },
+    {
+      "type": "texto",
+      "text": "<p><i><b>Escreva aqui o texto do parágrafo.</b></i></p><p>Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo.</p>",
+      "variant": "body",
+      "align": "left",
+      "maxWidth": "720px",
+      "fontSizeDesktop": "",
+      "fontSizeMobile": "",
+      "lineHeightDesktop": "",
+      "lineHeightMobile": "",
+      "textColor": ""
+    },
+    {
+      "type": "flourish-scrolly",
+      "src": "story/3218812",
+      "steps": [
+        {
+          "slide": 0,
+          "title": "sadfasdf",
+          "text": "<b>asdf</b>"
+        },
+        {
+          "slide": 2,
+          "title": "asdfasdf",
+          "text": ""
+        },
+        {
+          "slide": 9,
+          "title": "sfqfwef",
+          "text": ""
+        },
+        {
+          "slide": 0,
+          "title": "sadfq",
+          "text": ""
+        },
+        {
+          "slide": 1,
+          "title": "asdfasdf",
+          "text": ""
+        },
+        {
+          "slide": 1,
+          "title": "",
+          "text": ""
+        }
+      ]
     }
   ]
 }

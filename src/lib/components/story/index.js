@@ -25,10 +25,9 @@ export { default as CrimeExplainer } from './CrimeExplainer.svelte';
 export { default as TimelineInteractive } from './TimelineInteractive.svelte';
 export { default as RecommendedItems } from './RecommendedItems.svelte';
 export { default as SectionWrapper } from './SectionWrapper.svelte';
-export { default as AbsoluteCanvas } from './AbsoluteCanvas.svelte';
+export { default as FreeCanvas } from './FreeCanvas.svelte';
 export { default as ResponsiveMediaLayout } from './ResponsiveMediaLayout.svelte';
 export { default as FlexibleLayout } from './FlexibleLayout.svelte';
 export { default as Curiosidades } from './Curiosidades.svelte';
-export { default as SuperFlex } from './SuperFlex.svelte';
 
 // Add other component exports here

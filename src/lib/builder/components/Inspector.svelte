@@ -1,7 +1,6 @@
 <script>
   import { get } from 'svelte/store';
   import FieldEditor from './FieldEditor.svelte';
-  import SuperFlexEditor from './editors/SuperFlexEditor.svelte';
   import { storyStore, selectedBlock, selectedBlockId } from '../stores/storyStore.js';
   import { metadataFields, creditsFields } from '../story-defaults.js';
   import { getComponentDefinition } from '../component-registry.js';
@@ -10,7 +9,6 @@
   let activeSection = 'project';
   let rawJson = '';
   let jsonError = '';
-  let superFlexDraft = null;
   let lastSelectedBlockId = null;
 
   const clone = (value) => {
@@ -25,14 +23,12 @@
   $: definition = block ? getComponentDefinition(block.type) : null;
   $: if (block) {
     rawJson = JSON.stringify(removeInternalFields(block), null, 2);
-    superFlexDraft = block.type === 'super-flex' ? clone(block) : null;
     if (block.__id !== lastSelectedBlockId) {
       activeSection = 'block';
       lastSelectedBlockId = block.__id;
     }
   } else {
     rawJson = '';
-    superFlexDraft = null;
     lastSelectedBlockId = null;
     if (activeSection !== 'project') {
       activeSection = 'project';
@@ -63,16 +59,6 @@
   };
 
   const blockHasAdvancedFields = (definition) => Boolean(definition?.fields?.length);
-
-  const commitSuperFlexChanges = () => {
-    if (!block || block.type !== 'super-flex' || !superFlexDraft) return;
-    const blockId = get(selectedBlockId);
-    if (!blockId) return;
-
-    const draft = clone(superFlexDraft);
-    const { __id, type, ...rest } = draft;
-    storyStore.replaceBlock(blockId, { ...rest, type: 'super-flex' });
-  };
 </script>
 
 <div class="inspector">
@@ -142,9 +128,20 @@
             </button>
           </header>
 
-          {#if block.type === 'super-flex'}
-            <SuperFlexEditor bind:data={superFlexDraft} on:update={commitSuperFlexChanges} />
-          {:else if blockHasAdvancedFields(definition)}
+          {#if block.type === 'free-canvas'}
+            <div class="info-card">
+              <h4>Free Canvas</h4>
+              <p>Use o editor visual para arrastar e editar os elementos. O JSON abaixo é apenas para ajustes avançados.</p>
+            </div>
+          {/if}
+          {#if block.type === 'flourish-scrolly'}
+            <div class="info-card">
+              <h4>Flourish Scrolly</h4>
+              <p>Configure a URL do story e gerencie os passos utilizando o formulário de steps logo abaixo.</p>
+            </div>
+          {/if}
+
+          {#if blockHasAdvancedFields(definition)}
             <div class="fields card">
               {#each definition.fields as field}
                 <FieldEditor

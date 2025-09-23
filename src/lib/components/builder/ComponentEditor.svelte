@@ -11,7 +11,7 @@
 
   // Mapa de editores disponíveis
   const editorMap = {
-    'super-flex': () => import('./editors/SuperFlexEditor.svelte'),
+    'free-canvas': () => import('./editors/FreeCanvasEditor.svelte'),
     'header': () => import('./editors/HeaderEditor.svelte'),
     'text': () => import('./editors/TextEditor.svelte'),
     'photo': () => import('./editors/PhotoEditor.svelte'),
@@ -97,6 +97,7 @@
               {:else if component.type === 'before-after'}🔄
               {:else if component.type === 'parallax'}🌄
               {:else if component.type === 'flourish'}📊
+              {:else if component.type === 'flourish-scrolly'}🌀
               {:else if component.type === 'character'}👤
               {:else if component.type === 'timeline'}⏰
               {:else if component.type === 'document'}📄

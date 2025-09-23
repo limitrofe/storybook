@@ -47,6 +47,11 @@ function ensureMediaVariants(paragraph = {}) {
     ensure(obj, b, a);
   };
 
+  if (type === 'absolute-canvas' || type === 'super-flex' || type === 'superflex') {
+    clone.type = 'free-canvas';
+    type = 'free-canvas';
+  }
+
   switch (type) {
     case 'header':
       ensurePair(clone, 'backgroundImageMobile', 'backgroundImage');
@@ -130,21 +135,54 @@ function ensureMediaVariants(paragraph = {}) {
         });
       }
       break;
-    case 'super-flex': {
-      if (clone.container && typeof clone.container === 'object') {
-        const container = { ...clone.container };
-        const bgImage = container.backgroundImage ? { ...container.backgroundImage } : undefined;
-        const bgVideo = container.backgroundVideo ? { ...container.backgroundVideo } : undefined;
-        if (bgImage) {
-          ensurePair(bgImage, 'mobile', 'desktop');
-          container.backgroundImage = bgImage;
-        }
-        if (bgVideo) {
-          ensurePair(bgVideo, 'mobile', 'desktop');
-          container.backgroundVideo = bgVideo;
-        }
-        clone.container = container;
+    case 'free-canvas': {
+      clone.minHeightDesktop = Number(clone.minHeightDesktop ?? clone.heightDesktop ?? clone.height ?? 400) || 0;
+      clone.maxHeightDesktop = clone.maxHeightDesktop === null || clone.maxHeightDesktop === undefined ? null : Number(clone.maxHeightDesktop);
+      if (!Number.isFinite(clone.maxHeightDesktop)) clone.maxHeightDesktop = null;
+      clone.minHeightMobile = Number(clone.minHeightMobile ?? clone.heightMobile ?? clone.height ?? 400) || 0;
+      clone.maxHeightMobile = clone.maxHeightMobile === null || clone.maxHeightMobile === undefined ? null : Number(clone.maxHeightMobile);
+      if (!Number.isFinite(clone.maxHeightMobile)) clone.maxHeightMobile = null;
+      clone.baseWidthDesktop = Number(clone.baseWidthDesktop) || 1440;
+      clone.baseWidthMobile = Number(clone.baseWidthMobile) || 375;
+
+      delete clone.widthDesktop;
+      delete clone.widthMobile;
+      delete clone.heightDesktop;
+      delete clone.heightMobile;
+
+      if (!Array.isArray(clone.items)) {
+        clone.items = [];
+        break;
       }
+      clone.items = clone.items.map((item) => {
+        if (!item || typeof item !== 'object') return null;
+        const desktop = item.desktop && typeof item.desktop === 'object' ? item.desktop : {};
+        const mobile = item.mobile && typeof item.mobile === 'object' ? item.mobile : {};
+        return {
+          id: item.id || `free-${Date.now()}`,
+          type: item.type || 'text',
+          content: item.content || '',
+          src: item.src || '',
+          srcMobile: item.srcMobile || '',
+          textStyles: { ...(item.textStyles || {}) },
+          desktop: {
+            x: Number(desktop.x) || 0,
+            y: Number(desktop.y) || 0,
+            width: Number(desktop.width) || 200,
+            height: Number(desktop.height) || 120,
+            z: Number(desktop.z) || 1,
+            opacity: desktop.opacity === undefined ? 1 : Number(desktop.opacity)
+          },
+          mobile: {
+            x: Number(mobile.x) || 0,
+            y: Number(mobile.y) || 0,
+            width: Number(mobile.width) || 200,
+            height: Number(mobile.height) || 120,
+            z: Number(mobile.z) || 1,
+            opacity: mobile.opacity === undefined ? 1 : Number(mobile.opacity)
+          }
+        };
+      }).filter(Boolean);
       break;
     }
   }

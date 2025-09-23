@@ -5,6 +5,7 @@
   import CarouselItemsEditor from './editors/CarouselItemsEditor.svelte';
   import ListItemsEditor from './editors/ListItemsEditor.svelte';
   import RichTextEditor from './RichTextEditor.svelte';
+  import FlourishScrollyStepsEditor from './editors/FlourishScrollyStepsEditor.svelte';
 
   export let field;
   export let value;
@@ -157,6 +158,11 @@
       />
     {:else if field.type === 'carousel-items'}
       <CarouselItemsEditor
+        value={value ?? []}
+        on:change={(event) => dispatch('change', { value: event.detail.value })}
+      />
+    {:else if field.type === 'flourish-scrolly-steps'}
+      <FlourishScrollyStepsEditor
         value={value ?? []}
         on:change={(event) => dispatch('change', { value: event.detail.value })}
       />

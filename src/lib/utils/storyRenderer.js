@@ -138,25 +138,16 @@ export function parseStoryComponents(paragraphs) {
 				component.whiteSpaceMobile = paragraph.whiteSpaceMobile;
 				break;
 
-			case 'absolute-canvas':
-				component.type = 'absolute-canvas';
-				component.heightDesktop = paragraph.heightDesktop || '100vh';
-				component.heightMobile = paragraph.heightMobile || '100vh';
+			case 'free-canvas':
+			case 'canvas-livre':
+				component.type = 'free-canvas';
+				component.widthDesktop = Number(paragraph.widthDesktop) || 1200;
+				component.heightDesktop = Number(paragraph.heightDesktop) || 600;
+				component.widthMobile = Number(paragraph.widthMobile) || 375;
+				component.heightMobile = Number(paragraph.heightMobile) || 600;
 				component.backgroundColor = paragraph.backgroundColor || '#000000';
-				component.backgroundImage = paragraph.backgroundImage || '';
-				component.backgroundImageMobile = paragraph.backgroundImageMobile || '';
-				component.backgroundVideo = paragraph.backgroundVideo || '';
-				component.backgroundVideoMobile = paragraph.backgroundVideoMobile || '';
-				component.elements = paragraph.elements || [];
+				component.items = paragraph.items || paragraph.elements || [];
 			break;
-
-            			case 'super-flex':
-			case 'superflex':
-				component.type = 'super-flex';
-				component.backgroundColor = paragraph.backgroundColor;
-				component.backgroundImage = paragraph.backgroundImage;
-				component.items = paragraph.items || [];
-				break;
 
 
 			case 'foto':

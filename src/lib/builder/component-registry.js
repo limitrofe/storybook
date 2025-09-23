@@ -22,8 +22,7 @@ import CrimeExplainer from '$lib/components/story/CrimeExplainer.svelte';
 import AnchorPoint from '$lib/components/story/AnchorPoint.svelte';
 import FlexibleLayout from '$lib/components/story/FlexibleLayout.svelte';
 import ResponsiveMediaLayout from '$lib/components/story/ResponsiveMediaLayout.svelte';
-import AbsoluteCanvas from '$lib/components/story/AbsoluteCanvas.svelte';
-import SuperFlex from '$lib/components/story/SuperFlex.svelte';
+import FreeCanvas from '$lib/components/story/FreeCanvas.svelte';
 
 /**
  * Catálogo centralizado de blocos disponíveis no builder.
@@ -721,7 +720,7 @@ export const componentRegistry = [
     },
     fields: [
       { path: 'src', label: 'URL do story Flourish', type: 'url', required: true },
-      { path: 'steps', label: 'Steps (JSON)', type: 'json', rows: 6, placeholder: '[{"title":"Cena 1","text":""}]', emptyValue: [] }
+      { path: 'steps', label: 'Steps', type: 'flourish-scrolly-steps', description: 'Adicione cards de texto e associe a um slide do story Flourish.', emptyValue: [] }
     ]
   },
   {
@@ -1127,79 +1126,22 @@ export const componentRegistry = [
     ]
   },
   {
-    type: 'absolute-canvas',
-    label: 'Absolute Canvas',
-    icon: '🎨',
+    type: 'free-canvas',
+    label: 'Free Canvas',
+    icon: '🖼️',
     category: 'Layout',
-    description: 'Canvas com elementos absolutamente posicionados para experiências imersivas.',
-    component: AbsoluteCanvas,
+    description: 'Canvas livre com elementos arrastáveis em pixels.',
+    component: FreeCanvas,
     defaultData: {
-      type: 'absolute-canvas',
-      heightDesktop: '100vh',
-      heightMobile: '100vh',
+      type: 'free-canvas',
+      minHeightDesktop: 400,
+      maxHeightDesktop: null,
+      minHeightMobile: 400,
+      maxHeightMobile: null,
       backgroundColor: '#000000',
-      backgroundImage: '',
-      backgroundImageMobile: '',
-      backgroundVideo: '',
-      backgroundVideoMobile: '',
-      elements: []
-    },
-    fields: [
-      { path: 'heightDesktop', label: 'Altura desktop', type: 'text', placeholder: '100vh' },
-      { path: 'heightMobile', label: 'Altura mobile', type: 'text', placeholder: '100vh' },
-      { path: 'backgroundColor', label: 'Cor de fundo', type: 'color' },
-      { path: 'backgroundImage', label: 'Imagem desktop', type: 'url' },
-      { path: 'backgroundImageMobile', label: 'Imagem mobile', type: 'url' },
-      { path: 'backgroundVideo', label: 'Vídeo desktop', type: 'url' },
-      { path: 'backgroundVideoMobile', label: 'Vídeo mobile', type: 'url' },
-      { path: 'elements', label: 'Elementos (JSON)', type: 'json', rows: 10, placeholder: '[{"type":"text","content":"","position":{"desktop":{"x":"50%","y":"40%"}}}]', emptyValue: [] }
-    ]
-  },
-  {
-    type: 'super-flex',
-    label: 'Super Flex',
-    icon: '🧩',
-    category: 'Layout',
-    description: 'Layout flexível com container configurável e itens variados.',
-    component: SuperFlex,
-    defaultData: {
-      type: 'super-flex',
-      container: {
-        backgroundColor: '#0b0d17',
-        backgroundImage: { desktop: '', mobile: '' },
-        backgroundVideo: { desktop: '', mobile: '' },
-        height: { desktop: '100vh', mobile: '80vh' },
-        padding: { desktop: '3rem', mobile: '1.5rem' },
-        margin: { desktop: '0', mobile: '0' },
-        alignItems: { desktop: 'center', mobile: 'center' },
-        justifyContent: { desktop: 'center', mobile: 'center' },
-        gap: { desktop: '2rem', mobile: '1.25rem' },
-        flexDirection: { desktop: 'row', mobile: 'column' }
-      },
       items: []
     },
-    fields: [
-      { path: 'container.backgroundColor', label: 'Fundo do container', type: 'color' },
-      { path: 'container.backgroundImage.desktop', label: 'Imagem desktop', type: 'url' },
-      { path: 'container.backgroundImage.mobile', label: 'Imagem mobile', type: 'url' },
-      { path: 'container.backgroundVideo.desktop', label: 'Vídeo desktop', type: 'url' },
-      { path: 'container.backgroundVideo.mobile', label: 'Vídeo mobile', type: 'url' },
-      { path: 'container.height.desktop', label: 'Altura desktop', type: 'text', placeholder: '100vh' },
-      { path: 'container.height.mobile', label: 'Altura mobile', type: 'text', placeholder: '80vh' },
-      { path: 'container.padding.desktop', label: 'Padding desktop', type: 'text', placeholder: '3rem' },
-      { path: 'container.padding.mobile', label: 'Padding mobile', type: 'text', placeholder: '1.5rem' },
-      { path: 'container.margin.desktop', label: 'Margem desktop', type: 'text', placeholder: '0' },
-      { path: 'container.margin.mobile', label: 'Margem mobile', type: 'text', placeholder: '0' },
-      { path: 'container.gap.desktop', label: 'Gap desktop', type: 'text', placeholder: '2rem' },
-      { path: 'container.gap.mobile', label: 'Gap mobile', type: 'text', placeholder: '1.25rem' },
-      { path: 'container.alignItems.desktop', label: 'align-items desktop', type: 'text', placeholder: 'center' },
-      { path: 'container.alignItems.mobile', label: 'align-items mobile', type: 'text', placeholder: 'center' },
-      { path: 'container.justifyContent.desktop', label: 'justify-content desktop', type: 'text', placeholder: 'center' },
-      { path: 'container.justifyContent.mobile', label: 'justify-content mobile', type: 'text', placeholder: 'center' },
-      { path: 'container.flexDirection.desktop', label: 'flex-direction desktop', type: 'text', placeholder: 'row' },
-      { path: 'container.flexDirection.mobile', label: 'flex-direction mobile', type: 'text', placeholder: 'column' },
-      { path: 'items', label: 'Itens (JSON)', type: 'json', rows: 10, placeholder: '[{"type":"text","content":"<h2>Bloco</h2>"}]', emptyValue: [] }
-    ]
+    fields: []
   },
   {
     type: 'ancora',

@@ -1,5 +1,6 @@
 <script>
   export let src = '';
+  export let srcMobile = '';
   export let alt = '';
   export let caption = '';
   export let credit = '';

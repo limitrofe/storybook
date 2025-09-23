@@ -61,18 +61,27 @@ export function loadFlourishScript() {
 
 		script.onload = () => {
 			console.log('✅ Script do Flourish carregado com sucesso');
-			
-			// Aguarda um pouco para garantir que tudo está inicializado
-			setTimeout(() => {
-				if (window.Flourish) {
+
+			const startedAt = Date.now();
+			const maxWait = 5000;
+
+			(function checkAvailability() {
+				if (window.Flourish && window.Flourish.Live) {
 					console.log('✅ window.Flourish disponível:', typeof window.Flourish);
 					isScriptLoaded = true;
 					resolve();
-				} else {
-					console.error('❌ window.Flourish não está disponível após carregamento');
-					reject(new Error('window.Flourish não disponível'));
+					return;
 				}
-			}, 100);
+
+				if (Date.now() - startedAt > maxWait) {
+					console.error('❌ window.Flourish não está disponível após carregamento');
+					scriptPromise = null; // permite tentativa futura
+					reject(new Error('window.Flourish não disponível'));
+					return;
+				}
+
+				requestAnimationFrame(checkAvailability);
+			})();
 		};
 
 		script.onerror = () => {

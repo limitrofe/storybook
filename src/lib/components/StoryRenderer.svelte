@@ -1,5 +1,6 @@
 <!-- StoryRenderer.svelte - COMPLETO com ResponsiveMediaLayout -->
 <script>
+	import { onMount } from 'svelte';
 	// Importação dos componentes da história
 	import Header from './story/Header.svelte';
 	import StoryText from './story/StoryText.svelte';
@@ -33,8 +34,30 @@
 	import FlexibleLayout from './story/FlexibleLayout.svelte';
 	// 🎨 NOVO: ResponsiveMediaLayout
 	import ResponsiveMediaLayout from './story/ResponsiveMediaLayout.svelte';
-import AbsoluteCanvas from './story/AbsoluteCanvas.svelte';
-	import SuperFlex from './story/SuperFlex.svelte';
+import FreeCanvas from './story/FreeCanvas.svelte';
+
+	export let previewDevice = null;
+
+	let device = 'desktop';
+
+	function determineDevice() {
+		if (previewDevice && typeof previewDevice === 'string') return previewDevice;
+		if (typeof window !== 'undefined') {
+			return window.innerWidth <= 768 ? 'mobile' : 'desktop';
+		}
+		return 'desktop';
+	}
+
+	$: device = determineDevice();
+
+	onMount(() => {
+		if (typeof window === 'undefined' || previewDevice) return;
+		const handleResize = () => {
+			device = determineDevice();
+		};
+		window.addEventListener('resize', handleResize);
+		return () => window.removeEventListener('resize', handleResize);
+	});
 
 
 	export let storyData = {};
@@ -69,11 +92,6 @@ import AbsoluteCanvas from './story/AbsoluteCanvas.svelte';
 			case 'titulo':
 				return 'section-title';
 
-// ✅ NOVO: Case para o SuperFlex
-			case 'super-flex':
-			case 'superflex':
-				return 'super-flex';
-
 			case 'layout-flexivel':
 			case 'flexible-layout': 
 			case 'layout-personalizado':
@@ -86,8 +104,13 @@ import AbsoluteCanvas from './story/AbsoluteCanvas.svelte';
 			case 'media-layout':
 				return 'responsive-media';
 
-				case 'absolute-canvas':
-  return 'absolute-canvas';
+			case 'free-canvas':
+			case 'canvas-livre':
+			case 'creative-canvas':
+			case 'absolute-canvas':
+			case 'super-flex':
+			case 'superflex':
+				return 'free-canvas';
 
 			case 'frase':
 			case 'citacao':
@@ -578,20 +601,18 @@ import AbsoluteCanvas from './story/AbsoluteCanvas.svelte';
 					imagens={processImagens(props.imagens || props.images || [])}
 				/>
 
-				{:else if componentType === 'absolute-canvas'}
-  <AbsoluteCanvas
-    heightDesktop={props.heightDesktop}
-    heightMobile={props.heightMobile}
-    backgroundColor={props.backgroundColor}
-    backgroundImage={props.backgroundImage}
-    backgroundImageMobile={props.backgroundImageMobile}
-    backgroundVideo={props.backgroundVideo}
-    backgroundVideoMobile={props.backgroundVideoMobile}
-    elements={props.elements}
-  />
-
-  			{:else if componentType === 'super-flex'}
-				<SuperFlex data={props} />
+			{:else if componentType === 'free-canvas'}
+				<FreeCanvas
+					minHeightDesktop={Number(props.minHeightDesktop ?? props.heightDesktop ?? props.height ?? 400)}
+					maxHeightDesktop={props.maxHeightDesktop ?? null}
+					minHeightMobile={Number(props.minHeightMobile ?? props.heightMobile ?? props.height ?? 400)}
+					maxHeightMobile={props.maxHeightMobile ?? null}
+					baseWidthDesktop={Number(props.baseWidthDesktop ?? 1440)}
+					baseWidthMobile={Number(props.baseWidthMobile ?? 375)}
+					backgroundColor={props.backgroundColor || '#000000'}
+					items={props.items || props.elements || []}
+					device={device}
+				/>
 
 {:else if componentType === 'photo'}
 	<PhotoWithCaption

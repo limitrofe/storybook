@@ -146,16 +146,26 @@ Math.round(top_px - progress * (background_height - available_space))
 fixed = true;
         }
 
+        if (!sections.length) return;
+
+        const activationLine = top_px + threshold_px;
+        let activeIndex = 0;
+        let activeRect = null;
+
         for (let i = 0; i < sections.length; i++) {
-            const section = sections[i];
-const { top } = section.getBoundingClientRect();
-            const next = sections[i + 1];
-            const bottom = next ? next.getBoundingClientRect().top : fg.bottom;
-offset = (threshold_px - top) / (bottom - top);
-            if (bottom >= threshold_px) {
-                index = i;
-break;
+            const rect = sections[i].getBoundingClientRect();
+            if (rect.top <= activationLine) {
+                activeIndex = i;
+                activeRect = rect;
             }
+        }
+
+        index = activeIndex;
+
+        if (activeRect) {
+            const height = activeRect.height || 1;
+            const progressRaw = (activationLine - activeRect.top) / height;
+            offset = Math.max(0, Math.min(1, progressRaw));
         }
     }
 </script>

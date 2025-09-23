@@ -95,14 +95,16 @@
 >
   <!-- Before Image -->
   <div class="before-after__before">
-    <picture>
-      {#if beforeImageMobile}
-        <source srcset={beforeImageMobile} media="(max-width: 768px)" />
-      {/if}
-      <img src={beforeImage} alt={beforeLabel} loading="lazy" />
-    </picture>
-    <div class="before-after__label before-after__label--before">
-      {beforeLabel}
+    <div class="before-after__media before-after__media--before">
+      <picture>
+        {#if beforeImageMobile}
+          <source srcset={beforeImageMobile} media="(max-width: 768px)" />
+        {/if}
+        <img src={beforeImage} alt={beforeLabel} loading="lazy" />
+      </picture>
+      <div class="before-after__label before-after__label--before">
+        {beforeLabel}
+      </div>
     </div>
     {#if beforeCaption || beforeCredit}
       <div class="before-after__caption">
@@ -113,21 +115,22 @@
   </div>
 
   <!-- After Image -->
-  <div 
-    class="before-after__after"
-    style={orientation === 'vertical' 
-      ? `clip-path: inset(0 0 0 ${sliderPosition}%)` 
-      : `clip-path: inset(${sliderPosition}% 0 0 0)`
-    }
-  >
-    <picture>
-      {#if afterImageMobile}
-        <source srcset={afterImageMobile} media="(max-width: 768px)" />
-      {/if}
-      <img src={afterImage} alt={afterLabel} loading="lazy" />
-    </picture>
-    <div class="before-after__label before-after__label--after">
-      {afterLabel}
+  <div class="before-after__after">
+    <div
+      class="before-after__media before-after__media--after"
+      style={orientation === 'vertical'
+        ? `clip-path: inset(0 0 0 ${sliderPosition}%)`
+        : `clip-path: inset(${sliderPosition}% 0 0 0)`}
+    >
+      <picture>
+        {#if afterImageMobile}
+          <source srcset={afterImageMobile} media="(max-width: 768px)" />
+        {/if}
+        <img src={afterImage} alt={afterLabel} loading="lazy" />
+      </picture>
+      <div class="before-after__label before-after__label--after">
+        {afterLabel}
+      </div>
     </div>
     {#if afterCaption || afterCredit}
       <div class="before-after__caption">
@@ -186,6 +189,18 @@
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 2;
+  }
+
+  .before-after__before {
+    z-index: 1;
+  }
+
+  .before-after__media {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
   }
 
   .before-after img {

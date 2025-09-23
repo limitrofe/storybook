@@ -13,11 +13,25 @@
   // Resolver src
   $: actualSrc = src || flourishUrl;
 
-  let length = steps.length - 1;
   let currentStepIndex = 0;
+  let previousStepIndex = 0;
+
+  const normalizeStep = (step = {}) => ({
+    slide: typeof step.slide === 'number' ? step.slide : Number.parseInt(step.slide ?? 0, 10) || 0,
+    title: step.title ?? '',
+    text: step.text ?? '',
+    position: step.position || 'center',
+    variant: step.variant || ''
+  });
+
+  $: normalizedSteps = Array.isArray(steps) && steps.length
+    ? steps.map(normalizeStep)
+    : [normalizeStep()];
+
+  $: totalSteps = normalizedSteps.length - 1;
 
   // Preparar conteúdo dos steps
-  $: stepContent = steps.map(step => {
+  $: stepContent = normalizedSteps.map((step) => {
     let content = '';
     if (step.title) content += `<h3>${step.title}</h3>`;
     if (step.text) content += `<div>${step.text}</div>`;
@@ -25,21 +39,25 @@
   });
 
   // Calcular slide do Flourish baseado no step atual
-  $: flourishSlideIndex = steps[currentStepIndex]?.slide !== undefined ? steps[currentStepIndex].slide : 0;
+  $: flourishSlideIndex = normalizedSteps[currentStepIndex]?.slide ?? 0;
+
+  $: if (currentStepIndex !== previousStepIndex) {
+    previousStepIndex = currentStepIndex;
+  }
 
   $: {
     console.log('📜 FlourishScrolly:', { 
-      actualSrc, 
-      currentStepIndex, 
-      flourishSlideIndex, 
-      stepsLength: steps.length 
+      actualSrc,
+      currentStepIndex,
+      flourishSlideIndex,
+      stepsLength: normalizedSteps.length
     });
   }
 </script>
 
-{#if actualSrc && steps.length > 0}
+{#if actualSrc && normalizedSteps.length > 0}
   <div class="scrolly-wrapper">
-    <Scroller top={0} bottom={1} threshold={0.5} bind:index={currentStepIndex}>
+    <Scroller top={0} bottom={1} threshold={0} bind:index={currentStepIndex}>
       <div slot="background" class="flourish-background-fullscreen">
         <FlourishScrollyEmbed src={actualSrc} index={flourishSlideIndex} />
       </div>
@@ -48,7 +66,14 @@
         <section class="spacer-top"></section>
         
         {#each stepContent as stepText, i}
-          <Step {stepText} {length} {i} />
+          <Step
+            {stepText}
+            i={i}
+            length={totalSteps}
+            position={normalizedSteps[i]?.position || 'center'}
+            variant={normalizedSteps[i]?.variant || ''}
+            active={i === currentStepIndex}
+          />
         {/each}
       </div>
     </Scroller>
@@ -61,7 +86,7 @@
       {#if !actualSrc}
         <p>Propriedade 'src' não definida.</p>
         <small>Exemplo: <code>src: story/3218812</code></small>
-      {:else if steps.length === 0}
+      {:else if normalizedSteps.length === 0}
         <p>Nenhum step definido.</p>
         <small>Adicione steps com title, text e slide.</small>
       {/if}
