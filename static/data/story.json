@@ -931,32 +931,50 @@
         {
           "slide": 0,
           "title": "sadfasdf",
-          "text": "<b>asdf</b>"
+          "text": "asdf",
+          "position": "right",
+          "backgroundColor": "#e100ff",
+          "textColor": ""
         },
         {
           "slide": 2,
           "title": "asdfasdf",
-          "text": ""
+          "text": "",
+          "position": "right",
+          "backgroundColor": "",
+          "textColor": ""
         },
         {
           "slide": 9,
           "title": "sfqfwef",
-          "text": ""
+          "text": "",
+          "position": "right",
+          "backgroundColor": "",
+          "textColor": ""
         },
         {
           "slide": 0,
           "title": "sadfq",
-          "text": ""
+          "text": "",
+          "position": "right",
+          "backgroundColor": "",
+          "textColor": ""
         },
         {
           "slide": 1,
           "title": "asdfasdf",
-          "text": ""
+          "text": "",
+          "position": "right",
+          "backgroundColor": "",
+          "textColor": ""
         },
         {
           "slide": 1,
           "title": "",
-          "text": ""
+          "text": "",
+          "position": "right",
+          "backgroundColor": "",
+          "textColor": ""
         }
       ]
     }

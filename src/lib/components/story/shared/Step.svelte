@@ -5,16 +5,33 @@
   export let position = 'right';
   export let variant = '';
   export let active = false;
+  export let backgroundColor = '';
+  export let textColor = '';
+
+  $: styleVars = [
+    backgroundColor ? `--step-bg-color:${backgroundColor}` : '',
+    textColor ? `--step-text-color:${textColor}` : '',
+    textColor ? `--step-heading-color:${textColor}` : ''
+  ]
+    .filter(Boolean)
+    .join(';');
 </script>
 
-<section class="step-container position-{position}" class:last-section={i === length} class:active>
-  <div class="step-content" class:destaque={variant === 'destaque'}>
+<section
+  class="step-container position-{position}"
+  class:last-section={i === length}
+  class:active
+>
+  <div
+    class="step-content"
+    class:destaque={variant === 'destaque'}
+    style={styleVars}
+  >
     {@html stepText}
   </div>
 </section>
 
 <style>
-
 
     .step-container {
         display: flex;
@@ -23,14 +40,13 @@
         padding: 2rem 5vw;
         opacity: 0;
         pointer-events: none;
-        transform: translateY(40px);
-        transition: opacity 0.35s ease, transform 0.35s ease;
+        visibility: hidden;
     }
 
     .step-container.active {
         opacity: 1;
         pointer-events: auto;
-        transform: translateY(0);
+        visibility: visible;
     }
     /* NOVO: Posicionamentos baseados na classe */
     .position-left {
@@ -46,10 +62,10 @@
     }
 
     .step-content {
-        background-color: rgba(var(--color-background-rgb), 0.9);
+        background-color: var(--step-bg-color, rgba(var(--color-background-rgb), 0.9));
         backdrop-filter: blur(8px);
         -webkit-backdrop-filter: blur(8px);
-        color: var(--color-text);
+        color: var(--step-text-color, var(--color-text));
         padding: 2rem;
         border: 1px solid var(--color-border);
         border-radius: 12px;
@@ -64,7 +80,7 @@
         font-size: var(--font-size-90);
         font-weight: 700;
         margin: 0 0 1rem 0;
-        color: var(--color-primary);
+        color: var(--step-heading-color, var(--color-primary));
         line-height: 1.2;
     }
 

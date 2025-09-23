@@ -19,6 +19,9 @@
     slide: 0,
     title: '',
     text: '',
+    position: 'right',
+    backgroundColor: '',
+    textColor: '',
     ...clone(overrides)
   });
 
@@ -105,6 +108,7 @@
       </header>
 
       <div class="fields">
+
         <div class="grid">
           <label>
             <span>Slide do Flourish</span>
@@ -117,15 +121,24 @@
             <small>Use o índice do slide (0 = primeiro). Pode repetir valores para múltiplos cards no mesmo slide.</small>
           </label>
           <label>
-            <span>Título (opcional)</span>
-            <input
-              type="text"
-              value={step.title}
-              placeholder="Título exibido acima do texto"
-              on:input={(event) => updateStep(index, 'title', event.currentTarget.value)}
-            />
+            <span>Posicionamento do card</span>
+            <select value={step.position || 'right'} on:change={(event) => updateStep(index, 'position', event.currentTarget.value)}>
+              <option value="left">Esquerda</option>
+              <option value="center">Centro</option>
+              <option value="right">Direita</option>
+            </select>
           </label>
         </div>
+
+        <label>
+          <span>Título (opcional)</span>
+          <input
+            type="text"
+            value={step.title}
+            placeholder="Título exibido acima do texto"
+            on:input={(event) => updateStep(index, 'title', event.currentTarget.value)}
+          />
+        </label>
 
         <label>
           <span>Texto do step</span>
@@ -136,6 +149,44 @@
             on:change={(event) => updateStep(index, 'text', event.detail.value)}
           />
         </label>
+
+        <div class="grid colors">
+          <label>
+            <span>Cor do fundo</span>
+            <div class="color-input">
+              <input
+                type="color"
+                value={step.backgroundColor && step.backgroundColor.startsWith('#') ? step.backgroundColor : '#ffffff'}
+                on:input={(event) => updateStep(index, 'backgroundColor', event.currentTarget.value)}
+              />
+              <input
+                type="text"
+                value={step.backgroundColor}
+                placeholder="(opcional) ex: transparent ou rgba(...)"
+                on:input={(event) => updateStep(index, 'backgroundColor', event.currentTarget.value)}
+              />
+            </div>
+            <small>Deixe vazio para usar o tema do projeto.</small>
+          </label>
+
+          <label>
+            <span>Cor do texto</span>
+            <div class="color-input">
+              <input
+                type="color"
+                value={step.textColor && step.textColor.startsWith('#') ? step.textColor : '#000000'}
+                on:input={(event) => updateStep(index, 'textColor', event.currentTarget.value)}
+              />
+              <input
+                type="text"
+                value={step.textColor}
+                placeholder="(opcional) ex: #ffffff"
+                on:input={(event) => updateStep(index, 'textColor', event.currentTarget.value)}
+              />
+            </div>
+            <small>Deixe vazio para herdar a cor padrão.</small>
+          </label>
+        </div>
       </div>
     </article>
   {/each}
@@ -224,7 +275,8 @@
   }
 
   label input[type="text"],
-  label input[type="number"] {
+  label input[type="number"],
+  label select {
     border: 1px solid rgba(148, 163, 184, 0.6);
     border-radius: 8px;
     padding: 0.45rem 0.5rem;
@@ -242,8 +294,31 @@
     gap: 0.75rem;
   }
 
+  .grid.colors {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  .color-input {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .color-input input[type="color"] {
+    width: 100%;
+    height: 36px;
+    padding: 0;
+    border: none;
+    background: transparent;
+  }
+
   @media (min-width: 720px) {
     .grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid.colors {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }

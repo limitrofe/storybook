@@ -20,7 +20,9 @@
     slide: typeof step.slide === 'number' ? step.slide : Number.parseInt(step.slide ?? 0, 10) || 0,
     title: step.title ?? '',
     text: step.text ?? '',
-    position: step.position || 'center',
+    position: step.position || 'right',
+    backgroundColor: step.backgroundColor || '',
+    textColor: step.textColor || '',
     variant: step.variant || ''
   });
 
@@ -70,8 +72,10 @@
             {stepText}
             i={i}
             length={totalSteps}
-            position={normalizedSteps[i]?.position || 'center'}
+            position={normalizedSteps[i]?.position || 'right'}
             variant={normalizedSteps[i]?.variant || ''}
+            backgroundColor={normalizedSteps[i]?.backgroundColor || ''}
+            textColor={normalizedSteps[i]?.textColor || ''}
             active={i === currentStepIndex}
           />
         {/each}
