@@ -27,7 +27,7 @@
   const DEFAULT_ITEM = (type = 'text') => ({
     id: createId(),
     type,
-    content: '<p>Seu texto aqui</p>',
+    content: 'Seu texto aqui',
     src: '',
     srcMobile: '',
     poster: '',
@@ -245,7 +245,11 @@ function setCanvasValue(field, value) {
   function clampPosition(value, axis, item) {
     const frame = item[currentDevice] || {};
     const size = axis === 'x' ? (frame.width || 0) : (frame.height || 0);
-    const limit = axis === 'x' ? (currentDevice === 'desktop' ? data.baseWidthDesktop : data.baseWidthMobile) : canvasHeightBase;
+    if (axis === 'y') {
+      return Math.max(0, value);
+    }
+
+    const limit = currentDevice === 'desktop' ? data.baseWidthDesktop : data.baseWidthMobile;
     const max = Math.max(0, limit - size);
     return Math.max(0, Math.min(max, value));
   }

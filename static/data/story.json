@@ -981,6 +981,123 @@
           "textColor": "transparent"
         }
       ]
+    },
+    {
+      "type": "free-canvas",
+      "minHeightDesktop": 400,
+      "maxHeightDesktop": null,
+      "minHeightMobile": 400,
+      "maxHeightMobile": null,
+      "baseWidthDesktop": 1440,
+      "baseWidthMobile": 375,
+      "backgroundColor": "#000000",
+      "items": [
+        {
+          "id": "35eeacc7-9ff9-4204-a1b0-7dfd5ccf7571",
+          "type": "text",
+          "content": "Seu texto aqui",
+          "src": "",
+          "srcMobile": "",
+          "textStyles": {
+            "fontFamily": "",
+            "fontSize": "",
+            "fontSizeMobile": "",
+            "lineHeight": "",
+            "lineHeightMobile": "",
+            "textAlign": "left",
+            "textAlignMobile": "left",
+            "color": "",
+            "fontWeight": "",
+            "typography": ""
+          },
+          "desktop": {
+            "x": 291.65668604584755,
+            "y": 300,
+            "width": 260,
+            "height": 140,
+            "z": 1,
+            "opacity": 1
+          },
+          "mobile": {
+            "x": 40,
+            "y": 80,
+            "width": 220,
+            "height": 140,
+            "z": 1,
+            "opacity": 1
+          }
+        },
+        {
+          "id": "103170a0-ad4b-4b19-bd11-ec5e94954502",
+          "type": "text",
+          "content": "Seu texto aqui",
+          "src": "",
+          "srcMobile": "",
+          "textStyles": {
+            "fontFamily": "",
+            "fontSize": "",
+            "fontSizeMobile": "",
+            "lineHeight": "",
+            "lineHeightMobile": "",
+            "textAlign": "left",
+            "textAlignMobile": "left",
+            "color": "",
+            "fontWeight": "",
+            "typography": "h1"
+          },
+          "desktop": {
+            "x": 0.2395213633621438,
+            "y": 0,
+            "width": 260,
+            "height": 140,
+            "z": 1,
+            "opacity": 1
+          },
+          "mobile": {
+            "x": 40,
+            "y": 80,
+            "width": 220,
+            "height": 140,
+            "z": 1,
+            "opacity": 1
+          }
+        },
+        {
+          "id": "344ada1d-4a69-47f8-ba78-5ba1b2b76461",
+          "type": "text",
+          "content": "Seu texto aqui",
+          "src": "",
+          "srcMobile": "",
+          "textStyles": {
+            "fontFamily": "",
+            "fontSize": "",
+            "fontSizeMobile": "",
+            "lineHeight": "",
+            "lineHeightMobile": "",
+            "textAlign": "left",
+            "textAlignMobile": "left",
+            "color": "",
+            "fontWeight": "",
+            "typography": "blockquote"
+          },
+          "desktop": {
+            "x": 732.7744490241303,
+            "y": 0,
+            "width": 260,
+            "height": 140,
+            "z": 1,
+            "opacity": 1
+          },
+          "mobile": {
+            "x": 40,
+            "y": 80,
+            "width": 220,
+            "height": 140,
+            "z": 1,
+            "opacity": 1
+          }
+        }
+      ]
     }
   ]
 }

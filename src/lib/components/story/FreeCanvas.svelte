@@ -8,6 +8,7 @@
   export let backgroundColor = '#000000';
   export let items = [];
   export let device = 'desktop';
+  export let typography = {};
 
   let isMobile;
   $: isMobile = device === 'mobile';
@@ -21,7 +22,19 @@
     return `${(value / baseWidth) * 100}vw`;
   }
 
-  function getTextContainerStyle(item) {
+  function selectValue(primary, fallback) {
+    if (primary !== undefined && primary !== null && primary !== '') return primary;
+    return fallback ?? '';
+  }
+
+  function getTypographyConfig(tag) {
+    if (!tag || !typography || typeof typography !== 'object') return null;
+    if (tag === 'blockquote') return typography.blockquote || null;
+    if (tag === 'p') return typography.body || null;
+    return typography[tag] || null;
+  }
+
+  function getTextContainerStyle(item, tag) {
     const styles = item.textStyles || {};
     const align = isMobile ? styles.textAlignMobile || styles.textAlign || 'left' : styles.textAlign || 'left';
     const declarations = [
@@ -33,14 +46,49 @@
       `justify-content:${styles.horizontalAlign || 'flex-start'}`
     ];
 
-    const fontSize = isMobile ? styles.fontSizeMobile || styles.fontSize : styles.fontSize;
-    const lineHeight = isMobile ? styles.lineHeightMobile || styles.lineHeight : styles.lineHeight;
+    const config = getTypographyConfig(tag || 'p');
+    if (config?.background) declarations.push(`background:${config.background}`);
+    if (config?.borderColor) {
+      const width = config.borderWidth || '1px';
+      declarations.push(`border:${width} solid ${config.borderColor}`);
+    }
 
-    if (styles.fontFamily) declarations.push(`font-family:${styles.fontFamily}`);
+    return `${declarations.join(';')};`;
+  }
+
+  function getTextContentStyle(item, tag) {
+    const styles = item.textStyles || {};
+    const config = getTypographyConfig(tag || 'p');
+    const declarations = ['margin:0'];
+
+    const fontFamily = selectValue(styles.fontFamily, config?.fontFamily);
+    const fontWeight = selectValue(styles.fontWeight, config?.fontWeight);
+    const fontStyle = selectValue(styles.fontStyle, config?.fontStyle);
+    const textTransform = selectValue(styles.textTransform, config?.textTransform);
+    const letterSpacing = selectValue(styles.letterSpacing, config?.letterSpacing);
+    const color = selectValue(styles.color, config?.color);
+
+    if (fontFamily) declarations.push(`font-family:${fontFamily}`);
+    if (fontWeight) declarations.push(`font-weight:${fontWeight}`);
+    if (fontStyle) declarations.push(`font-style:${fontStyle}`);
+    if (textTransform) declarations.push(`text-transform:${textTransform}`);
+    if (letterSpacing) declarations.push(`letter-spacing:${letterSpacing}`);
+    if (color) declarations.push(`color:${color}`);
+
+    const desktop = config?.desktop || {};
+    const mobile = config?.mobile || {};
+
+    const fontSize = isMobile
+      ? selectValue(styles.fontSizeMobile, selectValue(styles.fontSize, selectValue(mobile.fontSize, desktop.fontSize)))
+      : selectValue(styles.fontSize, selectValue(desktop.fontSize, mobile.fontSize));
+    const lineHeight = isMobile
+      ? selectValue(styles.lineHeightMobile, selectValue(styles.lineHeight, selectValue(mobile.lineHeight, desktop.lineHeight)))
+      : selectValue(styles.lineHeight, selectValue(desktop.lineHeight, mobile.lineHeight));
+
     if (fontSize) declarations.push(`font-size:${fontSize}`);
     if (lineHeight) declarations.push(`line-height:${lineHeight}`);
-    if (styles.color) declarations.push(`color:${styles.color}`);
-    if (styles.fontWeight) declarations.push(`font-weight:${styles.fontWeight}`);
+
+    if (config?.accentColor) declarations.push(`--free-canvas-accent:${config.accentColor}`);
 
     return `${declarations.join(';')};`;
   }
@@ -112,11 +160,18 @@
       {#if item.type === 'text'}
         {@const tag = getTypographyTag(item)}
         {@const contentHasHtml = hasHtml(item.content)}
-        <div class="text" style={getTextContainerStyle(item)}>
+        {@const textStyle = getTextContentStyle(item, tag)}
+        <div class="text" style={getTextContainerStyle(item, tag)}>
           {#if contentHasHtml}
-            {@html item.content || ''}
+            <div class={`text-content ${tag ? `typography-${tag}` : ''}`.trim()} style={textStyle}>{@html item.content || ''}</div>
           {:else}
-            <svelte:element this={tag || 'p'} class="text-content">{@html item.content || ''}</svelte:element>
+            <svelte:element
+              this={tag || 'p'}
+              class={`text-content ${tag ? `typography-${tag}` : ''}`.trim()}
+              style={textStyle}
+            >
+              {@html item.content || ''}
+            </svelte:element>
           {/if}
         </div>
       {:else if item.type === 'image'}
@@ -144,10 +199,16 @@
   .text {
     width: 100%;
     height: 100%;
+    box-sizing: border-box;
   }
 
   .text-content {
     width: 100%;
+    margin: 0;
+  }
+
+  .text-content :global(*) {
+    margin: 0;
   }
 
   img,

@@ -612,6 +612,7 @@ import FreeCanvas from './story/FreeCanvas.svelte';
 					backgroundColor={props.backgroundColor || '#000000'}
 					items={props.items || props.elements || []}
 					device={device}
+					typography={storyData.appearance?.typography || {}}
 				/>
 
 {:else if componentType === 'photo'}
