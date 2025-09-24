@@ -7,6 +7,9 @@
   export let active = false;
   export let defaultStickyTopDesktop = 'min( 0px)';
   export let defaultStickyTopMobile = '12vh';
+  export let progress = null;
+  export let slideFromBottom = true;
+  export let travelDistance = '45vh';
 
   // Configurações padrão do step
   $: textConfig = step.textConfig || {};
@@ -15,6 +18,12 @@
   $: cardVisibility = textConfig.cardVisibility || step.cardVisibility || 'card';
   $: isTransparentCard = cardVisibility === 'transparent';
   $: isHiddenCard = cardVisibility === 'hidden';
+
+  // Motion
+  const clamp = (value, min = 0, max = 1) => Math.max(min, Math.min(max, value));
+  $: effectiveSlideFromBottom = textConfig.slideFromBottom ?? slideFromBottom;
+  $: effectiveTravelDistance = textConfig.travelDistance || travelDistance || '45vh';
+  $: stepProgress = progress != null ? clamp(progress) : (active ? 1 : 0);
 
   // Offset sticky respeitando overrides por device
   $: stickyTop = isMobile
@@ -25,7 +34,7 @@
   $: position = isMobile ? (textConfig.positionMobile || textConfig.position || 'center') : (textConfig.position || 'right');
   
   // Estilos do container
-  $: containerStyles = {
+  $: baseContainerStyles = {
     backgroundColor: isTransparentCard
       ? 'transparent'
       : textConfig.backgroundColor || 'rgba(var(--color-background-rgb), 0.9)',
@@ -40,6 +49,15 @@
     pointerEvents: isHiddenCard ? 'none' : 'auto',
     ...textConfig.customStyles
   };
+
+  $: containerStyles = effectiveSlideFromBottom
+    ? {
+        ...baseContainerStyles,
+        '--step-progress': stepProgress,
+        '--step-travel': effectiveTravelDistance,
+        '--step-transform': 'translateY(calc((1 - var(--step-progress, 1)) * var(--step-travel, 0px)))'
+      }
+    : baseContainerStyles;
 
   // Função para renderizar elementos tipográficos
   function renderElement(element) {
@@ -179,6 +197,8 @@
     .step-content {
         width: 100%;
         /* Backdrop filter já aplicado via style inline */
+        transform: var(--step-transform, none);
+        transition: transform 0.45s ease-out;
     }
 
     .step-content.transparent-card {

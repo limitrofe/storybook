@@ -15,6 +15,7 @@
 
   let currentStepIndex = 0;
   let previousStepIndex = 0;
+  let stepOffset = 0;
 
   const normalizeStep = (step = {}) => ({
     slide: typeof step.slide === 'number' ? step.slide : Number.parseInt(step.slide ?? 0, 10) || 0,
@@ -29,6 +30,8 @@
     maxWidth: step.maxWidth || '',
     maxWidthMobile: step.maxWidthMobile || '',
     variant: step.variant || '',
+    slideFromBottom: step.slideFromBottom ?? true,
+    travelDistance: step.travelDistance || '45vh',
     cardVisibility: step.cardVisibility || 'card'
   });
 
@@ -65,7 +68,7 @@
 
 {#if actualSrc && normalizedSteps.length > 0}
   <div class="scrolly-wrapper">
-    <Scroller top={0} bottom={1} threshold={0} bind:index={currentStepIndex}>
+    <Scroller top={0} bottom={1} threshold={0} bind:index={currentStepIndex} bind:offset={stepOffset}>
       <div slot="background" class="flourish-background-fullscreen">
         <FlourishScrollyEmbed src={actualSrc} index={flourishSlideIndex} />
       </div>
@@ -87,6 +90,9 @@
             padding={normalizedSteps[i]?.padding || ''}
             maxWidth={normalizedSteps[i]?.maxWidth || ''}
             maxWidthMobile={normalizedSteps[i]?.maxWidthMobile || ''}
+            slideFromBottom={normalizedSteps[i]?.slideFromBottom ?? true}
+            travelDistance={normalizedSteps[i]?.travelDistance || '45vh'}
+            progress={i === currentStepIndex ? stepOffset : i < currentStepIndex ? 1 : 0}
             cardVisibility={normalizedSteps[i]?.cardVisibility || 'card'}
             active={i === currentStepIndex}
           />

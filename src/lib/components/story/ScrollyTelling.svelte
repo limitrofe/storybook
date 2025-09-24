@@ -37,13 +37,22 @@
         videoMobile: '',
         alt: '',
         caption: '',
+        slideFromBottom: true,
+        travelDistance: '45vh',
         cardVisibility: 'card',
         stickyTop: undefined,
         stickyTopMobile: undefined,
         textConfig: undefined
     };
 
-    const buildStep = (step = {}) => ({ ...DEFAULT_STEP, ...step });
+    const buildStep = (step = {}) => {
+        const merged = { ...DEFAULT_STEP, ...step };
+        return {
+            ...merged,
+            slideFromBottom: step.slideFromBottom ?? DEFAULT_STEP.slideFromBottom,
+            travelDistance: step.travelDistance || DEFAULT_STEP.travelDistance
+        };
+    };
 
     $: normalizedSteps = Array.isArray(steps) && steps.length
         ? steps.map((step) => buildStep(step))
@@ -104,6 +113,8 @@
     function hasAdvancedConfig(step) {
         return step?.textConfig?.elements && Array.isArray(step.textConfig.elements);
     }
+
+    let stepOffset = 0;
 </script>
 
 <div class="scrolly-container" class:fullWidth>
@@ -113,6 +124,7 @@
         threshold={effectiveThreshold}
         bind:index={currentStepIndex}
         bind:progress={scrollProgress}
+        bind:offset={stepOffset}
     >
 
         <div slot="background" class="background-container-fixed">
@@ -155,6 +167,9 @@
                     active={i === currentStepIndex}
                     defaultStickyTopDesktop={getStickyTop(step, false)}
                     defaultStickyTopMobile={getStickyTop(step, true)}
+                    progress={i === currentStepIndex ? stepOffset : i < currentStepIndex ? 1 : 0}
+                    slideFromBottom={step.slideFromBottom ?? true}
+                    travelDistance={step.travelDistance || '45vh'}
                 />
             {:else}
                 <!-- Mantém o comportamento original para compatibilidade COM POSITION -->
@@ -173,6 +188,9 @@
                     padding={step.padding}
                     maxWidth={step.maxWidth}
                     maxWidthMobile={step.maxWidthMobile}
+                    slideFromBottom={step.slideFromBottom ?? true}
+                    travelDistance={step.travelDistance || '45vh'}
+                    progress={i === currentStepIndex ? stepOffset : i < currentStepIndex ? 1 : 0}
                     cardVisibility={step.cardVisibility}
                 />
             {/if}

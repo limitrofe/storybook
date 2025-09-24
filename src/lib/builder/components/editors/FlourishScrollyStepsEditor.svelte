@@ -25,6 +25,8 @@
     position: overrides.position || 'right',
     backgroundColor: overrides.backgroundColor || '',
     textColor: overrides.textColor || '',
+    slideFromBottom: overrides.slideFromBottom ?? true,
+    travelDistance: overrides.travelDistance || '45vh',
     cardVisibility: overrides.cardVisibility || 'card',
     ...clone(overrides)
   });
@@ -149,6 +151,26 @@
               {/each}
             </select>
             <small>Escolha “Sem card” para deixar só o slide visível.</small>
+          </label>
+
+          <label class="toggle-field">
+            <span>Animar do rodapé ao topo</span>
+            <input
+              type="checkbox"
+              checked={Boolean(step.slideFromBottom ?? true)}
+              on:change={(event) => updateStep(index, 'slideFromBottom', event.currentTarget.checked)}
+            />
+          </label>
+
+          <label>
+            <span>Distância da animação</span>
+            <input
+              type="text"
+              value={step.travelDistance || '45vh'}
+              placeholder="ex: 45vh"
+              on:input={(event) => updateStep(index, 'travelDistance', event.currentTarget.value)}
+            />
+            <small>Use unidades como px ou vh. Padrão: 45vh.</small>
           </label>
         </div>
 
@@ -326,6 +348,12 @@
   .grid {
     display: grid;
     gap: 0.75rem;
+  }
+
+  .toggle-field {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
 
   .grid.colors {

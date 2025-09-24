@@ -634,6 +634,8 @@ export const componentRegistry = [
           maxWidth: '460px',
           maxWidthMobile: '92%',
           cardVisibility: 'card',
+          slideFromBottom: true,
+          travelDistance: '45vh',
           image: '',
           imageMobile: '',
           video: '',

@@ -23,6 +23,8 @@
     maxWidth: '460px',
     maxWidthMobile: '92%',
     cardVisibility: 'card',
+    slideFromBottom: true,
+    travelDistance: '45vh',
     image: '',
     imageMobile: '',
     video: '',
@@ -167,6 +169,26 @@
               {/each}
             </select>
             <small>Use “Sem card” para deixar apenas a mídia em destaque.</small>
+          </label>
+
+          <label class="toggle-field">
+            <span>Animar do rodapé ao topo</span>
+            <input
+              type="checkbox"
+              checked={Boolean(step.slideFromBottom ?? true)}
+              on:change={(event) => updateStep(index, 'slideFromBottom', event.currentTarget.checked)}
+            />
+          </label>
+
+          <label>
+            <span>Distância da animação</span>
+            <input
+              type="text"
+              value={step.travelDistance || '45vh'}
+              placeholder="ex: 45vh"
+              on:input={(event) => updateStep(index, 'travelDistance', event.currentTarget.value)}
+            />
+            <small>Use unidades como px ou vh. Padrão: 45vh.</small>
           </label>
         </div>
 
@@ -330,6 +352,12 @@
     gap: 0.35rem;
     font-size: 0.8rem;
     color: #334155;
+  }
+
+  .toggle-field {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
 
   input[type='text'],

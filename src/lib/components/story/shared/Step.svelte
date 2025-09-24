@@ -14,7 +14,15 @@
   export let maxWidthMobile = '';
   export let stickyTop = '';
   export let cardVisibility = 'card'; // card | transparent | hidden
+  export let progress = null;
+  export let slideFromBottom = true;
+  export let travelDistance = '45vh';
 
+  $: isTransparentCard = cardVisibility === 'transparent';
+  $: isHiddenCard = cardVisibility === 'hidden';
+  const clamp = (value, min = 0, max = 1) => Math.max(min, Math.min(max, value));
+  $: effectiveTravelDistance = travelDistance || '45vh';
+  $: computedProgress = progress != null ? clamp(progress) : (active ? 1 : 0);
   $: styleVars = [
     backgroundColor ? `--step-bg-color:${backgroundColor}` : '',
     textColor ? `--step-text-color:${textColor}` : '',
@@ -23,13 +31,13 @@
     padding ? `--step-padding:${padding}` : '',
     maxWidth ? `--step-max-width:${maxWidth}` : '',
     maxWidthMobile ? `--step-max-width-mobile:${maxWidthMobile}` : '',
-    stickyTop ? `--step-sticky-top:${stickyTop}` : ''
+    stickyTop ? `--step-sticky-top:${stickyTop}` : '',
+    slideFromBottom ? `--step-progress:${computedProgress}` : '',
+    slideFromBottom ? `--step-travel:${effectiveTravelDistance}` : '',
+    slideFromBottom ? `--step-transform:translateY(calc((1 - var(--step-progress, 1)) * var(--step-travel, 0px)))` : ''
   ]
     .filter(Boolean)
     .join(';');
-
-  $: isTransparentCard = cardVisibility === 'transparent';
-  $: isHiddenCard = cardVisibility === 'hidden';
 </script>
 
 <section
@@ -99,6 +107,8 @@
         box-shadow: 0 8px 30px rgba(0,0,0,0.15);
         position: sticky;
         top: var(--step-sticky-top, min(0vh, 0px));
+        transform: var(--step-transform, none);
+        transition: transform 0.45s ease-out;
     }
 
     .step-content.transparent-card {
