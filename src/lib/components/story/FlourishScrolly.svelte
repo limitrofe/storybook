@@ -23,7 +23,13 @@
     position: step.position || 'right',
     backgroundColor: step.backgroundColor || '',
     textColor: step.textColor || '',
-    variant: step.variant || ''
+    accentColor: step.accentColor || '',
+    borderColor: step.borderColor || '',
+    padding: step.padding || '',
+    maxWidth: step.maxWidth || '',
+    maxWidthMobile: step.maxWidthMobile || '',
+    variant: step.variant || '',
+    cardVisibility: step.cardVisibility || 'card'
   });
 
   $: normalizedSteps = Array.isArray(steps) && steps.length
@@ -76,6 +82,12 @@
             variant={normalizedSteps[i]?.variant || ''}
             backgroundColor={normalizedSteps[i]?.backgroundColor || ''}
             textColor={normalizedSteps[i]?.textColor || ''}
+            accentColor={normalizedSteps[i]?.accentColor || ''}
+            borderColor={normalizedSteps[i]?.borderColor || ''}
+            padding={normalizedSteps[i]?.padding || ''}
+            maxWidth={normalizedSteps[i]?.maxWidth || ''}
+            maxWidthMobile={normalizedSteps[i]?.maxWidthMobile || ''}
+            cardVisibility={normalizedSteps[i]?.cardVisibility || 'card'}
             active={i === currentStepIndex}
           />
         {/each}

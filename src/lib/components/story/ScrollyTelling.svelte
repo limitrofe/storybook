@@ -7,22 +7,60 @@
     export let steps = [];
     export let fullWidth = false;
     export let hasHeaderBefore = false;
+    export let threshold;
+    export let stickyTopDesktop;
+    export let stickyTopMobile;
 
     let currentStepIndex = 0;
     let isMobile = false;
     let scrollProgress = 0;
-    let stepElements = [];
 
-    const registerStep = (node, index) => {
-        stepElements[index] = node;
-        return {
-            destroy() {
-                stepElements[index] = null;
-            }
-        };
+    const DEFAULT_DESKTOP_STICKY = 'min(0, 0px)';
+    const DEFAULT_MOBILE_STICKY = '4vh';
+
+    const DEFAULT_STEP = {
+        title: '',
+        text: '',
+        position: 'right',
+        variant: 'default',
+        backgroundColor: 'rgba(15, 23, 42, 0.82)',
+        overlayColor: 'rgba(0, 0, 0, 0.35)',
+        textColor: '#F9FAFB',
+        accentColor: '#C4170C',
+        borderColor: 'rgba(255, 255, 255, 0.12)',
+        padding: '2rem',
+        maxWidth: '460px',
+        maxWidthMobile: '92%',
+        image: '',
+        imageMobile: '',
+        video: '',
+        videoMobile: '',
+        alt: '',
+        caption: '',
+        cardVisibility: 'card',
+        stickyTop: undefined,
+        stickyTopMobile: undefined,
+        textConfig: undefined
     };
 
-    $: validSteps = Array.isArray(steps) ? steps : [];
+    const buildStep = (step = {}) => ({ ...DEFAULT_STEP, ...step });
+
+    $: normalizedSteps = Array.isArray(steps) && steps.length
+        ? steps.map((step) => buildStep(step))
+        : [buildStep()];
+
+    $: baseStickyTopDesktop = stickyTopDesktop ?? (hasHeaderBefore ? DEFAULT_DESKTOP_STICKY : '0px');
+    $: baseStickyTopMobile = stickyTopMobile ?? (hasHeaderBefore ? DEFAULT_MOBILE_STICKY : '0px');
+
+    $: effectiveThreshold = typeof threshold === 'number' ? threshold : 0;
+
+    function getStickyTop(step, mobile) {
+        if (!step) return mobile ? baseStickyTopMobile : baseStickyTopDesktop;
+        if (mobile) {
+            return step.stickyTopMobile ?? step.stickyTop ?? baseStickyTopMobile;
+        }
+        return step.stickyTop ?? baseStickyTopDesktop;
+    }
 
     onMount(() => {
         const checkScreenSize = () => { isMobile = window.innerWidth <= 768; };
@@ -31,128 +69,112 @@
         return () => { window.removeEventListener('resize', checkScreenSize); };
     });
 
-    function getMostVisibleStepIndex(fallbackIndex = 0) {
-        if (typeof window === 'undefined') return fallbackIndex;
+    $: activeMediaIndex = normalizedSteps.length
+        ? Math.max(0, Math.min(currentStepIndex, normalizedSteps.length - 1))
+        : 0;
 
-        const viewportHeight = window.innerHeight || 1;
-        let bestIndex = Math.min(fallbackIndex, validSteps.length - 1);
-        let bestVisible = 0;
-
-        stepElements.forEach((el, idx) => {
-            if (!el) return;
-            const rect = el.getBoundingClientRect();
-            const visibleTop = Math.max(rect.top, 0);
-            const visibleBottom = Math.min(rect.bottom, viewportHeight);
-            const visibleHeight = visibleBottom - visibleTop;
-
-            if (visibleHeight > bestVisible) {
-                bestVisible = visibleHeight;
-                bestIndex = idx;
-            }
-        });
-
-        return bestIndex;
-    }
-
-    $: activeMediaIndex = (() => {
-        if (!validSteps.length) return 0;
-        const fallback = Math.min(currentStepIndex, validSteps.length - 1);
-        const mostVisible = getMostVisibleStepIndex(fallback);
-        return Math.max(0, Math.min(mostVisible, validSteps.length - 1));
-    })();
-
-    // FUNÇÃO getMediaSource MAIS CLARA E EXPLÍCITA
-    function getMediaSource(step) {
+    function resolveMedia(step) {
         if (!step) {
             return { type: null, src: null };
         }
 
-        // Em telas mobile, prioriza a mídia mobile
         if (isMobile) {
             if (step.videoMobile) return { type: 'video', src: step.videoMobile };
             if (step.imageMobile) return { type: 'image', src: step.imageMobile };
         }
 
-        // Como fallback (ou em telas desktop), usa a mídia padrão
         if (step.video) return { type: 'video', src: step.video };
         if (step.image) return { type: 'image', src: step.image };
-        
+
         return { type: null, src: null };
     }
 
-    // VARIÁVEL REATIVA para garantir que a mídia seja atualizada quando `isMobile` mudar
-    $: mediaSources = validSteps.map(step => {
-        console.log('🔄 Recalculando mediaSources para isMobile:', isMobile);
-        return getMediaSource(step);
+    $: mediaSources = normalizedSteps.map((step) => {
+        const media = resolveMedia(step);
+        return {
+            ...media,
+            backgroundColor: step.backgroundColor,
+            overlayColor: step.overlayColor,
+            caption: step.caption,
+            alt: step.alt || step.title || '',
+            textColor: step.textColor
+        };
     });
 
-    // 🆕 NOVA FUNÇÃO: Verifica se o step usa formato avançado
     function hasAdvancedConfig(step) {
-        return step.textConfig && step.textConfig.elements && Array.isArray(step.textConfig.elements);
-    }
-
-    // Debug
-    $: {
-        console.log('🔍 Debug dos steps carregados:', validSteps);
-        validSteps.forEach((step, index) => {
-            console.log(`Step ${index}:`, {
-                title: step.title,
-                hasImage: !!step.image,
-                hasImageMobile: !!step.imageMobile,
-                image: step.image,
-                imageMobile: step.imageMobile,
-                hasAdvancedConfig: hasAdvancedConfig(step) // 🆕 NOVO DEBUG
-            });
-        });
-        
-        console.log('📜 ScrollyTelling Debug:', {
-            isMobile,
-            currentStepIndex,
-            scrollProgress,
-            activeMediaIndex,
-            activeMediaSrc: mediaSources[activeMediaIndex]?.src,
-        });
+        return step?.textConfig?.elements && Array.isArray(step.textConfig.elements);
     }
 </script>
 
 <div class="scrolly-container" class:fullWidth>
-    <Scroller top={0} bottom={0.8} threshold={0.5} bind:index={currentStepIndex} bind:progress={scrollProgress}>
+    <Scroller
+        top={0}
+        bottom={1}
+        threshold={effectiveThreshold}
+        bind:index={currentStepIndex}
+        bind:progress={scrollProgress}
+    >
 
         <div slot="background" class="background-container-fixed">
             {#each mediaSources as media, i}
-                {#if media.src}
-                    <div class="media-wrapper" class:active={i === activeMediaIndex}>
-                        {#if media.type === 'image'}
-                            <img src={media.src} alt={validSteps[i].alt || validSteps[i].title || ''} loading="lazy" />
-                        {:else if media.type === 'video'}
-                            <video src={media.src} autoplay loop muted playsinline key={media.src}></video>
-                        {/if}
-                    </div>
-                {/if}
+                <div
+                    class="media-wrapper"
+                    class:active={i === activeMediaIndex}
+                    style={`background:${media.backgroundColor || '#000'}`}
+                >
+                    {#if media.type === 'image' && media.src}
+                        <img src={media.src} alt={media.alt} loading="lazy" />
+                    {:else if media.type === 'video' && media.src}
+                        <video src={media.src} autoplay loop muted playsinline key={media.src}></video>
+                    {/if}
+
+                    {#if media.overlayColor}
+                        <div class="media-overlay" style={`background:${media.overlayColor}`}></div>
+                    {/if}
+
+                    {#if media.caption}
+                        <div class="media-caption" style={`color:${media.textColor || '#f4f4f5'}`}>
+                            {@html media.caption}
+                        </div>
+                    {/if}
+                </div>
             {/each}
         </div>
 
         <div slot="foreground" class="steps-foreground">
     <section class="spacer-top"></section>
-    {#each validSteps as step, i}
-        <div class="step-wrapper" use:registerStep={i}>
+    {#each normalizedSteps as step, i}
+        <div class="step-wrapper">
             <!-- 🆕 CONDICIONAL: Usa StepEnhanced se tem textConfig.elements, senão usa Step original -->
             {#if hasAdvancedConfig(step)}
                 <StepEnhanced 
                     {step} 
                     {isMobile}
                     stepIndex={i}
-                    totalSteps={validSteps.length - 1}
+                    totalSteps={normalizedSteps.length - 1}
+                    active={i === currentStepIndex}
+                    defaultStickyTopDesktop={getStickyTop(step, false)}
+                    defaultStickyTopMobile={getStickyTop(step, true)}
                 />
             {:else}
                 <!-- Mantém o comportamento original para compatibilidade COM POSITION -->
-<Step 
-    stepText={`<h3>${step.title || ''}</h3><div>${step.text || ''}</div>`} 
-    length={validSteps.length - 1} 
-    {i}
-    position={step.position || 'right'}
-    variant={step.variant || ''} 
-/>
+                <Step 
+                    stepText={`<h3>${step.title || ''}</h3><div>${step.text || ''}</div>`} 
+                    length={normalizedSteps.length - 1} 
+                    {i}
+                    position={step.position || 'right'}
+                    variant={step.variant || ''} 
+                    active={i === currentStepIndex}
+                    stickyTop={isMobile ? getStickyTop(step, true) : getStickyTop(step, false)}
+                    backgroundColor={step.backgroundColor}
+                    textColor={step.textColor}
+                    accentColor={step.accentColor}
+                    borderColor={step.borderColor}
+                    padding={step.padding}
+                    maxWidth={step.maxWidth}
+                    maxWidthMobile={step.maxWidthMobile}
+                    cardVisibility={step.cardVisibility}
+                />
             {/if}
         </div>
     {/each}
@@ -165,7 +187,6 @@
 </div>
 
 <style>
-    /* Seu CSS continua igual */
     .scrolly-container {
         position: relative;
     }
@@ -193,17 +214,55 @@
         width: 100%;
         height: 100%;
         opacity: 0;
-        /* transition: opacity 0.5s ease-in-out; Adicionado para suavizar a troca */
+        transition: opacity 0.45s ease-in-out;
+        pointer-events: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: flex-end;
+        padding: clamp(1.25rem, 5vw, 3rem);
     }
     
     .media-wrapper.active {
         opacity: 1;
+        z-index: 1;
     }
     
-    .media-wrapper img, .media-wrapper video {
+    .media-wrapper img,
+    .media-wrapper video {
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
         height: 100%;
         object-fit: cover;
+        z-index: 1;
+    }
+
+    .media-wrapper video {
+        background: #000;
+    }
+
+    .media-overlay {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 2;
+    }
+
+    .media-caption {
+        position: relative;
+        z-index: 3;
+        max-width: min(420px, 38vw);
+        font-size: 0.85rem;
+        line-height: 1.45;
+        background: rgba(15, 23, 42, 0.55);
+        color: inherit;
+        padding: 0.75rem 1rem;
+        border-radius: 10px;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow: 0 10px 35px rgba(15, 15, 15, 0.3);
     }
 
     .steps-foreground {
@@ -222,5 +281,14 @@
         .spacer-top { height: 30vh; }
         .spacer-bottom { height: 40vh; }
         .component-spacer { height: 15vh; }
+        .media-wrapper {
+            align-items: flex-start;
+            padding: 1.25rem;
+        }
+        .media-caption {
+            max-width: min(90%, 28rem);
+            font-size: 0.75rem;
+            line-height: 1.35;
+        }
     }
 </style>

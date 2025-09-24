@@ -26,7 +26,7 @@ const observer = new IntersectionObserver(
                 });
             },
             {
-                rootMargin: '400px 0px'
+                rootMargin: '100px 0px'
             }
   
       );
@@ -67,7 +67,7 @@ if (index !== -1) handlers.splice(index, 1);
     // config
     export let top = 0;
 export let bottom = 1;
-    export let threshold = 0.5;
+    export let threshold = 0.1;
     export let query = 'section';
     export let parallax = false;
 // bindings
@@ -127,12 +127,22 @@ visible = fg.top < wh && fg.bottom > 0;
 const background_height = bg.bottom - bg.top;
 
         const available_space = bottom_px - top_px;
-progress = (top_px - fg.top) / (foreground_height - available_space);
+        const progressDenominator = foreground_height - available_space;
+        let normalizedProgress = 0;
 
-        if (progress <= 0) {
+        if (progressDenominator > 0) {
+            normalizedProgress = (top_px - fg.top) / progressDenominator;
+        } else if (foreground_height) {
+            normalizedProgress = fg.top <= top_px ? 1 : 0;
+        }
+
+        normalizedProgress = Math.max(0, Math.min(1, normalizedProgress));
+        progress = normalizedProgress * 100;
+
+        if (normalizedProgress <= 0) {
             offset_top = 0;
 fixed = false;
-        } else if (progress >= 1) {
+        } else if (normalizedProgress >= 1) {
             offset_top = parallax
                 ?
 foreground_height - background_height
@@ -141,7 +151,7 @@ fixed = false;
         } else {
             offset_top = parallax
                 ?
-Math.round(top_px - progress * (background_height - available_space))
+Math.round(top_px - normalizedProgress * (background_height - available_space))
                 : top_px;
 fixed = true;
         }

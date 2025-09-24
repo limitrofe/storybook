@@ -22,6 +22,7 @@
     padding: '2rem',
     maxWidth: '460px',
     maxWidthMobile: '92%',
+    cardVisibility: 'card',
     image: '',
     imageMobile: '',
     video: '',
@@ -99,6 +100,12 @@
     { label: 'Padrão', value: 'default' },
     { label: 'Destaque', value: 'destaque' }
   ];
+
+  const cardVisibilityOptions = [
+    { label: 'Card visível', value: 'card' },
+    { label: 'Card transparente', value: 'transparent' },
+    { label: 'Sem card (apenas mídia)', value: 'hidden' }
+  ];
 </script>
 
 <div class="steps-editor">
@@ -150,6 +157,16 @@
                 <option value={option.value}>{option.label}</option>
               {/each}
             </select>
+          </label>
+
+          <label>
+            <span>Card de texto</span>
+            <select value={step.cardVisibility || 'card'} on:change={(event) => updateStep(index, 'cardVisibility', event.currentTarget.value)}>
+              {#each cardVisibilityOptions as option}
+                <option value={option.value}>{option.label}</option>
+              {/each}
+            </select>
+            <small>Use “Sem card” para deixar apenas a mídia em destaque.</small>
           </label>
         </div>
 

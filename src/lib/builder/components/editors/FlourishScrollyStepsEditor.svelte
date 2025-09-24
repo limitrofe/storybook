@@ -15,13 +15,17 @@
     return JSON.parse(JSON.stringify(input));
   };
 
+  const createId = () => (typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : `flourish-step-${Math.random().toString(36).slice(2, 10)}`);
+
   const createDefaultStep = (overrides = {}) => ({
+    id: overrides.id || createId(),
     slide: 0,
     title: '',
     text: '',
-    position: 'right',
-    backgroundColor: '',
-    textColor: '',
+    position: overrides.position || 'right',
+    backgroundColor: overrides.backgroundColor || '',
+    textColor: overrides.textColor || '',
+    cardVisibility: overrides.cardVisibility || 'card',
     ...clone(overrides)
   });
 
@@ -44,8 +48,9 @@
     isUpdating = true;
     const normalized = normalizeSteps(updated);
     steps = normalized;
-    lastSerialized = JSON.stringify(normalized);
-    dispatch('change', { value: normalized });
+    const serialized = JSON.stringify(normalized.map(({ id, ...rest }) => rest));
+    lastSerialized = serialized;
+    dispatch('change', { value: normalized.map(({ id, ...rest }) => rest) });
     Promise.resolve().then(() => {
       isUpdating = false;
     });
@@ -58,7 +63,8 @@
   }
 
   function duplicateStep(index) {
-    const clone = createDefaultStep(steps[index]);
+    const { id: _ignored, ...rest } = steps[index];
+    const clone = createDefaultStep(rest);
     const updated = [
       ...steps.slice(0, index + 1),
       { ...clone },
@@ -89,10 +95,16 @@
     steps = updated;
     emit(updated);
   }
+
+  const cardVisibilityOptions = [
+    { label: 'Card visível', value: 'card' },
+    { label: 'Card transparente', value: 'transparent' },
+    { label: 'Sem card (apenas slide)', value: 'hidden' }
+  ];
 </script>
 
 <div class="scrolly-steps-editor">
-  {#each steps as step, index}
+  {#each steps as step, index (step.id)}
     <article class="step-card">
       <header>
         <div>
@@ -128,6 +140,16 @@
               <option value="right">Direita</option>
             </select>
           </label>
+
+          <label>
+            <span>Exibição do card</span>
+            <select value={step.cardVisibility || 'card'} on:change={(event) => updateStep(index, 'cardVisibility', event.currentTarget.value)}>
+              {#each cardVisibilityOptions as option}
+                <option value={option.value}>{option.label}</option>
+              {/each}
+            </select>
+            <small>Escolha “Sem card” para deixar só o slide visível.</small>
+          </label>
         </div>
 
         <label>
@@ -140,7 +162,7 @@
           />
         </label>
 
-        <label>
+        <div class="field richtext">
           <span>Texto do step</span>
           <RichTextEditor
             value={step.text || ''}
@@ -148,7 +170,7 @@
             placeholder="Conteúdo que aparece enquanto este step está ativo"
             on:change={(event) => updateStep(index, 'text', event.detail.value)}
           />
-        </label>
+        </div>
 
         <div class="grid colors">
           <label>
@@ -270,6 +292,18 @@
   }
 
   label span {
+    font-weight: 600;
+    color: #1e293b;
+  }
+
+  .field.richtext {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+  }
+
+  .field.richtext span {
     font-weight: 600;
     color: #1e293b;
   }

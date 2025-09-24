@@ -276,6 +276,7 @@
           "padding": "2rem",
           "maxWidth": "460px",
           "maxWidthMobile": "92%",
+          "cardVisibility": "card",
           "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_06.jpg",
           "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_06.jpg",
           "video": "",
@@ -296,6 +297,7 @@
           "padding": "2rem",
           "maxWidth": "460px",
           "maxWidthMobile": "92%",
+          "cardVisibility": "hidden",
           "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_05.jpg",
           "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_05.jpg",
           "video": "",
@@ -316,6 +318,7 @@
           "padding": "2rem",
           "maxWidth": "460px",
           "maxWidthMobile": "92%",
+          "cardVisibility": "card",
           "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_04.jpg",
           "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_04.jpg",
           "video": "",
@@ -336,6 +339,7 @@
           "padding": "2rem",
           "maxWidth": "460px",
           "maxWidthMobile": "92%",
+          "cardVisibility": "card",
           "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_03.jpg",
           "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/imagens/imagens-scrolly/SCROLL-JURI-HORIZONTAL_03.jpg",
           "video": "",
@@ -787,8 +791,8 @@
             "opacity": 1
           },
           "mobile": {
-            "x": 155,
-            "y": 0,
+            "x": 134.04191616766468,
+            "y": 64.87025948103792,
             "width": 220,
             "height": 140,
             "z": 1,
@@ -822,8 +826,8 @@
             "opacity": 1
           },
           "mobile": {
-            "x": 40.99800399201597,
-            "y": 141.87624750499003,
+            "x": 87.90419161676647,
+            "y": 139.8802395209581,
             "width": 220,
             "height": 140,
             "z": 1,
@@ -857,8 +861,8 @@
             "opacity": 1
           },
           "mobile": {
-            "x": 155,
-            "y": 235.688622754491,
+            "x": 64.18163672654691,
+            "y": 249.66067864271457,
             "width": 220,
             "height": 140,
             "z": 1,
@@ -931,23 +935,23 @@
         {
           "slide": 0,
           "title": "sadfasdf",
-          "text": "asdf",
-          "position": "right",
+          "text": "<b>asdf</b><p><i>kjhkhj</i></p><p><i><br></i></p>",
+          "position": "left",
           "backgroundColor": "#e100ff",
           "textColor": ""
         },
         {
           "slide": 2,
           "title": "asdfasdf",
-          "text": "",
-          "position": "right",
+          "text": "<u>jkhkjh</u>",
+          "position": "center",
           "backgroundColor": "",
           "textColor": ""
         },
         {
           "slide": 9,
           "title": "sfqfwef",
-          "text": "",
+          "text": "<ul><li>khkjhkjh</li><li>lkjhkjhkjh</li><li>kjhhkjhkj</li></ul>",
           "position": "right",
           "backgroundColor": "",
           "textColor": ""
@@ -955,7 +959,7 @@
         {
           "slide": 0,
           "title": "sadfq",
-          "text": "",
+          "text": "<ol><li>kjhkhkjh</li><li>kjhkjhkj</li><li>kjhkjh</li></ol>",
           "position": "right",
           "backgroundColor": "",
           "textColor": ""
@@ -963,18 +967,18 @@
         {
           "slide": 1,
           "title": "asdfasdf",
-          "text": "",
+          "text": "<strike><font color=\"#ffe0e0\">kjhkjhkhjkh</font></strike><p><strike><font color=\"#ffe0e0\">kjhkhj</font></strike></p>",
           "position": "right",
-          "backgroundColor": "",
-          "textColor": ""
+          "backgroundColor": "#000000",
+          "textColor": "#e9afaf"
         },
         {
           "slide": 1,
           "title": "",
           "text": "",
           "position": "right",
-          "backgroundColor": "",
-          "textColor": ""
+          "backgroundColor": "transparente",
+          "textColor": "transparent"
         }
       ]
     }

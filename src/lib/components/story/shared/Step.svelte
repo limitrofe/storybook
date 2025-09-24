@@ -7,28 +7,48 @@
   export let active = false;
   export let backgroundColor = '';
   export let textColor = '';
+  export let accentColor = '';
+  export let borderColor = '';
+  export let padding = '';
+  export let maxWidth = '';
+  export let maxWidthMobile = '';
+  export let stickyTop = '';
+  export let cardVisibility = 'card'; // card | transparent | hidden
 
   $: styleVars = [
     backgroundColor ? `--step-bg-color:${backgroundColor}` : '',
     textColor ? `--step-text-color:${textColor}` : '',
-    textColor ? `--step-heading-color:${textColor}` : ''
+    accentColor ? `--step-heading-color:${accentColor}` : '',
+    borderColor ? `--step-border-color:${borderColor}` : '',
+    padding ? `--step-padding:${padding}` : '',
+    maxWidth ? `--step-max-width:${maxWidth}` : '',
+    maxWidthMobile ? `--step-max-width-mobile:${maxWidthMobile}` : '',
+    stickyTop ? `--step-sticky-top:${stickyTop}` : ''
   ]
     .filter(Boolean)
     .join(';');
+
+  $: isTransparentCard = cardVisibility === 'transparent';
+  $: isHiddenCard = cardVisibility === 'hidden';
 </script>
 
 <section
   class="step-container position-{position}"
   class:last-section={i === length}
   class:active
+  class:transparent-card={isTransparentCard}
+  class:hidden-card={isHiddenCard}
 >
-  <div
-    class="step-content"
-    class:destaque={variant === 'destaque'}
-    style={styleVars}
-  >
-    {@html stepText}
-  </div>
+  {#if !isHiddenCard}
+    <div
+      class="step-content"
+      class:destaque={variant === 'destaque'}
+      class:transparent-card={isTransparentCard}
+      style={styleVars}
+    >
+      {@html stepText}
+    </div>
+  {/if}
 </section>
 
 <style>
@@ -38,6 +58,7 @@
         align-items: center;
         min-height: 100vh;
         padding: 2rem 5vw;
+        padding-bottom: 45vh;
         opacity: 0;
         pointer-events: none;
         visibility: hidden;
@@ -47,6 +68,10 @@
         opacity: 1;
         pointer-events: auto;
         visibility: visible;
+    }
+
+    .step-container.hidden-card.active {
+        pointer-events: none;
     }
     /* NOVO: Posicionamentos baseados na classe */
     .position-left {
@@ -66,14 +91,22 @@
         backdrop-filter: blur(8px);
         -webkit-backdrop-filter: blur(8px);
         color: var(--step-text-color, var(--color-text));
-        padding: 2rem;
-        border: 1px solid var(--color-border);
+        padding: var(--step-padding, 2rem);
+        border: 1px solid var(--step-border-color, var(--color-border));
         border-radius: 12px;
-        max-width: 450px;
+        max-width: var(--step-max-width, 450px);
         width: 100%;
         box-shadow: 0 8px 30px rgba(0,0,0,0.15);
         position: sticky;
-        top: min(18vh, 120px);
+        top: var(--step-sticky-top, min(0vh, 0px));
+    }
+
+    .step-content.transparent-card {
+        background-color: transparent !important;
+        border: none;
+        box-shadow: none;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
     }
 
     :global(.step-content h3) {
@@ -92,19 +125,24 @@
     .last-section {
         margin-bottom: 0;
         min-height: 0;
-        padding-bottom: 50vh;
+        padding-bottom: 55vh;
     }
     
     @media (max-width: 768px) {
-        .step-container {
-            justify-content: center !important; /* Mobile sempre centralizado */
-            min-height: 90vh;
-        }
-        
-        .step-content {
-            max-width: 90%;
-            top: 12vh;
-        }
+    .step-container {
+        justify-content: center !important; /* Mobile sempre centralizado */
+        min-height: 90vh;
+        padding-bottom: 35vh;
+    }
+
+    .step-content {
+        max-width: var(--step-max-width-mobile, 90%);
+        top: var(--step-sticky-top, 12vh);
+    }
+
+    .step-container.hidden-card {
+        padding-bottom: 30vh;
+    }
     }
     /* Cole no final do <style> em Step.svelte */
 

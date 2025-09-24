@@ -633,6 +633,7 @@ export const componentRegistry = [
           padding: '2rem',
           maxWidth: '460px',
           maxWidthMobile: '92%',
+          cardVisibility: 'card',
           image: '',
           imageMobile: '',
           video: '',
