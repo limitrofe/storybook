@@ -128,12 +128,25 @@
 	}
 
 	function getMediaSource(item) {
-		if (isMobile && item.srcMobile) return item.srcMobile;
-		return item.src || '';
+		if (!item) return '';
+		const source = isMobile ? item.srcMobile || item.src : item.src;
+		return sanitizeUrl(source);
+	}
+
+	function getMediaPoster(item) {
+		if (!item) return '';
+		const poster = isMobile ? item.posterMobile || item.poster : item.poster;
+		return sanitizeUrl(poster);
 	}
 
 	function sanitizeUrl(url) {
 		return typeof url === 'string' ? url.trim() : '';
+	}
+
+	function getPlaybackFlag(item, field, fallback = true) {
+		if (!item || !(field in item)) return fallback;
+		const value = item[field];
+		return value === undefined || value === null ? fallback : Boolean(value);
 	}
 
 	let normalizedBackgroundSource;
@@ -289,13 +302,14 @@
 					/>
 				{/if}
 			{:else if item.type === 'video'}
-				{#if getMediaSource(item)}
+				{@const videoSrc = getMediaSource(item)}
+				{#if videoSrc}
 					<video
-						src={getMediaSource(item)}
-						poster={item.poster || ''}
-						autoplay={item.autoplay}
-						loop={item.loop}
-						muted={item.muted ?? true}
+						src={videoSrc}
+						poster={getMediaPoster(item)}
+						autoplay={getPlaybackFlag(item, 'autoplay', true)}
+						loop={getPlaybackFlag(item, 'loop', true)}
+						muted={getPlaybackFlag(item, 'muted', true)}
 						playsinline
 						style="width:100%;height:100%;object-fit:${item.objectFit || 'cover'};"
 					></video>
