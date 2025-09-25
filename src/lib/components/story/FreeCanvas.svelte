@@ -5,7 +5,19 @@
 	export let maxHeightMobile = null;
 	export let baseWidthDesktop = 1440;
 	export let baseWidthMobile = 375;
+	export let backgroundSource = 'color';
 	export let backgroundColor = '#000000';
+	export let backgroundColorDesktop = '#000000';
+	export let backgroundColorMobile = '#000000';
+	export let backgroundImageDesktop = '';
+	export let backgroundImageMobile = '';
+	export let backgroundVideoDesktop = '';
+	export let backgroundVideoMobile = '';
+	export let backgroundVideoPosterDesktop = '';
+	export let backgroundVideoPosterMobile = '';
+	export let videoAutoplay = true;
+	export let videoLoop = true;
+	export let videoMuted = true;
 	export let items = [];
 	export let device = 'desktop';
 	export let typography = {};
@@ -120,6 +132,77 @@
 		return item.src || '';
 	}
 
+	function sanitizeUrl(url) {
+		return typeof url === 'string' ? url.trim() : '';
+	}
+
+	let normalizedBackgroundSource;
+	$: normalizedBackgroundSource = ['image', 'video'].includes(backgroundSource)
+		? backgroundSource
+		: backgroundVideoDesktop || backgroundVideoMobile
+			? 'video'
+			: backgroundImageDesktop || backgroundImageMobile
+				? 'image'
+				: 'color';
+
+	function getBackgroundColorValue(device) {
+		const fallback = backgroundColor || '#000000';
+		const desktop = backgroundColorDesktop || fallback;
+		const mobile = backgroundColorMobile || desktop;
+		return device === 'mobile' ? mobile : desktop;
+	}
+
+	function getBackgroundImageValue(device) {
+		const desktop = sanitizeUrl(backgroundImageDesktop);
+		const mobile = sanitizeUrl(backgroundImageMobile) || desktop;
+		return device === 'mobile' ? mobile : desktop;
+	}
+
+	function getBackgroundVideoValue(device) {
+		const desktop = sanitizeUrl(backgroundVideoDesktop);
+		const mobile = sanitizeUrl(backgroundVideoMobile) || desktop;
+		return device === 'mobile' ? mobile : desktop;
+	}
+
+	function getBackgroundPosterValue(device) {
+		const desktop = sanitizeUrl(backgroundVideoPosterDesktop);
+		const mobile = sanitizeUrl(backgroundVideoPosterMobile) || desktop;
+		return device === 'mobile' ? mobile : desktop;
+	}
+
+	function getContainerStyle() {
+		const device = isMobile ? 'mobile' : 'desktop';
+		const color = getBackgroundColorValue(device) || '#000000';
+		const declarations = [
+			'width:100vw',
+			`height:${cssHeight}`,
+			'position:relative',
+			'overflow:hidden',
+			'margin-left:calc(50% - 50vw)',
+			'margin-right:calc(50% - 50vw)',
+			`background-color:${color}`
+		];
+		if (normalizedBackgroundSource === 'image') {
+			const image = getBackgroundImageValue(device);
+			if (image) {
+				const safe = image.replace(/"/g, '\\"');
+				declarations.push(`background-image:url("${safe}")`);
+				declarations.push('background-size:cover');
+				declarations.push('background-position:center');
+				declarations.push('background-repeat:no-repeat');
+			} else {
+				declarations.push('background-image:none');
+			}
+		} else {
+			declarations.push('background-image:none');
+		}
+		return declarations.join(';');
+	}
+
+	$: shouldRenderBackgroundVideo =
+		normalizedBackgroundSource === 'video' &&
+		Boolean(getBackgroundVideoValue(isMobile ? 'mobile' : 'desktop'));
+
 	let effectiveBaseWidth = baseWidthDesktop;
 	let baseHeight = 0;
 	let cssHeight = '0px';
@@ -149,23 +232,33 @@
 		if (!frame) return '';
 		const baseWidth = effectiveBaseWidth || (isMobile ? baseWidthMobile : baseWidthDesktop) || 1;
 		const { x = 0, y = 0, width = 200, height = 100, z = 1, opacity = 1 } = frame;
+		const overflow = item.type === 'text' ? 'visible' : 'hidden';
 		return `
-      position:absolute;
-      left:${toVw(x, baseWidth)};
-      top:${toVw(y, baseWidth)};
-      width:${toVw(width, baseWidth)};
-      height:${toVw(height, baseWidth)};
-      z-index:${z};
-      opacity:${opacity};
-      overflow:hidden;
-    `;
+		position:absolute;
+		left:${toVw(x, baseWidth)};
+		top:${toVw(y, baseWidth)};
+		width:${toVw(width, baseWidth)};
+		height:${toVw(height, baseWidth)};
+		z-index:${z};
+		opacity:${opacity};
+		overflow:${overflow};
+	`;
 	}
 </script>
 
-<div
-	class="free-canvas"
-	style={`width:100vw;height:${cssHeight};background:${backgroundColor};position:relative;overflow:hidden;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);`}
->
+<div class="free-canvas" style={getContainerStyle()}>
+	{#if shouldRenderBackgroundVideo}
+		<video
+			class="free-canvas__background-video"
+			src={getBackgroundVideoValue(isMobile ? 'mobile' : 'desktop')}
+			poster={getBackgroundPosterValue(isMobile ? 'mobile' : 'desktop')}
+			autoplay={videoAutoplay}
+			loop={videoLoop}
+			muted={videoMuted ?? true}
+			playsinline
+			preload="auto"
+		></video>
+	{/if}
 	{#each items as item (item.id)}
 		<div class="canvas-item" style={getStyle(item)}>
 			{#if item.type === 'text'}
@@ -219,6 +312,18 @@
 
 	.canvas-item {
 		position: absolute;
+		z-index: 1;
+	}
+
+	.free-canvas__background-video {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		pointer-events: none;
+		z-index: 0;
 	}
 
 	.text {

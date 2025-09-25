@@ -149,6 +149,22 @@ function ensureMediaVariants(paragraph = {}) {
 			if (!Number.isFinite(clone.maxHeightMobile)) clone.maxHeightMobile = null;
 			clone.baseWidthDesktop = Number(clone.baseWidthDesktop) || 1440;
 			clone.baseWidthMobile = Number(clone.baseWidthMobile) || 375;
+			clone.backgroundSource = ['image', 'video'].includes(clone.backgroundSource)
+				? clone.backgroundSource
+				: 'color';
+			const legacyColor = clone.backgroundColor || '#000000';
+			clone.backgroundColorDesktop = clone.backgroundColorDesktop || legacyColor;
+			clone.backgroundColorMobile = clone.backgroundColorMobile || clone.backgroundColorDesktop;
+			clone.backgroundColor = clone.backgroundColorDesktop;
+			clone.backgroundImageDesktop = clone.backgroundImageDesktop || '';
+			clone.backgroundImageMobile = clone.backgroundImageMobile || '';
+			clone.backgroundVideoDesktop = clone.backgroundVideoDesktop || '';
+			clone.backgroundVideoMobile = clone.backgroundVideoMobile || '';
+			clone.backgroundVideoPosterDesktop = clone.backgroundVideoPosterDesktop || '';
+			clone.backgroundVideoPosterMobile = clone.backgroundVideoPosterMobile || '';
+			clone.videoAutoplay = clone.videoAutoplay === undefined ? true : Boolean(clone.videoAutoplay);
+			clone.videoLoop = clone.videoLoop === undefined ? true : Boolean(clone.videoLoop);
+			clone.videoMuted = clone.videoMuted === undefined ? true : Boolean(clone.videoMuted);
 
 			delete clone.widthDesktop;
 			delete clone.widthMobile;
@@ -164,12 +180,22 @@ function ensureMediaVariants(paragraph = {}) {
 					if (!item || typeof item !== 'object') return null;
 					const desktop = item.desktop && typeof item.desktop === 'object' ? item.desktop : {};
 					const mobile = item.mobile && typeof item.mobile === 'object' ? item.mobile : {};
+					const type = item.type || 'text';
+					const baseAutoHeight = type === 'text';
 					return {
 						id: item.id || `free-${Date.now()}`,
-						type: item.type || 'text',
+						type,
 						content: item.content || '',
 						src: item.src || '',
 						srcMobile: item.srcMobile || '',
+						alt: item.alt || '',
+						poster: item.poster || '',
+						posterMobile: item.posterMobile || '',
+						autoplay: item.autoplay === undefined ? type === 'video' : Boolean(item.autoplay),
+						loop: item.loop === undefined ? type === 'video' : Boolean(item.loop),
+						muted: item.muted === undefined ? true : Boolean(item.muted),
+						objectFit: item.objectFit || 'cover',
+						autoHeight: item.autoHeight === undefined ? baseAutoHeight : Boolean(item.autoHeight),
 						textStyles: { ...(item.textStyles || {}) },
 						desktop: {
 							x: Number(desktop.x) || 0,

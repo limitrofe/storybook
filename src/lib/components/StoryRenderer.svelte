@@ -592,6 +592,28 @@
 					imagens={processImagens(props.imagens || props.images || [])}
 				/>
 			{:else if componentType === 'free-canvas'}
+				{@const backgroundColorDesktop =
+					props.backgroundColorDesktop ?? props.backgroundColor ?? '#000000'}
+				{@const backgroundColorMobile = props.backgroundColorMobile ?? backgroundColorDesktop}
+				{@const backgroundImageDesktop =
+					props.backgroundImageDesktop || props.backgroundImage || ''}
+				{@const backgroundImageMobile = props.backgroundImageMobile || backgroundImageDesktop}
+				{@const backgroundVideoDesktop =
+					props.backgroundVideoDesktop || props.backgroundVideo || ''}
+				{@const backgroundVideoMobile = props.backgroundVideoMobile || backgroundVideoDesktop}
+				{@const backgroundVideoPosterDesktop =
+					props.backgroundVideoPosterDesktop || props.videoPosterDesktop || ''}
+				{@const backgroundVideoPosterMobile =
+					props.backgroundVideoPosterMobile ||
+					props.videoPosterMobile ||
+					backgroundVideoPosterDesktop}
+				{@const inferredBackgroundSource = props.backgroundSource
+					? props.backgroundSource
+					: backgroundVideoDesktop || backgroundVideoMobile
+						? 'video'
+						: backgroundImageDesktop || backgroundImageMobile
+							? 'image'
+							: 'color'}
 				<FreeCanvas
 					minHeightDesktop={Number(
 						props.minHeightDesktop ?? props.heightDesktop ?? props.height ?? 400
@@ -603,7 +625,19 @@
 					maxHeightMobile={props.maxHeightMobile ?? null}
 					baseWidthDesktop={Number(props.baseWidthDesktop ?? 1440)}
 					baseWidthMobile={Number(props.baseWidthMobile ?? 375)}
-					backgroundColor={props.backgroundColor || '#000000'}
+					backgroundSource={inferredBackgroundSource}
+					backgroundColor={backgroundColorDesktop}
+					{backgroundColorDesktop}
+					{backgroundColorMobile}
+					{backgroundImageDesktop}
+					{backgroundImageMobile}
+					{backgroundVideoDesktop}
+					{backgroundVideoMobile}
+					{backgroundVideoPosterDesktop}
+					{backgroundVideoPosterMobile}
+					videoAutoplay={props.videoAutoplay ?? props.backgroundVideoAutoplay ?? true}
+					videoLoop={props.videoLoop ?? true}
+					videoMuted={props.videoMuted ?? true}
 					items={props.items || props.elements || []}
 					{device}
 					typography={storyData.appearance?.typography || {}}

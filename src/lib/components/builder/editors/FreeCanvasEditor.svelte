@@ -24,6 +24,16 @@
 		{ value: 'blockquote', label: 'Citação (blockquote)' }
 	];
 
+	const OBJECT_FIT_OPTIONS = [
+		{ value: 'cover', label: 'Preencher (cover)' },
+		{ value: 'contain', label: 'Conter (contain)' },
+		{ value: 'fill', label: 'Esticar (fill)' },
+		{ value: 'none', label: 'Sem ajuste (none)' },
+		{ value: 'scale-down', label: 'Reduzir (scale-down)' }
+	];
+
+	const ALLOWED_OBJECT_FITS = new Set(OBJECT_FIT_OPTIONS.map((option) => option.value));
+
 	const DEFAULT_ITEM = (type = 'text') => ({
 		id: createId(),
 		type,
@@ -61,7 +71,19 @@
 		maxHeightMobile: null,
 		baseWidthDesktop: 1440,
 		baseWidthMobile: 375,
+		backgroundSource: 'color',
+		backgroundColorDesktop: '#000000',
+		backgroundColorMobile: '#000000',
 		backgroundColor: '#000000',
+		backgroundImageDesktop: '',
+		backgroundImageMobile: '',
+		backgroundVideoDesktop: '',
+		backgroundVideoMobile: '',
+		backgroundVideoPosterDesktop: '',
+		backgroundVideoPosterMobile: '',
+		videoAutoplay: true,
+		videoLoop: true,
+		videoMuted: true,
 		items: []
 	};
 
@@ -70,6 +92,23 @@
 		const merged = { ...structuredClone(DEFAULT_DATA), ...value };
 		merged.baseWidthDesktop = Number(merged.baseWidthDesktop) || 1440;
 		merged.baseWidthMobile = Number(merged.baseWidthMobile) || 375;
+		if (!['color', 'image', 'video'].includes(merged.backgroundSource)) {
+			merged.backgroundSource = 'color';
+		}
+		const legacyColor = merged.backgroundColor || '#000000';
+		merged.backgroundColorDesktop = merged.backgroundColorDesktop || legacyColor;
+		merged.backgroundColorMobile = merged.backgroundColorMobile || merged.backgroundColorDesktop;
+		merged.backgroundColor = merged.backgroundColorDesktop;
+		merged.backgroundImageDesktop = merged.backgroundImageDesktop || '';
+		merged.backgroundImageMobile = merged.backgroundImageMobile || '';
+		merged.backgroundVideoDesktop = merged.backgroundVideoDesktop || '';
+		merged.backgroundVideoMobile = merged.backgroundVideoMobile || '';
+		merged.backgroundVideoPosterDesktop = merged.backgroundVideoPosterDesktop || '';
+		merged.backgroundVideoPosterMobile = merged.backgroundVideoPosterMobile || '';
+		merged.videoAutoplay =
+			merged.videoAutoplay === undefined ? true : Boolean(merged.videoAutoplay);
+		merged.videoLoop = merged.videoLoop === undefined ? true : Boolean(merged.videoLoop);
+		merged.videoMuted = merged.videoMuted === undefined ? true : Boolean(merged.videoMuted);
 		if (!Array.isArray(merged.items)) merged.items = [];
 		merged.items = merged.items.map(ensureItem).filter(Boolean);
 		return merged;
@@ -169,6 +208,27 @@
 		emit();
 	}
 
+	function setItemField(item, field, value) {
+		if (!item) return;
+
+		updateItem(item.id, (draft) => {
+			if (field === 'objectFit' && typeof value === 'string') {
+				const next = value.trim();
+				draft.objectFit = ALLOWED_OBJECT_FITS.has(next) ? next : draft.objectFit || 'cover';
+				return;
+			}
+
+			if (typeof value === 'string') {
+				const trimmed = value.trim();
+				draft[field] = trimmed;
+				return;
+			}
+
+			draft[field] = value;
+		});
+		emit();
+	}
+
 	function setAutoHeight(item, enabled) {
 		updateItem(item.id, (draft) => {
 			draft.autoHeight = enabled;
@@ -192,6 +252,75 @@
 		const numeric = value === null || value === '' ? null : Number(value);
 		data = { ...data, [field]: Number.isFinite(numeric) ? numeric : null };
 		emit();
+	}
+
+	function setCanvasNumber(field, value) {
+		const numeric = Number.parseFloat(value);
+		if (!Number.isFinite(numeric)) return;
+		const clamped = Math.max(0, numeric);
+		data = { ...data, [field]: clamped };
+		emit();
+	}
+
+	function sanitizeUrl(url) {
+		return typeof url === 'string' ? url.trim() : '';
+	}
+
+	function getBackgroundColorValue(device = currentDevice) {
+		const fallback = data.backgroundColor || '#000000';
+		const desktop = data.backgroundColorDesktop || fallback;
+		const mobile = data.backgroundColorMobile || desktop;
+		return device === 'mobile' ? mobile : desktop;
+	}
+
+	function getBackgroundImageValue(device = currentDevice) {
+		const desktop = sanitizeUrl(data.backgroundImageDesktop);
+		const mobile = sanitizeUrl(data.backgroundImageMobile) || desktop;
+		return device === 'mobile' ? mobile : desktop;
+	}
+
+	function getBackgroundVideoValue(device = currentDevice) {
+		const desktop = sanitizeUrl(data.backgroundVideoDesktop);
+		const mobile = sanitizeUrl(data.backgroundVideoMobile) || desktop;
+		return device === 'mobile' ? mobile : desktop;
+	}
+
+	function getBackgroundPosterValue(device = currentDevice) {
+		const desktop = sanitizeUrl(data.backgroundVideoPosterDesktop);
+		const mobile = sanitizeUrl(data.backgroundVideoPosterMobile) || desktop;
+		return device === 'mobile' ? mobile : desktop;
+	}
+
+	function getPreviewContainerStyle() {
+		const color = getBackgroundColorValue(currentDevice) || '#000000';
+		const declarations = [
+			`width:${baseWidth}px`,
+			`height:${previewHeight}px`,
+			`min-height:${currentDevice === 'desktop' ? data.minHeightDesktop : data.minHeightMobile}px`,
+			'position:relative',
+			'overflow:hidden',
+			`background-color:${color}`
+		];
+		if (data.backgroundSource === 'image') {
+			const image = getBackgroundImageValue(currentDevice);
+			if (image) {
+				const safe = image.replace(/"/g, '\\"');
+				declarations.push(`background-image:url("${safe}")`);
+				declarations.push('background-size:cover');
+				declarations.push('background-position:center');
+				declarations.push('background-repeat:no-repeat');
+			} else {
+				declarations.push('background-image:none');
+			}
+		} else {
+			declarations.push('background-image:none');
+		}
+		return declarations.join(';');
+	}
+
+	function shouldRenderPreviewVideo() {
+		if (data.backgroundSource !== 'video') return false;
+		return Boolean(getBackgroundVideoValue(currentDevice));
 	}
 
 	let previewRef;
@@ -299,12 +428,30 @@
 				y: initial?.y ?? 0
 			};
 		})();
+		let pointerOrigin = null;
+		const getDeltas = (offsetX, offsetY, event) => {
+			if (pointerOrigin && event) {
+				return {
+					x: (event.clientX - pointerOrigin.x) / (scale || 1),
+					y: (event.clientY - pointerOrigin.y) / (scale || 1)
+				};
+			}
+			return {
+				x: offsetX / (scale || 1),
+				y: offsetY / (scale || 1)
+			};
+		};
 		return {
-			bounds: '.free-canvas-preview',
 			transform: ({ rootNode }) => {
 				rootNode.style.transform = 'translate(0px, 0px)';
 			},
-			onDragStart: () => {
+			onDragStart: ({ event }) => {
+				pointerOrigin = event
+					? {
+							x: event.clientX,
+							y: event.clientY
+						}
+					: null;
 				const current = getFrame(item.id);
 				originFrame = {
 					x: current?.x ?? 0,
@@ -313,24 +460,27 @@
 				selectedId = item.id;
 				updatePreviewRect();
 			},
-			onDrag: ({ offsetX, offsetY }) => {
+			onDrag: ({ offsetX, offsetY, event }) => {
+				const { x: deltaX, y: deltaY } = getDeltas(offsetX, offsetY, event);
 				const startX = originFrame?.x ?? 0;
 				const startY = originFrame?.y ?? 0;
-				const nextX = clampPosition(startX + offsetX / (scale || 1), 'x', item.id);
-				const nextY = clampPosition(startY + offsetY / (scale || 1), 'y', item.id);
+				const nextX = clampPosition(startX + deltaX, 'x', item.id);
+				const nextY = clampPosition(startY + deltaY, 'y', item.id);
 				updateItem(item.id, (draft) => {
 					draft[currentDevice] = { ...draft[currentDevice], x: nextX, y: nextY };
 				});
 			},
-			onDragEnd: ({ offsetX, offsetY }) => {
+			onDragEnd: ({ offsetX, offsetY, event }) => {
+				const { x: deltaX, y: deltaY } = getDeltas(offsetX, offsetY, event);
 				const startX = originFrame?.x ?? 0;
 				const startY = originFrame?.y ?? 0;
-				const nextX = clampPosition(startX + offsetX / (scale || 1), 'x', item.id);
-				const nextY = clampPosition(startY + offsetY / (scale || 1), 'y', item.id);
+				const nextX = clampPosition(startX + deltaX, 'x', item.id);
+				const nextY = clampPosition(startY + deltaY, 'y', item.id);
 				updateItem(item.id, (draft) => {
 					draft[currentDevice] = { ...draft[currentDevice], x: nextX, y: nextY };
 				});
 				emit();
+				pointerOrigin = null;
 			}
 		};
 	}
@@ -369,8 +519,19 @@
 			<div
 				class="free-canvas-preview {currentDevice}"
 				bind:this={previewRef}
-				style={`width:${baseWidth}px;background:${data.backgroundColor};height:${previewHeight}px;min-height:${currentDevice === 'desktop' ? data.minHeightDesktop : data.minHeightMobile}px;`}
+				style={getPreviewContainerStyle()}
 			>
+				{#if shouldRenderPreviewVideo()}
+					<video
+						class="preview-background-video"
+						src={getBackgroundVideoValue(currentDevice)}
+						poster={getBackgroundPosterValue(currentDevice)}
+						autoplay={data.videoAutoplay}
+						loop={data.videoLoop}
+						muted={data.videoMuted ?? true}
+						playsinline
+					></video>
+				{/if}
 				{#each data.items as item (item.id)}
 					{#if item[currentDevice]}
 						<div
@@ -436,16 +597,157 @@
 					/>
 				</label>
 				<label>
-					Cor de fundo
-					<input
-						type="color"
-						value={data.backgroundColor}
-						on:input={(e) => {
-							data = { ...data, backgroundColor: e.currentTarget.value };
+					Fundo
+					<select
+						value={data.backgroundSource}
+						on:change={(e) => {
+							data = { ...data, backgroundSource: e.currentTarget.value };
 							emit();
 						}}
-					/>
+					>
+						<option value="color">Cor</option>
+						<option value="image">Imagem</option>
+						<option value="video">Vídeo</option>
+					</select>
 				</label>
+				{#if data.backgroundSource === 'color'}
+					<label>
+						Cor (desktop)
+						<input
+							type="color"
+							value={data.backgroundColorDesktop}
+							on:input={(e) => {
+								const value = e.currentTarget.value;
+								data = {
+									...data,
+									backgroundColorDesktop: value,
+									backgroundColor: value
+								};
+								emit();
+							}}
+						/>
+					</label>
+					<label>
+						Cor (mobile)
+						<input
+							type="color"
+							value={data.backgroundColorMobile}
+							on:input={(e) => {
+								data = { ...data, backgroundColorMobile: e.currentTarget.value };
+								emit();
+							}}
+						/>
+					</label>
+				{:else if data.backgroundSource === 'image'}
+					<label>
+						Imagem desktop (URL)
+						<input
+							type="text"
+							placeholder="https://..."
+							value={data.backgroundImageDesktop}
+							on:input={(e) => {
+								data = { ...data, backgroundImageDesktop: e.currentTarget.value };
+								emit();
+							}}
+						/>
+					</label>
+					<label>
+						Imagem mobile (URL)
+						<input
+							type="text"
+							placeholder="https://..."
+							value={data.backgroundImageMobile}
+							on:input={(e) => {
+								data = { ...data, backgroundImageMobile: e.currentTarget.value };
+								emit();
+							}}
+						/>
+					</label>
+				{:else if data.backgroundSource === 'video'}
+					<label>
+						Vídeo desktop (URL)
+						<input
+							type="text"
+							placeholder="https://..."
+							value={data.backgroundVideoDesktop}
+							on:input={(e) => {
+								data = { ...data, backgroundVideoDesktop: e.currentTarget.value };
+								emit();
+							}}
+						/>
+					</label>
+					<label>
+						Vídeo mobile (URL)
+						<input
+							type="text"
+							placeholder="https://..."
+							value={data.backgroundVideoMobile}
+							on:input={(e) => {
+								data = { ...data, backgroundVideoMobile: e.currentTarget.value };
+								emit();
+							}}
+						/>
+					</label>
+					<label>
+						Poster desktop (URL)
+						<input
+							type="text"
+							placeholder="https://..."
+							value={data.backgroundVideoPosterDesktop}
+							on:input={(e) => {
+								data = { ...data, backgroundVideoPosterDesktop: e.currentTarget.value };
+								emit();
+							}}
+						/>
+					</label>
+					<label>
+						Poster mobile (URL)
+						<input
+							type="text"
+							placeholder="https://..."
+							value={data.backgroundVideoPosterMobile}
+							on:input={(e) => {
+								data = { ...data, backgroundVideoPosterMobile: e.currentTarget.value };
+								emit();
+							}}
+						/>
+					</label>
+					<div class="checkbox-row">
+						<label class="checkbox">
+							<input
+								type="checkbox"
+								checked={data.videoAutoplay}
+								on:change={(e) => {
+									data = { ...data, videoAutoplay: e.currentTarget.checked };
+									emit();
+								}}
+							/>
+							Autoplay
+						</label>
+						<label class="checkbox">
+							<input
+								type="checkbox"
+								checked={data.videoLoop}
+								on:change={(e) => {
+									data = { ...data, videoLoop: e.currentTarget.checked };
+									emit();
+								}}
+							/>
+							Loop
+						</label>
+						<label class="checkbox">
+							<input
+								type="checkbox"
+								checked={data.videoMuted}
+								on:change={(e) => {
+									data = { ...data, videoMuted: e.currentTarget.checked };
+									emit();
+								}}
+							/>
+							Mudo
+						</label>
+					</div>
+				{/if}
 				<label>
 					Largura base desktop (px)
 					<input
@@ -511,26 +813,26 @@
 							/>
 						</label>
 					</div>
-					<label>
-						Conteúdo (HTML)
-						<textarea
-							rows="4"
-							value={selectedItem.content}
-							on:input={(e) => {
-								updateItem(selectedItem.id, (draft) => (draft.content = e.currentTarget.value));
-								emit();
-							}}
-						></textarea>
-					</label>
-					<label class="checkbox">
-						<input
-							type="checkbox"
-							checked={selectedItem.autoHeight ?? selectedItem.type === 'text'}
-							on:change={(e) => setAutoHeight(selectedItem, e.currentTarget.checked)}
-						/>
-						Altura automática ({currentDevice})
-					</label>
 					{#if selectedItem.type === 'text'}
+						<label>
+							Conteúdo (HTML)
+							<textarea
+								rows="4"
+								value={selectedItem.content}
+								on:input={(e) => {
+									updateItem(selectedItem.id, (draft) => (draft.content = e.currentTarget.value));
+									emit();
+								}}
+							></textarea>
+						</label>
+						<label class="checkbox">
+							<input
+								type="checkbox"
+								checked={selectedItem.autoHeight ?? true}
+								on:change={(e) => setAutoHeight(selectedItem, e.currentTarget.checked)}
+							/>
+							Altura automática ({currentDevice})
+						</label>
 						<label>
 							Cor do texto
 							<input
@@ -552,6 +854,119 @@
 								{/each}
 							</select>
 							<small class="hint">Se já inseriu HTML no campo de conteúdo, deixe em branco.</small>
+						</label>
+					{:else if selectedItem.type === 'image'}
+						<label>
+							Imagem desktop (URL)
+							<input
+								type="text"
+								placeholder="https://..."
+								value={selectedItem.src}
+								on:input={(e) => setItemField(selectedItem, 'src', e.currentTarget.value)}
+							/>
+						</label>
+						<label>
+							Imagem mobile (URL)
+							<input
+								type="text"
+								placeholder="https://..."
+								value={selectedItem.srcMobile}
+								on:input={(e) => setItemField(selectedItem, 'srcMobile', e.currentTarget.value)}
+							/>
+						</label>
+						<label>
+							Texto alternativo (alt)
+							<input
+								type="text"
+								placeholder="Descrição da imagem"
+								value={selectedItem.alt || ''}
+								on:input={(e) => setItemField(selectedItem, 'alt', e.currentTarget.value)}
+							/>
+						</label>
+						<label>
+							Ajuste da imagem (object-fit)
+							<select
+								value={selectedItem.objectFit || 'cover'}
+								on:change={(e) => setItemField(selectedItem, 'objectFit', e.currentTarget.value)}
+							>
+								{#each OBJECT_FIT_OPTIONS as option}
+									<option value={option.value}>{option.label}</option>
+								{/each}
+							</select>
+						</label>
+					{:else if selectedItem.type === 'video'}
+						<label>
+							Vídeo desktop (URL)
+							<input
+								type="text"
+								placeholder="https://..."
+								value={selectedItem.src}
+								on:input={(e) => setItemField(selectedItem, 'src', e.currentTarget.value)}
+							/>
+						</label>
+						<label>
+							Vídeo mobile (URL)
+							<input
+								type="text"
+								placeholder="https://..."
+								value={selectedItem.srcMobile}
+								on:input={(e) => setItemField(selectedItem, 'srcMobile', e.currentTarget.value)}
+							/>
+						</label>
+						<label>
+							Poster desktop (URL)
+							<input
+								type="text"
+								placeholder="https://..."
+								value={selectedItem.poster || ''}
+								on:input={(e) => setItemField(selectedItem, 'poster', e.currentTarget.value)}
+							/>
+						</label>
+						<label>
+							Poster mobile (URL)
+							<input
+								type="text"
+								placeholder="https://..."
+								value={selectedItem.posterMobile || ''}
+								on:input={(e) => setItemField(selectedItem, 'posterMobile', e.currentTarget.value)}
+							/>
+						</label>
+						<div class="checkbox-row">
+							<label class="checkbox">
+								<input
+									type="checkbox"
+									checked={selectedItem.autoplay ?? true}
+									on:change={(e) => setItemField(selectedItem, 'autoplay', e.currentTarget.checked)}
+								/>
+								Autoplay
+							</label>
+							<label class="checkbox">
+								<input
+									type="checkbox"
+									checked={selectedItem.loop ?? true}
+									on:change={(e) => setItemField(selectedItem, 'loop', e.currentTarget.checked)}
+								/>
+								Loop
+							</label>
+							<label class="checkbox">
+								<input
+									type="checkbox"
+									checked={selectedItem.muted ?? true}
+									on:change={(e) => setItemField(selectedItem, 'muted', e.currentTarget.checked)}
+								/>
+								Mudo
+							</label>
+						</div>
+						<label>
+							Ajuste do vídeo (object-fit)
+							<select
+								value={selectedItem.objectFit || 'cover'}
+								on:change={(e) => setItemField(selectedItem, 'objectFit', e.currentTarget.value)}
+							>
+								{#each OBJECT_FIT_OPTIONS as option}
+									<option value={option.value}>{option.label}</option>
+								{/each}
+							</select>
 						</label>
 					{/if}
 				{:else}
@@ -627,6 +1042,7 @@
 		justify-content: center;
 		font-size: 0.85rem;
 		text-transform: uppercase;
+		z-index: 1;
 	}
 
 	.preview-item.selected {
@@ -639,6 +1055,17 @@
 		opacity: 0.85;
 		font-weight: 600;
 		letter-spacing: 0.08em;
+	}
+
+	.preview-background-video {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		pointer-events: none;
+		z-index: 0;
 	}
 
 	.inspector {
@@ -671,6 +1098,13 @@
 	label.checkbox input {
 		width: auto;
 		margin-right: 0.5rem;
+	}
+
+	.checkbox-row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		align-items: center;
 	}
 
 	.hint {
