@@ -72,8 +72,8 @@
 	{/if}
 
 	<div class="story-header__content">
-		<h1>{title}</h1>
-		<h2>{subtitle}</h2>
+		<h1>{@html title || ''}</h1>
+		<h2>{@html subtitle || ''}</h2>
 
 		{#if author || date}
 			<div class="meta">

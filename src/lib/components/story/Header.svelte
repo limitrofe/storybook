@@ -122,10 +122,10 @@
 
 	<div class="story-header__content" style={typographyStyle}>
 		<div class="story-header__container">
-			<h1>{title}</h1>
+			<h1>{@html title || ''}</h1>
 
 			{#if subtitle}
-				<p class="story-header__subtitle">{subtitle}</p>
+				<p class="story-header__subtitle">{@html subtitle}</p>
 			{/if}
 
 			{#if author || date}
