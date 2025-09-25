@@ -34,7 +34,7 @@
 	import FlexibleLayout from './story/FlexibleLayout.svelte';
 	// 🎨 NOVO: ResponsiveMediaLayout
 	import ResponsiveMediaLayout from './story/ResponsiveMediaLayout.svelte';
-import FreeCanvas from './story/FreeCanvas.svelte';
+	import FreeCanvas from './story/FreeCanvas.svelte';
 
 	export let previewDevice = null;
 
@@ -58,7 +58,6 @@ import FreeCanvas from './story/FreeCanvas.svelte';
 		window.addEventListener('resize', handleResize);
 		return () => window.removeEventListener('resize', handleResize);
 	});
-
 
 	export let storyData = {};
 
@@ -93,7 +92,7 @@ import FreeCanvas from './story/FreeCanvas.svelte';
 				return 'section-title';
 
 			case 'layout-flexivel':
-			case 'flexible-layout': 
+			case 'flexible-layout':
 			case 'layout-personalizado':
 				return 'flexible-layout';
 
@@ -245,7 +244,7 @@ import FreeCanvas from './story/FreeCanvas.svelte';
 	 */
 	function processCharacters(characters) {
 		if (!characters) return [];
-		
+
 		// Se for string JSON, faz parse
 		if (typeof characters === 'string') {
 			try {
@@ -258,11 +257,12 @@ import FreeCanvas from './story/FreeCanvas.svelte';
 
 		// Se for array, retorna processado
 		if (Array.isArray(characters)) {
-			return characters.map(char => ({
+			return characters.map((char) => ({
 				nome: char.nome || char.name || '',
 				sobrenome: char.sobrenome || char.surname || '',
 				foto: char.foto || char.photo || char.image || '',
-				fotoMobile: char.fotoMobile || char.photoMobile || char.foto_mobile || char.photo_mobile || '',
+				fotoMobile:
+					char.fotoMobile || char.photoMobile || char.foto_mobile || char.photo_mobile || '',
 				descricao: char.descricao || char.description || char.texto || '',
 				frase: char.frase || char.quote || char.phrase || '', // ✅ CAMPO EXISTENTE
 				autor: char.autor || char.author || '', // ✅ NOVO CAMPO
@@ -278,7 +278,7 @@ import FreeCanvas from './story/FreeCanvas.svelte';
 	 */
 	function processRecommendedItems(items) {
 		if (!items) return [];
-		
+
 		// Se for string JSON, faz parse
 		if (typeof items === 'string') {
 			try {
@@ -291,7 +291,7 @@ import FreeCanvas from './story/FreeCanvas.svelte';
 
 		// Se for array, retorna processado
 		if (Array.isArray(items)) {
-			return items.map(item => ({
+			return items.map((item) => ({
 				title: item.title || item.titulo || item.nome || '',
 				subtitle: item.subtitle || item.subtitulo || '',
 				description: item.description || item.descricao || '',
@@ -315,7 +315,7 @@ import FreeCanvas from './story/FreeCanvas.svelte';
 	 */
 	function processChaoticMedias(medias) {
 		if (!medias) return [];
-		
+
 		// Se for string JSON, faz parse
 		if (typeof medias === 'string') {
 			try {
@@ -328,7 +328,7 @@ import FreeCanvas from './story/FreeCanvas.svelte';
 
 		// Se for array, retorna processado
 		if (Array.isArray(medias)) {
-			return medias.map(media => ({
+			return medias.map((media) => ({
 				type: media.type || 'image',
 				src: media.src || media.url || '',
 				rotation: media.rotation || Math.random() * 30 - 15,
@@ -347,8 +347,8 @@ import FreeCanvas from './story/FreeCanvas.svelte';
 	 */
 	function processTextos(textos) {
 		if (!Array.isArray(textos)) return [];
-		
-		return textos.map(texto => ({
+
+		return textos.map((texto) => ({
 			content: texto.content || texto.texto || '',
 			fontFamily: texto.fontFamily || texto.familia || 'inherit',
 			fontSize: {
@@ -391,15 +391,13 @@ import FreeCanvas from './story/FreeCanvas.svelte';
 		}));
 	}
 
-	
-
 	/**
 	 * 🎨 NOVO: Processa array de imagens para ResponsiveMediaLayout
 	 */
 	function processImagens(imagens) {
 		if (!Array.isArray(imagens)) return [];
-		
-		return imagens.map(imagem => ({
+
+		return imagens.map((imagem) => ({
 			srcDesktop: imagem.srcDesktop || imagem.src || '',
 			srcMobile: imagem.srcMobile || imagem.src || '',
 			alt: imagem.alt || imagem.description || '',
@@ -450,29 +448,28 @@ import FreeCanvas from './story/FreeCanvas.svelte';
 			{@const props = getComponentProps(paragraph)}
 
 			<!-- Header -->
-{#if componentType === 'header'}
-  <Header
-    title={props.title}
-    subtitle={props.subtitle}
-    author={props.author}
-    date={props.date}
-    backgroundImage={props.backgroundImage}
-    backgroundImageMobile={props.backgroundImageMobile}
-    backgroundVideo={props.backgroundVideo}
-    backgroundVideoMobile={props.backgroundVideoMobile}
-    variant={props.variant || 'default'}
-    overlay={stringToBoolean(props.overlay, true)}
-    posterImage={props.poster}
-    posterImageMobile={props.posterMobile}
-  />
-			<!-- 🌪️ Header Caótico -->
+			{#if componentType === 'header'}
+				<Header
+					title={props.title}
+					subtitle={props.subtitle}
+					author={props.author}
+					date={props.date}
+					backgroundImage={props.backgroundImage}
+					backgroundImageMobile={props.backgroundImageMobile}
+					backgroundVideo={props.backgroundVideo}
+					backgroundVideoMobile={props.backgroundVideoMobile}
+					variant={props.variant || 'default'}
+					overlay={stringToBoolean(props.overlay, true)}
+					posterImage={props.poster}
+					posterImageMobile={props.posterMobile}
+				/>
+				<!-- 🌪️ Header Caótico -->
 			{:else if componentType === 'header-caotico'}
 				<HeaderCaotico
 					title={props.title || 'HEADER CAÓTICO'}
 					subtitle={props.subtitle || '40 mídias se movimentando dinamicamente'}
 					titleColor={props.titleColor || '#232323'}
 					medias={processChaoticMedias(props.medias || [])}
-					
 					useCustomBackground={stringToBoolean(props.useCustomBackground, false)}
 					backgroundImage={props.backgroundImage || ''}
 					backgroundImageMobile={props.backgroundImageMobile || ''}
@@ -480,11 +477,9 @@ import FreeCanvas from './story/FreeCanvas.svelte';
 					backgroundVideoMobile={props.backgroundVideoMobile || ''}
 					overlay={stringToBoolean(props.overlay, true)}
 					overlayOpacity={parseFloat(props.overlayOpacity) || 0.5}
-					
 					totalDefaultMedias={parseInt(props.totalDefaultMedias) || 40}
 					shuffleInterval={parseInt(props.shuffleInterval) || 3000}
 					animationDelay={parseInt(props.animationDelay) || 300}
-					
 					mediaWidth={parseInt(props.mediaWidth) || 220}
 					mediaHeight={parseInt(props.mediaHeight) || 165}
 					mediaWidthMobile={parseInt(props.mediaWidthMobile) || 160}
@@ -492,30 +487,25 @@ import FreeCanvas from './story/FreeCanvas.svelte';
 					mediaSizeVariation={parseFloat(props.mediaSizeVariation) || 0.4}
 				/>
 
-			<!-- Text -->
+				<!-- Text -->
 			{:else if componentType === 'text'}
 				<div class="section-content">
-					<StoryText 
-						content={props.text} 
-						variant={props.variant || 'body'} 
+					<StoryText
+						content={props.text}
+						variant={props.variant || 'body'}
 						align={props.align}
 						size={props.size}
 						color={props.color}
 					/>
 				</div>
 
-			<!-- Quote -->
+				<!-- Quote -->
 			{:else if componentType === 'quote'}
 				<div class="section-content">
-					<StoryText 
-						content={props.text} 
-						variant="quote" 
-						author={props.author} 
-						role={props.role} 
-					/>
+					<StoryText content={props.text} variant="quote" author={props.author} role={props.role} />
 				</div>
 
-			<!-- Section Title -->
+				<!-- Section Title -->
 			{:else if componentType === 'section-title'}
 				<SectionTitle
 					title={props.text}
@@ -539,7 +529,7 @@ import FreeCanvas from './story/FreeCanvas.svelte';
 					overlay={stringToBoolean(props.overlay, false)}
 				/>
 
-			<!-- Flexible Layout -->
+				<!-- Flexible Layout -->
 			{:else if componentType === 'flexible-layout'}
 				<FlexibleLayout
 					text={props.text || ''}
@@ -549,7 +539,6 @@ import FreeCanvas from './story/FreeCanvas.svelte';
 					fontSize={props.fontSize || 'clamp(2rem, 5vw, 4rem)'}
 					fontSizeMobile={props.fontSizeMobile || 'clamp(1.5rem, 8vw, 2.5rem)'}
 					textZIndex={props.textZIndex || 2}
-					
 					image1Desktop={props.image1Desktop || ''}
 					image1Mobile={props.image1Mobile || ''}
 					image1Width={props.image1Width || '200px'}
@@ -561,7 +550,6 @@ import FreeCanvas from './story/FreeCanvas.svelte';
 					image1XMobile={props.image1XMobile || '0px'}
 					image1YMobile={props.image1YMobile || '0px'}
 					image1ZIndex={props.image1ZIndex || 3}
-					
 					image2Desktop={props.image2Desktop || ''}
 					image2Mobile={props.image2Mobile || ''}
 					image2Width={props.image2Width || '400px'}
@@ -574,7 +562,6 @@ import FreeCanvas from './story/FreeCanvas.svelte';
 					image2XMobile={props.image2XMobile || '0px'}
 					image2YMobile={props.image2YMobile || '0px'}
 					image2ZIndex={props.image2ZIndex || 1}
-					
 					backgroundColor={props.backgroundColor || '#1a1a1a'}
 					minHeight={props.minHeight || '80vh'}
 					minHeightMobile={props.minHeightMobile || '70vh'}
@@ -582,17 +569,21 @@ import FreeCanvas from './story/FreeCanvas.svelte';
 					paddingMobile={props.paddingMobile || '1.5rem'}
 				/>
 
-			<!-- 🎨 NOVO: ResponsiveMediaLayout -->
+				<!-- 🎨 NOVO: ResponsiveMediaLayout -->
 			{:else if componentType === 'responsive-media'}
-				<ResponsiveMediaLayout 
+				<ResponsiveMediaLayout
 					heightDesktop={props.heightDesktop || props.height || '100vh'}
 					heightMobile={props.heightMobile || props.height || '100vh'}
 					backgroundType={props.backgroundType || 'color'}
 					backgroundColor={props.backgroundColor || '#000000'}
 					backgroundImageDesktop={props.backgroundImageDesktop || props.backgroundImage || ''}
 					backgroundImageMobile={props.backgroundImageMobile || props.backgroundImage || ''}
-					backgroundPositionDesktop={props.backgroundPositionDesktop || props.backgroundPosition || 'center center'}
-					backgroundPositionMobile={props.backgroundPositionMobile || props.backgroundPosition || 'center center'}
+					backgroundPositionDesktop={props.backgroundPositionDesktop ||
+						props.backgroundPosition ||
+						'center center'}
+					backgroundPositionMobile={props.backgroundPositionMobile ||
+						props.backgroundPosition ||
+						'center center'}
 					backgroundSizeDesktop={props.backgroundSizeDesktop || props.backgroundSize || 'cover'}
 					backgroundSizeMobile={props.backgroundSizeMobile || props.backgroundSize || 'cover'}
 					backgroundVideoDesktop={props.backgroundVideoDesktop || props.backgroundVideo || ''}
@@ -600,37 +591,39 @@ import FreeCanvas from './story/FreeCanvas.svelte';
 					textos={processTextos(props.textos || props.texts || [])}
 					imagens={processImagens(props.imagens || props.images || [])}
 				/>
-
 			{:else if componentType === 'free-canvas'}
 				<FreeCanvas
-					minHeightDesktop={Number(props.minHeightDesktop ?? props.heightDesktop ?? props.height ?? 400)}
+					minHeightDesktop={Number(
+						props.minHeightDesktop ?? props.heightDesktop ?? props.height ?? 400
+					)}
 					maxHeightDesktop={props.maxHeightDesktop ?? null}
-					minHeightMobile={Number(props.minHeightMobile ?? props.heightMobile ?? props.height ?? 400)}
+					minHeightMobile={Number(
+						props.minHeightMobile ?? props.heightMobile ?? props.height ?? 400
+					)}
 					maxHeightMobile={props.maxHeightMobile ?? null}
 					baseWidthDesktop={Number(props.baseWidthDesktop ?? 1440)}
 					baseWidthMobile={Number(props.baseWidthMobile ?? 375)}
 					backgroundColor={props.backgroundColor || '#000000'}
 					items={props.items || props.elements || []}
-					device={device}
+					{device}
 					typography={storyData.appearance?.typography || {}}
 				/>
-
-{:else if componentType === 'photo'}
-	<PhotoWithCaption
-		src={props.src}
-		srcMobile={props.srcMobile || props.src}
-		alt={props.alt || ''}
-		caption={props.caption || ''}
-		credit={props.credit || ''}
-		fullWidth={stringToBoolean(props.fullWidth, false)}
-		alignment={props.alignment || 'center'}
-	/>
-<!-- Video - ATUALIZADO COM NOVAS PROPS -->
-<!-- Video - ATUALIZADO COM NOVAS PROPS -->
+			{:else if componentType === 'photo'}
+				<PhotoWithCaption
+					src={props.src}
+					srcMobile={props.srcMobile || props.src}
+					alt={props.alt || ''}
+					caption={props.caption || ''}
+					credit={props.credit || ''}
+					fullWidth={stringToBoolean(props.fullWidth, false)}
+					alignment={props.alignment || 'center'}
+				/>
+				<!-- Video - ATUALIZADO COM NOVAS PROPS -->
+				<!-- Video - ATUALIZADO COM NOVAS PROPS -->
 			{:else if componentType === 'video'}
 				<VideoPlayer
 					src={props.src}
-					srcMobile={props.srcMobile || props.src} 
+					srcMobile={props.srcMobile || props.src}
 					poster={props.poster}
 					posterMobile={props.posterMobile || props.poster}
 					caption={props.caption}
@@ -645,58 +638,59 @@ import FreeCanvas from './story/FreeCanvas.svelte';
 					customWidthMobile={props.customWidthMobile || ''}
 					aspectRatio={props.aspectRatio || '16/9'}
 					aspectRatioMobile={props.aspectRatioMobile || '9/16'}
-					backgroundColor={props.backgroundColor || props.containerBackgroundColor || 'rgba(0, 0, 0, 0.05)'}
+					backgroundColor={props.backgroundColor ||
+						props.containerBackgroundColor ||
+						'rgba(0, 0, 0, 0.05)'}
 					alignment={props.alignment || 'center'}
-                    fullWidthBackground={stringToBoolean(props.fullWidthBackground, false)}
+					fullWidthBackground={stringToBoolean(props.fullWidthBackground, false)}
 				/>
 
-<!-- Globo Player -->
-{:else if componentType === 'globo-player'}
-    <GloboPlayer
-        videoId={props.videoId}
-        videosIDs={props.videosIDs}
-        videoIdMobile={props.videoIdMobile}
-        videoIdDesktop={props.videoIdDesktop}
-        widthMobile={props.widthMobile}
-        widthDesktop={props.widthDesktop}
-        width={props.width}
-        containerBackgroundColor={props.containerBackgroundColor}
-        aspectRatio={props.aspectRatio}
-        aspectRatioMobile={props.aspectRatioMobile}
-        caption={props.caption}
-        credit={props.credit}
-        fullWidth={stringToBoolean(props.fullWidth, false)}
-        autoplay={stringToBoolean(props.autoplay, false)}
-        startMuted={stringToBoolean(props.startMuted, true)}
-        skipDFP={stringToBoolean(props.skipDFP, false)}
-        chromeless={stringToBoolean(props.chromeless, false)}
-        showCaption={stringToBoolean(props.showCaption, true)}
-        controls={stringToBoolean(props.controls, true)}
-        autoPlay={stringToBoolean(props.autoPlay, false)}
-        allowRestrictedContent={stringToBoolean(props.allowRestrictedContent, true)}
-        allowLocation={stringToBoolean(props.allowLocation, true)}
-        exitFullscreenOnEnd={stringToBoolean(props.exitFullscreenOnEnd, true)}
-        isLiveContent={stringToBoolean(props.isLiveContent, false)}
-        preventBlackBars={stringToBoolean(props.preventBlackBars, false)}
-        includeResetStyle={stringToBoolean(props.includeResetStyle, true)}
-        disasterRecoveryMode={stringToBoolean(props.disasterRecoveryMode, false)}
-        env={props.env || 'production'}
-        globoId={props.globoId}
-        token={props.token}
-        resumeAt={props.resumeAt}
-        maxQualityLevel={props.maxQualityLevel}
-        defaultSubtitle={props.defaultSubtitle}
-        defaultAudio={props.defaultAudio}
-        adAccountId={props.adAccountId}
-        adCmsId={props.adCmsId}
-        adUnit={props.adUnit}
-        adCustomData={props.adCustomData}
-        siteName={props.siteName}
-        ga4={props.ga4}
-    />
+				<!-- Globo Player -->
+			{:else if componentType === 'globo-player'}
+				<GloboPlayer
+					videoId={props.videoId}
+					videosIDs={props.videosIDs}
+					videoIdMobile={props.videoIdMobile}
+					videoIdDesktop={props.videoIdDesktop}
+					widthMobile={props.widthMobile}
+					widthDesktop={props.widthDesktop}
+					width={props.width}
+					containerBackgroundColor={props.containerBackgroundColor}
+					aspectRatio={props.aspectRatio}
+					aspectRatioMobile={props.aspectRatioMobile}
+					caption={props.caption}
+					credit={props.credit}
+					fullWidth={stringToBoolean(props.fullWidth, false)}
+					autoplay={stringToBoolean(props.autoplay, false)}
+					startMuted={stringToBoolean(props.startMuted, true)}
+					skipDFP={stringToBoolean(props.skipDFP, false)}
+					chromeless={stringToBoolean(props.chromeless, false)}
+					showCaption={stringToBoolean(props.showCaption, true)}
+					controls={stringToBoolean(props.controls, true)}
+					autoPlay={stringToBoolean(props.autoPlay, false)}
+					allowRestrictedContent={stringToBoolean(props.allowRestrictedContent, true)}
+					allowLocation={stringToBoolean(props.allowLocation, true)}
+					exitFullscreenOnEnd={stringToBoolean(props.exitFullscreenOnEnd, true)}
+					isLiveContent={stringToBoolean(props.isLiveContent, false)}
+					preventBlackBars={stringToBoolean(props.preventBlackBars, false)}
+					includeResetStyle={stringToBoolean(props.includeResetStyle, true)}
+					disasterRecoveryMode={stringToBoolean(props.disasterRecoveryMode, false)}
+					env={props.env || 'production'}
+					globoId={props.globoId}
+					token={props.token}
+					resumeAt={props.resumeAt}
+					maxQualityLevel={props.maxQualityLevel}
+					defaultSubtitle={props.defaultSubtitle}
+					defaultAudio={props.defaultAudio}
+					adAccountId={props.adAccountId}
+					adCmsId={props.adCmsId}
+					adUnit={props.adUnit}
+					adCustomData={props.adCustomData}
+					siteName={props.siteName}
+					ga4={props.ga4}
+				/>
 
-
-    <!-- Gallery -->
+				<!-- Gallery -->
 			{:else if componentType === 'gallery'}
 				<PhotoGallery
 					images={props.images || []}
@@ -705,7 +699,7 @@ import FreeCanvas from './story/FreeCanvas.svelte';
 					lightbox={stringToBoolean(props.lightbox, true)}
 				/>
 
-			<!-- Carousel -->
+				<!-- Carousel -->
 			{:else if componentType === 'carousel'}
 				<Carousel
 					items={props.items || []}
@@ -715,7 +709,7 @@ import FreeCanvas from './story/FreeCanvas.svelte';
 					showArrows={stringToBoolean(props.showArrows, true)}
 				/>
 
-			<!-- 🆕 NOVO: Recommended Items -->
+				<!-- 🆕 NOVO: Recommended Items -->
 			{:else if componentType === 'recommended-items'}
 				<RecommendedItems
 					items={processRecommendedItems(props.items || props.itens)}
@@ -728,7 +722,7 @@ import FreeCanvas from './story/FreeCanvas.svelte';
 					textColor={props.textColor || props.corTexto || '#ffffff'}
 				/>
 
-			<!-- Parallax -->
+				<!-- Parallax -->
 			{:else if componentType === 'parallax'}
 				<Parallax
 					image={props.image}
@@ -739,7 +733,7 @@ import FreeCanvas from './story/FreeCanvas.svelte';
 					content={props.content || ''}
 				/>
 
-			<!-- Before/After -->
+				<!-- Before/After -->
 			{:else if componentType === 'before-after'}
 				<BeforeAfter
 					beforeImage={props.beforeImage}
@@ -749,14 +743,14 @@ import FreeCanvas from './story/FreeCanvas.svelte';
 					orientation={props.orientation || 'vertical'}
 				/>
 
-			<!-- ScrollyTelling -->
+				<!-- ScrollyTelling -->
 			{:else if componentType === 'scrolly'}
 				<ScrollyTelling
 					steps={props.steps || []}
 					fullWidth={stringToBoolean(props.fullWidth, false)}
 				/>
 
-			<!-- ✅ SCROLLY FRAMES - NOVO COMPONENTE -->
+				<!-- ✅ SCROLLY FRAMES - NOVO COMPONENTE -->
 			{:else if componentType === 'scrollyframes'}
 				<ScrollyFrames
 					framePrefix={props.imagePrefix || ''}
@@ -772,7 +766,7 @@ import FreeCanvas from './story/FreeCanvas.svelte';
 					preloadRadius={parseInt(props.preloadFrames) || 8}
 				/>
 
-			<!-- 🎬 CHARACTER PRESENTATION - COMPONENTE DE PERSONAGENS -->
+				<!-- 🎬 CHARACTER PRESENTATION - COMPONENTE DE PERSONAGENS -->
 			{:else if componentType === 'character-presentation'}
 				<CharacterPresentation
 					personagens={processCharacters(props.personagens || props.characters || props.lista)}
@@ -785,7 +779,7 @@ import FreeCanvas from './story/FreeCanvas.svelte';
 					sectionHeightMobile={props.sectionHeightMobile || '100vh'}
 				/>
 
-			<!-- 🎯 CURIOSIDADES - NOVO COMPONENTE -->
+				<!-- 🎯 CURIOSIDADES - NOVO COMPONENTE -->
 			{:else if componentType === 'curiosidades'}
 				<Curiosidades
 					personagens={processCharacters(props.personagens || props.characters || props.lista)}
@@ -796,7 +790,7 @@ import FreeCanvas from './story/FreeCanvas.svelte';
 					quoteColor={props.quoteColor || '#ffd700'}
 				/>
 
-			<!-- 🆕 TIMELINE INTERACTIVE -->
+				<!-- 🆕 TIMELINE INTERACTIVE -->
 			{:else if componentType === 'timeline-interactive'}
 				<TimelineInteractive
 					events={props.events || []}
@@ -808,7 +802,7 @@ import FreeCanvas from './story/FreeCanvas.svelte';
 					highlightCurrent={stringToBoolean(props.highlightCurrent, true)}
 				/>
 
-			<!-- 🆕 DOCUMENT VIEWER -->
+				<!-- 🆕 DOCUMENT VIEWER -->
 			{:else if componentType === 'document-viewer'}
 				<DocumentViewer
 					documents={props.documents || []}
@@ -820,7 +814,7 @@ import FreeCanvas from './story/FreeCanvas.svelte';
 					showThumbnails={stringToBoolean(props.showThumbnails, true)}
 				/>
 
-			<!-- 🆕 CRIME EXPLAINER -->
+				<!-- 🆕 CRIME EXPLAINER -->
 			{:else if componentType === 'crime-explainer'}
 				<CrimeExplainer
 					crimes={props.crimes || []}
@@ -831,7 +825,7 @@ import FreeCanvas from './story/FreeCanvas.svelte';
 					autoAdvance={stringToBoolean(props.autoAdvance, false)}
 				/>
 
-			<!-- Flourish Embed -->
+				<!-- Flourish Embed -->
 			{:else if componentType === 'flourish'}
 				<FlourishEmbed
 					src={props.src}
@@ -840,15 +834,15 @@ import FreeCanvas from './story/FreeCanvas.svelte';
 					credit={props.credit}
 				/>
 
-			<!-- Flourish Scrolly -->
+				<!-- Flourish Scrolly -->
 			{:else if componentType === 'flourish-scrolly'}
 				<FlourishScrolly src={props.src} steps={props.steps || []} />
 
-			<!-- Anchor Point -->
+				<!-- Anchor Point -->
 			{:else if componentType === 'anchor'}
 				<AnchorPoint id={props.id} />
 
-			<!-- Fallback para tipos desconhecidos -->
+				<!-- Fallback para tipos desconhecidos -->
 			{:else}
 				<div class="unknown-component">
 					<p><strong>Componente desconhecido:</strong> {paragraph.type}</p>
@@ -860,7 +854,7 @@ import FreeCanvas from './story/FreeCanvas.svelte';
 
 	<!-- Renderizar créditos finais se existir -->
 	{#if storyData.credits}
-		<FinalCredits 
+		<FinalCredits
 			notes={storyData.credits.notes || ''}
 			sources={storyData.credits.sources || []}
 			additionalGraphics={storyData.credits.additionalGraphics || []}

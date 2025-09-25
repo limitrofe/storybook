@@ -3,11 +3,13 @@
 ## 📁 Arquivos que precisam ser atualizados/criados:
 
 ### 1. 🆕 Novos componentes:
+
 ```
 src/lib/components/story/ScrollyFrames.svelte          ← Componente principal otimizado
 ```
 
 ### 2. 🔄 Arquivos para atualizar:
+
 ```
 src/lib/components/StoryRenderer.svelte                ← Adicionar suporte ao ScrollyFrames
 src/lib/utils/storyRenderer.js                        ← Adicionar processamento videoscrollytelling
@@ -16,6 +18,7 @@ package.json                                          ← Adicionar novos comand
 ```
 
 ### 3. 🆕 Scripts novos:
+
 ```
 scripts/fetch-docs-automatico.js                      ← Fetch com detecção automática
 scripts/sistema-simplificado.js                       ← Sistema super simples (opcional)
@@ -28,18 +31,23 @@ scripts/auto-upload-frames.js                         ← Upload automático (op
 ## 🎯 Implementação mínima (só o essencial):
 
 ### Passo 1: Criar o componente ScrollyFrames
+
 Copie o conteúdo do artifact `ScrollyFrames.svelte` para:
+
 ```
 src/lib/components/story/ScrollyFrames.svelte
 ```
 
 ### Passo 2: Atualizar StoryRenderer.svelte
+
 Adicione a importação:
+
 ```javascript
 import ScrollyFrames from './story/ScrollyFrames.svelte';
 ```
 
 E adicione o caso no switch:
+
 ```javascript
 <!-- VideoScrollytelling NOVO -->
 {:else if componentType === 'video-scrolly-new'}
@@ -62,7 +70,9 @@ E adicione o caso no switch:
 ```
 
 ### Passo 3: Atualizar função getComponentType
+
 Adicione no mapeamento:
+
 ```javascript
 // VideoScrollytelling NOVO
 'videoscrollytelling': 'video-scrolly-new',
@@ -72,7 +82,9 @@ Adicione no mapeamento:
 ```
 
 ### Passo 4: Atualizar storyRenderer.js
+
 Adicione o case no switch:
+
 ```javascript
 case 'videoscrollytelling':
 case 'video-scrollytelling':
@@ -100,24 +112,26 @@ case 'video-scrolly':
 ## 🎮 Teste básico:
 
 ### 1. Criar JSON de teste:
+
 ```json
 {
-  "title": "Teste VideoScrolly",
-  "paragraphs": [
-    {
-      "type": "videoscrollytelling",
-      "imagePrefix": "https://via.placeholder.com/1920x1080/ff0000/ffffff?text=Frame+",
-      "imagePrefixMobile": "https://via.placeholder.com/800x600/00ff00/ffffff?text=Mobile+",
-      "totalFrames": 10,
-      "imageSuffix": "",
-      "imageSuffixMobile": "",
-      "showProgress": true
-    }
-  ]
+	"title": "Teste VideoScrolly",
+	"paragraphs": [
+		{
+			"type": "videoscrollytelling",
+			"imagePrefix": "https://via.placeholder.com/1920x1080/ff0000/ffffff?text=Frame+",
+			"imagePrefixMobile": "https://via.placeholder.com/800x600/00ff00/ffffff?text=Mobile+",
+			"totalFrames": 10,
+			"imageSuffix": "",
+			"imageSuffixMobile": "",
+			"showProgress": true
+		}
+	]
 }
 ```
 
 ### 2. Testar no navegador:
+
 ```bash
 npm run dev
 # Abrir: http://localhost:5173/teste
@@ -128,24 +142,29 @@ npm run dev
 ## 🚀 Implementação completa (com automação):
 
 ### Passo 1: Substituir fetch-docs.js
+
 Renomear o atual e criar o novo:
+
 ```bash
 mv scripts/fetch-docs.js scripts/fetch-docs-original.js
 # Copiar conteúdo do fetch-docs-automatico.js para scripts/fetch-docs.js
 ```
 
 ### Passo 2: Atualizar package.json
+
 ```json
 {
-  "scripts": {
-    "fetch": "node scripts/fetch-docs.js",
-    "fetch-original": "node scripts/fetch-docs-original.js"
-  }
+	"scripts": {
+		"fetch": "node scripts/fetch-docs.js",
+		"fetch-original": "node scripts/fetch-docs-original.js"
+	}
 }
 ```
 
 ### Passo 3: Configurar detecção automática
+
 O novo fetch-docs.js vai:
+
 - Detectar componentes `videoscrollytelling` automaticamente
 - Procurar vídeos nos seus caminhos habituais
 - Configurar URLs dos frames automaticamente
@@ -156,11 +175,13 @@ O novo fetch-docs.js vai:
 ## 📱 Como usar após implementação:
 
 ### Usuário final:
+
 1. **Google Docs:** Escrever `type: videoscrollytelling`
-2. **Terminal:** `npm run fetch DOC_ID`  
+2. **Terminal:** `npm run fetch DOC_ID`
 3. **Pronto!** Sistema detecta e configura automaticamente
 
 ### Desenvolvedor:
+
 1. **Testar:** `npm run dev`
 2. **Debug:** Console do navegador mostra logs detalhados
 3. **Personalizar:** Editar props do ScrollyFrames conforme necessário
@@ -170,23 +191,28 @@ O novo fetch-docs.js vai:
 ## 🔧 Configurações avançadas:
 
 ### Personalizar detecção de vídeos:
+
 Editar `fetch-docs.js`, função `buscarVideosLocais()`:
+
 ```javascript
 const possiveisPaths = [
-  // Seus padrões
-  {
-    desktop: `../static/videos/meu_video_${index}.mp4`,
-    mobile: `../static/videos/meu_video_${index}_mobile.mp4`
-  },
-  // Padrão atual
-  {
-    desktop: `../static/videos/videoscrolly_${index}_main.mp4`,
-    mobile: `../static/videos/videoscrolly_${index}_mobile.mp4`
-  }
+	// Seus padrões
+	{
+		desktop: `../static/videos/meu_video_${index}.mp4`,
+		mobile: `../static/videos/meu_video_${index}_mobile.mp4`
+	},
+	// Padrão atual
+	{
+		desktop: `../static/videos/videoscrolly_${index}_main.mp4`,
+		mobile: `../static/videos/videoscrolly_${index}_mobile.mp4`
+	}
 ];
 ```
 
 ### Personalizar configurações padrão:
+
 Editar função `processarDesdeLocais()`:
+
 ```javascript
 component.totalFrames = 150; // Alterar aqui
+```

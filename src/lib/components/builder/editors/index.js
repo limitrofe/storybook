@@ -5,13 +5,13 @@ export { default as GenericEditor } from './SimpleEditor.svelte'; // Alias
 
 // Função helper para obter editor específico
 export function getEditor(componentType) {
-  switch (componentType) {
-    case 'free-canvas':
-      return import('./FreeCanvasEditor.svelte').then((m) => m.default);
-    case 'header':
-    case 'text':
-      return import('./SimpleEditor.svelte').then((m) => m.default);
-    default:
-      return import('./SimpleEditor.svelte').then((m) => m.default);
-  }
+	switch (componentType) {
+		case 'free-canvas':
+			return import('./FreeCanvasEditor.svelte').then((m) => m.default);
+		case 'header':
+		case 'text':
+			return import('./SimpleEditor.svelte').then((m) => m.default);
+		default:
+			return import('./SimpleEditor.svelte').then((m) => m.default);
+	}
 }

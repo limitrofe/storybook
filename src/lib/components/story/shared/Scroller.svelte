@@ -1,224 +1,219 @@
 <script context="module">
-    const handlers = [];
-    let manager;
-if (typeof window !== 'undefined') {
-        const run_all = () => handlers.forEach((fn) => fn());
-window.addEventListener('scroll', run_all);
-        window.addEventListener('resize', run_all);
-    }
+	const handlers = [];
+	let manager;
+	if (typeof window !== 'undefined') {
+		const run_all = () => handlers.forEach((fn) => fn());
+		window.addEventListener('scroll', run_all);
+		window.addEventListener('resize', run_all);
+	}
 
-    if (typeof IntersectionObserver !== 'undefined') {
-        const map = new Map();
-const observer = new IntersectionObserver(
-            (entries, observer) => {
-                entries.forEach((entry) => {
-                    const update = map.get(entry.target);
-                    const index = handlers.indexOf(update);
+	if (typeof IntersectionObserver !== 'undefined') {
+		const map = new Map();
+		const observer = new IntersectionObserver(
+			(entries, observer) => {
+				entries.forEach((entry) => {
+					const update = map.get(entry.target);
+					const index = handlers.indexOf(update);
 
-                 
-   if (entry.isIntersecting) {
-                        if (index === -1) handlers.push(update);
-                    } else {
-                        update();
-                     
-   if (index !== -1) handlers.splice(index, 1);
-                    }
-                });
-            },
-            {
-                rootMargin: '100px 0px'
-            }
-  
-      );
-        manager = {
-            add: ({ outer, update }) => {
-                const { top, bottom } = outer.getBoundingClientRect();
-if (top < window.innerHeight && bottom > 0) handlers.push(update);
+					if (entry.isIntersecting) {
+						if (index === -1) handlers.push(update);
+					} else {
+						update();
 
-                map.set(outer, update);
-                observer.observe(outer);
-},
+						if (index !== -1) handlers.splice(index, 1);
+					}
+				});
+			},
+			{
+				rootMargin: '100px 0px'
+			}
+		);
+		manager = {
+			add: ({ outer, update }) => {
+				const { top, bottom } = outer.getBoundingClientRect();
+				if (top < window.innerHeight && bottom > 0) handlers.push(update);
 
-            remove: ({ outer, update }) => {
-                const index = handlers.indexOf(update);
-if (index !== -1) handlers.splice(index, 1);
+				map.set(outer, update);
+				observer.observe(outer);
+			},
 
-                map.delete(outer);
-                observer.unobserve(outer);
-            }
-        };
-} else {
-        manager = {
-            add: ({ update }) => {
-                handlers.push(update);
-},
+			remove: ({ outer, update }) => {
+				const index = handlers.indexOf(update);
+				if (index !== -1) handlers.splice(index, 1);
 
-            remove: ({ update }) => {
-                const index = handlers.indexOf(update);
-if (index !== -1) handlers.splice(index, 1);
-            }
-        };
-}
+				map.delete(outer);
+				observer.unobserve(outer);
+			}
+		};
+	} else {
+		manager = {
+			add: ({ update }) => {
+				handlers.push(update);
+			},
+
+			remove: ({ update }) => {
+				const index = handlers.indexOf(update);
+				if (index !== -1) handlers.splice(index, 1);
+			}
+		};
+	}
 </script>
 
 <script>
-    import { onMount } from 'svelte';
+	import { onMount } from 'svelte';
 
-    // config
-    export let top = 0;
-export let bottom = 1;
-    export let threshold = 0.1;
-    export let query = 'section';
-    export let parallax = false;
-// bindings
-    export let index = 0;
-    export let count = 0;
-    export let offset = 0;
-export let progress = 0;
-    export let visible = false;
+	// config
+	export let top = 0;
+	export let bottom = 1;
+	export let threshold = 0.1;
+	export let query = 'section';
+	export let parallax = false;
+	// bindings
+	export let index = 0;
+	export let count = 0;
+	export let offset = 0;
+	export let progress = 0;
+	export let visible = false;
 
-    let outer;
-    let foreground;
-    let background;
-    let left;
-    let sections;
-let wh = 0;
-    let fixed;
-    let offset_top = 0;
-    let width = 1;
-    let height;
-    let inverted;
-$: top_px = Math.round(top * wh);
-    $: bottom_px = Math.round(bottom * wh);
-    $: threshold_px = Math.round(threshold * wh);
-$: top, bottom, threshold, parallax, update();
+	let outer;
+	let foreground;
+	let background;
+	let left;
+	let sections;
+	let wh = 0;
+	let fixed;
+	let offset_top = 0;
+	let width = 1;
+	let height;
+	let inverted;
+	$: top_px = Math.round(top * wh);
+	$: bottom_px = Math.round(bottom * wh);
+	$: threshold_px = Math.round(threshold * wh);
+	$: (top, bottom, threshold, parallax, update());
 
-    $: style = `
-        position: ${fixed ?
-'fixed' : 'absolute'};
+	$: style = `
+        position: ${fixed ? 'fixed' : 'absolute'};
         top: 0;
         transform: translate(0, ${offset_top}px);
         z-index: ${inverted ? 3 : 1};
     `;
 
-    $: widthStyle = fixed ?
-`width:${width}px;` : '';
-    onMount(() => {
-        sections = foreground.querySelectorAll(query);
-        count = sections.length;
+	$: widthStyle = fixed ? `width:${width}px;` : '';
+	onMount(() => {
+		sections = foreground.querySelectorAll(query);
+		count = sections.length;
 
-        update();
+		update();
 
-        const scroller = { outer, update };
+		const scroller = { outer, update };
 
-        manager.add(scroller);
-        return () => manager.remove(scroller);
-    });
-function update() {
-        if (!foreground) return;
+		manager.add(scroller);
+		return () => manager.remove(scroller);
+	});
+	function update() {
+		if (!foreground) return;
 
-        const bcr = outer.getBoundingClientRect();
-        left = bcr.left;
-width = bcr.right - left;
-        const fg = foreground.getBoundingClientRect();
-        const bg = background.getBoundingClientRect();
-visible = fg.top < wh && fg.bottom > 0;
-        const foreground_height = fg.bottom - fg.top;
-const background_height = bg.bottom - bg.top;
+		const bcr = outer.getBoundingClientRect();
+		left = bcr.left;
+		width = bcr.right - left;
+		const fg = foreground.getBoundingClientRect();
+		const bg = background.getBoundingClientRect();
+		visible = fg.top < wh && fg.bottom > 0;
+		const foreground_height = fg.bottom - fg.top;
+		const background_height = bg.bottom - bg.top;
 
-        const available_space = bottom_px - top_px;
-        const progressDenominator = foreground_height - available_space;
-        let normalizedProgress = 0;
+		const available_space = bottom_px - top_px;
+		const progressDenominator = foreground_height - available_space;
+		let normalizedProgress = 0;
 
-        if (progressDenominator > 0) {
-            normalizedProgress = (top_px - fg.top) / progressDenominator;
-        } else if (foreground_height) {
-            normalizedProgress = fg.top <= top_px ? 1 : 0;
-        }
+		if (progressDenominator > 0) {
+			normalizedProgress = (top_px - fg.top) / progressDenominator;
+		} else if (foreground_height) {
+			normalizedProgress = fg.top <= top_px ? 1 : 0;
+		}
 
-        normalizedProgress = Math.max(0, Math.min(1, normalizedProgress));
-        progress = normalizedProgress * 100;
+		normalizedProgress = Math.max(0, Math.min(1, normalizedProgress));
+		progress = normalizedProgress * 100;
 
-        if (normalizedProgress <= 0) {
-            offset_top = 0;
-fixed = false;
-        } else if (normalizedProgress >= 1) {
-            offset_top = parallax
-                ?
-foreground_height - background_height
-                : foreground_height - available_space;
-fixed = false;
-        } else {
-            offset_top = parallax
-                ?
-Math.round(top_px - normalizedProgress * (background_height - available_space))
-                : top_px;
-fixed = true;
-        }
+		if (normalizedProgress <= 0) {
+			offset_top = 0;
+			fixed = false;
+		} else if (normalizedProgress >= 1) {
+			offset_top = parallax
+				? foreground_height - background_height
+				: foreground_height - available_space;
+			fixed = false;
+		} else {
+			offset_top = parallax
+				? Math.round(top_px - normalizedProgress * (background_height - available_space))
+				: top_px;
+			fixed = true;
+		}
 
-        if (!sections.length) return;
+		if (!sections.length) return;
 
-        const activationLine = top_px + threshold_px;
-        let activeIndex = 0;
-        let activeRect = null;
+		const activationLine = top_px + threshold_px;
+		let activeIndex = 0;
+		let activeRect = null;
 
-        for (let i = 0; i < sections.length; i++) {
-            const rect = sections[i].getBoundingClientRect();
-            if (rect.top <= activationLine) {
-                activeIndex = i;
-                activeRect = rect;
-            }
-        }
+		for (let i = 0; i < sections.length; i++) {
+			const rect = sections[i].getBoundingClientRect();
+			if (rect.top <= activationLine) {
+				activeIndex = i;
+				activeRect = rect;
+			}
+		}
 
-        index = activeIndex;
+		index = activeIndex;
 
-        if (activeRect) {
-            const height = activeRect.height || 1;
-            const progressRaw = (activationLine - activeRect.top) / height;
-            offset = Math.max(0, Math.min(1, progressRaw));
-        }
-    }
+		if (activeRect) {
+			const height = activeRect.height || 1;
+			const progressRaw = (activationLine - activeRect.top) / height;
+			offset = Math.max(0, Math.min(1, progressRaw));
+		}
+	}
 </script>
 
 <svelte:window bind:innerHeight={wh} />
 
 <div bind:this={outer} class="scroller-outer">
-    <div class="background-container" style="{style}{widthStyle}">
-        <div bind:this={background} class="scroller-background">
-            <slot name="background" />
-        </div>
-    </div>
+	<div class="background-container" style="{style}{widthStyle}">
+		<div bind:this={background} class="scroller-background">
+			<slot name="background" />
+		</div>
+	</div>
 
-    <div bind:this={foreground} class="scroller-foreground">
-        <slot name="foreground" />
-    </div>
+	<div bind:this={foreground} class="scroller-foreground">
+		<slot name="foreground" />
+	</div>
 </div>
+
 <style>
-  .scroller-outer {
-    display: block;
-position: relative;
-  }
-  .scroller-background {
-    display: block;
-    position: relative;
-    width: 100%;
-}
-  .scroller-foreground {
-    display: block;
-    position: relative;
-    z-index: 2;
-    pointer-events: none;
-}
-  .scroller-foreground::after {
-    content: ' ';
-    display: block;
-    clear: both;
-}
-  .background-container {
-    display: block;
-    position: absolute;
-    width: 100%;
-    max-width: 100%;
-    will-change: transform;
-  }
+	.scroller-outer {
+		display: block;
+		position: relative;
+	}
+	.scroller-background {
+		display: block;
+		position: relative;
+		width: 100%;
+	}
+	.scroller-foreground {
+		display: block;
+		position: relative;
+		z-index: 2;
+		pointer-events: none;
+	}
+	.scroller-foreground::after {
+		content: ' ';
+		display: block;
+		clear: both;
+	}
+	.background-container {
+		display: block;
+		position: absolute;
+		width: 100%;
+		max-width: 100%;
+		will-change: transform;
+	}
 </style>

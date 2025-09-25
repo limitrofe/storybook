@@ -1,144 +1,155 @@
 <script>
-  export let minHeightDesktop = 400;
-  export let maxHeightDesktop = null;
-  export let minHeightMobile = 400;
-  export let maxHeightMobile = null;
-  export let baseWidthDesktop = 1440;
-  export let baseWidthMobile = 375;
-  export let backgroundColor = '#000000';
-  export let items = [];
-  export let device = 'desktop';
-  export let typography = {};
+	export let minHeightDesktop = 400;
+	export let maxHeightDesktop = null;
+	export let minHeightMobile = 400;
+	export let maxHeightMobile = null;
+	export let baseWidthDesktop = 1440;
+	export let baseWidthMobile = 375;
+	export let backgroundColor = '#000000';
+	export let items = [];
+	export let device = 'desktop';
+	export let typography = {};
 
-  let isMobile;
-  $: isMobile = device === 'mobile';
+	let isMobile;
+	$: isMobile = device === 'mobile';
 
-  function getFrame(item) {
-    return isMobile ? item.mobile : item.desktop;
-  }
+	function getFrame(item) {
+		return isMobile ? item.mobile : item.desktop;
+	}
 
-  function toVw(value, baseWidth) {
-    if (!baseWidth || baseWidth <= 0) return '0px';
-    return `${(value / baseWidth) * 100}vw`;
-  }
+	function toVw(value, baseWidth) {
+		if (!baseWidth || baseWidth <= 0) return '0px';
+		return `${(value / baseWidth) * 100}vw`;
+	}
 
-  function selectValue(primary, fallback) {
-    if (primary !== undefined && primary !== null && primary !== '') return primary;
-    return fallback ?? '';
-  }
+	function selectValue(primary, fallback) {
+		if (primary !== undefined && primary !== null && primary !== '') return primary;
+		return fallback ?? '';
+	}
 
-  function getTypographyConfig(tag) {
-    if (!tag || !typography || typeof typography !== 'object') return null;
-    if (tag === 'blockquote') return typography.blockquote || null;
-    if (tag === 'p') return typography.body || null;
-    return typography[tag] || null;
-  }
+	function getTypographyConfig(tag) {
+		if (!tag || !typography || typeof typography !== 'object') return null;
+		if (tag === 'blockquote') return typography.blockquote || null;
+		if (tag === 'p') return typography.body || null;
+		return typography[tag] || null;
+	}
 
-  function getTextContainerStyle(item, tag) {
-    const styles = item.textStyles || {};
-    const align = isMobile ? styles.textAlignMobile || styles.textAlign || 'left' : styles.textAlign || 'left';
-    const declarations = [
-      'width:100%',
-      'height:100%',
-      'display:flex',
-      `text-align:${align}`,
-      `align-items:${styles.verticalAlign || 'flex-start'}`,
-      `justify-content:${styles.horizontalAlign || 'flex-start'}`
-    ];
+	function getTextContainerStyle(item, tag) {
+		const styles = item.textStyles || {};
+		const align = isMobile
+			? styles.textAlignMobile || styles.textAlign || 'left'
+			: styles.textAlign || 'left';
+		const declarations = [
+			'width:100%',
+			'height:100%',
+			'display:flex',
+			`text-align:${align}`,
+			`align-items:${styles.verticalAlign || 'flex-start'}`,
+			`justify-content:${styles.horizontalAlign || 'flex-start'}`
+		];
 
-    const config = getTypographyConfig(tag || 'p');
-    if (config?.background) declarations.push(`background:${config.background}`);
-    if (config?.borderColor) {
-      const width = config.borderWidth || '1px';
-      declarations.push(`border:${width} solid ${config.borderColor}`);
-    }
+		const config = getTypographyConfig(tag || 'p');
+		if (config?.background) declarations.push(`background:${config.background}`);
+		if (config?.borderColor) {
+			const width = config.borderWidth || '1px';
+			declarations.push(`border:${width} solid ${config.borderColor}`);
+		}
 
-    return `${declarations.join(';')};`;
-  }
+		return `${declarations.join(';')};`;
+	}
 
-  function getTextContentStyle(item, tag) {
-    const styles = item.textStyles || {};
-    const config = getTypographyConfig(tag || 'p');
-    const declarations = ['margin:0'];
+	function getTextContentStyle(item, tag) {
+		const styles = item.textStyles || {};
+		const config = getTypographyConfig(tag || 'p');
+		const declarations = ['margin:0'];
 
-    const fontFamily = selectValue(styles.fontFamily, config?.fontFamily);
-    const fontWeight = selectValue(styles.fontWeight, config?.fontWeight);
-    const fontStyle = selectValue(styles.fontStyle, config?.fontStyle);
-    const textTransform = selectValue(styles.textTransform, config?.textTransform);
-    const letterSpacing = selectValue(styles.letterSpacing, config?.letterSpacing);
-    const color = selectValue(styles.color, config?.color);
+		const fontFamily = selectValue(styles.fontFamily, config?.fontFamily);
+		const fontWeight = selectValue(styles.fontWeight, config?.fontWeight);
+		const fontStyle = selectValue(styles.fontStyle, config?.fontStyle);
+		const textTransform = selectValue(styles.textTransform, config?.textTransform);
+		const letterSpacing = selectValue(styles.letterSpacing, config?.letterSpacing);
+		const color = selectValue(styles.color, config?.color);
 
-    if (fontFamily) declarations.push(`font-family:${fontFamily}`);
-    if (fontWeight) declarations.push(`font-weight:${fontWeight}`);
-    if (fontStyle) declarations.push(`font-style:${fontStyle}`);
-    if (textTransform) declarations.push(`text-transform:${textTransform}`);
-    if (letterSpacing) declarations.push(`letter-spacing:${letterSpacing}`);
-    if (color) declarations.push(`color:${color}`);
+		if (fontFamily) declarations.push(`font-family:${fontFamily}`);
+		if (fontWeight) declarations.push(`font-weight:${fontWeight}`);
+		if (fontStyle) declarations.push(`font-style:${fontStyle}`);
+		if (textTransform) declarations.push(`text-transform:${textTransform}`);
+		if (letterSpacing) declarations.push(`letter-spacing:${letterSpacing}`);
+		if (color) declarations.push(`color:${color}`);
 
-    const desktop = config?.desktop || {};
-    const mobile = config?.mobile || {};
+		const desktop = config?.desktop || {};
+		const mobile = config?.mobile || {};
 
-    const fontSize = isMobile
-      ? selectValue(styles.fontSizeMobile, selectValue(styles.fontSize, selectValue(mobile.fontSize, desktop.fontSize)))
-      : selectValue(styles.fontSize, selectValue(desktop.fontSize, mobile.fontSize));
-    const lineHeight = isMobile
-      ? selectValue(styles.lineHeightMobile, selectValue(styles.lineHeight, selectValue(mobile.lineHeight, desktop.lineHeight)))
-      : selectValue(styles.lineHeight, selectValue(desktop.lineHeight, mobile.lineHeight));
+		const fontSize = isMobile
+			? selectValue(
+					styles.fontSizeMobile,
+					selectValue(styles.fontSize, selectValue(mobile.fontSize, desktop.fontSize))
+				)
+			: selectValue(styles.fontSize, selectValue(desktop.fontSize, mobile.fontSize));
+		const lineHeight = isMobile
+			? selectValue(
+					styles.lineHeightMobile,
+					selectValue(styles.lineHeight, selectValue(mobile.lineHeight, desktop.lineHeight))
+				)
+			: selectValue(styles.lineHeight, selectValue(desktop.lineHeight, mobile.lineHeight));
 
-    if (fontSize) declarations.push(`font-size:${fontSize}`);
-    if (lineHeight) declarations.push(`line-height:${lineHeight}`);
+		if (fontSize) declarations.push(`font-size:${fontSize}`);
+		if (lineHeight) declarations.push(`line-height:${lineHeight}`);
 
-    if (config?.accentColor) declarations.push(`--free-canvas-accent:${config.accentColor}`);
+		if (config?.accentColor) declarations.push(`--free-canvas-accent:${config.accentColor}`);
 
-    return `${declarations.join(';')};`;
-  }
+		return `${declarations.join(';')};`;
+	}
 
-  const allowedTypographyTags = new Set(['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'blockquote']);
+	const allowedTypographyTags = new Set(['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'blockquote']);
 
-  function getTypographyTag(item) {
-    const raw = item.textStyles?.typography;
-    if (typeof raw !== 'string') return null;
-    const tag = raw.trim().toLowerCase();
-    return allowedTypographyTags.has(tag) ? tag : null;
-  }
+	function getTypographyTag(item) {
+		const raw = item.textStyles?.typography;
+		if (typeof raw !== 'string') return null;
+		const tag = raw.trim().toLowerCase();
+		return allowedTypographyTags.has(tag) ? tag : null;
+	}
 
-  function hasHtml(content) {
-    if (!content) return false;
-    return /<\/?[a-z][^>]*>/i.test(content);
-  }
+	function hasHtml(content) {
+		if (!content) return false;
+		return /<\/?[a-z][^>]*>/i.test(content);
+	}
 
+	function getMediaSource(item) {
+		if (isMobile && item.srcMobile) return item.srcMobile;
+		return item.src || '';
+	}
 
-  function getMediaSource(item) {
-    if (isMobile && item.srcMobile) return item.srcMobile;
-    return item.src || '';
-  }
+	let effectiveBaseWidth = baseWidthDesktop;
+	let baseHeight = 0;
+	let cssHeight = '0px';
 
-  let effectiveBaseWidth = baseWidthDesktop;
-  let baseHeight = 0;
-  let cssHeight = '0px';
+	$: {
+		const frames = items.map(getFrame).filter(Boolean);
+		const contentWidth = frames.length
+			? Math.max(...frames.map((frame) => (frame.x || 0) + (frame.width || 0)))
+			: 0;
+		const baseWidth = isMobile ? baseWidthMobile : baseWidthDesktop;
+		effectiveBaseWidth = Math.max(baseWidth || 0, contentWidth);
 
-  $: {
-    const frames = items.map(getFrame).filter(Boolean);
-    const contentWidth = frames.length ? Math.max(...frames.map((frame) => (frame.x || 0) + (frame.width || 0))) : 0;
-    const baseWidth = isMobile ? baseWidthMobile : baseWidthDesktop;
-    effectiveBaseWidth = Math.max(baseWidth || 0, contentWidth);
+		const minHeight = isMobile ? minHeightMobile : minHeightDesktop;
+		const maxHeight = isMobile ? maxHeightMobile : maxHeightDesktop;
+		const contentHeight = frames.length
+			? Math.max(...frames.map((frame) => (frame.y || 0) + (frame.height || 0)))
+			: 0;
+		baseHeight = Math.max(contentHeight, minHeight || 0);
+		if (typeof maxHeight === 'number' && Number.isFinite(maxHeight) && maxHeight > 0) {
+			baseHeight = Math.min(baseHeight, maxHeight);
+		}
+		cssHeight = toVw(baseHeight, effectiveBaseWidth || baseWidth || 1);
+	}
 
-    const minHeight = isMobile ? minHeightMobile : minHeightDesktop;
-    const maxHeight = isMobile ? maxHeightMobile : maxHeightDesktop;
-    const contentHeight = frames.length ? Math.max(...frames.map((frame) => (frame.y || 0) + (frame.height || 0))) : 0;
-    baseHeight = Math.max(contentHeight, minHeight || 0);
-    if (typeof maxHeight === 'number' && Number.isFinite(maxHeight) && maxHeight > 0) {
-      baseHeight = Math.min(baseHeight, maxHeight);
-    }
-    cssHeight = toVw(baseHeight, effectiveBaseWidth || baseWidth || 1);
-  }
-
-  function getStyle(item) {
-    const frame = getFrame(item);
-    if (!frame) return '';
-    const baseWidth = effectiveBaseWidth || (isMobile ? baseWidthMobile : baseWidthDesktop) || 1;
-    const { x = 0, y = 0, width = 200, height = 100, z = 1, opacity = 1 } = frame;
-    return `
+	function getStyle(item) {
+		const frame = getFrame(item);
+		if (!frame) return '';
+		const baseWidth = effectiveBaseWidth || (isMobile ? baseWidthMobile : baseWidthDesktop) || 1;
+		const { x = 0, y = 0, width = 200, height = 100, z = 1, opacity = 1 } = frame;
+		return `
       position:absolute;
       left:${toVw(x, baseWidth)};
       top:${toVw(y, baseWidth)};
@@ -148,71 +159,85 @@
       opacity:${opacity};
       overflow:hidden;
     `;
-  }
+	}
 </script>
 
 <div
-  class="free-canvas"
-  style={`width:100vw;height:${cssHeight};background:${backgroundColor};position:relative;overflow:hidden;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);`}
+	class="free-canvas"
+	style={`width:100vw;height:${cssHeight};background:${backgroundColor};position:relative;overflow:hidden;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);`}
 >
-  {#each items as item (item.id)}
-    <div class="canvas-item" style={getStyle(item)}>
-      {#if item.type === 'text'}
-        {@const tag = getTypographyTag(item)}
-        {@const contentHasHtml = hasHtml(item.content)}
-        {@const textStyle = getTextContentStyle(item, tag)}
-        <div class="text" style={getTextContainerStyle(item, tag)}>
-          {#if contentHasHtml}
-            <div class={`text-content ${tag ? `typography-${tag}` : ''}`.trim()} style={textStyle}>{@html item.content || ''}</div>
-          {:else}
-            <svelte:element
-              this={tag || 'p'}
-              class={`text-content ${tag ? `typography-${tag}` : ''}`.trim()}
-              style={textStyle}
-            >
-              {@html item.content || ''}
-            </svelte:element>
-          {/if}
-        </div>
-      {:else if item.type === 'image'}
-        {#if getMediaSource(item)}
-          <img src={getMediaSource(item)} alt={item.alt || ''} style="width:100%;height:100%;object-fit:${item.objectFit || 'cover'};" />
-        {/if}
-      {:else if item.type === 'video'}
-        {#if getMediaSource(item)}
-          <video src={getMediaSource(item)} poster={item.poster || ''} autoplay={item.autoplay} loop={item.loop} muted={item.muted ?? true} playsinline style="width:100%;height:100%;object-fit:${item.objectFit || 'cover'};"></video>
-        {/if}
-      {/if}
-    </div>
-  {/each}
+	{#each items as item (item.id)}
+		<div class="canvas-item" style={getStyle(item)}>
+			{#if item.type === 'text'}
+				{@const tag = getTypographyTag(item)}
+				{@const contentHasHtml = hasHtml(item.content)}
+				{@const textStyle = getTextContentStyle(item, tag)}
+				<div class="text" style={getTextContainerStyle(item, tag)}>
+					{#if contentHasHtml}
+						<div class={`text-content ${tag ? `typography-${tag}` : ''}`.trim()} style={textStyle}>
+							{@html item.content || ''}
+						</div>
+					{:else}
+						<svelte:element
+							this={tag || 'p'}
+							class={`text-content ${tag ? `typography-${tag}` : ''}`.trim()}
+							style={textStyle}
+						>
+							{@html item.content || ''}
+						</svelte:element>
+					{/if}
+				</div>
+			{:else if item.type === 'image'}
+				{#if getMediaSource(item)}
+					<img
+						src={getMediaSource(item)}
+						alt={item.alt || ''}
+						style="width:100%;height:100%;object-fit:${item.objectFit || 'cover'};"
+					/>
+				{/if}
+			{:else if item.type === 'video'}
+				{#if getMediaSource(item)}
+					<video
+						src={getMediaSource(item)}
+						poster={item.poster || ''}
+						autoplay={item.autoplay}
+						loop={item.loop}
+						muted={item.muted ?? true}
+						playsinline
+						style="width:100%;height:100%;object-fit:${item.objectFit || 'cover'};"
+					></video>
+				{/if}
+			{/if}
+		</div>
+	{/each}
 </div>
 
 <style>
-  .free-canvas {
-    position: relative;
-  }
+	.free-canvas {
+		position: relative;
+	}
 
-  .canvas-item {
-    position: absolute;
-  }
+	.canvas-item {
+		position: absolute;
+	}
 
-  .text {
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-  }
+	.text {
+		width: 100%;
+		height: 100%;
+		box-sizing: border-box;
+	}
 
-  .text-content {
-    width: 100%;
-    margin: 0;
-  }
+	.text-content {
+		width: 100%;
+		margin: 0;
+	}
 
-  .text-content :global(*) {
-    margin: 0;
-  }
+	.text-content :global(*) {
+		margin: 0;
+	}
 
-  img,
-  video {
-    display: block;
-  }
+	img,
+	video {
+		display: block;
+	}
 </style>

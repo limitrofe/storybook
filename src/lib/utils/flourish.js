@@ -37,19 +37,19 @@ export function loadFlourishScript() {
 		const existingScript = document.querySelector('script[src*="flourish.studio"]');
 		if (existingScript) {
 			console.log('🌺 Script Flourish já existe no DOM, aguardando carregamento...');
-			
+
 			// Se já existe, adiciona listeners para saber quando terminar
 			existingScript.addEventListener('load', () => {
 				console.log('✅ Script Flourish existente carregado');
 				isScriptLoaded = true;
 				resolve();
 			});
-			
+
 			existingScript.addEventListener('error', () => {
 				console.error('❌ Erro no script Flourish existente');
 				reject(new Error('Script Flourish existente falhou'));
 			});
-			
+
 			return;
 		}
 

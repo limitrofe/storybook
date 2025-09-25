@@ -41,4 +41,3 @@ Para gerar a versão final do site:
 ```bash
 npm run build
 ```
-

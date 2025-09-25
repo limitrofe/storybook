@@ -65,7 +65,7 @@ export function parseStoryComponents(paragraphs) {
 			case 'flexible-layout':
 			case 'layout-personalizado':
 				component.type = 'flexible-layout';
-				
+
 				// TEXTO
 				component.text = paragraph.text || '';
 				component.textAlign = paragraph.textAlign || 'left';
@@ -120,14 +120,22 @@ export function parseStoryComponents(paragraphs) {
 				component.heightMobile = paragraph.heightMobile || paragraph.height || '100vh';
 				component.backgroundType = paragraph.backgroundType || 'color';
 				component.backgroundColor = paragraph.backgroundColor || '#000000';
-				component.backgroundImageDesktop = paragraph.backgroundImageDesktop || paragraph.backgroundImage || '';
-				component.backgroundImageMobile = paragraph.backgroundImageMobile || paragraph.backgroundImage || '';
-				component.backgroundPositionDesktop = paragraph.backgroundPositionDesktop || paragraph.backgroundPosition || 'center center';
-				component.backgroundPositionMobile = paragraph.backgroundPositionMobile || paragraph.backgroundPosition || 'center center';
-				component.backgroundSizeDesktop = paragraph.backgroundSizeDesktop || paragraph.backgroundSize || 'cover';
-				component.backgroundSizeMobile = paragraph.backgroundSizeMobile || paragraph.backgroundSize || 'cover';
-				component.backgroundVideoDesktop = paragraph.backgroundVideoDesktop || paragraph.backgroundVideo || '';
-				component.backgroundVideoMobile = paragraph.backgroundVideoMobile || paragraph.backgroundVideo || '';
+				component.backgroundImageDesktop =
+					paragraph.backgroundImageDesktop || paragraph.backgroundImage || '';
+				component.backgroundImageMobile =
+					paragraph.backgroundImageMobile || paragraph.backgroundImage || '';
+				component.backgroundPositionDesktop =
+					paragraph.backgroundPositionDesktop || paragraph.backgroundPosition || 'center center';
+				component.backgroundPositionMobile =
+					paragraph.backgroundPositionMobile || paragraph.backgroundPosition || 'center center';
+				component.backgroundSizeDesktop =
+					paragraph.backgroundSizeDesktop || paragraph.backgroundSize || 'cover';
+				component.backgroundSizeMobile =
+					paragraph.backgroundSizeMobile || paragraph.backgroundSize || 'cover';
+				component.backgroundVideoDesktop =
+					paragraph.backgroundVideoDesktop || paragraph.backgroundVideo || '';
+				component.backgroundVideoMobile =
+					paragraph.backgroundVideoMobile || paragraph.backgroundVideo || '';
 				component.textos = paragraph.textos || paragraph.texts || [];
 				component.imagens = paragraph.imagens || paragraph.images || [];
 				component.maxWidthDesktop = paragraph.maxWidthDesktop;
@@ -147,8 +155,7 @@ export function parseStoryComponents(paragraphs) {
 				component.heightMobile = Number(paragraph.heightMobile) || 600;
 				component.backgroundColor = paragraph.backgroundColor || '#000000';
 				component.items = paragraph.items || paragraph.elements || [];
-			break;
-
+				break;
 
 			case 'foto':
 			case 'imagem':
@@ -263,47 +270,47 @@ export function parseStoryComponents(paragraphs) {
 			case 'videoscrolly':
 			case 'video-scrolly':
 				component.type = 'video-scrolly-new';
-				
+
 				// URLs dos frames
 				component.imagePrefix = paragraph.imagePrefix || '';
 				component.imagePrefixMobile = paragraph.imagePrefixMobile || paragraph.imagePrefix || '';
 				component.imageSuffix = paragraph.imageSuffix || '.jpg';
 				component.imageSuffixMobile = paragraph.imageSuffixMobile || '.webp';
-				
+
 				// Configurações de frames
 				component.totalFrames = parseInt(paragraph.totalFrames) || 100;
 				component.frameStart = parseInt(paragraph.frameStart) || 1;
 				component.frameStop = parseInt(paragraph.frameStop) || component.totalFrames;
-				
+
 				// Configurações de vídeo (fallback/legacy)
 				component.videoSrc = paragraph.videoSrc || paragraph.src;
 				component.videoSrcMobile = paragraph.videoSrcMobile || paragraph.srcMobile;
 				component.frameStartSeconds = parseFloat(paragraph.frameStartSeconds) || 0;
 				component.frameStopSeconds = parseFloat(paragraph.frameStopSeconds) || 10;
-				
+
 				// Configurações de performance
 				component.preloadFrames = parseInt(paragraph.preloadFrames) || 10;
 				component.maxMemoryMB = parseInt(paragraph.maxMemoryMB) || 50;
 				component.scrollSmoothness = parseFloat(paragraph.scrollSmoothness) || 0.05;
 				component.frameRate = parseInt(paragraph.frameRate) || 30;
-				
+
 				// Configurações de UI
 				component.height = paragraph.height || '100vh';
 				component.showProgress = paragraph.showProgress !== false;
 				component.showTime = paragraph.showTime !== false;
 				component.showFrameCounter = paragraph.showFrameCounter || false;
 				component.showControls = paragraph.showControls || false;
-				
+
 				// Configurações avançadas
 				component.smoothTransition = paragraph.smoothTransition !== false;
 				component.lazyLoading = paragraph.lazyLoading !== false;
 				component.bufferSize = parseInt(paragraph.bufferSize) || 20;
 				component.fallbackFrames = paragraph.fallbackFrames || [];
 				component.posterImage = paragraph.posterImage;
-				
+
 				// Steps para scrollytelling
 				component.steps = paragraph.steps || [];
-				
+
 				// Layout
 				component.fullWidth = paragraph.fullWidth !== false;
 				component.variant = paragraph.variant || 'default';
@@ -315,7 +322,8 @@ export function parseStoryComponents(paragraphs) {
 			case 'character-presentation':
 			case 'apresentacao-personagens':
 				component.type = 'character-presentation';
-				component.personagens = paragraph.personagens || paragraph.characters || paragraph.lista || [];
+				component.personagens =
+					paragraph.personagens || paragraph.characters || paragraph.lista || [];
 				component.shapeColor = paragraph.shapeColor || '#DC2626';
 				component.nameColor = paragraph.nameColor || '#000';
 				component.textColor = paragraph.textColor || '#fff';
@@ -331,7 +339,8 @@ export function parseStoryComponents(paragraphs) {
 			case 'facts':
 			case 'apresentacao-curiosidades':
 				component.type = 'curiosidades';
-				component.personagens = paragraph.personagens || paragraph.characters || paragraph.lista || [];
+				component.personagens =
+					paragraph.personagens || paragraph.characters || paragraph.lista || [];
 				component.shapeColor = paragraph.shapeColor || '#b51207';
 				component.nameColor = paragraph.nameColor || '#000000';
 				component.textColor = paragraph.textColor || '#ffffff';
@@ -378,15 +387,12 @@ export function parseStoryComponents(paragraphs) {
  */
 export function isVideoScrollyComponent(paragraph) {
 	if (!paragraph || !paragraph.type) return false;
-	
+
 	const type = paragraph.type.toLowerCase().trim();
-	
-	return [
-		'videoscrollytelling',
-		'video-scrollytelling', 
-		'videoscrolly',
-		'video-scrolly'
-	].includes(type);
+
+	return ['videoscrollytelling', 'video-scrollytelling', 'videoscrolly', 'video-scrolly'].includes(
+		type
+	);
 }
 
 /**
@@ -394,15 +400,10 @@ export function isVideoScrollyComponent(paragraph) {
  */
 export function isCuriosidadesComponent(paragraph) {
 	if (!paragraph || !paragraph.type) return false;
-	
+
 	const type = paragraph.type.toLowerCase().trim();
-	
-	return [
-		'curiosidades',
-		'trivia',
-		'facts',
-		'apresentacao-curiosidades'
-	].includes(type);
+
+	return ['curiosidades', 'trivia', 'facts', 'apresentacao-curiosidades'].includes(type);
 }
 
 /**
@@ -410,9 +411,9 @@ export function isCuriosidadesComponent(paragraph) {
  */
 export function isCharacterPresentationComponent(paragraph) {
 	if (!paragraph || !paragraph.type) return false;
-	
+
 	const type = paragraph.type.toLowerCase().trim();
-	
+
 	return [
 		'personagens',
 		'characters',
@@ -426,9 +427,9 @@ export function isCharacterPresentationComponent(paragraph) {
  */
 export function isRecommendedItemsComponent(paragraph) {
 	if (!paragraph || !paragraph.type) return false;
-	
+
 	const type = paragraph.type.toLowerCase().trim();
-	
+
 	return [
 		'recomendados',
 		'recommended',
@@ -444,15 +445,12 @@ export function isRecommendedItemsComponent(paragraph) {
  */
 export function isResponsiveMediaComponent(paragraph) {
 	if (!paragraph || !paragraph.type) return false;
-	
+
 	const type = paragraph.type.toLowerCase().trim();
-	
-	return [
-		'responsive-media',
-		'responsivemedia', 
-		'responsive-layout',
-		'media-layout'
-	].includes(type);
+
+	return ['responsive-media', 'responsivemedia', 'responsive-layout', 'media-layout'].includes(
+		type
+	);
 }
 
 /**
@@ -461,35 +459,35 @@ export function isResponsiveMediaComponent(paragraph) {
 export function validateVideoScrollyComponent(component) {
 	const errors = [];
 	const warnings = [];
-	
+
 	// Verificar URLs dos frames
 	if (!component.imagePrefix) {
 		errors.push('imagePrefix é obrigatório');
 	}
-	
+
 	if (!component.imagePrefixMobile && !component.imagePrefix) {
 		warnings.push('imagePrefixMobile não definido, usando imagePrefix');
 	}
-	
+
 	// Verificar totalFrames
 	if (!component.totalFrames || component.totalFrames < 1) {
 		errors.push('totalFrames deve ser maior que 0');
 	}
-	
+
 	// Verificar frameStart/Stop
 	if (component.frameStart < 1) {
 		warnings.push('frameStart deve ser >= 1');
 	}
-	
+
 	if (component.frameStop > component.totalFrames) {
 		warnings.push('frameStop maior que totalFrames');
 	}
-	
+
 	// Verificar extensões
 	if (!component.imageSuffix) {
 		warnings.push('imageSuffix não definido, usando .jpg');
 	}
-	
+
 	return {
 		isValid: errors.length === 0,
 		errors,
@@ -503,7 +501,7 @@ export function validateVideoScrollyComponent(component) {
 export function validateCuriosidadesComponent(component) {
 	const errors = [];
 	const warnings = [];
-	
+
 	// Verificar se tem lista de curiosidades
 	if (!component.personagens || !Array.isArray(component.personagens)) {
 		errors.push('Lista de curiosidades é obrigatória');
@@ -515,21 +513,27 @@ export function validateCuriosidadesComponent(component) {
 			if (!curiosidade.nome && !curiosidade.name) {
 				errors.push(`Curiosidade ${index + 1}: nome é obrigatório`);
 			}
-			
-			if (!curiosidade.descricao && !curiosidade.description && !curiosidade.frase && !curiosidade.quote && !curiosidade.phrase) {
+
+			if (
+				!curiosidade.descricao &&
+				!curiosidade.description &&
+				!curiosidade.frase &&
+				!curiosidade.quote &&
+				!curiosidade.phrase
+			) {
 				warnings.push(`Curiosidade ${index + 1}: sem descrição nem frase`);
 			}
 		});
 	}
-	
+
 	// Verificar cores (opcional, mas deve ser formato válido se fornecido)
 	const colorFields = ['shapeColor', 'nameColor', 'textColor', 'backgroundColor', 'quoteColor'];
-	colorFields.forEach(field => {
+	colorFields.forEach((field) => {
 		if (component[field] && !component[field].match(/^#[0-9A-Fa-f]{6}$/)) {
 			warnings.push(`${field} deve estar no formato #RRGGBB`);
 		}
 	});
-	
+
 	return {
 		isValid: errors.length === 0,
 		errors,
@@ -543,7 +547,7 @@ export function validateCuriosidadesComponent(component) {
 export function validateCharacterPresentationComponent(component) {
 	const errors = [];
 	const warnings = [];
-	
+
 	// Verificar se tem lista de personagens
 	if (!component.personagens || !Array.isArray(component.personagens)) {
 		errors.push('Lista de personagens é obrigatória');
@@ -555,17 +559,17 @@ export function validateCharacterPresentationComponent(component) {
 			if (!personagem.nome && !personagem.name) {
 				errors.push(`Personagem ${index + 1}: nome é obrigatório`);
 			}
-			
+
 			if (!personagem.descricao && !personagem.description) {
 				warnings.push(`Personagem ${index + 1}: sem descrição`);
 			}
-			
+
 			if (!personagem.foto && !personagem.photo && !personagem.image) {
 				warnings.push(`Personagem ${index + 1}: sem foto`);
 			}
 		});
 	}
-	
+
 	return {
 		isValid: errors.length === 0,
 		errors,
@@ -579,7 +583,7 @@ export function validateCharacterPresentationComponent(component) {
 export function validateRecommendedItemsComponent(component) {
 	const errors = [];
 	const warnings = [];
-	
+
 	// Verificar se tem lista de itens
 	if (!component.items || !Array.isArray(component.items)) {
 		errors.push('Lista de itens é obrigatória');
@@ -591,35 +595,35 @@ export function validateRecommendedItemsComponent(component) {
 			if (!item.title) {
 				errors.push(`Item ${index + 1}: título é obrigatório`);
 			}
-			
+
 			if (!item.image) {
 				errors.push(`Item ${index + 1}: imagem é obrigatória`);
 			}
-			
+
 			if (!item.link && !item.url) {
 				warnings.push(`Item ${index + 1}: sem link para navegação`);
 			}
 		});
 	}
-	
+
 	// Verificar layout
 	if (component.layout && !['grid', 'carousel'].includes(component.layout)) {
 		warnings.push('Layout deve ser "grid" ou "carousel"');
 	}
-	
+
 	// Verificar colunas para layout grid
 	if (component.layout === 'grid' && (component.columns < 1 || component.columns > 6)) {
 		warnings.push('Número de colunas deve estar entre 1 e 6');
 	}
-	
+
 	// Verificar cores (opcional, mas deve ser formato válido se fornecido)
 	const colorFields = ['backgroundColor', 'titleColor', 'textColor'];
-	colorFields.forEach(field => {
+	colorFields.forEach((field) => {
 		if (component[field] && !component[field].match(/^#[0-9A-Fa-f]{6}$/)) {
 			warnings.push(`${field} deve estar no formato #RRGGBB`);
 		}
 	});
-	
+
 	return {
 		isValid: errors.length === 0,
 		errors,
@@ -633,13 +637,15 @@ export function validateRecommendedItemsComponent(component) {
 export function validateResponsiveMediaComponent(component) {
 	const errors = [];
 	const warnings = [];
-	
+
 	// Verificar se tem conteúdo
-	if ((!component.textos || component.textos.length === 0) && 
-		(!component.imagens || component.imagens.length === 0)) {
+	if (
+		(!component.textos || component.textos.length === 0) &&
+		(!component.imagens || component.imagens.length === 0)
+	) {
 		errors.push('Componente não tem textos nem imagens');
 	}
-	
+
 	// Verificar textos
 	if (component.textos && component.textos.length > 0) {
 		component.textos.forEach((texto, index) => {
@@ -654,7 +660,7 @@ export function validateResponsiveMediaComponent(component) {
 			}
 		});
 	}
-	
+
 	// Verificar imagens
 	if (component.imagens && component.imagens.length > 0) {
 		component.imagens.forEach((imagem, index) => {
@@ -666,7 +672,7 @@ export function validateResponsiveMediaComponent(component) {
 			}
 		});
 	}
-	
+
 	return {
 		isValid: errors.length === 0,
 		errors,
@@ -765,8 +771,10 @@ export function generateResponsiveMediaDefaults(baseConfig = {}) {
 		backgroundColor: baseConfig.backgroundColor || '#000000',
 		backgroundImageDesktop: baseConfig.backgroundImageDesktop || baseConfig.backgroundImage || '',
 		backgroundImageMobile: baseConfig.backgroundImageMobile || baseConfig.backgroundImage || '',
-		backgroundPositionDesktop: baseConfig.backgroundPositionDesktop || baseConfig.backgroundPosition || 'center center',
-		backgroundPositionMobile: baseConfig.backgroundPositionMobile || baseConfig.backgroundPosition || 'center center',
+		backgroundPositionDesktop:
+			baseConfig.backgroundPositionDesktop || baseConfig.backgroundPosition || 'center center',
+		backgroundPositionMobile:
+			baseConfig.backgroundPositionMobile || baseConfig.backgroundPosition || 'center center',
 		backgroundSizeDesktop: baseConfig.backgroundSizeDesktop || baseConfig.backgroundSize || 'cover',
 		backgroundSizeMobile: baseConfig.backgroundSizeMobile || baseConfig.backgroundSize || 'cover',
 		backgroundVideoDesktop: baseConfig.backgroundVideoDesktop || baseConfig.backgroundVideo || '',
@@ -813,7 +821,7 @@ export function parseInteger(value, defaultValue = 0) {
  */
 export function cleanText(text) {
 	if (!text) return '';
-	
+
 	return text
 		.replace(/<br\s*\/?>/gi, '\n')
 		.replace(/<\/p>/gi, '\n')
@@ -835,7 +843,7 @@ export function generateComponentId(type, index) {
  */
 export function processCharactersData(characters) {
 	if (!characters) return [];
-	
+
 	// Se for string JSON, faz parse
 	if (typeof characters === 'string') {
 		try {
@@ -848,7 +856,7 @@ export function processCharactersData(characters) {
 
 	// Se for array, retorna processado
 	if (Array.isArray(characters)) {
-		return characters.map(char => ({
+		return characters.map((char) => ({
 			nome: char.nome || char.name || '',
 			sobrenome: char.sobrenome || char.surname || '',
 			foto: char.foto || char.photo || char.image || '',
@@ -865,7 +873,7 @@ export function processCharactersData(characters) {
  */
 export function processRecommendedItems(items) {
 	if (!items) return [];
-	
+
 	// Se for string JSON, faz parse
 	if (typeof items === 'string') {
 		try {
@@ -878,34 +886,36 @@ export function processRecommendedItems(items) {
 
 	// Se for array, retorna processado
 	if (Array.isArray(items)) {
-		return items.map(item => {
-			// Se o item for uma string, tenta fazer parse do JSON
-			if (typeof item === 'string') {
-				try {
-					item = JSON.parse(item);
-				} catch {
-					return null;
+		return items
+			.map((item) => {
+				// Se o item for uma string, tenta fazer parse do JSON
+				if (typeof item === 'string') {
+					try {
+						item = JSON.parse(item);
+					} catch {
+						return null;
+					}
 				}
-			}
-			
-			// Se não for objeto, retorna null
-			if (!item || typeof item !== 'object') return null;
-			
-			return {
-				title: item.title || item.titulo || item.nome || '',
-				subtitle: item.subtitle || item.subtitulo || '',
-				description: item.description || item.descricao || '',
-				image: item.image || item.imagem || item.img || item.foto || '',
-				link: item.link || item.url || '',
-				category: item.category || item.categoria || '',
-				year: item.year || item.ano || '',
-				rating: item.rating || item.avaliacao || item.nota || '',
-				genre: item.genre || item.genero || '',
-				duration: item.duration || item.duracao || '',
-				badge: item.badge || item.selo || '',
-				isNew: item.isNew || item.novo || item.new || false
-			};
-		}).filter(Boolean); // Remove itens nulos
+
+				// Se não for objeto, retorna null
+				if (!item || typeof item !== 'object') return null;
+
+				return {
+					title: item.title || item.titulo || item.nome || '',
+					subtitle: item.subtitle || item.subtitulo || '',
+					description: item.description || item.descricao || '',
+					image: item.image || item.imagem || item.img || item.foto || '',
+					link: item.link || item.url || '',
+					category: item.category || item.categoria || '',
+					year: item.year || item.ano || '',
+					rating: item.rating || item.avaliacao || item.nota || '',
+					genre: item.genre || item.genero || '',
+					duration: item.duration || item.duracao || '',
+					badge: item.badge || item.selo || '',
+					isNew: item.isNew || item.novo || item.new || false
+				};
+			})
+			.filter(Boolean); // Remove itens nulos
 	}
 
 	return [];
@@ -916,7 +926,7 @@ export function processRecommendedItems(items) {
  */
 export function processStoryData(rawData) {
 	if (!rawData) return null;
-	
+
 	const processed = {
 		title: rawData.title || '',
 		subtitle: rawData.subtitle || rawData.intro || '',
@@ -927,12 +937,12 @@ export function processStoryData(rawData) {
 		credits: rawData.credits || '',
 		paragraphs: []
 	};
-	
+
 	// Processar parágrafos
 	if (rawData.paragraphs && Array.isArray(rawData.paragraphs)) {
 		processed.paragraphs = parseStoryComponents(rawData.paragraphs);
 	}
-	
+
 	return processed;
 }
 
@@ -941,30 +951,30 @@ export function processStoryData(rawData) {
  */
 export function debugVideoScrollyComponents(paragraphs) {
 	if (!paragraphs || !Array.isArray(paragraphs)) return;
-	
-	const videoScrollyComponents = paragraphs.filter(p => isVideoScrollyComponent(p));
-	
+
+	const videoScrollyComponents = paragraphs.filter((p) => isVideoScrollyComponent(p));
+
 	if (videoScrollyComponents.length === 0) {
 		console.log('🎬 Nenhum componente VideoScrolly encontrado');
 		return;
 	}
-	
+
 	console.log(`🎬 ${videoScrollyComponents.length} componente(s) VideoScrolly encontrado(s):`);
-	
+
 	videoScrollyComponents.forEach((comp, index) => {
 		const validation = validateVideoScrollyComponent(comp);
 		const status = validation.isValid ? '✅' : '⚠️';
-		
+
 		console.log(`  ${status} Componente ${index + 1}:`);
 		console.log(`     Tipo: ${comp.type}`);
 		console.log(`     Frames: ${comp.totalFrames || 'N/A'}`);
 		console.log(`     Desktop: ${comp.imagePrefix ? '✅' : '❌'}`);
 		console.log(`     Mobile: ${comp.imagePrefixMobile ? '✅' : '❌'}`);
-		
+
 		if (validation.errors.length > 0) {
 			console.log(`     ❌ Erros: ${validation.errors.join(', ')}`);
 		}
-		
+
 		if (validation.warnings.length > 0) {
 			console.log(`     ⚠️ Avisos: ${validation.warnings.join(', ')}`);
 		}
@@ -976,39 +986,41 @@ export function debugVideoScrollyComponents(paragraphs) {
  */
 export function debugCuriosidadesComponents(paragraphs) {
 	if (!paragraphs || !Array.isArray(paragraphs)) return;
-	
-	const curiosidadesComponents = paragraphs.filter(p => isCuriosidadesComponent(p));
-	
+
+	const curiosidadesComponents = paragraphs.filter((p) => isCuriosidadesComponent(p));
+
 	if (curiosidadesComponents.length === 0) {
 		console.log('🎯 Nenhum componente de Curiosidades encontrado');
 		return;
 	}
-	
+
 	console.log(`🎯 ${curiosidadesComponents.length} componente(s) de Curiosidades encontrado(s):`);
-	
+
 	curiosidadesComponents.forEach((comp, index) => {
 		const validation = validateCuriosidadesComponent(comp);
 		const status = validation.isValid ? '✅' : '⚠️';
 		const charCount = comp.personagens?.length || 0;
-		
+
 		console.log(`  ${status} Componente ${index + 1}:`);
 		console.log(`     Tipo: ${comp.type}`);
 		console.log(`     Curiosidades: ${charCount}`);
 		console.log(`     ShapeColor: ${comp.shapeColor}`);
 		console.log(`     QuoteColor: ${comp.quoteColor}`);
-		
+
 		if (charCount > 0) {
 			comp.personagens.forEach((curiosidade, charIndex) => {
 				const temFrase = !!(curiosidade.frase || curiosidade.quote || curiosidade.phrase);
 				const temFoto = !!(curiosidade.foto || curiosidade.photo || curiosidade.image);
-				console.log(`     Curiosidade ${charIndex + 1}: "${curiosidade.nome || curiosidade.name}" | Foto: ${temFoto ? '✅' : '❌'} | Frase: ${temFrase ? '✅' : '❌'}`);
+				console.log(
+					`     Curiosidade ${charIndex + 1}: "${curiosidade.nome || curiosidade.name}" | Foto: ${temFoto ? '✅' : '❌'} | Frase: ${temFrase ? '✅' : '❌'}`
+				);
 			});
 		}
-		
+
 		if (validation.errors.length > 0) {
 			console.log(`     ❌ Erros: ${validation.errors.join(', ')}`);
 		}
-		
+
 		if (validation.warnings.length > 0) {
 			console.log(`     ⚠️ Avisos: ${validation.warnings.join(', ')}`);
 		}
@@ -1020,38 +1032,42 @@ export function debugCuriosidadesComponents(paragraphs) {
  */
 export function debugCharacterPresentationComponents(paragraphs) {
 	if (!paragraphs || !Array.isArray(paragraphs)) return;
-	
-	const characterComponents = paragraphs.filter(p => isCharacterPresentationComponent(p));
-	
+
+	const characterComponents = paragraphs.filter((p) => isCharacterPresentationComponent(p));
+
 	if (characterComponents.length === 0) {
 		console.log('🎬 Nenhum componente de Apresentação de Personagens encontrado');
 		return;
 	}
-	
-	console.log(`🎬 ${characterComponents.length} componente(s) de Apresentação de Personagens encontrado(s):`);
-	
+
+	console.log(
+		`🎬 ${characterComponents.length} componente(s) de Apresentação de Personagens encontrado(s):`
+	);
+
 	characterComponents.forEach((comp, index) => {
 		const validation = validateCharacterPresentationComponent(comp);
 		const status = validation.isValid ? '✅' : '⚠️';
 		const charCount = comp.personagens?.length || 0;
-		
+
 		console.log(`  ${status} Componente ${index + 1}:`);
 		console.log(`     Tipo: ${comp.type}`);
 		console.log(`     Personagens: ${charCount}`);
 		console.log(`     ShapeColor: ${comp.shapeColor}`);
-		
+
 		if (charCount > 0) {
 			comp.personagens.forEach((personagem, charIndex) => {
 				const temFoto = !!(personagem.foto || personagem.photo || personagem.image);
 				const temDescricao = !!(personagem.descricao || personagem.description);
-				console.log(`     Personagem ${charIndex + 1}: "${personagem.nome || personagem.name}" | Foto: ${temFoto ? '✅' : '❌'} | Descrição: ${temDescricao ? '✅' : '❌'}`);
+				console.log(
+					`     Personagem ${charIndex + 1}: "${personagem.nome || personagem.name}" | Foto: ${temFoto ? '✅' : '❌'} | Descrição: ${temDescricao ? '✅' : '❌'}`
+				);
 			});
 		}
-		
+
 		if (validation.errors.length > 0) {
 			console.log(`     ❌ Erros: ${validation.errors.join(', ')}`);
 		}
-		
+
 		if (validation.warnings.length > 0) {
 			console.log(`     ⚠️ Avisos: ${validation.warnings.join(', ')}`);
 		}
@@ -1063,21 +1079,23 @@ export function debugCharacterPresentationComponents(paragraphs) {
  */
 export function debugRecommendedItemsComponents(paragraphs) {
 	if (!paragraphs || !Array.isArray(paragraphs)) return;
-	
-	const recommendedComponents = paragraphs.filter(p => isRecommendedItemsComponent(p));
-	
+
+	const recommendedComponents = paragraphs.filter((p) => isRecommendedItemsComponent(p));
+
 	if (recommendedComponents.length === 0) {
 		console.log('🎯 Nenhum componente de Itens Recomendados encontrado');
 		return;
 	}
-	
-	console.log(`🎯 ${recommendedComponents.length} componente(s) de Itens Recomendados encontrado(s):`);
-	
+
+	console.log(
+		`🎯 ${recommendedComponents.length} componente(s) de Itens Recomendados encontrado(s):`
+	);
+
 	recommendedComponents.forEach((comp, index) => {
 		const validation = validateRecommendedItemsComponent(comp);
 		const status = validation.isValid ? '✅' : '⚠️';
 		const itemsCount = comp.items?.length || 0;
-		
+
 		console.log(`  ${status} Componente ${index + 1}:`);
 		console.log(`     Tipo: ${comp.type}`);
 		console.log(`     Items: ${itemsCount}`);
@@ -1085,21 +1103,23 @@ export function debugRecommendedItemsComponents(paragraphs) {
 		console.log(`     Columns: ${comp.columns}`);
 		console.log(`     Title: "${comp.title}"`);
 		console.log(`     Colors: BG=${comp.backgroundColor} | Title=${comp.titleColor}`);
-		
+
 		if (itemsCount > 0) {
 			comp.items.forEach((item, itemIndex) => {
 				const temImagem = !!item.image;
 				const temLink = !!item.link;
 				const category = item.category || '';
 				const isNew = item.isNew || false;
-				console.log(`     Item ${itemIndex + 1}: "${item.title}" | Image: ${temImagem ? '✅' : '❌'} | Link: ${temLink ? '✅' : '❌'} | Category: ${category} | New: ${isNew}`);
+				console.log(
+					`     Item ${itemIndex + 1}: "${item.title}" | Image: ${temImagem ? '✅' : '❌'} | Link: ${temLink ? '✅' : '❌'} | Category: ${category} | New: ${isNew}`
+				);
 			});
 		}
-		
+
 		if (validation.errors.length > 0) {
 			console.log(`     ❌ Erros: ${validation.errors.join(', ')}`);
 		}
-		
+
 		if (validation.warnings.length > 0) {
 			console.log(`     ⚠️ Avisos: ${validation.warnings.join(', ')}`);
 		}
@@ -1111,53 +1131,59 @@ export function debugRecommendedItemsComponents(paragraphs) {
  */
 export function debugResponsiveMediaComponents(paragraphs) {
 	if (!paragraphs || !Array.isArray(paragraphs)) return;
-	
-	const responsiveMediaComponents = paragraphs.filter(p => isResponsiveMediaComponent(p));
-	
+
+	const responsiveMediaComponents = paragraphs.filter((p) => isResponsiveMediaComponent(p));
+
 	if (responsiveMediaComponents.length === 0) {
 		console.log('🎨 Nenhum componente ResponsiveMediaLayout encontrado');
 		return;
 	}
-	
-	console.log(`🎨 ${responsiveMediaComponents.length} componente(s) ResponsiveMediaLayout encontrado(s):`);
-	
+
+	console.log(
+		`🎨 ${responsiveMediaComponents.length} componente(s) ResponsiveMediaLayout encontrado(s):`
+	);
+
 	responsiveMediaComponents.forEach((comp, index) => {
 		const validation = validateResponsiveMediaComponent(comp);
 		const status = validation.isValid ? '✅' : '⚠️';
 		const textosCount = comp.textos?.length || 0;
 		const imagensCount = comp.imagens?.length || 0;
-		
+
 		console.log(`  ${status} Componente ${index + 1}:`);
 		console.log(`     Tipo: ${comp.type}`);
 		console.log(`     Textos: ${textosCount}`);
 		console.log(`     Imagens: ${imagensCount}`);
 		console.log(`     Background: ${comp.backgroundType}`);
 		console.log(`     Height: ${comp.heightDesktop}/${comp.heightMobile}`);
-		
+
 		if (textosCount > 0) {
 			comp.textos.forEach((texto, textoIndex) => {
 				const content = (texto.content || texto.texto || '').substring(0, 30);
 				const hasPosition = !!(texto.xDesktop || texto.position?.desktop?.x);
 				const fontFamily = texto.fontFamily || texto.familia || 'inherit';
 				const fontSize = texto.fontSizeDesktop || texto.fontSize?.desktop || '2rem';
-				console.log(`     Texto ${textoIndex + 1}: "${content}..." | Font: ${fontFamily}/${fontSize} | HasPosition: ${hasPosition}`);
+				console.log(
+					`     Texto ${textoIndex + 1}: "${content}..." | Font: ${fontFamily}/${fontSize} | HasPosition: ${hasPosition}`
+				);
 			});
 		}
-		
+
 		if (imagensCount > 0) {
 			comp.imagens.forEach((imagem, imagemIndex) => {
 				const hasSrcDesktop = !!(imagem.srcDesktop || imagem.src);
-				const hasSrcMobile = !!(imagem.srcMobile);
+				const hasSrcMobile = !!imagem.srcMobile;
 				const hasPosition = !!(imagem.xDesktop || imagem.position?.desktop?.x);
 				const width = imagem.widthDesktop || imagem.width?.desktop || 'auto';
-				console.log(`     Imagem ${imagemIndex + 1}: Desktop: ${hasSrcDesktop} | Mobile: ${hasSrcMobile} | Width: ${width} | HasPosition: ${hasPosition}`);
+				console.log(
+					`     Imagem ${imagemIndex + 1}: Desktop: ${hasSrcDesktop} | Mobile: ${hasSrcMobile} | Width: ${width} | HasPosition: ${hasPosition}`
+				);
 			});
 		}
-		
+
 		if (validation.errors.length > 0) {
 			console.log(`     ❌ Erros: ${validation.errors.join(', ')}`);
 		}
-		
+
 		if (validation.warnings.length > 0) {
 			console.log(`     ⚠️ Avisos: ${validation.warnings.join(', ')}`);
 		}

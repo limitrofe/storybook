@@ -3,51 +3,50 @@ import fs from 'fs/promises';
 import path from 'path';
 
 async function generateFullCacheList() {
-  const baseDir = path.join(process.cwd(), 'static/img/frames');
-  const projectName = 'dias-perfeitos';
-  const cacheUrls = [];
-  
-  console.log('🔍 Escaneando todos os frames...');
-  
-  // Escanear desktop
-  const desktopDir = path.join(baseDir, 'desktop');
-  const desktopVideos = await fs.readdir(desktopDir);
-  
-  for (const video of desktopVideos) {
-    const framesDir = path.join(desktopDir, video);
-    const frames = await fs.readdir(framesDir);
-    
-    for (const frame of frames) {
-      if (frame.endsWith('.jpg')) {
-        cacheUrls.push(`/g1/${projectName}/img/frames/desktop/${video}/${frame}`);
-      }
-    }
-  }
+	const baseDir = path.join(process.cwd(), 'static/img/frames');
+	const projectName = 'dias-perfeitos';
+	const cacheUrls = [];
 
-  
-  // Escanear mobile
-  const mobileDir = path.join(baseDir, 'mobile');
-  const mobileVideos = await fs.readdir(mobileDir);
-  
-  for (const video of mobileVideos) {
-    const framesDir = path.join(mobileDir, video);
-    const frames = await fs.readdir(framesDir);
-    
-    for (const frame of frames) {
-      if (frame.endsWith('.webp')) {
-        cacheUrls.push(`/g1/${projectName}/img/frames/mobile/${video}/${frame}`);
-      }
-    }
-  }
-  
-  // Salvar lista
-  await fs.writeFile('cache-all-frames.txt', cacheUrls.join('\n'));
-  
-  console.log(`✅ Lista completa gerada: ${cacheUrls.length} arquivos`);
-  console.log(`📦 Tamanho estimado: ~${(cacheUrls.length * 0.1).toFixed(1)}MB`);
-  
-  // Criar script de warming
-  const warmScript = `#!/bin/bash
+	console.log('🔍 Escaneando todos os frames...');
+
+	// Escanear desktop
+	const desktopDir = path.join(baseDir, 'desktop');
+	const desktopVideos = await fs.readdir(desktopDir);
+
+	for (const video of desktopVideos) {
+		const framesDir = path.join(desktopDir, video);
+		const frames = await fs.readdir(framesDir);
+
+		for (const frame of frames) {
+			if (frame.endsWith('.jpg')) {
+				cacheUrls.push(`/g1/${projectName}/img/frames/desktop/${video}/${frame}`);
+			}
+		}
+	}
+
+	// Escanear mobile
+	const mobileDir = path.join(baseDir, 'mobile');
+	const mobileVideos = await fs.readdir(mobileDir);
+
+	for (const video of mobileVideos) {
+		const framesDir = path.join(mobileDir, video);
+		const frames = await fs.readdir(framesDir);
+
+		for (const frame of frames) {
+			if (frame.endsWith('.webp')) {
+				cacheUrls.push(`/g1/${projectName}/img/frames/mobile/${video}/${frame}`);
+			}
+		}
+	}
+
+	// Salvar lista
+	await fs.writeFile('cache-all-frames.txt', cacheUrls.join('\n'));
+
+	console.log(`✅ Lista completa gerada: ${cacheUrls.length} arquivos`);
+	console.log(`📦 Tamanho estimado: ~${(cacheUrls.length * 0.1).toFixed(1)}MB`);
+
+	// Criar script de warming
+	const warmScript = `#!/bin/bash
 # Script para aquecer o cache com TODOS os frames
 # Executa em paralelo para ser mais rápido
 
@@ -67,11 +66,11 @@ cat cache-all-frames.txt | xargs -P 10 -I {} bash -c 'warm_url "{}"'
 
 echo "✅ Cache aquecido com sucesso!"
 `;
-  
-  await fs.writeFile('warm-cache.sh', warmScript);
-  await fs.chmod('warm-cache.sh', '755');
-  
-  console.log('📄 Script de aquecimento criado: warm-cache.sh');
+
+	await fs.writeFile('warm-cache.sh', warmScript);
+	await fs.chmod('warm-cache.sh', '755');
+
+	console.log('📄 Script de aquecimento criado: warm-cache.sh');
 }
 
 generateFullCacheList();

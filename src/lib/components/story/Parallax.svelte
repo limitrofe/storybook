@@ -27,7 +27,7 @@
 		const handleScroll = () => {
 			// Se o elemento da imagem ainda não foi renderizado, não faz nada.
 			if (!parallaxImage) return;
-			
+
 			// Pega as dimensões e a posição do container principal na tela.
 			const rect = parallaxContainer.getBoundingClientRect();
 
@@ -63,12 +63,7 @@
 	});
 </script>
 
-<div
-	class="parallax-container"
-	bind:this={parallaxContainer}
-	style:height
-	class:mounted
->
+<div class="parallax-container" bind:this={parallaxContainer} style:height class:mounted>
 	<!-- ✅ ATUALIZADO: Agora usa currentImage que é reativo -->
 	<div
 		class="parallax-image"
@@ -95,7 +90,9 @@
 		align-items: center;
 		opacity: 0;
 		transform: translateY(20px);
-		transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+		transition:
+			opacity 0.6s ease-out,
+			transform 0.6s ease-out;
 	}
 
 	.parallax-container.mounted {

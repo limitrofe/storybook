@@ -6,153 +6,163 @@ import fs from 'fs/promises';
 import PROJECT_CONFIG from '../project.config.js';
 
 class CachePurger {
-  constructor() {
-    this.config = PROJECT_CONFIG;
-    this.purgedCount = 0;
-    this.failedCount = 0;
-  }
+	constructor() {
+		this.config = PROJECT_CONFIG;
+		this.purgedCount = 0;
+		this.failedCount = 0;
+	}
 
-  async purgeCacheList() {
-    console.log('\n🧹 LIMPANDO CACHE DA CDN');
-    console.log('=' .repeat(60));
-    console.log(`📁 Projeto: ${this.config.projectName}`);
-    console.log(`🌐 CDN Base: ${this.config.cdn.baseUrl}`);
-    
-    // Verificar se existe lista de cache
-    try {
-      await fs.access('cache-list.txt');
-    } catch {
-      console.error('❌ Arquivo cache-list.txt não encontrado!');
-      console.error('💡 Execute primeiro: npm run cache:generate');
-      process.exit(1);
-    }
+	async purgeCacheList() {
+		console.log('\n🧹 LIMPANDO CACHE DA CDN');
+		console.log('='.repeat(60));
+		console.log(`📁 Projeto: ${this.config.projectName}`);
+		console.log(`🌐 CDN Base: ${this.config.cdn.baseUrl}`);
 
-    // Ler lista de URLs
-    const cacheContent = await fs.readFile('cache-list.txt', 'utf8');
-    const urls = cacheContent.trim().split('\n').filter(url => url.trim());
-    
-    console.log(`📄 ${urls.length} URLs encontradas na lista de cache`);
-    console.log('\n🔥 Iniciando purge do cache...');
-    
-    // Purgar cada URL
-    for (let i = 0; i < urls.length; i++) {
-      const url = urls[i].trim();
-      const progress = `[${i + 1}/${urls.length}]`;
-      
-      try {
-        await this.purgeUrl(url);
-        this.purgedCount++;
-        process.stdout.write(`\r${progress} ✅ ${this.purgedCount} purgados | ❌ ${this.failedCount} falhas`);
-      } catch (error) {
-        this.failedCount++;
-        process.stdout.write(`\r${progress} ✅ ${this.purgedCount} purgados | ❌ ${this.failedCount} falhas`);
-      }
-      
-      // Pausa pequena para não sobrecarregar
-      if (i % 10 === 0) {
-        await new Promise(resolve => setTimeout(resolve, 100));
-      }
-    }
-    
-    console.log('\n\n' + '=' .repeat(60));
-    console.log('🧹 PURGE CONCLUÍDO!');
-    console.log(`✅ Purgados: ${this.purgedCount}`);
-    console.log(`❌ Falhas: ${this.failedCount}`);
-    console.log(`📊 Total: ${urls.length}`);
-  }
+		// Verificar se existe lista de cache
+		try {
+			await fs.access('cache-list.txt');
+		} catch {
+			console.error('❌ Arquivo cache-list.txt não encontrado!');
+			console.error('💡 Execute primeiro: npm run cache:generate');
+			process.exit(1);
+		}
 
-  async purgeUrl(urlPath) {
-    // URL completa para purge
-    const fullUrl = `${this.config.cdn.baseUrl}${urlPath}`;
-    
-    // Fazer requisição PURGE para limpar cache
-    // Método 1: PURGE request (padrão CDN)
-    try {
-      const response = await fetch(fullUrl, {
-        method: 'PURGE',
-        headers: {
-          'User-Agent': 'CachePurger/1.0',
-          'Cache-Control': 'no-cache'
-        }
-      });
-      
-      if (response.ok || response.status === 404) {
-        return true; // Sucesso ou já não existe
-      }
-      
-      throw new Error(`HTTP ${response.status}`);
-    } catch (error) {
-      // Método 2: HEAD request com cache-busting (fallback)
-      try {
-        const cacheBustUrl = `${fullUrl}?cb=${Date.now()}&purge=1`;
-        const response = await fetch(cacheBustUrl, {
-          method: 'HEAD',
-          headers: {
-            'Cache-Control': 'no-cache, no-store, must-revalidate',
-            'Pragma': 'no-cache',
-            'Expires': '0'
-          }
-        });
-        return true;
-      } catch (fallbackError) {
-        throw new Error(`Purge failed: ${error.message}`);
-      }
-    }
-  }
+		// Ler lista de URLs
+		const cacheContent = await fs.readFile('cache-list.txt', 'utf8');
+		const urls = cacheContent
+			.trim()
+			.split('\n')
+			.filter((url) => url.trim());
 
-  async purgeProject() {
-    console.log('\n🧹 PURGE COMPLETO DO PROJETO');
-    console.log('=' .repeat(60));
-    console.log(`📁 Projeto: ${this.config.projectName}`);
-    
-    // URLs principais para purgar
-    const mainUrls = [
-      `/${this.config.cdn.container}/${this.config.projectName}/index.html`,
-      `/${this.config.cdn.container}/${this.config.projectName}/`,
-      `/${this.config.cdn.container}/${this.config.projectName}/app.css`,
-      `/${this.config.cdn.container}/${this.config.projectName}/app.js`,
-      `/${this.config.cdn.container}/${this.config.projectName}/data/story.json`
-    ];
-    
-    console.log('\n🔥 Purgando arquivos principais...');
-    
-    for (const url of mainUrls) {
-      try {
-        await this.purgeUrl(url);
-        console.log(`✅ ${url}`);
-      } catch (error) {
-        console.log(`❌ ${url} (${error.message})`);
-      }
-    }
-    
-    // Purgar cache de frames se existir lista
-    try {
-      await fs.access('cache-list.txt');
-      console.log('\n📄 Lista de cache encontrada - purgando frames...');
-      await this.purgeCacheList();
-    } catch {
-      console.log('\n⚠️ Lista de cache não encontrada - apenas arquivos principais purgados');
-    }
-  }
+		console.log(`📄 ${urls.length} URLs encontradas na lista de cache`);
+		console.log('\n🔥 Iniciando purge do cache...');
 
-  async generatePurgeScript() {
-    console.log('\n📝 Gerando script de purge...');
-    
-    // Ler lista de cache se existir
-    let urls = [];
-    try {
-      const cacheContent = await fs.readFile('cache-list.txt', 'utf8');
-      urls = cacheContent.trim().split('\n').filter(url => url.trim());
-    } catch {
-      console.log('⚠️ cache-list.txt não encontrado - usando URLs padrão');
-      urls = [
-        `/${this.config.cdn.container}/${this.config.projectName}/index.html`,
-        `/${this.config.cdn.container}/${this.config.projectName}/app.css`,
-        `/${this.config.cdn.container}/${this.config.projectName}/app.js`
-      ];
-    }
-    
-    const bashScript = `#!/bin/bash
+		// Purgar cada URL
+		for (let i = 0; i < urls.length; i++) {
+			const url = urls[i].trim();
+			const progress = `[${i + 1}/${urls.length}]`;
+
+			try {
+				await this.purgeUrl(url);
+				this.purgedCount++;
+				process.stdout.write(
+					`\r${progress} ✅ ${this.purgedCount} purgados | ❌ ${this.failedCount} falhas`
+				);
+			} catch (error) {
+				this.failedCount++;
+				process.stdout.write(
+					`\r${progress} ✅ ${this.purgedCount} purgados | ❌ ${this.failedCount} falhas`
+				);
+			}
+
+			// Pausa pequena para não sobrecarregar
+			if (i % 10 === 0) {
+				await new Promise((resolve) => setTimeout(resolve, 100));
+			}
+		}
+
+		console.log('\n\n' + '='.repeat(60));
+		console.log('🧹 PURGE CONCLUÍDO!');
+		console.log(`✅ Purgados: ${this.purgedCount}`);
+		console.log(`❌ Falhas: ${this.failedCount}`);
+		console.log(`📊 Total: ${urls.length}`);
+	}
+
+	async purgeUrl(urlPath) {
+		// URL completa para purge
+		const fullUrl = `${this.config.cdn.baseUrl}${urlPath}`;
+
+		// Fazer requisição PURGE para limpar cache
+		// Método 1: PURGE request (padrão CDN)
+		try {
+			const response = await fetch(fullUrl, {
+				method: 'PURGE',
+				headers: {
+					'User-Agent': 'CachePurger/1.0',
+					'Cache-Control': 'no-cache'
+				}
+			});
+
+			if (response.ok || response.status === 404) {
+				return true; // Sucesso ou já não existe
+			}
+
+			throw new Error(`HTTP ${response.status}`);
+		} catch (error) {
+			// Método 2: HEAD request com cache-busting (fallback)
+			try {
+				const cacheBustUrl = `${fullUrl}?cb=${Date.now()}&purge=1`;
+				const response = await fetch(cacheBustUrl, {
+					method: 'HEAD',
+					headers: {
+						'Cache-Control': 'no-cache, no-store, must-revalidate',
+						Pragma: 'no-cache',
+						Expires: '0'
+					}
+				});
+				return true;
+			} catch (fallbackError) {
+				throw new Error(`Purge failed: ${error.message}`);
+			}
+		}
+	}
+
+	async purgeProject() {
+		console.log('\n🧹 PURGE COMPLETO DO PROJETO');
+		console.log('='.repeat(60));
+		console.log(`📁 Projeto: ${this.config.projectName}`);
+
+		// URLs principais para purgar
+		const mainUrls = [
+			`/${this.config.cdn.container}/${this.config.projectName}/index.html`,
+			`/${this.config.cdn.container}/${this.config.projectName}/`,
+			`/${this.config.cdn.container}/${this.config.projectName}/app.css`,
+			`/${this.config.cdn.container}/${this.config.projectName}/app.js`,
+			`/${this.config.cdn.container}/${this.config.projectName}/data/story.json`
+		];
+
+		console.log('\n🔥 Purgando arquivos principais...');
+
+		for (const url of mainUrls) {
+			try {
+				await this.purgeUrl(url);
+				console.log(`✅ ${url}`);
+			} catch (error) {
+				console.log(`❌ ${url} (${error.message})`);
+			}
+		}
+
+		// Purgar cache de frames se existir lista
+		try {
+			await fs.access('cache-list.txt');
+			console.log('\n📄 Lista de cache encontrada - purgando frames...');
+			await this.purgeCacheList();
+		} catch {
+			console.log('\n⚠️ Lista de cache não encontrada - apenas arquivos principais purgados');
+		}
+	}
+
+	async generatePurgeScript() {
+		console.log('\n📝 Gerando script de purge...');
+
+		// Ler lista de cache se existir
+		let urls = [];
+		try {
+			const cacheContent = await fs.readFile('cache-list.txt', 'utf8');
+			urls = cacheContent
+				.trim()
+				.split('\n')
+				.filter((url) => url.trim());
+		} catch {
+			console.log('⚠️ cache-list.txt não encontrado - usando URLs padrão');
+			urls = [
+				`/${this.config.cdn.container}/${this.config.projectName}/index.html`,
+				`/${this.config.cdn.container}/${this.config.projectName}/app.css`,
+				`/${this.config.cdn.container}/${this.config.projectName}/app.js`
+			];
+		}
+
+		const bashScript = `#!/bin/bash
 # Script para purgar cache do projeto ${this.config.projectName}
 # Gerado automaticamente em: ${new Date().toLocaleString()}
 
@@ -198,44 +208,44 @@ echo "🎯 Projeto: ${this.config.projectName}"
 echo "🕒 Cache pode levar alguns minutos para ser totalmente limpo"
 `;
 
-    await fs.writeFile('purge-cache.sh', bashScript);
-    await fs.chmod('purge-cache.sh', '755');
-    
-    console.log('📄 Script criado: purge-cache.sh');
-  }
+		await fs.writeFile('purge-cache.sh', bashScript);
+		await fs.chmod('purge-cache.sh', '755');
 
-  async run(command = 'all') {
-    switch (command) {
-      case 'list':
-        await this.purgeCacheList();
-        break;
-      case 'project':
-        await this.purgeProject();
-        break;
-      case 'script':
-        await this.generatePurgeScript();
-        break;
-      case 'all':
-      default:
-        await this.purgeProject();
-        await this.generatePurgeScript();
-        break;
-    }
-    
-    console.log('\n💡 DICAS:');
-    console.log('   • Cache da CDN pode levar 5-15 minutos para limpar completamente');
-    console.log('   • Teste em navegador privado para verificar se cache foi limpo');
-    console.log('   • Use Ctrl+F5 para forçar reload completo');
-  }
+		console.log('📄 Script criado: purge-cache.sh');
+	}
+
+	async run(command = 'all') {
+		switch (command) {
+			case 'list':
+				await this.purgeCacheList();
+				break;
+			case 'project':
+				await this.purgeProject();
+				break;
+			case 'script':
+				await this.generatePurgeScript();
+				break;
+			case 'all':
+			default:
+				await this.purgeProject();
+				await this.generatePurgeScript();
+				break;
+		}
+
+		console.log('\n💡 DICAS:');
+		console.log('   • Cache da CDN pode levar 5-15 minutos para limpar completamente');
+		console.log('   • Teste em navegador privado para verificar se cache foi limpo');
+		console.log('   • Use Ctrl+F5 para forçar reload completo');
+	}
 }
 
 // CLI
 if (import.meta.url === `file://${process.argv[1]}`) {
-  const purger = new CachePurger();
-  const command = process.argv[2] || 'all';
-  
-  if (['--help', '-h'].includes(command)) {
-    console.log(`
+	const purger = new CachePurger();
+	const command = process.argv[2] || 'all';
+
+	if (['--help', '-h'].includes(command)) {
+		console.log(`
 🧹 CACHE PURGER - Limpa cache da CDN
 
 Uso: node scripts/cache-purge.js [comando]
@@ -251,8 +261,8 @@ Exemplos:
   npm run cache:purge project
   ./purge-cache.sh
 `);
-    process.exit(0);
-  }
-  
-  await purger.run(command);
+		process.exit(0);
+	}
+
+	await purger.run(command);
 }

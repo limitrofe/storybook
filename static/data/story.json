@@ -933,12 +933,15 @@
       "src": "story/3218812",
       "steps": [
         {
-          "slide": 0,
+          "slide": 5,
           "title": "sadfasdf",
           "text": "<b>asdf</b><p><i>kjhkhj</i></p><p><i><br></i></p>",
           "position": "left",
           "backgroundColor": "#e100ff",
-          "textColor": ""
+          "textColor": "",
+          "slideFromBottom": true,
+          "travelDistance": "45vh",
+          "cardVisibility": "card"
         },
         {
           "slide": 2,
@@ -946,7 +949,10 @@
           "text": "<u>jkhkjh</u>",
           "position": "center",
           "backgroundColor": "",
-          "textColor": ""
+          "textColor": "",
+          "slideFromBottom": true,
+          "travelDistance": "45vh",
+          "cardVisibility": "card"
         },
         {
           "slide": 9,
@@ -954,7 +960,10 @@
           "text": "<ul><li>khkjhkjh</li><li>lkjhkjhkjh</li><li>kjhhkjhkj</li></ul>",
           "position": "right",
           "backgroundColor": "",
-          "textColor": ""
+          "textColor": "",
+          "slideFromBottom": true,
+          "travelDistance": "45vh",
+          "cardVisibility": "card"
         },
         {
           "slide": 0,
@@ -962,7 +971,10 @@
           "text": "<ol><li>kjhkhkjh</li><li>kjhkjhkj</li><li>kjhkjh</li></ol>",
           "position": "right",
           "backgroundColor": "",
-          "textColor": ""
+          "textColor": "",
+          "slideFromBottom": true,
+          "travelDistance": "45vh",
+          "cardVisibility": "card"
         },
         {
           "slide": 1,
@@ -970,15 +982,21 @@
           "text": "<strike><font color=\"#ffe0e0\">kjhkjhkhjkh</font></strike><p><strike><font color=\"#ffe0e0\">kjhkhj</font></strike></p>",
           "position": "right",
           "backgroundColor": "#000000",
-          "textColor": "#e9afaf"
+          "textColor": "#e9afaf",
+          "slideFromBottom": true,
+          "travelDistance": "45vh",
+          "cardVisibility": "card"
         },
         {
-          "slide": 1,
+          "slide": 5,
           "title": "",
           "text": "",
           "position": "right",
           "backgroundColor": "transparente",
-          "textColor": "transparent"
+          "textColor": "transparent",
+          "slideFromBottom": true,
+          "travelDistance": "45vh",
+          "cardVisibility": "card"
         }
       ]
     },
@@ -1011,16 +1029,16 @@
             "typography": ""
           },
           "desktop": {
-            "x": 291.65668604584755,
-            "y": 300,
+            "x": 1390.4590725622095,
+            "y": 440,
             "width": 260,
             "height": 140,
             "z": 1,
             "opacity": 1
           },
           "mobile": {
-            "x": 40,
-            "y": 80,
+            "x": 79.92015968063873,
+            "y": 300,
             "width": 220,
             "height": 140,
             "z": 1,
@@ -1054,8 +1072,8 @@
             "opacity": 1
           },
           "mobile": {
-            "x": 40,
-            "y": 80,
+            "x": 43.992015968063875,
+            "y": 0,
             "width": 220,
             "height": 140,
             "z": 1,
@@ -1089,8 +1107,8 @@
             "opacity": 1
           },
           "mobile": {
-            "x": 40,
-            "y": 80,
+            "x": 132.81437125748505,
+            "y": 150,
             "width": 220,
             "height": 140,
             "z": 1,
