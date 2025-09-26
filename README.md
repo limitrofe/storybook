@@ -12,7 +12,7 @@ Ambiente de criação de narrativas do Newsroom baseado em Svelte + Vite. Todo o
 ## 2. Instalação
 
 ```bash
-git clone https://github.com/<org>/storybook.git
+git clone https://github.com/limitrofe/storybook.git
 cd storybook
 npm install
 ```
