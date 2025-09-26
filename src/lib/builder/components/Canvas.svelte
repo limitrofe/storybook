@@ -18,6 +18,8 @@
 	let activeView = mode;
 	let previewDevice = 'desktop';
 	let drafts = {};
+	let collapsedBlocks = {};
+	let lastSelectedId = null;
 	const DRAFTABLE_TYPES = new Set(['free-canvas']);
 
 	$: exportedStory = sanitizeStoryForExport($storyStore);
@@ -37,6 +39,9 @@
 
 	const selectBlock = (id) => {
 		selectedBlockId.set(id);
+		if (collapsedBlocks[id]) {
+			collapsedBlocks = { ...collapsedBlocks, [id]: false };
+		}
 	};
 
 	$: activeView = mode;
@@ -183,6 +188,49 @@
 	const updateBlockFieldValue = (block, path, value) => {
 		storyStore.updateBlockField(block.__id, path, value);
 	};
+
+	const ensureCollapsedState = (blocks) => {
+		if (!Array.isArray(blocks)) return;
+		const ids = new Set(blocks.map((block) => block.__id));
+		let changed = false;
+		const next = { ...collapsedBlocks };
+
+		for (const block of blocks) {
+			if (!(block.__id in next)) {
+				next[block.__id] = true;
+				changed = true;
+			}
+		}
+
+		for (const id in next) {
+			if (!ids.has(id)) {
+				delete next[id];
+				changed = true;
+			}
+		}
+
+		if (changed) {
+			collapsedBlocks = next;
+		}
+	};
+
+	$: ensureCollapsedState($paragraphs);
+
+	$: {
+		const activeId = $selectedBlockId;
+		if (activeId && activeId !== lastSelectedId && (collapsedBlocks[activeId] ?? true)) {
+			collapsedBlocks = { ...collapsedBlocks, [activeId]: false };
+		}
+		lastSelectedId = activeId;
+	}
+
+	const toggleBlockCollapse = (id) => {
+		const next = !(collapsedBlocks[id] ?? true);
+		collapsedBlocks = { ...collapsedBlocks, [id]: next };
+		if (!next) {
+			selectedBlockId.set(id);
+		}
+	};
 </script>
 
 <div
@@ -236,9 +284,11 @@
 			></div>
 
 			{@const definition = getComponentDefinition(block.type)}
+			{@const bodyId = `block-body-${index}`}
 
 			<article
 				class="block-card"
+				class:collapsed={collapsedBlocks[block.__id] ?? true}
 				class:selected={$selectedBlockId === block.__id}
 				draggable
 				role="listitem"
@@ -249,6 +299,17 @@
 				on:dragover|preventDefault={handleDragOver}
 			>
 				<header class="block-head">
+					<button
+						type="button"
+						class="collapse-toggle"
+						title={collapsedBlocks[block.__id] ?? true ? 'Expandir bloco' : 'Recolher bloco'}
+						aria-label={collapsedBlocks[block.__id] ?? true ? 'Expandir bloco' : 'Recolher bloco'}
+						aria-expanded={!((collapsedBlocks[block.__id] ?? true))}
+						aria-controls={bodyId}
+						on:click|stopPropagation={() => toggleBlockCollapse(block.__id)}
+					>
+						{collapsedBlocks[block.__id] ?? true ? '▸' : '▾'}
+					</button>
 					<div
 						class="block-meta"
 						role="button"
@@ -265,6 +326,9 @@
 						<div>
 							<strong>{definition?.label || block.type}</strong>
 							<small>#{index + 1} · {block.type}</small>
+							{#if collapsedBlocks[block.__id] ?? true}
+								<p class="block-summary">{renderSummary(block)}</p>
+							{/if}
 						</div>
 					</div>
 					<div class="block-actions" aria-label="Ações do bloco">
@@ -292,7 +356,11 @@
 					</div>
 				</header>
 
-				<div class="block-body">
+				<div
+					class="block-body"
+					id={bodyId}
+					hidden={collapsedBlocks[block.__id] ?? true}
+				>
 					{#if block.type === 'free-canvas'}
 						{#if drafts[block.__id]}
 							<FreeCanvasEditor
@@ -806,14 +874,41 @@
 	.block-head {
 		display: flex;
 		align-items: center;
-		justify-content: space-between;
-		gap: 1rem;
+		gap: 0.75rem;
+	}
+
+	.collapse-toggle {
+		border: 1px solid #dbe2f3;
+		background: #ffffff;
+		border-radius: 8px;
+		padding: 0.3rem;
+		cursor: pointer;
+		font-size: 0.85rem;
+		line-height: 1;
+		width: 28px;
+		height: 28px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: #1f2937;
+		transition: background 0.15s ease, border-color 0.15s ease;
+	}
+
+	.collapse-toggle:hover {
+		background: #f1f5f9;
+	}
+
+	.collapse-toggle:focus-visible {
+		outline: 2px solid #2563eb;
+		outline-offset: 2px;
 	}
 
 	.block-meta {
 		display: flex;
 		align-items: center;
 		gap: 0.85rem;
+		flex: 1;
+		min-width: 0;
 	}
 
 	.block-meta:hover {
@@ -833,6 +928,17 @@
 		color: #64748b;
 		font-size: 0.78rem;
 		display: block;
+	}
+
+	.block-summary {
+		margin: 0.15rem 0 0;
+		color: #475569;
+		font-size: 0.78rem;
+		max-width: 42ch;
+		overflow: hidden;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
 	}
 
 	.block-actions {
@@ -868,6 +974,14 @@
 		background: #f8fafc;
 		padding: 1rem;
 		border: 1px solid rgba(226, 232, 240, 0.7);
+	}
+
+	.block-card.collapsed {
+		padding-bottom: 0.85rem;
+	}
+
+	.block-card.collapsed .block-body {
+		display: none;
 	}
 
 	.inline-editor {

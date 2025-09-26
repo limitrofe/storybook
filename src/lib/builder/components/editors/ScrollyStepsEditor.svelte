@@ -7,6 +7,7 @@
 	const dispatch = createEventDispatcher();
 	let steps = [];
 	let isUpdating = false;
+	let collapsedStates = [];
 
 	const buildDefaults = () => ({
 		title: '',
@@ -33,10 +34,15 @@
 	});
 
 	$: if (!isUpdating) {
-		steps =
+		const nextSteps =
 			Array.isArray(value) && value.length
 				? value.map((step) => ({ ...buildDefaults(), ...structuredClone(step) }))
 				: [buildDefaults()];
+		const previousCollapsed = collapsedStates;
+		steps = nextSteps;
+		if (collapsedStates.length !== nextSteps.length) {
+			collapsedStates = nextSteps.map((_, index) => previousCollapsed[index] ?? false);
+		}
 	}
 
 	function emit(updated) {
@@ -50,6 +56,7 @@
 	function addStep() {
 		const updated = [...steps, buildDefaults()];
 		steps = updated;
+		collapsedStates = [...collapsedStates, false];
 		emit(updated);
 	}
 
@@ -57,6 +64,11 @@
 		const clone = { ...steps[index] };
 		const updated = [...steps.slice(0, index + 1), { ...clone }, ...steps.slice(index + 1)];
 		steps = updated;
+		collapsedStates = [
+			...collapsedStates.slice(0, index + 1),
+			collapsedStates[index] ?? false,
+			...collapsedStates.slice(index + 1)
+		];
 		emit(updated);
 	}
 
@@ -64,11 +76,13 @@
 		if (steps.length === 1) {
 			const updated = [buildDefaults()];
 			steps = updated;
+			collapsedStates = [false];
 			emit(updated);
 			return;
 		}
 		const updated = steps.filter((_, i) => i !== index);
 		steps = updated;
+		collapsedStates = collapsedStates.filter((_, i) => i !== index);
 		emit(updated);
 	}
 
@@ -79,6 +93,10 @@
 		const [item] = updated.splice(index, 1);
 		updated.splice(target, 0, item);
 		steps = updated;
+		const collapsedClone = [...collapsedStates];
+		const [state] = collapsedClone.splice(index, 1);
+		collapsedClone.splice(target, 0, state ?? false);
+		collapsedStates = collapsedClone;
 		emit(updated);
 	}
 
@@ -86,6 +104,10 @@
 		const updated = steps.map((step, i) => (i === index ? { ...step, [key]: value } : step));
 		steps = updated;
 		emit(updated);
+	}
+
+	function toggleCollapsed(index) {
+		collapsedStates = collapsedStates.map((state, i) => (i === index ? !state : state ?? false));
 	}
 
 	const positions = [
@@ -108,9 +130,18 @@
 
 <div class="steps-editor">
 	{#each steps as step, index}
-		<article class="step-card">
+		<article class="step-card" class:collapsed={collapsedStates[index]}>
 			<header>
-				<div>
+				<button
+					type="button"
+					class="toggle-collapse"
+					aria-expanded={!collapsedStates[index]}
+					aria-controls={`scrolly-step-fields-${index}`}
+					on:click={() => toggleCollapsed(index)}
+				>
+					{collapsedStates[index] ? '▸' : '▾'}
+				</button>
+				<div class="summary">
 					<strong>Step {index + 1}</strong>
 					<span>{step.title || 'Sem título'}</span>
 				</div>
@@ -134,7 +165,11 @@
 				</div>
 			</header>
 
-			<div class="fields">
+			<div
+				class="fields"
+				id={`scrolly-step-fields-${index}`}
+				hidden={collapsedStates[index]}
+			>
 				<label>
 					<span>Título</span>
 					<input
@@ -397,9 +432,13 @@
 
 	header {
 		display: flex;
-		justify-content: space-between;
 		align-items: center;
-		gap: 1rem;
+		gap: 0.75rem;
+	}
+
+	.summary {
+		flex: 1;
+		min-width: 0;
 	}
 
 	header strong {
@@ -414,9 +453,31 @@
 		color: #6b7280;
 	}
 
+	.toggle-collapse {
+		border: 1px solid #cbd5f5;
+		background: #fff;
+		border-radius: 6px;
+		padding: 0.25rem;
+		cursor: pointer;
+		font-size: 0.9rem;
+		line-height: 1;
+		width: 28px;
+		height: 28px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: #0f172a;
+	}
+
+	.toggle-collapse:focus-visible {
+		outline: 2px solid #2563eb;
+		outline-offset: 2px;
+	}
+
 	.actions {
 		display: inline-flex;
 		gap: 0.35rem;
+		margin-left: auto;
 	}
 
 	.actions button {
@@ -426,6 +487,19 @@
 		padding: 0.25rem 0.5rem;
 		cursor: pointer;
 		font-size: 0.75rem;
+	}
+
+	.step-card.collapsed {
+		padding-bottom: 0.75rem;
+	}
+
+	.step-card.collapsed .summary span {
+		color: #475569;
+		font-style: italic;
+	}
+
+	.step-card.collapsed .fields {
+		display: none;
 	}
 
 	.actions button:disabled {
