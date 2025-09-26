@@ -240,14 +240,26 @@
       "poster": "",
       "posterMobile": "",
       "variant": "hero",
-      "overlay": true
+      "overlay": true,
+      "section": {
+        "backgroundColor": "#000000",
+        "textColor": "#ffffff",
+        "paddingTop": "0",
+        "paddingBottom": "0"
+      }
     },
     {
       "type": "texto",
       "text": "<p><i><b><font color=\"#8c0d0d\">Escreva aqui o texto do parágrafo.</font></b></i></p><p></p><ol><li><font color=\"#8c0d0d\"><span style=\"font-size: 0.95rem; text-wrap-mode: initial;\">Escreva aqui o texto do </span><span style=\"font-size: 0.95rem; text-wrap-mode: initial;\">parágrafo</span><span style=\"font-size: 0.95rem; text-wrap-mode: initial;\">. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o </span><span style=\"font-size: 0.95rem; text-wrap-mode: initial;\">texto</span><span style=\"font-size: 0.95rem; text-wrap-mode: initial;\"> do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo. Escreva aqui o texto do parágrafo.</span></font></li></ol><span style=\"text-wrap-mode: initial;\"><div><span style=\"text-wrap-mode: initial;\"><font color=\"#8c0d0d\"><br></font></span></div></span><ul><li><span style=\"font-size: 0.95rem; text-wrap-mode: initial;\"><font color=\"#8c0d0d\">asdfasdf</font></span></li></ul><ol><li><b style=\"text-wrap-mode: initial;\"><i><u><strike><font color=\"#8c0d0d\">asdfasdf</font></strike></u></i></b></li></ol><span style=\"text-wrap-mode: initial;\"></span><p></p>",
       "variant": "lead",
       "align": "left",
-      "maxWidth": "720px"
+      "maxWidth": "720px",
+      "section": {
+        "backgroundColor": "#000000",
+        "textColor": "#ffffff",
+        "paddingTop": "1rem",
+        "paddingBottom": "0"
+      }
     },
     {
       "type": "citacao",
@@ -258,7 +270,13 @@
       "fontSizeMobile": "",
       "lineHeightDesktop": "",
       "lineHeightMobile": "",
-      "textColor": ""
+      "textColor": "",
+      "section": {
+        "backgroundColor": "#000000",
+        "textColor": "#ffffff",
+        "paddingTop": "0",
+        "paddingBottom": "0"
+      }
     },
     {
       "type": "scrolly",
@@ -356,7 +374,13 @@
           "caption": ""
         }
       ],
-      "fullWidth": true
+      "fullWidth": true,
+      "section": {
+        "backgroundColor": "",
+        "textColor": "",
+        "paddingTop": "",
+        "paddingBottom": ""
+      }
     },
     {
       "type": "intertitulo",
@@ -379,11 +403,23 @@
       "subtitleLineHeightDesktop": "",
       "subtitleLineHeightMobile": "",
       "height": "30vh",
-      "textAlignMobile": "center"
+      "textAlignMobile": "center",
+      "section": {
+        "backgroundColor": "",
+        "textColor": "",
+        "paddingTop": "",
+        "paddingBottom": ""
+      }
     },
     {
       "type": "ancora",
-      "id": "bloco-1"
+      "id": "bloco-1",
+      "section": {
+        "backgroundColor": "",
+        "textColor": "",
+        "paddingTop": "",
+        "paddingBottom": ""
+      }
     },
     {
       "type": "texto",
@@ -395,7 +431,13 @@
       "fontSizeMobile": "",
       "lineHeightDesktop": "",
       "lineHeightMobile": "",
-      "textColor": ""
+      "textColor": "",
+      "section": {
+        "backgroundColor": "",
+        "textColor": "",
+        "paddingTop": "",
+        "paddingBottom": ""
+      }
     },
     {
       "type": "scrolly",
@@ -481,7 +523,13 @@
           "caption": ""
         }
       ],
-      "fullWidth": true
+      "fullWidth": true,
+      "section": {
+        "backgroundColor": "",
+        "textColor": "",
+        "paddingTop": "",
+        "paddingBottom": ""
+      }
     },
     {
       "type": "video",
@@ -500,7 +548,13 @@
       "customWidthMobile": "360px",
       "backgroundColor": "#0f172a",
       "fullWidth": false,
-      "fullWidthBackground": false
+      "fullWidthBackground": false,
+      "section": {
+        "backgroundColor": "",
+        "textColor": "",
+        "paddingTop": "",
+        "paddingBottom": ""
+      }
     },
     {
       "type": "texto",
@@ -512,7 +566,13 @@
       "fontSizeMobile": "",
       "lineHeightDesktop": "",
       "lineHeightMobile": "",
-      "textColor": ""
+      "textColor": "",
+      "section": {
+        "backgroundColor": "",
+        "textColor": "",
+        "paddingTop": "",
+        "paddingBottom": ""
+      }
     },
     {
       "type": "galeria",
@@ -641,7 +701,13 @@
       ],
       "layout": "masonry",
       "columns": 4,
-      "lightbox": true
+      "lightbox": true,
+      "section": {
+        "backgroundColor": "",
+        "textColor": "",
+        "paddingTop": "",
+        "paddingBottom": ""
+      }
     },
     {
       "type": "texto",
@@ -653,7 +719,13 @@
       "fontSizeMobile": "",
       "lineHeightDesktop": "",
       "lineHeightMobile": "",
-      "textColor": ""
+      "textColor": "",
+      "section": {
+        "backgroundColor": "",
+        "textColor": "",
+        "paddingTop": "",
+        "paddingBottom": ""
+      }
     },
     {
       "type": "texto",
@@ -665,7 +737,13 @@
       "fontSizeMobile": "",
       "lineHeightDesktop": "",
       "lineHeightMobile": "",
-      "textColor": ""
+      "textColor": "",
+      "section": {
+        "backgroundColor": "",
+        "textColor": "",
+        "paddingTop": "",
+        "paddingBottom": ""
+      }
     },
     {
       "type": "carousel",
@@ -692,7 +770,13 @@
       "autoplay": false,
       "interval": 4000,
       "showDots": true,
-      "showArrows": true
+      "showArrows": true,
+      "section": {
+        "backgroundColor": "",
+        "textColor": "",
+        "paddingTop": "",
+        "paddingBottom": ""
+      }
     },
     {
       "type": "texto",
@@ -704,7 +788,13 @@
       "fontSizeMobile": "",
       "lineHeightDesktop": "",
       "lineHeightMobile": "",
-      "textColor": ""
+      "textColor": "",
+      "section": {
+        "backgroundColor": "",
+        "textColor": "",
+        "paddingTop": "",
+        "paddingBottom": ""
+      }
     },
     {
       "type": "parallax",
@@ -713,7 +803,13 @@
       "height": "65vh",
       "speed": 0.45,
       "overlay": true,
-      "content": "<b>sf;lja ;</b>sdlkfj<b> asl;dfkj ;asldfk</b>"
+      "content": "<b>sf;lja ;</b>sdlkfj<b> asl;dfkj ;asldfk</b>",
+      "section": {
+        "backgroundColor": "",
+        "textColor": "",
+        "paddingTop": "",
+        "paddingBottom": ""
+      }
     },
     {
       "type": "texto",
@@ -725,7 +821,13 @@
       "fontSizeMobile": "",
       "lineHeightDesktop": "",
       "lineHeightMobile": "",
-      "textColor": ""
+      "textColor": "",
+      "section": {
+        "backgroundColor": "",
+        "textColor": "",
+        "paddingTop": "",
+        "paddingBottom": ""
+      }
     },
     {
       "type": "globo-player",
@@ -744,7 +846,13 @@
       "showCaption": true,
       "caption": "",
       "credit": "",
-      "fullWidth": false
+      "fullWidth": false,
+      "section": {
+        "backgroundColor": "",
+        "textColor": "",
+        "paddingTop": "",
+        "paddingBottom": ""
+      }
     },
     {
       "type": "texto",
@@ -756,7 +864,13 @@
       "fontSizeMobile": "",
       "lineHeightDesktop": "",
       "lineHeightMobile": "",
-      "textColor": ""
+      "textColor": "",
+      "section": {
+        "backgroundColor": "",
+        "textColor": "",
+        "paddingTop": "",
+        "paddingBottom": ""
+      }
     },
     {
       "type": "foto",
@@ -767,7 +881,13 @@
       "credit": "",
       "fullWidth": false,
       "link": "",
-      "target": "_blank"
+      "target": "_blank",
+      "section": {
+        "backgroundColor": "",
+        "textColor": "",
+        "paddingTop": "",
+        "paddingBottom": ""
+      }
     },
     {
       "type": "texto",
@@ -779,7 +899,13 @@
       "fontSizeMobile": "",
       "lineHeightDesktop": "",
       "lineHeightMobile": "",
-      "textColor": ""
+      "textColor": "",
+      "section": {
+        "backgroundColor": "",
+        "textColor": "",
+        "paddingTop": "",
+        "paddingBottom": ""
+      }
     },
     {
       "type": "foto",
@@ -790,7 +916,13 @@
       "credit": "",
       "fullWidth": true,
       "link": "",
-      "target": "_blank"
+      "target": "_blank",
+      "section": {
+        "backgroundColor": "",
+        "textColor": "",
+        "paddingTop": "",
+        "paddingBottom": ""
+      }
     },
     {
       "type": "texto",
@@ -802,7 +934,13 @@
       "fontSizeMobile": "",
       "lineHeightDesktop": "",
       "lineHeightMobile": "",
-      "textColor": ""
+      "textColor": "",
+      "section": {
+        "backgroundColor": "",
+        "textColor": "",
+        "paddingTop": "",
+        "paddingBottom": ""
+      }
     },
     {
       "type": "free-canvas",
@@ -998,7 +1136,13 @@
             "opacity": 1
           }
         }
-      ]
+      ],
+      "section": {
+        "backgroundColor": "",
+        "textColor": "",
+        "paddingTop": "",
+        "paddingBottom": ""
+      }
     },
     {
       "type": "texto",
@@ -1010,14 +1154,26 @@
       "fontSizeMobile": "",
       "lineHeightDesktop": "",
       "lineHeightMobile": "",
-      "textColor": ""
+      "textColor": "",
+      "section": {
+        "backgroundColor": "",
+        "textColor": "",
+        "paddingTop": "",
+        "paddingBottom": ""
+      }
     },
     {
       "type": "flourish",
       "src": "visualisation/19202353",
       "height": "600px",
       "caption": "",
-      "credit": ""
+      "credit": "",
+      "section": {
+        "backgroundColor": "",
+        "textColor": "",
+        "paddingTop": "",
+        "paddingBottom": ""
+      }
     },
     {
       "type": "texto",
@@ -1029,7 +1185,13 @@
       "fontSizeMobile": "",
       "lineHeightDesktop": "",
       "lineHeightMobile": "",
-      "textColor": ""
+      "textColor": "",
+      "section": {
+        "backgroundColor": "",
+        "textColor": "",
+        "paddingTop": "",
+        "paddingBottom": ""
+      }
     },
     {
       "type": "antes-depois",
@@ -1043,7 +1205,13 @@
       "afterCredit": "não seiQ",
       "beforeLabel": "Antes",
       "afterLabel": "Depois",
-      "orientation": "vertical"
+      "orientation": "vertical",
+      "section": {
+        "backgroundColor": "",
+        "textColor": "",
+        "paddingTop": "",
+        "paddingBottom": ""
+      }
     },
     {
       "type": "texto",
@@ -1055,7 +1223,13 @@
       "fontSizeMobile": "",
       "lineHeightDesktop": "",
       "lineHeightMobile": "",
-      "textColor": ""
+      "textColor": "",
+      "section": {
+        "backgroundColor": "",
+        "textColor": "",
+        "paddingTop": "",
+        "paddingBottom": ""
+      }
     },
     {
       "type": "flourish-scrolly",
@@ -1127,7 +1301,13 @@
           "travelDistance": "45vh",
           "cardVisibility": "card"
         }
-      ]
+      ],
+      "section": {
+        "backgroundColor": "",
+        "textColor": "",
+        "paddingTop": "",
+        "paddingBottom": ""
+      }
     },
     {
       "type": "free-canvas",
@@ -1409,7 +1589,13 @@
             "opacity": 1
           }
         }
-      ]
+      ],
+      "section": {
+        "backgroundColor": "",
+        "textColor": "",
+        "paddingTop": "",
+        "paddingBottom": ""
+      }
     }
   ]
 }

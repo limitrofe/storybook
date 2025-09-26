@@ -5,7 +5,7 @@
 	import Header from './story/Header.svelte';
 	import StoryText from './story/StoryText.svelte';
 	import SectionTitle from './story/SectionTitle.svelte';
-	import SectionWrapper from './story/SectionWrapper.svelte';
+import { getSectionStyling } from './story/sectionStyle.js';
 	import PhotoWithCaption from './story/PhotoWithCaption.svelte';
 	import VideoPlayer from './story/VideoPlayer.svelte';
 	import GloboPlayer from './story/GloboPlayer.svelte';
@@ -446,443 +446,449 @@
 		{#each storyData.paragraphs as paragraph}
 			{@const componentType = getComponentType(paragraph)}
 			{@const props = getComponentProps(paragraph)}
+			{@const sectionStyling = getSectionStyling(paragraph)}
 
-			<!-- Header -->
-			{#if componentType === 'header'}
-				<Header
-					title={props.title}
-					subtitle={props.subtitle}
-					author={props.author}
-					date={props.date}
-					backgroundImage={props.backgroundImage}
-					backgroundImageMobile={props.backgroundImageMobile}
-					backgroundVideo={props.backgroundVideo}
-					backgroundVideoMobile={props.backgroundVideoMobile}
-					variant={props.variant || 'default'}
-					overlay={stringToBoolean(props.overlay, true)}
-					posterImage={props.poster}
-					posterImageMobile={props.posterMobile}
-				/>
-				<!-- 🌪️ Header Caótico -->
-			{:else if componentType === 'header-caotico'}
-				<HeaderCaotico
-					title={props.title || 'HEADER CAÓTICO'}
-					subtitle={props.subtitle || '40 mídias se movimentando dinamicamente'}
-					titleColor={props.titleColor || '#232323'}
-					medias={processChaoticMedias(props.medias || [])}
-					useCustomBackground={stringToBoolean(props.useCustomBackground, false)}
-					backgroundImage={props.backgroundImage || ''}
-					backgroundImageMobile={props.backgroundImageMobile || ''}
-					backgroundVideo={props.backgroundVideo || ''}
-					backgroundVideoMobile={props.backgroundVideoMobile || ''}
-					overlay={stringToBoolean(props.overlay, true)}
-					overlayOpacity={parseFloat(props.overlayOpacity) || 0.5}
-					totalDefaultMedias={parseInt(props.totalDefaultMedias) || 40}
-					shuffleInterval={parseInt(props.shuffleInterval) || 3000}
-					animationDelay={parseInt(props.animationDelay) || 300}
-					mediaWidth={parseInt(props.mediaWidth) || 220}
-					mediaHeight={parseInt(props.mediaHeight) || 165}
-					mediaWidthMobile={parseInt(props.mediaWidthMobile) || 160}
-					mediaHeightMobile={parseInt(props.mediaHeightMobile) || 120}
-					mediaSizeVariation={parseFloat(props.mediaSizeVariation) || 0.4}
-				/>
-
-				<!-- Text -->
-			{:else if componentType === 'text'}
-				<div class="section-content">
-					<StoryText
-						content={props.text}
-						variant={props.variant || 'body'}
-						align={props.align}
-						size={props.size}
-						color={props.color}
+			<section class={sectionStyling.className} style={sectionStyling.style}>
+				<div class="story-section__inner">
+					<!-- Header -->
+					{#if componentType === 'header'}
+						<Header
+						title={props.title}
+						subtitle={props.subtitle}
+						author={props.author}
+						date={props.date}
+						backgroundImage={props.backgroundImage}
+						backgroundImageMobile={props.backgroundImageMobile}
+						backgroundVideo={props.backgroundVideo}
+						backgroundVideoMobile={props.backgroundVideoMobile}
+						variant={props.variant || 'default'}
+						overlay={stringToBoolean(props.overlay, true)}
+						posterImage={props.poster}
+						posterImageMobile={props.posterMobile}
 					/>
+					<!-- 🌪️ Header Caótico -->
+				{:else if componentType === 'header-caotico'}
+					<HeaderCaotico
+						title={props.title || 'HEADER CAÓTICO'}
+						subtitle={props.subtitle || '40 mídias se movimentando dinamicamente'}
+						titleColor={props.titleColor || '#232323'}
+						medias={processChaoticMedias(props.medias || [])}
+						useCustomBackground={stringToBoolean(props.useCustomBackground, false)}
+						backgroundImage={props.backgroundImage || ''}
+						backgroundImageMobile={props.backgroundImageMobile || ''}
+						backgroundVideo={props.backgroundVideo || ''}
+						backgroundVideoMobile={props.backgroundVideoMobile || ''}
+						overlay={stringToBoolean(props.overlay, true)}
+						overlayOpacity={parseFloat(props.overlayOpacity) || 0.5}
+						totalDefaultMedias={parseInt(props.totalDefaultMedias) || 40}
+						shuffleInterval={parseInt(props.shuffleInterval) || 3000}
+						animationDelay={parseInt(props.animationDelay) || 300}
+						mediaWidth={parseInt(props.mediaWidth) || 220}
+						mediaHeight={parseInt(props.mediaHeight) || 165}
+						mediaWidthMobile={parseInt(props.mediaWidthMobile) || 160}
+						mediaHeightMobile={parseInt(props.mediaHeightMobile) || 120}
+						mediaSizeVariation={parseFloat(props.mediaSizeVariation) || 0.4}
+					/>
+
+					<!-- Text -->
+				{:else if componentType === 'text'}
+					<div class="section-content">
+						<StoryText
+							content={props.text}
+							variant={props.variant || 'body'}
+							align={props.align}
+							size={props.size}
+							color={props.color}
+						/>
+					</div>
+
+					<!-- Quote -->
+				{:else if componentType === 'quote'}
+					<div class="section-content">
+						<StoryText content={props.text} variant="quote" author={props.author} role={props.role} />
+					</div>
+
+					<!-- Section Title -->
+				{:else if componentType === 'section-title'}
+					<SectionTitle
+						title={props.text}
+						backgroundImage={props.backgroundImage}
+						backgroundImageMobile={props.backgroundImageMobile}
+						backgroundPosition={props.backgroundPosition || 'center'}
+						backgroundPositionMobile={props.backgroundPositionMobile || 'center'}
+						backgroundVideo={props.backgroundVideo}
+						backgroundVideoMobile={props.backgroundVideoMobile}
+						backgroundColor={props.backgroundColor}
+						textColor={props.textColor}
+						fontFamily={props.fontFamily || 'obviously'}
+						variant={props.variant || 'default'}
+						size={props.size || 'medium'}
+						height={props.height}
+						heightMobile={props.heightMobile}
+						textPosition={props.textPosition || 'center'}
+						textPositionMobile={props.textPositionMobile}
+						textAlign={props.textAlign || 'center'}
+						textAlignMobile={props.textAlignMobile}
+						overlay={stringToBoolean(props.overlay, false)}
+					/>
+
+					<!-- Flexible Layout -->
+				{:else if componentType === 'flexible-layout'}
+					<FlexibleLayout
+						text={props.text || ''}
+						textAlign={props.textAlign || 'left'}
+						textPosition={props.textPosition || 'left'}
+						textColor={props.textColor || '#ffffff'}
+						fontSize={props.fontSize || 'clamp(2rem, 5vw, 4rem)'}
+						fontSizeMobile={props.fontSizeMobile || 'clamp(1.5rem, 8vw, 2.5rem)'}
+						textZIndex={props.textZIndex || 2}
+						image1Desktop={props.image1Desktop || ''}
+						image1Mobile={props.image1Mobile || ''}
+						image1Width={props.image1Width || '200px'}
+						image1Height={props.image1Height || '20px'}
+						image1WidthMobile={props.image1WidthMobile || '150px'}
+						image1HeightMobile={props.image1HeightMobile || '15px'}
+						image1X={props.image1X || '0px'}
+						image1Y={props.image1Y || '0px'}
+						image1XMobile={props.image1XMobile || '0px'}
+						image1YMobile={props.image1YMobile || '0px'}
+						image1ZIndex={props.image1ZIndex || 3}
+						image2Desktop={props.image2Desktop || ''}
+						image2Mobile={props.image2Mobile || ''}
+						image2Width={props.image2Width || '400px'}
+						image2Height={props.image2Height || '500px'}
+						image2WidthMobile={props.image2WidthMobile || '300px'}
+						image2HeightMobile={props.image2HeightMobile || '400px'}
+						image2Position={props.image2Position || 'right'}
+						image2X={props.image2X || '0px'}
+						image2Y={props.image2Y || '0px'}
+						image2XMobile={props.image2XMobile || '0px'}
+						image2YMobile={props.image2YMobile || '0px'}
+						image2ZIndex={props.image2ZIndex || 1}
+						backgroundColor={props.backgroundColor || '#1a1a1a'}
+						minHeight={props.minHeight || '80vh'}
+						minHeightMobile={props.minHeightMobile || '70vh'}
+						padding={props.padding || '2rem'}
+						paddingMobile={props.paddingMobile || '1.5rem'}
+					/>
+
+					<!-- 🎨 NOVO: ResponsiveMediaLayout -->
+				{:else if componentType === 'responsive-media'}
+					<ResponsiveMediaLayout
+						heightDesktop={props.heightDesktop || props.height || '100vh'}
+						heightMobile={props.heightMobile || props.height || '100vh'}
+						backgroundType={props.backgroundType || 'color'}
+						backgroundColor={props.backgroundColor || '#000000'}
+						backgroundImageDesktop={props.backgroundImageDesktop || props.backgroundImage || ''}
+						backgroundImageMobile={props.backgroundImageMobile || props.backgroundImage || ''}
+						backgroundPositionDesktop={props.backgroundPositionDesktop ||
+							props.backgroundPosition ||
+							'center center'}
+						backgroundPositionMobile={props.backgroundPositionMobile ||
+							props.backgroundPosition ||
+							'center center'}
+						backgroundSizeDesktop={props.backgroundSizeDesktop || props.backgroundSize || 'cover'}
+						backgroundSizeMobile={props.backgroundSizeMobile || props.backgroundSize || 'cover'}
+						backgroundVideoDesktop={props.backgroundVideoDesktop || props.backgroundVideo || ''}
+						backgroundVideoMobile={props.backgroundVideoMobile || props.backgroundVideo || ''}
+						textos={processTextos(props.textos || props.texts || [])}
+						imagens={processImagens(props.imagens || props.images || [])}
+					/>
+				{:else if componentType === 'free-canvas'}
+					{@const backgroundColorDesktop =
+						props.backgroundColorDesktop ?? props.backgroundColor ?? '#000000'}
+					{@const backgroundColorMobile = props.backgroundColorMobile ?? backgroundColorDesktop}
+					{@const backgroundImageDesktop =
+						props.backgroundImageDesktop || props.backgroundImage || ''}
+					{@const backgroundImageMobile = props.backgroundImageMobile || backgroundImageDesktop}
+					{@const backgroundVideoDesktop =
+						props.backgroundVideoDesktop || props.backgroundVideo || ''}
+					{@const backgroundVideoMobile = props.backgroundVideoMobile || backgroundVideoDesktop}
+					{@const backgroundVideoPosterDesktop =
+						props.backgroundVideoPosterDesktop || props.videoPosterDesktop || ''}
+					{@const backgroundVideoPosterMobile =
+						props.backgroundVideoPosterMobile ||
+						props.videoPosterMobile ||
+						backgroundVideoPosterDesktop}
+					{@const inferredBackgroundSource = props.backgroundSource
+						? props.backgroundSource
+						: backgroundVideoDesktop || backgroundVideoMobile
+							? 'video'
+							: backgroundImageDesktop || backgroundImageMobile
+								? 'image'
+								: 'color'}
+					<FreeCanvas
+						minHeightDesktop={Number(
+							props.minHeightDesktop ?? props.heightDesktop ?? props.height ?? 400
+						)}
+						maxHeightDesktop={props.maxHeightDesktop ?? null}
+						minHeightMobile={Number(
+							props.minHeightMobile ?? props.heightMobile ?? props.height ?? 400
+						)}
+						maxHeightMobile={props.maxHeightMobile ?? null}
+						baseWidthDesktop={Number(props.baseWidthDesktop ?? 1440)}
+						baseWidthMobile={Number(props.baseWidthMobile ?? 375)}
+						backgroundSource={inferredBackgroundSource}
+						backgroundColor={backgroundColorDesktop}
+						{backgroundColorDesktop}
+						{backgroundColorMobile}
+						{backgroundImageDesktop}
+						{backgroundImageMobile}
+						{backgroundVideoDesktop}
+						{backgroundVideoMobile}
+						{backgroundVideoPosterDesktop}
+						{backgroundVideoPosterMobile}
+						videoAutoplay={props.videoAutoplay ?? props.backgroundVideoAutoplay ?? true}
+						videoLoop={props.videoLoop ?? true}
+						videoMuted={props.videoMuted ?? true}
+						items={props.items || props.elements || []}
+						{device}
+						typography={storyData.appearance?.typography || {}}
+					/>
+				{:else if componentType === 'photo'}
+					<PhotoWithCaption
+						src={props.src}
+						srcMobile={props.srcMobile || props.src}
+						alt={props.alt || ''}
+						caption={props.caption || ''}
+						credit={props.credit || ''}
+						fullWidth={stringToBoolean(props.fullWidth, false)}
+						alignment={props.alignment || 'center'}
+					/>
+					<!-- Video - ATUALIZADO COM NOVAS PROPS -->
+					<!-- Video - ATUALIZADO COM NOVAS PROPS -->
+				{:else if componentType === 'video'}
+					<VideoPlayer
+						src={props.src}
+						srcMobile={props.srcMobile || props.src}
+						poster={props.poster}
+						posterMobile={props.posterMobile || props.poster}
+						caption={props.caption}
+						credit={props.credit}
+						fullWidth={stringToBoolean(props.fullWidth, false)}
+						autoplay={stringToBoolean(props.autoplay, true)}
+						controls={stringToBoolean(props.controls, false)}
+						loop={stringToBoolean(props.loop, false)}
+						showCaption={stringToBoolean(props.showCaption, true)}
+						customWidth={props.customWidth || props.width || '800px'}
+						customWidthDesktop={props.customWidthDesktop || ''}
+						customWidthMobile={props.customWidthMobile || ''}
+						aspectRatio={props.aspectRatio || '16/9'}
+						aspectRatioMobile={props.aspectRatioMobile || '9/16'}
+						backgroundColor={props.backgroundColor ||
+							props.containerBackgroundColor ||
+							'rgba(0, 0, 0, 0.05)'}
+						alignment={props.alignment || 'center'}
+						fullWidthBackground={stringToBoolean(props.fullWidthBackground, false)}
+					/>
+
+					<!-- Globo Player -->
+				{:else if componentType === 'globo-player'}
+					<GloboPlayer
+						videoId={props.videoId}
+						videosIDs={props.videosIDs}
+						videoIdMobile={props.videoIdMobile}
+						videoIdDesktop={props.videoIdDesktop}
+						widthMobile={props.widthMobile}
+						widthDesktop={props.widthDesktop}
+						width={props.width}
+						containerBackgroundColor={props.containerBackgroundColor}
+						aspectRatio={props.aspectRatio}
+						aspectRatioMobile={props.aspectRatioMobile}
+						caption={props.caption}
+						credit={props.credit}
+						fullWidth={stringToBoolean(props.fullWidth, false)}
+						autoplay={stringToBoolean(props.autoplay, false)}
+						startMuted={stringToBoolean(props.startMuted, true)}
+						skipDFP={stringToBoolean(props.skipDFP, false)}
+						chromeless={stringToBoolean(props.chromeless, false)}
+						showCaption={stringToBoolean(props.showCaption, true)}
+						controls={stringToBoolean(props.controls, true)}
+						autoPlay={stringToBoolean(props.autoPlay, false)}
+						allowRestrictedContent={stringToBoolean(props.allowRestrictedContent, true)}
+						allowLocation={stringToBoolean(props.allowLocation, true)}
+						exitFullscreenOnEnd={stringToBoolean(props.exitFullscreenOnEnd, true)}
+						isLiveContent={stringToBoolean(props.isLiveContent, false)}
+						preventBlackBars={stringToBoolean(props.preventBlackBars, false)}
+						includeResetStyle={stringToBoolean(props.includeResetStyle, true)}
+						disasterRecoveryMode={stringToBoolean(props.disasterRecoveryMode, false)}
+						env={props.env || 'production'}
+						globoId={props.globoId}
+						token={props.token}
+						resumeAt={props.resumeAt}
+						maxQualityLevel={props.maxQualityLevel}
+						defaultSubtitle={props.defaultSubtitle}
+						defaultAudio={props.defaultAudio}
+						adAccountId={props.adAccountId}
+						adCmsId={props.adCmsId}
+						adUnit={props.adUnit}
+						adCustomData={props.adCustomData}
+						siteName={props.siteName}
+						ga4={props.ga4}
+					/>
+
+					<!-- Gallery -->
+				{:else if componentType === 'gallery'}
+					<PhotoGallery
+						images={props.images || []}
+						layout={props.layout || 'grid'}
+						columns={parseInt(props.columns) || 3}
+						lightbox={stringToBoolean(props.lightbox, true)}
+					/>
+
+					<!-- Carousel -->
+				{:else if componentType === 'carousel'}
+					<Carousel
+						items={props.items || []}
+						autoplay={stringToBoolean(props.autoplay, false)}
+						interval={parseInt(props.interval) || 3000}
+						showDots={stringToBoolean(props.showDots, true)}
+						showArrows={stringToBoolean(props.showArrows, true)}
+					/>
+
+					<!-- 🆕 NOVO: Recommended Items -->
+				{:else if componentType === 'recommended-items'}
+					<RecommendedItems
+						items={processRecommendedItems(props.items || props.itens)}
+						title={props.title || props.titulo || 'conteúdos relacionados'}
+						layout={props.layout || 'grid'}
+						columns={parseInt(props.columns || props.colunas) || 5}
+						showTitle={stringToBoolean(props.showTitle || props.mostrarTitulo, true)}
+						backgroundColor={props.backgroundColor || props.corFundo || '#000000'}
+						titleColor={props.titleColor || props.corTitulo || '#ff0000'}
+						textColor={props.textColor || props.corTexto || '#ffffff'}
+					/>
+
+					<!-- Parallax -->
+				{:else if componentType === 'parallax'}
+					<Parallax
+						image={props.image}
+						imageMobile={props.imageMobile}
+						height={props.height || '60vh'}
+						speed={parseFloat(props.speed) || 0.5}
+						overlay={stringToBoolean(props.overlay, true)}
+						content={props.content || ''}
+					/>
+
+					<!-- Before/After -->
+				{:else if componentType === 'before-after'}
+					<BeforeAfter
+						beforeImage={props.beforeImage}
+						afterImage={props.afterImage}
+						beforeLabel={props.beforeLabel || 'Antes'}
+						afterLabel={props.afterLabel || 'Depois'}
+						orientation={props.orientation || 'vertical'}
+					/>
+
+					<!-- ScrollyTelling -->
+				{:else if componentType === 'scrolly'}
+					<ScrollyTelling
+						steps={props.steps || []}
+						fullWidth={stringToBoolean(props.fullWidth, false)}
+					/>
+
+					<!-- ✅ SCROLLY FRAMES - NOVO COMPONENTE -->
+				{:else if componentType === 'scrollyframes'}
+					<ScrollyFrames
+						framePrefix={props.imagePrefix || ''}
+						framePrefixMobile={props.imagePrefixMobile || ''}
+						frameExtension={props.imageSuffix || '.jpg'}
+						frameExtensionMobile={props.imageSuffixMobile || '.webp'}
+						startFrame={parseInt(props.frameStart) || 1}
+						endFrame={parseInt(props.frameStop) || 100}
+						totalFrames={parseInt(props.frameStop) || 100}
+						height={props.height || '400vh'}
+						showProgress={stringToBoolean(props.showProgress, true)}
+						showFrameCounter={stringToBoolean(props.showTime, false)}
+						preloadRadius={parseInt(props.preloadFrames) || 8}
+					/>
+
+					<!-- 🎬 CHARACTER PRESENTATION - COMPONENTE DE PERSONAGENS -->
+				{:else if componentType === 'character-presentation'}
+					<CharacterPresentation
+						personagens={processCharacters(props.personagens || props.characters || props.lista)}
+						shapeColor={props.shapeColor || '#DC2626'}
+						nameColor={props.nameColor || '#000'}
+						textColor={props.textColor || '#fff'}
+						backgroundColor={props.backgroundColor || '#000'}
+						animationSpeed={props.animationSpeed || 'normal'}
+						sectionHeight={props.sectionHeight || '100vh'}
+						sectionHeightMobile={props.sectionHeightMobile || '100vh'}
+					/>
+
+					<!-- 🎯 CURIOSIDADES - NOVO COMPONENTE -->
+				{:else if componentType === 'curiosidades'}
+					<Curiosidades
+						personagens={processCharacters(props.personagens || props.characters || props.lista)}
+						shapeColor={props.shapeColor || '#b51207'}
+						nameColor={props.nameColor || '#000000'}
+						textColor={props.textColor || '#ffffff'}
+						backgroundColor={props.backgroundColor || '#000000'}
+						quoteColor={props.quoteColor || '#ffd700'}
+					/>
+
+					<!-- 🆕 TIMELINE INTERACTIVE -->
+				{:else if componentType === 'timeline-interactive'}
+					<TimelineInteractive
+						events={props.events || []}
+						theme={props.theme || 'dramatic'}
+						autoAdvance={stringToBoolean(props.autoAdvance, false)}
+						showProgress={stringToBoolean(props.showProgress, true)}
+						height={props.height || '100vh'}
+						fullWidth={stringToBoolean(props.fullWidth, false)}
+						highlightCurrent={stringToBoolean(props.highlightCurrent, true)}
+					/>
+
+					<!-- 🆕 DOCUMENT VIEWER -->
+				{:else if componentType === 'document-viewer'}
+					<DocumentViewer
+						documents={props.documents || []}
+						classification={props.classification || 'CONFIDENCIAL'}
+						theme={props.theme || 'investigative'}
+						showWatermark={stringToBoolean(props.showWatermark, true)}
+						highlightAreas={props.highlightAreas || []}
+						allowDownload={stringToBoolean(props.allowDownload, false)}
+						showThumbnails={stringToBoolean(props.showThumbnails, true)}
+					/>
+
+					<!-- 🆕 CRIME EXPLAINER -->
+				{:else if componentType === 'crime-explainer'}
+					<CrimeExplainer
+						crimes={props.crimes || []}
+						theme={props.theme || 'judicial'}
+						interactive={stringToBoolean(props.interactive, true)}
+						showPenalties={stringToBoolean(props.showPenalties, true)}
+						layout={props.layout || 'cards'}
+						autoAdvance={stringToBoolean(props.autoAdvance, false)}
+					/>
+
+					<!-- Flourish Embed -->
+				{:else if componentType === 'flourish'}
+					<FlourishEmbed
+						src={props.src}
+						height={props.height || '600px'}
+						caption={props.caption}
+						credit={props.credit}
+					/>
+
+					<!-- Flourish Scrolly -->
+					{:else if componentType === 'flourish-scrolly'}
+						<FlourishScrolly src={props.src} steps={props.steps || []} />
+
+					<!-- Anchor Point -->
+					{:else if componentType === 'anchor'}
+						<AnchorPoint id={props.id} />
+
+					<!-- Fallback para tipos desconhecidos -->
+					{:else}
+						<div class="unknown-component">
+							<p><strong>Componente desconhecido:</strong> {paragraph.type}</p>
+							<pre>{JSON.stringify(paragraph, null, 2)}</pre>
+						</div>
+					{/if}
 				</div>
+			</section>
 
-				<!-- Quote -->
-			{:else if componentType === 'quote'}
-				<div class="section-content">
-					<StoryText content={props.text} variant="quote" author={props.author} role={props.role} />
-				</div>
-
-				<!-- Section Title -->
-			{:else if componentType === 'section-title'}
-				<SectionTitle
-					title={props.text}
-					backgroundImage={props.backgroundImage}
-					backgroundImageMobile={props.backgroundImageMobile}
-					backgroundPosition={props.backgroundPosition || 'center'}
-					backgroundPositionMobile={props.backgroundPositionMobile || 'center'}
-					backgroundVideo={props.backgroundVideo}
-					backgroundVideoMobile={props.backgroundVideoMobile}
-					backgroundColor={props.backgroundColor}
-					textColor={props.textColor}
-					fontFamily={props.fontFamily || 'obviously'}
-					variant={props.variant || 'default'}
-					size={props.size || 'medium'}
-					height={props.height}
-					heightMobile={props.heightMobile}
-					textPosition={props.textPosition || 'center'}
-					textPositionMobile={props.textPositionMobile}
-					textAlign={props.textAlign || 'center'}
-					textAlignMobile={props.textAlignMobile}
-					overlay={stringToBoolean(props.overlay, false)}
-				/>
-
-				<!-- Flexible Layout -->
-			{:else if componentType === 'flexible-layout'}
-				<FlexibleLayout
-					text={props.text || ''}
-					textAlign={props.textAlign || 'left'}
-					textPosition={props.textPosition || 'left'}
-					textColor={props.textColor || '#ffffff'}
-					fontSize={props.fontSize || 'clamp(2rem, 5vw, 4rem)'}
-					fontSizeMobile={props.fontSizeMobile || 'clamp(1.5rem, 8vw, 2.5rem)'}
-					textZIndex={props.textZIndex || 2}
-					image1Desktop={props.image1Desktop || ''}
-					image1Mobile={props.image1Mobile || ''}
-					image1Width={props.image1Width || '200px'}
-					image1Height={props.image1Height || '20px'}
-					image1WidthMobile={props.image1WidthMobile || '150px'}
-					image1HeightMobile={props.image1HeightMobile || '15px'}
-					image1X={props.image1X || '0px'}
-					image1Y={props.image1Y || '0px'}
-					image1XMobile={props.image1XMobile || '0px'}
-					image1YMobile={props.image1YMobile || '0px'}
-					image1ZIndex={props.image1ZIndex || 3}
-					image2Desktop={props.image2Desktop || ''}
-					image2Mobile={props.image2Mobile || ''}
-					image2Width={props.image2Width || '400px'}
-					image2Height={props.image2Height || '500px'}
-					image2WidthMobile={props.image2WidthMobile || '300px'}
-					image2HeightMobile={props.image2HeightMobile || '400px'}
-					image2Position={props.image2Position || 'right'}
-					image2X={props.image2X || '0px'}
-					image2Y={props.image2Y || '0px'}
-					image2XMobile={props.image2XMobile || '0px'}
-					image2YMobile={props.image2YMobile || '0px'}
-					image2ZIndex={props.image2ZIndex || 1}
-					backgroundColor={props.backgroundColor || '#1a1a1a'}
-					minHeight={props.minHeight || '80vh'}
-					minHeightMobile={props.minHeightMobile || '70vh'}
-					padding={props.padding || '2rem'}
-					paddingMobile={props.paddingMobile || '1.5rem'}
-				/>
-
-				<!-- 🎨 NOVO: ResponsiveMediaLayout -->
-			{:else if componentType === 'responsive-media'}
-				<ResponsiveMediaLayout
-					heightDesktop={props.heightDesktop || props.height || '100vh'}
-					heightMobile={props.heightMobile || props.height || '100vh'}
-					backgroundType={props.backgroundType || 'color'}
-					backgroundColor={props.backgroundColor || '#000000'}
-					backgroundImageDesktop={props.backgroundImageDesktop || props.backgroundImage || ''}
-					backgroundImageMobile={props.backgroundImageMobile || props.backgroundImage || ''}
-					backgroundPositionDesktop={props.backgroundPositionDesktop ||
-						props.backgroundPosition ||
-						'center center'}
-					backgroundPositionMobile={props.backgroundPositionMobile ||
-						props.backgroundPosition ||
-						'center center'}
-					backgroundSizeDesktop={props.backgroundSizeDesktop || props.backgroundSize || 'cover'}
-					backgroundSizeMobile={props.backgroundSizeMobile || props.backgroundSize || 'cover'}
-					backgroundVideoDesktop={props.backgroundVideoDesktop || props.backgroundVideo || ''}
-					backgroundVideoMobile={props.backgroundVideoMobile || props.backgroundVideo || ''}
-					textos={processTextos(props.textos || props.texts || [])}
-					imagens={processImagens(props.imagens || props.images || [])}
-				/>
-			{:else if componentType === 'free-canvas'}
-				{@const backgroundColorDesktop =
-					props.backgroundColorDesktop ?? props.backgroundColor ?? '#000000'}
-				{@const backgroundColorMobile = props.backgroundColorMobile ?? backgroundColorDesktop}
-				{@const backgroundImageDesktop =
-					props.backgroundImageDesktop || props.backgroundImage || ''}
-				{@const backgroundImageMobile = props.backgroundImageMobile || backgroundImageDesktop}
-				{@const backgroundVideoDesktop =
-					props.backgroundVideoDesktop || props.backgroundVideo || ''}
-				{@const backgroundVideoMobile = props.backgroundVideoMobile || backgroundVideoDesktop}
-				{@const backgroundVideoPosterDesktop =
-					props.backgroundVideoPosterDesktop || props.videoPosterDesktop || ''}
-				{@const backgroundVideoPosterMobile =
-					props.backgroundVideoPosterMobile ||
-					props.videoPosterMobile ||
-					backgroundVideoPosterDesktop}
-				{@const inferredBackgroundSource = props.backgroundSource
-					? props.backgroundSource
-					: backgroundVideoDesktop || backgroundVideoMobile
-						? 'video'
-						: backgroundImageDesktop || backgroundImageMobile
-							? 'image'
-							: 'color'}
-				<FreeCanvas
-					minHeightDesktop={Number(
-						props.minHeightDesktop ?? props.heightDesktop ?? props.height ?? 400
-					)}
-					maxHeightDesktop={props.maxHeightDesktop ?? null}
-					minHeightMobile={Number(
-						props.minHeightMobile ?? props.heightMobile ?? props.height ?? 400
-					)}
-					maxHeightMobile={props.maxHeightMobile ?? null}
-					baseWidthDesktop={Number(props.baseWidthDesktop ?? 1440)}
-					baseWidthMobile={Number(props.baseWidthMobile ?? 375)}
-					backgroundSource={inferredBackgroundSource}
-					backgroundColor={backgroundColorDesktop}
-					{backgroundColorDesktop}
-					{backgroundColorMobile}
-					{backgroundImageDesktop}
-					{backgroundImageMobile}
-					{backgroundVideoDesktop}
-					{backgroundVideoMobile}
-					{backgroundVideoPosterDesktop}
-					{backgroundVideoPosterMobile}
-					videoAutoplay={props.videoAutoplay ?? props.backgroundVideoAutoplay ?? true}
-					videoLoop={props.videoLoop ?? true}
-					videoMuted={props.videoMuted ?? true}
-					items={props.items || props.elements || []}
-					{device}
-					typography={storyData.appearance?.typography || {}}
-				/>
-			{:else if componentType === 'photo'}
-				<PhotoWithCaption
-					src={props.src}
-					srcMobile={props.srcMobile || props.src}
-					alt={props.alt || ''}
-					caption={props.caption || ''}
-					credit={props.credit || ''}
-					fullWidth={stringToBoolean(props.fullWidth, false)}
-					alignment={props.alignment || 'center'}
-				/>
-				<!-- Video - ATUALIZADO COM NOVAS PROPS -->
-				<!-- Video - ATUALIZADO COM NOVAS PROPS -->
-			{:else if componentType === 'video'}
-				<VideoPlayer
-					src={props.src}
-					srcMobile={props.srcMobile || props.src}
-					poster={props.poster}
-					posterMobile={props.posterMobile || props.poster}
-					caption={props.caption}
-					credit={props.credit}
-					fullWidth={stringToBoolean(props.fullWidth, false)}
-					autoplay={stringToBoolean(props.autoplay, true)}
-					controls={stringToBoolean(props.controls, false)}
-					loop={stringToBoolean(props.loop, false)}
-					showCaption={stringToBoolean(props.showCaption, true)}
-					customWidth={props.customWidth || props.width || '800px'}
-					customWidthDesktop={props.customWidthDesktop || ''}
-					customWidthMobile={props.customWidthMobile || ''}
-					aspectRatio={props.aspectRatio || '16/9'}
-					aspectRatioMobile={props.aspectRatioMobile || '9/16'}
-					backgroundColor={props.backgroundColor ||
-						props.containerBackgroundColor ||
-						'rgba(0, 0, 0, 0.05)'}
-					alignment={props.alignment || 'center'}
-					fullWidthBackground={stringToBoolean(props.fullWidthBackground, false)}
-				/>
-
-				<!-- Globo Player -->
-			{:else if componentType === 'globo-player'}
-				<GloboPlayer
-					videoId={props.videoId}
-					videosIDs={props.videosIDs}
-					videoIdMobile={props.videoIdMobile}
-					videoIdDesktop={props.videoIdDesktop}
-					widthMobile={props.widthMobile}
-					widthDesktop={props.widthDesktop}
-					width={props.width}
-					containerBackgroundColor={props.containerBackgroundColor}
-					aspectRatio={props.aspectRatio}
-					aspectRatioMobile={props.aspectRatioMobile}
-					caption={props.caption}
-					credit={props.credit}
-					fullWidth={stringToBoolean(props.fullWidth, false)}
-					autoplay={stringToBoolean(props.autoplay, false)}
-					startMuted={stringToBoolean(props.startMuted, true)}
-					skipDFP={stringToBoolean(props.skipDFP, false)}
-					chromeless={stringToBoolean(props.chromeless, false)}
-					showCaption={stringToBoolean(props.showCaption, true)}
-					controls={stringToBoolean(props.controls, true)}
-					autoPlay={stringToBoolean(props.autoPlay, false)}
-					allowRestrictedContent={stringToBoolean(props.allowRestrictedContent, true)}
-					allowLocation={stringToBoolean(props.allowLocation, true)}
-					exitFullscreenOnEnd={stringToBoolean(props.exitFullscreenOnEnd, true)}
-					isLiveContent={stringToBoolean(props.isLiveContent, false)}
-					preventBlackBars={stringToBoolean(props.preventBlackBars, false)}
-					includeResetStyle={stringToBoolean(props.includeResetStyle, true)}
-					disasterRecoveryMode={stringToBoolean(props.disasterRecoveryMode, false)}
-					env={props.env || 'production'}
-					globoId={props.globoId}
-					token={props.token}
-					resumeAt={props.resumeAt}
-					maxQualityLevel={props.maxQualityLevel}
-					defaultSubtitle={props.defaultSubtitle}
-					defaultAudio={props.defaultAudio}
-					adAccountId={props.adAccountId}
-					adCmsId={props.adCmsId}
-					adUnit={props.adUnit}
-					adCustomData={props.adCustomData}
-					siteName={props.siteName}
-					ga4={props.ga4}
-				/>
-
-				<!-- Gallery -->
-			{:else if componentType === 'gallery'}
-				<PhotoGallery
-					images={props.images || []}
-					layout={props.layout || 'grid'}
-					columns={parseInt(props.columns) || 3}
-					lightbox={stringToBoolean(props.lightbox, true)}
-				/>
-
-				<!-- Carousel -->
-			{:else if componentType === 'carousel'}
-				<Carousel
-					items={props.items || []}
-					autoplay={stringToBoolean(props.autoplay, false)}
-					interval={parseInt(props.interval) || 3000}
-					showDots={stringToBoolean(props.showDots, true)}
-					showArrows={stringToBoolean(props.showArrows, true)}
-				/>
-
-				<!-- 🆕 NOVO: Recommended Items -->
-			{:else if componentType === 'recommended-items'}
-				<RecommendedItems
-					items={processRecommendedItems(props.items || props.itens)}
-					title={props.title || props.titulo || 'conteúdos relacionados'}
-					layout={props.layout || 'grid'}
-					columns={parseInt(props.columns || props.colunas) || 5}
-					showTitle={stringToBoolean(props.showTitle || props.mostrarTitulo, true)}
-					backgroundColor={props.backgroundColor || props.corFundo || '#000000'}
-					titleColor={props.titleColor || props.corTitulo || '#ff0000'}
-					textColor={props.textColor || props.corTexto || '#ffffff'}
-				/>
-
-				<!-- Parallax -->
-			{:else if componentType === 'parallax'}
-				<Parallax
-					image={props.image}
-					imageMobile={props.imageMobile}
-					height={props.height || '60vh'}
-					speed={parseFloat(props.speed) || 0.5}
-					overlay={stringToBoolean(props.overlay, true)}
-					content={props.content || ''}
-				/>
-
-				<!-- Before/After -->
-			{:else if componentType === 'before-after'}
-				<BeforeAfter
-					beforeImage={props.beforeImage}
-					afterImage={props.afterImage}
-					beforeLabel={props.beforeLabel || 'Antes'}
-					afterLabel={props.afterLabel || 'Depois'}
-					orientation={props.orientation || 'vertical'}
-				/>
-
-				<!-- ScrollyTelling -->
-			{:else if componentType === 'scrolly'}
-				<ScrollyTelling
-					steps={props.steps || []}
-					fullWidth={stringToBoolean(props.fullWidth, false)}
-				/>
-
-				<!-- ✅ SCROLLY FRAMES - NOVO COMPONENTE -->
-			{:else if componentType === 'scrollyframes'}
-				<ScrollyFrames
-					framePrefix={props.imagePrefix || ''}
-					framePrefixMobile={props.imagePrefixMobile || ''}
-					frameExtension={props.imageSuffix || '.jpg'}
-					frameExtensionMobile={props.imageSuffixMobile || '.webp'}
-					startFrame={parseInt(props.frameStart) || 1}
-					endFrame={parseInt(props.frameStop) || 100}
-					totalFrames={parseInt(props.frameStop) || 100}
-					height={props.height || '400vh'}
-					showProgress={stringToBoolean(props.showProgress, true)}
-					showFrameCounter={stringToBoolean(props.showTime, false)}
-					preloadRadius={parseInt(props.preloadFrames) || 8}
-				/>
-
-				<!-- 🎬 CHARACTER PRESENTATION - COMPONENTE DE PERSONAGENS -->
-			{:else if componentType === 'character-presentation'}
-				<CharacterPresentation
-					personagens={processCharacters(props.personagens || props.characters || props.lista)}
-					shapeColor={props.shapeColor || '#DC2626'}
-					nameColor={props.nameColor || '#000'}
-					textColor={props.textColor || '#fff'}
-					backgroundColor={props.backgroundColor || '#000'}
-					animationSpeed={props.animationSpeed || 'normal'}
-					sectionHeight={props.sectionHeight || '100vh'}
-					sectionHeightMobile={props.sectionHeightMobile || '100vh'}
-				/>
-
-				<!-- 🎯 CURIOSIDADES - NOVO COMPONENTE -->
-			{:else if componentType === 'curiosidades'}
-				<Curiosidades
-					personagens={processCharacters(props.personagens || props.characters || props.lista)}
-					shapeColor={props.shapeColor || '#b51207'}
-					nameColor={props.nameColor || '#000000'}
-					textColor={props.textColor || '#ffffff'}
-					backgroundColor={props.backgroundColor || '#000000'}
-					quoteColor={props.quoteColor || '#ffd700'}
-				/>
-
-				<!-- 🆕 TIMELINE INTERACTIVE -->
-			{:else if componentType === 'timeline-interactive'}
-				<TimelineInteractive
-					events={props.events || []}
-					theme={props.theme || 'dramatic'}
-					autoAdvance={stringToBoolean(props.autoAdvance, false)}
-					showProgress={stringToBoolean(props.showProgress, true)}
-					height={props.height || '100vh'}
-					fullWidth={stringToBoolean(props.fullWidth, false)}
-					highlightCurrent={stringToBoolean(props.highlightCurrent, true)}
-				/>
-
-				<!-- 🆕 DOCUMENT VIEWER -->
-			{:else if componentType === 'document-viewer'}
-				<DocumentViewer
-					documents={props.documents || []}
-					classification={props.classification || 'CONFIDENCIAL'}
-					theme={props.theme || 'investigative'}
-					showWatermark={stringToBoolean(props.showWatermark, true)}
-					highlightAreas={props.highlightAreas || []}
-					allowDownload={stringToBoolean(props.allowDownload, false)}
-					showThumbnails={stringToBoolean(props.showThumbnails, true)}
-				/>
-
-				<!-- 🆕 CRIME EXPLAINER -->
-			{:else if componentType === 'crime-explainer'}
-				<CrimeExplainer
-					crimes={props.crimes || []}
-					theme={props.theme || 'judicial'}
-					interactive={stringToBoolean(props.interactive, true)}
-					showPenalties={stringToBoolean(props.showPenalties, true)}
-					layout={props.layout || 'cards'}
-					autoAdvance={stringToBoolean(props.autoAdvance, false)}
-				/>
-
-				<!-- Flourish Embed -->
-			{:else if componentType === 'flourish'}
-				<FlourishEmbed
-					src={props.src}
-					height={props.height || '600px'}
-					caption={props.caption}
-					credit={props.credit}
-				/>
-
-				<!-- Flourish Scrolly -->
-			{:else if componentType === 'flourish-scrolly'}
-				<FlourishScrolly src={props.src} steps={props.steps || []} />
-
-				<!-- Anchor Point -->
-			{:else if componentType === 'anchor'}
-				<AnchorPoint id={props.id} />
-
-				<!-- Fallback para tipos desconhecidos -->
-			{:else}
-				<div class="unknown-component">
-					<p><strong>Componente desconhecido:</strong> {paragraph.type}</p>
-					<pre>{JSON.stringify(paragraph, null, 2)}</pre>
-				</div>
-			{/if}
 		{/each}
 	{/if}
 
@@ -902,6 +908,25 @@
 	.story-content {
 		max-width: none;
 		width: 100%;
+	}
+
+	.story-section {
+		position: relative;
+		width: 100%;
+	}
+
+	.story-section__inner {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		padding-top: var(--story-section-padding-top, 0);
+		padding-bottom: var(--story-section-padding-bottom, 0);
+		gap: var(--story-section-gap, 0);
+	}
+
+	.story-section--with-text-color .section-content,
+	.story-section--with-text-color .section-content :global(*) {
+		color: inherit;
 	}
 
 	.section-content {

@@ -9,6 +9,7 @@
 	import PhotoWithCaption from './story/PhotoWithCaption.svelte';
 	import VideoPlayer from './story/VideoPlayer.svelte';
 	import GloboPlayer from './story/GloboPlayer.svelte';
+	import { getSectionStyling } from './story/sectionStyle.js';
 
 	// Importar novos componentes (com fallback)
 	let ReadingProgress;
@@ -225,10 +226,19 @@
 
 	<!-- Renderização dos parágrafos -->
 	{#if storyData.paragraphs}
+	{#if storyData.paragraphs}
 		{#each storyData.paragraphs as paragraph, index}
 			{@const componentType = getComponentType(paragraph)}
+			{@const sectionStyling = getSectionStyling(paragraph)}
 
-			<div class="story-component" data-component-type={componentType} data-index={index}>
+			<section
+				class={sectionStyling.className}
+				style={sectionStyling.style}
+				data-component-type={componentType}
+				data-index={index}
+			>
+				<div class="story-section__inner">
+					<div class="story-component">
 				{#if componentType === 'text'}
 					<StoryText
 						content={paragraph.text}
@@ -273,16 +283,18 @@
 						autoplay={paragraph.autoplay === 'true'}
 						controls={paragraph.controls !== 'false'}
 					/>
-				{:else if componentType === 'globo-player'}
-					<GloboPlayer
-						videosIDs={paragraph.videoId || paragraph.videosIDs || paragraph.id}
-						width={paragraph.width || '100%'}
-						height={parseInt(paragraph.height) || 450}
-						autoPlay={paragraph.autoplay === 'true'}
-						startMuted={paragraph.startMuted !== 'false'}
-					/>
-				{/if}
-			</div>
+					{:else if componentType === 'globo-player'}
+						<GloboPlayer
+							videosIDs={paragraph.videoId || paragraph.videosIDs || paragraph.id}
+							width={paragraph.width || '100%'}
+							height={parseInt(paragraph.height) || 450}
+							autoPlay={paragraph.autoplay === 'true'}
+							startMuted={paragraph.startMuted !== 'false'}
+						/>
+					{/if}
+					</div>
+				</div>
+			</section>
 		{/each}
 	{/if}
 
@@ -401,6 +413,25 @@
 	}
 
 	/* Story Components */
+	.story-section {
+		position: relative;
+		width: 100%;
+	}
+
+	.story-section__inner {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		padding-top: var(--story-section-padding-top, 0);
+		padding-bottom: var(--story-section-padding-bottom, 0);
+		gap: var(--story-section-gap, 0);
+	}
+
+	.story-section--with-text-color .story-component,
+	.story-section--with-text-color .story-component :global(*) {
+		color: inherit;
+	}
+
 	.story-component {
 		margin: 1rem 0;
 	}

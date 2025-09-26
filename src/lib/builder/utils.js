@@ -3,6 +3,20 @@ import { getComponentDefinition } from './component-registry.js';
 
 let blockCounter = 0;
 
+const SECTION_DEFAULTS = {
+	backgroundColor: '',
+	textColor: '',
+	paddingTop: '',
+	paddingBottom: ''
+};
+
+export function ensureSectionDefaults(section = {}) {
+	return {
+		...SECTION_DEFAULTS,
+		...(section || {})
+	};
+}
+
 function mergeTypography(defaultValue = {}, incoming = {}) {
 	const result = {};
 	const keys = new Set([...Object.keys(defaultValue || {}), ...Object.keys(incoming || {})]);
@@ -226,10 +240,12 @@ function ensureMediaVariants(paragraph = {}) {
 export function createBlockInstance(type) {
 	const definition = getComponentDefinition(type);
 	const baseData = definition?.defaultData ? structuredClone(definition.defaultData) : { type };
+	const { section, ...rest } = baseData;
 
 	return {
 		__id: `${type}-${Date.now()}-${blockCounter++}`,
-		...baseData
+		...rest,
+		section: ensureSectionDefaults(section)
 	};
 }
 
@@ -291,7 +307,8 @@ export function normalizeStory(value = {}) {
 	const paragraphs = Array.isArray(value?.paragraphs) ? value.paragraphs : [];
 	story.paragraphs = paragraphs.map((paragraph) => ({
 		__id: paragraph.__id || `${paragraph.type || 'block'}-${Date.now()}-${blockCounter++}`,
-		...paragraph
+		...paragraph,
+		section: ensureSectionDefaults(paragraph?.section)
 	}));
 
 	return story;

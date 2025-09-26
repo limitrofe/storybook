@@ -59,6 +59,23 @@
 	};
 
 	const blockHasAdvancedFields = (definition) => Boolean(definition?.fields?.length);
+
+	const sectionAppearanceFields = [
+		{ path: 'section.backgroundColor', label: 'Cor de fundo da seção', type: 'color' },
+		{ path: 'section.textColor', label: 'Cor do texto da seção', type: 'color' },
+		{
+			path: 'section.paddingTop',
+			label: 'Padding superior',
+			type: 'text',
+			placeholder: 'ex: 3rem'
+		},
+		{
+			path: 'section.paddingBottom',
+			label: 'Padding inferior',
+			type: 'text',
+			placeholder: 'ex: 3rem'
+		}
+	];
 </script>
 
 <div class="inspector">
@@ -170,6 +187,17 @@
 							</p>
 						</div>
 					{/if}
+
+					<div class="fields card">
+						<h4>Aparência da seção</h4>
+						{#each sectionAppearanceFields as field}
+							<FieldEditor
+								{field}
+								value={getByPath(block, field.path)}
+								on:change={(event) => handleBlockFieldChange(field.path, event)}
+							/>
+						{/each}
+					</div>
 
 					<details class="advanced" open>
 						<summary>JSON completo do bloco</summary>
