@@ -4,17 +4,30 @@ import { getComponentDefinition } from './component-registry.js';
 let blockCounter = 0;
 
 const SECTION_DEFAULTS = {
+	backgroundSource: 'color',
 	backgroundColor: '',
+	backgroundImageDesktop: '',
+	backgroundImageMobile: '',
+	backgroundVideoDesktop: '',
+	backgroundVideoMobile: '',
+	backgroundVideoPosterDesktop: '',
+	backgroundVideoPosterMobile: '',
 	textColor: '',
 	paddingTop: '',
 	paddingBottom: ''
 };
 
 export function ensureSectionDefaults(section = {}) {
-	return {
+	const merged = {
 		...SECTION_DEFAULTS,
 		...(section || {})
 	};
+
+	if (!['color', 'image', 'video'].includes(merged.backgroundSource)) {
+		merged.backgroundSource = 'color';
+	}
+
+	return merged;
 }
 
 function mergeTypography(defaultValue = {}, incoming = {}) {

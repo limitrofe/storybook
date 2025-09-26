@@ -296,7 +296,7 @@
 		height: 60vh;
 	}
 	.component-spacer {
-		height: 20vh;
+		height: 0vh;
 		background: transparent;
 		position: relative;
 		z-index: 5;

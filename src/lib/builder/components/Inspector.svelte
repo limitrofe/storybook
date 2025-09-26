@@ -61,7 +61,24 @@
 	const blockHasAdvancedFields = (definition) => Boolean(definition?.fields?.length);
 
 	const sectionAppearanceFields = [
+		{
+			path: 'section.backgroundSource',
+			label: 'Tipo de fundo',
+			type: 'select',
+			options: [
+				{ label: 'Cor sólida', value: 'color' },
+				{ label: 'Imagem', value: 'image' },
+				{ label: 'Vídeo', value: 'video' }
+			],
+			defaultValue: 'color'
+		},
 		{ path: 'section.backgroundColor', label: 'Cor de fundo da seção', type: 'color' },
+		{ path: 'section.backgroundImageDesktop', label: 'Imagem desktop (URL)', type: 'url' },
+		{ path: 'section.backgroundImageMobile', label: 'Imagem mobile (URL)', type: 'url' },
+		{ path: 'section.backgroundVideoDesktop', label: 'Vídeo desktop (URL)', type: 'url' },
+		{ path: 'section.backgroundVideoMobile', label: 'Vídeo mobile (URL)', type: 'url' },
+		{ path: 'section.backgroundVideoPosterDesktop', label: 'Poster vídeo desktop (URL)', type: 'url' },
+		{ path: 'section.backgroundVideoPosterMobile', label: 'Poster vídeo mobile (URL)', type: 'url' },
 		{ path: 'section.textColor', label: 'Cor do texto da seção', type: 'color' },
 		{
 			path: 'section.paddingTop',

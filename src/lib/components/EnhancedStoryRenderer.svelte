@@ -226,7 +226,6 @@
 
 	<!-- Renderização dos parágrafos -->
 	{#if storyData.paragraphs}
-	{#if storyData.paragraphs}
 		{#each storyData.paragraphs as paragraph, index}
 			{@const componentType = getComponentType(paragraph)}
 			{@const sectionStyling = getSectionStyling(paragraph)}
@@ -237,6 +236,41 @@
 				data-component-type={componentType}
 				data-index={index}
 			>
+				{#if sectionStyling.background.source === 'image'}
+					<picture class="story-section__background story-section__background--image">
+						{#if sectionStyling.background.imageMobile}
+							<source srcset={sectionStyling.background.imageMobile} media="(max-width: 768px)" />
+						{/if}
+						{#if sectionStyling.background.imageDesktop}
+							<img src={sectionStyling.background.imageDesktop} alt="" aria-hidden="true" />
+						{/if}
+					</picture>
+				{/if}
+
+				{#if sectionStyling.background.source === 'video'}
+					<video
+						class="story-section__background story-section__background--video"
+						autoplay
+						muted
+						loop
+						playsinline
+						preload="auto"
+						poster={sectionStyling.background.videoPosterMobile ||
+							sectionStyling.background.videoPosterDesktop || ''}
+					>
+						{#if sectionStyling.background.videoMobile}
+							<source
+								src={sectionStyling.background.videoMobile}
+								type="video/mp4"
+								media="(max-width: 768px)"
+							/>
+						{/if}
+						{#if sectionStyling.background.videoDesktop}
+							<source src={sectionStyling.background.videoDesktop} type="video/mp4" />
+						{/if}
+					</video>
+				{/if}
+
 				<div class="story-section__inner">
 					<div class="story-component">
 				{#if componentType === 'text'}
@@ -416,9 +450,37 @@
 	.story-section {
 		position: relative;
 		width: 100%;
+		overflow: hidden;
+	}
+
+	.story-section__background {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 0;
+		pointer-events: none;
+	}
+
+	.story-section__background--image {
+		display: block;
+	}
+
+	.story-section__background--image img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.story-section__background--video {
+		object-fit: cover;
 	}
 
 	.story-section__inner {
+		position: relative;
+		z-index: 1;
 		display: flex;
 		flex-direction: column;
 		width: 100%;
@@ -433,7 +495,7 @@
 	}
 
 	.story-component {
-		margin: 1rem 0;
+		margin: 0;
 	}
 
 	/* Footer */

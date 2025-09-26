@@ -220,7 +220,7 @@
     "text": ""
   },
   "credits": {
-    "notes": "",
+    "notes": "teste teste teste",
     "sources": [],
     "authors": [],
     "editedBy": [],
@@ -242,7 +242,14 @@
       "variant": "hero",
       "overlay": true,
       "section": {
+        "backgroundSource": "color",
         "backgroundColor": "#000000",
+        "backgroundImageDesktop": "",
+        "backgroundImageMobile": "",
+        "backgroundVideoDesktop": "",
+        "backgroundVideoMobile": "",
+        "backgroundVideoPosterDesktop": "",
+        "backgroundVideoPosterMobile": "",
         "textColor": "#ffffff",
         "paddingTop": "0",
         "paddingBottom": "0"
@@ -255,7 +262,14 @@
       "align": "left",
       "maxWidth": "720px",
       "section": {
+        "backgroundSource": "color",
         "backgroundColor": "#000000",
+        "backgroundImageDesktop": "",
+        "backgroundImageMobile": "",
+        "backgroundVideoDesktop": "",
+        "backgroundVideoMobile": "",
+        "backgroundVideoPosterDesktop": "",
+        "backgroundVideoPosterMobile": "",
         "textColor": "#ffffff",
         "paddingTop": "1rem",
         "paddingBottom": "0"
@@ -272,7 +286,14 @@
       "lineHeightMobile": "",
       "textColor": "",
       "section": {
+        "backgroundSource": "color",
         "backgroundColor": "#000000",
+        "backgroundImageDesktop": "",
+        "backgroundImageMobile": "",
+        "backgroundVideoDesktop": "",
+        "backgroundVideoMobile": "",
+        "backgroundVideoPosterDesktop": "",
+        "backgroundVideoPosterMobile": "",
         "textColor": "#ffffff",
         "paddingTop": "0",
         "paddingBottom": "0"
@@ -376,10 +397,17 @@
       ],
       "fullWidth": true,
       "section": {
-        "backgroundColor": "",
+        "backgroundSource": "color",
+        "backgroundColor": "#000000",
+        "backgroundImageDesktop": "",
+        "backgroundImageMobile": "",
+        "backgroundVideoDesktop": "",
+        "backgroundVideoMobile": "",
+        "backgroundVideoPosterDesktop": "",
+        "backgroundVideoPosterMobile": "",
         "textColor": "",
-        "paddingTop": "",
-        "paddingBottom": ""
+        "paddingTop": "0",
+        "paddingBottom": "0"
       }
     },
     {
@@ -405,20 +433,17 @@
       "height": "30vh",
       "textAlignMobile": "center",
       "section": {
+        "backgroundSource": "image",
         "backgroundColor": "",
+        "backgroundImageDesktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
+        "backgroundImageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/lula.jpg",
+        "backgroundVideoDesktop": "",
+        "backgroundVideoMobile": "",
+        "backgroundVideoPosterDesktop": "",
+        "backgroundVideoPosterMobile": "",
         "textColor": "",
-        "paddingTop": "",
-        "paddingBottom": ""
-      }
-    },
-    {
-      "type": "ancora",
-      "id": "bloco-1",
-      "section": {
-        "backgroundColor": "",
-        "textColor": "",
-        "paddingTop": "",
-        "paddingBottom": ""
+        "paddingTop": "0",
+        "paddingBottom": "0"
       }
     },
     {
@@ -433,10 +458,17 @@
       "lineHeightMobile": "",
       "textColor": "",
       "section": {
+        "backgroundSource": "video",
         "backgroundColor": "",
+        "backgroundImageDesktop": "",
+        "backgroundImageMobile": "",
+        "backgroundVideoDesktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/videos/pagina-sentenca-golpe_documentos_mob.mp4",
+        "backgroundVideoMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/o-julgamento/videos/pagina-sentenca-golpe_documentos_mob.mp4",
+        "backgroundVideoPosterDesktop": "",
+        "backgroundVideoPosterMobile": "",
         "textColor": "",
-        "paddingTop": "",
-        "paddingBottom": ""
+        "paddingTop": "0",
+        "paddingBottom": "0"
       }
     },
     {
@@ -525,7 +557,14 @@
       ],
       "fullWidth": true,
       "section": {
+        "backgroundSource": "color",
         "backgroundColor": "",
+        "backgroundImageDesktop": "",
+        "backgroundImageMobile": "",
+        "backgroundVideoDesktop": "",
+        "backgroundVideoMobile": "",
+        "backgroundVideoPosterDesktop": "",
+        "backgroundVideoPosterMobile": "",
         "textColor": "",
         "paddingTop": "",
         "paddingBottom": ""
@@ -550,7 +589,14 @@
       "fullWidth": false,
       "fullWidthBackground": false,
       "section": {
+        "backgroundSource": "color",
         "backgroundColor": "",
+        "backgroundImageDesktop": "",
+        "backgroundImageMobile": "",
+        "backgroundVideoDesktop": "",
+        "backgroundVideoMobile": "",
+        "backgroundVideoPosterDesktop": "",
+        "backgroundVideoPosterMobile": "",
         "textColor": "",
         "paddingTop": "",
         "paddingBottom": ""
@@ -568,7 +614,14 @@
       "lineHeightMobile": "",
       "textColor": "",
       "section": {
+        "backgroundSource": "color",
         "backgroundColor": "",
+        "backgroundImageDesktop": "",
+        "backgroundImageMobile": "",
+        "backgroundVideoDesktop": "",
+        "backgroundVideoMobile": "",
+        "backgroundVideoPosterDesktop": "",
+        "backgroundVideoPosterMobile": "",
         "textColor": "",
         "paddingTop": "",
         "paddingBottom": ""
@@ -703,7 +756,14 @@
       "columns": 4,
       "lightbox": true,
       "section": {
+        "backgroundSource": "color",
         "backgroundColor": "",
+        "backgroundImageDesktop": "",
+        "backgroundImageMobile": "",
+        "backgroundVideoDesktop": "",
+        "backgroundVideoMobile": "",
+        "backgroundVideoPosterDesktop": "",
+        "backgroundVideoPosterMobile": "",
         "textColor": "",
         "paddingTop": "",
         "paddingBottom": ""
@@ -721,7 +781,14 @@
       "lineHeightMobile": "",
       "textColor": "",
       "section": {
+        "backgroundSource": "color",
         "backgroundColor": "",
+        "backgroundImageDesktop": "",
+        "backgroundImageMobile": "",
+        "backgroundVideoDesktop": "",
+        "backgroundVideoMobile": "",
+        "backgroundVideoPosterDesktop": "",
+        "backgroundVideoPosterMobile": "",
         "textColor": "",
         "paddingTop": "",
         "paddingBottom": ""
@@ -739,7 +806,14 @@
       "lineHeightMobile": "",
       "textColor": "",
       "section": {
+        "backgroundSource": "color",
         "backgroundColor": "",
+        "backgroundImageDesktop": "",
+        "backgroundImageMobile": "",
+        "backgroundVideoDesktop": "",
+        "backgroundVideoMobile": "",
+        "backgroundVideoPosterDesktop": "",
+        "backgroundVideoPosterMobile": "",
         "textColor": "",
         "paddingTop": "",
         "paddingBottom": ""
@@ -772,7 +846,14 @@
       "showDots": true,
       "showArrows": true,
       "section": {
+        "backgroundSource": "color",
         "backgroundColor": "",
+        "backgroundImageDesktop": "",
+        "backgroundImageMobile": "",
+        "backgroundVideoDesktop": "",
+        "backgroundVideoMobile": "",
+        "backgroundVideoPosterDesktop": "",
+        "backgroundVideoPosterMobile": "",
         "textColor": "",
         "paddingTop": "",
         "paddingBottom": ""
@@ -790,7 +871,14 @@
       "lineHeightMobile": "",
       "textColor": "",
       "section": {
+        "backgroundSource": "color",
         "backgroundColor": "",
+        "backgroundImageDesktop": "",
+        "backgroundImageMobile": "",
+        "backgroundVideoDesktop": "",
+        "backgroundVideoMobile": "",
+        "backgroundVideoPosterDesktop": "",
+        "backgroundVideoPosterMobile": "",
         "textColor": "",
         "paddingTop": "",
         "paddingBottom": ""
@@ -805,7 +893,14 @@
       "overlay": true,
       "content": "<b>sf;lja ;</b>sdlkfj<b> asl;dfkj ;asldfk</b>",
       "section": {
+        "backgroundSource": "color",
         "backgroundColor": "",
+        "backgroundImageDesktop": "",
+        "backgroundImageMobile": "",
+        "backgroundVideoDesktop": "",
+        "backgroundVideoMobile": "",
+        "backgroundVideoPosterDesktop": "",
+        "backgroundVideoPosterMobile": "",
         "textColor": "",
         "paddingTop": "",
         "paddingBottom": ""
@@ -823,7 +918,14 @@
       "lineHeightMobile": "",
       "textColor": "",
       "section": {
+        "backgroundSource": "color",
         "backgroundColor": "",
+        "backgroundImageDesktop": "",
+        "backgroundImageMobile": "",
+        "backgroundVideoDesktop": "",
+        "backgroundVideoMobile": "",
+        "backgroundVideoPosterDesktop": "",
+        "backgroundVideoPosterMobile": "",
         "textColor": "",
         "paddingTop": "",
         "paddingBottom": ""
@@ -848,7 +950,14 @@
       "credit": "",
       "fullWidth": false,
       "section": {
+        "backgroundSource": "color",
         "backgroundColor": "",
+        "backgroundImageDesktop": "",
+        "backgroundImageMobile": "",
+        "backgroundVideoDesktop": "",
+        "backgroundVideoMobile": "",
+        "backgroundVideoPosterDesktop": "",
+        "backgroundVideoPosterMobile": "",
         "textColor": "",
         "paddingTop": "",
         "paddingBottom": ""
@@ -866,7 +975,14 @@
       "lineHeightMobile": "",
       "textColor": "",
       "section": {
+        "backgroundSource": "color",
         "backgroundColor": "",
+        "backgroundImageDesktop": "",
+        "backgroundImageMobile": "",
+        "backgroundVideoDesktop": "",
+        "backgroundVideoMobile": "",
+        "backgroundVideoPosterDesktop": "",
+        "backgroundVideoPosterMobile": "",
         "textColor": "",
         "paddingTop": "",
         "paddingBottom": ""
@@ -883,7 +999,14 @@
       "link": "",
       "target": "_blank",
       "section": {
+        "backgroundSource": "color",
         "backgroundColor": "",
+        "backgroundImageDesktop": "",
+        "backgroundImageMobile": "",
+        "backgroundVideoDesktop": "",
+        "backgroundVideoMobile": "",
+        "backgroundVideoPosterDesktop": "",
+        "backgroundVideoPosterMobile": "",
         "textColor": "",
         "paddingTop": "",
         "paddingBottom": ""
@@ -901,7 +1024,14 @@
       "lineHeightMobile": "",
       "textColor": "",
       "section": {
+        "backgroundSource": "color",
         "backgroundColor": "",
+        "backgroundImageDesktop": "",
+        "backgroundImageMobile": "",
+        "backgroundVideoDesktop": "",
+        "backgroundVideoMobile": "",
+        "backgroundVideoPosterDesktop": "",
+        "backgroundVideoPosterMobile": "",
         "textColor": "",
         "paddingTop": "",
         "paddingBottom": ""
@@ -918,7 +1048,14 @@
       "link": "",
       "target": "_blank",
       "section": {
+        "backgroundSource": "color",
         "backgroundColor": "",
+        "backgroundImageDesktop": "",
+        "backgroundImageMobile": "",
+        "backgroundVideoDesktop": "",
+        "backgroundVideoMobile": "",
+        "backgroundVideoPosterDesktop": "",
+        "backgroundVideoPosterMobile": "",
         "textColor": "",
         "paddingTop": "",
         "paddingBottom": ""
@@ -936,7 +1073,14 @@
       "lineHeightMobile": "",
       "textColor": "",
       "section": {
+        "backgroundSource": "color",
         "backgroundColor": "",
+        "backgroundImageDesktop": "",
+        "backgroundImageMobile": "",
+        "backgroundVideoDesktop": "",
+        "backgroundVideoMobile": "",
+        "backgroundVideoPosterDesktop": "",
+        "backgroundVideoPosterMobile": "",
         "textColor": "",
         "paddingTop": "",
         "paddingBottom": ""
@@ -1138,7 +1282,14 @@
         }
       ],
       "section": {
+        "backgroundSource": "color",
         "backgroundColor": "",
+        "backgroundImageDesktop": "",
+        "backgroundImageMobile": "",
+        "backgroundVideoDesktop": "",
+        "backgroundVideoMobile": "",
+        "backgroundVideoPosterDesktop": "",
+        "backgroundVideoPosterMobile": "",
         "textColor": "",
         "paddingTop": "",
         "paddingBottom": ""
@@ -1156,7 +1307,14 @@
       "lineHeightMobile": "",
       "textColor": "",
       "section": {
+        "backgroundSource": "color",
         "backgroundColor": "",
+        "backgroundImageDesktop": "",
+        "backgroundImageMobile": "",
+        "backgroundVideoDesktop": "",
+        "backgroundVideoMobile": "",
+        "backgroundVideoPosterDesktop": "",
+        "backgroundVideoPosterMobile": "",
         "textColor": "",
         "paddingTop": "",
         "paddingBottom": ""
@@ -1169,7 +1327,14 @@
       "caption": "",
       "credit": "",
       "section": {
+        "backgroundSource": "color",
         "backgroundColor": "",
+        "backgroundImageDesktop": "",
+        "backgroundImageMobile": "",
+        "backgroundVideoDesktop": "",
+        "backgroundVideoMobile": "",
+        "backgroundVideoPosterDesktop": "",
+        "backgroundVideoPosterMobile": "",
         "textColor": "",
         "paddingTop": "",
         "paddingBottom": ""
@@ -1187,7 +1352,14 @@
       "lineHeightMobile": "",
       "textColor": "",
       "section": {
+        "backgroundSource": "color",
         "backgroundColor": "",
+        "backgroundImageDesktop": "",
+        "backgroundImageMobile": "",
+        "backgroundVideoDesktop": "",
+        "backgroundVideoMobile": "",
+        "backgroundVideoPosterDesktop": "",
+        "backgroundVideoPosterMobile": "",
         "textColor": "",
         "paddingTop": "",
         "paddingBottom": ""
@@ -1207,7 +1379,14 @@
       "afterLabel": "Depois",
       "orientation": "vertical",
       "section": {
+        "backgroundSource": "color",
         "backgroundColor": "",
+        "backgroundImageDesktop": "",
+        "backgroundImageMobile": "",
+        "backgroundVideoDesktop": "",
+        "backgroundVideoMobile": "",
+        "backgroundVideoPosterDesktop": "",
+        "backgroundVideoPosterMobile": "",
         "textColor": "",
         "paddingTop": "",
         "paddingBottom": ""
@@ -1225,7 +1404,14 @@
       "lineHeightMobile": "",
       "textColor": "",
       "section": {
+        "backgroundSource": "color",
         "backgroundColor": "",
+        "backgroundImageDesktop": "",
+        "backgroundImageMobile": "",
+        "backgroundVideoDesktop": "",
+        "backgroundVideoMobile": "",
+        "backgroundVideoPosterDesktop": "",
+        "backgroundVideoPosterMobile": "",
         "textColor": "",
         "paddingTop": "",
         "paddingBottom": ""
@@ -1303,7 +1489,14 @@
         }
       ],
       "section": {
+        "backgroundSource": "color",
         "backgroundColor": "",
+        "backgroundImageDesktop": "",
+        "backgroundImageMobile": "",
+        "backgroundVideoDesktop": "",
+        "backgroundVideoMobile": "",
+        "backgroundVideoPosterDesktop": "",
+        "backgroundVideoPosterMobile": "",
         "textColor": "",
         "paddingTop": "",
         "paddingBottom": ""
@@ -1591,7 +1784,14 @@
         }
       ],
       "section": {
+        "backgroundSource": "color",
         "backgroundColor": "",
+        "backgroundImageDesktop": "",
+        "backgroundImageMobile": "",
+        "backgroundVideoDesktop": "",
+        "backgroundVideoMobile": "",
+        "backgroundVideoPosterDesktop": "",
+        "backgroundVideoPosterMobile": "",
         "textColor": "",
         "paddingTop": "",
         "paddingBottom": ""
