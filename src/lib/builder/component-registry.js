@@ -163,6 +163,7 @@ export const componentRegistry = [
 		label: 'Header Caótico',
 		icon: '🌪️',
 		category: 'Estrutura',
+		hidden: true,
 		description: 'Intro com dezenas de mídias animadas e camadas sobrepostas.',
 		component: HeaderCaotico,
 		defaultData: {
@@ -938,6 +939,7 @@ export const componentRegistry = [
 		label: 'Itens recomendados',
 		icon: '🧲',
 		category: 'Narrativa',
+		hidden: true,
 		description: 'Lista de conteúdos relacionados com layout grid ou lista.',
 		component: RecommendedItems,
 		defaultData: {
@@ -1024,6 +1026,7 @@ export const componentRegistry = [
 		label: 'Apresentação de personagens',
 		icon: '🧑‍🤝‍🧑',
 		category: 'Narrativa',
+		hidden: true,
 		description: 'Grade animada com personagens e descrições.',
 		component: CharacterPresentation,
 		defaultData: {
@@ -1069,6 +1072,7 @@ export const componentRegistry = [
 		label: 'Curiosidades',
 		icon: '❓',
 		category: 'Narrativa',
+		hidden: true,
 		description: 'Cartões animados com fatos e curiosidades.',
 		component: Curiosidades,
 		defaultData: {
@@ -1101,6 +1105,7 @@ export const componentRegistry = [
 		label: 'Timeline interativa',
 		icon: '🗓️',
 		category: 'Investigativo',
+		hidden: true,
 		description: 'Linha do tempo com eventos detalhados e animações.',
 		component: TimelineInteractive,
 		defaultData: {
@@ -1144,6 +1149,7 @@ export const componentRegistry = [
 		label: 'Documentos interativos',
 		icon: '📄',
 		category: 'Investigativo',
+		hidden: true,
 		description: 'Visualizador de documentos com marcações e galeria.',
 		component: DocumentViewer,
 		defaultData: {
@@ -1199,6 +1205,7 @@ export const componentRegistry = [
 		label: 'Crime Explainer',
 		icon: '⚖️',
 		category: 'Investigativo',
+		hidden: true,
 		description: 'Explica cada crime com penas, detalhes e interatividade.',
 		component: CrimeExplainer,
 		defaultData: {
@@ -1248,6 +1255,7 @@ export const componentRegistry = [
 		label: 'Flexible Layout',
 		icon: '🧬',
 		category: 'Layout',
+		hidden: true,
 		description: 'Hero flexível com textos posicionados e duas camadas de mídia.',
 		component: FlexibleLayout,
 		defaultData: {
@@ -1363,6 +1371,7 @@ export const componentRegistry = [
 		label: 'Responsive Media Layout',
 		icon: '🖥️',
 		category: 'Layout',
+		hidden: true,
 		description: 'Canvas responsivo com textos e imagens posicionadas via JSON.',
 		component: ResponsiveMediaLayout,
 		defaultData: {
@@ -1477,6 +1486,7 @@ export const componentRegistry = [
 		label: 'Ponto de âncora',
 		icon: '⛳️',
 		category: 'Utilitário',
+		hidden: true,
 		description: 'Marca um ponto da página para navegação interna.',
 		component: AnchorPoint,
 		defaultData: {
@@ -1493,6 +1503,9 @@ export function getComponentDefinition(type) {
 
 export function listComponentsByCategory() {
 	return componentRegistry.reduce((acc, component) => {
+		if (component.hidden) {
+			return acc;
+		}
 		const category = component.category || 'Outros';
 		if (!acc[category]) {
 			acc[category] = [];
