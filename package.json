@@ -14,6 +14,7 @@
 		"visual-builder": "vite dev --mode builder",
 		"builder": "vite dev --mode builder --open /builder",
 		"builder:viewer": "vite dev --mode builder --open /builder/viewer",
+		"builder:deploy": "node scripts/builder-deploy.js",
 		"// === 🚀 WORKFLOW PRINCIPAL ===": "",
 		"start": "node scripts/workflow.js",
 		"workflow": "node scripts/workflow.js",

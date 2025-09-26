@@ -253,7 +253,9 @@
         "textColor": "#ffffff",
         "paddingTop": "0",
         "paddingBottom": "0"
-      }
+      },
+      "verticalAlign": "center",
+      "horizontalAlign": "center"
     },
     {
       "type": "texto",

@@ -50,6 +50,8 @@ export const componentRegistry = [
 			posterMobile: '',
 			variant: 'default',
 			overlay: true,
+			verticalAlign: 'top',
+			horizontalAlign: 'left',
 			titleFontSizeDesktop: '',
 			titleFontSizeMobile: '',
 			titleLineHeightDesktop: '',
@@ -86,6 +88,26 @@ export const componentRegistry = [
 			{ path: 'backgroundVideoMobile', label: 'Vídeo mobile (mp4)', type: 'url' },
 			{ path: 'poster', label: 'Poster desktop', type: 'url' },
 			{ path: 'posterMobile', label: 'Poster mobile', type: 'url' },
+			{
+				path: 'verticalAlign',
+				label: 'Alinhamento vertical',
+				type: 'select',
+				options: [
+					{ label: 'Topo', value: 'top' },
+					{ label: 'Centro', value: 'center' },
+					{ label: 'Base', value: 'bottom' }
+				]
+			},
+			{
+				path: 'horizontalAlign',
+				label: 'Alinhamento horizontal',
+				type: 'select',
+				options: [
+					{ label: 'Esquerda', value: 'left' },
+					{ label: 'Centro', value: 'center' },
+					{ label: 'Direita', value: 'right' }
+				]
+			},
 			{
 				path: 'titleFontSizeDesktop',
 				label: 'Título • tamanho desktop',

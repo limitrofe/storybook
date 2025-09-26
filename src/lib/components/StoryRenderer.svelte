@@ -500,6 +500,8 @@ import { getSectionStyling } from './story/sectionStyle.js';
 						overlay={stringToBoolean(props.overlay, true)}
 						posterImage={props.poster}
 						posterImageMobile={props.posterMobile}
+						verticalAlign={(props.verticalAlign || props.valign || 'top').toLowerCase()}
+						horizontalAlign={(props.horizontalAlign || props.align || 'left').toLowerCase()}
 					/>
 					<!-- 🌪️ Header Caótico -->
 				{:else if componentType === 'header-caotico'}

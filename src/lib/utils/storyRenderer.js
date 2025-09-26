@@ -27,6 +27,8 @@ export function parseStoryComponents(paragraphs) {
 				component.backgroundVideoMobile = paragraph.backgroundVideoMobile;
 				component.overlay = paragraph.overlay;
 				component.variant = paragraph.variant;
+				component.verticalAlign = paragraph.verticalAlign || paragraph.valign || 'top';
+				component.horizontalAlign = paragraph.horizontalAlign || paragraph.align || 'left';
 				break;
 
 			case 'texto':

@@ -20,6 +20,8 @@
 	export let subtitleFontSizeMobile = '';
 	export let subtitleLineHeightDesktop = '';
 	export let subtitleLineHeightMobile = '';
+	export let verticalAlign = 'top'; // top | center | bottom
+	export let horizontalAlign = 'left'; // left | center | right
 
 	// Verificações de mídia mais rigorosas
 	$: hasDesktopMedia = !!(backgroundImage?.trim() || backgroundVideo?.trim());
@@ -43,6 +45,16 @@
 	$: computedSubtitleMobile = subtitleFontSizeMobile || subtitleFallbackMobile;
 	$: computedSubtitleLineDesktop = subtitleLineHeightDesktop || subtitleLineFallbackDesktop;
 	$: computedSubtitleLineMobile = subtitleLineHeightMobile || subtitleLineFallbackMobile;
+
+	const verticalOptions = ['top', 'center', 'bottom'];
+	const horizontalOptions = ['left', 'center', 'right'];
+
+	$: normalizedVerticalAlign = verticalOptions.includes((verticalAlign || '').toLowerCase())
+		? (verticalAlign || '').toLowerCase()
+		: 'top';
+	$: normalizedHorizontalAlign = horizontalOptions.includes((horizontalAlign || '').toLowerCase())
+		? (horizontalAlign || '').toLowerCase()
+		: 'left';
 
 	$: typographyStyle = [
 		`--story-header-title-size-desktop:${computedTitleDesktop}`,
@@ -77,6 +89,12 @@
 	class="story-header story-header--{variant}"
 	class:has-media={hasMedia}
 	class:has-overlay={hasMedia && overlay}
+	class:story-header--valign-top={normalizedVerticalAlign === 'top'}
+	class:story-header--valign-center={normalizedVerticalAlign === 'center'}
+	class:story-header--valign-bottom={normalizedVerticalAlign === 'bottom'}
+	class:story-header--halign-left={normalizedHorizontalAlign === 'left'}
+	class:story-header--halign-center={normalizedHorizontalAlign === 'center'}
+	class:story-header--halign-right={normalizedHorizontalAlign === 'right'}
 >
 	{#if hasMedia}
 		<div class="story-header__media-container">
@@ -146,21 +164,20 @@
 	.story-header {
 		position: relative;
 		display: flex;
-		align-items: flex-start; /* 🔥 Muda para flex-start para posicionar no topo */
-		justify-content: center;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: flex-start;
 		width: 100%;
 		min-height: 100vh;
 		padding: 4rem 2rem;
-		padding-top: 35%;
 		background-color: var(--color-background, transparent);
 		color: var(--color-text, #f8fafc);
 		text-align: left;
 	}
 
-	/* ✅ ESTILOS APLICADOS APENAS QUANDO HÁ MÍDIA */
 	.story-header.has-media {
 		min-height: 100vh;
-		padding: 10% 2rem;
+		padding: 6rem 2rem;
 	}
 
 	.story-header--hero.has-media {
@@ -176,14 +193,40 @@
 		min-height: 30vh;
 	}
 
-	/* 🔥 Z-INDEX CORRIGIDO */
+	.story-header--valign-top {
+		justify-content: flex-start;
+	}
+
+	.story-header--valign-center {
+		justify-content: center;
+	}
+
+	.story-header--valign-bottom {
+		justify-content: flex-end;
+	}
+
+	.story-header--halign-left {
+		align-items: flex-start;
+		text-align: left;
+	}
+
+	.story-header--halign-center {
+		align-items: center;
+		text-align: center;
+	}
+
+	.story-header--halign-right {
+		align-items: flex-end;
+		text-align: right;
+	}
+
 	.story-header__media-container {
 		position: absolute;
 		top: 0;
 		left: 0;
 		width: 100%;
 		height: 100%;
-		z-index: 1; /* Mídia atrás */
+		z-index: 1;
 	}
 
 	.story-header__overlay {
@@ -210,35 +253,53 @@
 
 	.story-header__background--desktop,
 	.story-header__video--desktop {
-		display: none; /* Mobile first: esconde desktop */
+		display: none;
 	}
 
-	/* 🔥 CONTENT COM Z-INDEX ALTO */
 	.story-header__content {
 		position: relative;
-		z-index: 10; /* 🔥 Conteúdo sempre na frente */
+		z-index: 10;
 		width: 100%;
-		padding-top: 0%;
 	}
 
 	.story-header__container {
-		max-width: none;
-		margin: 0 auto;
+		width: 100%;
+		max-width: min(90vw, 1100px);
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
 	}
 
-	/* 🔥 TÍTULOS SEMPRE VISÍVEIS */
+	.story-header--halign-left .story-header__container {
+		align-items: flex-start;
+		margin-left: 0;
+		margin-right: auto;
+	}
+
+	.story-header--halign-center .story-header__container {
+		align-items: center;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.story-header--halign-right .story-header__container {
+		align-items: flex-end;
+		margin-left: auto;
+		margin-right: 0;
+	}
+
 	h1 {
 		font-size: 3rem;
 		font-weight: 900;
 		color: var(--color-text, #f8fafc);
-		margin: 0 0 1rem 0;
-		line-height: 3.3rem;
+		margin: 0;
+		line-height: 1.1;
+		width: 100%;
 	}
 
 	.story-header.has-media h1 {
 		color: var(--color-text, #f8fafc);
-		width: 90%;
-		padding-top: 5%;
 	}
 
 	.story-header__subtitle {
@@ -248,12 +309,18 @@
 		);
 		color: var(--color-text, #f8fafc);
 		font-weight: 600;
-		margin: 0 0 2rem 0;
+		margin: 0;
 		line-height: var(
 			--story-header-subtitle-line-desktop,
 			var(--typography-lead-desktop-line-height, 1.6)
 		);
 		opacity: 0.9;
+		max-width: 40rem;
+	}
+
+	.story-header--halign-center .story-header__subtitle,
+	.story-header--halign-right .story-header__subtitle {
+		max-width: none;
 	}
 
 	.story-header.has-media .story-header__subtitle {
@@ -263,11 +330,19 @@
 	.story-header__meta {
 		display: flex;
 		gap: 1rem;
-		justify-content: center;
 		align-items: center;
+		justify-content: flex-start;
 		font-size: var(--typography-small-desktop-font-size, 0.9rem);
 		color: var(--color-subtle-text, rgba(148, 157, 166, 0.9));
 		opacity: 0.85;
+	}
+
+	.story-header--halign-center .story-header__meta {
+		justify-content: center;
+	}
+
+	.story-header--halign-right .story-header__meta {
+		justify-content: flex-end;
 	}
 
 	.story-header__author {
@@ -276,92 +351,18 @@
 
 	@media (max-width: 768px) {
 		.story-header {
-			padding: 2rem 1rem; /* 🔥 Menos padding geral */
-			padding-top: 12rem; /* 🔥 Conteúdo mais próximo do topo */
-			align-items: flex-start; /* 🔥 Garante alinhamento no topo */
-		}
-		.story-header.has-media {
-			padding: 2rem 1rem;
-			padding-top: 3rem; /* 🔥 Mesmo padding com mídia */
-		}
-		.story-header__meta {
-			flex-direction: column;
-			gap: 0.5rem;
-		}
-		.story-header.has-media h1 {
-			color: var(--color-text, #f8fafc);
-			/* text-shadow: 2px 2px 4px rgba(255,255,255,0.9); 🔥 Sombra BRANCA para contraste */
-			width: 90%;
-			font-size: 3rem;
-		}
-		h1 {
-			font-size: 2.5rem;
-			padding-top: 4%;
-			line-height: 3rem;
-		}
-	}
-
-	/* Desktop - ALINHAMENTO À ESQUERDA */
-	@media (min-width: 769px) {
-		/* 🔥 ALINHAMENTO À ESQUERDA NO DESKTOP */
-		.story-header {
-			text-align: left; /* 🔥 Alinha à esquerda */
-			justify-content: flex-start; /* 🔥 Justifica à esquerda */
-			padding: 4rem 6rem;
+			padding: 2.5rem 1.5rem;
 		}
 
 		.story-header.has-media {
-			padding: 8rem 2rem;
-		}
-
-		.story-header__container {
-			margin: 0; /* 🔥 Remove centralização */
-			max-width: none; /* 🔥 Remove limitação de largura */
-		}
-
-		.story-header__meta {
-			justify-content: flex-start; /* 🔥 Meta à esquerda também */
-		}
-
-		/* Troca mídia mobile por desktop */
-		.story-header__background--mobile,
-		.story-header__video--mobile {
-			display: none;
-		}
-
-		.story-header__background--desktop,
-		.story-header__video--desktop {
-			display: block;
-		}
-
-		h1 {
-			font-size: 6rem;
-			padding-top: 4%;
-			line-height: 6rem;
-		}
-
-		.story-header__subtitle {
-			font-size: 2rem;
-			width: 400px;
-		}
-
-		.story-header.has-media h1 {
-			color: var(--color-text, #f8fafc);
-			/* text-shadow: 2px 2px 4px rgba(255,255,255,0.9); 🔥 Sombra BRANCA para contraste */
-			font-size: 6rem;
-			width: 40%;
-			line-height: 6rem;
-		}
-	}
-
-	@media (max-width: 768px) {
-		.story-header {
 			padding: 3rem 1.5rem;
-			padding-top: 30%;
 		}
 
-		.story-header__container h1 {
-			font-size: var(--story-header-title-size-mobile, var(--typography-h1-mobile-font-size, 3rem));
+		h1 {
+			font-size: var(
+				--story-header-title-size-mobile,
+				var(--typography-h1-mobile-font-size, 3rem)
+			);
 			line-height: var(
 				--story-header-title-line-mobile,
 				var(--typography-h1-mobile-line-height, 1.12)
@@ -383,6 +384,38 @@
 			font-size: var(--typography-small-mobile-font-size, 0.8rem);
 			flex-direction: column;
 			gap: 0.5rem;
+			text-align: inherit;
+		}
+	}
+
+	@media (min-width: 769px) {
+		.story-header {
+			padding: 4rem 6rem;
+		}
+
+		.story-header.has-media {
+			padding: 8rem 4rem;
+		}
+
+		.story-header__background--mobile,
+		.story-header__video--mobile {
+			display: none;
+		}
+
+		.story-header__background--desktop,
+		.story-header__video--desktop {
+			display: block;
+		}
+
+		h1 {
+			font-size: var(
+				--story-header-title-size-desktop,
+				var(--typography-h1-desktop-font-size, 4.5rem)
+			);
+			line-height: var(
+				--story-header-title-line-desktop,
+				var(--typography-h1-desktop-line-height, 1.05)
+			);
 		}
 	}
 </style>

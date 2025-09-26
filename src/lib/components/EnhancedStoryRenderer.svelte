@@ -216,6 +216,13 @@
 			subtitle={storyData.subtitle}
 			author={storyData.author}
 			date={storyData.date}
+			backgroundImage={storyData.backgroundImage}
+			backgroundImageMobile={storyData.backgroundImageMobile}
+			backgroundVideo={storyData.backgroundVideo}
+			backgroundVideoMobile={storyData.backgroundVideoMobile}
+			overlay={storyData.overlay ?? true}
+			verticalAlign={storyData.verticalAlign || storyData.valign || 'center'}
+			horizontalAlign={storyData.horizontalAlign || storyData.align || 'center'}
 		/>
 	{/if}
 
