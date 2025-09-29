@@ -549,6 +549,7 @@ import { getSectionStyling } from './story/sectionStyle.js';
 				{:else if componentType === 'section-title'}
 					<SectionTitle
 						title={props.text}
+						subtitle={props.subtitle}
 						backgroundImage={props.backgroundImage}
 						backgroundImageMobile={props.backgroundImageMobile}
 						backgroundPosition={props.backgroundPosition || 'center'}
