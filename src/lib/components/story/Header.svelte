@@ -22,6 +22,10 @@
 	export let subtitleLineHeightMobile = '';
 	export let verticalAlign = 'top'; // top | center | bottom
 	export let horizontalAlign = 'left'; // left | center | right
+	export let titleColor = '';
+	export let subtitleColor = '';
+	export let metaColor = '';
+	export let onMediaColor = '';
 
 	// Verificações de mídia mais rigorosas
 	$: hasDesktopMedia = !!(backgroundImage?.trim() || backgroundVideo?.trim());
@@ -66,6 +70,17 @@
 		`--story-header-subtitle-line-desktop:${computedSubtitleLineDesktop}`,
 		`--story-header-subtitle-line-mobile:${computedSubtitleLineMobile}`
 	].join('; ');
+
+	$: colorStyle = [
+		titleColor ? `--story-header-title-color:${titleColor}` : '',
+		subtitleColor ? `--story-header-subtitle-color:${subtitleColor}` : '',
+		metaColor ? `--story-header-meta-color:${metaColor}` : '',
+		onMediaColor ? `--story-header-on-media-color:${onMediaColor}` : ''
+	]
+		.filter(Boolean)
+		.join('; ');
+
+	$: combinedStyle = [typographyStyle, colorStyle].filter(Boolean).join('; ');
 
 	function formatDate(dateStr) {
 		if (!dateStr) return '';
@@ -138,7 +153,7 @@
 		<div class="story-header__overlay"></div>
 	{/if}
 
-	<div class="story-header__content" style={typographyStyle}>
+	<div class="story-header__content" style={combinedStyle}>
 		<div class="story-header__container">
 			<h1>{@html title || ''}</h1>
 
@@ -178,6 +193,10 @@
 	.story-header.has-media {
 		min-height: 100vh;
 		padding: 6rem 2rem;
+	}
+
+	.story-header.has-media .story-header__meta {
+		color: var(--story-header-meta-color, var(--story-header-on-media-color, #f8fafc));
 	}
 
 	.story-header--hero.has-media {
@@ -292,14 +311,14 @@
 	h1 {
 		font-size: 3rem;
 		font-weight: 900;
-		color: var(--color-text, #f8fafc);
+		color: var(--story-header-title-color, var(--color-text, #f8fafc));
 		margin: 0;
 		line-height: 1.1;
 		width: 100%;
 	}
 
 	.story-header.has-media h1 {
-		color: var(--color-text, #f8fafc);
+		color: var(--story-header-title-color, var(--story-header-on-media-color, #f8fafc));
 	}
 
 	.story-header__subtitle {
@@ -307,7 +326,7 @@
 			--story-header-subtitle-size-desktop,
 			var(--typography-lead-desktop-font-size, 1.5rem)
 		);
-		color: var(--color-text, #f8fafc);
+		color: var(--story-header-subtitle-color, var(--color-text, #f8fafc));
 		font-weight: 600;
 		margin: 0;
 		line-height: var(
@@ -324,7 +343,7 @@
 	}
 
 	.story-header.has-media .story-header__subtitle {
-		color: var(--color-text, #f8fafc);
+		color: var(--story-header-subtitle-color, var(--story-header-on-media-color, #f8fafc));
 	}
 
 	.story-header__meta {
@@ -333,7 +352,7 @@
 		align-items: center;
 		justify-content: flex-start;
 		font-size: var(--typography-small-desktop-font-size, 0.9rem);
-		color: var(--color-subtle-text, rgba(148, 157, 166, 0.9));
+		color: var(--story-header-meta-color, var(--color-subtle-text, rgba(148, 157, 166, 0.9)));
 		opacity: 0.85;
 	}
 

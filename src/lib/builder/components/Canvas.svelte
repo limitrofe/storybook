@@ -413,6 +413,28 @@
 									/>
 								</label>
 							</div>
+							<div class="inline-grid">
+								<label>
+									Cor autor/data
+									<input
+										type="text"
+										value={block.metaColor || ''}
+										placeholder="#ffffff"
+										on:input={(event) =>
+											updateBlockFieldValue(block, 'metaColor', event.currentTarget.value)}
+									/>
+								</label>
+								<label>
+									Cor texto sobre mídia
+									<input
+										type="text"
+										value={block.onMediaColor || ''}
+										placeholder="#ffffff"
+										on:input={(event) =>
+											updateBlockFieldValue(block, 'onMediaColor', event.currentTarget.value)}
+									/>
+								</label>
+							</div>
 						</div>
 					{:else if block.type === 'galeria'}
 						<div class="inline-editor">

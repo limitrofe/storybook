@@ -502,6 +502,10 @@ import { getSectionStyling } from './story/sectionStyle.js';
 						posterImageMobile={props.posterMobile}
 						verticalAlign={(props.verticalAlign || props.valign || 'top').toLowerCase()}
 						horizontalAlign={(props.horizontalAlign || props.align || 'left').toLowerCase()}
+						titleColor={props.titleColor}
+						subtitleColor={props.subtitleColor}
+						metaColor={props.metaColor}
+						onMediaColor={props.onMediaColor}
 					/>
 					<!-- 🌪️ Header Caótico -->
 				{:else if componentType === 'header-caotico'}
