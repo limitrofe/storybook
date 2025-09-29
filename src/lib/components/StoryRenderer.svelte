@@ -813,6 +813,13 @@ import { getSectionStyling } from './story/sectionStyle.js';
 							backgroundPositionMobile={props.backgroundPositionMobile}
 							backgroundSize={props.backgroundSize}
 							backgroundSizeMobile={props.backgroundSizeMobile}
+							backgroundBaseColor={props.backgroundBaseColor}
+							backgroundBaseImage={props.backgroundBaseImage}
+							backgroundBaseImageMobile={props.backgroundBaseImageMobile}
+							backgroundBasePosition={props.backgroundBasePosition}
+							backgroundBasePositionMobile={props.backgroundBasePositionMobile}
+							backgroundBaseSize={props.backgroundBaseSize}
+							backgroundBaseSizeMobile={props.backgroundBaseSizeMobile}
 							content={props.content || ''}
 						/>
 

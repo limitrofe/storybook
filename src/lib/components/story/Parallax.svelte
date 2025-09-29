@@ -12,6 +12,13 @@
 	export let backgroundPositionMobile = '';
 	export let backgroundSize = 'cover';
 	export let backgroundSizeMobile = '';
+	export let backgroundBaseColor = '';
+	export let backgroundBaseImage = '';
+	export let backgroundBaseImageMobile = '';
+	export let backgroundBasePosition = '';
+	export let backgroundBasePositionMobile = '';
+	export let backgroundBaseSize = '';
+	export let backgroundBaseSizeMobile = '';
 
 	let parallaxContainer; // Referência ao elemento container do parallax
 	let parallaxImage; // Referência ao elemento da imagem
@@ -29,6 +36,18 @@
 	$: currentBackgroundPosition =
 		pickResponsive(backgroundPosition, backgroundPositionMobile, viewportWidth) || 'center center';
 	$: currentBackgroundSize = pickResponsive(backgroundSize, backgroundSizeMobile, viewportWidth) || 'cover';
+	$: currentBaseImage = pickResponsive(backgroundBaseImage, backgroundBaseImageMobile, viewportWidth);
+	$: currentBasePosition = pickResponsive(
+		backgroundBasePosition || backgroundPosition,
+		backgroundBasePositionMobile || backgroundPositionMobile,
+		viewportWidth
+	) || 'center center';
+	$: currentBaseSize = pickResponsive(
+		backgroundBaseSize || backgroundSize,
+		backgroundBaseSizeMobile || backgroundSizeMobile,
+		viewportWidth
+	) || 'cover';
+	$: baseColor = backgroundBaseColor || 'var(--color-background)';
 
 	onMount(() => {
 		mounted = true;
@@ -70,12 +89,27 @@
 	});
 </script>
 
-<div class="parallax-container" bind:this={parallaxContainer} style:height class:mounted>
+<div
+	class="parallax-container"
+	bind:this={parallaxContainer}
+	style:height
+	style:background-color={baseColor}
+	class:mounted
+>
+	{#if currentBaseImage}
+		<div
+			class="parallax-base"
+			style:background-image={`url(${currentBaseImage})`}
+			style:background-position={currentBasePosition}
+			style:background-size={currentBaseSize}
+		/>
+	{/if}
+
 	<!-- ✅ ATUALIZADO: Agora usa currentImage que é reativo -->
 	<div
 		class="parallax-image"
 		bind:this={parallaxImage}
-		style:background-image={`url(${currentImage || ''})`}
+		style:background-image={currentImage ? `url(${currentImage})` : 'none'}
 		style:background-position={currentBackgroundPosition}
 		style:background-size={currentBackgroundSize}
 	/>
@@ -109,6 +143,18 @@
 		transform: translateY(0);
 	}
 
+	.parallax-base {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+		z-index: 0;
+	}
+
 	.parallax-image {
 		position: absolute;
 		top: -100%;
@@ -117,9 +163,9 @@
 		height: 200%;
 		background-size: cover;
 		background-position: center;
+		background-repeat: no-repeat;
 		will-change: transform;
 		z-index: 1;
-		background-color: var(--color-background); /* Usa a cor de fundo do tema atual */
 		/* ✅ NOVO: Transição suave para mudança de imagem */
 		transition: background-image 0.3s ease-in-out;
 	}

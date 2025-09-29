@@ -269,13 +269,13 @@
       "type": "parallax",
       "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/gshow/quem_matou_odete_roitman/img/banner-desktop.png",
       "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/gshow/quem_matou_odete_roitman/img/banner-desktop.png",
-      "height": "65vh",
+      "height": "100vh",
       "speed": 0.45,
       "overlay": true,
       "content": "",
-      "backgroundPosition": "center center",
+      "backgroundPosition": "center bottom",
       "backgroundPositionMobile": "",
-      "backgroundSize": "cover",
+      "backgroundSize": "contain",
       "backgroundSizeMobile": "",
       "section": {
         "backgroundSource": "color",
@@ -289,7 +289,8 @@
         "textColor": "",
         "paddingTop": "",
         "paddingBottom": ""
-      }
+      },
+      "backgroundBaseColor": "#f00000"
     },
     {
       "type": "texto",

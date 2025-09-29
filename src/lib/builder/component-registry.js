@@ -802,7 +802,14 @@ export const componentRegistry = [
 			backgroundPosition: 'center center',
 			backgroundPositionMobile: '',
 			backgroundSize: 'cover',
-			backgroundSizeMobile: ''
+			backgroundSizeMobile: '',
+			backgroundBaseColor: '',
+			backgroundBaseImage: '',
+			backgroundBaseImageMobile: '',
+			backgroundBasePosition: '',
+			backgroundBasePositionMobile: '',
+			backgroundBaseSize: '',
+			backgroundBaseSizeMobile: ''
 		},
 		fields: [
 			{ path: 'image', label: 'Imagem desktop (jpg/webp)', type: 'url', required: true },
@@ -821,6 +828,23 @@ export const componentRegistry = [
 			{
 				path: 'backgroundSizeMobile',
 				label: 'Tamanho da imagem (mobile)',
+				type: 'text',
+				placeholder: 'herda do desktop'
+			},
+			{ path: 'backgroundBaseColor', label: 'Cor de fundo (fallback)', type: 'color' },
+			{ path: 'backgroundBaseImage', label: 'Imagem de fundo (desktop)', type: 'url' },
+			{ path: 'backgroundBaseImageMobile', label: 'Imagem de fundo (mobile)', type: 'url' },
+			{ path: 'backgroundBasePosition', label: 'Fundo • posição desktop', type: 'text', placeholder: 'inherit' },
+			{
+				path: 'backgroundBasePositionMobile',
+				label: 'Fundo • posição mobile',
+				type: 'text',
+				placeholder: 'herda do desktop'
+			},
+			{ path: 'backgroundBaseSize', label: 'Fundo • tamanho desktop', type: 'text', placeholder: 'cover' },
+			{
+				path: 'backgroundBaseSizeMobile',
+				label: 'Fundo • tamanho mobile',
 				type: 'text',
 				placeholder: 'herda do desktop'
 			},

@@ -251,6 +251,13 @@ export function parseStoryComponents(paragraphs) {
 				component.backgroundPositionMobile = paragraph.backgroundPositionMobile;
 				component.backgroundSize = paragraph.backgroundSize;
 				component.backgroundSizeMobile = paragraph.backgroundSizeMobile;
+				component.backgroundBaseColor = paragraph.backgroundBaseColor;
+				component.backgroundBaseImage = paragraph.backgroundBaseImage;
+				component.backgroundBaseImageMobile = paragraph.backgroundBaseImageMobile;
+				component.backgroundBasePosition = paragraph.backgroundBasePosition;
+				component.backgroundBasePositionMobile = paragraph.backgroundBasePositionMobile;
+				component.backgroundBaseSize = paragraph.backgroundBaseSize;
+				component.backgroundBaseSizeMobile = paragraph.backgroundBaseSizeMobile;
 				break;
 
 			case 'antes-depois':
