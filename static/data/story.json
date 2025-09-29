@@ -220,11 +220,56 @@
     "text": ""
   },
   "credits": {
-    "notes": "Design: Gabs, Guilherme Gomes\nDesenvolvimento: Gabs, Guilherme Gomes\nCoordenação de Desenvolvimento: Guilherme Gomes",
+    "notes": "",
     "sources": [],
     "authors": [],
     "editedBy": [],
-    "additionalGraphics": []
+    "additionalGraphics": [],
+    "sections": [
+      {
+        "title": "Design",
+        "items": [
+          "Gabs",
+          "Guilherme Gomes"
+        ]
+      },
+      {
+        "title": "Desenvolvimento",
+        "items": [
+          "Gabs",
+          "Guilherme Gomes"
+        ]
+      },
+      {
+        "title": "Coordenação de Desenvolvimento",
+        "items": [
+          "Guilherme Gomes"
+        ]
+      }
+    ],
+    "layout": "grid",
+    "columnsDesktop": 1,
+    "columnsMobile": 1,
+    "gap": "2rem",
+    "maxWidth": "900px",
+    "textAlign": "left",
+    "backgroundColor": "",
+    "textColor": "",
+    "titleColor": "",
+    "accentColor": "",
+    "borderColor": "",
+    "paddingDesktop": "4rem 2rem 8rem 2rem",
+    "paddingMobile": "2.5rem 1rem 12rem 1rem",
+    "backgroundImage": "",
+    "backgroundImageMobile": "",
+    "backgroundVideo": "",
+    "backgroundVideoMobile": "",
+    "backgroundPosition": "center center",
+    "backgroundPositionMobile": "",
+    "backgroundSize": "cover",
+    "backgroundSizeMobile": "",
+    "overlay": false,
+    "overlayColor": "rgba(0, 0, 0, 0.4)"
   },
   "paragraphs": [
     {

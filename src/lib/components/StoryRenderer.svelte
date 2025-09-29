@@ -953,6 +953,30 @@ import { getSectionStyling } from './story/sectionStyle.js';
 			additionalGraphics={storyData.credits.additionalGraphics || []}
 			editedBy={storyData.credits.editedBy || []}
 			authors={storyData.credits.authors || []}
+			sections={storyData.credits.sections || []}
+			layout={storyData.credits.layout || 'grid'}
+			columnsDesktop={storyData.credits.columnsDesktop ?? 1}
+			columnsMobile={storyData.credits.columnsMobile ?? 1}
+			gap={storyData.credits.gap || '2rem'}
+			maxWidth={storyData.credits.maxWidth || '900px'}
+			textAlign={storyData.credits.textAlign || 'left'}
+			backgroundColor={storyData.credits.backgroundColor || ''}
+			textColor={storyData.credits.textColor || ''}
+			titleColor={storyData.credits.titleColor || ''}
+			accentColor={storyData.credits.accentColor || ''}
+			borderColor={storyData.credits.borderColor || ''}
+			paddingDesktop={storyData.credits.paddingDesktop || '4rem 2rem 8rem 2rem'}
+			paddingMobile={storyData.credits.paddingMobile || '2.5rem 1rem 12rem 1rem'}
+			backgroundImage={storyData.credits.backgroundImage || ''}
+			backgroundImageMobile={storyData.credits.backgroundImageMobile || ''}
+			backgroundVideo={storyData.credits.backgroundVideo || ''}
+			backgroundVideoMobile={storyData.credits.backgroundVideoMobile || ''}
+			backgroundPosition={storyData.credits.backgroundPosition || 'center center'}
+			backgroundPositionMobile={storyData.credits.backgroundPositionMobile || ''}
+			backgroundSize={storyData.credits.backgroundSize || 'cover'}
+			backgroundSizeMobile={storyData.credits.backgroundSizeMobile || ''}
+			overlay={storyData.credits.overlay ?? false}
+			overlayColor={storyData.credits.overlayColor || 'rgba(0, 0, 0, 0.4)'}
 		/>
 	{/if}
 </article>

@@ -308,7 +308,10 @@ export function cloneStory(value = {}) {
 				: [...storyDefaults.credits.editedBy],
 			additionalGraphics: Array.isArray(value?.credits?.additionalGraphics)
 				? structuredClone(value.credits.additionalGraphics)
-				: [...storyDefaults.credits.additionalGraphics]
+				: [...storyDefaults.credits.additionalGraphics],
+			sections: Array.isArray(value?.credits?.sections)
+				? structuredClone(value.credits.sections)
+				: [...storyDefaults.credits.sections]
 		},
 		paragraphs: []
 	});

@@ -56,7 +56,14 @@
 			jsonError = '';
 			dispatch('change', { value: parsed });
 		} catch (error) {
-			jsonError = 'JSON inválido: ' + error.message;
+			const relaxed = tryRelaxedParse(jsonText, field);
+			if (relaxed.success) {
+				jsonError = '';
+				jsonText = relaxed.serialized;
+				dispatch('change', { value: relaxed.value });
+			} else {
+				jsonError = 'JSON inválido: ' + error.message;
+			}
 		}
 	};
 
@@ -73,6 +80,64 @@
 		if (!isEmpty(fallback) && fallback !== value) {
 			dispatch('change', { value: fallback });
 		}
+	}
+
+	function tryRelaxedParse(text, field) {
+		const trimmed = text.trim();
+		if (!trimmed) {
+			return { success: true, value: field.emptyValue ?? [], serialized: JSON.stringify(field.emptyValue ?? [], null, 2) };
+		}
+
+		const lines = trimmed.split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
+		if (!lines.length) {
+			return { success: true, value: field.emptyValue ?? [], serialized: JSON.stringify(field.emptyValue ?? [], null, 2) };
+		}
+
+		const path = field.path || '';
+
+		if (path.endsWith('credits.sections')) {
+			const sections = lines.map((line, index) => {
+				const [rawTitle, ...restParts] = line.split(':');
+				const title = (rawTitle || '').trim();
+				const remainder = restParts.join(':').trim();
+				const people = remainder
+					? remainder.split(/,|;|\•/).map((item) => item.trim()).filter(Boolean)
+					: [];
+
+				return {
+					title: title || `Seção ${index + 1}`,
+					items: people.length ? people : title ? [] : [line]
+				};
+			});
+
+			return {
+				success: true,
+				value: sections,
+				serialized: JSON.stringify(sections, null, 2)
+			};
+		}
+
+		if (path.startsWith('credits.') && path !== 'credits.sections') {
+			const list = lines.map((line) => {
+				const [rawName, ...restParts] = line.split(':');
+				const name = (rawName || '').trim();
+				const remainder = restParts.join(':').trim();
+
+				if (name && remainder) {
+					return { name, role: remainder };
+				}
+
+				return line;
+			});
+
+			return {
+				success: true,
+				value: list,
+				serialized: JSON.stringify(list, null, 2)
+			};
+		}
+
+		return { success: false };
 	}
 </script>
 
