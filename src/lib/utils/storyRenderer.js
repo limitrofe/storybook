@@ -247,6 +247,10 @@ export function parseStoryComponents(paragraphs) {
 				component.height = paragraph.height || '80vh';
 				component.speed = paragraph.speed || 0.5;
 				component.overlay = paragraph.overlay;
+				component.backgroundPosition = paragraph.backgroundPosition;
+				component.backgroundPositionMobile = paragraph.backgroundPositionMobile;
+				component.backgroundSize = paragraph.backgroundSize;
+				component.backgroundSizeMobile = paragraph.backgroundSizeMobile;
 				break;
 
 			case 'antes-depois':

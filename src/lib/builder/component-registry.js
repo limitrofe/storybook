@@ -798,7 +798,11 @@ export const componentRegistry = [
 			height: '65vh',
 			speed: 0.45,
 			overlay: true,
-			content: ''
+			content: '',
+			backgroundPosition: 'center center',
+			backgroundPositionMobile: '',
+			backgroundSize: 'cover',
+			backgroundSizeMobile: ''
 		},
 		fields: [
 			{ path: 'image', label: 'Imagem desktop (jpg/webp)', type: 'url', required: true },
@@ -806,6 +810,20 @@ export const componentRegistry = [
 			{ path: 'height', label: 'Altura', type: 'text', placeholder: '65vh' },
 			{ path: 'speed', label: 'Velocidade do efeito', type: 'number', step: 0.05 },
 			{ path: 'overlay', label: 'Overlay escuro', type: 'boolean' },
+			{ path: 'backgroundPosition', label: 'Posição da imagem (desktop)', type: 'text', placeholder: 'center center' },
+			{
+				path: 'backgroundPositionMobile',
+				label: 'Posição da imagem (mobile)',
+				type: 'text',
+				placeholder: 'herda do desktop'
+			},
+			{ path: 'backgroundSize', label: 'Tamanho da imagem (desktop)', type: 'text', placeholder: 'cover' },
+			{
+				path: 'backgroundSizeMobile',
+				label: 'Tamanho da imagem (mobile)',
+				type: 'text',
+				placeholder: 'herda do desktop'
+			},
 			{ path: 'content', label: 'HTML sobreposto', type: 'richtext', rows: 3 }
 		]
 	},

@@ -266,6 +266,32 @@
       }
     },
     {
+      "type": "parallax",
+      "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/gshow/quem_matou_odete_roitman/img/banner-desktop.png",
+      "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/gshow/quem_matou_odete_roitman/img/banner-desktop.png",
+      "height": "65vh",
+      "speed": 0.45,
+      "overlay": true,
+      "content": "",
+      "backgroundPosition": "center center",
+      "backgroundPositionMobile": "",
+      "backgroundSize": "cover",
+      "backgroundSizeMobile": "",
+      "section": {
+        "backgroundSource": "color",
+        "backgroundColor": "",
+        "backgroundImageDesktop": "",
+        "backgroundImageMobile": "",
+        "backgroundVideoDesktop": "",
+        "backgroundVideoMobile": "",
+        "backgroundVideoPosterDesktop": "",
+        "backgroundVideoPosterMobile": "",
+        "textColor": "",
+        "paddingTop": "",
+        "paddingBottom": ""
+      }
+    },
+    {
       "type": "texto",
       "text": "<p>Esta investigação apresenta uma análise detalhada dos principais suspeitos envolvidos no caso. Através de evidências coletadas, depoimentos contraditórios e análise comportamental, construímos um perfil abrangente de cada pessoa de interesse. Cada suspeito possui características únicas que os conectam ao caso de formas distintas, revelando uma rede complexa de relacionamentos e motivações.</p>",
       "variant": "lead",

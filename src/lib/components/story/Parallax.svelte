@@ -8,21 +8,31 @@
 	export let speed = 0.5; // Velocidade do efeito (0 a 1)
 	export let overlay = true; // Se deve aplicar um overlay escuro
 	export let content = ''; // Conteúdo HTML a ser exibido sobre a imagem
+	export let backgroundPosition = 'center center';
+	export let backgroundPositionMobile = '';
+	export let backgroundSize = 'cover';
+	export let backgroundSizeMobile = '';
 
 	let parallaxContainer; // Referência ao elemento container do parallax
 	let parallaxImage; // Referência ao elemento da imagem
 	let mounted = false; // Flag para aplicar animações de entrada
 
 	// ✅ NOVO: Determinar qual imagem usar baseado no tamanho da tela
-	$: currentImage = (() => {
-		if (typeof window !== 'undefined') {
-			return window.innerWidth <= 768 && imageMobile ? imageMobile : image;
-		}
-		return image;
-	})();
+	const isBrowser = typeof window !== 'undefined';
+	let viewportWidth = isBrowser ? window.innerWidth : 1024;
+
+	const pickResponsive = (desktopValue, mobileValue, width) => {
+		return width <= 768 && mobileValue ? mobileValue : desktopValue;
+	};
+
+	$: currentImage = pickResponsive(image, imageMobile, viewportWidth);
+	$: currentBackgroundPosition =
+		pickResponsive(backgroundPosition, backgroundPositionMobile, viewportWidth) || 'center center';
+	$: currentBackgroundSize = pickResponsive(backgroundSize, backgroundSizeMobile, viewportWidth) || 'cover';
 
 	onMount(() => {
 		mounted = true;
+		viewportWidth = window.innerWidth;
 
 		const handleScroll = () => {
 			// Se o elemento da imagem ainda não foi renderizado, não faz nada.
@@ -45,10 +55,7 @@
 
 		// ✅ NOVO: Listener para mudanças de tamanho da tela
 		const handleResize = () => {
-			// Forçar re-renderização quando a tela muda de tamanho
-			if (parallaxImage) {
-				parallaxImage.style.backgroundImage = `url(${currentImage})`;
-			}
+			viewportWidth = window.innerWidth;
 		};
 
 		// Adiciona os listeners
@@ -68,7 +75,9 @@
 	<div
 		class="parallax-image"
 		bind:this={parallaxImage}
-		style:background-image="url({currentImage})"
+		style:background-image={`url(${currentImage || ''})`}
+		style:background-position={currentBackgroundPosition}
+		style:background-size={currentBackgroundSize}
 	/>
 
 	{#if overlay}

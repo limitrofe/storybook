@@ -802,15 +802,19 @@ import { getSectionStyling } from './story/sectionStyle.js';
 					/>
 
 					<!-- Parallax -->
-				{:else if componentType === 'parallax'}
-					<Parallax
-						image={props.image}
-						imageMobile={props.imageMobile}
-						height={props.height || '60vh'}
-						speed={parseFloat(props.speed) || 0.5}
-						overlay={stringToBoolean(props.overlay, true)}
-						content={props.content || ''}
-					/>
+					{:else if componentType === 'parallax'}
+						<Parallax
+							image={props.image}
+							imageMobile={props.imageMobile}
+							height={props.height || '60vh'}
+							speed={parseFloat(props.speed) || 0.5}
+							overlay={stringToBoolean(props.overlay, true)}
+							backgroundPosition={props.backgroundPosition}
+							backgroundPositionMobile={props.backgroundPositionMobile}
+							backgroundSize={props.backgroundSize}
+							backgroundSizeMobile={props.backgroundSizeMobile}
+							content={props.content || ''}
+						/>
 
 					<!-- Before/After -->
 				{:else if componentType === 'before-after'}
