@@ -293,19 +293,23 @@
 						author={paragraph.author}
 						role={paragraph.role}
 					/>
-				{:else if componentType === 'section-title'}
-					<SectionTitle
-						title={paragraph.text}
-						subtitle={paragraph.subtitle}
-						backgroundImage={paragraph.backgroundImage}
-						backgroundImageMobile={paragraph.backgroundImageMobile}
-						variant={paragraph.variant || 'default'}
-						size={paragraph.size || 'medium'}
-						height={paragraph.height}
-						textPosition={paragraph.textPosition || 'center'}
-						textAlign={paragraph.textAlign || 'center'}
-						overlay={paragraph.overlay !== 'false'}
-					/>
+			{:else if componentType === 'section-title'}
+				<SectionTitle
+					title={paragraph.text}
+					subtitle={paragraph.subtitle}
+					backgroundImage={paragraph.backgroundImage}
+					backgroundImageMobile={paragraph.backgroundImageMobile}
+					variant={paragraph.variant || 'default'}
+					size={paragraph.size || 'medium'}
+					height={paragraph.height}
+					textPosition={paragraph.textPosition || 'center'}
+					textAlign={paragraph.textAlign || 'center'}
+					titleFontWeight={paragraph.titleFontWeight}
+					titleFontStyle={paragraph.titleFontStyle}
+					subtitleFontWeight={paragraph.subtitleFontWeight}
+					subtitleFontStyle={paragraph.subtitleFontStyle}
+					overlay={paragraph.overlay !== 'false'}
+				/>
 				{:else if componentType === 'photo'}
 					<PhotoWithCaption
 						src={paragraph.src || paragraph.url || paragraph.image}

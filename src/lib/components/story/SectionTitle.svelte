@@ -27,6 +27,10 @@
 	export let subtitleFontSizeMobile = '';
 	export let subtitleLineHeightDesktop = '';
 	export let subtitleLineHeightMobile = '';
+	export let titleFontWeight = '';
+	export let titleFontStyle = '';
+	export let subtitleFontWeight = '';
+	export let subtitleFontStyle = '';
 
 	// Lógica reativa para determinar se há mídia
 	$: hasMedia = !!(backgroundImage || backgroundVideo);
@@ -98,8 +102,12 @@
 		`--section-title-subtitle-size-desktop:${subtitleSizeDesktop}`,
 		`--section-title-subtitle-line-desktop:${subtitleLineDesktop}`,
 		`--section-title-subtitle-size-mobile:${subtitleSizeMobile}`,
-		`--section-title-subtitle-line-mobile:${subtitleLineMobile}`
-	].join('; ');
+		`--section-title-subtitle-line-mobile:${subtitleLineMobile}`,
+		titleFontWeight ? `--section-title-title-weight:${titleFontWeight}` : '',
+		titleFontStyle ? `--section-title-title-style:${titleFontStyle}` : '',
+		subtitleFontWeight ? `--section-title-subtitle-weight:${subtitleFontWeight}` : '',
+		subtitleFontStyle ? `--section-title-subtitle-style:${subtitleFontStyle}` : ''
+	].filter(Boolean).join('; ');
 
 	// Debug para desenvolvimento
 	$: if (import.meta.env.DEV) {
@@ -166,14 +174,14 @@
 	<div class="section-title__content" style={`${textStyle}; ${typographyStyle}`}>
 		<div class="section-title__container">
 			<h2 class="section-title__title" style={textColor ? `color: ${textColor} !important` : ''}>
-				{title}
+				{@html title}
 			</h2>
 			{#if subtitle}
 				<p
 					class="section-title__subtitle"
 					style={textColor ? `color: ${textColor} !important` : ''}
 				>
-					{subtitle}
+					{@html subtitle}
 				</p>
 			{/if}
 		</div>
@@ -212,42 +220,49 @@
 	}
 	.font-obviously .section-title__title {
 		font-family: 'obviously', sans-serif;
-		font-weight: 600;
+		font-weight: var(--section-title-title-weight, 600);
 	}
 
 	.font-obviously .section-title__subtitle {
 		font-family: 'obviously', sans-serif;
-		font-weight: 400;
+		font-weight: var(--section-title-subtitle-weight, 400);
 	}
 
 	.font-globotipo .section-title__title,
 	.font-globotipo .section-title__subtitle {
 		font-family: 'Globotipo', sans-serif;
-		font-weight: inherit;
+	}
+
+	.font-globotipo .section-title__title {
+		font-weight: var(--section-title-title-weight, inherit);
+	}
+
+	.font-globotipo .section-title__subtitle {
+		font-weight: var(--section-title-subtitle-weight, inherit);
 	}
 
 	.font-obviously-compressed .section-title__title {
 		font-family: 'obviously-compressed', sans-serif;
-		font-weight: 700;
+		font-weight: var(--section-title-title-weight, 700);
 		text-transform: uppercase;
 		letter-spacing: -0.02em;
 	}
 
 	.font-obviously-compressed .section-title__subtitle {
 		font-family: 'obviously', sans-serif;
-		font-weight: 400;
+		font-weight: var(--section-title-subtitle-weight, 400);
 		text-transform: none;
 		letter-spacing: normal;
 	}
 
 	.font-default .section-title__title {
 		font-family: var(--font-family-heading);
-		font-weight: var(--font-weight-bold);
+		font-weight: var(--section-title-title-weight, var(--font-weight-bold));
 	}
 
 	.font-default .section-title__subtitle {
 		font-family: var(--font-family-body);
-		font-weight: var(--font-weight-normal);
+		font-weight: var(--section-title-subtitle-weight, var(--font-weight-normal));
 	}
 
 	/* Cor do texto só muda se REALMENTE tiver mídia */
@@ -369,7 +384,8 @@
 			--section-title-title-line-desktop,
 			var(--typography-h2-desktop-line-height, 1.1)
 		);
-		font-weight: 800;
+		font-weight: var(--section-title-title-weight, 800);
+		font-style: var(--section-title-title-style, normal);
 		margin: 0 0 1rem 0;
 		color: inherit;
 	}
@@ -383,7 +399,8 @@
 			--section-title-subtitle-line-desktop,
 			var(--typography-lead-desktop-line-height, 1.6)
 		);
-		font-weight: 400;
+		font-weight: var(--section-title-subtitle-weight, 400);
+		font-style: var(--section-title-subtitle-style, normal);
 		margin: 0;
 		opacity: 0.9;
 		color: inherit;

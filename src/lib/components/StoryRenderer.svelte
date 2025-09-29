@@ -567,6 +567,10 @@ import { getSectionStyling } from './story/sectionStyle.js';
 						textPositionMobile={props.textPositionMobile}
 						textAlign={props.textAlign || 'center'}
 						textAlignMobile={props.textAlignMobile}
+						titleFontWeight={props.titleFontWeight}
+						titleFontStyle={props.titleFontStyle}
+						subtitleFontWeight={props.subtitleFontWeight}
+						subtitleFontStyle={props.subtitleFontStyle}
 						overlay={stringToBoolean(props.overlay, false)}
 					/>
 

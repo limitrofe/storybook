@@ -248,7 +248,11 @@ export const componentRegistry = [
 			subtitleFontSizeDesktop: '',
 			subtitleFontSizeMobile: '',
 			subtitleLineHeightDesktop: '',
-			subtitleLineHeightMobile: ''
+			subtitleLineHeightMobile: '',
+			titleFontWeight: '',
+			titleFontStyle: '',
+			subtitleFontWeight: '',
+			subtitleFontStyle: ''
 		},
 		fields: [
 			{ path: 'text', label: 'Título', type: 'text', required: true },
@@ -360,6 +364,52 @@ export const componentRegistry = [
 				label: 'Subtítulo • altura linha mobile',
 				type: 'text',
 				placeholder: 'herda do tema'
+			},
+			{
+				path: 'titleFontWeight',
+				label: 'Título • peso',
+				type: 'select',
+				options: [
+					{ label: 'Herda do tema (800)', value: '' },
+					{ label: 'Light (300)', value: '300' },
+					{ label: 'Normal (400)', value: '400' },
+					{ label: 'Semi-bold (600)', value: '600' },
+					{ label: 'Bold (700)', value: '700' },
+					{ label: 'Extra Bold (800)', value: '800' },
+					{ label: 'Black (900)', value: '900' }
+				]
+			},
+			{
+				path: 'titleFontStyle',
+				label: 'Título • estilo',
+				type: 'select',
+				options: [
+					{ label: 'Herda do tema (normal)', value: '' },
+					{ label: 'Normal', value: 'normal' },
+					{ label: 'Itálico', value: 'italic' }
+				]
+			},
+			{
+				path: 'subtitleFontWeight',
+				label: 'Subtítulo • peso',
+				type: 'select',
+				options: [
+					{ label: 'Herda do tema (400)', value: '' },
+					{ label: 'Light (300)', value: '300' },
+					{ label: 'Normal (400)', value: '400' },
+					{ label: 'Semi-bold (600)', value: '600' },
+					{ label: 'Bold (700)', value: '700' }
+				]
+			},
+			{
+				path: 'subtitleFontStyle',
+				label: 'Subtítulo • estilo',
+				type: 'select',
+				options: [
+					{ label: 'Herda do tema (normal)', value: '' },
+					{ label: 'Normal', value: 'normal' },
+					{ label: 'Itálico', value: 'italic' }
+				]
 			}
 		]
 	},

@@ -292,8 +292,8 @@
     },
     {
       "type": "intertitulo",
-      "text": "Os suspeitos",
-      "subtitle": "Será que um desses 8 é o assassino de Odete?",
+      "text": "Os <b>suspeitos</b>",
+      "subtitle": "<span style=\"font-weight: normal;\"><i>Será que um desses 8 é o assassino de Odete?</i></span>",
       "backgroundColor": "#081533",
       "textColor": "#bfff39",
       "fontFamily": "globotipo",
@@ -710,8 +710,8 @@
     },
     {
       "type": "intertitulo",
-      "text": "A 1a edição",
-      "subtitle": "Será que um desses 8 é o assassino de Odete?",
+      "text": "<u><i>A 1a edição</i></u>",
+      "subtitle": "<span style=\"font-weight: normal;\">Será que um desses 8 é o assassino de Odete?</span>",
       "backgroundColor": "#081533",
       "textColor": "#bfff39",
       "fontFamily": "globotipo",
