@@ -27,16 +27,63 @@
 		'#10b981'
 	];
 
+	const HEX_MAX_LENGTH = 8; // support RGB (#rrggbb) and RGBA (#rrggbbaa)
+
+	function normalizeHex(input, fallback = '') {
+		if (typeof input !== 'string') return fallback;
+		let candidate = input.trim();
+		if (!candidate) return fallback;
+
+		// Permite omitir o # quando colar
+		if (!candidate.startsWith('#')) {
+			candidate = `#${candidate}`;
+		}
+
+		let hexPart = candidate.slice(1);
+		const isCandidateValid = /^[0-9a-fA-F]{1,8}$/.test(hexPart);
+
+		if (!isCandidateValid) {
+			hexPart = hexPart.replace(/[^0-9a-fA-F]/g, '');
+			if (!hexPart) return fallback;
+			if (!/^[0-9a-fA-F]{1,8}$/.test(hexPart)) {
+				return fallback;
+			}
+		}
+
+		const limited = hexPart.slice(0, HEX_MAX_LENGTH);
+		if (!limited) return fallback;
+
+		return `#${limited}`.toLowerCase();
+	}
+
 	$: {
 		if (typeof value !== 'string') {
 			value = '#000000';
+		} else {
+			const normalized = normalizeHex(value, value);
+			if (normalized !== value) {
+				value = normalized;
+			}
 		}
 	}
 
 	$: normalizedValue = typeof value === 'string' ? value : '#000000';
+	$: swatchValue =
+		typeof normalizedValue === 'string' && /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/.test(normalizedValue)
+			? normalizedValue
+			: '#000000';
 
 	function handleChange(newValue) {
-		const next = typeof newValue === 'string' ? newValue : '#000000';
+		if (typeof newValue !== 'string') return;
+		if (!newValue.trim()) {
+			value = '';
+			dispatch('change', { value: '' });
+			return;
+		}
+
+		const previous =
+			typeof normalizedValue === 'string' && normalizedValue ? normalizedValue : '#000000';
+		const next = normalizeHex(newValue, previous);
 		value = next;
 		dispatch('change', { value: next });
 	}
@@ -55,7 +102,7 @@
 		<div class="color-input-group">
 			<input
 				type="color"
-				value={normalizedValue}
+				value={swatchValue}
 				on:input={(e) => handleChange(e.target.value)}
 				class="color-swatch"
 				title="Selecionar cor"
@@ -68,7 +115,8 @@
 					on:input={(e) => handleChange(e.target.value)}
 					class="color-text"
 					placeholder="#000000"
-					pattern="^#[0-9A-Fa-f]{6}$"
+					spellcheck="false"
+					autocomplete="off"
 				/>
 			{/if}
 		</div>
