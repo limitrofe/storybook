@@ -1,6 +1,7 @@
 <script>
 	import { createEventDispatcher, onDestroy, onMount } from 'svelte';
 	import { draggable } from '@neodrag/svelte';
+	import RichTextEditor from '$lib/builder/components/RichTextEditor.svelte';
 
 	export let data = {};
 
@@ -56,10 +57,15 @@
 			textAlignMobile: 'left',
 			color: '',
 			fontWeight: '',
+			fontStyle: '',
+			textDecoration: '',
+			textTransform: '',
+			letterSpacing: '',
+			textShadow: '',
 			typography: ''
 		},
-		desktop: { x: 120, y: 100, width: 260, height: 140, z: 1, opacity: 1 },
-		mobile: { x: 40, y: 80, width: 220, height: 140, z: 1, opacity: 1 },
+		desktop: { x: 120, y: 100, width: 260, height: 140, z: 1, opacity: 1, rotation: 0 },
+		mobile: { x: 40, y: 80, width: 220, height: 140, z: 1, opacity: 1, rotation: 0 },
 		autoHeight: type === 'text'
 	});
 
@@ -126,6 +132,22 @@
 			mobile: { ...base.mobile, ...(item.mobile || {}) }
 		};
 
+		const normalizeRotation = (value) => {
+			const numeric = Number(value);
+			return Number.isFinite(numeric) ? numeric : 0;
+		};
+
+		const normalizeOpacity = (value) => {
+			const numeric = Number(value);
+			if (!Number.isFinite(numeric)) return 1;
+			return Math.min(1, Math.max(0, numeric));
+		};
+
+		merged.desktop.rotation = normalizeRotation(merged.desktop.rotation);
+		merged.mobile.rotation = normalizeRotation(merged.mobile.rotation);
+		merged.desktop.opacity = normalizeOpacity(merged.desktop.opacity);
+		merged.mobile.opacity = normalizeOpacity(merged.mobile.opacity);
+
 		const sanitizedStyles = { ...base.textStyles, ...(item.textStyles || {}) };
 		if (sanitizedStyles.fontFamily === 'Inter, sans-serif') sanitizedStyles.fontFamily = '';
 		if (sanitizedStyles.fontSize === '32px') sanitizedStyles.fontSize = '';
@@ -172,6 +194,9 @@
 		}
 		previewNodes.delete(selectedItem.id);
 		data = { ...data, items: data.items.filter((item) => item.id !== selectedItem.id) };
+		if (editingItemId === selectedItem.id) {
+			editingItemId = null;
+		}
 		selectedId = data.items[0]?.id || null;
 		emit();
 	}
@@ -189,8 +214,11 @@
 	}
 
 	function setFrameValue(item, device, field, value) {
-		const numeric = Number.parseFloat(value);
-		const parsed = Number.isFinite(numeric) ? numeric : 0;
+	const numeric = Number.parseFloat(value);
+	let parsed = Number.isFinite(numeric) ? numeric : 0;
+	if (field === 'opacity') {
+		parsed = Math.min(1, Math.max(0, Number.isFinite(numeric) ? numeric : 1));
+	}
 		updateItem(item.id, (draft) => {
 			draft[device] = { ...draft[device], [field]: parsed };
 			if (field === 'height') {
@@ -206,6 +234,38 @@
 			draft.textStyles = { ...draft.textStyles, [field]: value };
 		});
 		emit();
+	}
+
+	function applyTextFormat(kind) {
+		if (!selectedItem || !contentTextarea) return;
+		const textarea = contentTextarea;
+		const selectionStart = textarea.selectionStart ?? 0;
+		const selectionEnd = textarea.selectionEnd ?? selectionStart;
+		const value = textarea.value || '';
+
+		const tags = {
+			bold: { open: '<strong>', close: '</strong>' },
+			italic: { open: '<em>', close: '</em>' },
+			underline: { open: '<u>', close: '</u>' }
+		};
+
+		const { open, close } = tags[kind] || tags.bold;
+		const selected = value.slice(selectionStart, selectionEnd);
+		const fallbackText = selected || 'texto';
+		const newValue =
+			value.slice(0, selectionStart) + open + fallbackText + close + value.slice(selectionEnd);
+
+		updateItem(selectedItem.id, (draft) => {
+			draft.content = newValue;
+		});
+		emit();
+
+		queueMicrotask(() => {
+			if (!contentTextarea) return;
+			const cursor = selectionStart + open.length + fallbackText.length;
+			contentTextarea.focus();
+			contentTextarea.setSelectionRange(cursor, cursor);
+		});
 	}
 
 	function setItemField(item, field, value) {
@@ -295,7 +355,7 @@
 		const color = getBackgroundColorValue(currentDevice) || '#000000';
 		const declarations = [
 			`width:${baseWidth}px`,
-			`height:${previewHeight}px`,
+			`height:${canvasHeightBase}px`,
 			`min-height:${currentDevice === 'desktop' ? data.minHeightDesktop : data.minHeightMobile}px`,
 			'position:relative',
 			'overflow:hidden',
@@ -332,7 +392,6 @@
 	$: baseWidth = currentDevice === 'desktop' ? data.baseWidthDesktop : data.baseWidthMobile;
 	$: canvasHeightBase = computeCanvasHeightBase(currentDevice);
 	$: scale = baseWidth > 0 ? previewRect.width / baseWidth : 1;
-	$: previewHeight = canvasHeightBase * scale;
 
 	function updatePreviewRect() {
 		if (!previewRef) return;
@@ -347,6 +406,15 @@
 		updatePreviewRect();
 		resizeObserver = new ResizeObserver(() => updatePreviewRect());
 		if (previewRef) resizeObserver.observe(previewRef);
+		const handleKeyDown = (event) => {
+			if (event.key === 'Escape') {
+				closeItemModal();
+			}
+		};
+		window.addEventListener('keydown', handleKeyDown);
+		return () => {
+			window.removeEventListener('keydown', handleKeyDown);
+		};
 	});
 
 	onDestroy(() => {
@@ -391,6 +459,10 @@
 		return Math.max(0, Math.min(max, value));
 	}
 
+	let editingItemId = null;
+	let contentTextarea;
+	$: editingItem = editingItemId ? findItemById(editingItemId) : null;
+
 	function registerPreviewNode(item, el) {
 		const id = item.id;
 		const existing = previewObservers.get(id);
@@ -398,10 +470,12 @@
 			existing.disconnect();
 			previewObservers.delete(id);
 		}
-		if (!el) {
+
+		if (item.type !== 'text' || !el) {
 			previewNodes.delete(id);
 			return;
 		}
+
 		previewNodes.set(id, el);
 		const observer = new ResizeObserver(() => {
 			const current = data.items.find((entry) => entry.id === id);
@@ -418,6 +492,105 @@
 		});
 		observer.observe(el);
 		previewObservers.set(id, observer);
+	}
+
+	function previewNodeAction(node, item) {
+		registerPreviewNode(item, node);
+		return {
+			update(newItem) {
+				if (newItem === item) return;
+				registerPreviewNode(item, null);
+				item = newItem;
+				registerPreviewNode(item, node);
+			},
+			destroy() {
+				registerPreviewNode(item, null);
+			}
+		};
+	}
+
+	function getPreviewItemStyle(item) {
+		const frame = item[currentDevice] || {};
+		const {
+			x = 0,
+			y = 0,
+			width = 200,
+			height = 120,
+			z = 1,
+			opacity = 1,
+			rotation = 0
+		} = frame;
+		const declarations = [
+			'position:absolute',
+			`left:${x}px`,
+			`top:${y}px`,
+			`width:${width}px`,
+			item.autoHeight && item.type === 'text' ? 'height:auto' : `height:${height}px`,
+			`z-index:${z}`,
+			`opacity:${opacity}`,
+			'transform-origin:top left',
+			`transform:rotate(${rotation}deg)`
+		];
+		return declarations.join(';');
+	}
+
+	const selectValue = (primary, fallback) =>
+		primary !== undefined && primary !== null && primary !== '' ? primary : fallback ?? '';
+
+	function getPreviewTextStyle(item) {
+		const styles = item.textStyles || {};
+		const align = currentDevice === 'mobile'
+			? selectValue(styles.textAlignMobile, styles.textAlign)
+			: selectValue(styles.textAlign, styles.textAlignMobile);
+		const fontSize = currentDevice === 'mobile'
+			? selectValue(styles.fontSizeMobile, styles.fontSize)
+			: selectValue(styles.fontSize, styles.fontSizeMobile);
+		const lineHeight = currentDevice === 'mobile'
+			? selectValue(styles.lineHeightMobile, styles.lineHeight)
+			: selectValue(styles.lineHeight, styles.lineHeightMobile);
+
+		const declarations = [
+			'width:100%',
+			 item.autoHeight ? 'min-height:20px' : 'height:100%',
+			'pointer-events:none',
+			`text-align:${align || 'left'}`
+		];
+
+		const fontWeight = selectValue(styles.fontWeight, '');
+		const fontStyle = selectValue(styles.fontStyle, '');
+		const textTransform = selectValue(styles.textTransform, '');
+		const textDecoration = selectValue(styles.textDecoration, '');
+		const letterSpacing = selectValue(styles.letterSpacing, '');
+		const textShadow = selectValue(styles.textShadow, '');
+		const color = selectValue(styles.color, '');
+
+		if (fontSize) declarations.push(`font-size:${fontSize}`);
+		if (lineHeight) declarations.push(`line-height:${lineHeight}`);
+		if (fontWeight) declarations.push(`font-weight:${fontWeight}`);
+		if (fontStyle) declarations.push(`font-style:${fontStyle}`);
+		if (textTransform) declarations.push(`text-transform:${textTransform}`);
+		if (textDecoration) declarations.push(`text-decoration:${textDecoration}`);
+		if (letterSpacing) declarations.push(`letter-spacing:${letterSpacing}`);
+		if (textShadow) declarations.push(`text-shadow:${textShadow}`);
+		if (color) declarations.push(`color:${color}`);
+
+		return declarations.join(';');
+	}
+
+	function getPreviewMediaSource(item) {
+		if (!item) return '';
+		const desktop = sanitizeUrl(item.src);
+		const mobile = sanitizeUrl(item.srcMobile) || desktop;
+		return currentDevice === 'mobile' ? mobile : desktop;
+	}
+
+	function openItemModal(item) {
+		selectedId = item.id;
+		editingItemId = item.id;
+	}
+
+	function closeItemModal() {
+		editingItemId = null;
 	}
 
 	function getDragOptions(item) {
@@ -536,11 +709,40 @@
 					{#if item[currentDevice]}
 						<div
 							class="preview-item {selectedId === item.id ? 'selected' : ''}"
-							style={`left:${item[currentDevice].x || 0}px;top:${item[currentDevice].y || 0}px;width:${item[currentDevice].width || 200}px;height:${item[currentDevice].height || 120}px;`}
+							style={getPreviewItemStyle(item)}
 							use:draggable={getDragOptions(item)}
 							on:click={() => (selectedId = item.id)}
+							on:dblclick={() => openItemModal(item)}
 						>
-							<div class="preview-label">{item.type}</div>
+						{#if item.type === 'text'}
+						<div
+							class="preview-item__text"
+							style={getPreviewTextStyle(item)}
+							use:previewNodeAction={item}
+						>
+								{@html item.content || ''}
+						</div>
+							{:else if item.type === 'image'}
+								<img
+									class="preview-item__image"
+									src={getPreviewMediaSource(item)}
+									alt={item.alt || ''}
+									style={`object-fit:${item.objectFit || 'cover'};`}
+								/>
+							{:else if item.type === 'video'}
+								<video
+									class="preview-item__video"
+									src={getPreviewMediaSource(item)}
+									poster={item.poster || ''}
+									muted
+									playsinline
+									autoplay={item.autoplay ?? true}
+									loop={item.loop ?? true}
+									style={`object-fit:${item.objectFit || 'cover'};`}
+								></video>
+							{:else}
+								<div class="preview-item__placeholder">{item.type}</div>
+							{/if}
 						</div>
 					{/if}
 				{/each}
@@ -746,6 +948,9 @@
 							/>
 							Mudo
 						</label>
+						<button type="button" class="secondary-button" on:click={() => openItemModal(selectedItem)}>
+							Abrir editor avançado
+						</button>
 					</div>
 				{/if}
 				<label>
@@ -812,19 +1017,55 @@
 									setFrameValue(selectedItem, currentDevice, 'height', e.currentTarget.value)}
 							/>
 						</label>
+						<label>
+							Rotação ({currentDevice})
+							<input
+								type="number"
+								value={selectedItem[currentDevice].rotation ?? 0}
+								on:input={(e) =>
+									setFrameValue(selectedItem, currentDevice, 'rotation', e.currentTarget.value)}
+							/>
+						</label>
+						<label>
+							Opacidade ({currentDevice})
+							<input
+								type="number"
+								min="0"
+								max="1"
+								step="0.05"
+								value={selectedItem[currentDevice].opacity ?? 1}
+								on:input={(e) =>
+									setFrameValue(selectedItem, currentDevice, 'opacity', e.currentTarget.value)}
+							/>
+						</label>
 					</div>
 					{#if selectedItem.type === 'text'}
 						<label>
 							Conteúdo (HTML)
+							<div class="text-toolbar">
+								<button type="button" class="toolbar-button" title="Negrito" on:click={() => applyTextFormat('bold')}>
+									<strong>B</strong>
+								</button>
+								<button type="button" class="toolbar-button" title="Itálico" on:click={() => applyTextFormat('italic')}>
+									<em>I</em>
+								</button>
+								<button type="button" class="toolbar-button" title="Sublinhado" on:click={() => applyTextFormat('underline')}>
+									<span class="underline">U</span>
+								</button>
+							</div>
 							<textarea
 								rows="4"
 								value={selectedItem.content}
+								bind:this={contentTextarea}
 								on:input={(e) => {
 									updateItem(selectedItem.id, (draft) => (draft.content = e.currentTarget.value));
 									emit();
 								}}
 							></textarea>
 						</label>
+						<button type="button" class="secondary-button" on:click={() => openItemModal(selectedItem)}>
+							Abrir editor avançado
+						</button>
 						<label class="checkbox">
 							<input
 								type="checkbox"
@@ -855,6 +1096,76 @@
 							</select>
 							<small class="hint">Se já inseriu HTML no campo de conteúdo, deixe em branco.</small>
 						</label>
+						<div class="text-style-grid">
+							<label>
+								Peso
+								<select
+									value={selectedItem.textStyles?.fontWeight || ''}
+									on:change={(e) => setTextValue('fontWeight', e.currentTarget.value)}
+								>
+									<option value="">Herdar</option>
+									<option value="300">Light</option>
+									<option value="400">Normal</option>
+									<option value="500">Medium</option>
+									<option value="600">Semibold</option>
+									<option value="700">Bold</option>
+									<option value="800">Extra Bold</option>
+									<option value="900">Black</option>
+								</select>
+							</label>
+							<label>
+								Estilo
+								<select
+									value={selectedItem.textStyles?.fontStyle || ''}
+									on:change={(e) => setTextValue('fontStyle', e.currentTarget.value)}
+								>
+									<option value="">Normal</option>
+									<option value="italic">Itálico</option>
+								</select>
+							</label>
+							<label>
+								Decoração
+								<select
+									value={selectedItem.textStyles?.textDecoration || ''}
+									on:change={(e) => setTextValue('textDecoration', e.currentTarget.value)}
+								>
+									<option value="">Nenhuma</option>
+									<option value="underline">Sublinhado</option>
+									<option value="line-through">Tachado</option>
+									<option value="overline">Linha superior</option>
+								</select>
+							</label>
+							<label>
+								Transformação
+								<select
+									value={selectedItem.textStyles?.textTransform || ''}
+									on:change={(e) => setTextValue('textTransform', e.currentTarget.value)}
+								>
+									<option value="">Normal</option>
+									<option value="uppercase">Caixa alta</option>
+									<option value="lowercase">Caixa baixa</option>
+									<option value="capitalize">Capitalizar</option>
+								</select>
+							</label>
+							<label>
+								Espaçamento letras
+								<input
+									type="text"
+									placeholder="ex: 0.08em"
+									value={selectedItem.textStyles?.letterSpacing || ''}
+									on:input={(e) => setTextValue('letterSpacing', e.currentTarget.value)}
+								/>
+							</label>
+							<label>
+								Sombra
+								<input
+									type="text"
+									placeholder="ex: 2px 2px 4px rgba(0,0,0,0.4)"
+									value={selectedItem.textStyles?.textShadow || ''}
+									on:input={(e) => setTextValue('textShadow', e.currentTarget.value)}
+								/>
+							</label>
+						</div>
 					{:else if selectedItem.type === 'image'}
 						<label>
 							Imagem desktop (URL)
@@ -894,6 +1205,9 @@
 								{/each}
 							</select>
 						</label>
+						<button type="button" class="secondary-button" on:click={() => openItemModal(selectedItem)}>
+							Abrir editor avançado
+						</button>
 					{:else if selectedItem.type === 'video'}
 						<label>
 							Vídeo desktop (URL)
@@ -977,6 +1291,430 @@
 	</div>
 </div>
 
+{#if editingItem}
+	<div class="free-canvas-modal-backdrop" on:click={closeItemModal}>
+		<div class="free-canvas-modal" on:click|stopPropagation>
+			<header>
+				<h2>
+					Editar
+					{#if editingItem.type === 'text'}
+						texto
+					{:else if editingItem.type === 'image'}
+						imagem
+					{:else if editingItem.type === 'video'}
+						vídeo
+					{:else}
+						{editingItem.type}
+					{/if}
+				</h2>
+				<button type="button" class="toolbar-button" on:click={closeItemModal} title="Fechar">✕</button>
+			</header>
+			<div class="modal-body">
+				{#if editingItem.type === 'text'}
+					<RichTextEditor
+						value={selectedItem?.content || ''}
+						rows={10}
+						on:change={(event) => {
+							const html = event.detail.value;
+							updateItem(selectedItem.id, (draft) => (draft.content = html));
+							emit();
+						}}
+					/>
+					<div class="modal-grid">
+						<label>
+							Cor do texto
+							<input
+								type="color"
+								value={selectedItem.textStyles?.color || '#ffffff'}
+								on:input={(e) => setTextValue('color', e.currentTarget.value)}
+							/>
+						</label>
+						<label>
+							Tipografia (usa HTML automático)
+							<select
+								value={selectedItem.textStyles?.typography || ''}
+								on:change={(e) => setTextValue('typography', e.currentTarget.value)}
+							>
+								{#each TYPOGRAPHY_OPTIONS as option}
+									<option value={option.value}>{option.label}</option>
+								{/each}
+							</select>
+						</label>
+						<label>
+							Tamanho desktop
+							<input
+								type="text"
+								placeholder="ex: 32px"
+								value={selectedItem.textStyles?.fontSize || ''}
+								on:input={(e) => setTextValue('fontSize', e.currentTarget.value)}
+							/>
+						</label>
+						<label>
+							Tamanho mobile
+							<input
+								type="text"
+								placeholder="ex: 24px"
+								value={selectedItem.textStyles?.fontSizeMobile || ''}
+								on:input={(e) => setTextValue('fontSizeMobile', e.currentTarget.value)}
+							/>
+						</label>
+						<label>
+							Alinhamento desktop
+							<select
+								value={selectedItem.textStyles?.textAlign || 'left'}
+								on:change={(e) => setTextValue('textAlign', e.currentTarget.value)}
+							>
+								<option value="left">Esquerda</option>
+								<option value="center">Centro</option>
+								<option value="right">Direita</option>
+							</select>
+						</label>
+						<label>
+							Alinhamento mobile
+							<select
+								value={selectedItem.textStyles?.textAlignMobile || selectedItem.textStyles?.textAlign || 'left'}
+								on:change={(e) => setTextValue('textAlignMobile', e.currentTarget.value)}
+							>
+								<option value="left">Esquerda</option>
+								<option value="center">Centro</option>
+								<option value="right">Direita</option>
+							</select>
+						</label>
+					</div>
+					<div class="text-style-grid">
+						<label>
+							Peso
+							<select
+								value={selectedItem.textStyles?.fontWeight || ''}
+								on:change={(e) => setTextValue('fontWeight', e.currentTarget.value)}
+							>
+								<option value="">Herdar</option>
+								<option value="300">Light</option>
+								<option value="400">Normal</option>
+								<option value="500">Medium</option>
+								<option value="600">Semibold</option>
+								<option value="700">Bold</option>
+								<option value="800">Extra Bold</option>
+								<option value="900">Black</option>
+							</select>
+						</label>
+						<label>
+							Estilo
+							<select
+								value={selectedItem.textStyles?.fontStyle || ''}
+								on:change={(e) => setTextValue('fontStyle', e.currentTarget.value)}
+							>
+								<option value="">Normal</option>
+								<option value="italic">Itálico</option>
+							</select>
+						</label>
+						<label>
+							Decoração
+							<select
+								value={selectedItem.textStyles?.textDecoration || ''}
+								on:change={(e) => setTextValue('textDecoration', e.currentTarget.value)}
+							>
+								<option value="">Nenhuma</option>
+								<option value="underline">Sublinhado</option>
+								<option value="line-through">Tachado</option>
+								<option value="overline">Linha superior</option>
+							</select>
+						</label>
+						<label>
+							Transformação
+							<select
+								value={selectedItem.textStyles?.textTransform || ''}
+								on:change={(e) => setTextValue('textTransform', e.currentTarget.value)}
+							>
+								<option value="">Normal</option>
+								<option value="uppercase">Caixa alta</option>
+								<option value="lowercase">Caixa baixa</option>
+								<option value="capitalize">Capitalizar</option>
+							</select>
+						</label>
+						<label>
+							Espaçamento letras
+							<input
+								type="text"
+								placeholder="ex: 0.08em"
+								value={selectedItem.textStyles?.letterSpacing || ''}
+								on:input={(e) => setTextValue('letterSpacing', e.currentTarget.value)}
+							/>
+						</label>
+						<label>
+							Sombra
+							<input
+								type="text"
+								placeholder="ex: 2px 2px 4px rgba(0,0,0,0.4)"
+								value={selectedItem.textStyles?.textShadow || ''}
+								on:input={(e) => setTextValue('textShadow', e.currentTarget.value)}
+							/>
+						</label>
+					</div>
+					<div class="modal-grid">
+						<label>
+							Largura ({currentDevice})
+							<input
+								type="number"
+								min="0"
+								value={selectedItem[currentDevice].width}
+								on:input={(e) => setFrameValue(selectedItem, currentDevice, 'width', e.currentTarget.value)}
+							/>
+						</label>
+						<label>
+							Altura ({currentDevice})
+							<input
+								type="number"
+								min="0"
+								disabled={selectedItem.autoHeight ?? selectedItem.type === 'text'}
+								value={selectedItem[currentDevice].height}
+								on:input={(e) => setFrameValue(selectedItem, currentDevice, 'height', e.currentTarget.value)}
+							/>
+						</label>
+						<label>
+							Rotação ({currentDevice})
+							<input
+								type="number"
+								value={selectedItem[currentDevice].rotation ?? 0}
+								on:input={(e) => setFrameValue(selectedItem, currentDevice, 'rotation', e.currentTarget.value)}
+							/>
+						</label>
+						<label>
+							Opacidade ({currentDevice})
+							<input
+								type="number"
+								min="0"
+								max="1"
+								step="0.05"
+								value={selectedItem[currentDevice].opacity ?? 1}
+								on:input={(e) => setFrameValue(selectedItem, currentDevice, 'opacity', e.currentTarget.value)}
+							/>
+						</label>
+					</div>
+				{:else if editingItem.type === 'image'}
+					<div class="modal-preview">
+						{#if getPreviewMediaSource(editingItem)}
+							<img src={getPreviewMediaSource(editingItem)} alt={editingItem.alt || ''} />
+						{:else}
+							<span>Insira uma URL de imagem para visualizar</span>
+						{/if}
+					</div>
+					<div class="modal-grid">
+						<label>
+							Imagem desktop (URL)
+							<input
+								type="text"
+								placeholder="https://..."
+								value={editingItem.src || ''}
+								on:input={(e) => setItemField(editingItem, 'src', e.currentTarget.value)}
+							/>
+						</label>
+						<label>
+							Imagem mobile (URL)
+							<input
+								type="text"
+								placeholder="https://..."
+								value={editingItem.srcMobile || ''}
+								on:input={(e) => setItemField(editingItem, 'srcMobile', e.currentTarget.value)}
+							/>
+						</label>
+						<label>
+							Texto alternativo
+							<input
+								type="text"
+								placeholder="Descrição da imagem"
+								value={editingItem.alt || ''}
+								on:input={(e) => setItemField(editingItem, 'alt', e.currentTarget.value)}
+							/>
+						</label>
+						<label>
+							Ajuste da imagem
+							<select
+								value={editingItem.objectFit || 'cover'}
+								on:change={(e) => setItemField(editingItem, 'objectFit', e.currentTarget.value)}
+							>
+								{#each OBJECT_FIT_OPTIONS as option}
+									<option value={option.value}>{option.label}</option>
+								{/each}
+							</select>
+						</label>
+					</div>
+					<div class="modal-grid">
+						<label>
+							Largura ({currentDevice})
+							<input
+								type="number"
+								min="0"
+								value={editingItem[currentDevice].width}
+								on:input={(e) => setFrameValue(editingItem, currentDevice, 'width', e.currentTarget.value)}
+							/>
+						</label>
+						<label>
+							Altura ({currentDevice})
+							<input
+								type="number"
+								min="0"
+								value={editingItem[currentDevice].height}
+								on:input={(e) => setFrameValue(editingItem, currentDevice, 'height', e.currentTarget.value)}
+							/>
+						</label>
+						<label>
+							Rotação ({currentDevice})
+							<input
+								type="number"
+								value={editingItem[currentDevice].rotation ?? 0}
+								on:input={(e) => setFrameValue(editingItem, currentDevice, 'rotation', e.currentTarget.value)}
+							/>
+						</label>
+						<label>
+							Opacidade ({currentDevice})
+							<input
+								type="number"
+								min="0"
+								max="1"
+								step="0.05"
+								value={editingItem[currentDevice].opacity ?? 1}
+								on:input={(e) => setFrameValue(editingItem, currentDevice, 'opacity', e.currentTarget.value)}
+							/>
+						</label>
+					</div>
+				{:else if editingItem.type === 'video'}
+					<div class="modal-preview">
+						{#if getPreviewMediaSource(editingItem)}
+							<video
+								src={getPreviewMediaSource(editingItem)}
+								poster={editingItem.poster || ''}
+								controls
+								muted
+								playsinline
+							></video>
+						{:else}
+							<span>Defina uma URL de vídeo para visualizar</span>
+						{/if}
+					</div>
+					<div class="modal-grid">
+						<label>
+							Vídeo desktop (URL)
+							<input
+								type="text"
+								placeholder="https://..."
+								value={editingItem.src || ''}
+								on:input={(e) => setItemField(editingItem, 'src', e.currentTarget.value)}
+							/>
+						</label>
+						<label>
+							Vídeo mobile (URL)
+							<input
+								type="text"
+								placeholder="https://..."
+								value={editingItem.srcMobile || ''}
+								on:input={(e) => setItemField(editingItem, 'srcMobile', e.currentTarget.value)}
+							/>
+						</label>
+						<label>
+							Poster desktop (URL)
+							<input
+								type="text"
+								placeholder="https://..."
+								value={editingItem.poster || ''}
+								on:input={(e) => setItemField(editingItem, 'poster', e.currentTarget.value)}
+							/>
+						</label>
+						<label>
+							Poster mobile (URL)
+							<input
+								type="text"
+								placeholder="https://..."
+								value={editingItem.posterMobile || ''}
+								on:input={(e) => setItemField(editingItem, 'posterMobile', e.currentTarget.value)}
+							/>
+						</label>
+						<label>
+							Ajuste do vídeo
+							<select
+								value={editingItem.objectFit || 'cover'}
+								on:change={(e) => setItemField(editingItem, 'objectFit', e.currentTarget.value)}
+							>
+								{#each OBJECT_FIT_OPTIONS as option}
+									<option value={option.value}>{option.label}</option>
+								{/each}
+							</select>
+						</label>
+					</div>
+					<div class="modal-grid">
+						<label>
+							Largura ({currentDevice})
+							<input
+								type="number"
+								min="0"
+								value={editingItem[currentDevice].width}
+								on:input={(e) => setFrameValue(editingItem, currentDevice, 'width', e.currentTarget.value)}
+							/>
+						</label>
+						<label>
+							Altura ({currentDevice})
+							<input
+								type="number"
+								min="0"
+								value={editingItem[currentDevice].height}
+								on:input={(e) => setFrameValue(editingItem, currentDevice, 'height', e.currentTarget.value)}
+							/>
+						</label>
+						<label>
+							Rotação ({currentDevice})
+							<input
+								type="number"
+								value={editingItem[currentDevice].rotation ?? 0}
+								on:input={(e) => setFrameValue(editingItem, currentDevice, 'rotation', e.currentTarget.value)}
+							/>
+						</label>
+						<label>
+							Opacidade ({currentDevice})
+							<input
+								type="number"
+								min="0"
+								max="1"
+								step="0.05"
+								value={editingItem[currentDevice].opacity ?? 1}
+								on:input={(e) => setFrameValue(editingItem, currentDevice, 'opacity', e.currentTarget.value)}
+							/>
+						</label>
+					</div>
+					<div class="checkbox-row">
+						<label class="checkbox">
+							<input
+								type="checkbox"
+								checked={editingItem.autoplay ?? true}
+								on:change={(e) => setItemField(editingItem, 'autoplay', e.currentTarget.checked)}
+							/>
+							Autoplay
+						</label>
+						<label class="checkbox">
+							<input
+								type="checkbox"
+								checked={editingItem.loop ?? true}
+								on:change={(e) => setItemField(editingItem, 'loop', e.currentTarget.checked)}
+							/>
+							Loop
+						</label>
+						<label class="checkbox">
+							<input
+								type="checkbox"
+								checked={editingItem.muted ?? true}
+								on:change={(e) => setItemField(editingItem, 'muted', e.currentTarget.checked)}
+							/>
+							Mudo
+						</label>
+					</div>
+				{/if}
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="secondary-button" on:click={closeItemModal}>Fechar</button>
+			</div>
+		</div>
+	</div>
+{/if}
+
 <style>
 	.editor {
 		display: flex;
@@ -1009,6 +1747,24 @@
 		color: white;
 	}
 
+	.secondary-button {
+		align-self: flex-start;
+		padding: 0.45rem 0.75rem;
+		border-radius: 8px;
+		border: 1px solid rgba(148, 163, 184, 0.6);
+		background: #f8fafc;
+		font-size: 0.85rem;
+		cursor: pointer;
+		transition: background 0.2s ease, border-color 0.2s ease;
+	}
+
+	.secondary-button:hover,
+	.secondary-button:focus {
+		background: #e2e8f0;
+		border-color: rgba(59, 130, 246, 0.45);
+		outline: none;
+	}
+
 	.canvas-panel {
 		display: grid;
 		grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
@@ -1030,31 +1786,53 @@
 
 	.preview-item {
 		position: absolute;
-		border: 2px dashed rgba(148, 163, 184, 0.6);
-		border-radius: 8px;
 		box-sizing: border-box;
-		background: rgba(30, 41, 59, 0.55);
-		color: white;
-		cursor: grab;
+		border: 1px solid rgba(148, 163, 184, 0.4);
+		border-radius: 10px;
+		background: rgba(15, 23, 42, 0.08);
+		backdrop-filter: blur(1px);
+		cursor: move;
 		touch-action: none;
+		overflow: hidden;
+		transition: box-shadow 0.2s ease, border-color 0.2s ease;
+	}
+
+	.preview-item.selected {
+		border-color: rgba(59, 130, 246, 0.95);
+		box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+	}
+
+	.preview-item__text {
+		padding: 0.75rem;
+		color: inherit;
+		font-size: inherit;
+		line-height: inherit;
+		pointer-events: none;
+	}
+
+	.preview-item__image,
+	.preview-item__video {
+		width: 100%;
+		height: 100%;
+		display: block;
+		pointer-events: none;
+	}
+
+	.preview-item__video {
+		background: #000;
+	}
+
+	.preview-item__placeholder {
+		pointer-events: none;
+		width: 100%;
+		height: 100%;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		font-size: 0.85rem;
 		text-transform: uppercase;
-		z-index: 1;
-	}
-
-	.preview-item.selected {
-		border-color: rgba(59, 130, 246, 0.9);
-		box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.4);
-	}
-
-	.preview-label {
-		pointer-events: none;
-		opacity: 0.85;
-		font-weight: 600;
 		letter-spacing: 0.08em;
+		color: rgba(148, 163, 184, 0.9);
 	}
 
 	.preview-background-video {
@@ -1098,6 +1876,121 @@
 	label.checkbox input {
 		width: auto;
 		margin-right: 0.5rem;
+	}
+
+	.text-style-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+		gap: 0.75rem;
+	}
+
+	.text-toolbar {
+		display: flex;
+		gap: 0.5rem;
+		margin-bottom: 0.4rem;
+	}
+
+	.toolbar-button {
+		border: 1px solid rgba(148, 163, 184, 0.6);
+		background: #ffffff;
+		border-radius: 6px;
+		padding: 0.25rem 0.5rem;
+		cursor: pointer;
+		font-size: 0.9rem;
+		line-height: 1;
+		color: #0f172a;
+		transition: background 0.2s ease, border-color 0.2s ease;
+	}
+
+	.toolbar-button:hover,
+	.toolbar-button:focus {
+		background: rgba(59, 130, 246, 0.1);
+		border-color: rgba(59, 130, 246, 0.6);
+		outline: none;
+	}
+
+	.toolbar-button .underline {
+		text-decoration: underline;
+	}
+
+	.free-canvas-modal-backdrop {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		background: rgba(15, 23, 42, 0.55);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		z-index: 1000;
+		backdrop-filter: blur(4px);
+	}
+
+	.free-canvas-modal {
+		background: #ffffff;
+		color: #0f172a;
+		border-radius: 16px;
+		box-shadow: 0 20px 40px rgba(15, 23, 42, 0.35);
+		width: min(960px, 92vw);
+		max-height: 92vh;
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
+	}
+
+	.free-canvas-modal header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 1rem 1.5rem;
+		border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+	}
+
+	.free-canvas-modal header h2 {
+		margin: 0;
+		font-size: 1.25rem;
+	}
+
+	.free-canvas-modal .modal-body {
+		padding: 1.5rem;
+		overflow-y: auto;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.free-canvas-modal .modal-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+		gap: 0.75rem;
+	}
+
+	.free-canvas-modal .modal-footer {
+		display: flex;
+		justify-content: flex-end;
+		gap: 0.75rem;
+		padding: 1rem 1.5rem;
+		border-top: 1px solid rgba(148, 163, 184, 0.2);
+	}
+
+	.free-canvas-modal .modal-preview {
+		border: 1px solid rgba(148, 163, 184, 0.4);
+		border-radius: 12px;
+		padding: 0.75rem;
+		background: rgba(241, 245, 249, 0.6);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		overflow: hidden;
+	}
+
+	.free-canvas-modal .modal-preview img,
+	.free-canvas-modal .modal-preview video {
+		max-width: 100%;
+		max-height: 280px;
+		object-fit: contain;
+		border-radius: 8px;
 	}
 
 	.checkbox-row {

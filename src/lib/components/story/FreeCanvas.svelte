@@ -98,6 +98,8 @@
 		const fontWeight = selectValue(styles.fontWeight, config?.fontWeight);
 		const fontStyle = selectValue(styles.fontStyle, config?.fontStyle);
 		const textTransform = selectValue(styles.textTransform, config?.textTransform);
+		const textDecoration = selectValue(styles.textDecoration, config?.textDecoration);
+		const textShadow = selectValue(styles.textShadow, config?.textShadow);
 		const letterSpacing = selectValue(styles.letterSpacing, config?.letterSpacing);
 		const color = selectValue(styles.color, config?.color);
 
@@ -107,6 +109,8 @@
 		if (textTransform) declarations.push(`text-transform:${textTransform}`);
 		if (letterSpacing) declarations.push(`letter-spacing:${letterSpacing}`);
 		if (color) declarations.push(`color:${color}`);
+		if (textDecoration) declarations.push(`text-decoration:${textDecoration}`);
+		if (textShadow) declarations.push(`text-shadow:${textShadow}`);
 
 		const desktop = config?.desktop || {};
 		const mobile = config?.mobile || {};
@@ -299,7 +303,15 @@
 	function getStyle(item) {
 		const frame = getFrame(item);
 		if (!frame) return '';
-		const { x = 0, y = 0, width = 200, height = 100, z = 1, opacity = 1 } = frame;
+		const {
+			x = 0,
+			y = 0,
+			width = 200,
+			height = 100,
+			z = 1,
+			opacity = 1,
+			rotation = 0
+		} = frame;
 		const overflow = item.type === 'text' ? 'visible' : 'hidden';
 		if (isSimulatedMobile) {
 			const left = x * simulatedScale;
@@ -315,6 +327,8 @@
 		z-index:${z};
 		opacity:${opacity};
 		overflow:${overflow};
+		transform:rotate(${rotation}deg);
+		transform-origin:top left;
 	`;
 		}
 		const baseWidth = effectiveBaseWidth || (isMobile ? baseWidthMobile : baseWidthDesktop) || 1;
@@ -327,6 +341,8 @@
 		z-index:${z};
 		opacity:${opacity};
 		overflow:${overflow};
+		transform:rotate(${rotation}deg);
+		transform-origin:top left;
 	`;
 	}
 
