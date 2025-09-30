@@ -404,7 +404,7 @@
       "minHeightDesktop": 600,
       "maxHeightDesktop": 600,
       "minHeightMobile": 1500,
-      "maxHeightMobile": 1500,
+      "maxHeightMobile": 3989,
       "baseWidthDesktop": 1200,
       "baseWidthMobile": 375,
       "backgroundSource": "color",
@@ -445,6 +445,11 @@
             "textAlignMobile": "left",
             "color": "",
             "fontWeight": "",
+            "fontStyle": "",
+            "textDecoration": "",
+            "textTransform": "",
+            "letterSpacing": "",
+            "textShadow": "",
             "typography": ""
           },
           "desktop": {
@@ -456,8 +461,8 @@
             "opacity": 1
           },
           "mobile": {
-            "x": 133.49546279207195,
-            "y": 503.79819220217115,
+            "x": 111.33530654207195,
+            "y": 551.8958484521711,
             "width": 220,
             "height": 140,
             "z": 1,
@@ -488,6 +493,11 @@
             "textAlignMobile": "left",
             "color": "#b3ff3c",
             "fontWeight": "",
+            "fontStyle": "",
+            "textDecoration": "",
+            "textTransform": "",
+            "letterSpacing": "",
+            "textShadow": "",
             "typography": "h3"
           },
           "desktop": {
@@ -499,10 +509,10 @@
             "opacity": 1
           },
           "mobile": {
-            "x": 115.50136136212761,
-            "y": 376.00608914455484,
+            "x": 109.03261136212761,
+            "y": 695.6467141445548,
             "width": 220,
-            "height": 140,
+            "height": 47.90419161676647,
             "z": 1,
             "opacity": 1
           }
@@ -510,7 +520,7 @@
         {
           "id": "1e6ab1fa-3be5-48d9-a8b1-a590f54856fa",
           "type": "text",
-          "content": "Por que é suspeita? É a candidata mais óbvia. Ambiciosa, sem escrúpulos e nora de Odete, ela sempre viveu em conflito direto com a sogra, que a desprezava. Matar Odete seria o caminho mais rápido para Fátima garantir sua herança, seu poder e se livrar de sua maior rival.\n",
+          "content": "Por que é suspeita? É a candidata mais óbvia. Ambiciosa, sem escrúpulos e nora de Odete, ela sempre viveu em conflito direto com a sogra, que a desprezava. Matar Odete seria o caminho mais rápido para Fátima garantir sua herança, seu poder e se livrar de sua maior rival.",
           "src": "",
           "srcMobile": "",
           "alt": "",
@@ -531,6 +541,11 @@
             "textAlignMobile": "left",
             "color": "",
             "fontWeight": "",
+            "fontStyle": "",
+            "textDecoration": "",
+            "textTransform": "",
+            "letterSpacing": "",
+            "textShadow": "",
             "typography": ""
           },
           "desktop": {
@@ -542,10 +557,10 @@
             "opacity": 1
           },
           "mobile": {
-            "x": 23.7808108291717,
-            "y": 204.3383183843281,
+            "x": 24.813900899031978,
+            "y": 218.50529692724226,
             "width": 220,
-            "height": 140,
+            "height": 312,
             "z": 1,
             "opacity": 1
           }
@@ -574,6 +589,11 @@
             "textAlignMobile": "left",
             "color": "",
             "fontWeight": "",
+            "fontStyle": "",
+            "textDecoration": "",
+            "textTransform": "",
+            "letterSpacing": "",
+            "textShadow": "",
             "typography": ""
           },
           "desktop": {
@@ -617,6 +637,11 @@
             "textAlignMobile": "left",
             "color": "#b3ff3c",
             "fontWeight": "",
+            "fontStyle": "",
+            "textDecoration": "",
+            "textTransform": "",
+            "letterSpacing": "",
+            "textShadow": "",
             "typography": "h3"
           },
           "desktop": {
@@ -628,10 +653,10 @@
             "opacity": 1
           },
           "mobile": {
-            "x": 155,
-            "y": 100.66687743806658,
+            "x": 25.275074850299404,
+            "y": 180.35515712868533,
             "width": 220,
-            "height": 140,
+            "height": 47.90419161676647,
             "z": 1,
             "opacity": 1
           }
@@ -660,6 +685,11 @@
             "textAlignMobile": "left",
             "color": "",
             "fontWeight": "",
+            "fontStyle": "",
+            "textDecoration": "",
+            "textTransform": "",
+            "letterSpacing": "",
+            "textShadow": "",
             "typography": ""
           },
           "desktop": {
@@ -671,10 +701,10 @@
             "opacity": 1
           },
           "mobile": {
-            "x": 110.1336788675725,
-            "y": 234.7911248159585,
+            "x": 111.8133663675725,
+            "y": 741.0684685659585,
             "width": 220,
-            "height": 140,
+            "height": 384,
             "z": 1,
             "opacity": 1
           }
@@ -703,6 +733,11 @@
             "textAlignMobile": "left",
             "color": "#b3ff2c",
             "fontWeight": "",
+            "fontStyle": "",
+            "textDecoration": "",
+            "textTransform": "",
+            "letterSpacing": "",
+            "textShadow": "",
             "typography": "h6"
           },
           "desktop": {
@@ -714,10 +749,10 @@
             "opacity": 1
           },
           "mobile": {
-            "x": 40,
-            "y": 80,
+            "x": 53.3872879241517,
+            "y": 1256.030750998004,
             "width": 220,
-            "height": 140,
+            "height": 71.8562874251497,
             "z": 1,
             "opacity": 1
           }
@@ -746,6 +781,11 @@
             "textAlignMobile": "left",
             "color": "#b3ff3c",
             "fontWeight": "",
+            "fontStyle": "",
+            "textDecoration": "",
+            "textTransform": "",
+            "letterSpacing": "",
+            "textShadow": "",
             "typography": "h6"
           },
           "desktop": {
@@ -757,10 +797,10 @@
             "opacity": 1
           },
           "mobile": {
-            "x": 56.52456771587506,
-            "y": 77.21869742735603,
+            "x": 11.867787526254299,
+            "y": 1141.1416328065975,
             "width": 220,
-            "height": 140,
+            "height": 71.8562874251497,
             "z": 1,
             "opacity": 1
           }

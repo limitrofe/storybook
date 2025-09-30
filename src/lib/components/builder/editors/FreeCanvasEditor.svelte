@@ -171,7 +171,7 @@
 
 	function selectDevice(device) {
 		currentDevice = device;
-		queueMicrotask(updatePreviewRect);
+		queueMicrotask(() => updatePreviewRect(device));
 	}
 
 	function emit() {
@@ -187,12 +187,15 @@
 
 	function removeSelected() {
 		if (!selectedItem) return;
-		const observer = previewObservers.get(selectedItem.id);
-		if (observer) {
-			observer.disconnect();
-			previewObservers.delete(selectedItem.id);
-		}
-		previewNodes.delete(selectedItem.id);
+		DEVICE_LIST.forEach((device) => {
+			const key = getPreviewKey(selectedItem.id, device);
+			const observer = previewObservers.get(key);
+			if (observer) {
+				observer.disconnect();
+				previewObservers.delete(key);
+			}
+			previewNodes.delete(key);
+		});
 		data = { ...data, items: data.items.filter((item) => item.id !== selectedItem.id) };
 		if (editingItemId === selectedItem.id) {
 			editingItemId = null;
@@ -293,13 +296,15 @@
 		updateItem(item.id, (draft) => {
 			draft.autoHeight = enabled;
 		});
-		if (enabled) {
-			queueMicrotask(() => {
-				const el = previewNodes.get(item.id);
-				if (!el) return;
-				const newHeight = el.offsetHeight / (scale || 1);
-				updateItem(item.id, (draft) => {
-					draft[currentDevice] = { ...draft[currentDevice], height: newHeight };
+	if (enabled) {
+		queueMicrotask(() => {
+			const key = getPreviewKey(item.id, currentDevice);
+			const el = previewNodes.get(key);
+			if (!el) return;
+			const { scale } = getViewportMetrics(currentDevice);
+			const newHeight = el.offsetHeight / (scale || 1);
+			updateItem(item.id, (draft) => {
+				draft[currentDevice] = { ...draft[currentDevice], height: newHeight };
 				});
 				emit();
 			});
@@ -351,61 +356,95 @@
 		return device === 'mobile' ? mobile : desktop;
 	}
 
-	function getPreviewContainerStyle() {
-		const color = getBackgroundColorValue(currentDevice) || '#000000';
-		const declarations = [
-			`width:${baseWidth}px`,
-			`height:${canvasHeightBase}px`,
-			`min-height:${currentDevice === 'desktop' ? data.minHeightDesktop : data.minHeightMobile}px`,
-			'position:relative',
-			'overflow:hidden',
-			`background-color:${color}`
-		];
-		if (data.backgroundSource === 'image') {
-			const image = getBackgroundImageValue(currentDevice);
-			if (image) {
-				const safe = image.replace(/"/g, '\\"');
-				declarations.push(`background-image:url("${safe}")`);
-				declarations.push('background-size:cover');
-				declarations.push('background-position:center');
-				declarations.push('background-repeat:no-repeat');
-			} else {
-				declarations.push('background-image:none');
-			}
+function getPreviewContainerStyle(device = currentDevice) {
+	const color = getBackgroundColorValue(device) || '#000000';
+	const { baseWidth, canvasHeight } = getViewportMetrics(device);
+	const minHeight = device === 'desktop' ? data.minHeightDesktop : data.minHeightMobile;
+	const declarations = [
+		`width:${baseWidth}px`,
+		`height:${canvasHeight}px`,
+		`min-height:${minHeight}px`,
+		'position:relative',
+		'overflow:hidden',
+		`background-color:${color}`
+	];
+	if (data.backgroundSource === 'image') {
+		const image = getBackgroundImageValue(device);
+		if (image) {
+			const safe = image.replace(/"/g, '\\"');
+			declarations.push(`background-image:url("${safe}")`);
+			declarations.push('background-size:cover');
+			declarations.push('background-position:center');
+			declarations.push('background-repeat:no-repeat');
 		} else {
 			declarations.push('background-image:none');
 		}
-		return declarations.join(';');
+	} else {
+		declarations.push('background-image:none');
 	}
+	return declarations.join(';');
+}
 
-	function shouldRenderPreviewVideo() {
+	function shouldRenderPreviewVideo(device = currentDevice) {
 		if (data.backgroundSource !== 'video') return false;
-		return Boolean(getBackgroundVideoValue(currentDevice));
+		return Boolean(getBackgroundVideoValue(device));
 	}
 
-	let previewRef;
-	let previewRect = { width: 800, height: 600 };
-	let resizeObserver;
-	const previewNodes = new Map();
-	const previewObservers = new Map();
+let desktopPreviewRef;
+let mobilePreviewRef;
+let previewRects = {
+	desktop: { width: 800, height: 600 },
+	mobile: { width: 375, height: 600 }
+};
+let resizeObservers = {};
+const previewNodes = new Map();
+const previewObservers = new Map();
 
-	$: baseWidth = currentDevice === 'desktop' ? data.baseWidthDesktop : data.baseWidthMobile;
-	$: canvasHeightBase = computeCanvasHeightBase(currentDevice);
-	$: scale = baseWidth > 0 ? previewRect.width / baseWidth : 1;
+function getPreviewKey(id, device) {
+	return `${id}-${device}`;
+}
 
-	function updatePreviewRect() {
-		if (!previewRef) return;
-		const rect = previewRef.getBoundingClientRect();
-		previewRect = {
-			width: rect.width || previewRect.width,
-			height: rect.height || previewRect.height
+$: attachPreviewObserver('desktop', desktopPreviewRef);
+$: attachPreviewObserver('mobile', mobilePreviewRef);
+
+	function getViewportMetrics(device = currentDevice) {
+		const baseWidth = device === 'desktop' ? data.baseWidthDesktop : data.baseWidthMobile;
+		const canvasHeight = computeCanvasHeightBase(device);
+		const rect = previewRects[device] || { width: baseWidth || 1, height: canvasHeight || 1 };
+		const scale = baseWidth > 0 ? rect.width / baseWidth : 1;
+		return { baseWidth, canvasHeight, scale, previewHeight: canvasHeight * scale };
+	}
+
+	$: activeMetrics = getViewportMetrics(currentDevice);
+
+	function updatePreviewRect(device) {
+		const element = device === 'desktop' ? desktopPreviewRef : mobilePreviewRef;
+		if (!element) return;
+		const rect = element.getBoundingClientRect();
+		previewRects = {
+			...previewRects,
+			[device]: {
+				width: rect.width || previewRects[device]?.width || 1,
+				height: rect.height || previewRects[device]?.height || 1
+			}
 		};
 	}
 
+	function attachPreviewObserver(device, element) {
+		const existing = resizeObservers[device];
+		if (existing) existing.disconnect();
+		if (!element) {
+			delete resizeObservers[device];
+			return;
+		}
+		const observer = new ResizeObserver(() => updatePreviewRect(device));
+		observer.observe(element);
+		resizeObservers[device] = observer;
+		updatePreviewRect(device);
+	}
+
 	onMount(() => {
-		updatePreviewRect();
-		resizeObserver = new ResizeObserver(() => updatePreviewRect());
-		if (previewRef) resizeObserver.observe(previewRef);
+		DEVICE_LIST.forEach((device) => updatePreviewRect(device));
 		const handleKeyDown = (event) => {
 			if (event.key === 'Escape') {
 				closeItemModal();
@@ -418,7 +457,7 @@
 	});
 
 	onDestroy(() => {
-		if (resizeObserver) resizeObserver.disconnect();
+		Object.values(resizeObservers).forEach((observer) => observer.disconnect());
 		previewObservers.forEach((observer) => observer.disconnect());
 		previewObservers.clear();
 		previewNodes.clear();
@@ -442,10 +481,10 @@
 		return data.items.find((entry) => entry.id === id) || null;
 	}
 
-	function getFrame(itemId) {
-		const current = findItemById(itemId);
-		return current?.[currentDevice] || null;
-	}
+function getFrame(itemId, device = currentDevice) {
+	const current = findItemById(itemId);
+	return current?.[device] || null;
+}
 
 	function clampPosition(value, axis, itemId) {
 		const frame = getFrame(itemId) || {};
@@ -463,56 +502,61 @@
 	let contentTextarea;
 	$: editingItem = editingItemId ? findItemById(editingItemId) : null;
 
-	function registerPreviewNode(item, el) {
-		const id = item.id;
-		const existing = previewObservers.get(id);
-		if (existing) {
-			existing.disconnect();
-			previewObservers.delete(id);
-		}
+function registerPreviewNode(item, el, device = currentDevice) {
+	const key = getPreviewKey(item.id, device);
+	const existing = previewObservers.get(key);
+	if (existing) {
+		existing.disconnect();
+		previewObservers.delete(key);
+	}
 
-		if (item.type !== 'text' || !el) {
-			previewNodes.delete(id);
-			return;
-		}
+	if (item.type !== 'text' || !el) {
+		previewNodes.delete(key);
+		return;
+	}
 
-		previewNodes.set(id, el);
-		const observer = new ResizeObserver(() => {
-			const current = data.items.find((entry) => entry.id === id);
-			if (!current) return;
-			if (current.autoHeight === false && current.type !== 'text') return;
-			const frame = current[currentDevice];
-			if (!frame) return;
-			const measured = el.offsetHeight / (scale || 1);
-			if (Math.abs((frame.height || 0) - measured) < 0.5) return;
-			updateItem(id, (draft) => {
-				draft[currentDevice] = { ...draft[currentDevice], height: measured };
-			});
-			emit();
+	previewNodes.set(key, el);
+	const observer = new ResizeObserver(() => {
+		const current = data.items.find((entry) => entry.id === item.id);
+		if (!current) return;
+		if (current.autoHeight === false && current.type !== 'text') return;
+		const frame = current[device];
+		if (!frame) return;
+		const { scale } = getViewportMetrics(device);
+		const measured = el.offsetHeight / (scale || 1);
+		if (Math.abs((frame.height || 0) - measured) < 0.5) return;
+		updateItem(id, (draft) => {
+			draft[device] = { ...draft[device], height: measured };
 		});
-		observer.observe(el);
-		previewObservers.set(id, observer);
-	}
+		emit();
+	});
+	observer.observe(el);
+	previewObservers.set(key, observer);
+}
 
-	function previewNodeAction(node, item) {
-		registerPreviewNode(item, node);
-		return {
-			update(newItem) {
-				if (newItem === item) return;
-				registerPreviewNode(item, null);
-				item = newItem;
-				registerPreviewNode(item, node);
-			},
-			destroy() {
-				registerPreviewNode(item, null);
-			}
-		};
-	}
+function previewNodeAction(node, params) {
+	if (!params) return;
+	let { item, device } = params;
+	registerPreviewNode(item, node, device);
+	return {
+		update(nextParams) {
+			if (!nextParams) return;
+			if (nextParams.item === item && nextParams.device === device) return;
+			registerPreviewNode(item, null, device);
+			item = nextParams.item;
+			device = nextParams.device;
+			registerPreviewNode(item, node, device);
+		},
+		destroy() {
+			registerPreviewNode(item, null, device);
+		}
+	};
+}
 
-	function getPreviewItemStyle(item) {
-		const frame = item[currentDevice] || {};
-		const {
-			x = 0,
+function getPreviewItemStyle(item, device = currentDevice) {
+	const frame = item[device] || {};
+	const {
+		x = 0,
 			y = 0,
 			width = 200,
 			height = 120,
@@ -537,17 +581,17 @@
 	const selectValue = (primary, fallback) =>
 		primary !== undefined && primary !== null && primary !== '' ? primary : fallback ?? '';
 
-	function getPreviewTextStyle(item) {
-		const styles = item.textStyles || {};
-		const align = currentDevice === 'mobile'
-			? selectValue(styles.textAlignMobile, styles.textAlign)
-			: selectValue(styles.textAlign, styles.textAlignMobile);
-		const fontSize = currentDevice === 'mobile'
-			? selectValue(styles.fontSizeMobile, styles.fontSize)
-			: selectValue(styles.fontSize, styles.fontSizeMobile);
-		const lineHeight = currentDevice === 'mobile'
-			? selectValue(styles.lineHeightMobile, styles.lineHeight)
-			: selectValue(styles.lineHeight, styles.lineHeightMobile);
+function getPreviewTextStyle(item, device = currentDevice) {
+	const styles = item.textStyles || {};
+	const align = device === 'mobile'
+		? selectValue(styles.textAlignMobile, styles.textAlign)
+		: selectValue(styles.textAlign, styles.textAlignMobile);
+	const fontSize = device === 'mobile'
+		? selectValue(styles.fontSizeMobile, styles.fontSize)
+		: selectValue(styles.fontSize, styles.fontSizeMobile);
+	const lineHeight = device === 'mobile'
+		? selectValue(styles.lineHeightMobile, styles.lineHeight)
+		: selectValue(styles.lineHeight, styles.lineHeightMobile);
 
 		const declarations = [
 			'width:100%',
@@ -577,17 +621,17 @@
 		return declarations.join(';');
 	}
 
-	function getPreviewMediaSource(item) {
-		if (!item) return '';
-		const desktop = sanitizeUrl(item.src);
-		const mobile = sanitizeUrl(item.srcMobile) || desktop;
-		return currentDevice === 'mobile' ? mobile : desktop;
-	}
+function getPreviewMediaSource(item, device = currentDevice) {
+	if (!item) return '';
+	const desktop = sanitizeUrl(item.src);
+	const mobile = sanitizeUrl(item.srcMobile) || desktop;
+	return device === 'mobile' ? mobile : desktop;
+}
 
 	function openItemModal(item) {
 		selectedId = item.id;
 		editingItemId = item.id;
-	}
+}
 
 	function closeItemModal() {
 		editingItemId = null;
@@ -603,6 +647,7 @@
 		})();
 		let pointerOrigin = null;
 		const getDeltas = (offsetX, offsetY, event) => {
+			const { scale } = getViewportMetrics(currentDevice);
 			if (pointerOrigin && event) {
 				return {
 					x: (event.clientX - pointerOrigin.x) / (scale || 1),
@@ -688,64 +733,242 @@
 	</header>
 
 	<div class="canvas-panel">
-		<div class="free-canvas-preview-wrapper">
-			<div
-				class="free-canvas-preview {currentDevice}"
-				bind:this={previewRef}
-				style={getPreviewContainerStyle()}
-			>
-				{#if shouldRenderPreviewVideo()}
-					<video
-						class="preview-background-video"
-						src={getBackgroundVideoValue(currentDevice)}
-						poster={getBackgroundPosterValue(currentDevice)}
-						autoplay={data.videoAutoplay}
-						loop={data.videoLoop}
-						muted={data.videoMuted ?? true}
-						playsinline
-					></video>
-				{/if}
-				{#each data.items as item (item.id)}
-					{#if item[currentDevice]}
-						<div
-							class="preview-item {selectedId === item.id ? 'selected' : ''}"
-							style={getPreviewItemStyle(item)}
-							use:draggable={getDragOptions(item)}
-							on:click={() => (selectedId = item.id)}
-							on:dblclick={() => openItemModal(item)}
-						>
-						{#if item.type === 'text'}
-						<div
-							class="preview-item__text"
-							style={getPreviewTextStyle(item)}
-							use:previewNodeAction={item}
-						>
-								{@html item.content || ''}
-						</div>
-							{:else if item.type === 'image'}
-								<img
-									class="preview-item__image"
-									src={getPreviewMediaSource(item)}
-									alt={item.alt || ''}
-									style={`object-fit:${item.objectFit || 'cover'};`}
-								/>
-							{:else if item.type === 'video'}
-								<video
-									class="preview-item__video"
-									src={getPreviewMediaSource(item)}
-									poster={item.poster || ''}
-									muted
-									playsinline
-									autoplay={item.autoplay ?? true}
-									loop={item.loop ?? true}
-									style={`object-fit:${item.objectFit || 'cover'};`}
-								></video>
-							{:else}
-								<div class="preview-item__placeholder">{item.type}</div>
+		<div class="preview-columns">
+			<div class="preview-column">
+				<div class="preview-column__header">
+					<h4>Desktop</h4>
+					<button
+						type="button"
+						class:active={currentDevice === 'desktop'}
+						on:click={() => selectDevice('desktop')}
+					>
+						Editar
+					</button>
+				</div>
+				<div class="free-canvas-preview-wrapper">
+					<div
+						class="free-canvas-preview desktop {currentDevice !== 'desktop' ? 'inactive' : ''}"
+						bind:this={desktopPreviewRef}
+						style={getPreviewContainerStyle('desktop')}
+					>
+						{#if shouldRenderPreviewVideo('desktop')}
+							<video
+								class="preview-background-video"
+								src={getBackgroundVideoValue('desktop')}
+								poster={getBackgroundPosterValue('desktop')}
+								autoplay={data.videoAutoplay}
+								loop={data.videoLoop}
+								muted={data.videoMuted ?? true}
+								playsinline
+							></video>
+						{/if}
+						{#each data.items as item (item.id)}
+							{#if item.desktop}
+								{#if currentDevice === 'desktop'}
+									<div
+										class="preview-item {selectedId === item.id ? 'selected' : ''}"
+										style={getPreviewItemStyle(item, 'desktop')}
+										use:draggable={getDragOptions(item)}
+										on:click={() => (selectedId = item.id)}
+										on:dblclick={() => openItemModal(item)}
+									>
+										{#if item.type === 'text'}
+											<div
+												class="preview-item__text"
+												style={getPreviewTextStyle(item, 'desktop')}
+												use:previewNodeAction={{ item, device: 'desktop' }}
+											>
+												{@html item.content || ''}
+											</div>
+										{:else if item.type === 'image'}
+											<img
+												class="preview-item__image"
+												src={getPreviewMediaSource(item, 'desktop')}
+												alt={item.alt || ''}
+												style={`object-fit:${item.objectFit || 'cover'};`}
+											/>
+										{:else if item.type === 'video'}
+											<video
+												class="preview-item__video"
+												src={getPreviewMediaSource(item, 'desktop')}
+												poster={item.poster || ''}
+												muted
+												playsinline
+												autoplay={item.autoplay ?? true}
+												loop={item.loop ?? true}
+												style={`object-fit:${item.objectFit || 'cover'};`}
+											></video>
+										{:else}
+											<div class="preview-item__placeholder">{item.type}</div>
+										{/if}
+									</div>
+								{:else}
+									<div
+										class="preview-item preview-item--readonly"
+										style={getPreviewItemStyle(item, 'desktop')}
+										on:click={() => {
+											selectDevice('desktop');
+											selectedId = item.id;
+										}}
+										on:dblclick={() => {
+											selectDevice('desktop');
+											selectedId = item.id;
+											openItemModal(item);
+										}}
+									>
+										{#if item.type === 'text'}
+											<div
+												class="preview-item__text"
+												style={getPreviewTextStyle(item, 'desktop')}
+												use:previewNodeAction={{ item, device: 'desktop' }}
+											>
+												{@html item.content || ''}
+											</div>
+										{:else if item.type === 'image'}
+											<img
+												class="preview-item__image"
+												src={getPreviewMediaSource(item, 'desktop')}
+												alt={item.alt || ''}
+												style={`object-fit:${item.objectFit || 'cover'};`}
+											/>
+										{:else if item.type === 'video'}
+											<video
+												class="preview-item__video"
+												src={getPreviewMediaSource(item, 'desktop')}
+												poster={item.poster || ''}
+												muted
+												playsinline
+												autoplay={item.autoplay ?? true}
+												loop={item.loop ?? true}
+												style={`object-fit:${item.objectFit || 'cover'};`}
+											></video>
+										{:else}
+											<div class="preview-item__placeholder">{item.type}</div>
+										{/if}
+									</div>
+								{/if}
 							{/if}
-						</div>
-					{/if}
-				{/each}
+						{/each}
+					</div>
+				</div>
+			</div>
+			<div class="preview-column">
+				<div class="preview-column__header">
+					<h4>Mobile</h4>
+					<button
+						type="button"
+						class:active={currentDevice === 'mobile'}
+						on:click={() => selectDevice('mobile')}
+					>
+						Editar
+					</button>
+				</div>
+				<div class="free-canvas-preview-wrapper">
+					<div
+						class="free-canvas-preview mobile {currentDevice !== 'mobile' ? 'inactive' : ''}"
+						bind:this={mobilePreviewRef}
+						style={getPreviewContainerStyle('mobile')}
+					>
+						{#if shouldRenderPreviewVideo('mobile')}
+							<video
+								class="preview-background-video"
+								src={getBackgroundVideoValue('mobile')}
+								poster={getBackgroundPosterValue('mobile')}
+								autoplay={data.videoAutoplay}
+								loop={data.videoLoop}
+								muted={data.videoMuted ?? true}
+								playsinline
+							></video>
+						{/if}
+						{#each data.items as item (item.id)}
+							{#if item.mobile}
+								{#if currentDevice === 'mobile'}
+									<div
+										class="preview-item {selectedId === item.id ? 'selected' : ''}"
+										style={getPreviewItemStyle(item, 'mobile')}
+										use:draggable={getDragOptions(item)}
+										on:click={() => (selectedId = item.id)}
+										on:dblclick={() => openItemModal(item)}
+									>
+										{#if item.type === 'text'}
+											<div
+												class="preview-item__text"
+												style={getPreviewTextStyle(item, 'mobile')}
+												use:previewNodeAction={{ item, device: 'mobile' }}
+											>
+												{@html item.content || ''}
+											</div>
+										{:else if item.type === 'image'}
+											<img
+												class="preview-item__image"
+												src={getPreviewMediaSource(item, 'mobile')}
+												alt={item.alt || ''}
+												style={`object-fit:${item.objectFit || 'cover'};`}
+											/>
+										{:else if item.type === 'video'}
+											<video
+												class="preview-item__video"
+												src={getPreviewMediaSource(item, 'mobile')}
+												poster={item.posterMobile || item.poster || ''}
+												muted
+												playsinline
+												autoplay={item.autoplay ?? true}
+												loop={item.loop ?? true}
+												style={`object-fit:${item.objectFit || 'cover'};`}
+											></video>
+										{:else}
+											<div class="preview-item__placeholder">{item.type}</div>
+										{/if}
+									</div>
+								{:else}
+									<div
+										class="preview-item preview-item--readonly"
+										style={getPreviewItemStyle(item, 'mobile')}
+										on:click={() => {
+											selectDevice('mobile');
+											selectedId = item.id;
+										}}
+										on:dblclick={() => {
+											selectDevice('mobile');
+											selectedId = item.id;
+											openItemModal(item);
+										}}
+									>
+										{#if item.type === 'text'}
+											<div
+												class="preview-item__text"
+												style={getPreviewTextStyle(item, 'mobile')}
+												use:previewNodeAction={{ item, device: 'mobile' }}
+											>
+												{@html item.content || ''}
+											</div>
+										{:else if item.type === 'image'}
+											<img
+												class="preview-item__image"
+												src={getPreviewMediaSource(item, 'mobile')}
+												alt={item.alt || ''}
+												style={`object-fit:${item.objectFit || 'cover'};`}
+											/>
+										{:else if item.type === 'video'}
+											<video
+												class="preview-item__video"
+												src={getPreviewMediaSource(item, 'mobile')}
+												poster={item.posterMobile || item.poster || ''}
+												muted
+												playsinline
+												autoplay={item.autoplay ?? true}
+												loop={item.loop ?? true}
+												style={`object-fit:${item.objectFit || 'cover'};`}
+											></video>
+										{:else}
+											<div class="preview-item__placeholder">{item.type}</div>
+										{/if}
+									</div>
+								{/if}
+							{/if}
+						{/each}
+					</div>
+				</div>
 			</div>
 		</div>
 
@@ -1771,6 +1994,47 @@
 		gap: 1rem;
 	}
 
+	.preview-columns {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+		gap: 1rem;
+	}
+
+	.preview-column {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+
+	.preview-column__header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.preview-column__header h4 {
+		margin: 0;
+		font-size: 0.95rem;
+		font-weight: 600;
+		color: #334155;
+	}
+
+	.preview-column__header button {
+		border: 1px solid rgba(148, 163, 184, 0.4);
+		background: #f1f5f9;
+		border-radius: 6px;
+		padding: 0.3rem 0.6rem;
+		font-size: 0.8rem;
+		cursor: pointer;
+	}
+
+	.preview-column__header button.active {
+		background: #2563eb;
+		color: white;
+		border-color: transparent;
+	}
+
 	.free-canvas-preview-wrapper {
 		overflow: auto;
 		border-radius: 12px;
@@ -1782,6 +2046,10 @@
 		border-radius: 12px;
 		overflow: hidden;
 		background: #111827;
+	}
+
+	.free-canvas-preview.inactive {
+		opacity: 0.65;
 	}
 
 	.preview-item {
@@ -1800,6 +2068,10 @@
 	.preview-item.selected {
 		border-color: rgba(59, 130, 246, 0.95);
 		box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+	}
+
+	.preview-item--readonly {
+		cursor: default;
 	}
 
 	.preview-item__text {
