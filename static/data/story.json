@@ -401,10 +401,10 @@
     },
     {
       "type": "free-canvas",
-      "minHeightDesktop": 600,
-      "maxHeightDesktop": 600,
-      "minHeightMobile": 1500,
-      "maxHeightMobile": 3989,
+      "minHeightDesktop": 900,
+      "maxHeightDesktop": 5000,
+      "minHeightMobile": 5000,
+      "maxHeightMobile": 15000,
       "baseWidthDesktop": 1200,
       "baseWidthMobile": 375,
       "backgroundSource": "color",
@@ -557,8 +557,8 @@
             "opacity": 1
           },
           "mobile": {
-            "x": 24.813900899031978,
-            "y": 218.50529692724226,
+            "x": 18.486711527774492,
+            "y": 215.34365146816043,
             "width": 220,
             "height": 312,
             "z": 1,
@@ -577,7 +577,7 @@
           "autoplay": false,
           "loop": false,
           "muted": true,
-          "objectFit": "cover",
+          "objectFit": "contain",
           "autoHeight": false,
           "textStyles": {
             "fontFamily": "",
@@ -605,10 +605,10 @@
             "opacity": 1
           },
           "mobile": {
-            "x": 29.54524223327554,
-            "y": 50.34434558906701,
-            "width": 220,
-            "height": 140,
+            "x": 173.48002890992225,
+            "y": 0,
+            "width": 100,
+            "height": 300,
             "z": 1,
             "opacity": 1
           }
@@ -749,8 +749,8 @@
             "opacity": 1
           },
           "mobile": {
-            "x": 53.3872879241517,
-            "y": 1256.030750998004,
+            "x": 120.21067240518963,
+            "y": 1440.4041916167664,
             "width": 220,
             "height": 71.8562874251497,
             "z": 1,
@@ -801,6 +801,54 @@
             "y": 1141.1416328065975,
             "width": 220,
             "height": 71.8562874251497,
+            "z": 1,
+            "opacity": 1
+          }
+        },
+        {
+          "id": "b8678582-c7e3-4f08-aeff-9c49d74e6bdc",
+          "type": "image",
+          "content": "Seu texto aqui",
+          "src": "",
+          "srcMobile": "",
+          "alt": "",
+          "poster": "",
+          "posterMobile": "",
+          "autoplay": false,
+          "loop": false,
+          "muted": true,
+          "objectFit": "cover",
+          "autoHeight": false,
+          "textStyles": {
+            "fontFamily": "",
+            "fontSize": "",
+            "fontSizeMobile": "",
+            "lineHeight": "",
+            "lineHeightMobile": "",
+            "textAlign": "left",
+            "textAlignMobile": "left",
+            "color": "",
+            "fontWeight": "",
+            "fontStyle": "",
+            "textDecoration": "",
+            "textTransform": "",
+            "letterSpacing": "",
+            "textShadow": "",
+            "typography": ""
+          },
+          "desktop": {
+            "x": 186.97542959129183,
+            "y": 442.22963108854157,
+            "width": 260,
+            "height": 140,
+            "z": 1,
+            "opacity": 1
+          },
+          "mobile": {
+            "x": 8.849488522954092,
+            "y": 1218.5510229540916,
+            "width": 220,
+            "height": 140,
             "z": 1,
             "opacity": 1
           }

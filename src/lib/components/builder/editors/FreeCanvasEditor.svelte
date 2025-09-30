@@ -165,9 +165,23 @@
 	data = ensureData(data);
 	$: data = ensureData(data);
 
-	let currentDevice = 'desktop';
-	let selectedId = data.items[0]?.id || null;
-	$: selectedItem = data.items.find((item) => item.id === selectedId) || null;
+let currentDevice = 'desktop';
+let isCanvasModalOpen = false;
+let selectedId = data.items[0]?.id || null;
+$: selectedItem = data.items.find((item) => item.id === selectedId) || null;
+
+function openCanvasModal(device = currentDevice) {
+	if (device && device !== currentDevice) {
+		selectDevice(device);
+	}
+	isCanvasModalOpen = true;
+	queueMicrotask(() => updatePreviewRect(currentDevice));
+}
+
+function closeCanvasModal() {
+	isCanvasModalOpen = false;
+	queueMicrotask(() => updatePreviewRect(currentDevice));
+}
 
 	function selectDevice(device) {
 		currentDevice = device;
@@ -445,11 +459,16 @@ $: attachPreviewObserver('mobile', mobilePreviewRef);
 
 	onMount(() => {
 		DEVICE_LIST.forEach((device) => updatePreviewRect(device));
-		const handleKeyDown = (event) => {
-			if (event.key === 'Escape') {
-				closeItemModal();
+	const handleKeyDown = (event) => {
+		if (event.key === 'Escape') {
+			if (isCanvasModalOpen) {
+				closeCanvasModal();
+				event.preventDefault();
+				return;
 			}
-		};
+			closeItemModal();
+		}
+	};
 		window.addEventListener('keydown', handleKeyDown);
 		return () => {
 			window.removeEventListener('keydown', handleKeyDown);
@@ -733,21 +752,24 @@ function getPreviewMediaSource(item, device = currentDevice) {
 	</header>
 
 	<div class="canvas-panel">
-		<div class="preview-columns">
-			<div class="preview-column">
-				<div class="preview-column__header">
-					<h4>Desktop</h4>
-					<button
-						type="button"
-						class:active={currentDevice === 'desktop'}
-						on:click={() => selectDevice('desktop')}
-					>
-						Editar
-					</button>
+		<div class={`preview-area ${isCanvasModalOpen ? 'preview-area--expanded' : ''}`}>
+			<div class="preview-area__header">
+				<h4>{currentDevice === 'desktop' ? 'Desktop' : 'Mobile'}</h4>
+				<div class="preview-area__controls">
+					{#if isCanvasModalOpen}
+						<button type="button" on:click={closeCanvasModal}>Fechar modal</button>
+					{:else}
+						<button type="button" on:click={() => openCanvasModal(currentDevice)}>
+							Abrir em tela cheia
+						</button>
+					{/if}
 				</div>
-				<div class="free-canvas-preview-wrapper">
+			</div>
+			<div class="preview-area__surface">
+				{#if currentDevice === 'desktop'}
 					<div
-						class="free-canvas-preview desktop {currentDevice !== 'desktop' ? 'inactive' : ''}"
+						class="free-canvas-preview desktop"
+						class:expanded={isCanvasModalOpen}
 						bind:this={desktopPreviewRef}
 						style={getPreviewContainerStyle('desktop')}
 					>
@@ -764,108 +786,50 @@ function getPreviewMediaSource(item, device = currentDevice) {
 						{/if}
 						{#each data.items as item (item.id)}
 							{#if item.desktop}
-								{#if currentDevice === 'desktop'}
-									<div
-										class="preview-item {selectedId === item.id ? 'selected' : ''}"
-										style={getPreviewItemStyle(item, 'desktop')}
-										use:draggable={getDragOptions(item)}
-										on:click={() => (selectedId = item.id)}
-										on:dblclick={() => openItemModal(item)}
-									>
-										{#if item.type === 'text'}
-											<div
-												class="preview-item__text"
-												style={getPreviewTextStyle(item, 'desktop')}
-												use:previewNodeAction={{ item, device: 'desktop' }}
-											>
-												{@html item.content || ''}
-											</div>
-										{:else if item.type === 'image'}
-											<img
-												class="preview-item__image"
-												src={getPreviewMediaSource(item, 'desktop')}
-												alt={item.alt || ''}
-												style={`object-fit:${item.objectFit || 'cover'};`}
-											/>
-										{:else if item.type === 'video'}
-											<video
-												class="preview-item__video"
-												src={getPreviewMediaSource(item, 'desktop')}
-												poster={item.poster || ''}
-												muted
-												playsinline
-												autoplay={item.autoplay ?? true}
-												loop={item.loop ?? true}
-												style={`object-fit:${item.objectFit || 'cover'};`}
-											></video>
-										{:else}
-											<div class="preview-item__placeholder">{item.type}</div>
-										{/if}
-									</div>
-								{:else}
-									<div
-										class="preview-item preview-item--readonly"
-										style={getPreviewItemStyle(item, 'desktop')}
-										on:click={() => {
-											selectDevice('desktop');
-											selectedId = item.id;
-										}}
-										on:dblclick={() => {
-											selectDevice('desktop');
-											selectedId = item.id;
-											openItemModal(item);
-										}}
-									>
-										{#if item.type === 'text'}
-											<div
-												class="preview-item__text"
-												style={getPreviewTextStyle(item, 'desktop')}
-												use:previewNodeAction={{ item, device: 'desktop' }}
-											>
-												{@html item.content || ''}
-											</div>
-										{:else if item.type === 'image'}
-											<img
-												class="preview-item__image"
-												src={getPreviewMediaSource(item, 'desktop')}
-												alt={item.alt || ''}
-												style={`object-fit:${item.objectFit || 'cover'};`}
-											/>
-										{:else if item.type === 'video'}
-											<video
-												class="preview-item__video"
-												src={getPreviewMediaSource(item, 'desktop')}
-												poster={item.poster || ''}
-												muted
-												playsinline
-												autoplay={item.autoplay ?? true}
-												loop={item.loop ?? true}
-												style={`object-fit:${item.objectFit || 'cover'};`}
-											></video>
-										{:else}
-											<div class="preview-item__placeholder">{item.type}</div>
-										{/if}
-									</div>
-								{/if}
+								<div
+									class="preview-item {selectedId === item.id ? 'selected' : ''}"
+									style={getPreviewItemStyle(item, 'desktop')}
+									use:draggable={getDragOptions(item)}
+									on:click={() => (selectedId = item.id)}
+									on:dblclick={() => openItemModal(item)}
+								>
+									{#if item.type === 'text'}
+										<div
+											class="preview-item__text"
+											style={getPreviewTextStyle(item, 'desktop')}
+											use:previewNodeAction={{ item, device: 'desktop' }}
+										>
+											{@html item.content || ''}
+										</div>
+									{:else if item.type === 'image'}
+										<img
+											class="preview-item__image"
+											src={getPreviewMediaSource(item, 'desktop')}
+											alt={item.alt || ''}
+											style={`object-fit:${item.objectFit || 'cover'};`}
+										/>
+									{:else if item.type === 'video'}
+										<video
+											class="preview-item__video"
+											src={getPreviewMediaSource(item, 'desktop')}
+											poster={item.poster || ''}
+											muted
+											playsinline
+											autoplay={item.autoplay ?? true}
+											loop={item.loop ?? true}
+											style={`object-fit:${item.objectFit || 'cover'};`}
+										></video>
+									{:else}
+										<div class="preview-item__placeholder">{item.type}</div>
+									{/if}
+								</div>
 							{/if}
 						{/each}
 					</div>
-				</div>
-			</div>
-			<div class="preview-column">
-				<div class="preview-column__header">
-					<h4>Mobile</h4>
-					<button
-						type="button"
-						class:active={currentDevice === 'mobile'}
-						on:click={() => selectDevice('mobile')}
-					>
-						Editar
-					</button>
-				</div>
-				<div class="free-canvas-preview-wrapper">
+				{:else}
 					<div
-						class="free-canvas-preview mobile {currentDevice !== 'mobile' ? 'inactive' : ''}"
+						class="free-canvas-preview mobile"
+						class:expanded={isCanvasModalOpen}
 						bind:this={mobilePreviewRef}
 						style={getPreviewContainerStyle('mobile')}
 					>
@@ -882,94 +846,51 @@ function getPreviewMediaSource(item, device = currentDevice) {
 						{/if}
 						{#each data.items as item (item.id)}
 							{#if item.mobile}
-								{#if currentDevice === 'mobile'}
-									<div
-										class="preview-item {selectedId === item.id ? 'selected' : ''}"
-										style={getPreviewItemStyle(item, 'mobile')}
-										use:draggable={getDragOptions(item)}
-										on:click={() => (selectedId = item.id)}
-										on:dblclick={() => openItemModal(item)}
-									>
-										{#if item.type === 'text'}
-											<div
-												class="preview-item__text"
-												style={getPreviewTextStyle(item, 'mobile')}
-												use:previewNodeAction={{ item, device: 'mobile' }}
-											>
-												{@html item.content || ''}
-											</div>
-										{:else if item.type === 'image'}
-											<img
-												class="preview-item__image"
-												src={getPreviewMediaSource(item, 'mobile')}
-												alt={item.alt || ''}
-												style={`object-fit:${item.objectFit || 'cover'};`}
-											/>
-										{:else if item.type === 'video'}
-											<video
-												class="preview-item__video"
-												src={getPreviewMediaSource(item, 'mobile')}
-												poster={item.posterMobile || item.poster || ''}
-												muted
-												playsinline
-												autoplay={item.autoplay ?? true}
-												loop={item.loop ?? true}
-												style={`object-fit:${item.objectFit || 'cover'};`}
-											></video>
-										{:else}
-											<div class="preview-item__placeholder">{item.type}</div>
-										{/if}
-									</div>
-								{:else}
-									<div
-										class="preview-item preview-item--readonly"
-										style={getPreviewItemStyle(item, 'mobile')}
-										on:click={() => {
-											selectDevice('mobile');
-											selectedId = item.id;
-										}}
-										on:dblclick={() => {
-											selectDevice('mobile');
-											selectedId = item.id;
-											openItemModal(item);
-										}}
-									>
-										{#if item.type === 'text'}
-											<div
-												class="preview-item__text"
-												style={getPreviewTextStyle(item, 'mobile')}
-												use:previewNodeAction={{ item, device: 'mobile' }}
-											>
-												{@html item.content || ''}
-											</div>
-										{:else if item.type === 'image'}
-											<img
-												class="preview-item__image"
-												src={getPreviewMediaSource(item, 'mobile')}
-												alt={item.alt || ''}
-												style={`object-fit:${item.objectFit || 'cover'};`}
-											/>
-										{:else if item.type === 'video'}
-											<video
-												class="preview-item__video"
-												src={getPreviewMediaSource(item, 'mobile')}
-												poster={item.posterMobile || item.poster || ''}
-												muted
-												playsinline
-												autoplay={item.autoplay ?? true}
-												loop={item.loop ?? true}
-												style={`object-fit:${item.objectFit || 'cover'};`}
-											></video>
-										{:else}
-											<div class="preview-item__placeholder">{item.type}</div>
-										{/if}
-									</div>
-								{/if}
+								<div
+									class="preview-item {selectedId === item.id ? 'selected' : ''}"
+									style={getPreviewItemStyle(item, 'mobile')}
+									use:draggable={getDragOptions(item)}
+									on:click={() => (selectedId = item.id)}
+									on:dblclick={() => openItemModal(item)}
+								>
+									{#if item.type === 'text'}
+										<div
+											class="preview-item__text"
+											style={getPreviewTextStyle(item, 'mobile')}
+											use:previewNodeAction={{ item, device: 'mobile' }}
+										>
+											{@html item.content || ''}
+										</div>
+									{:else if item.type === 'image'}
+										<img
+											class="preview-item__image"
+											src={getPreviewMediaSource(item, 'mobile')}
+											alt={item.alt || ''}
+											style={`object-fit:${item.objectFit || 'cover'};`}
+										/>
+									{:else if item.type === 'video'}
+										<video
+											class="preview-item__video"
+											src={getPreviewMediaSource(item, 'mobile')}
+											poster={item.posterMobile || item.poster || ''}
+											muted
+											playsinline
+											autoplay={item.autoplay ?? true}
+											loop={item.loop ?? true}
+											style={`object-fit:${item.objectFit || 'cover'};`}
+										></video>
+									{:else}
+										<div class="preview-item__placeholder">{item.type}</div>
+									{/if}
+								</div>
 							{/if}
 						{/each}
 					</div>
-				</div>
+				{/if}
 			</div>
+			{#if !isCanvasModalOpen}
+				<p class="preview-area__hint">Clique e arraste os elementos ou abra o canvas em tela cheia para editar com mais espaço.</p>
+			{/if}
 		</div>
 
 		<aside class="inspector">
@@ -1512,6 +1433,9 @@ function getPreviewMediaSource(item, device = currentDevice) {
 			</section>
 		</aside>
 	</div>
+	{#if isCanvasModalOpen}
+		<div class="preview-area__backdrop" on:click={closeCanvasModal}></div>
+	{/if}
 </div>
 
 {#if editingItem}
@@ -1990,66 +1914,146 @@ function getPreviewMediaSource(item, device = currentDevice) {
 
 	.canvas-panel {
 		display: grid;
-		grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
-		gap: 1rem;
+		grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+		gap: 1.5rem;
+		align-items: flex-start;
+		position: relative;
 	}
 
-	.preview-columns {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-		gap: 1rem;
-	}
-
-	.preview-column {
+	.preview-area {
 		display: flex;
 		flex-direction: column;
+		gap: 0.85rem;
+		padding: 1rem;
+		border-radius: 18px;
+		background: #0b1120;
+		border: 1px solid rgba(148, 163, 184, 0.28);
+		position: relative;
+		min-height: 360px;
+		box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.18);
+		transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+	}
+
+	.preview-area__header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
 		gap: 0.75rem;
 	}
 
-	.preview-column__header {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		gap: 0.5rem;
-	}
-
-	.preview-column__header h4 {
+	.preview-area__header h4 {
 		margin: 0;
 		font-size: 0.95rem;
 		font-weight: 600;
-		color: #334155;
+		letter-spacing: 0.01em;
+		color: #e2e8f0;
 	}
 
-	.preview-column__header button {
-		border: 1px solid rgba(148, 163, 184, 0.4);
-		background: #f1f5f9;
-		border-radius: 6px;
-		padding: 0.3rem 0.6rem;
-		font-size: 0.8rem;
+	.preview-area__controls button {
+		border: 1px solid rgba(59, 130, 246, 0.45);
+		background: rgba(59, 130, 246, 0.16);
+		color: #bfdbfe;
+		padding: 0.35rem 0.85rem;
+		border-radius: 9999px;
+		font-size: 0.82rem;
 		cursor: pointer;
+		transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 	}
 
-	.preview-column__header button.active {
-		background: #2563eb;
-		color: white;
-		border-color: transparent;
+	.preview-area__controls button:hover,
+	.preview-area__controls button:focus {
+		background: rgba(59, 130, 246, 0.28);
+		box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.22);
+		outline: none;
+		transform: translateY(-1px);
 	}
 
-	.free-canvas-preview-wrapper {
+	.preview-area__surface {
+		position: relative;
 		overflow: auto;
-		border-radius: 12px;
+		border-radius: 14px;
+		background: #020617;
+		padding: 1rem;
+		min-height: 280px;
+		max-height: clamp(320px, 65vh, 540px);
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+	}
+
+	.preview-area__surface::-webkit-scrollbar {
+		width: 10px;
+		height: 10px;
+	}
+
+	.preview-area__surface::-webkit-scrollbar-track {
+		background: rgba(148, 163, 184, 0.16);
+		border-radius: 9999px;
+	}
+
+	.preview-area__surface::-webkit-scrollbar-thumb {
+		background: rgba(59, 130, 246, 0.35);
+		border-radius: 9999px;
+	}
+
+	.preview-area__surface::-webkit-scrollbar-thumb:hover {
+		background: rgba(59, 130, 246, 0.5);
+	}
+
+	.preview-area__hint {
+		margin: 0;
+		font-size: 0.78rem;
+		line-height: 1.5;
+		color: rgba(148, 163, 184, 0.85);
+	}
+
+	.preview-area--expanded {
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: min(90vw, 1280px);
+		height: min(92vh, 860px);
+		z-index: 60;
+		padding: 1.5rem;
+		gap: 1.25rem;
+		border-radius: 22px;
+		border-color: rgba(148, 163, 184, 0.45);
+		box-shadow: 0 32px 80px rgba(2, 6, 23, 0.65);
+	}
+
+	.preview-area--expanded .preview-area__surface {
+		flex: 1;
+		min-height: 0;
+		max-height: none;
+	}
+
+	.preview-area--expanded .preview-area__header {
+		padding-bottom: 0.5rem;
+		border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+	}
+
+	.preview-area--expanded .preview-area__controls button {
+		background: rgba(59, 130, 246, 0.25);
+	}
+
+	.preview-area__backdrop {
+		position: fixed;
+		inset: 0;
+		z-index: 55;
+		background: rgba(2, 6, 23, 0.7);
+		backdrop-filter: blur(4px);
 	}
 
 	.free-canvas-preview {
 		position: relative;
-		border: 1px solid #1f2937;
+		border: 1px solid rgba(148, 163, 184, 0.35);
 		border-radius: 12px;
 		overflow: hidden;
-		background: #111827;
+		background: linear-gradient(180deg, #0f172a 0%, #020617 100%);
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
 	}
 
-	.free-canvas-preview.inactive {
-		opacity: 0.65;
+	.free-canvas-preview.expanded {
+		box-shadow: none;
 	}
 
 	.preview-item {
@@ -2059,19 +2063,19 @@ function getPreviewMediaSource(item, device = currentDevice) {
 		border-radius: 10px;
 		background: rgba(15, 23, 42, 0.08);
 		backdrop-filter: blur(1px);
-		cursor: move;
+		cursor: grab;
 		touch-action: none;
 		overflow: hidden;
 		transition: box-shadow 0.2s ease, border-color 0.2s ease;
 	}
 
+	.preview-item:active {
+		cursor: grabbing;
+	}
+
 	.preview-item.selected {
 		border-color: rgba(59, 130, 246, 0.95);
 		box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
-	}
-
-	.preview-item--readonly {
-		cursor: default;
 	}
 
 	.preview-item__text {
