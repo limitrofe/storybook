@@ -1,6 +1,7 @@
 <script>
 	import { createEventDispatcher, onMount } from 'svelte';
 	import { tick } from 'svelte';
+	import { ColorPicker } from '$lib/components/builder/controls/index.js';
 
 	export let value = '';
 	export let placeholder = '';
@@ -13,6 +14,9 @@
 	$: sanitizedRows = Math.max(Number(rows) || 0, 1);
 	let isUnorderedListActive = false;
 	let isOrderedListActive = false;
+	let currentColor = '#000000';
+	let colorPickerRef;
+	let isColorPickerOpen = false;
 	const exec = (command, arg = null) => {
 		if (!editorEl) return;
 		const selection = window.getSelection();
@@ -118,7 +122,22 @@
 
 	const applyColor = (color) => {
 		editorEl?.focus();
-		exec('foreColor', color);
+		const safeColor = typeof color === 'string' ? color.trim() : '';
+		if (!safeColor) {
+			currentColor = '#000000';
+			exec('removeFormat');
+			return;
+		}
+		currentColor = safeColor;
+		if (safeColor.toLowerCase() === 'transparent') {
+			exec('foreColor', 'rgba(0,0,0,0)');
+		} else {
+			exec('foreColor', safeColor);
+		}
+	};
+
+	const handleColorChange = (event) => {
+		applyColor(event.detail.value);
 	};
 
 	const handleInput = () => {
@@ -239,16 +258,37 @@
 			>🔗</button
 		>
 		<span class="rt-divider" aria-hidden="true"></span>
-		<label class="rt-color" title="Cor do texto">
-			<input
-				type="color"
-				on:mousedown={(event) => {
-					event.preventDefault();
-					editorEl?.focus();
-				}}
-				on:input={(event) => applyColor(event.target.value)}
+		<div class="rt-color" title="Cor do texto">
+			<button
+				type="button"
+				class="rt-color-button"
+				on:mousedown|preventDefault
+				on:click={() => colorPickerRef?.open()}
+				aria-haspopup="dialog"
+				aria-expanded={isColorPickerOpen}
+			>
+				<span
+					class="rt-color-swatch"
+					style={`--swatch-color:${
+						currentColor === 'transparent' ? 'rgba(0,0,0,0)' : currentColor || '#000000'
+					}`}
+				></span>
+			</button>
+			<ColorPicker
+				class="rt-color-controller"
+				label={null}
+				value={currentColor}
+				showPresets={false}
+				showAlpha={true}
+				allowClear={true}
+				clearValue="transparent"
+				bind:this={colorPickerRef}
+				on:change={handleColorChange}
+				on:save={(event) => applyColor(event.detail.value)}
+				on:open={() => (isColorPickerOpen = true)}
+				on:close={() => (isColorPickerOpen = false)}
 			/>
-		</label>
+		</div>
 		<button
 			type="button"
 			on:mousedown|preventDefault
@@ -332,13 +372,78 @@
 		background: rgba(148, 163, 184, 0.4);
 	}
 
-	.rt-color input[type='color'] {
+	.rt-color {
+		position: relative;
+		display: flex;
+		align-items: center;
+	}
+
+	.rt-color-button {
 		border: none;
-		background: transparent;
-		padding: 0;
-		width: 24px;
-		height: 24px;
+		background: #fff;
+		border-radius: 6px;
+		padding: 0.3rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		cursor: pointer;
+		transition:
+			background 0.2s ease,
+			box-shadow 0.2s ease;
+	}
+
+	.rt-color-button:hover,
+	.rt-color-button:focus {
+		background: #e2e8f0;
+		outline: none;
+	}
+
+	.rt-color-swatch {
+		width: 18px;
+		height: 18px;
+		border-radius: 50%;
+		border: 2px solid rgba(15, 23, 42, 0.15);
+		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+		background-clip: padding-box;
+		position: relative;
+		background-image:
+			linear-gradient(var(--swatch-color, #000000), var(--swatch-color, #000000)),
+			linear-gradient(
+				45deg,
+				rgba(148, 163, 184, 0.35) 25%,
+				transparent 25%,
+				transparent 75%,
+				rgba(148, 163, 184, 0.35) 75%
+			),
+			linear-gradient(
+				45deg,
+				rgba(148, 163, 184, 0.35) 25%,
+				transparent 25%,
+				transparent 75%,
+				rgba(148, 163, 184, 0.35) 75%
+			);
+		background-size:
+			100% 100%,
+			8px 8px,
+			8px 8px;
+		background-position:
+			0 0,
+			0 0,
+			4px 4px;
+	}
+
+	.rt-color-controller {
+		position: absolute;
+		left: -9999px;
+		top: -9999px;
+		height: 1px;
+		width: 1px;
+		overflow: hidden;
+	}
+
+	.rt-color-controller :global(.color-label),
+	.rt-color-controller :global(.color-summary) {
+		display: none !important;
 	}
 
 	.rt-editor {

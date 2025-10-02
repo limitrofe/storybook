@@ -6,6 +6,7 @@
 	import ListItemsEditor from './editors/ListItemsEditor.svelte';
 	import RichTextEditor from './RichTextEditor.svelte';
 	import FlourishScrollyStepsEditor from './editors/FlourishScrollyStepsEditor.svelte';
+	import { ColorPicker } from '$lib/components/builder/controls/index.js';
 
 	export let field;
 	export let value;
@@ -37,10 +38,6 @@
 	};
 
 	const handleSelect = (event) => {
-		dispatch('change', { value: event.currentTarget.value });
-	};
-
-	const handleColor = (event) => {
 		dispatch('change', { value: event.currentTarget.value });
 	};
 
@@ -85,12 +82,23 @@
 	function tryRelaxedParse(text, field) {
 		const trimmed = text.trim();
 		if (!trimmed) {
-			return { success: true, value: field.emptyValue ?? [], serialized: JSON.stringify(field.emptyValue ?? [], null, 2) };
+			return {
+				success: true,
+				value: field.emptyValue ?? [],
+				serialized: JSON.stringify(field.emptyValue ?? [], null, 2)
+			};
 		}
 
-		const lines = trimmed.split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
+		const lines = trimmed
+			.split(/\r?\n/)
+			.map((line) => line.trim())
+			.filter(Boolean);
 		if (!lines.length) {
-			return { success: true, value: field.emptyValue ?? [], serialized: JSON.stringify(field.emptyValue ?? [], null, 2) };
+			return {
+				success: true,
+				value: field.emptyValue ?? [],
+				serialized: JSON.stringify(field.emptyValue ?? [], null, 2)
+			};
 		}
 
 		const path = field.path || '';
@@ -101,7 +109,10 @@
 				const title = (rawTitle || '').trim();
 				const remainder = restParts.join(':').trim();
 				const people = remainder
-					? remainder.split(/,|;|\•/).map((item) => item.trim()).filter(Boolean)
+					? remainder
+							.split(/,|;|\•/)
+							.map((item) => item.trim())
+							.filter(Boolean)
 					: [];
 
 				return {
@@ -158,93 +169,118 @@
 	</div>
 {:else}
 	<div class="field-editor">
-		<label>
-			<span>{field.label}</span>
-			{#if field.type === 'text' || field.type === 'url'}
-				<input
-					type={field.type === 'url' ? 'url' : 'text'}
+		{#if field.type === 'color'}
+			{#if field?.presets}
+				<ColorPicker
+					label={field.label}
 					value={value ?? ''}
-					placeholder={field.placeholder}
-					required={field.required}
-					on:input={handleInput}
+					showPresets={field.showPresets ?? Boolean(field.presets)}
+					showInput={field.showInput ?? true}
+					showAlpha={field.showAlpha ?? true}
+					allowClear={field.allowClear ?? true}
+					clearValue={field.clearValue ?? 'transparent'}
+					presets={field.presets}
+					on:change={(event) => dispatch('change', { value: event.detail.value })}
 				/>
-			{:else if field.type === 'number'}
-				<input
-					type="number"
+			{:else}
+				<ColorPicker
+					label={field.label}
 					value={value ?? ''}
-					min={field.min}
-					max={field.max}
-					step={field.step}
-					placeholder={field.placeholder}
-					required={field.required}
-					on:input={handleInput}
-				/>
-			{:else if field.type === 'textarea'}
-				<textarea
-					rows={field.rows || 3}
-					placeholder={field.placeholder}
-					value={value ?? ''}
-					required={field.required}
-					on:input={handleInput}
-				></textarea>
-			{:else if field.type === 'select'}
-				<select
-					on:change={handleSelect}
-					value={isEmpty(value) ? (field.defaultValue ?? field.options?.[0]?.value ?? '') : value}
-					required={field.required}
-				>
-					{#each field.options || [] as option}
-						<option value={option.value}>{option.label}</option>
-					{/each}
-				</select>
-			{:else if field.type === 'boolean'}
-				<div class="boolean-field">
-					<input type="checkbox" checked={Boolean(value)} on:change={handleInput} />
-					{#if field.helpText}
-						<span>{field.helpText}</span>
-					{/if}
-				</div>
-			{:else if field.type === 'color'}
-				<input type="color" value={value || '#000000'} on:input={handleColor} />
-			{:else if field.type === 'scrolly-steps'}
-				<ScrollyStepsEditor
-					value={value ?? []}
+					showPresets={field.showPresets ?? Boolean(field.presets)}
+					showInput={field.showInput ?? true}
+					showAlpha={field.showAlpha ?? true}
+					allowClear={field.allowClear ?? true}
+					clearValue={field.clearValue ?? 'transparent'}
 					on:change={(event) => dispatch('change', { value: event.detail.value })}
 				/>
-			{:else if field.type === 'list-items'}
-				<ListItemsEditor
-					value={value ?? []}
-					on:change={(event) => dispatch('change', { value: event.detail.value })}
-				/>
-			{:else if field.type === 'gallery-items'}
-				<GalleryItemsEditor
-					value={value ?? []}
-					on:change={(event) => dispatch('change', { value: event.detail.value })}
-				/>
-			{:else if field.type === 'carousel-items'}
-				<CarouselItemsEditor
-					value={value ?? []}
-					on:change={(event) => dispatch('change', { value: event.detail.value })}
-				/>
-			{:else if field.type === 'flourish-scrolly-steps'}
-				<FlourishScrollyStepsEditor
-					value={value ?? []}
-					on:change={(event) => dispatch('change', { value: event.detail.value })}
-				/>
-			{:else if field.type === 'json'}
-				<textarea
-					class:invalid={jsonError}
-					rows={field.rows || 6}
-					bind:value={jsonText}
-					placeholder={field.placeholder}
-					on:focus={handleJsonFocus}
-					on:blur={handleJsonBlur}
-				></textarea>
-				{#if jsonError}
-					<small class="error">{jsonError}</small>
-				{/if}
 			{/if}
-		</label>
+		{:else}
+			<label>
+				<span>{field.label}</span>
+				{#if field.type === 'text' || field.type === 'url'}
+					<input
+						type={field.type === 'url' ? 'url' : 'text'}
+						value={value ?? ''}
+						placeholder={field.placeholder}
+						required={field.required}
+						on:input={handleInput}
+					/>
+				{:else if field.type === 'number'}
+					<input
+						type="number"
+						value={value ?? ''}
+						min={field.min}
+						max={field.max}
+						step={field.step}
+						placeholder={field.placeholder}
+						required={field.required}
+						on:input={handleInput}
+					/>
+				{:else if field.type === 'textarea'}
+					<textarea
+						rows={field.rows || 3}
+						placeholder={field.placeholder}
+						value={value ?? ''}
+						required={field.required}
+						on:input={handleInput}
+					></textarea>
+				{:else if field.type === 'select'}
+					<select
+						on:change={handleSelect}
+						value={isEmpty(value) ? (field.defaultValue ?? field.options?.[0]?.value ?? '') : value}
+						required={field.required}
+					>
+						{#each field.options || [] as option}
+							<option value={option.value}>{option.label}</option>
+						{/each}
+					</select>
+				{:else if field.type === 'boolean'}
+					<div class="boolean-field">
+						<input type="checkbox" checked={Boolean(value)} on:change={handleInput} />
+						{#if field.helpText}
+							<span>{field.helpText}</span>
+						{/if}
+					</div>
+				{:else if field.type === 'scrolly-steps'}
+					<ScrollyStepsEditor
+						value={value ?? []}
+						on:change={(event) => dispatch('change', { value: event.detail.value })}
+					/>
+				{:else if field.type === 'list-items'}
+					<ListItemsEditor
+						value={value ?? []}
+						on:change={(event) => dispatch('change', { value: event.detail.value })}
+					/>
+				{:else if field.type === 'gallery-items'}
+					<GalleryItemsEditor
+						value={value ?? []}
+						on:change={(event) => dispatch('change', { value: event.detail.value })}
+					/>
+				{:else if field.type === 'carousel-items'}
+					<CarouselItemsEditor
+						value={value ?? []}
+						on:change={(event) => dispatch('change', { value: event.detail.value })}
+					/>
+				{:else if field.type === 'flourish-scrolly-steps'}
+					<FlourishScrollyStepsEditor
+						value={value ?? []}
+						on:change={(event) => dispatch('change', { value: event.detail.value })}
+					/>
+				{:else if field.type === 'json'}
+					<textarea
+						class:invalid={jsonError}
+						rows={field.rows || 6}
+						bind:value={jsonText}
+						placeholder={field.placeholder}
+						on:focus={handleJsonFocus}
+						on:blur={handleJsonBlur}
+					></textarea>
+					{#if jsonError}
+						<small class="error">{jsonError}</small>
+					{/if}
+				{/if}
+			</label>
+		{/if}
 		{#if field.description}
 			<small class="description">{field.description}</small>
 		{/if}

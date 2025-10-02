@@ -1,6 +1,7 @@
 <!-- src/lib/components/builder/editors/SimpleEditor.svelte -->
 <script>
 	import { createEventDispatcher } from 'svelte';
+	import { ColorPicker } from '$lib/components/builder/controls/index.js';
 
 	const dispatch = createEventDispatcher();
 
@@ -42,10 +43,13 @@
 		{:else}
 			<div class="fields-list">
 				{#each Object.entries(data) as [key, value]}
+					{@const fieldType = getFieldType(key, value)}
 					<div class="field">
-						<label for={key}>{getFieldLabel(key)}:</label>
+						{#if fieldType !== 'color'}
+							<label for={key}>{getFieldLabel(key)}:</label>
+						{/if}
 
-						{#if getFieldType(key, value) === 'checkbox'}
+						{#if fieldType === 'checkbox'}
 							<input
 								id={key}
 								type="checkbox"
@@ -53,24 +57,19 @@
 								on:change={updateParent}
 								class="checkbox-input"
 							/>
-						{:else if getFieldType(key, value) === 'color'}
-							<div class="color-input-group">
-								<input
-									id={key}
-									type="color"
+						{:else if fieldType === 'color'}
+							<div class="color-field">
+								<ColorPicker
+									label={getFieldLabel(key)}
 									bind:value={data[key]}
-									on:input={updateParent}
-									class="color-swatch"
-								/>
-								<input
-									type="text"
-									bind:value={data[key]}
-									on:input={updateParent}
-									placeholder="#000000"
-									class="color-text"
+									showPresets={false}
+									showAlpha={true}
+									allowClear={true}
+									clearValue="transparent"
+									on:change={updateParent}
 								/>
 							</div>
-						{:else if getFieldType(key, value) === 'textarea'}
+						{:else if fieldType === 'textarea'}
 							<textarea
 								id={key}
 								bind:value={data[key]}
@@ -190,25 +189,8 @@
 		margin: 0;
 	}
 
-	.color-input-group {
-		display: flex;
-		gap: 0.5rem;
-		align-items: center;
-	}
-
-	.color-swatch {
-		width: 40px;
-		height: 40px;
-		border: 2px solid #d1d5db;
-		border-radius: 6px;
-		cursor: pointer;
-		background: none;
-		padding: 0;
-	}
-
-	.color-text {
-		flex: 1;
-		font-family: monospace;
+	.color-field :global(.color-picker) {
+		width: 100%;
 	}
 
 	.json-debug {

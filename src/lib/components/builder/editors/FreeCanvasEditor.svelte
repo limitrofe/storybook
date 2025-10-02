@@ -2,6 +2,7 @@
 	import { createEventDispatcher, onDestroy, onMount } from 'svelte';
 	import { draggable } from '@neodrag/svelte';
 	import RichTextEditor from '$lib/builder/components/RichTextEditor.svelte';
+	import { ColorPicker } from '$lib/components/builder/controls/index.js';
 
 	export let data = {};
 
@@ -165,23 +166,23 @@
 	data = ensureData(data);
 	$: data = ensureData(data);
 
-let currentDevice = 'desktop';
-let isCanvasModalOpen = false;
-let selectedId = data.items[0]?.id || null;
-$: selectedItem = data.items.find((item) => item.id === selectedId) || null;
+	let currentDevice = 'desktop';
+	let isCanvasModalOpen = false;
+	let selectedId = data.items[0]?.id || null;
+	$: selectedItem = data.items.find((item) => item.id === selectedId) || null;
 
-function openCanvasModal(device = currentDevice) {
-	if (device && device !== currentDevice) {
-		selectDevice(device);
+	function openCanvasModal(device = currentDevice) {
+		if (device && device !== currentDevice) {
+			selectDevice(device);
+		}
+		isCanvasModalOpen = true;
+		queueMicrotask(() => updatePreviewRect(currentDevice));
 	}
-	isCanvasModalOpen = true;
-	queueMicrotask(() => updatePreviewRect(currentDevice));
-}
 
-function closeCanvasModal() {
-	isCanvasModalOpen = false;
-	queueMicrotask(() => updatePreviewRect(currentDevice));
-}
+	function closeCanvasModal() {
+		isCanvasModalOpen = false;
+		queueMicrotask(() => updatePreviewRect(currentDevice));
+	}
 
 	function selectDevice(device) {
 		currentDevice = device;
@@ -231,11 +232,11 @@ function closeCanvasModal() {
 	}
 
 	function setFrameValue(item, device, field, value) {
-	const numeric = Number.parseFloat(value);
-	let parsed = Number.isFinite(numeric) ? numeric : 0;
-	if (field === 'opacity') {
-		parsed = Math.min(1, Math.max(0, Number.isFinite(numeric) ? numeric : 1));
-	}
+		const numeric = Number.parseFloat(value);
+		let parsed = Number.isFinite(numeric) ? numeric : 0;
+		if (field === 'opacity') {
+			parsed = Math.min(1, Math.max(0, Number.isFinite(numeric) ? numeric : 1));
+		}
 		updateItem(item.id, (draft) => {
 			draft[device] = { ...draft[device], [field]: parsed };
 			if (field === 'height') {
@@ -310,15 +311,15 @@ function closeCanvasModal() {
 		updateItem(item.id, (draft) => {
 			draft.autoHeight = enabled;
 		});
-	if (enabled) {
-		queueMicrotask(() => {
-			const key = getPreviewKey(item.id, currentDevice);
-			const el = previewNodes.get(key);
-			if (!el) return;
-			const { scale } = getViewportMetrics(currentDevice);
-			const newHeight = el.offsetHeight / (scale || 1);
-			updateItem(item.id, (draft) => {
-				draft[currentDevice] = { ...draft[currentDevice], height: newHeight };
+		if (enabled) {
+			queueMicrotask(() => {
+				const key = getPreviewKey(item.id, currentDevice);
+				const el = previewNodes.get(key);
+				if (!el) return;
+				const { scale } = getViewportMetrics(currentDevice);
+				const newHeight = el.offsetHeight / (scale || 1);
+				updateItem(item.id, (draft) => {
+					draft[currentDevice] = { ...draft[currentDevice], height: newHeight };
 				});
 				emit();
 			});
@@ -370,56 +371,56 @@ function closeCanvasModal() {
 		return device === 'mobile' ? mobile : desktop;
 	}
 
-function getPreviewContainerStyle(device = currentDevice) {
-	const color = getBackgroundColorValue(device) || '#000000';
-	const { baseWidth, canvasHeight } = getViewportMetrics(device);
-	const minHeight = device === 'desktop' ? data.minHeightDesktop : data.minHeightMobile;
-	const declarations = [
-		`width:${baseWidth}px`,
-		`height:${canvasHeight}px`,
-		`min-height:${minHeight}px`,
-		'position:relative',
-		'overflow:hidden',
-		`background-color:${color}`
-	];
-	if (data.backgroundSource === 'image') {
-		const image = getBackgroundImageValue(device);
-		if (image) {
-			const safe = image.replace(/"/g, '\\"');
-			declarations.push(`background-image:url("${safe}")`);
-			declarations.push('background-size:cover');
-			declarations.push('background-position:center');
-			declarations.push('background-repeat:no-repeat');
+	function getPreviewContainerStyle(device = currentDevice) {
+		const color = getBackgroundColorValue(device) || '#000000';
+		const { baseWidth, canvasHeight } = getViewportMetrics(device);
+		const minHeight = device === 'desktop' ? data.minHeightDesktop : data.minHeightMobile;
+		const declarations = [
+			`width:${baseWidth}px`,
+			`height:${canvasHeight}px`,
+			`min-height:${minHeight}px`,
+			'position:relative',
+			'overflow:hidden',
+			`background-color:${color}`
+		];
+		if (data.backgroundSource === 'image') {
+			const image = getBackgroundImageValue(device);
+			if (image) {
+				const safe = image.replace(/"/g, '\\"');
+				declarations.push(`background-image:url("${safe}")`);
+				declarations.push('background-size:cover');
+				declarations.push('background-position:center');
+				declarations.push('background-repeat:no-repeat');
+			} else {
+				declarations.push('background-image:none');
+			}
 		} else {
 			declarations.push('background-image:none');
 		}
-	} else {
-		declarations.push('background-image:none');
+		return declarations.join(';');
 	}
-	return declarations.join(';');
-}
 
 	function shouldRenderPreviewVideo(device = currentDevice) {
 		if (data.backgroundSource !== 'video') return false;
 		return Boolean(getBackgroundVideoValue(device));
 	}
 
-let desktopPreviewRef;
-let mobilePreviewRef;
-let previewRects = {
-	desktop: { width: 800, height: 600 },
-	mobile: { width: 375, height: 600 }
-};
-let resizeObservers = {};
-const previewNodes = new Map();
-const previewObservers = new Map();
+	let desktopPreviewRef;
+	let mobilePreviewRef;
+	let previewRects = {
+		desktop: { width: 800, height: 600 },
+		mobile: { width: 375, height: 600 }
+	};
+	let resizeObservers = {};
+	const previewNodes = new Map();
+	const previewObservers = new Map();
 
-function getPreviewKey(id, device) {
-	return `${id}-${device}`;
-}
+	function getPreviewKey(id, device) {
+		return `${id}-${device}`;
+	}
 
-$: attachPreviewObserver('desktop', desktopPreviewRef);
-$: attachPreviewObserver('mobile', mobilePreviewRef);
+	$: attachPreviewObserver('desktop', desktopPreviewRef);
+	$: attachPreviewObserver('mobile', mobilePreviewRef);
 
 	function getViewportMetrics(device = currentDevice) {
 		const baseWidth = device === 'desktop' ? data.baseWidthDesktop : data.baseWidthMobile;
@@ -459,16 +460,16 @@ $: attachPreviewObserver('mobile', mobilePreviewRef);
 
 	onMount(() => {
 		DEVICE_LIST.forEach((device) => updatePreviewRect(device));
-	const handleKeyDown = (event) => {
-		if (event.key === 'Escape') {
-			if (isCanvasModalOpen) {
-				closeCanvasModal();
-				event.preventDefault();
-				return;
+		const handleKeyDown = (event) => {
+			if (event.key === 'Escape') {
+				if (isCanvasModalOpen) {
+					closeCanvasModal();
+					event.preventDefault();
+					return;
+				}
+				closeItemModal();
 			}
-			closeItemModal();
-		}
-	};
+		};
 		window.addEventListener('keydown', handleKeyDown);
 		return () => {
 			window.removeEventListener('keydown', handleKeyDown);
@@ -500,10 +501,10 @@ $: attachPreviewObserver('mobile', mobilePreviewRef);
 		return data.items.find((entry) => entry.id === id) || null;
 	}
 
-function getFrame(itemId, device = currentDevice) {
-	const current = findItemById(itemId);
-	return current?.[device] || null;
-}
+	function getFrame(itemId, device = currentDevice) {
+		const current = findItemById(itemId);
+		return current?.[device] || null;
+	}
 
 	function clampPosition(value, axis, itemId) {
 		const frame = getFrame(itemId) || {};
@@ -521,68 +522,60 @@ function getFrame(itemId, device = currentDevice) {
 	let contentTextarea;
 	$: editingItem = editingItemId ? findItemById(editingItemId) : null;
 
-function registerPreviewNode(item, el, device = currentDevice) {
-	const key = getPreviewKey(item.id, device);
-	const existing = previewObservers.get(key);
-	if (existing) {
-		existing.disconnect();
-		previewObservers.delete(key);
-	}
-
-	if (item.type !== 'text' || !el) {
-		previewNodes.delete(key);
-		return;
-	}
-
-	previewNodes.set(key, el);
-	const observer = new ResizeObserver(() => {
-		const current = data.items.find((entry) => entry.id === item.id);
-		if (!current) return;
-		if (current.autoHeight === false && current.type !== 'text') return;
-		const frame = current[device];
-		if (!frame) return;
-		const { scale } = getViewportMetrics(device);
-		const measured = el.offsetHeight / (scale || 1);
-		if (Math.abs((frame.height || 0) - measured) < 0.5) return;
-		updateItem(id, (draft) => {
-			draft[device] = { ...draft[device], height: measured };
-		});
-		emit();
-	});
-	observer.observe(el);
-	previewObservers.set(key, observer);
-}
-
-function previewNodeAction(node, params) {
-	if (!params) return;
-	let { item, device } = params;
-	registerPreviewNode(item, node, device);
-	return {
-		update(nextParams) {
-			if (!nextParams) return;
-			if (nextParams.item === item && nextParams.device === device) return;
-			registerPreviewNode(item, null, device);
-			item = nextParams.item;
-			device = nextParams.device;
-			registerPreviewNode(item, node, device);
-		},
-		destroy() {
-			registerPreviewNode(item, null, device);
+	function registerPreviewNode(item, el, device = currentDevice) {
+		const key = getPreviewKey(item.id, device);
+		const existing = previewObservers.get(key);
+		if (existing) {
+			existing.disconnect();
+			previewObservers.delete(key);
 		}
-	};
-}
 
-function getPreviewItemStyle(item, device = currentDevice) {
-	const frame = item[device] || {};
-	const {
-		x = 0,
-			y = 0,
-			width = 200,
-			height = 120,
-			z = 1,
-			opacity = 1,
-			rotation = 0
-		} = frame;
+		if (item.type !== 'text' || !el) {
+			previewNodes.delete(key);
+			return;
+		}
+
+		previewNodes.set(key, el);
+		const observer = new ResizeObserver(() => {
+			const current = data.items.find((entry) => entry.id === item.id);
+			if (!current) return;
+			if (current.autoHeight === false && current.type !== 'text') return;
+			const frame = current[device];
+			if (!frame) return;
+			const { scale } = getViewportMetrics(device);
+			const measured = el.offsetHeight / (scale || 1);
+			if (Math.abs((frame.height || 0) - measured) < 0.5) return;
+			updateItem(id, (draft) => {
+				draft[device] = { ...draft[device], height: measured };
+			});
+			emit();
+		});
+		observer.observe(el);
+		previewObservers.set(key, observer);
+	}
+
+	function previewNodeAction(node, params) {
+		if (!params) return;
+		let { item, device } = params;
+		registerPreviewNode(item, node, device);
+		return {
+			update(nextParams) {
+				if (!nextParams) return;
+				if (nextParams.item === item && nextParams.device === device) return;
+				registerPreviewNode(item, null, device);
+				item = nextParams.item;
+				device = nextParams.device;
+				registerPreviewNode(item, node, device);
+			},
+			destroy() {
+				registerPreviewNode(item, null, device);
+			}
+		};
+	}
+
+	function getPreviewItemStyle(item, device = currentDevice) {
+		const frame = item[device] || {};
+		const { x = 0, y = 0, width = 200, height = 120, z = 1, opacity = 1, rotation = 0 } = frame;
 		const declarations = [
 			'position:absolute',
 			`left:${x}px`,
@@ -598,23 +591,26 @@ function getPreviewItemStyle(item, device = currentDevice) {
 	}
 
 	const selectValue = (primary, fallback) =>
-		primary !== undefined && primary !== null && primary !== '' ? primary : fallback ?? '';
+		primary !== undefined && primary !== null && primary !== '' ? primary : (fallback ?? '');
 
-function getPreviewTextStyle(item, device = currentDevice) {
-	const styles = item.textStyles || {};
-	const align = device === 'mobile'
-		? selectValue(styles.textAlignMobile, styles.textAlign)
-		: selectValue(styles.textAlign, styles.textAlignMobile);
-	const fontSize = device === 'mobile'
-		? selectValue(styles.fontSizeMobile, styles.fontSize)
-		: selectValue(styles.fontSize, styles.fontSizeMobile);
-	const lineHeight = device === 'mobile'
-		? selectValue(styles.lineHeightMobile, styles.lineHeight)
-		: selectValue(styles.lineHeight, styles.lineHeightMobile);
+	function getPreviewTextStyle(item, device = currentDevice) {
+		const styles = item.textStyles || {};
+		const align =
+			device === 'mobile'
+				? selectValue(styles.textAlignMobile, styles.textAlign)
+				: selectValue(styles.textAlign, styles.textAlignMobile);
+		const fontSize =
+			device === 'mobile'
+				? selectValue(styles.fontSizeMobile, styles.fontSize)
+				: selectValue(styles.fontSize, styles.fontSizeMobile);
+		const lineHeight =
+			device === 'mobile'
+				? selectValue(styles.lineHeightMobile, styles.lineHeight)
+				: selectValue(styles.lineHeight, styles.lineHeightMobile);
 
 		const declarations = [
 			'width:100%',
-			 item.autoHeight ? 'min-height:20px' : 'height:100%',
+			item.autoHeight ? 'min-height:20px' : 'height:100%',
 			'pointer-events:none',
 			`text-align:${align || 'left'}`
 		];
@@ -640,17 +636,17 @@ function getPreviewTextStyle(item, device = currentDevice) {
 		return declarations.join(';');
 	}
 
-function getPreviewMediaSource(item, device = currentDevice) {
-	if (!item) return '';
-	const desktop = sanitizeUrl(item.src);
-	const mobile = sanitizeUrl(item.srcMobile) || desktop;
-	return device === 'mobile' ? mobile : desktop;
-}
+	function getPreviewMediaSource(item, device = currentDevice) {
+		if (!item) return '';
+		const desktop = sanitizeUrl(item.src);
+		const mobile = sanitizeUrl(item.srcMobile) || desktop;
+		return device === 'mobile' ? mobile : desktop;
+	}
 
 	function openItemModal(item) {
 		selectedId = item.id;
 		editingItemId = item.id;
-}
+	}
 
 	function closeItemModal() {
 		editingItemId = null;
@@ -889,7 +885,9 @@ function getPreviewMediaSource(item, device = currentDevice) {
 				{/if}
 			</div>
 			{#if !isCanvasModalOpen}
-				<p class="preview-area__hint">Clique e arraste os elementos ou abra o canvas em tela cheia para editar com mais espaço.</p>
+				<p class="preview-area__hint">
+					Clique e arraste os elementos ou abra o canvas em tela cheia para editar com mais espaço.
+				</p>
 			{/if}
 		</div>
 
@@ -957,29 +955,37 @@ function getPreviewMediaSource(item, device = currentDevice) {
 					</select>
 				</label>
 				{#if data.backgroundSource === 'color'}
-					<label>
-						Cor (desktop)
-						<input
-							type="color"
-							value={data.backgroundColorDesktop}
-							on:input={(e) => {
-								const value = e.currentTarget.value;
+					<label class="color-control">
+						<span>Cor (desktop)</span>
+						<ColorPicker
+							label={null}
+							value={data.backgroundColorDesktop ?? ''}
+							showPresets={false}
+							showAlpha={true}
+							allowClear={true}
+							clearValue="transparent"
+							on:change={(event) => {
+								const nextValue = event.detail.value;
 								data = {
 									...data,
-									backgroundColorDesktop: value,
-									backgroundColor: value
+									backgroundColorDesktop: nextValue,
+									backgroundColor: nextValue
 								};
 								emit();
 							}}
 						/>
 					</label>
-					<label>
-						Cor (mobile)
-						<input
-							type="color"
-							value={data.backgroundColorMobile}
-							on:input={(e) => {
-								data = { ...data, backgroundColorMobile: e.currentTarget.value };
+					<label class="color-control">
+						<span>Cor (mobile)</span>
+						<ColorPicker
+							label={null}
+							value={data.backgroundColorMobile ?? ''}
+							showPresets={false}
+							showAlpha={true}
+							allowClear={true}
+							clearValue="transparent"
+							on:change={(event) => {
+								data = { ...data, backgroundColorMobile: event.detail.value };
 								emit();
 							}}
 						/>
@@ -1092,7 +1098,11 @@ function getPreviewMediaSource(item, device = currentDevice) {
 							/>
 							Mudo
 						</label>
-						<button type="button" class="secondary-button" on:click={() => openItemModal(selectedItem)}>
+						<button
+							type="button"
+							class="secondary-button"
+							on:click={() => openItemModal(selectedItem)}
+						>
 							Abrir editor avançado
 						</button>
 					</div>
@@ -1187,13 +1197,28 @@ function getPreviewMediaSource(item, device = currentDevice) {
 						<label>
 							Conteúdo (HTML)
 							<div class="text-toolbar">
-								<button type="button" class="toolbar-button" title="Negrito" on:click={() => applyTextFormat('bold')}>
+								<button
+									type="button"
+									class="toolbar-button"
+									title="Negrito"
+									on:click={() => applyTextFormat('bold')}
+								>
 									<strong>B</strong>
 								</button>
-								<button type="button" class="toolbar-button" title="Itálico" on:click={() => applyTextFormat('italic')}>
+								<button
+									type="button"
+									class="toolbar-button"
+									title="Itálico"
+									on:click={() => applyTextFormat('italic')}
+								>
 									<em>I</em>
 								</button>
-								<button type="button" class="toolbar-button" title="Sublinhado" on:click={() => applyTextFormat('underline')}>
+								<button
+									type="button"
+									class="toolbar-button"
+									title="Sublinhado"
+									on:click={() => applyTextFormat('underline')}
+								>
 									<span class="underline">U</span>
 								</button>
 							</div>
@@ -1207,7 +1232,11 @@ function getPreviewMediaSource(item, device = currentDevice) {
 								}}
 							></textarea>
 						</label>
-						<button type="button" class="secondary-button" on:click={() => openItemModal(selectedItem)}>
+						<button
+							type="button"
+							class="secondary-button"
+							on:click={() => openItemModal(selectedItem)}
+						>
 							Abrir editor avançado
 						</button>
 						<label class="checkbox">
@@ -1218,12 +1247,16 @@ function getPreviewMediaSource(item, device = currentDevice) {
 							/>
 							Altura automática ({currentDevice})
 						</label>
-						<label>
-							Cor do texto
-							<input
-								type="color"
-								value={selectedItem.textStyles?.color || '#ffffff'}
-								on:input={(e) => setTextValue('color', e.currentTarget.value)}
+						<label class="color-control">
+							<span>Cor do texto</span>
+							<ColorPicker
+								label={null}
+								value={selectedItem.textStyles?.color ?? ''}
+								showPresets={false}
+								showAlpha={true}
+								allowClear={true}
+								clearValue="transparent"
+								on:change={(event) => setTextValue('color', event.detail.value)}
 							/>
 						</label>
 						<label>
@@ -1349,7 +1382,11 @@ function getPreviewMediaSource(item, device = currentDevice) {
 								{/each}
 							</select>
 						</label>
-						<button type="button" class="secondary-button" on:click={() => openItemModal(selectedItem)}>
+						<button
+							type="button"
+							class="secondary-button"
+							on:click={() => openItemModal(selectedItem)}
+						>
 							Abrir editor avançado
 						</button>
 					{:else if selectedItem.type === 'video'}
@@ -1454,7 +1491,9 @@ function getPreviewMediaSource(item, device = currentDevice) {
 						{editingItem.type}
 					{/if}
 				</h2>
-				<button type="button" class="toolbar-button" on:click={closeItemModal} title="Fechar">✕</button>
+				<button type="button" class="toolbar-button" on:click={closeItemModal} title="Fechar"
+					>✕</button
+				>
 			</header>
 			<div class="modal-body">
 				{#if editingItem.type === 'text'}
@@ -1468,12 +1507,16 @@ function getPreviewMediaSource(item, device = currentDevice) {
 						}}
 					/>
 					<div class="modal-grid">
-						<label>
-							Cor do texto
-							<input
-								type="color"
-								value={selectedItem.textStyles?.color || '#ffffff'}
-								on:input={(e) => setTextValue('color', e.currentTarget.value)}
+						<label class="color-control">
+							<span>Cor do texto</span>
+							<ColorPicker
+								label={null}
+								value={selectedItem.textStyles?.color ?? ''}
+								showPresets={false}
+								showAlpha={true}
+								allowClear={true}
+								clearValue="transparent"
+								on:change={(event) => setTextValue('color', event.detail.value)}
 							/>
 						</label>
 						<label>
@@ -1519,7 +1562,9 @@ function getPreviewMediaSource(item, device = currentDevice) {
 						<label>
 							Alinhamento mobile
 							<select
-								value={selectedItem.textStyles?.textAlignMobile || selectedItem.textStyles?.textAlign || 'left'}
+								value={selectedItem.textStyles?.textAlignMobile ||
+									selectedItem.textStyles?.textAlign ||
+									'left'}
 								on:change={(e) => setTextValue('textAlignMobile', e.currentTarget.value)}
 							>
 								<option value="left">Esquerda</option>
@@ -1605,7 +1650,8 @@ function getPreviewMediaSource(item, device = currentDevice) {
 								type="number"
 								min="0"
 								value={selectedItem[currentDevice].width}
-								on:input={(e) => setFrameValue(selectedItem, currentDevice, 'width', e.currentTarget.value)}
+								on:input={(e) =>
+									setFrameValue(selectedItem, currentDevice, 'width', e.currentTarget.value)}
 							/>
 						</label>
 						<label>
@@ -1615,7 +1661,8 @@ function getPreviewMediaSource(item, device = currentDevice) {
 								min="0"
 								disabled={selectedItem.autoHeight ?? selectedItem.type === 'text'}
 								value={selectedItem[currentDevice].height}
-								on:input={(e) => setFrameValue(selectedItem, currentDevice, 'height', e.currentTarget.value)}
+								on:input={(e) =>
+									setFrameValue(selectedItem, currentDevice, 'height', e.currentTarget.value)}
 							/>
 						</label>
 						<label>
@@ -1623,7 +1670,8 @@ function getPreviewMediaSource(item, device = currentDevice) {
 							<input
 								type="number"
 								value={selectedItem[currentDevice].rotation ?? 0}
-								on:input={(e) => setFrameValue(selectedItem, currentDevice, 'rotation', e.currentTarget.value)}
+								on:input={(e) =>
+									setFrameValue(selectedItem, currentDevice, 'rotation', e.currentTarget.value)}
 							/>
 						</label>
 						<label>
@@ -1634,7 +1682,8 @@ function getPreviewMediaSource(item, device = currentDevice) {
 								max="1"
 								step="0.05"
 								value={selectedItem[currentDevice].opacity ?? 1}
-								on:input={(e) => setFrameValue(selectedItem, currentDevice, 'opacity', e.currentTarget.value)}
+								on:input={(e) =>
+									setFrameValue(selectedItem, currentDevice, 'opacity', e.currentTarget.value)}
 							/>
 						</label>
 					</div>
@@ -1693,7 +1742,8 @@ function getPreviewMediaSource(item, device = currentDevice) {
 								type="number"
 								min="0"
 								value={editingItem[currentDevice].width}
-								on:input={(e) => setFrameValue(editingItem, currentDevice, 'width', e.currentTarget.value)}
+								on:input={(e) =>
+									setFrameValue(editingItem, currentDevice, 'width', e.currentTarget.value)}
 							/>
 						</label>
 						<label>
@@ -1702,7 +1752,8 @@ function getPreviewMediaSource(item, device = currentDevice) {
 								type="number"
 								min="0"
 								value={editingItem[currentDevice].height}
-								on:input={(e) => setFrameValue(editingItem, currentDevice, 'height', e.currentTarget.value)}
+								on:input={(e) =>
+									setFrameValue(editingItem, currentDevice, 'height', e.currentTarget.value)}
 							/>
 						</label>
 						<label>
@@ -1710,7 +1761,8 @@ function getPreviewMediaSource(item, device = currentDevice) {
 							<input
 								type="number"
 								value={editingItem[currentDevice].rotation ?? 0}
-								on:input={(e) => setFrameValue(editingItem, currentDevice, 'rotation', e.currentTarget.value)}
+								on:input={(e) =>
+									setFrameValue(editingItem, currentDevice, 'rotation', e.currentTarget.value)}
 							/>
 						</label>
 						<label>
@@ -1721,7 +1773,8 @@ function getPreviewMediaSource(item, device = currentDevice) {
 								max="1"
 								step="0.05"
 								value={editingItem[currentDevice].opacity ?? 1}
-								on:input={(e) => setFrameValue(editingItem, currentDevice, 'opacity', e.currentTarget.value)}
+								on:input={(e) =>
+									setFrameValue(editingItem, currentDevice, 'opacity', e.currentTarget.value)}
 							/>
 						</label>
 					</div>
@@ -1795,7 +1848,8 @@ function getPreviewMediaSource(item, device = currentDevice) {
 								type="number"
 								min="0"
 								value={editingItem[currentDevice].width}
-								on:input={(e) => setFrameValue(editingItem, currentDevice, 'width', e.currentTarget.value)}
+								on:input={(e) =>
+									setFrameValue(editingItem, currentDevice, 'width', e.currentTarget.value)}
 							/>
 						</label>
 						<label>
@@ -1804,7 +1858,8 @@ function getPreviewMediaSource(item, device = currentDevice) {
 								type="number"
 								min="0"
 								value={editingItem[currentDevice].height}
-								on:input={(e) => setFrameValue(editingItem, currentDevice, 'height', e.currentTarget.value)}
+								on:input={(e) =>
+									setFrameValue(editingItem, currentDevice, 'height', e.currentTarget.value)}
 							/>
 						</label>
 						<label>
@@ -1812,7 +1867,8 @@ function getPreviewMediaSource(item, device = currentDevice) {
 							<input
 								type="number"
 								value={editingItem[currentDevice].rotation ?? 0}
-								on:input={(e) => setFrameValue(editingItem, currentDevice, 'rotation', e.currentTarget.value)}
+								on:input={(e) =>
+									setFrameValue(editingItem, currentDevice, 'rotation', e.currentTarget.value)}
 							/>
 						</label>
 						<label>
@@ -1823,7 +1879,8 @@ function getPreviewMediaSource(item, device = currentDevice) {
 								max="1"
 								step="0.05"
 								value={editingItem[currentDevice].opacity ?? 1}
-								on:input={(e) => setFrameValue(editingItem, currentDevice, 'opacity', e.currentTarget.value)}
+								on:input={(e) =>
+									setFrameValue(editingItem, currentDevice, 'opacity', e.currentTarget.value)}
 							/>
 						</label>
 					</div>
@@ -1902,7 +1959,9 @@ function getPreviewMediaSource(item, device = currentDevice) {
 		background: #f8fafc;
 		font-size: 0.85rem;
 		cursor: pointer;
-		transition: background 0.2s ease, border-color 0.2s ease;
+		transition:
+			background 0.2s ease,
+			border-color 0.2s ease;
 	}
 
 	.secondary-button:hover,
@@ -1931,7 +1990,10 @@ function getPreviewMediaSource(item, device = currentDevice) {
 		position: relative;
 		min-height: 360px;
 		box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.18);
-		transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+		transition:
+			transform 0.25s ease,
+			box-shadow 0.25s ease,
+			border-color 0.25s ease;
 	}
 
 	.preview-area__header {
@@ -1957,7 +2019,10 @@ function getPreviewMediaSource(item, device = currentDevice) {
 		border-radius: 9999px;
 		font-size: 0.82rem;
 		cursor: pointer;
-		transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+		transition:
+			background 0.2s ease,
+			box-shadow 0.2s ease,
+			transform 0.2s ease;
 	}
 
 	.preview-area__controls button:hover,
@@ -2066,7 +2131,9 @@ function getPreviewMediaSource(item, device = currentDevice) {
 		cursor: grab;
 		touch-action: none;
 		overflow: hidden;
-		transition: box-shadow 0.2s ease, border-color 0.2s ease;
+		transition:
+			box-shadow 0.2s ease,
+			border-color 0.2s ease;
 	}
 
 	.preview-item:active {
@@ -2144,6 +2211,16 @@ function getPreviewMediaSource(item, device = currentDevice) {
 		font-size: 0.9rem;
 	}
 
+	label.color-control > span {
+		font-weight: 600;
+		font-size: 0.85rem;
+		color: #334155;
+	}
+
+	label.color-control :global(.color-picker) {
+		width: 100%;
+	}
+
 	label.checkbox {
 		flex-direction: row;
 		align-items: center;
@@ -2175,7 +2252,9 @@ function getPreviewMediaSource(item, device = currentDevice) {
 		font-size: 0.9rem;
 		line-height: 1;
 		color: #0f172a;
-		transition: background 0.2s ease, border-color 0.2s ease;
+		transition:
+			background 0.2s ease,
+			border-color 0.2s ease;
 	}
 
 	.toolbar-button:hover,

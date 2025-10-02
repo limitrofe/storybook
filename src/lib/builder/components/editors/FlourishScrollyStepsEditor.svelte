@@ -1,6 +1,7 @@
 <script>
 	import { createEventDispatcher } from 'svelte';
 	import RichTextEditor from '../RichTextEditor.svelte';
+	import { ColorPicker } from '$lib/components/builder/controls/index.js';
 
 	export let value = [];
 
@@ -219,45 +220,31 @@
 				</div>
 
 				<div class="grid colors">
-					<label>
+					<label class="color-control">
 						<span>Cor do fundo</span>
-						<div class="color-input">
-							<input
-								type="color"
-								value={step.backgroundColor && step.backgroundColor.startsWith('#')
-									? step.backgroundColor
-									: '#ffffff'}
-								on:input={(event) =>
-									updateStep(index, 'backgroundColor', event.currentTarget.value)}
-							/>
-							<input
-								type="text"
-								value={step.backgroundColor}
-								placeholder="(opcional) ex: transparent ou rgba(...)"
-								on:input={(event) =>
-									updateStep(index, 'backgroundColor', event.currentTarget.value)}
-							/>
-						</div>
+						<ColorPicker
+							label={null}
+							value={step.backgroundColor ?? ''}
+							showPresets={false}
+							showAlpha={true}
+							allowClear={true}
+							clearValue=""
+							on:change={(event) => updateStep(index, 'backgroundColor', event.detail.value)}
+						/>
 						<small>Deixe vazio para usar o tema do projeto.</small>
 					</label>
 
-					<label>
+					<label class="color-control">
 						<span>Cor do texto</span>
-						<div class="color-input">
-							<input
-								type="color"
-								value={step.textColor && step.textColor.startsWith('#')
-									? step.textColor
-									: '#000000'}
-								on:input={(event) => updateStep(index, 'textColor', event.currentTarget.value)}
-							/>
-							<input
-								type="text"
-								value={step.textColor}
-								placeholder="(opcional) ex: #ffffff"
-								on:input={(event) => updateStep(index, 'textColor', event.currentTarget.value)}
-							/>
-						</div>
+						<ColorPicker
+							label={null}
+							value={step.textColor ?? ''}
+							showPresets={false}
+							showAlpha={true}
+							allowClear={true}
+							clearValue=""
+							on:change={(event) => updateStep(index, 'textColor', event.detail.value)}
+						/>
 						<small>Deixe vazio para herdar a cor padrão.</small>
 					</label>
 				</div>
@@ -388,19 +375,20 @@
 		grid-template-columns: repeat(1, minmax(0, 1fr));
 	}
 
-	.color-input {
-		display: grid;
-		grid-template-columns: 60px 1fr;
-		gap: 0.5rem;
-		align-items: center;
+	label.color-control {
+		display: flex;
+		flex-direction: column;
+		gap: 0.4rem;
 	}
 
-	.color-input input[type='color'] {
+	label.color-control > span {
+		font-weight: 600;
+		font-size: 0.85rem;
+		color: #0f172a;
+	}
+
+	label.color-control :global(.color-picker) {
 		width: 100%;
-		height: 36px;
-		padding: 0;
-		border: none;
-		background: transparent;
 	}
 
 	@media (min-width: 720px) {

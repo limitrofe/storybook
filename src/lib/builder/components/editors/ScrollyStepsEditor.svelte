@@ -1,6 +1,7 @@
 <script>
 	import { createEventDispatcher } from 'svelte';
 	import RichTextEditor from '../RichTextEditor.svelte';
+	import { ColorPicker } from '$lib/components/builder/controls/index.js';
 
 	export let value = [];
 
@@ -107,7 +108,7 @@
 	}
 
 	function toggleCollapsed(index) {
-		collapsedStates = collapsedStates.map((state, i) => (i === index ? !state : state ?? false));
+		collapsedStates = collapsedStates.map((state, i) => (i === index ? !state : (state ?? false)));
 	}
 
 	const positions = [
@@ -165,11 +166,7 @@
 				</div>
 			</header>
 
-			<div
-				class="fields"
-				id={`scrolly-step-fields-${index}`}
-				hidden={collapsedStates[index]}
-			>
+			<div class="fields" id={`scrolly-step-fields-${index}`} hidden={collapsedStates[index]}>
 				<label>
 					<span>Título</span>
 					<input
@@ -250,23 +247,17 @@
 				</div>
 
 				<div class="grid colors">
-					<label>
+					<label class="color-control">
 						<span>Cor do card</span>
-						<div class="color-input">
-							<input
-								type="color"
-								value={step.backgroundColor?.startsWith('#') ? step.backgroundColor : '#1f2933'}
-								on:input={(event) =>
-									updateStep(index, 'backgroundColor', event.currentTarget.value)}
-							/>
-							<input
-								type="text"
-								value={step.backgroundColor}
-								placeholder="rgba(15, 23, 42, 0.82)"
-								on:input={(event) =>
-									updateStep(index, 'backgroundColor', event.currentTarget.value)}
-							/>
-						</div>
+						<ColorPicker
+							label={null}
+							value={step.backgroundColor ?? ''}
+							showPresets={false}
+							showAlpha={true}
+							allowClear={true}
+							clearValue="transparent"
+							on:change={(event) => updateStep(index, 'backgroundColor', event.detail.value)}
+						/>
 					</label>
 
 					<label>
@@ -279,39 +270,43 @@
 						/>
 					</label>
 
-					<label>
+					<label class="color-control">
 						<span>Cor do texto</span>
-						<input
-							type="color"
-							value={step.textColor || '#F9FAFB'}
-							on:input={(event) => updateStep(index, 'textColor', event.currentTarget.value)}
+						<ColorPicker
+							label={null}
+							value={step.textColor ?? ''}
+							showPresets={false}
+							showAlpha={true}
+							allowClear={true}
+							clearValue="transparent"
+							on:change={(event) => updateStep(index, 'textColor', event.detail.value)}
 						/>
 					</label>
 
-					<label>
+					<label class="color-control">
 						<span>Cor de destaque</span>
-						<input
-							type="color"
-							value={step.accentColor || '#C4170C'}
-							on:input={(event) => updateStep(index, 'accentColor', event.currentTarget.value)}
+						<ColorPicker
+							label={null}
+							value={step.accentColor ?? ''}
+							showPresets={false}
+							showAlpha={true}
+							allowClear={true}
+							clearValue="transparent"
+							on:change={(event) => updateStep(index, 'accentColor', event.detail.value)}
 						/>
 					</label>
 
-					<label>
+					<label class="color-control">
 						<span>Cor da borda</span>
-						<div class="color-input">
-							<input
-								type="color"
-								value={step.borderColor?.startsWith('#') ? step.borderColor : '#FFFFFF'}
-								on:input={(event) => updateStep(index, 'borderColor', event.currentTarget.value)}
-							/>
-							<input
-								type="text"
-								value={step.borderColor}
-								placeholder="rgba(255,255,255,0.12)"
-								on:input={(event) => updateStep(index, 'borderColor', event.currentTarget.value)}
-							/>
-						</div>
+						<ColorPicker
+							label={null}
+							value={step.borderColor ?? ''}
+							showPresets={false}
+							showAlpha={true}
+							allowClear={true}
+							clearValue="transparent"
+							on:change={(event) => updateStep(index, 'borderColor', event.detail.value)}
+						/>
 					</label>
 				</div>
 
@@ -526,6 +521,16 @@
 		color: #334155;
 	}
 
+	label.color-control > span {
+		font-weight: 600;
+		font-size: 0.8rem;
+		color: #1e293b;
+	}
+
+	label.color-control :global(.color-picker) {
+		width: 100%;
+	}
+
 	.toggle-field {
 		flex-direction: row;
 		align-items: center;
@@ -546,14 +551,6 @@
 		resize: vertical;
 	}
 
-	input[type='color'] {
-		width: 44px;
-		height: 32px;
-		padding: 0;
-		border: none;
-		background: transparent;
-	}
-
 	.grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -562,13 +559,6 @@
 
 	.grid.colors {
 		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-	}
-
-	.color-input {
-		display: grid;
-		grid-template-columns: auto 1fr;
-		gap: 0.5rem;
-		align-items: center;
 	}
 
 	.add-step {
