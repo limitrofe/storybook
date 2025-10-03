@@ -1,5 +1,6 @@
 <script>
 	import { afterUpdate, onDestroy, onMount } from 'svelte';
+	import GloboPlayer from './GloboPlayer.svelte';
 	export let minHeightDesktop = 400;
 	export let maxHeightDesktop = null;
 	export let minHeightMobile = 400;
@@ -172,6 +173,10 @@
 		return value === undefined || value === null ? fallback : Boolean(value);
 	}
 
+	function hasValidGloboId(item) {
+		return Boolean((item?.videoId || item?.videoIdDesktop || item?.videoIdMobile || '').trim());
+	}
+
 	function isRenderableItem(item, frame) {
 		if (!item || typeof item !== 'object') return false;
 		if (!frame) return false;
@@ -180,6 +185,7 @@
 		if (item.enabled === false) return false;
 		if (item.deleted || item.isDeleted) return false;
 		if (item.status && `${item.status}`.toLowerCase() === 'deleted') return false;
+		if (item.type === 'globo-player' && !hasValidGloboId(item)) return false;
 		return true;
 	}
 
@@ -558,6 +564,20 @@
 								style="width:100%;height:100%;object-fit:${item.objectFit || 'cover'};"
 							></video>
 						{/if}
+					{:else if item.type === 'globo-player'}
+						<GloboPlayer
+							videoId={item.videoId || ''}
+							videoIdDesktop={item.videoIdDesktop || ''}
+							videoIdMobile={item.videoIdMobile || ''}
+							autoPlay={item.autoplay ?? false}
+							autoplay={item.autoplay ?? false}
+							startMuted={item.muted ?? true}
+							skipDFP={item.skipDFP ?? false}
+							loop={item.loop ?? false}
+							containerBackgroundColor="transparent"
+							widthDesktop="100%"
+							widthMobile="100%"
+						/>
 					{/if}
 				</div>
 			{/each}

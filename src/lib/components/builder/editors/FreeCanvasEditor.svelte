@@ -38,39 +38,80 @@
 
 	const ALLOWED_OBJECT_FITS = new Set(OBJECT_FIT_OPTIONS.map((option) => option.value));
 
-	const DEFAULT_ITEM = (type = 'text') => ({
-		id: createId(),
-		type,
-		content: 'Seu texto aqui',
-		src: '',
-		srcMobile: '',
-		poster: '',
-		posterMobile: '',
-		autoplay: false,
-		loop: false,
-		muted: true,
-		objectFit: 'cover',
-		textStyles: {
-			fontFamily: '',
-			fontSize: '',
-			fontSizeMobile: '',
-			lineHeight: '',
-			lineHeightMobile: '',
-			textAlign: 'left',
-			textAlignMobile: 'left',
-			color: '',
-			fontWeight: '',
-			fontStyle: '',
-			textDecoration: '',
-			textTransform: '',
-			letterSpacing: '',
-			textShadow: '',
-			typography: ''
-		},
-		desktop: { x: 120, y: 100, width: 260, height: 140, z: 1, opacity: 1, rotation: 0 },
-		mobile: { x: 40, y: 80, width: 220, height: 140, z: 1, opacity: 1, rotation: 0 },
-		autoHeight: type === 'text'
-	});
+	const DEFAULT_ITEM = (type = 'text') => {
+		const base = {
+			id: createId(),
+			type,
+			content: 'Seu texto aqui',
+			src: '',
+			srcMobile: '',
+			poster: '',
+			posterMobile: '',
+			autoplay: false,
+			loop: false,
+			muted: true,
+			skipDFP: false,
+			objectFit: 'cover',
+			videoId: '',
+			videoIdDesktop: '',
+			videoIdMobile: '',
+			textStyles: {
+				fontFamily: '',
+				fontSize: '',
+				fontSizeMobile: '',
+				lineHeight: '',
+				lineHeightMobile: '',
+				textAlign: 'left',
+				textAlignMobile: 'left',
+				color: '',
+				fontWeight: '',
+				fontStyle: '',
+				textDecoration: '',
+				textTransform: '',
+				letterSpacing: '',
+				textShadow: '',
+				typography: ''
+			},
+			desktop: { x: 120, y: 100, width: 260, height: 140, z: 1, opacity: 1, rotation: 0 },
+			mobile: { x: 40, y: 80, width: 220, height: 140, z: 1, opacity: 1, rotation: 0 },
+			autoHeight: type === 'text'
+		};
+
+		if (type === 'globo-player') {
+			return {
+				...base,
+				content: '',
+				desktop: { x: 120, y: 100, width: 640, height: 360, z: 1, opacity: 1, rotation: 0 },
+				mobile: { x: 24, y: 80, width: 320, height: 180, z: 1, opacity: 1, rotation: 0 },
+				autoplay: false,
+				loop: false,
+				muted: true,
+				skipDFP: false,
+				autoHeight: false
+			};
+		}
+
+		if (type === 'image') {
+			return {
+				...base,
+				content: '',
+				autoHeight: false
+			};
+		}
+
+		if (type === 'video') {
+			return {
+				...base,
+				content: '',
+				autoplay: true,
+				loop: true,
+				muted: true,
+				autoHeight: false
+			};
+		}
+
+		return base;
+	};
 
 	const DEFAULT_DATA = {
 		type: 'free-canvas',
@@ -150,6 +191,26 @@
 		merged.mobile.rotation = normalizeRotation(merged.mobile.rotation);
 		merged.desktop.opacity = normalizeOpacity(merged.desktop.opacity);
 		merged.mobile.opacity = normalizeOpacity(merged.mobile.opacity);
+		merged.autoplay = merged.autoplay === undefined ? base.autoplay : Boolean(merged.autoplay);
+		merged.loop = merged.loop === undefined ? base.loop : Boolean(merged.loop);
+		merged.muted = merged.muted === undefined ? base.muted : Boolean(merged.muted);
+		merged.skipDFP = merged.skipDFP === undefined ? base.skipDFP : Boolean(merged.skipDFP);
+		merged.videoId = merged.videoId ?? '';
+		merged.videoIdDesktop = merged.videoIdDesktop ?? '';
+		merged.videoIdMobile = merged.videoIdMobile ?? '';
+		if (merged.type === 'globo-player') {
+			merged.autoHeight = false;
+			merged.desktop = {
+				...merged.desktop,
+				height: merged.desktop.height || 360,
+				width: merged.desktop.width || 640
+			};
+			merged.mobile = {
+				...merged.mobile,
+				height: merged.mobile.height || 180,
+				width: merged.mobile.width || 320
+			};
+		}
 
 		const sanitizedStyles = { ...base.textStyles, ...(item.textStyles || {}) };
 		if (sanitizedStyles.fontFamily === 'Inter, sans-serif') sanitizedStyles.fontFamily = '';
@@ -743,6 +804,7 @@
 			<button type="button" on:click={() => addItem('text')}>+ Texto</button>
 			<button type="button" on:click={() => addItem('image')}>+ Imagem</button>
 			<button type="button" on:click={() => addItem('video')}>+ Vídeo</button>
+			<button type="button" on:click={() => addItem('globo-player')}>+ Globo Player</button>
 			<button type="button" class="danger" disabled={!selectedItem} on:click={removeSelected}>
 				Remover
 			</button>
@@ -817,6 +879,16 @@
 											loop={item.loop ?? true}
 											style={`object-fit:${item.objectFit || 'cover'};`}
 										></video>
+									{:else if item.type === 'globo-player'}
+										<div class="preview-item__globo">
+											<span class="preview-item__globo-label">Globo Player</span>
+											<span class="preview-item__globo-id">
+												{item.videoId ||
+													item.videoIdDesktop ||
+													item.videoIdMobile ||
+													'ID não definido'}
+											</span>
+										</div>
 									{:else}
 										<div class="preview-item__placeholder">{item.type}</div>
 									{/if}
@@ -877,6 +949,16 @@
 											loop={item.loop ?? true}
 											style={`object-fit:${item.objectFit || 'cover'};`}
 										></video>
+									{:else if item.type === 'globo-player'}
+										<div class="preview-item__globo">
+											<span class="preview-item__globo-label">Globo Player</span>
+											<span class="preview-item__globo-id">
+												{item.videoId ||
+													item.videoIdMobile ||
+													item.videoIdDesktop ||
+													'ID não definido'}
+											</span>
+										</div>
 									{:else}
 										<div class="preview-item__placeholder">{item.type}</div>
 									{/if}
@@ -1465,6 +1547,72 @@
 								{/each}
 							</select>
 						</label>
+					{:else if selectedItem.type === 'globo-player'}
+						<label>
+							ID principal (fallback)
+							<input
+								type="text"
+								placeholder="ex: 1234567"
+								value={selectedItem.videoId || ''}
+								on:input={(e) => setItemField(selectedItem, 'videoId', e.currentTarget.value)}
+							/>
+						</label>
+						<div class="grid">
+							<label>
+								ID desktop
+								<input
+									type="text"
+									placeholder="opcional"
+									value={selectedItem.videoIdDesktop || ''}
+									on:input={(e) =>
+										setItemField(selectedItem, 'videoIdDesktop', e.currentTarget.value)}
+								/>
+							</label>
+							<label>
+								ID mobile
+								<input
+									type="text"
+									placeholder="opcional"
+									value={selectedItem.videoIdMobile || ''}
+									on:input={(e) =>
+										setItemField(selectedItem, 'videoIdMobile', e.currentTarget.value)}
+								/>
+							</label>
+						</div>
+						<div class="checkbox-row">
+							<label class="checkbox">
+								<input
+									type="checkbox"
+									checked={selectedItem.autoplay ?? false}
+									on:change={(e) => setItemField(selectedItem, 'autoplay', e.currentTarget.checked)}
+								/>
+								Autoplay
+							</label>
+							<label class="checkbox">
+								<input
+									type="checkbox"
+									checked={selectedItem.loop ?? false}
+									on:change={(e) => setItemField(selectedItem, 'loop', e.currentTarget.checked)}
+								/>
+								Loop
+							</label>
+							<label class="checkbox">
+								<input
+									type="checkbox"
+									checked={selectedItem.muted ?? true}
+									on:change={(e) => setItemField(selectedItem, 'muted', e.currentTarget.checked)}
+								/>
+								Começar sem áudio
+							</label>
+							<label class="checkbox">
+								<input
+									type="checkbox"
+									checked={selectedItem.skipDFP ?? false}
+									on:change={(e) => setItemField(selectedItem, 'skipDFP', e.currentTarget.checked)}
+								/>
+								Pular anúncios (skipDFP)
+							</label>
+						</div>
 					{/if}
 				{:else}
 					<p>Selecione um elemento para editar.</p>
@@ -1489,6 +1637,8 @@
 						imagem
 					{:else if editingItem.type === 'video'}
 						vídeo
+					{:else if editingItem.type === 'globo-player'}
+						Globo Player
 					{:else}
 						{editingItem.type}
 					{/if}
@@ -2178,6 +2328,36 @@
 		text-transform: uppercase;
 		letter-spacing: 0.08em;
 		color: rgba(148, 163, 184, 0.9);
+	}
+
+	.preview-item__globo {
+		pointer-events: none;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 0.35rem;
+		padding: 0.8rem;
+		border-radius: 12px;
+		background: linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(59, 130, 246, 0.65));
+		color: #f8fafc;
+		text-align: center;
+	}
+
+	.preview-item__globo-label {
+		font-weight: 600;
+		font-size: 0.8rem;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+	}
+
+	.preview-item__globo-id {
+		font-size: 0.72rem;
+		opacity: 0.9;
+		word-break: break-word;
+		max-width: 100%;
 	}
 
 	.preview-background-video {

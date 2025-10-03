@@ -286,6 +286,8 @@ function ensureMediaVariants(paragraph = {}) {
 					const mobile = item.mobile && typeof item.mobile === 'object' ? item.mobile : {};
 					const type = item.type || 'text';
 					const baseAutoHeight = type === 'text';
+					const normalizeId = (value) =>
+						value === undefined || value === null ? '' : String(value).trim();
 					return {
 						id: item.id || `free-${Date.now()}`,
 						type,
@@ -298,6 +300,10 @@ function ensureMediaVariants(paragraph = {}) {
 						autoplay: item.autoplay === undefined ? type === 'video' : Boolean(item.autoplay),
 						loop: item.loop === undefined ? type === 'video' : Boolean(item.loop),
 						muted: item.muted === undefined ? true : Boolean(item.muted),
+						skipDFP: item.skipDFP === undefined ? false : Boolean(item.skipDFP),
+						videoId: normalizeId(item.videoId),
+						videoIdDesktop: normalizeId(item.videoIdDesktop),
+						videoIdMobile: normalizeId(item.videoIdMobile),
 						objectFit: item.objectFit || 'cover',
 						autoHeight: item.autoHeight === undefined ? baseAutoHeight : Boolean(item.autoHeight),
 						textStyles: { ...(item.textStyles || {}) },

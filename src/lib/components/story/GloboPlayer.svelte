@@ -60,6 +60,7 @@
 	export let autoPlay = false;
 	export let startMuted = true;
 	export let skipDFP = false;
+	export let loop = false;
 	export let width = '100%'; // Deprecated, usar widthMobile/widthDesktop
 	export let height = '100%';
 	export let chromeless = false;
@@ -189,7 +190,19 @@
 				if (shouldAutoplayOnCreate) playerInstance.play();
 				dispatch('ready');
 			},
-			onEnded: () => dispatch('ended'),
+			onEnded: () => {
+				if (loop && playerInstance && typeof playerInstance.seek === 'function') {
+					try {
+						playerInstance.seek(0);
+						if (typeof playerInstance.play === 'function') {
+							playerInstance.play();
+						}
+					} catch (error) {
+						console.warn('Erro ao reiniciar GloboPlayer em loop', error);
+					}
+				}
+				dispatch('ended');
+			},
 			onPlay: () => dispatch('play'),
 			onPause: () => dispatch('pause')
 		};
