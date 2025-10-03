@@ -354,6 +354,11 @@
 								subtitleFontWeight={paragraph.subtitleFontWeight}
 								subtitleFontStyle={paragraph.subtitleFontStyle}
 								overlay={paragraph.overlay !== 'false'}
+								minimalAccentColor={paragraph.minimalAccentColor}
+								minimalAccentWidthDesktop={paragraph.minimalAccentWidthDesktop}
+								minimalAccentWidthMobile={paragraph.minimalAccentWidthMobile}
+								minimalAccentHeightDesktop={paragraph.minimalAccentHeightDesktop}
+								minimalAccentHeightMobile={paragraph.minimalAccentHeightMobile}
 							/>
 						{:else if componentType === 'photo'}
 							<PhotoWithCaption

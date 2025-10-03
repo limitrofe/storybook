@@ -374,6 +374,11 @@ export const componentRegistry = [
 			textColor: '',
 			fontFamily: 'globotipo',
 			variant: 'default',
+			minimalAccentColor: '',
+			minimalAccentWidthDesktop: '',
+			minimalAccentWidthMobile: '',
+			minimalAccentHeightDesktop: '',
+			minimalAccentHeightMobile: '',
 			size: 'medium',
 			overlay: false,
 			titleShadow: {
@@ -443,6 +448,36 @@ export const componentRegistry = [
 			},
 			{ path: 'backgroundColor', label: 'Cor de fundo', type: 'color' },
 			{ path: 'textColor', label: 'Cor do texto', type: 'color' },
+			{
+				path: 'minimalAccentColor',
+				label: 'Minimal • cor do traço',
+				type: 'color',
+				helpText: 'Personaliza a linha acima do título na variante minimal.'
+			},
+			{
+				path: 'minimalAccentWidthDesktop',
+				label: 'Minimal • largura desktop',
+				type: 'text',
+				placeholder: '30%'
+			},
+			{
+				path: 'minimalAccentWidthMobile',
+				label: 'Minimal • largura mobile',
+				type: 'text',
+				placeholder: '40%'
+			},
+			{
+				path: 'minimalAccentHeightDesktop',
+				label: 'Minimal • altura desktop',
+				type: 'text',
+				placeholder: '2px'
+			},
+			{
+				path: 'minimalAccentHeightMobile',
+				label: 'Minimal • altura mobile',
+				type: 'text',
+				placeholder: '2px'
+			},
 			{ path: 'backgroundImage', label: 'Imagem desktop', type: 'url' },
 			{ path: 'backgroundImageMobile', label: 'Imagem mobile', type: 'url' },
 			{ path: 'backgroundVideo', label: 'Vídeo desktop', type: 'url' },

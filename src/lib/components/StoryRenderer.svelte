@@ -612,6 +612,11 @@
 							backgroundVideoMobile={props.backgroundVideoMobile}
 							backgroundColor={props.backgroundColor}
 							textColor={props.textColor}
+							minimalAccentColor={props.minimalAccentColor}
+							minimalAccentWidthDesktop={props.minimalAccentWidthDesktop}
+							minimalAccentWidthMobile={props.minimalAccentWidthMobile}
+							minimalAccentHeightDesktop={props.minimalAccentHeightDesktop}
+							minimalAccentHeightMobile={props.minimalAccentHeightMobile}
 							fontFamily={props.fontFamily || 'obviously'}
 							variant={props.variant || 'default'}
 							size={props.size || 'medium'}

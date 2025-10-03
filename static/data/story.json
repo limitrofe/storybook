@@ -378,7 +378,7 @@
       "backgroundColor": "#39f0f3",
       "textColor": "#ffffff",
       "fontFamily": "globotipo",
-      "variant": "default",
+      "variant": "minimal",
       "size": "large",
       "overlay": false,
       "textAlign": "center",
@@ -422,7 +422,9 @@
         "blur": "12",
         "spread": "",
         "color": "#11f20d"
-      }
+      },
+      "minimalAccentColor": "#ffffff",
+      "minimalAccentHeightDesktop": "12px"
     },
     {
       "type": "texto",

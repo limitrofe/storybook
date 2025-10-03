@@ -10,6 +10,11 @@
 	export let backgroundColor = ''; // ✅ NOVO CAMPO
 	export let textColor = ''; // ✅ NOVO CAMPO
 	export let variant = 'default'; // default, centered, minimal
+	export let minimalAccentColor = '';
+	export let minimalAccentWidthDesktop = '';
+	export let minimalAccentWidthMobile = '';
+	export let minimalAccentHeightDesktop = '';
+	export let minimalAccentHeightMobile = '';
 	export let size = 'medium'; // small, medium, large
 	export let height = '';
 	export let heightMobile = '';
@@ -219,6 +224,23 @@
 		.join('; ');
 
 	$: contentStyle = [textStyle, typographyStyle, shadowStyle].filter(Boolean).join('; ');
+	$: minimalAccentStyle = [
+		minimalAccentColor ? `--section-title-minimal-underline-color:${minimalAccentColor}` : '',
+		minimalAccentWidthDesktop
+			? `--section-title-minimal-underline-width-desktop:${minimalAccentWidthDesktop}`
+			: '',
+		minimalAccentWidthMobile
+			? `--section-title-minimal-underline-width-mobile:${minimalAccentWidthMobile}`
+			: '',
+		minimalAccentHeightDesktop
+			? `--section-title-minimal-underline-height-desktop:${minimalAccentHeightDesktop}`
+			: '',
+		minimalAccentHeightMobile
+			? `--section-title-minimal-underline-height-mobile:${minimalAccentHeightMobile}`
+			: ''
+	]
+		.filter(Boolean)
+		.join('; ');
 
 	// Debug para desenvolvimento
 	$: if (import.meta.env.DEV) {
@@ -283,7 +305,7 @@
 	{/if}
 
 	<div class="section-title__content" style={contentStyle}>
-		<div class="section-title__container">
+		<div class="section-title__container" style={minimalAccentStyle}>
 			<h2 class="section-title__title" style={textColor ? `color: ${textColor} !important` : ''}>
 				{@html title}
 			</h2>
@@ -473,9 +495,18 @@
 		top: 0;
 		left: 50%;
 		transform: translateX(-50%);
-		width: 30%;
-		height: 2px;
-		background-color: var(--color-primary);
+		width: var(
+			--section-title-minimal-underline-width-desktop,
+			30%
+		);
+		height: var(
+			--section-title-minimal-underline-height-desktop,
+			2px
+		);
+		background-color: var(
+			--section-title-minimal-underline-color,
+			var(--color-primary)
+		);
 	}
 
 	/* Estilo para seções sem mídia (sem fundo) */
@@ -563,6 +594,17 @@
 
 		.section-title__background-video--mobile {
 			display: block;
+		}
+
+		.section-title--minimal .section-title__container::before {
+			width: var(
+				--section-title-minimal-underline-width-mobile,
+				var(--section-title-minimal-underline-width-desktop, 30%)
+			);
+			height: var(
+				--section-title-minimal-underline-height-mobile,
+				var(--section-title-minimal-underline-height-desktop, 2px)
+			);
 		}
 
 		.section-title__content {
