@@ -286,7 +286,28 @@
 							<StoryText
 								content={paragraph.text}
 								variant={paragraph.variant || 'body'}
-								maxWidth="700px"
+								align={paragraph.align || 'left'}
+								maxWidth={paragraph.maxWidth}
+								maxWidthDesktop={paragraph.maxWidthDesktop}
+								maxWidthMobile={paragraph.maxWidthMobile}
+								widthDesktop={paragraph.widthDesktop}
+								widthMobile={paragraph.widthMobile}
+								containerWidth={paragraph.containerWidth}
+								containerWidthDesktop={paragraph.containerWidthDesktop}
+								containerWidthMobile={paragraph.containerWidthMobile}
+								containerMaxWidth={paragraph.containerMaxWidth}
+								containerMaxWidthDesktop={paragraph.containerMaxWidthDesktop}
+								containerMaxWidthMobile={paragraph.containerMaxWidthMobile}
+								containerMinHeight={paragraph.containerMinHeight}
+								containerMinHeightDesktop={paragraph.containerMinHeightDesktop}
+								containerMinHeightMobile={paragraph.containerMinHeightMobile}
+								horizontalPosition={paragraph.horizontalPosition}
+								verticalPosition={paragraph.verticalPosition}
+								fontSizeDesktop={paragraph.fontSizeDesktop}
+								fontSizeMobile={paragraph.fontSizeMobile}
+								lineHeightDesktop={paragraph.lineHeightDesktop}
+								lineHeightMobile={paragraph.lineHeightMobile}
+								textColor={paragraph.textColor || paragraph.color}
 							/>
 						{:else if componentType === 'quote'}
 							<StoryText
@@ -294,6 +315,28 @@
 								variant="quote"
 								author={paragraph.author}
 								role={paragraph.role}
+								align={paragraph.align || 'left'}
+								maxWidth={paragraph.maxWidth}
+								maxWidthDesktop={paragraph.maxWidthDesktop}
+								maxWidthMobile={paragraph.maxWidthMobile}
+								widthDesktop={paragraph.widthDesktop}
+								widthMobile={paragraph.widthMobile}
+								containerWidth={paragraph.containerWidth}
+								containerWidthDesktop={paragraph.containerWidthDesktop}
+								containerWidthMobile={paragraph.containerWidthMobile}
+								containerMaxWidth={paragraph.containerMaxWidth}
+								containerMaxWidthDesktop={paragraph.containerMaxWidthDesktop}
+								containerMaxWidthMobile={paragraph.containerMaxWidthMobile}
+								containerMinHeight={paragraph.containerMinHeight}
+								containerMinHeightDesktop={paragraph.containerMinHeightDesktop}
+								containerMinHeightMobile={paragraph.containerMinHeightMobile}
+								horizontalPosition={paragraph.horizontalPosition}
+								verticalPosition={paragraph.verticalPosition}
+								fontSizeDesktop={paragraph.fontSizeDesktop}
+								fontSizeMobile={paragraph.fontSizeMobile}
+								lineHeightDesktop={paragraph.lineHeightDesktop}
+								lineHeightMobile={paragraph.lineHeightMobile}
+								textColor={paragraph.textColor || paragraph.color}
 							/>
 						{:else if componentType === 'section-title'}
 							<SectionTitle

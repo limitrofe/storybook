@@ -4,11 +4,26 @@
 	export let variant = 'body'; // 'body', 'lead', 'quote'
 	export let align = 'left'; // 'left', 'center', 'right', 'justify'
 	export let maxWidth = '700px';
+	export let maxWidthDesktop = '';
+	export let maxWidthMobile = '';
+	export let widthDesktop = '';
+	export let widthMobile = '';
 	export let author = '';
 	export let role = '';
+
+	$: wrapperStyle = [
+		`text-align:${align}`,
+		maxWidth ? `--story-text-max-width-desktop:${maxWidth}` : '',
+		maxWidthDesktop ? `--story-text-max-width-desktop:${maxWidthDesktop}` : '',
+		maxWidthMobile ? `--story-text-max-width-mobile:${maxWidthMobile}` : '',
+		widthDesktop ? `--story-text-width-desktop:${widthDesktop}` : '',
+		widthMobile ? `--story-text-width-mobile:${widthMobile}` : ''
+	]
+		.filter(Boolean)
+		.join('; ');
 </script>
 
-<div class="story-text story-text--{variant}" style="text-align: {align}; max-width: {maxWidth};">
+<div class="story-text story-text--{variant}" style={wrapperStyle}>
 	<div class="story-text__content">
 		{#if variant === 'quote'}
 			<div class="quote-container">
@@ -41,6 +56,8 @@
 		margin: 2rem auto;
 		padding: 0 1rem;
 		color: var(--color-text);
+		width: var(--story-text-width-desktop, auto);
+		max-width: var(--story-text-max-width-desktop, 700px);
 	}
 
 	.story-text__content {
@@ -209,6 +226,17 @@
 
 	/* Responsive Design */
 	@media (max-width: 768px) {
+		.story-text {
+			width: var(
+				--story-text-width-mobile,
+				var(--story-text-width-desktop, auto)
+			);
+			max-width: var(
+				--story-text-max-width-mobile,
+				var(--story-text-max-width-desktop, 700px)
+			);
+		}
+
 		.story-text--body {
 			font-size: var(--font-size-60);
 		}

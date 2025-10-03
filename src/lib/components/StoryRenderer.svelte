@@ -543,8 +543,27 @@
 								content={props.text}
 								variant={props.variant || 'body'}
 								align={props.align}
-								size={props.size}
-								color={props.color}
+								maxWidth={props.maxWidth}
+								maxWidthDesktop={props.maxWidthDesktop}
+								maxWidthMobile={props.maxWidthMobile}
+								widthDesktop={props.widthDesktop}
+								widthMobile={props.widthMobile}
+								containerWidth={props.containerWidth}
+								containerWidthDesktop={props.containerWidthDesktop}
+								containerWidthMobile={props.containerWidthMobile}
+								containerMaxWidth={props.containerMaxWidth}
+								containerMaxWidthDesktop={props.containerMaxWidthDesktop}
+								containerMaxWidthMobile={props.containerMaxWidthMobile}
+								containerMinHeight={props.containerMinHeight}
+								containerMinHeightDesktop={props.containerMinHeightDesktop}
+								containerMinHeightMobile={props.containerMinHeightMobile}
+								horizontalPosition={props.horizontalPosition}
+								verticalPosition={props.verticalPosition}
+								fontSizeDesktop={props.fontSizeDesktop}
+								fontSizeMobile={props.fontSizeMobile}
+								lineHeightDesktop={props.lineHeightDesktop}
+								lineHeightMobile={props.lineHeightMobile}
+								textColor={props.textColor || props.color}
 							/>
 						</div>
 
@@ -556,6 +575,27 @@
 								variant="quote"
 								author={props.author}
 								role={props.role}
+								maxWidth={props.maxWidth}
+								maxWidthDesktop={props.maxWidthDesktop}
+								maxWidthMobile={props.maxWidthMobile}
+								widthDesktop={props.widthDesktop}
+								widthMobile={props.widthMobile}
+								containerWidth={props.containerWidth}
+								containerWidthDesktop={props.containerWidthDesktop}
+								containerWidthMobile={props.containerWidthMobile}
+								containerMaxWidth={props.containerMaxWidth}
+								containerMaxWidthDesktop={props.containerMaxWidthDesktop}
+								containerMaxWidthMobile={props.containerMaxWidthMobile}
+								containerMinHeight={props.containerMinHeight}
+								containerMinHeightDesktop={props.containerMinHeightDesktop}
+								containerMinHeightMobile={props.containerMinHeightMobile}
+								horizontalPosition={props.horizontalPosition}
+								verticalPosition={props.verticalPosition}
+								fontSizeDesktop={props.fontSizeDesktop}
+								fontSizeMobile={props.fontSizeMobile}
+								lineHeightDesktop={props.lineHeightDesktop}
+								lineHeightMobile={props.lineHeightMobile}
+								textColor={props.textColor || props.color}
 							/>
 						</div>
 
@@ -1050,9 +1090,50 @@
 	}
 
 	.section-content {
-		max-width: 800px;
-		margin: 0 auto;
-		padding: 0 0rem;
+		width: var(--section-content-width-desktop, 100%);
+		max-width: var(--section-content-max-width-desktop, 800px);
+		min-height: var(--section-content-min-height-desktop, auto);
+		margin: var(--section-content-margin-desktop, 0 auto);
+		padding: var(--section-content-padding-desktop, 0 0rem);
+		display: var(--section-content-display, block);
+		flex-direction: var(--section-content-flex-direction, column);
+		align-items: var(--section-content-align-items, stretch);
+		justify-content: var(--section-content-justify-content, flex-start);
+		gap: var(--section-content-gap, 0);
+	}
+
+	@media (max-width: 768px) {
+		.section-content {
+			width: var(--section-content-width-mobile, var(--section-content-width-desktop, 100%));
+			max-width: var(
+				--section-content-max-width-mobile,
+				var(--section-content-max-width-desktop, 100%)
+			);
+			min-height: var(
+				--section-content-min-height-mobile,
+				var(--section-content-min-height-desktop, auto)
+			);
+			margin: var(
+				--section-content-margin-mobile,
+				var(--section-content-margin-desktop, 0 auto)
+			);
+			padding: var(
+				--section-content-padding-mobile,
+				var(--section-content-padding-desktop, 0 0rem)
+			);
+			flex-direction: var(
+				--section-content-flex-direction-mobile,
+				var(--section-content-flex-direction, column)
+			);
+			align-items: var(
+				--section-content-align-items-mobile,
+				var(--section-content-align-items, stretch)
+			);
+			justify-content: var(
+				--section-content-justify-content-mobile,
+				var(--section-content-justify-content, flex-start)
+			);
+		}
 	}
 
 	.unknown-component {

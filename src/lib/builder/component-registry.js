@@ -633,6 +633,21 @@ export const componentRegistry = [
 			variant: 'body',
 			align: 'left',
 			maxWidth: '720px',
+			maxWidthDesktop: '',
+			maxWidthMobile: '',
+			widthDesktop: '',
+			widthMobile: '',
+			containerWidth: '',
+			containerWidthDesktop: '',
+			containerWidthMobile: '',
+			containerMaxWidth: '',
+			containerMaxWidthDesktop: '',
+			containerMaxWidthMobile: '',
+			containerMinHeight: '',
+			containerMinHeightDesktop: '',
+			containerMinHeightMobile: '',
+			horizontalPosition: 'center',
+			verticalPosition: 'top',
 			fontSizeDesktop: '',
 			fontSizeMobile: '',
 			lineHeightDesktop: '',
@@ -663,6 +678,52 @@ export const componentRegistry = [
 				]
 			},
 			{ path: 'maxWidth', label: 'Largura máxima', type: 'text', placeholder: '720px' },
+			{
+				path: 'maxWidthDesktop',
+				label: 'Max desktop',
+				type: 'text',
+				placeholder: '720px ou 70%'
+			},
+			{
+				path: 'maxWidthMobile',
+				label: 'Max mobile',
+				type: 'text',
+				placeholder: '360px ou 90%'
+			},
+			{ path: 'widthDesktop', label: 'Largura desktop', type: 'text', placeholder: 'auto' },
+			{ path: 'widthMobile', label: 'Largura mobile', type: 'text', placeholder: 'auto' },
+			{
+				path: 'horizontalPosition',
+				label: 'Posição horizontal',
+				type: 'select',
+				options: [
+					{ label: 'Centro', value: 'center' },
+					{ label: 'Esquerda', value: 'left' },
+					{ label: 'Direita', value: 'right' }
+				]
+			},
+			{
+				path: 'verticalPosition',
+				label: 'Posição vertical',
+				type: 'select',
+				options: [
+					{ label: 'Topo', value: 'top' },
+					{ label: 'Centro', value: 'center' },
+					{ label: 'Base', value: 'bottom' }
+				]
+			},
+			{
+				path: 'containerMinHeightDesktop',
+				label: 'Altura mínima desktop',
+				type: 'text',
+				placeholder: 'auto ou 80vh'
+			},
+			{
+				path: 'containerMinHeightMobile',
+				label: 'Altura mínima mobile',
+				type: 'text',
+				placeholder: 'auto'
+			},
 			{ path: 'author', label: 'Autor (para citações)', type: 'text' },
 			{ path: 'role', label: 'Cargo (para citações)', type: 'text' },
 			{

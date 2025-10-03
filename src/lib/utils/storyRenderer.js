@@ -144,6 +144,17 @@ export function parseStoryComponents(paragraphs) {
 				component.maxWidthMobile = paragraph.maxWidthMobile;
 				component.widthDesktop = paragraph.widthDesktop;
 				component.widthMobile = paragraph.widthMobile;
+				component.containerWidth = paragraph.containerWidth;
+				component.containerWidthDesktop = paragraph.containerWidthDesktop;
+				component.containerWidthMobile = paragraph.containerWidthMobile;
+				component.containerMaxWidth = paragraph.containerMaxWidth;
+				component.containerMaxWidthDesktop = paragraph.containerMaxWidthDesktop;
+				component.containerMaxWidthMobile = paragraph.containerMaxWidthMobile;
+				component.containerMinHeight = paragraph.containerMinHeight;
+				component.containerMinHeightDesktop = paragraph.containerMinHeightDesktop;
+				component.containerMinHeightMobile = paragraph.containerMinHeightMobile;
+				component.horizontalPosition = paragraph.horizontalPosition;
+				component.verticalPosition = paragraph.verticalPosition;
 				component.whiteSpaceDesktop = paragraph.whiteSpaceDesktop;
 				component.whiteSpaceMobile = paragraph.whiteSpaceMobile;
 				break;
