@@ -178,6 +178,8 @@
 		if (item.hidden || item.isHidden) return false;
 		if (item.visible === false) return false;
 		if (item.enabled === false) return false;
+		if (item.deleted || item.isDeleted) return false;
+		if (item.status && `${item.status}`.toLowerCase() === 'deleted') return false;
 		return true;
 	}
 
@@ -279,18 +281,22 @@
 	let cssHeightPx = 0;
 	let renderableItems = [];
 
-	$: renderableItems = items
-		.map((item, index) => {
-			const frame = getFrame(item);
-			return isRenderableItem(item, frame)
-				? {
-						item,
-						frame,
-						key: createItemKey(item, index)
-					}
-				: null;
-		})
-		.filter(Boolean);
+	$: {
+		const deviceLabel = isMobile ? 'mobile' : 'desktop';
+		const source = Array.isArray(items) ? items : [];
+		renderableItems = source
+			.map((item, index) => {
+				const frame = deviceLabel === 'mobile' ? item?.mobile : item?.desktop;
+				return isRenderableItem(item, frame)
+					? {
+							item,
+							frame,
+							key: createItemKey(item, index)
+						}
+					: null;
+			})
+			.filter(Boolean);
+	}
 
 	$: isSimulatedMobile = isMobile && browserWidth > 768;
 

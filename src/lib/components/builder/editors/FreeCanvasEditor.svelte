@@ -6,6 +6,8 @@
 
 	export let data = {};
 
+	const DEVICE_LIST = ['desktop', 'mobile'];
+
 	const dispatch = createEventDispatcher();
 
 	function createId() {
@@ -545,7 +547,7 @@
 			const { scale } = getViewportMetrics(device);
 			const measured = el.offsetHeight / (scale || 1);
 			if (Math.abs((frame.height || 0) - measured) < 0.5) return;
-			updateItem(id, (draft) => {
+			updateItem(item.id, (draft) => {
 				draft[device] = { ...draft[device], height: measured };
 			});
 			emit();

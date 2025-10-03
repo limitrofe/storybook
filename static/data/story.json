@@ -524,54 +524,6 @@
             "z": 1,
             "opacity": 1
           }
-        },
-        {
-          "id": "d1233524-210c-473d-9012-f85435bab2cf",
-          "type": "text",
-          "content": "Criador de histórias marcantes e personagens icônicos, Aguinaldo está de volta ao horário nobre da TV Globo após seis anos. O autor, vencedor de dois Emmys, traz nesta obra toda as suas vivências, referências e sua assinatura única na teledramaturgia. \nDesta vez, divide a escrita com Virgílio Silva e Zé Dassilva, e trabalha em parceria com Luiz Henrique Rios, que comanda pela primeira vez a direção artística de uma novela de sua autoria.",
-          "src": "",
-          "srcMobile": "",
-          "alt": "",
-          "poster": "",
-          "posterMobile": "",
-          "autoplay": false,
-          "loop": false,
-          "muted": true,
-          "objectFit": "cover",
-          "autoHeight": true,
-          "textStyles": {
-            "fontFamily": "",
-            "fontSize": "",
-            "fontSizeMobile": "",
-            "lineHeight": "",
-            "lineHeightMobile": "",
-            "textAlign": "left",
-            "textAlignMobile": "left",
-            "color": "",
-            "fontWeight": "",
-            "fontStyle": "",
-            "textDecoration": "",
-            "textTransform": "",
-            "letterSpacing": "",
-            "textShadow": "",
-            "typography": ""
-          },
-          "desktop": {
-            "x": 624.5906499296154,
-            "y": 110.37925494180803,
-            "width": 500,
-            "height": 140,
-            "z": 1,
-            "opacity": 1
-          },
-          "mobile": {
-            "x": 149.3477108283433,
-            "y": 72.19529690618762,
-            "width": 220,
-            "height": 140,
-            "z": 1,
-            "opacity": 1
-          }
         }
       ],
       "section": {
@@ -808,54 +760,6 @@
       "videoLoop": true,
       "videoMuted": true,
       "items": [
-        {
-          "id": "abe0b298-abab-4b1f-8752-990f2f47d228",
-          "type": "image",
-          "content": "Seu texto aqui",
-          "src": "https://s3.glbimg.com/v1/AUTH_8b29beb0cbe247a296f902be2fe084b6/2025/html/gshow/3gracas/galeria-chacrinha5.png",
-          "srcMobile": "https://s3.glbimg.com/v1/AUTH_8b29beb0cbe247a296f902be2fe084b6/2025/html/gshow/3gracas/galeria-chacrinha5.png",
-          "alt": "",
-          "poster": "",
-          "posterMobile": "",
-          "autoplay": false,
-          "loop": false,
-          "muted": true,
-          "objectFit": "cover",
-          "autoHeight": false,
-          "textStyles": {
-            "fontFamily": "",
-            "fontSize": "",
-            "fontSizeMobile": "",
-            "lineHeight": "",
-            "lineHeightMobile": "",
-            "textAlign": "left",
-            "textAlignMobile": "left",
-            "color": "",
-            "fontWeight": "",
-            "fontStyle": "",
-            "textDecoration": "",
-            "textTransform": "",
-            "letterSpacing": "",
-            "textShadow": "",
-            "typography": ""
-          },
-          "desktop": {
-            "x": 108,
-            "y": 37,
-            "width": 300,
-            "height": 400,
-            "z": 1,
-            "opacity": 1
-          },
-          "mobile": {
-            "x": 40,
-            "y": 80,
-            "width": 220,
-            "height": 140,
-            "z": 1,
-            "opacity": 1
-          }
-        },
         {
           "id": "0351cdeb-aa6a-4212-a405-d463192bef46",
           "type": "image",
