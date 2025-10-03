@@ -286,7 +286,9 @@ export function parseStoryComponents(paragraphs) {
 				component.afterLabel = paragraph.afterLabel || 'Depois';
 				component.orientation = paragraph.orientation || 'vertical';
 				component.width = paragraph.width || paragraph.largura || '100%';
+				component.widthMobile = paragraph.widthMobile || paragraph.larguraMobile;
 				component.maxWidth = paragraph.maxWidth || paragraph.larguraMaxima;
+				component.maxWidthMobile = paragraph.maxWidthMobile || paragraph.larguraMaximaMobile;
 				break;
 
 			case 'scrollytelling':

@@ -1195,7 +1195,9 @@ export const componentRegistry = [
 			afterLabel: 'Depois',
 			orientation: 'vertical',
 			width: '100%',
-			maxWidth: ''
+			maxWidth: '',
+			widthMobile: '',
+			maxWidthMobile: ''
 		},
 		fields: [
 			{ path: 'beforeImage', label: 'Imagem "Antes"', type: 'url', required: true },
@@ -1219,13 +1221,25 @@ export const componentRegistry = [
 			},
 			{
 				path: 'width',
-				label: 'Largura do componente',
+				label: 'Largura (desktop)',
 				type: 'text',
 				placeholder: 'ex: 100vw, 30vw, 600px'
 			},
 			{
 				path: 'maxWidth',
-				label: 'Largura máxima',
+				label: 'Largura máxima (desktop)',
+				type: 'text',
+				placeholder: 'opcional'
+			},
+			{
+				path: 'widthMobile',
+				label: 'Largura (mobile)',
+				type: 'text',
+				placeholder: 'ex: 100vw, 90vw'
+			},
+			{
+				path: 'maxWidthMobile',
+				label: 'Largura máxima (mobile)',
 				type: 'text',
 				placeholder: 'opcional'
 			}

@@ -172,6 +172,23 @@
 		return value === undefined || value === null ? fallback : Boolean(value);
 	}
 
+	function isRenderableItem(item, frame) {
+		if (!item || typeof item !== 'object') return false;
+		if (!frame) return false;
+		if (item.hidden || item.isHidden) return false;
+		if (item.visible === false) return false;
+		if (item.enabled === false) return false;
+		return true;
+	}
+
+	function createItemKey(item, index) {
+		if (item?.id && typeof item.id === 'string') {
+			const trimmed = item.id.trim();
+			if (trimmed.length > 0) return trimmed;
+		}
+		return `item-${index}`;
+	}
+
 	let normalizedBackgroundSource;
 	$: normalizedBackgroundSource = ['image', 'video'].includes(backgroundSource)
 		? backgroundSource
@@ -260,11 +277,25 @@
 	let baseHeight = 0;
 	let cssHeight = '0px';
 	let cssHeightPx = 0;
+	let renderableItems = [];
+
+	$: renderableItems = items
+		.map((item, index) => {
+			const frame = getFrame(item);
+			return isRenderableItem(item, frame)
+				? {
+						item,
+						frame,
+						key: createItemKey(item, index)
+					}
+				: null;
+		})
+		.filter(Boolean);
 
 	$: isSimulatedMobile = isMobile && browserWidth > 768;
 
 	$: {
-		const frames = items.map(getFrame).filter(Boolean);
+		const frames = renderableItems.map(({ frame }) => frame);
 		const contentWidth = frames.length
 			? Math.max(...frames.map((frame) => (frame.x || 0) + (frame.width || 0)))
 			: 0;
@@ -300,10 +331,18 @@
 		}
 	}
 
-	function getStyle(item) {
-		const frame = getFrame(item);
-		if (!frame) return '';
-		const { x = 0, y = 0, width = 200, height = 100, z = 1, opacity = 1, rotation = 0 } = frame;
+	function getStyle(item, frame = null) {
+		const targetFrame = frame || getFrame(item);
+		if (!targetFrame) return '';
+		const {
+			x = 0,
+			y = 0,
+			width = 200,
+			height = 100,
+			z = 1,
+			opacity = 1,
+			rotation = 0
+		} = targetFrame;
 		const overflow = item.type === 'text' ? 'visible' : 'hidden';
 		if (isSimulatedMobile) {
 			const left = x * simulatedScale;
@@ -467,8 +506,9 @@
 					preload="auto"
 				></video>
 			{/if}
-			{#each items as item (item.id)}
-				<div class="canvas-item" style={getStyle(item)}>
+			{#each renderableItems as renderable (renderable.key)}
+				{@const item = renderable.item}
+				<div class="canvas-item" style={getStyle(item, renderable.frame)}>
 					{#if item.type === 'text'}
 						{@const tag = getTypographyTag(item)}
 						{@const contentHasHtml = hasHtml(item.content)}

@@ -13,10 +13,18 @@
 	export let beforeLabel = 'Antes';
 	export let afterLabel = 'Depois';
 	export let orientation = 'vertical'; // 'vertical' or 'horizontal'
+
 	export let width = '100%';
 	export let maxWidth = '';
+	export let widthMobile = '';
+	export let maxWidthMobile = '';
 
-	$: containerStyle = [width ? `width: ${width}` : '', maxWidth ? `max-width: ${maxWidth}` : '']
+	$: containerStyle = [
+		width ? `--before-after-width: ${width}` : '',
+		maxWidth ? `--before-after-max-width: ${maxWidth}` : '',
+		widthMobile ? `--before-after-width-mobile: ${widthMobile}` : '',
+		maxWidthMobile ? `--before-after-max-width-mobile: ${maxWidthMobile}` : ''
+	]
 		.filter(Boolean)
 		.join('; ');
 
@@ -174,7 +182,8 @@
 <style>
 	.before-after {
 		position: relative;
-		width: 100%;
+		width: var(--before-after-width, 100%);
+		max-width: var(--before-after-max-width, none);
 		margin: 2rem auto;
 		border-radius: 12px;
 		overflow: hidden;
@@ -312,6 +321,11 @@
 	}
 
 	@media (max-width: 768px) {
+		.before-after {
+			width: var(--before-after-width-mobile, var(--before-after-width, 100%));
+			max-width: var(--before-after-max-width-mobile, var(--before-after-max-width, none));
+		}
+
 		.before-after__handle {
 			width: 35px;
 			height: 35px;

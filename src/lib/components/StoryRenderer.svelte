@@ -899,7 +899,9 @@
 							afterLabel={props.afterLabel || 'Depois'}
 							orientation={props.orientation || 'vertical'}
 							width={props.width || props.largura || '100%'}
+							widthMobile={props.widthMobile || props.larguraMobile}
 							maxWidth={props.maxWidth || props.larguraMaxima}
+							maxWidthMobile={props.maxWidthMobile || props.larguraMaximaMobile}
 						/>
 
 						<!-- ScrollyTelling -->

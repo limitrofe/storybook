@@ -501,19 +501,24 @@
             "textAlignMobile": "left",
             "color": "",
             "fontWeight": "",
+            "fontStyle": "",
+            "textDecoration": "",
+            "textTransform": "",
+            "letterSpacing": "",
+            "textShadow": "",
             "typography": ""
           },
           "desktop": {
-            "x": 230.17961392291497,
-            "y": 26.546982903426322,
+            "x": 102.79441952637852,
+            "y": 0.5847680115654118,
             "width": 300,
             "height": 400,
             "z": 1,
             "opacity": 1
           },
           "mobile": {
-            "x": 40,
-            "y": 80,
+            "x": 38.413329590818364,
+            "y": 16.638441866267463,
             "width": 220,
             "height": 140,
             "z": 1,
@@ -544,6 +549,11 @@
             "textAlignMobile": "left",
             "color": "",
             "fontWeight": "",
+            "fontStyle": "",
+            "textDecoration": "",
+            "textTransform": "",
+            "letterSpacing": "",
+            "textShadow": "",
             "typography": ""
           },
           "desktop": {
@@ -555,8 +565,8 @@
             "opacity": 1
           },
           "mobile": {
-            "x": 40,
-            "y": 80,
+            "x": 149.3477108283433,
+            "y": 72.19529690618762,
             "width": 220,
             "height": 140,
             "z": 1,
@@ -1007,12 +1017,12 @@
     },
     {
       "type": "antes-depois",
-      "beforeImage": "",
-      "beforeImageMobile": "",
+      "beforeImage": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/foto01a-desk.png",
+      "beforeImageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/02-tentativadegolpe.png",
       "beforeCaption": "",
       "beforeCredit": "",
-      "afterImage": "",
-      "afterImageMobile": "",
+      "afterImage": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/paulo_gonet_frase1.png",
+      "afterImageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/05-deterioracao.png",
       "afterCaption": "",
       "afterCredit": "",
       "beforeLabel": "Antes",
