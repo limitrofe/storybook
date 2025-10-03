@@ -7,10 +7,27 @@
 	export let interval = 5000;
 	export let showDots = true;
 	export let showArrows = true;
+	export let audioButtonBackground = 'rgba(0, 0, 0, 0.7)';
+	export let audioButtonHoverBackground = 'rgba(0, 0, 0, 0.85)';
+	export let audioButtonTextColor = '#fff';
 
 	let currentIndex = 0;
 	let carouselElement;
 	let autoplayInterval;
+	const videoElements = new Map();
+	let audioEnabledStates = [];
+
+	$: {
+		const currentStates = audioEnabledStates;
+		const nextStates = items.map((_, index) => currentStates[index] ?? false);
+		const hasChanged =
+			nextStates.length !== currentStates.length ||
+			nextStates.some((state, index) => state !== currentStates[index]);
+
+		if (hasChanged) {
+			audioEnabledStates = nextStates;
+		}
+	}
 
 	onMount(() => {
 		if (autoplay) {
@@ -21,6 +38,10 @@
 			if (autoplayInterval) {
 				clearInterval(autoplayInterval);
 			}
+
+			pauseAllVideos();
+			videoElements.clear();
+			audioEnabledStates = [];
 		};
 	});
 
@@ -48,6 +69,102 @@
 	function goTo(index) {
 		currentIndex = index;
 	}
+
+	function updateAudioState(index, enabled) {
+		const nextStates = [...audioEnabledStates];
+		nextStates[index] = enabled;
+		audioEnabledStates = nextStates;
+	}
+
+	function registerVideo(node, params) {
+		if (!params) return;
+
+		let { index } = params;
+		videoElements.set(index, node);
+		updateAudioState(index, false);
+
+		return {
+			update(newParams) {
+				if (!newParams) return;
+				const { index: newIndex } = newParams;
+				if (newIndex === index) return;
+				const wasEnabled = audioEnabledStates[index] ?? false;
+				videoElements.delete(index);
+				index = newIndex;
+				videoElements.set(index, node);
+				updateAudioState(index, wasEnabled);
+			},
+			destroy() {
+				node.pause?.();
+				node.currentTime = 0;
+				videoElements.delete(index);
+				updateAudioState(index, false);
+			}
+		};
+	}
+
+	function pauseAllVideos() {
+		videoElements.forEach((video) => {
+			if (!video) return;
+			video.pause();
+			video.currentTime = 0;
+		});
+	}
+
+	function pauseInactiveVideos(activeSlide) {
+		videoElements.forEach((video, index) => {
+			if (index !== activeSlide && video) {
+				video.pause();
+				video.currentTime = 0;
+				video.muted = true;
+				video.autoplay = false;
+				video.removeAttribute('autoplay');
+				video.setAttribute('muted', '');
+				updateAudioState(index, false);
+			}
+		});
+	}
+
+	function playActiveVideo(activeSlide) {
+		const video = videoElements.get(activeSlide);
+		if (!video) return;
+
+		video.muted = true;
+		video.autoplay = true;
+		video.setAttribute('muted', '');
+		video.setAttribute('autoplay', '');
+		video.currentTime = 0;
+		video.play?.().catch(() => {
+			// Ignora erros de autoplay (ex.: bloqueio do navegador)
+		});
+		updateAudioState(activeSlide, false);
+	}
+
+	function toggleAudio(index) {
+		const video = videoElements.get(index);
+		if (!video) return;
+
+		if (audioEnabledStates[index]) return;
+
+		video.muted = false;
+		video.removeAttribute('muted');
+		video.volume = 1;
+		video.play?.().catch(() => {});
+		updateAudioState(index, true);
+	}
+
+$: audioButtonStyle = [
+	audioButtonBackground ? `--carousel-audio-button-bg:${audioButtonBackground}` : '',
+	audioButtonHoverBackground ? `--carousel-audio-button-bg-hover:${audioButtonHoverBackground}` : '',
+	audioButtonTextColor ? `--carousel-audio-button-color:${audioButtonTextColor}` : ''
+]
+	.filter(Boolean)
+	.join(';');
+
+$: {
+	pauseInactiveVideos(currentIndex);
+	playActiveVideo(currentIndex);
+}
 </script>
 
 <div
@@ -69,8 +186,9 @@
 						{/if}
 						<img src={item.src} alt={item.alt || ''} loading="lazy" />
 					</picture>
-				{:else if item.type === 'video'}
-					<video controls playsinline>
+			{:else if item.type === 'video'}
+				<div class="carousel-video-wrapper">
+					<video controls playsinline use:registerVideo={{ index }}>
 						{#if item.srcMobile}
 							<source src={item.srcMobile} type="video/mp4" media="(max-width: 768px)" />
 						{/if}
@@ -78,7 +196,19 @@
 							<source src={item.src} type="video/mp4" />
 						{/if}
 					</video>
-				{:else if item.type === 'content'}
+					{#if !(audioEnabledStates[index] ?? false)}
+						<button
+							type="button"
+							class="carousel-audio-button"
+							on:click={() => toggleAudio(index)}
+							aria-label="Ativar áudio do vídeo"
+							style={audioButtonStyle}
+						>
+							Ativar áudio
+						</button>
+					{/if}
+				</div>
+			{:else if item.type === 'content'}
 					<div class="carousel-content">
 						{@html item.content}
 					</div>
@@ -142,6 +272,46 @@
 		width: 100%;
 		height: auto;
 		display: block;
+	}
+
+	.carousel-video-wrapper {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.carousel-audio-button {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		background: var(--carousel-audio-button-bg, rgba(0, 0, 0, 0.7));
+		color: var(--carousel-audio-button-color, #fff);
+		border: none;
+		border-radius: 999px;
+		padding: 0.5rem 1rem;
+		font-size: 0.875rem;
+		cursor: pointer;
+		transition: background 0.2s ease;
+		z-index: 2;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
+	}
+
+	.carousel-audio-button:hover,
+	.carousel-audio-button:focus-visible {
+		background: var(
+			--carousel-audio-button-bg-hover,
+			var(--carousel-audio-button-bg, rgba(0, 0, 0, 0.85))
+		);
+		outline: none;
+	}
+
+	.carousel-audio-button:focus-visible {
+		box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.35);
 	}
 
 	.carousel-content {

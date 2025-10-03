@@ -735,7 +735,7 @@
           "content": ""
         }
       ],
-      "autoplay": false,
+      "autoplay": true,
       "interval": 4000,
       "showDots": true,
       "showArrows": true,
