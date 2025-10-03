@@ -303,7 +303,7 @@
 		width: 100%;
 		min-height: 100vh;
 		padding: 4rem 2rem;
-		background-color: var(--color-background, transparent);
+		background-color: inherit;
 		color: var(--color-text, #f8fafc);
 		text-align: left;
 	}
