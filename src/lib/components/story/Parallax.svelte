@@ -35,18 +35,25 @@
 	$: currentImage = pickResponsive(image, imageMobile, viewportWidth);
 	$: currentBackgroundPosition =
 		pickResponsive(backgroundPosition, backgroundPositionMobile, viewportWidth) || 'center center';
-	$: currentBackgroundSize = pickResponsive(backgroundSize, backgroundSizeMobile, viewportWidth) || 'cover';
-	$: currentBaseImage = pickResponsive(backgroundBaseImage, backgroundBaseImageMobile, viewportWidth);
-	$: currentBasePosition = pickResponsive(
-		backgroundBasePosition || backgroundPosition,
-		backgroundBasePositionMobile || backgroundPositionMobile,
+	$: currentBackgroundSize =
+		pickResponsive(backgroundSize, backgroundSizeMobile, viewportWidth) || 'cover';
+	$: currentBaseImage = pickResponsive(
+		backgroundBaseImage,
+		backgroundBaseImageMobile,
 		viewportWidth
-	) || 'center center';
-	$: currentBaseSize = pickResponsive(
-		backgroundBaseSize || backgroundSize,
-		backgroundBaseSizeMobile || backgroundSizeMobile,
-		viewportWidth
-	) || 'cover';
+	);
+	$: currentBasePosition =
+		pickResponsive(
+			backgroundBasePosition || backgroundPosition,
+			backgroundBasePositionMobile || backgroundPositionMobile,
+			viewportWidth
+		) || 'center center';
+	$: currentBaseSize =
+		pickResponsive(
+			backgroundBaseSize || backgroundSize,
+			backgroundBaseSizeMobile || backgroundSizeMobile,
+			viewportWidth
+		) || 'cover';
 	$: baseColor = backgroundBaseColor || 'var(--color-background)';
 
 	onMount(() => {

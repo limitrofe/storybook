@@ -50,6 +50,7 @@ export const componentRegistry = [
 			posterMobile: '',
 			variant: 'default',
 			overlay: true,
+			overlayGradient: 'top-to-bottom',
 			verticalAlign: 'top',
 			horizontalAlign: 'left',
 			titleColor: '',
@@ -97,7 +98,12 @@ export const componentRegistry = [
 			{ path: 'titleColor', label: 'Cor do título', type: 'text', placeholder: '#ffffff' },
 			{ path: 'subtitleColor', label: 'Cor do subtítulo', type: 'text', placeholder: '#ffffff' },
 			{ path: 'metaColor', label: 'Cor do autor/data', type: 'text', placeholder: '#ffffff' },
-			{ path: 'onMediaColor', label: 'Cor do texto sobre mídia', type: 'text', placeholder: '#ffffff' },
+			{
+				path: 'onMediaColor',
+				label: 'Cor do texto sobre mídia',
+				type: 'text',
+				placeholder: '#ffffff'
+			},
 			{
 				path: 'variant',
 				label: 'Variante visual',
@@ -113,6 +119,14 @@ export const componentRegistry = [
 				label: 'Aplicar overlay',
 				type: 'boolean',
 				helpText: 'Melhora a legibilidade do texto sobre a mídia.'
+			},
+			{
+				path: 'overlayGradient',
+				label: 'Overlay • gradiente',
+				type: 'text',
+				placeholder: 'top-to-bottom | bottom-to-top',
+				helpText:
+					'Use os presets top-to-bottom/bottom-to-top ou cole um linear-gradient CSS personalizado.'
 			},
 			{
 				path: 'titleShadow.enabled',
@@ -170,31 +184,41 @@ export const componentRegistry = [
 				type: 'text',
 				placeholder: '12px'
 			},
-				{
-					path: 'subtitleShadow.color',
-					label: 'Subtítulo • cor da sombra',
-					type: 'color',
-					showAlpha: true,
-					allowClear: true,
-					clearValue: ''
-				},
-				{
-					path: 'metaShadow.enabled',
-					label: 'Autor/Data • sombra ativada',
-					type: 'boolean',
-					helpText: 'Controle a sombra das linhas de autor e data.'
-				},
-				{ path: 'metaShadow.offsetX', label: 'Autor/Data • deslocamento X', type: 'text', placeholder: '0px' },
-				{ path: 'metaShadow.offsetY', label: 'Autor/Data • deslocamento Y', type: 'text', placeholder: '2px' },
-				{ path: 'metaShadow.blur', label: 'Autor/Data • blur', type: 'text', placeholder: '10px' },
-				{
-					path: 'metaShadow.color',
-					label: 'Autor/Data • cor da sombra',
-					type: 'color',
-					showAlpha: true,
-					allowClear: true,
-					clearValue: ''
-				},
+			{
+				path: 'subtitleShadow.color',
+				label: 'Subtítulo • cor da sombra',
+				type: 'color',
+				showAlpha: true,
+				allowClear: true,
+				clearValue: ''
+			},
+			{
+				path: 'metaShadow.enabled',
+				label: 'Autor/Data • sombra ativada',
+				type: 'boolean',
+				helpText: 'Controle a sombra das linhas de autor e data.'
+			},
+			{
+				path: 'metaShadow.offsetX',
+				label: 'Autor/Data • deslocamento X',
+				type: 'text',
+				placeholder: '0px'
+			},
+			{
+				path: 'metaShadow.offsetY',
+				label: 'Autor/Data • deslocamento Y',
+				type: 'text',
+				placeholder: '2px'
+			},
+			{ path: 'metaShadow.blur', label: 'Autor/Data • blur', type: 'text', placeholder: '10px' },
+			{
+				path: 'metaShadow.color',
+				label: 'Autor/Data • cor da sombra',
+				type: 'color',
+				showAlpha: true,
+				allowClear: true,
+				clearValue: ''
+			},
 			{ path: 'backgroundImage', label: 'Imagem desktop (1920x1080)', type: 'url' },
 			{ path: 'backgroundImageMobile', label: 'Imagem mobile (1080x1920)', type: 'url' },
 			{ path: 'backgroundVideo', label: 'Vídeo desktop (mp4)', type: 'url' },
@@ -452,8 +476,18 @@ export const componentRegistry = [
 				type: 'boolean',
 				helpText: 'Ativa a sombra configurável do intertítulo.'
 			},
-			{ path: 'titleShadow.offsetX', label: 'Título • deslocamento X', type: 'text', placeholder: '0px' },
-			{ path: 'titleShadow.offsetY', label: 'Título • deslocamento Y', type: 'text', placeholder: '3px' },
+			{
+				path: 'titleShadow.offsetX',
+				label: 'Título • deslocamento X',
+				type: 'text',
+				placeholder: '0px'
+			},
+			{
+				path: 'titleShadow.offsetY',
+				label: 'Título • deslocamento Y',
+				type: 'text',
+				placeholder: '3px'
+			},
 			{ path: 'titleShadow.blur', label: 'Título • blur', type: 'text', placeholder: '18px' },
 			{
 				path: 'titleShadow.color',
@@ -469,8 +503,18 @@ export const componentRegistry = [
 				type: 'boolean',
 				helpText: 'Melhore a leitura do subtítulo sobre fundos claros.'
 			},
-			{ path: 'subtitleShadow.offsetX', label: 'Subtítulo • deslocamento X', type: 'text', placeholder: '0px' },
-			{ path: 'subtitleShadow.offsetY', label: 'Subtítulo • deslocamento Y', type: 'text', placeholder: '2px' },
+			{
+				path: 'subtitleShadow.offsetX',
+				label: 'Subtítulo • deslocamento X',
+				type: 'text',
+				placeholder: '0px'
+			},
+			{
+				path: 'subtitleShadow.offsetY',
+				label: 'Subtítulo • deslocamento Y',
+				type: 'text',
+				placeholder: '2px'
+			},
 			{ path: 'subtitleShadow.blur', label: 'Subtítulo • blur', type: 'text', placeholder: '12px' },
 			{
 				path: 'subtitleShadow.color',
@@ -980,14 +1024,24 @@ export const componentRegistry = [
 			{ path: 'height', label: 'Altura', type: 'text', placeholder: '65vh' },
 			{ path: 'speed', label: 'Velocidade do efeito', type: 'number', step: 0.05 },
 			{ path: 'overlay', label: 'Overlay escuro', type: 'boolean' },
-			{ path: 'backgroundPosition', label: 'Posição da imagem (desktop)', type: 'text', placeholder: 'center center' },
+			{
+				path: 'backgroundPosition',
+				label: 'Posição da imagem (desktop)',
+				type: 'text',
+				placeholder: 'center center'
+			},
 			{
 				path: 'backgroundPositionMobile',
 				label: 'Posição da imagem (mobile)',
 				type: 'text',
 				placeholder: 'herda do desktop'
 			},
-			{ path: 'backgroundSize', label: 'Tamanho da imagem (desktop)', type: 'text', placeholder: 'cover' },
+			{
+				path: 'backgroundSize',
+				label: 'Tamanho da imagem (desktop)',
+				type: 'text',
+				placeholder: 'cover'
+			},
 			{
 				path: 'backgroundSizeMobile',
 				label: 'Tamanho da imagem (mobile)',
@@ -997,14 +1051,24 @@ export const componentRegistry = [
 			{ path: 'backgroundBaseColor', label: 'Cor de fundo (fallback)', type: 'color' },
 			{ path: 'backgroundBaseImage', label: 'Imagem de fundo (desktop)', type: 'url' },
 			{ path: 'backgroundBaseImageMobile', label: 'Imagem de fundo (mobile)', type: 'url' },
-			{ path: 'backgroundBasePosition', label: 'Fundo • posição desktop', type: 'text', placeholder: 'inherit' },
+			{
+				path: 'backgroundBasePosition',
+				label: 'Fundo • posição desktop',
+				type: 'text',
+				placeholder: 'inherit'
+			},
 			{
 				path: 'backgroundBasePositionMobile',
 				label: 'Fundo • posição mobile',
 				type: 'text',
 				placeholder: 'herda do desktop'
 			},
-			{ path: 'backgroundBaseSize', label: 'Fundo • tamanho desktop', type: 'text', placeholder: 'cover' },
+			{
+				path: 'backgroundBaseSize',
+				label: 'Fundo • tamanho desktop',
+				type: 'text',
+				placeholder: 'cover'
+			},
 			{
 				path: 'backgroundBaseSizeMobile',
 				label: 'Fundo • tamanho mobile',

@@ -214,7 +214,9 @@
 		titleFontStyle ? `--section-title-title-style:${titleFontStyle}` : '',
 		subtitleFontWeight ? `--section-title-subtitle-weight:${subtitleFontWeight}` : '',
 		subtitleFontStyle ? `--section-title-subtitle-style:${subtitleFontStyle}` : ''
-	].filter(Boolean).join('; ');
+	]
+		.filter(Boolean)
+		.join('; ');
 
 	$: contentStyle = [textStyle, typographyStyle, shadowStyle].filter(Boolean).join('; ');
 

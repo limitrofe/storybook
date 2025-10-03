@@ -221,6 +221,7 @@
 			backgroundVideo={storyData.backgroundVideo}
 			backgroundVideoMobile={storyData.backgroundVideoMobile}
 			overlay={storyData.overlay ?? true}
+			overlayGradient={storyData.overlayGradient}
 			verticalAlign={storyData.verticalAlign || storyData.valign || 'center'}
 			horizontalAlign={storyData.horizontalAlign || storyData.align || 'center'}
 		/>
@@ -263,7 +264,8 @@
 						playsinline
 						preload="auto"
 						poster={sectionStyling.background.videoPosterMobile ||
-							sectionStyling.background.videoPosterDesktop || ''}
+							sectionStyling.background.videoPosterDesktop ||
+							''}
 					>
 						{#if sectionStyling.background.videoMobile}
 							<source
@@ -280,63 +282,63 @@
 
 				<div class="story-section__inner">
 					<div class="story-component">
-				{#if componentType === 'text'}
-					<StoryText
-						content={paragraph.text}
-						variant={paragraph.variant || 'body'}
-						maxWidth="700px"
-					/>
-				{:else if componentType === 'quote'}
-					<StoryText
-						content={paragraph.text}
-						variant="quote"
-						author={paragraph.author}
-						role={paragraph.role}
-					/>
-			{:else if componentType === 'section-title'}
-				<SectionTitle
-					title={paragraph.text}
-					subtitle={paragraph.subtitle}
-					backgroundImage={paragraph.backgroundImage}
-					backgroundImageMobile={paragraph.backgroundImageMobile}
-					variant={paragraph.variant || 'default'}
-					size={paragraph.size || 'medium'}
-					height={paragraph.height}
-					textPosition={paragraph.textPosition || 'center'}
-					textAlign={paragraph.textAlign || 'center'}
-					titleFontWeight={paragraph.titleFontWeight}
-					titleFontStyle={paragraph.titleFontStyle}
-					subtitleFontWeight={paragraph.subtitleFontWeight}
-					subtitleFontStyle={paragraph.subtitleFontStyle}
-					overlay={paragraph.overlay !== 'false'}
-				/>
-				{:else if componentType === 'photo'}
-					<PhotoWithCaption
-						src={paragraph.src || paragraph.url || paragraph.image}
-						alt={paragraph.alt || paragraph.text}
-						caption={paragraph.caption || paragraph.legenda}
-						credit={paragraph.credit || paragraph.credito}
-						fullWidth={paragraph.fullWidth === 'true'}
-					/>
-				{:else if componentType === 'video'}
-					<VideoPlayer
-						src={paragraph.src || paragraph.url}
-						poster={paragraph.poster}
-						caption={paragraph.caption}
-						credit={paragraph.credit}
-						fullWidth={paragraph.fullWidth === 'true'}
-						autoplay={paragraph.autoplay === 'true'}
-						controls={paragraph.controls !== 'false'}
-					/>
-					{:else if componentType === 'globo-player'}
-						<GloboPlayer
-							videosIDs={paragraph.videoId || paragraph.videosIDs || paragraph.id}
-							width={paragraph.width || '100%'}
-							height={parseInt(paragraph.height) || 450}
-							autoPlay={paragraph.autoplay === 'true'}
-							startMuted={paragraph.startMuted !== 'false'}
-						/>
-					{/if}
+						{#if componentType === 'text'}
+							<StoryText
+								content={paragraph.text}
+								variant={paragraph.variant || 'body'}
+								maxWidth="700px"
+							/>
+						{:else if componentType === 'quote'}
+							<StoryText
+								content={paragraph.text}
+								variant="quote"
+								author={paragraph.author}
+								role={paragraph.role}
+							/>
+						{:else if componentType === 'section-title'}
+							<SectionTitle
+								title={paragraph.text}
+								subtitle={paragraph.subtitle}
+								backgroundImage={paragraph.backgroundImage}
+								backgroundImageMobile={paragraph.backgroundImageMobile}
+								variant={paragraph.variant || 'default'}
+								size={paragraph.size || 'medium'}
+								height={paragraph.height}
+								textPosition={paragraph.textPosition || 'center'}
+								textAlign={paragraph.textAlign || 'center'}
+								titleFontWeight={paragraph.titleFontWeight}
+								titleFontStyle={paragraph.titleFontStyle}
+								subtitleFontWeight={paragraph.subtitleFontWeight}
+								subtitleFontStyle={paragraph.subtitleFontStyle}
+								overlay={paragraph.overlay !== 'false'}
+							/>
+						{:else if componentType === 'photo'}
+							<PhotoWithCaption
+								src={paragraph.src || paragraph.url || paragraph.image}
+								alt={paragraph.alt || paragraph.text}
+								caption={paragraph.caption || paragraph.legenda}
+								credit={paragraph.credit || paragraph.credito}
+								fullWidth={paragraph.fullWidth === 'true'}
+							/>
+						{:else if componentType === 'video'}
+							<VideoPlayer
+								src={paragraph.src || paragraph.url}
+								poster={paragraph.poster}
+								caption={paragraph.caption}
+								credit={paragraph.credit}
+								fullWidth={paragraph.fullWidth === 'true'}
+								autoplay={paragraph.autoplay === 'true'}
+								controls={paragraph.controls !== 'false'}
+							/>
+						{:else if componentType === 'globo-player'}
+							<GloboPlayer
+								videosIDs={paragraph.videoId || paragraph.videosIDs || paragraph.id}
+								width={paragraph.width || '100%'}
+								height={parseInt(paragraph.height) || 450}
+								autoPlay={paragraph.autoplay === 'true'}
+								startMuted={paragraph.startMuted !== 'false'}
+							/>
+						{/if}
 					</div>
 				</div>
 			</section>

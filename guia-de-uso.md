@@ -19,6 +19,7 @@ npm install
 ```
 
 O `npm install` baixa automaticamente todas as bibliotecas necessárias, incluindo:
+
 - `@sveltejs/kit`, `@sveltejs/adapter-static`, `vite`
 - `@neodrag/svelte`, `@sveltejs/svelte-scroller`, `lucide-svelte`
 - utilitários para upload/deploy, cache, processamento de frames etc.
@@ -28,6 +29,7 @@ O `npm install` baixa automaticamente todas as bibliotecas necessárias, incluin
 ### 3.1 Ajustar `project.config.js`
 
 Abra `project.config.js` e personalize os campos principais:
+
 - `projectName`: slug da história (sem espaços). Esta pasta será criada no CDN e nas cópias locais.
 - `pageTitle`: título mostrado no `<title>`.
 - `googleDocsId`: ID do documento que alimenta o builder (quando usar integração via Google Docs).
@@ -60,16 +62,16 @@ Se usar apenas o fluxo com `project.config.js`, esse passo é opcional.
 
 ## 4. Scripts npm essenciais
 
-| Comando | Descrição |
-| --- | --- |
-| `npm run dev` | Levanta o site em modo SvelteKit padrão (`http://localhost:5173`). |
-| `npm run builder` | Abre o builder visual em `mode=builder` (porta 3000, rota `/builder`). |
-| `npm run builder:viewer` | Abre a visualização do builder em `/builder/viewer`. |
-| `npm run builder:deploy -- --dest <pasta>` | Gera (ou copia) o build para uma pasta local, criando subpasta com `projectName`. |
-| `npm run build` | Gera build estático em `build/` usando adapter-static. |
-| `npm run deploy -- <projeto> [--build] [--validate]` | Executa `scripts/smart-deploy.js` para enviar ao Vault/Globo CDN. |
-| `npm run extract[:all]` | Extrai frames de vídeos com ffmpeg segundo as configs. |
-| `npm run upload` | Faz upload manual de arquivos usando `upload-globo-storage.js`. |
+| Comando                                              | Descrição                                                                         |
+| ---------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `npm run dev`                                        | Levanta o site em modo SvelteKit padrão (`http://localhost:5173`).                |
+| `npm run builder`                                    | Abre o builder visual em `mode=builder` (porta 3000, rota `/builder`).            |
+| `npm run builder:viewer`                             | Abre a visualização do builder em `/builder/viewer`.                              |
+| `npm run builder:deploy -- --dest <pasta>`           | Gera (ou copia) o build para uma pasta local, criando subpasta com `projectName`. |
+| `npm run build`                                      | Gera build estático em `build/` usando adapter-static.                            |
+| `npm run deploy -- <projeto> [--build] [--validate]` | Executa `scripts/smart-deploy.js` para enviar ao Vault/Globo CDN.                 |
+| `npm run extract[:all]`                              | Extrai frames de vídeos com ffmpeg segundo as configs.                            |
+| `npm run upload`                                     | Faz upload manual de arquivos usando `upload-globo-storage.js`.                   |
 
 > Dica: execute `npm run` para ver a lista completa de scripts disponíveis.
 

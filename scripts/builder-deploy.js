@@ -32,7 +32,9 @@ const projectName = getOption('project', PROJECT_CONFIG.projectName);
 const skipBuild = process.argv.includes('--skip-build');
 
 if (!destRootInput) {
-	console.error('❌ Uso: node scripts/builder-deploy.js --dest <pasta-destino> [--project <nome>] [--skip-build]');
+	console.error(
+		'❌ Uso: node scripts/builder-deploy.js --dest <pasta-destino> [--project <nome>] [--skip-build]'
+	);
 	process.exit(1);
 }
 

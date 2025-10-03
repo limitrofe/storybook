@@ -77,8 +77,16 @@
 		{ path: 'section.backgroundImageMobile', label: 'Imagem mobile (URL)', type: 'url' },
 		{ path: 'section.backgroundVideoDesktop', label: 'Vídeo desktop (URL)', type: 'url' },
 		{ path: 'section.backgroundVideoMobile', label: 'Vídeo mobile (URL)', type: 'url' },
-		{ path: 'section.backgroundVideoPosterDesktop', label: 'Poster vídeo desktop (URL)', type: 'url' },
-		{ path: 'section.backgroundVideoPosterMobile', label: 'Poster vídeo mobile (URL)', type: 'url' },
+		{
+			path: 'section.backgroundVideoPosterDesktop',
+			label: 'Poster vídeo desktop (URL)',
+			type: 'url'
+		},
+		{
+			path: 'section.backgroundVideoPosterMobile',
+			label: 'Poster vídeo mobile (URL)',
+			type: 'url'
+		},
 		{ path: 'section.textColor', label: 'Cor do texto da seção', type: 'color' },
 		{
 			path: 'section.paddingTop',

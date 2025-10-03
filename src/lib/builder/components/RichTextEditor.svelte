@@ -326,12 +326,12 @@
 		isUnorderedListActive = Boolean(element?.closest('ul'));
 	};
 
-		onMount(async () => {
-			await tick();
-			if (editorEl && value) {
-				editorEl.innerHTML = value;
-				normalizeEditorMarkup();
-			}
+	onMount(async () => {
+		await tick();
+		if (editorEl && value) {
+			editorEl.innerHTML = value;
+			normalizeEditorMarkup();
+		}
 
 		try {
 			document.execCommand('defaultParagraphSeparator', false, 'p');

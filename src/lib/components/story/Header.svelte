@@ -11,6 +11,7 @@
 	export let posterImageMobile = '';
 
 	export let overlay = true;
+	export let overlayGradient = 'top-to-bottom';
 	export let variant = 'default'; // 'default', 'minimal', 'hero'
 	export let titleFontSizeDesktop = '';
 	export let titleFontSizeMobile = '';
@@ -66,6 +67,12 @@
 		blur: '10px',
 		spread: '',
 		color: 'rgba(15, 23, 42, 0.35)'
+	};
+
+	const OVERLAY_GRADIENTS = {
+		'top-to-bottom': 'linear-gradient(180deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.25) 100%)',
+		'bottom-to-top':
+			'linear-gradient(0deg, rgba(15, 23, 42, 0.75) 0%, rgba(15, 23, 42, 0.35) 45%, rgba(15, 23, 42, 0) 100%)'
 	};
 
 	const NUMBER_PATTERN = /^-?\d+(?:\.\d+)?$/;
@@ -200,6 +207,28 @@
 
 	$: combinedStyle = [typographyStyle, colorStyle, shadowStyle].filter(Boolean).join('; ');
 
+	$: overlayGradientValue = (() => {
+		if (!overlay) {
+			return '';
+		}
+		if (typeof overlayGradient === 'string') {
+			const trimmed = overlayGradient.trim();
+			if (!trimmed) {
+				return OVERLAY_GRADIENTS['top-to-bottom'];
+			}
+			const preset = trimmed.toLowerCase();
+			if (OVERLAY_GRADIENTS[preset]) {
+				return OVERLAY_GRADIENTS[preset];
+			}
+			return trimmed;
+		}
+		return OVERLAY_GRADIENTS['top-to-bottom'];
+	})();
+
+	$: overlayStyle = overlayGradientValue
+		? `--story-header-overlay-gradient:${overlayGradientValue}`
+		: '';
+
 	function formatDate(dateStr) {
 		if (!dateStr) return '';
 		try {
@@ -221,7 +250,7 @@
 <header
 	class="story-header story-header--{variant}"
 	class:has-media={hasMedia}
-	class:has-overlay={hasMedia && overlay}
+	class:has-overlay={overlay && overlayGradientValue}
 	class:story-header--valign-top={normalizedVerticalAlign === 'top'}
 	class:story-header--valign-center={normalizedVerticalAlign === 'center'}
 	class:story-header--valign-bottom={normalizedVerticalAlign === 'bottom'}
@@ -267,8 +296,8 @@
 		</div>
 	{/if}
 
-	{#if hasMedia && overlay}
-		<div class="story-header__overlay"></div>
+	{#if overlay && overlayGradientValue}
+		<div class="story-header__overlay" style={overlayStyle}></div>
 	{/if}
 
 	<div class="story-header__content" style={combinedStyle}>
@@ -380,7 +409,10 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background: linear-gradient(180deg, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.25));
+		background: var(
+			--story-header-overlay-gradient,
+			linear-gradient(180deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.25) 100%)
+		);
 		z-index: 2;
 	}
 
@@ -505,10 +537,7 @@
 		}
 
 		h1 {
-			font-size: var(
-				--story-header-title-size-mobile,
-				var(--typography-h1-mobile-font-size, 3rem)
-			);
+			font-size: var(--story-header-title-size-mobile, var(--typography-h1-mobile-font-size, 3rem));
 			line-height: var(
 				--story-header-title-line-mobile,
 				var(--typography-h1-mobile-line-height, 1.12)

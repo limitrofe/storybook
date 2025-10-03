@@ -303,15 +303,7 @@
 	function getStyle(item) {
 		const frame = getFrame(item);
 		if (!frame) return '';
-		const {
-			x = 0,
-			y = 0,
-			width = 200,
-			height = 100,
-			z = 1,
-			opacity = 1,
-			rotation = 0
-		} = frame;
+		const { x = 0, y = 0, width = 200, height = 100, z = 1, opacity = 1, rotation = 0 } = frame;
 		const overflow = item.type === 'text' ? 'visible' : 'hidden';
 		if (isSimulatedMobile) {
 			const left = x * simulatedScale;

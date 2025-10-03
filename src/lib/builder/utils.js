@@ -3,7 +3,6 @@ import { getComponentDefinition } from './component-registry.js';
 
 let blockCounter = 0;
 
-
 const SECTION_DEFAULTS = {
 	backgroundSource: 'color',
 	backgroundColor: '',

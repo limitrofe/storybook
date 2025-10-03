@@ -28,8 +28,8 @@
 		appearance.useGradient && appearance.gradient
 			? appearance.gradient
 			: previewDevice === 'mobile'
-				? appearance.backgroundColorMobile ?? appearance.backgroundColor ?? '#0b0d17'
-				: appearance.backgroundColor ?? '#0b0d17';
+				? (appearance.backgroundColorMobile ?? appearance.backgroundColor ?? '#0b0d17')
+				: (appearance.backgroundColor ?? '#0b0d17');
 	$: previewTextColor = appearance.textColor || '#f8fafc';
 	$: previewPadding =
 		previewDevice === 'mobile'
@@ -302,13 +302,13 @@
 					<button
 						type="button"
 						class="collapse-toggle"
-						title={collapsedBlocks[block.__id] ?? true ? 'Expandir bloco' : 'Recolher bloco'}
-						aria-label={collapsedBlocks[block.__id] ?? true ? 'Expandir bloco' : 'Recolher bloco'}
-						aria-expanded={!((collapsedBlocks[block.__id] ?? true))}
+						title={(collapsedBlocks[block.__id] ?? true) ? 'Expandir bloco' : 'Recolher bloco'}
+						aria-label={(collapsedBlocks[block.__id] ?? true) ? 'Expandir bloco' : 'Recolher bloco'}
+						aria-expanded={!(collapsedBlocks[block.__id] ?? true)}
 						aria-controls={bodyId}
 						on:click|stopPropagation={() => toggleBlockCollapse(block.__id)}
 					>
-						{collapsedBlocks[block.__id] ?? true ? '▸' : '▾'}
+						{(collapsedBlocks[block.__id] ?? true) ? '▸' : '▾'}
 					</button>
 					<div
 						class="block-meta"
@@ -356,11 +356,7 @@
 					</div>
 				</header>
 
-				<div
-					class="block-body"
-					id={bodyId}
-					hidden={collapsedBlocks[block.__id] ?? true}
-				>
+				<div class="block-body" id={bodyId} hidden={collapsedBlocks[block.__id] ?? true}>
 					{#if block.type === 'free-canvas'}
 						{#if drafts[block.__id]}
 							<FreeCanvasEditor
@@ -913,7 +909,9 @@
 		align-items: center;
 		justify-content: center;
 		color: #1f2937;
-		transition: background 0.15s ease, border-color 0.15s ease;
+		transition:
+			background 0.15s ease,
+			border-color 0.15s ease;
 	}
 
 	.collapse-toggle:hover {

@@ -274,7 +274,7 @@
   "paragraphs": [
     {
       "type": "header",
-      "title": "<span style=\"color: rgba(0, 0, 0, 0.43);\">Título da matéria</span>",
+      "title": "<span style=\"color: rgb(255, 255, 255);\">Título da matéria</span>",
       "subtitle": "<span style=\"color: rgb(182, 43, 43);\">Subtítulo chamativo para contextualizar o tema.</span>",
       "author": "",
       "date": "",
@@ -285,8 +285,8 @@
       "poster": "",
       "posterMobile": "",
       "variant": "hero",
-      "overlay": false,
-      "verticalAlign": "center",
+      "overlay": true,
+      "verticalAlign": "bottom",
       "horizontalAlign": "center",
       "titleColor": "",
       "subtitleColor": "",
@@ -336,7 +336,8 @@
         "textColor": "transparent",
         "paddingTop": "0",
         "paddingBottom": "0"
-      }
+      },
+      "overlayGradient": "top-to-bottom"
     },
     {
       "type": "globo-player",
@@ -428,7 +429,7 @@
       "text": "<p>Uma mulher, filha e mãe, inconformada com a injustiça diante das maldades que assolam sua comunidade e sua família, numa São Paulo que abriga milhões de brasileiras como ela. Corruptos que prejudicam uma multidão de doentes em benefício próprio. A luta do bem contra o mal e a dúvida sobre até onde ir quando se precisa batalhar pela sobrevivência. Esses são os dilemas que movem a protagonista da nova novela das nove da TV Globo, ‘Três Graças’, de Aguinaldo Silva, que mistura drama, tragédia, romance, mistério e toques de humor, cujas gravações ocorrem neste mês na capital paulista.</p><p><br></p><p> \n</p><p> \n</p>",
       "variant": "lead",
       "align": "left",
-      "maxWidth": "80%",
+      "maxWidth": "300px",
       "fontSizeDesktop": "",
       "fontSizeMobile": "",
       "lineHeightDesktop": "",

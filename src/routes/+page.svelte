@@ -14,11 +14,11 @@
 	$: backgroundDesktop =
 		appearance.useGradient && appearance.gradient
 			? appearance.gradient
-			: appearance.backgroundColor ?? '#0b0d17';
+			: (appearance.backgroundColor ?? '#0b0d17');
 	$: backgroundMobile =
 		appearance.useGradient && appearance.gradient
 			? appearance.gradient
-			: appearance.backgroundColorMobile ?? appearance.backgroundColor ?? '#0b0d17';
+			: (appearance.backgroundColorMobile ?? appearance.backgroundColor ?? '#0b0d17');
 	$: textColor = appearance.textColor || '#f8fafc';
 	$: surfaceColor = appearance.surfaceColor || 'transparent';
 	$: accentColor = appearance.accentColor || '#f97316';

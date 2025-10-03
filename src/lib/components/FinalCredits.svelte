@@ -88,8 +88,7 @@
 		}
 
 		if (typeof item === 'object') {
-			const primary =
-				item.name || item.primary || item.title || item.label || item.text || '';
+			const primary = item.name || item.primary || item.title || item.label || item.text || '';
 			const secondary = item.role || item.secondary || item.subtitle || '';
 			const detail = item.description || item.detail || item.note || '';
 			const link = item.link || item.url || '';
@@ -117,7 +116,8 @@
 					.filter(Boolean)
 			: [];
 
-		const descriptionHtml = typeof section.descriptionHtml === 'string' ? section.descriptionHtml : '';
+		const descriptionHtml =
+			typeof section.descriptionHtml === 'string' ? section.descriptionHtml : '';
 		const html = typeof section.html === 'string' ? section.html : '';
 		const description = section.description || section.text || '';
 
@@ -136,7 +136,11 @@
 	$: baseSections = hasCustomSections ? sections : buildFallbackSections();
 	$: normalizedSections = baseSections
 		.map((section, index) => normalizeSection(section, index))
-		.filter((section) => section && (section.title || section.description || section.descriptionHtml || section.items.length));
+		.filter(
+			(section) =>
+				section &&
+				(section.title || section.description || section.descriptionHtml || section.items.length)
+		);
 
 	$: columnsDesktopSafe = Math.max(1, parseInt(columnsDesktop, 10) || 1);
 	$: columnsMobileSafe = Math.max(1, parseInt(columnsMobile, 10) || 1);
@@ -149,9 +153,13 @@
 	$: textAlignValue = textAlign || 'left';
 
 	$: backgroundImageDesktop = backgroundImage ? decodeURIComponent(backgroundImage) : '';
-	$: backgroundImageMobileDecoded = backgroundImageMobile ? decodeURIComponent(backgroundImageMobile) : '';
+	$: backgroundImageMobileDecoded = backgroundImageMobile
+		? decodeURIComponent(backgroundImageMobile)
+		: '';
 	$: backgroundVideoDesktop = backgroundVideo ? decodeURIComponent(backgroundVideo) : '';
-	$: backgroundVideoMobileDecoded = backgroundVideoMobile ? decodeURIComponent(backgroundVideoMobile) : '';
+	$: backgroundVideoMobileDecoded = backgroundVideoMobile
+		? decodeURIComponent(backgroundVideoMobile)
+		: '';
 
 	$: hasDesktopMedia = !!(backgroundImageDesktop || backgroundVideoDesktop);
 	$: hasMobileMedia = !!(backgroundImageMobileDecoded || backgroundVideoMobileDecoded);
@@ -243,8 +251,8 @@
 								<span class="credits-section__badge">{section.badge}</span>
 							{/if}
 
-						{#if section.descriptionHtml}
-							<div class="credits-section__description">{@html section.descriptionHtml}</div>
+							{#if section.descriptionHtml}
+								<div class="credits-section__description">{@html section.descriptionHtml}</div>
 							{:else if section.description}
 								<p class="credits-section__description">{section.description}</p>
 							{/if}
@@ -255,7 +263,12 @@
 										<li class="credits-item" data-id={item.id}>
 											{#if item.primary}
 												{#if item.link}
-													<a class="credits-item__primary" href={item.link} rel="noopener noreferrer" target="_blank">{item.primary}</a>
+													<a
+														class="credits-item__primary"
+														href={item.link}
+														rel="noopener noreferrer"
+														target="_blank">{item.primary}</a
+													>
 												{:else}
 													<span class="credits-item__primary">{item.primary}</span>
 												{/if}

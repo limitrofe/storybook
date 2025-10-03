@@ -40,11 +40,11 @@ npm run builder
 
 ## 5. Outras tarefas úteis
 
-| Comando | Descrição |
-| --- | --- |
-| `npm run dev` | Ambiente padrão do SvelteKit, útil para desenvolver componentes isolados. |
+| Comando                                    | Descrição                                                                                                                                                   |
+| ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `npm run dev`                              | Ambiente padrão do SvelteKit, útil para desenvolver componentes isolados.                                                                                   |
 | `npm run builder:deploy -- --dest <pasta>` | Copia o conteúdo de `build/` para uma pasta local (`<dest>/<projectName>`). Executa `npm run build` automaticamente, a menos que seja usado `--skip-build`. |
-| `npm run build` | Gera o build estático em `build/` (adapter-static). |
+| `npm run build`                            | Gera o build estático em `build/` (adapter-static).                                                                                                         |
 
 ## 6. Dicas de VS Code
 

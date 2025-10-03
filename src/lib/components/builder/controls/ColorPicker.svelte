@@ -94,7 +94,8 @@
 		unlockBodyScroll();
 		isEditingText = false;
 		draftText = parsed.text;
-		const target = triggerButton && triggerButton.offsetParent !== null ? triggerButton : previousFocus;
+		const target =
+			triggerButton && triggerButton.offsetParent !== null ? triggerButton : previousFocus;
 		if (target && typeof target.focus === 'function') {
 			target.focus();
 		}
