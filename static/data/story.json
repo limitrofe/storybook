@@ -5,7 +5,7 @@
   "author": "Bruna Azevedo, Gabs e Juan Silva",
   "date": "29/02/2025",
   "slug": "3-gracas",
-  "theme": "dark",
+  "theme": "light",
   "tags": [],
   "share": {
     "title": "",
@@ -22,10 +22,10 @@
     "ogType": "article"
   },
   "appearance": {
-    "colorScheme": "dark",
-    "backgroundColor": "#081533",
+    "colorScheme": "default",
+    "backgroundColor": "#bcc6dc",
     "backgroundColorMobile": "#081533",
-    "surfaceColor": "#000000",
+    "surfaceColor": "#d2cbcb",
     "textColor": "#ffffff",
     "accentColor": "#f97316",
     "pagePadding": {
@@ -253,7 +253,7 @@
     "gap": "2rem",
     "maxWidth": "900px",
     "textAlign": "left",
-    "backgroundColor": "#3d102e",
+    "backgroundColor": "transparent",
     "textColor": "",
     "titleColor": "",
     "accentColor": "",
@@ -274,20 +274,48 @@
   "paragraphs": [
     {
       "type": "header",
-      "title": "<br>",
-      "subtitle": "Descubra quem matou Odete Roitman em Vale Tudo, os segredos da personagem, finais dos protagonistas e curiosidades do remake de 2025.",
-      "author": "Bruna Azevedo, Gabs e Juan Silva",
-      "date": "29/02/2025",
-      "backgroundImage": "https://s3.glbimg.com/v1/AUTH_8b29beb0cbe247a296f902be2fe084b6/2025/html/gshow/3gracas/header.jpg",
-      "backgroundImageMobile": "https://s3.glbimg.com/v1/AUTH_8b29beb0cbe247a296f902be2fe084b6/2025/html/gshow/3gracas/header.jpg",
+      "title": "<span style=\"color: rgba(0, 0, 0, 0.43);\">Título da matéria</span>",
+      "subtitle": "<span style=\"color: rgb(182, 43, 43);\">Subtítulo chamativo para contextualizar o tema.</span>",
+      "author": "",
+      "date": "",
+      "backgroundImage": "",
+      "backgroundImageMobile": "",
       "backgroundVideo": "",
       "backgroundVideoMobile": "",
       "poster": "",
       "posterMobile": "",
-      "variant": "default",
+      "variant": "hero",
       "overlay": false,
-      "verticalAlign": "bottom",
+      "verticalAlign": "center",
       "horizontalAlign": "center",
+      "titleColor": "",
+      "subtitleColor": "",
+      "metaColor": "",
+      "onMediaColor": "",
+      "titleShadow": {
+        "enabled": true,
+        "offsetX": "0px",
+        "offsetY": "3px",
+        "blur": "18px",
+        "spread": "",
+        "color": "rgba(15, 23, 42, 0.55)"
+      },
+      "subtitleShadow": {
+        "enabled": true,
+        "offsetX": "0px",
+        "offsetY": "2px",
+        "blur": "12px",
+        "spread": "",
+        "color": "rgba(15, 23, 42, 0.45)"
+      },
+      "metaShadow": {
+        "enabled": false,
+        "offsetX": "0px",
+        "offsetY": "2px",
+        "blur": "10px",
+        "spread": "",
+        "color": "rgba(15, 23, 42, 0.35)"
+      },
       "titleFontSizeDesktop": "",
       "titleFontSizeMobile": "",
       "titleLineHeightDesktop": "",
@@ -297,15 +325,15 @@
       "subtitleLineHeightDesktop": "",
       "subtitleLineHeightMobile": "",
       "section": {
-        "backgroundSource": "image",
-        "backgroundColor": "",
-        "backgroundImageDesktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/gshow/quem_matou_odete_roitman/img/odete.jpg",
-        "backgroundImageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/gshow/quem_matou_odete_roitman/img/odete.jpg",
+        "backgroundSource": "color",
+        "backgroundColor": "#ddb1b1",
+        "backgroundImageDesktop": "",
+        "backgroundImageMobile": "",
         "backgroundVideoDesktop": "",
         "backgroundVideoMobile": "",
         "backgroundVideoPosterDesktop": "",
         "backgroundVideoPosterMobile": "",
-        "textColor": "",
+        "textColor": "transparent",
         "paddingTop": "0",
         "paddingBottom": "0"
       }
@@ -377,7 +405,23 @@
       },
       "textAlignMobile": "center",
       "height": "6vh",
-      "heightMobile": "6vh"
+      "heightMobile": "6vh",
+      "titleShadow": {
+        "enabled": true,
+        "offsetX": "5px",
+        "offsetY": "3px",
+        "blur": "2px",
+        "spread": "",
+        "color": "#f5da7a"
+      },
+      "subtitleShadow": {
+        "enabled": true,
+        "offsetX": "5",
+        "offsetY": "2",
+        "blur": "12",
+        "spread": "",
+        "color": "#11f20d"
+      }
     },
     {
       "type": "texto",

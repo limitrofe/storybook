@@ -31,10 +31,110 @@
 	export let titleFontStyle = '';
 	export let subtitleFontWeight = '';
 	export let subtitleFontStyle = '';
+	export let titleShadow = false;
+	export let subtitleShadow = false;
 
 	// Lógica reativa para determinar se há mídia
 	$: hasMedia = !!(backgroundImage || backgroundVideo);
 	$: hasMobileMedia = !!(backgroundImageMobile || backgroundVideoMobile);
+	const DEFAULT_TITLE_SHADOW = {
+		enabled: false,
+		offsetX: '0px',
+		offsetY: '3px',
+		blur: '18px',
+		spread: '',
+		color: 'rgba(15, 23, 42, 0.55)'
+	};
+	const DEFAULT_SUBTITLE_SHADOW = {
+		enabled: false,
+		offsetX: '0px',
+		offsetY: '2px',
+		blur: '12px',
+		spread: '',
+		color: 'rgba(15, 23, 42, 0.45)'
+	};
+
+	const NUMBER_PATTERN = /^-?\d+(?:\.\d+)?$/;
+
+	const sanitizeShadowPart = (value, fallback = '', { expectLength = false } = {}) => {
+		if (value === null || value === undefined) return fallback;
+		let text = String(value).trim();
+		if (!text) return fallback;
+		if (expectLength) {
+			if (NUMBER_PATTERN.test(text)) {
+				text = `${text}px`;
+			}
+		}
+		return text;
+	};
+
+	const normalizeShadowConfig = (input, defaults) => {
+		if (!defaults) {
+			return { enabled: false };
+		}
+		const base = {
+			enabled: Boolean(defaults.enabled),
+			offsetX: defaults.offsetX,
+			offsetY: defaults.offsetY,
+			blur: defaults.blur,
+			spread: defaults.spread,
+			color: defaults.color
+		};
+
+		if (typeof input === 'boolean') {
+			return { ...base, enabled: input };
+		}
+
+		if (typeof input === 'string') {
+			const trimmed = input.trim();
+			if (!trimmed) {
+				return { ...base, enabled: false };
+			}
+			return { ...base, enabled: true, value: trimmed };
+		}
+
+		if (input && typeof input === 'object') {
+			const merged = {
+				...base,
+				...input
+			};
+			merged.enabled = input.enabled !== undefined ? Boolean(input.enabled) : true;
+			return merged;
+		}
+
+		return { ...base, enabled: Boolean(input) };
+	};
+
+	const shadowToCss = (input, defaults) => {
+		const config = normalizeShadowConfig(input, defaults);
+		if (!config.enabled) {
+			return 'none';
+		}
+		if (config.value) {
+			return config.value;
+		}
+		const parts = [
+			sanitizeShadowPart(config.offsetX, defaults.offsetX || '0px', { expectLength: true }),
+			sanitizeShadowPart(config.offsetY, defaults.offsetY || '0px', { expectLength: true })
+		];
+		const blurPart = sanitizeShadowPart(
+			config.blur,
+			defaults.blur !== undefined ? defaults.blur : '',
+			{ expectLength: Boolean(config.blur || defaults.blur) }
+		);
+		if (blurPart) {
+			parts.push(blurPart);
+		}
+		const spreadPart = sanitizeShadowPart(config.spread, defaults.spread || '', {
+			expectLength: Boolean(config.spread || defaults.spread)
+		});
+		if (spreadPart) {
+			parts.push(spreadPart);
+		}
+		const colorPart = sanitizeShadowPart(config.color, defaults.color || 'rgba(0, 0, 0, 0.5)');
+		parts.push(colorPart);
+		return parts.filter((part) => part && part.length).join(' ');
+	};
 
 	// Classes CSS dinâmicas para alinhamento de texto
 	$: alignClass = textAlign ? `text-align-${textAlign}` : '';
@@ -81,6 +181,13 @@
 		.filter(Boolean)
 		.join('; ');
 
+	$: sectionTitleShadow = shadowToCss(titleShadow, DEFAULT_TITLE_SHADOW);
+	$: sectionSubtitleShadow = shadowToCss(subtitleShadow, DEFAULT_SUBTITLE_SHADOW);
+	$: shadowStyle = [
+		`--section-title-title-shadow:${sectionTitleShadow}`,
+		`--section-title-subtitle-shadow:${sectionSubtitleShadow}`
+	].join('; ');
+
 	$: titleSizeDesktop = titleFontSizeDesktop || 'var(--typography-h2-desktop-font-size, 3rem)';
 	$: titleSizeMobile = titleFontSizeMobile || 'var(--typography-h2-mobile-font-size, 2.4rem)';
 	$: titleLineDesktop = titleLineHeightDesktop || 'var(--typography-h2-desktop-line-height, 1.1)';
@@ -108,6 +215,8 @@
 		subtitleFontWeight ? `--section-title-subtitle-weight:${subtitleFontWeight}` : '',
 		subtitleFontStyle ? `--section-title-subtitle-style:${subtitleFontStyle}` : ''
 	].filter(Boolean).join('; ');
+
+	$: contentStyle = [textStyle, typographyStyle, shadowStyle].filter(Boolean).join('; ');
 
 	// Debug para desenvolvimento
 	$: if (import.meta.env.DEV) {
@@ -171,7 +280,7 @@
 		<div class="section-title__overlay"></div>
 	{/if}
 
-	<div class="section-title__content" style={`${textStyle}; ${typographyStyle}`}>
+	<div class="section-title__content" style={contentStyle}>
 		<div class="section-title__container">
 			<h2 class="section-title__title" style={textColor ? `color: ${textColor} !important` : ''}>
 				{@html title}
@@ -388,6 +497,7 @@
 		font-style: var(--section-title-title-style, normal);
 		margin: 0 0 1rem 0;
 		color: inherit;
+		text-shadow: var(--section-title-title-shadow, none);
 	}
 
 	.section-title__subtitle {
@@ -404,6 +514,7 @@
 		margin: 0;
 		opacity: 0.9;
 		color: inherit;
+		text-shadow: var(--section-title-subtitle-shadow, none);
 	}
 
 	/* Text positioning */

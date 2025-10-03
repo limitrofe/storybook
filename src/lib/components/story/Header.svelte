@@ -26,6 +26,9 @@
 	export let subtitleColor = '';
 	export let metaColor = '';
 	export let onMediaColor = '';
+	export let titleShadow = false;
+	export let subtitleShadow = false;
+	export let metaShadow = false;
 
 	// Verificações de mídia mais rigorosas
 	$: hasDesktopMedia = !!(backgroundImage?.trim() || backgroundVideo?.trim());
@@ -40,6 +43,112 @@
 	const subtitleFallbackMobile = 'var(--typography-lead-mobile-font-size, 1.3rem)';
 	const subtitleLineFallbackDesktop = 'var(--typography-lead-desktop-line-height, 1.6)';
 	const subtitleLineFallbackMobile = 'var(--typography-lead-mobile-line-height, 1.6)';
+	const DEFAULT_TITLE_SHADOW = {
+		enabled: false,
+		offsetX: '0px',
+		offsetY: '3px',
+		blur: '18px',
+		spread: '',
+		color: 'rgba(15, 23, 42, 0.55)'
+	};
+	const DEFAULT_SUBTITLE_SHADOW = {
+		enabled: false,
+		offsetX: '0px',
+		offsetY: '2px',
+		blur: '12px',
+		spread: '',
+		color: 'rgba(15, 23, 42, 0.45)'
+	};
+	const DEFAULT_META_SHADOW = {
+		enabled: false,
+		offsetX: '0px',
+		offsetY: '2px',
+		blur: '10px',
+		spread: '',
+		color: 'rgba(15, 23, 42, 0.35)'
+	};
+
+	const NUMBER_PATTERN = /^-?\d+(?:\.\d+)?$/;
+
+	const sanitizeShadowPart = (value, fallback = '', { expectLength = false } = {}) => {
+		if (value === null || value === undefined) return fallback;
+		let text = String(value).trim();
+		if (!text) return fallback;
+		if (expectLength) {
+			if (NUMBER_PATTERN.test(text)) {
+				text = `${text}px`;
+			}
+		}
+		return text;
+	};
+
+	const normalizeShadowConfig = (input, defaults) => {
+		if (!defaults) {
+			return { enabled: false };
+		}
+		const base = {
+			enabled: Boolean(defaults.enabled),
+			offsetX: defaults.offsetX,
+			offsetY: defaults.offsetY,
+			blur: defaults.blur,
+			spread: defaults.spread,
+			color: defaults.color
+		};
+
+		if (typeof input === 'boolean') {
+			return { ...base, enabled: input };
+		}
+
+		if (typeof input === 'string') {
+			const trimmed = input.trim();
+			if (!trimmed) {
+				return { ...base, enabled: false };
+			}
+			return { ...base, enabled: true, value: trimmed };
+		}
+
+		if (input && typeof input === 'object') {
+			const merged = {
+				...base,
+				...input
+			};
+			merged.enabled = input.enabled !== undefined ? Boolean(input.enabled) : true;
+			return merged;
+		}
+
+		return { ...base, enabled: Boolean(input) };
+	};
+
+	const shadowToCss = (input, defaults) => {
+		const config = normalizeShadowConfig(input, defaults);
+		if (!config.enabled) {
+			return 'none';
+		}
+		if (config.value) {
+			return config.value;
+		}
+		const parts = [
+			sanitizeShadowPart(config.offsetX, defaults.offsetX || '0px', { expectLength: true }),
+			sanitizeShadowPart(config.offsetY, defaults.offsetY || '0px', { expectLength: true })
+		];
+		const blurPart = sanitizeShadowPart(
+			config.blur,
+			defaults.blur !== undefined ? defaults.blur : '',
+			{ expectLength: Boolean(config.blur || defaults.blur) }
+		);
+		if (blurPart) {
+			parts.push(blurPart);
+		}
+		const spreadPart = sanitizeShadowPart(config.spread, defaults.spread || '', {
+			expectLength: Boolean(config.spread || defaults.spread)
+		});
+		if (spreadPart) {
+			parts.push(spreadPart);
+		}
+		const colorPart = sanitizeShadowPart(config.color, defaults.color || 'rgba(0, 0, 0, 0.5)');
+		parts.push(colorPart);
+		return parts.filter((part) => part && part.length).join(' ');
+	};
 
 	$: computedTitleDesktop = titleFontSizeDesktop || titleFallbackDesktop;
 	$: computedTitleMobile = titleFontSizeMobile || titleFallbackMobile;
@@ -80,7 +189,16 @@
 		.filter(Boolean)
 		.join('; ');
 
-	$: combinedStyle = [typographyStyle, colorStyle].filter(Boolean).join('; ');
+	$: headerTitleShadow = shadowToCss(titleShadow, DEFAULT_TITLE_SHADOW);
+	$: headerSubtitleShadow = shadowToCss(subtitleShadow, DEFAULT_SUBTITLE_SHADOW);
+	$: headerMetaShadow = shadowToCss(metaShadow, DEFAULT_META_SHADOW);
+	$: shadowStyle = [
+		`--story-header-title-shadow:${headerTitleShadow}`,
+		`--story-header-subtitle-shadow:${headerSubtitleShadow}`,
+		`--story-header-meta-shadow:${headerMetaShadow}`
+	].join('; ');
+
+	$: combinedStyle = [typographyStyle, colorStyle, shadowStyle].filter(Boolean).join('; ');
 
 	function formatDate(dateStr) {
 		if (!dateStr) return '';
@@ -197,6 +315,14 @@
 
 	.story-header.has-media .story-header__meta {
 		color: var(--story-header-meta-color, var(--story-header-on-media-color, #f8fafc));
+	}
+
+	.story-header .story-header__container h1 {
+		text-shadow: var(--story-header-title-shadow, none);
+	}
+
+	.story-header .story-header__subtitle {
+		text-shadow: var(--story-header-subtitle-shadow, none);
 	}
 
 	.story-header--hero.has-media {
@@ -354,6 +480,7 @@
 		font-size: var(--typography-small-desktop-font-size, 0.9rem);
 		color: var(--story-header-meta-color, var(--color-subtle-text, rgba(148, 157, 166, 0.9)));
 		opacity: 0.85;
+		text-shadow: var(--story-header-meta-shadow, none);
 	}
 
 	.story-header--halign-center .story-header__meta {

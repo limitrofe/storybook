@@ -56,6 +56,30 @@ export const componentRegistry = [
 			subtitleColor: '',
 			metaColor: '',
 			onMediaColor: '',
+			titleShadow: {
+				enabled: false,
+				offsetX: '0px',
+				offsetY: '3px',
+				blur: '18px',
+				spread: '',
+				color: 'rgba(15, 23, 42, 0.55)'
+			},
+			subtitleShadow: {
+				enabled: false,
+				offsetX: '0px',
+				offsetY: '2px',
+				blur: '12px',
+				spread: '',
+				color: 'rgba(15, 23, 42, 0.45)'
+			},
+			metaShadow: {
+				enabled: false,
+				offsetX: '0px',
+				offsetY: '2px',
+				blur: '10px',
+				spread: '',
+				color: 'rgba(15, 23, 42, 0.35)'
+			},
 			titleFontSizeDesktop: '',
 			titleFontSizeMobile: '',
 			titleLineHeightDesktop: '',
@@ -90,6 +114,87 @@ export const componentRegistry = [
 				type: 'boolean',
 				helpText: 'Melhora a legibilidade do texto sobre a mídia.'
 			},
+			{
+				path: 'titleShadow.enabled',
+				label: 'Título • sombra ativada',
+				type: 'boolean',
+				helpText: 'Habilita a sombra personalizada do título.'
+			},
+			{
+				path: 'titleShadow.offsetX',
+				label: 'Título • deslocamento X',
+				type: 'text',
+				placeholder: '0px'
+			},
+			{
+				path: 'titleShadow.offsetY',
+				label: 'Título • deslocamento Y',
+				type: 'text',
+				placeholder: '3px'
+			},
+			{
+				path: 'titleShadow.blur',
+				label: 'Título • blur',
+				type: 'text',
+				placeholder: '18px'
+			},
+			{
+				path: 'titleShadow.color',
+				label: 'Título • cor da sombra',
+				type: 'color',
+				showAlpha: true,
+				allowClear: true,
+				clearValue: ''
+			},
+			{
+				path: 'subtitleShadow.enabled',
+				label: 'Subtítulo • sombra ativada',
+				type: 'boolean',
+				helpText: 'Controle a sombra do subtítulo para contraste extra.'
+			},
+			{
+				path: 'subtitleShadow.offsetX',
+				label: 'Subtítulo • deslocamento X',
+				type: 'text',
+				placeholder: '0px'
+			},
+			{
+				path: 'subtitleShadow.offsetY',
+				label: 'Subtítulo • deslocamento Y',
+				type: 'text',
+				placeholder: '2px'
+			},
+			{
+				path: 'subtitleShadow.blur',
+				label: 'Subtítulo • blur',
+				type: 'text',
+				placeholder: '12px'
+			},
+				{
+					path: 'subtitleShadow.color',
+					label: 'Subtítulo • cor da sombra',
+					type: 'color',
+					showAlpha: true,
+					allowClear: true,
+					clearValue: ''
+				},
+				{
+					path: 'metaShadow.enabled',
+					label: 'Autor/Data • sombra ativada',
+					type: 'boolean',
+					helpText: 'Controle a sombra das linhas de autor e data.'
+				},
+				{ path: 'metaShadow.offsetX', label: 'Autor/Data • deslocamento X', type: 'text', placeholder: '0px' },
+				{ path: 'metaShadow.offsetY', label: 'Autor/Data • deslocamento Y', type: 'text', placeholder: '2px' },
+				{ path: 'metaShadow.blur', label: 'Autor/Data • blur', type: 'text', placeholder: '10px' },
+				{
+					path: 'metaShadow.color',
+					label: 'Autor/Data • cor da sombra',
+					type: 'color',
+					showAlpha: true,
+					allowClear: true,
+					clearValue: ''
+				},
 			{ path: 'backgroundImage', label: 'Imagem desktop (1920x1080)', type: 'url' },
 			{ path: 'backgroundImageMobile', label: 'Imagem mobile (1080x1920)', type: 'url' },
 			{ path: 'backgroundVideo', label: 'Vídeo desktop (mp4)', type: 'url' },
@@ -247,6 +352,22 @@ export const componentRegistry = [
 			variant: 'default',
 			size: 'medium',
 			overlay: false,
+			titleShadow: {
+				enabled: false,
+				offsetX: '0px',
+				offsetY: '3px',
+				blur: '18px',
+				spread: '',
+				color: 'rgba(15, 23, 42, 0.55)'
+			},
+			subtitleShadow: {
+				enabled: false,
+				offsetX: '0px',
+				offsetY: '2px',
+				blur: '12px',
+				spread: '',
+				color: 'rgba(15, 23, 42, 0.45)'
+			},
 			textAlign: 'center',
 			textPosition: 'center',
 			titleFontSizeDesktop: '',
@@ -325,6 +446,40 @@ export const componentRegistry = [
 				]
 			},
 			{ path: 'overlay', label: 'Overlay escuro', type: 'boolean' },
+			{
+				path: 'titleShadow.enabled',
+				label: 'Título • sombra ativada',
+				type: 'boolean',
+				helpText: 'Ativa a sombra configurável do intertítulo.'
+			},
+			{ path: 'titleShadow.offsetX', label: 'Título • deslocamento X', type: 'text', placeholder: '0px' },
+			{ path: 'titleShadow.offsetY', label: 'Título • deslocamento Y', type: 'text', placeholder: '3px' },
+			{ path: 'titleShadow.blur', label: 'Título • blur', type: 'text', placeholder: '18px' },
+			{
+				path: 'titleShadow.color',
+				label: 'Título • cor da sombra',
+				type: 'color',
+				showAlpha: true,
+				allowClear: true,
+				clearValue: ''
+			},
+			{
+				path: 'subtitleShadow.enabled',
+				label: 'Subtítulo • sombra ativada',
+				type: 'boolean',
+				helpText: 'Melhore a leitura do subtítulo sobre fundos claros.'
+			},
+			{ path: 'subtitleShadow.offsetX', label: 'Subtítulo • deslocamento X', type: 'text', placeholder: '0px' },
+			{ path: 'subtitleShadow.offsetY', label: 'Subtítulo • deslocamento Y', type: 'text', placeholder: '2px' },
+			{ path: 'subtitleShadow.blur', label: 'Subtítulo • blur', type: 'text', placeholder: '12px' },
+			{
+				path: 'subtitleShadow.color',
+				label: 'Subtítulo • cor da sombra',
+				type: 'color',
+				showAlpha: true,
+				allowClear: true,
+				clearValue: ''
+			},
 			{
 				path: 'titleFontSizeDesktop',
 				label: 'Título • tamanho desktop',

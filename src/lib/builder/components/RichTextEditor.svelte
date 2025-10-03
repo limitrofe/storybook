@@ -102,7 +102,13 @@
 		updateActiveListState();
 	};
 
+	const normalizeEditorMarkup = () => {
+		if (!editorEl) return;
+		replaceLegacyFontTags(editorEl);
+	};
+
 	const emit = () => {
+		normalizeEditorMarkup();
 		const html = (editorEl?.innerHTML || '').trim();
 		dispatch('change', { value: html });
 	};
@@ -128,12 +134,139 @@
 			exec('removeFormat');
 			return;
 		}
-		currentColor = safeColor;
-		if (safeColor.toLowerCase() === 'transparent') {
-			exec('foreColor', 'rgba(0,0,0,0)');
-		} else {
-			exec('foreColor', safeColor);
+
+		const cssColor = normalizeColorForCss(safeColor);
+		if (!cssColor) {
+			currentColor = '#000000';
+			exec('removeFormat');
+			return;
 		}
+
+		currentColor = cssColor;
+
+		if (cssColor === 'rgba(0, 0, 0, 0)') {
+			exec('removeFormat');
+			normalizeEditorMarkup();
+			return;
+		}
+
+		try {
+			document.execCommand('styleWithCSS', false, true);
+		} catch (error) {
+			// ignored: browsers que não suportam styleWithCSS
+		}
+
+		exec('foreColor', cssColor);
+		normalizeEditorMarkup();
+
+		try {
+			document.execCommand('styleWithCSS', false, false);
+		} catch (error) {
+			// ignored: apenas restaura estado original
+		}
+	};
+
+	const HEX_BODY_PATTERN = /^[0-9a-f]{3,8}$/i;
+
+	const normalizeColorForCss = (input) => {
+		if (!input) return '';
+		let candidate = String(input).trim();
+		if (!candidate) return '';
+
+		if (candidate.toLowerCase() === 'transparent') {
+			return 'rgba(0, 0, 0, 0)';
+		}
+
+		if (/^rgba?\(/i.test(candidate)) {
+			return candidate;
+		}
+
+		if (/^#[0-9a-f]+$/i.test(candidate)) {
+			return hexToCss(candidate);
+		}
+
+		return candidate;
+	};
+
+	const expandHex = (body) => {
+		if (!HEX_BODY_PATTERN.test(body)) {
+			return null;
+		}
+		switch (body.length) {
+			case 3:
+				return body
+					.split('')
+					.map((char) => char.repeat(2))
+					.join('');
+			case 4: {
+				const [r, g, b, a] = body.split('');
+				return `${r.repeat(2)}${g.repeat(2)}${b.repeat(2)}${a.repeat(2)}`;
+			}
+			case 6:
+			case 8:
+				return body;
+			default:
+				return null;
+		}
+	};
+
+	const hexToCss = (hex) => {
+		const trimmed = hex.trim().toLowerCase();
+		const body = trimmed.slice(1);
+		const expanded = expandHex(body);
+		if (!expanded) {
+			return '';
+		}
+		if (expanded.length === 6) {
+			return `#${expanded}`;
+		}
+		if (expanded.length === 8) {
+			const r = parseInt(expanded.slice(0, 2), 16);
+			const g = parseInt(expanded.slice(2, 4), 16);
+			const b = parseInt(expanded.slice(4, 6), 16);
+			const alphaRaw = parseInt(expanded.slice(6, 8), 16);
+			if (alphaRaw >= 255) {
+				return `#${expanded.slice(0, 6)}`;
+			}
+			if (alphaRaw <= 0) {
+				return 'rgba(0, 0, 0, 0)';
+			}
+			const alpha = Math.round((alphaRaw / 255) * 1000) / 1000;
+			return `rgba(${r}, ${g}, ${b}, ${formatAlpha(alpha)})`;
+		}
+		return '';
+	};
+
+	const formatAlpha = (alpha) => {
+		const alphaStr = String(alpha);
+		if (alphaStr.includes('.')) {
+			return alphaStr.replace(/0+$/, '').replace(/\.$/, '');
+		}
+		return alphaStr;
+	};
+
+	const replaceLegacyFontTags = (root) => {
+		const fonts = root?.querySelectorAll?.('font');
+		if (!fonts || fonts.length === 0) return;
+		fonts.forEach((fontEl) => {
+			const colorAttr = fontEl.getAttribute('color') || '';
+			const normalizedColor = normalizeColorForCss(colorAttr);
+			const parent = fontEl.parentNode;
+			if (!parent) return;
+			if (!normalizedColor || normalizedColor === 'rgba(0, 0, 0, 0)') {
+				while (fontEl.firstChild) {
+					parent.insertBefore(fontEl.firstChild, fontEl);
+				}
+				fontEl.remove();
+				return;
+			}
+			const span = document.createElement('span');
+			span.setAttribute('style', `color: ${normalizedColor};`);
+			while (fontEl.firstChild) {
+				span.appendChild(fontEl.firstChild);
+			}
+			fontEl.replaceWith(span);
+		});
 	};
 
 	const handleColorChange = (event) => {
@@ -170,6 +303,7 @@
 		const next = value || '';
 		if (current !== next) {
 			editorEl.innerHTML = next;
+			normalizeEditorMarkup();
 		}
 	}
 
@@ -192,11 +326,12 @@
 		isUnorderedListActive = Boolean(element?.closest('ul'));
 	};
 
-	onMount(async () => {
-		await tick();
-		if (editorEl && value) {
-			editorEl.innerHTML = value;
-		}
+		onMount(async () => {
+			await tick();
+			if (editorEl && value) {
+				editorEl.innerHTML = value;
+				normalizeEditorMarkup();
+			}
 
 		try {
 			document.execCommand('defaultParagraphSeparator', false, 'p');

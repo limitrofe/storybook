@@ -3,6 +3,7 @@ import { getComponentDefinition } from './component-registry.js';
 
 let blockCounter = 0;
 
+
 const SECTION_DEFAULTS = {
 	backgroundSource: 'color',
 	backgroundColor: '',
@@ -28,6 +29,83 @@ export function ensureSectionDefaults(section = {}) {
 	}
 
 	return merged;
+}
+
+const TITLE_SHADOW_DEFAULT = {
+	enabled: false,
+	offsetX: '0px',
+	offsetY: '3px',
+	blur: '18px',
+	spread: '',
+	color: 'rgba(15, 23, 42, 0.55)'
+};
+
+const SUBTITLE_SHADOW_DEFAULT = {
+	enabled: false,
+	offsetX: '0px',
+	offsetY: '2px',
+	blur: '12px',
+	spread: '',
+	color: 'rgba(15, 23, 42, 0.45)'
+};
+
+function normalizeShadowValue(value, defaults) {
+	const base = {
+		enabled: Boolean(defaults?.enabled),
+		offsetX: defaults?.offsetX ?? '0px',
+		offsetY: defaults?.offsetY ?? '0px',
+		blur: defaults?.blur ?? '',
+		spread: defaults?.spread ?? '',
+		color: defaults?.color ?? 'rgba(0, 0, 0, 0.5)'
+	};
+
+	if (value === null || value === undefined) {
+		return { ...base, enabled: false };
+	}
+
+	if (typeof value === 'boolean') {
+		return { ...base, enabled: value };
+	}
+
+	if (typeof value === 'string') {
+		const trimmed = value.trim();
+		if (!trimmed) {
+			return { ...base, enabled: false };
+		}
+		return { ...base, enabled: true, value: trimmed };
+	}
+
+	if (value && typeof value === 'object') {
+		const merged = {
+			...base,
+			...value
+		};
+		merged.enabled = value.enabled !== undefined ? Boolean(value.enabled) : true;
+		return merged;
+	}
+
+	return { ...base, enabled: Boolean(value) };
+}
+
+function ensureBlockShadows(block) {
+	if (!block || typeof block !== 'object') return block;
+	if ('titleShadow' in block) {
+		block.titleShadow = normalizeShadowValue(block.titleShadow, TITLE_SHADOW_DEFAULT);
+	}
+	if ('subtitleShadow' in block) {
+		block.subtitleShadow = normalizeShadowValue(block.subtitleShadow, SUBTITLE_SHADOW_DEFAULT);
+	}
+	if ('metaShadow' in block) {
+		block.metaShadow = normalizeShadowValue(block.metaShadow, {
+			enabled: false,
+			offsetX: '0px',
+			offsetY: '2px',
+			blur: '10px',
+			spread: '',
+			color: 'rgba(15, 23, 42, 0.35)'
+		});
+	}
+	return block;
 }
 
 function mergeTypography(defaultValue = {}, incoming = {}) {
@@ -323,7 +401,7 @@ export function normalizeStory(value = {}) {
 	const paragraphs = Array.isArray(value?.paragraphs) ? value.paragraphs : [];
 	story.paragraphs = paragraphs.map((paragraph) => ({
 		__id: paragraph.__id || `${paragraph.type || 'block'}-${Date.now()}-${blockCounter++}`,
-		...paragraph,
+		...ensureBlockShadows(structuredClone(paragraph)),
 		section: ensureSectionDefaults(paragraph?.section)
 	}));
 
@@ -377,7 +455,9 @@ export function sanitizeStoryForExport(data) {
 	if (!Array.isArray(sanitized.paragraphs)) {
 		sanitized.paragraphs = [];
 	} else {
-		sanitized.paragraphs = sanitized.paragraphs.map(ensureMediaVariants);
+		sanitized.paragraphs = sanitized.paragraphs
+			.map((paragraph) => ensureBlockShadows(paragraph))
+			.map(ensureMediaVariants);
 	}
 	return sanitized;
 }

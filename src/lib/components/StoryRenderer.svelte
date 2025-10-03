@@ -506,6 +506,9 @@ import { getSectionStyling } from './story/sectionStyle.js';
 						subtitleColor={props.subtitleColor}
 						metaColor={props.metaColor}
 						onMediaColor={props.onMediaColor}
+						titleShadow={props.titleShadow}
+						subtitleShadow={props.subtitleShadow}
+						metaShadow={props.metaShadow}
 					/>
 					<!-- 🌪️ Header Caótico -->
 				{:else if componentType === 'header-caotico'}
@@ -576,6 +579,8 @@ import { getSectionStyling } from './story/sectionStyle.js';
 						subtitleFontWeight={props.subtitleFontWeight}
 						subtitleFontStyle={props.subtitleFontStyle}
 						overlay={stringToBoolean(props.overlay, false)}
+						titleShadow={props.titleShadow}
+						subtitleShadow={props.subtitleShadow}
 					/>
 
 					<!-- Flexible Layout -->
