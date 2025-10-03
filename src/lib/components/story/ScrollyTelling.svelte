@@ -134,7 +134,7 @@
 				<div
 					class="media-wrapper"
 					class:active={i === activeMediaIndex}
-					style={`background:${media.backgroundColor || '#000'}`}
+					style={`background:${media.backgroundColor ?? '#000'}`}
 				>
 					{#if media.type === 'image' && media.src}
 						<img src={media.src} alt={media.alt} loading="lazy" />

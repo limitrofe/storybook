@@ -616,7 +616,7 @@ import { getSectionStyling } from './story/sectionStyle.js';
 						image2XMobile={props.image2XMobile || '0px'}
 						image2YMobile={props.image2YMobile || '0px'}
 						image2ZIndex={props.image2ZIndex || 1}
-						backgroundColor={props.backgroundColor || '#1a1a1a'}
+						backgroundColor={props.backgroundColor ?? '#1a1a1a'}
 						minHeight={props.minHeight || '80vh'}
 						minHeightMobile={props.minHeightMobile || '70vh'}
 						padding={props.padding || '2rem'}
@@ -629,7 +629,7 @@ import { getSectionStyling } from './story/sectionStyle.js';
 						heightDesktop={props.heightDesktop || props.height || '100vh'}
 						heightMobile={props.heightMobile || props.height || '100vh'}
 						backgroundType={props.backgroundType || 'color'}
-						backgroundColor={props.backgroundColor || '#000000'}
+						backgroundColor={props.backgroundColor ?? '#000000'}
 						backgroundImageDesktop={props.backgroundImageDesktop || props.backgroundImage || ''}
 						backgroundImageMobile={props.backgroundImageMobile || props.backgroundImage || ''}
 						backgroundPositionDesktop={props.backgroundPositionDesktop ||
@@ -726,8 +726,8 @@ import { getSectionStyling } from './story/sectionStyle.js';
 						customWidthMobile={props.customWidthMobile || ''}
 						aspectRatio={props.aspectRatio || '16/9'}
 						aspectRatioMobile={props.aspectRatioMobile || '9/16'}
-						backgroundColor={props.backgroundColor ||
-							props.containerBackgroundColor ||
+						backgroundColor={props.backgroundColor ??
+							props.containerBackgroundColor ??
 							'rgba(0, 0, 0, 0.05)'}
 						alignment={props.alignment || 'center'}
 						fullWidthBackground={stringToBoolean(props.fullWidthBackground, false)}
@@ -805,7 +805,7 @@ import { getSectionStyling } from './story/sectionStyle.js';
 						layout={props.layout || 'grid'}
 						columns={parseInt(props.columns || props.colunas) || 5}
 						showTitle={stringToBoolean(props.showTitle || props.mostrarTitulo, true)}
-						backgroundColor={props.backgroundColor || props.corFundo || '#000000'}
+						backgroundColor={props.backgroundColor ?? props.corFundo ?? '#000000'}
 						titleColor={props.titleColor || props.corTitulo || '#ff0000'}
 						textColor={props.textColor || props.corTexto || '#ffffff'}
 					/>
@@ -872,7 +872,7 @@ import { getSectionStyling } from './story/sectionStyle.js';
 						shapeColor={props.shapeColor || '#DC2626'}
 						nameColor={props.nameColor || '#000'}
 						textColor={props.textColor || '#fff'}
-						backgroundColor={props.backgroundColor || '#000'}
+						backgroundColor={props.backgroundColor ?? '#000'}
 						animationSpeed={props.animationSpeed || 'normal'}
 						sectionHeight={props.sectionHeight || '100vh'}
 						sectionHeightMobile={props.sectionHeightMobile || '100vh'}
@@ -885,7 +885,7 @@ import { getSectionStyling } from './story/sectionStyle.js';
 						shapeColor={props.shapeColor || '#b51207'}
 						nameColor={props.nameColor || '#000000'}
 						textColor={props.textColor || '#ffffff'}
-						backgroundColor={props.backgroundColor || '#000000'}
+						backgroundColor={props.backgroundColor ?? '#000000'}
 						quoteColor={props.quoteColor || '#ffd700'}
 					/>
 
@@ -969,7 +969,7 @@ import { getSectionStyling } from './story/sectionStyle.js';
 			gap={storyData.credits.gap || '2rem'}
 			maxWidth={storyData.credits.maxWidth || '900px'}
 			textAlign={storyData.credits.textAlign || 'left'}
-			backgroundColor={storyData.credits.backgroundColor || ''}
+			backgroundColor={storyData.credits.backgroundColor ?? ''}
 			textColor={storyData.credits.textColor || ''}
 			titleColor={storyData.credits.titleColor || ''}
 			accentColor={storyData.credits.accentColor || ''}

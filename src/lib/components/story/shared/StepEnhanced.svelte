@@ -43,7 +43,7 @@
 	$: baseContainerStyles = {
 		backgroundColor: isTransparentCard
 			? 'transparent'
-			: textConfig.backgroundColor || 'rgba(var(--color-background-rgb), 0.9)',
+			: textConfig.backgroundColor ?? 'rgba(var(--color-background-rgb), 0.9)',
 		borderRadius: textConfig.borderRadius || '12px',
 		padding: textConfig.padding || '2rem',
 		maxWidth: isMobile ? textConfig.maxWidthMobile || '90%' : textConfig.maxWidth || '450px',

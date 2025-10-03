@@ -28,8 +28,8 @@
 		appearance.useGradient && appearance.gradient
 			? appearance.gradient
 			: previewDevice === 'mobile'
-				? appearance.backgroundColorMobile || appearance.backgroundColor || '#0b0d17'
-				: appearance.backgroundColor || '#0b0d17';
+				? appearance.backgroundColorMobile ?? appearance.backgroundColor ?? '#0b0d17'
+				: appearance.backgroundColor ?? '#0b0d17';
 	$: previewTextColor = appearance.textColor || '#f8fafc';
 	$: previewPadding =
 		previewDevice === 'mobile'

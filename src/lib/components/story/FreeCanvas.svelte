@@ -182,9 +182,9 @@
 				: 'color';
 
 	function getBackgroundColorValue(device) {
-		const fallback = backgroundColor || '#000000';
-		const desktop = backgroundColorDesktop || fallback;
-		const mobile = backgroundColorMobile || desktop;
+		const fallback = backgroundColor ?? '#000000';
+		const desktop = backgroundColorDesktop ?? fallback;
+		const mobile = backgroundColorMobile ?? desktop;
 		return device === 'mobile' ? mobile : desktop;
 	}
 
@@ -208,7 +208,7 @@
 
 	function getContainerStyle() {
 		const deviceLabel = isMobile ? 'mobile' : 'desktop';
-		const color = getBackgroundColorValue(deviceLabel) || '#000000';
+		const color = getBackgroundColorValue(deviceLabel) ?? '#000000';
 		const baseWidthValue = isMobile ? baseWidthMobile : baseWidthDesktop;
 		const widthPx = simulatedWidthPx || Math.max(effectiveBaseWidth || 0, baseWidthValue || 0);
 		const declarations = ['position:relative', 'overflow:hidden', `background-color:${color}`];

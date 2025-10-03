@@ -51,7 +51,7 @@
 
 <section
 	class="recommended-items"
-	style={`--bg-color:${backgroundColor || 'transparent'}; --title-color:${titleColor || 'var(--color-text)'}; --text-color:${textColor || 'var(--color-text)'}; --columns:${columns}; --title-font-size-desktop:${titleFontSizeDesktop || ''}; --title-font-size-mobile:${titleFontSizeMobile || ''}; --item-title-font-size-desktop:${itemTitleFontSizeDesktop || ''}; --item-title-font-size-mobile:${itemTitleFontSizeMobile || ''}; --item-text-font-size-desktop:${itemTextFontSizeDesktop || ''}; --item-text-font-size-mobile:${itemTextFontSizeMobile || ''};`}
+	style={`--bg-color:${backgroundColor ?? 'transparent'}; --title-color:${titleColor || 'var(--color-text)'}; --text-color:${textColor || 'var(--color-text)'}; --columns:${columns}; --title-font-size-desktop:${titleFontSizeDesktop || ''}; --title-font-size-mobile:${titleFontSizeMobile || ''}; --item-title-font-size-desktop:${itemTitleFontSizeDesktop || ''}; --item-title-font-size-mobile:${itemTitleFontSizeMobile || ''}; --item-text-font-size-desktop:${itemTextFontSizeDesktop || ''}; --item-text-font-size-mobile:${itemTextFontSizeMobile || ''};`}
 >
 	{#if showTitle && title}
 		<h2 class="recommended-title">{title}</h2>

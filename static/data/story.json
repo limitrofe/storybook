@@ -294,19 +294,19 @@
       "onMediaColor": "",
       "titleShadow": {
         "enabled": true,
-        "offsetX": "0px",
+        "offsetX": "3px",
         "offsetY": "3px",
-        "blur": "18px",
+        "blur": "2px",
         "spread": "",
-        "color": "rgba(15, 23, 42, 0.55)"
+        "color": "#bccdf58c"
       },
       "subtitleShadow": {
         "enabled": true,
-        "offsetX": "0px",
+        "offsetX": "2px",
         "offsetY": "2px",
-        "blur": "12px",
+        "blur": "1px",
         "spread": "",
-        "color": "rgba(15, 23, 42, 0.45)"
+        "color": "#094ef173"
       },
       "metaShadow": {
         "enabled": false,
@@ -326,7 +326,7 @@
       "subtitleLineHeightMobile": "",
       "section": {
         "backgroundSource": "color",
-        "backgroundColor": "#ddb1b1",
+        "backgroundColor": "#fa0000",
         "backgroundImageDesktop": "",
         "backgroundImageMobile": "",
         "backgroundVideoDesktop": "",
@@ -374,7 +374,7 @@
       "type": "intertitulo",
       "text": "<i>SINOPSE</i>",
       "subtitle": "<span style=\"font-weight: normal;\">toda a história da novela</span>",
-      "backgroundColor": "#f3334a",
+      "backgroundColor": "#39f0f3",
       "textColor": "#ffffff",
       "fontFamily": "globotipo",
       "variant": "default",

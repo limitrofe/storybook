@@ -105,7 +105,7 @@ export function parseStoryComponents(paragraphs) {
 				component.image2ZIndex = paragraph.image2ZIndex || 1;
 
 				// LAYOUT
-				component.backgroundColor = paragraph.backgroundColor || '#1a1a1a';
+				component.backgroundColor = paragraph.backgroundColor ?? '#1a1a1a';
 				component.minHeight = paragraph.minHeight || '80vh';
 				component.minHeightMobile = paragraph.minHeightMobile || '70vh';
 				component.padding = paragraph.padding || '2rem';
@@ -121,7 +121,7 @@ export function parseStoryComponents(paragraphs) {
 				component.heightDesktop = paragraph.heightDesktop || paragraph.height || '100vh';
 				component.heightMobile = paragraph.heightMobile || paragraph.height || '100vh';
 				component.backgroundType = paragraph.backgroundType || 'color';
-				component.backgroundColor = paragraph.backgroundColor || '#000000';
+				component.backgroundColor = paragraph.backgroundColor ?? '#000000';
 				component.backgroundImageDesktop =
 					paragraph.backgroundImageDesktop || paragraph.backgroundImage || '';
 				component.backgroundImageMobile =
@@ -155,7 +155,7 @@ export function parseStoryComponents(paragraphs) {
 				component.heightDesktop = Number(paragraph.heightDesktop) || 600;
 				component.widthMobile = Number(paragraph.widthMobile) || 375;
 				component.heightMobile = Number(paragraph.heightMobile) || 600;
-				component.backgroundColor = paragraph.backgroundColor || '#000000';
+				component.backgroundColor = paragraph.backgroundColor ?? '#000000';
 				component.items = paragraph.items || paragraph.elements || [];
 				break;
 
@@ -234,7 +234,7 @@ export function parseStoryComponents(paragraphs) {
 				component.layout = paragraph.layout || 'grid';
 				component.columns = parseInt(paragraph.columns || paragraph.colunas) || 5;
 				component.showTitle = paragraph.showTitle !== false && paragraph.mostrarTitulo !== false;
-				component.backgroundColor = paragraph.backgroundColor || paragraph.corFundo || '#000000';
+				component.backgroundColor = paragraph.backgroundColor ?? paragraph.corFundo ?? '#000000';
 				component.titleColor = paragraph.titleColor || paragraph.corTitulo || '#ff0000';
 				component.textColor = paragraph.textColor || paragraph.corTexto || '#ffffff';
 				break;
@@ -340,7 +340,7 @@ export function parseStoryComponents(paragraphs) {
 				component.shapeColor = paragraph.shapeColor || '#DC2626';
 				component.nameColor = paragraph.nameColor || '#000';
 				component.textColor = paragraph.textColor || '#fff';
-				component.backgroundColor = paragraph.backgroundColor || '#000';
+				component.backgroundColor = paragraph.backgroundColor ?? '#000';
 				component.animationSpeed = paragraph.animationSpeed || 'normal';
 				component.sectionHeight = paragraph.sectionHeight || '100vh';
 				component.sectionHeightMobile = paragraph.sectionHeightMobile || '100vh';
@@ -357,7 +357,7 @@ export function parseStoryComponents(paragraphs) {
 				component.shapeColor = paragraph.shapeColor || '#b51207';
 				component.nameColor = paragraph.nameColor || '#000000';
 				component.textColor = paragraph.textColor || '#ffffff';
-				component.backgroundColor = paragraph.backgroundColor || '#000000';
+				component.backgroundColor = paragraph.backgroundColor ?? '#000000';
 				component.quoteColor = paragraph.quoteColor || '#ffd700';
 				break;
 
@@ -730,7 +730,7 @@ export function generateCuriosidadesDefaults(baseConfig = {}) {
 		shapeColor: baseConfig.shapeColor || '#b51207',
 		nameColor: baseConfig.nameColor || '#000000',
 		textColor: baseConfig.textColor || '#ffffff',
-		backgroundColor: baseConfig.backgroundColor || '#000000',
+		backgroundColor: baseConfig.backgroundColor ?? '#000000',
 		quoteColor: baseConfig.quoteColor || '#ffd700',
 		...baseConfig
 	};
@@ -746,7 +746,7 @@ export function generateCharacterPresentationDefaults(baseConfig = {}) {
 		shapeColor: baseConfig.shapeColor || '#DC2626',
 		nameColor: baseConfig.nameColor || '#000',
 		textColor: baseConfig.textColor || '#fff',
-		backgroundColor: baseConfig.backgroundColor || '#000',
+		backgroundColor: baseConfig.backgroundColor ?? '#000',
 		animationSpeed: baseConfig.animationSpeed || 'normal',
 		sectionHeight: baseConfig.sectionHeight || '100vh',
 		sectionHeightMobile: baseConfig.sectionHeightMobile || '100vh',
@@ -765,7 +765,7 @@ export function generateRecommendedItemsDefaults(baseConfig = {}) {
 		layout: baseConfig.layout || 'grid',
 		columns: parseInt(baseConfig.columns || baseConfig.colunas) || 5,
 		showTitle: baseConfig.showTitle !== false && baseConfig.mostrarTitulo !== false,
-		backgroundColor: baseConfig.backgroundColor || baseConfig.corFundo || '#000000',
+		backgroundColor: baseConfig.backgroundColor ?? baseConfig.corFundo ?? '#000000',
 		titleColor: baseConfig.titleColor || baseConfig.corTitulo || '#ff0000',
 		textColor: baseConfig.textColor || baseConfig.corTexto || '#ffffff',
 		...baseConfig
@@ -781,7 +781,7 @@ export function generateResponsiveMediaDefaults(baseConfig = {}) {
 		heightDesktop: baseConfig.heightDesktop || baseConfig.height || '100vh',
 		heightMobile: baseConfig.heightMobile || baseConfig.height || '100vh',
 		backgroundType: baseConfig.backgroundType || 'color',
-		backgroundColor: baseConfig.backgroundColor || '#000000',
+		backgroundColor: baseConfig.backgroundColor ?? '#000000',
 		backgroundImageDesktop: baseConfig.backgroundImageDesktop || baseConfig.backgroundImage || '',
 		backgroundImageMobile: baseConfig.backgroundImageMobile || baseConfig.backgroundImage || '',
 		backgroundPositionDesktop:

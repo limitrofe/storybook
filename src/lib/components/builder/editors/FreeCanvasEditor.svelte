@@ -102,9 +102,9 @@
 		if (!['color', 'image', 'video'].includes(merged.backgroundSource)) {
 			merged.backgroundSource = 'color';
 		}
-		const legacyColor = merged.backgroundColor || '#000000';
-		merged.backgroundColorDesktop = merged.backgroundColorDesktop || legacyColor;
-		merged.backgroundColorMobile = merged.backgroundColorMobile || merged.backgroundColorDesktop;
+		const legacyColor = merged.backgroundColor ?? '#000000';
+		merged.backgroundColorDesktop = merged.backgroundColorDesktop ?? legacyColor;
+		merged.backgroundColorMobile = merged.backgroundColorMobile ?? merged.backgroundColorDesktop;
 		merged.backgroundColor = merged.backgroundColorDesktop;
 		merged.backgroundImageDesktop = merged.backgroundImageDesktop || '';
 		merged.backgroundImageMobile = merged.backgroundImageMobile || '';
@@ -347,9 +347,9 @@
 	}
 
 	function getBackgroundColorValue(device = currentDevice) {
-		const fallback = data.backgroundColor || '#000000';
-		const desktop = data.backgroundColorDesktop || fallback;
-		const mobile = data.backgroundColorMobile || desktop;
+		const fallback = data.backgroundColor ?? '#000000';
+		const desktop = data.backgroundColorDesktop ?? fallback;
+		const mobile = data.backgroundColorMobile ?? desktop;
 		return device === 'mobile' ? mobile : desktop;
 	}
 
@@ -372,7 +372,7 @@
 	}
 
 	function getPreviewContainerStyle(device = currentDevice) {
-		const color = getBackgroundColorValue(device) || '#000000';
+		const color = getBackgroundColorValue(device) ?? '#000000';
 		const { baseWidth, canvasHeight } = getViewportMetrics(device);
 		const minHeight = device === 'desktop' ? data.minHeightDesktop : data.minHeightMobile;
 		const declarations = [

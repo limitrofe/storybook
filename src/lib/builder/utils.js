@@ -257,9 +257,9 @@ function ensureMediaVariants(paragraph = {}) {
 			clone.backgroundSource = ['image', 'video'].includes(clone.backgroundSource)
 				? clone.backgroundSource
 				: 'color';
-			const legacyColor = clone.backgroundColor || '#000000';
-			clone.backgroundColorDesktop = clone.backgroundColorDesktop || legacyColor;
-			clone.backgroundColorMobile = clone.backgroundColorMobile || clone.backgroundColorDesktop;
+			const legacyColor = clone.backgroundColor ?? '#000000';
+			clone.backgroundColorDesktop = clone.backgroundColorDesktop ?? legacyColor;
+			clone.backgroundColorMobile = clone.backgroundColorMobile ?? clone.backgroundColorDesktop;
 			clone.backgroundColor = clone.backgroundColorDesktop;
 			clone.backgroundImageDesktop = clone.backgroundImageDesktop || '';
 			clone.backgroundImageMobile = clone.backgroundImageMobile || '';
