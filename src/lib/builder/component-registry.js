@@ -1294,13 +1294,43 @@ export const componentRegistry = [
 		defaultData: {
 			type: 'flourish',
 			src: 'https://flo.uri.sh/visualisation/12345/embed',
-			height: '600px',
+			width: '100%',
+			maxWidth: '800px',
+			height: 'auto',
+			heightMobile: 'auto',
+			widthMobile: '100%',
+			maxWidthMobile: '100%',
 			caption: '',
 			credit: ''
 		},
 		fields: [
 			{ path: 'src', label: 'URL do Flourish', type: 'url', required: true },
-			{ path: 'height', label: 'Altura', type: 'text', placeholder: '600px' },
+			{ path: 'width', label: 'Largura desktop', type: 'text', placeholder: '100%' },
+			{
+				path: 'maxWidth',
+				label: 'Largura máxima desktop',
+				type: 'text',
+				placeholder: '800px (use none para desativar)'
+			},
+			{ path: 'widthMobile', label: 'Largura mobile', type: 'text', placeholder: '100%' },
+			{
+				path: 'maxWidthMobile',
+				label: 'Largura máxima mobile',
+				type: 'text',
+				placeholder: '100%'
+			},
+			{
+				path: 'height',
+				label: 'Altura desktop',
+				type: 'text',
+				placeholder: 'auto (ex: 80vh, 600px)'
+			},
+			{
+				path: 'heightMobile',
+				label: 'Altura mobile',
+				type: 'text',
+				placeholder: 'auto (ex: 80vh, 600px)'
+			},
 			{ path: 'caption', label: 'Legenda (HTML)', type: 'richtext', rows: 2 },
 			{ path: 'credit', label: 'Crédito', type: 'text' }
 		]

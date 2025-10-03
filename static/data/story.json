@@ -2013,6 +2013,31 @@
         "paddingTop": "0rem",
         "paddingBottom": "0rem"
       }
+    },
+    {
+      "type": "flourish",
+      "src": "visualisation/25355279",
+      "width": "50%",
+      "maxWidth": "100vw",
+      "widthMobile": "100%",
+      "maxWidthMobile": "100%",
+      "height": "auto",
+      "heightMobile": "auto",
+      "caption": "",
+      "credit": "",
+      "section": {
+        "backgroundSource": "color",
+        "backgroundColor": "",
+        "backgroundImageDesktop": "",
+        "backgroundImageMobile": "",
+        "backgroundVideoDesktop": "",
+        "backgroundVideoMobile": "",
+        "backgroundVideoPosterDesktop": "",
+        "backgroundVideoPosterMobile": "",
+        "textColor": "",
+        "paddingTop": "",
+        "paddingBottom": ""
+      }
     }
   ]
 }

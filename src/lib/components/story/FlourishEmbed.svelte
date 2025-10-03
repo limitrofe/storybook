@@ -5,7 +5,12 @@
 
 	export let src = '';
 	export let url = ''; // Alias para src
-	export let height = '600px';
+	export let height = 'auto';
+	export let width = '100%';
+	export let maxWidth = '800px';
+	export let heightMobile = 'auto';
+	export let widthMobile = '100%';
+	export let maxWidthMobile = '100%';
 	export let caption = '';
 	export let credit = '';
 
@@ -14,8 +19,76 @@
 
 	let lastRenderedKey = '';
 
+	const DEFAULT_HEIGHT = '600px';
+
+	$: normalizedWidth = (() => {
+		if (width == null) return '100%';
+		const value = String(width).trim();
+		return value === '' ? '100%' : value;
+	})();
+
+	$: normalizedMaxWidth = (() => {
+		if (maxWidth == null) return '800px';
+		const value = String(maxWidth).trim();
+		return value === '' ? '800px' : value;
+	})();
+
+	$: normalizedWidthMobile = (() => {
+		if (widthMobile == null) return '100%';
+		const value = String(widthMobile).trim();
+		return value === '' ? '100%' : value;
+	})();
+
+	$: normalizedMaxWidthMobile = (() => {
+		if (maxWidthMobile == null) return '100%';
+		const value = String(maxWidthMobile).trim();
+		return value === '' ? '100%' : value;
+	})();
+
+	$: normalizedHeight = (() => {
+		if (height == null) return 'auto';
+		const value = String(height).trim();
+		return value === '' ? 'auto' : value;
+	})();
+
+	$: normalizedHeightMobile = (() => {
+		if (heightMobile == null) return 'auto';
+		const value = String(heightMobile).trim();
+		return value === '' ? 'auto' : value;
+	})();
+
+	$: isDeclaredAuto = ['auto', 'automatic'].includes(normalizedHeight.toLowerCase());
+	$: treatAsAuto =
+		isDeclaredAuto ||
+			normalizedHeight.toLowerCase() === DEFAULT_HEIGHT &&
+				normalizedWidth === '100%' &&
+				normalizedMaxWidth === '800px';
+	$: dataHeight = treatAsAuto ? undefined : normalizedHeight;
+
+	$: isDeclaredAutoMobile = ['auto', 'automatic'].includes(normalizedHeightMobile.toLowerCase());
+	$: treatAsAutoMobile = isDeclaredAutoMobile;
+
+	$: containerStyle = [
+		normalizedWidth ? `--flourish-width: ${normalizedWidth}` : '',
+		normalizedMaxWidth ? `--flourish-max-width: ${normalizedMaxWidth}` : '',
+		treatAsAuto ? '' : `--flourish-min-height: ${normalizedHeight}`,
+		normalizedWidthMobile ? `--flourish-width-mobile: ${normalizedWidthMobile}` : '',
+		normalizedMaxWidthMobile ? `--flourish-max-width-mobile: ${normalizedMaxWidthMobile}` : '',
+		treatAsAutoMobile ? '' : `--flourish-min-height-mobile: ${normalizedHeightMobile}`
+	]
+		.filter(Boolean)
+		.join('; ');
+
 	function buildRenderKey() {
-		return `${actualSrc}::${height}`;
+		return [
+			actualSrc,
+			treatAsAuto ? 'auto' : normalizedHeight,
+			normalizedWidth,
+			normalizedMaxWidth,
+			treatAsAutoMobile ? 'auto' : normalizedHeightMobile,
+			normalizedWidthMobile,
+			normalizedMaxWidthMobile
+		].join('::');
 	}
 
 	async function hydrateFlourish() {
@@ -44,8 +117,8 @@
 </script>
 
 {#if actualSrc}
-	<div class="flourish-embed-container">
-		<div class="flourish-embed" data-src={actualSrc} data-height={height}>
+	<div class="flourish-embed-container" style={containerStyle}>
+		<div class="flourish-embed" data-src={actualSrc} data-height={dataHeight}>
 			<a href={`https://public.flourish.studio/${actualSrc}`} target="_blank">
 				Ver esta visualização de dados no Flourish
 			</a>
@@ -76,10 +149,10 @@
 
 <style>
 	.flourish-embed-container {
-		width: 100%;
-		max-width: 800px;
+		width: var(--flourish-width, 100%);
+		max-width: var(--flourish-max-width, 800px);
 		margin: 2rem auto;
-		min-height: 400px;
+		min-height: var(--flourish-min-height, 0);
 		background-color: var(--color-highlight-bg, #f9fafb);
 		border-radius: 8px;
 		overflow: hidden;
@@ -87,7 +160,22 @@
 
 	.flourish-embed {
 		width: 100%;
-		min-height: 400px;
+		min-height: var(--flourish-min-height, 0);
+	}
+
+	@media (max-width: 768px) {
+		.flourish-embed-container {
+			width: var(--flourish-width-mobile, var(--flourish-width, 100%));
+			max-width: var(--flourish-max-width-mobile, var(--flourish-max-width, 100%));
+			min-height: var(
+				--flourish-min-height-mobile,
+				var(--flourish-min-height, 0)
+			);
+		}
+
+		.flourish-embed {
+			min-height: var(--flourish-min-height-mobile, var(--flourish-min-height, 0));
+		}
 	}
 
 	.flourish-embed :global(a) {

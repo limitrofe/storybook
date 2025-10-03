@@ -983,7 +983,12 @@
 					{:else if componentType === 'flourish'}
 						<FlourishEmbed
 							src={props.src}
-							height={props.height || '600px'}
+							height={props.height && String(props.height).trim() ? props.height : 'auto'}
+							width={props.width}
+							maxWidth={props.maxWidth}
+							heightMobile={props.heightMobile}
+							widthMobile={props.widthMobile}
+							maxWidthMobile={props.maxWidthMobile}
 							caption={props.caption}
 							credit={props.credit}
 						/>

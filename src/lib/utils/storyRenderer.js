@@ -385,7 +385,12 @@ export function parseStoryComponents(paragraphs) {
 			case 'mapa':
 				component.type = 'flourish';
 				component.src = paragraph.src;
-				component.height = paragraph.height || '600px';
+				component.height = paragraph.height || 'auto';
+				component.heightMobile = paragraph.heightMobile || 'auto';
+				component.width = paragraph.width || '100%';
+				component.widthMobile = paragraph.widthMobile || '100%';
+				component.maxWidth = paragraph.maxWidth || '800px';
+				component.maxWidthMobile = paragraph.maxWidthMobile || '100%';
 				component.caption = paragraph.caption;
 				component.credit = paragraph.credit;
 				break;
