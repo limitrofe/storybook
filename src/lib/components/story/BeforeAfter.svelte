@@ -13,6 +13,12 @@
 	export let beforeLabel = 'Antes';
 	export let afterLabel = 'Depois';
 	export let orientation = 'vertical'; // 'vertical' or 'horizontal'
+	export let width = '100%';
+	export let maxWidth = '';
+
+	$: containerStyle = [width ? `width: ${width}` : '', maxWidth ? `max-width: ${maxWidth}` : '']
+		.filter(Boolean)
+		.join('; ');
 
 	let containerElement;
 	let sliderPosition = 50;
@@ -89,15 +95,19 @@
 	}
 </script>
 
-<div class="before-after before-after--{orientation}" bind:this={containerElement}>
+<div
+	class="before-after before-after--{orientation}"
+	bind:this={containerElement}
+	style={containerStyle}
+>
 	<!-- Before Image -->
 	<div class="before-after__before">
 		<div class="before-after__media before-after__media--before">
 			<picture>
-				{#if beforeImageMobile}
-					<source srcset={beforeImageMobile} media="(max-width: 768px)" />
+				{#if beforeImageMobile || beforeImage}
+					<source srcset={beforeImageMobile || beforeImage} media="(max-width: 768px)" />
 				{/if}
-				<img src={beforeImage} alt={beforeLabel} loading="lazy" />
+				<img src={beforeImage || beforeImageMobile} alt={beforeLabel} loading="lazy" />
 			</picture>
 			<div class="before-after__label before-after__label--before">
 				{beforeLabel}
@@ -120,10 +130,10 @@
 				: `clip-path: inset(${sliderPosition}% 0 0 0)`}
 		>
 			<picture>
-				{#if afterImageMobile}
-					<source srcset={afterImageMobile} media="(max-width: 768px)" />
+				{#if afterImageMobile || afterImage}
+					<source srcset={afterImageMobile || afterImage} media="(max-width: 768px)" />
 				{/if}
-				<img src={afterImage} alt={afterLabel} loading="lazy" />
+				<img src={afterImage || afterImageMobile} alt={afterLabel} loading="lazy" />
 			</picture>
 			<div class="before-after__label before-after__label--after">
 				{afterLabel}

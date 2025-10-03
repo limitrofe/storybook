@@ -1158,7 +1158,9 @@ export const componentRegistry = [
 			afterCredit: '',
 			beforeLabel: 'Antes',
 			afterLabel: 'Depois',
-			orientation: 'vertical'
+			orientation: 'vertical',
+			width: '100%',
+			maxWidth: ''
 		},
 		fields: [
 			{ path: 'beforeImage', label: 'Imagem "Antes"', type: 'url', required: true },
@@ -1179,6 +1181,18 @@ export const componentRegistry = [
 					{ label: 'Vertical', value: 'vertical' },
 					{ label: 'Horizontal', value: 'horizontal' }
 				]
+			},
+			{
+				path: 'width',
+				label: 'Largura do componente',
+				type: 'text',
+				placeholder: 'ex: 100vw, 30vw, 600px'
+			},
+			{
+				path: 'maxWidth',
+				label: 'Largura máxima',
+				type: 'text',
+				placeholder: 'opcional'
 			}
 		]
 	},

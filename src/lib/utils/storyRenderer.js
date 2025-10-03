@@ -275,10 +275,18 @@ export function parseStoryComponents(paragraphs) {
 			case 'before-after':
 				component.type = 'before-after';
 				component.beforeImage = paragraph.beforeImage;
+				component.beforeImageMobile = paragraph.beforeImageMobile || paragraph.beforeImage;
+				component.beforeCaption = paragraph.beforeCaption;
+				component.beforeCredit = paragraph.beforeCredit;
 				component.afterImage = paragraph.afterImage;
+				component.afterImageMobile = paragraph.afterImageMobile || paragraph.afterImage;
+				component.afterCaption = paragraph.afterCaption;
+				component.afterCredit = paragraph.afterCredit;
 				component.beforeLabel = paragraph.beforeLabel || 'Antes';
 				component.afterLabel = paragraph.afterLabel || 'Depois';
 				component.orientation = paragraph.orientation || 'vertical';
+				component.width = paragraph.width || paragraph.largura || '100%';
+				component.maxWidth = paragraph.maxWidth || paragraph.larguraMaxima;
 				break;
 
 			case 'scrollytelling':

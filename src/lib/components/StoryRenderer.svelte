@@ -883,10 +883,18 @@
 					{:else if componentType === 'before-after'}
 						<BeforeAfter
 							beforeImage={props.beforeImage}
+							beforeImageMobile={props.beforeImageMobile}
+							beforeCaption={props.beforeCaption}
+							beforeCredit={props.beforeCredit}
 							afterImage={props.afterImage}
+							afterImageMobile={props.afterImageMobile}
+							afterCaption={props.afterCaption}
+							afterCredit={props.afterCredit}
 							beforeLabel={props.beforeLabel || 'Antes'}
 							afterLabel={props.afterLabel || 'Depois'}
 							orientation={props.orientation || 'vertical'}
+							width={props.width || props.largura || '100%'}
+							maxWidth={props.maxWidth || props.larguraMaxima}
 						/>
 
 						<!-- ScrollyTelling -->
@@ -1113,10 +1121,7 @@
 				--section-content-min-height-mobile,
 				var(--section-content-min-height-desktop, auto)
 			);
-			margin: var(
-				--section-content-margin-mobile,
-				var(--section-content-margin-desktop, 0 auto)
-			);
+			margin: var(--section-content-margin-mobile, var(--section-content-margin-desktop, 0 auto));
 			padding: var(
 				--section-content-padding-mobile,
 				var(--section-content-padding-desktop, 0 0rem)

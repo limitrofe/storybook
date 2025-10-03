@@ -450,7 +450,8 @@
       },
       "horizontalPosition": "left",
       "verticalPosition": "bottom",
-      "containerMinHeightDesktop": "80vh"
+      "containerMinHeightDesktop": "80vh",
+      "widthMobile": "30%"
     },
     {
       "type": "free-canvas",
@@ -993,6 +994,35 @@
         "backgroundColor": "",
         "backgroundImageDesktop": "https://s3.glbimg.com/v1/AUTH_8b29beb0cbe247a296f902be2fe084b6/2025/html/gshow/3gracas/bg-favela.png",
         "backgroundImageMobile": "https://s3.glbimg.com/v1/AUTH_8b29beb0cbe247a296f902be2fe084b6/2025/html/gshow/3gracas/bg-favela.png",
+        "backgroundVideoDesktop": "",
+        "backgroundVideoMobile": "",
+        "backgroundVideoPosterDesktop": "",
+        "backgroundVideoPosterMobile": "",
+        "textColor": "",
+        "paddingTop": "",
+        "paddingBottom": ""
+      }
+    },
+    {
+      "type": "antes-depois",
+      "beforeImage": "",
+      "beforeImageMobile": "",
+      "beforeCaption": "",
+      "beforeCredit": "",
+      "afterImage": "",
+      "afterImageMobile": "",
+      "afterCaption": "",
+      "afterCredit": "",
+      "beforeLabel": "Antes",
+      "afterLabel": "Depois",
+      "orientation": "vertical",
+      "width": "50%",
+      "maxWidth": "",
+      "section": {
+        "backgroundSource": "color",
+        "backgroundColor": "",
+        "backgroundImageDesktop": "",
+        "backgroundImageMobile": "",
         "backgroundVideoDesktop": "",
         "backgroundVideoMobile": "",
         "backgroundVideoPosterDesktop": "",
