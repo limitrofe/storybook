@@ -464,9 +464,9 @@
       "baseWidthDesktop": 1440,
       "baseWidthMobile": 375,
       "backgroundSource": "color",
-      "backgroundColorDesktop": "#5a0e3c",
+      "backgroundColorDesktop": "#b83d8799",
       "backgroundColorMobile": "#5a0e3c",
-      "backgroundColor": "#5a0e3c",
+      "backgroundColor": "#b83d8799",
       "backgroundImageDesktop": "",
       "backgroundImageMobile": "",
       "backgroundVideoDesktop": "",
@@ -565,16 +565,16 @@
             "typography": ""
           },
           "desktop": {
-            "x": 408.43487247793416,
-            "y": 17.32160007147165,
+            "x": 414.09542682988734,
+            "y": 21.711258611622668,
             "width": 640,
             "height": 360,
             "z": 1,
             "opacity": 1
           },
           "mobile": {
-            "x": 24,
-            "y": 80,
+            "x": 21.83246007984032,
+            "y": 192.29104291417167,
             "width": 320,
             "height": 180,
             "z": 1,

@@ -172,10 +172,26 @@
 
 	function handleSave() {
 		dispatch('save', { value });
+		closeDialog();
 	}
 
 	function handleCancel() {
 		closeDialog();
+	}
+
+	function portal(node) {
+		if (typeof document === 'undefined') {
+			return {};
+		}
+		const target = document.body;
+		target.appendChild(node);
+		return {
+			destroy() {
+				if (node.parentNode) {
+					node.parentNode.removeChild(node);
+				}
+			}
+		};
 	}
 
 	export function open() {
@@ -494,7 +510,7 @@
 </div>
 
 {#if isDialogOpen}
-	<div class="color-dialog-backdrop">
+	<div class="color-dialog-backdrop" use:portal>
 		<div
 			class="color-dialog"
 			role="dialog"
@@ -938,7 +954,9 @@
 	.color-dialog-backdrop {
 		position: fixed;
 		inset: 0;
-		z-index: 9999999999;
+		z-index: 9099999999;
+		width: 100vw;
+		height: 100vh;
 		background: rgba(15, 23, 42, 0.55);
 		display: flex;
 		align-items: center;
