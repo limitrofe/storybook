@@ -32,6 +32,20 @@
 	let sliderPosition = 50;
 	let isDragging = false;
 
+	$: clampedSlider = Math.max(0, Math.min(100, sliderPosition));
+	$: beforeClipStyle =
+		orientation === 'vertical'
+			? `clip-path: inset(0 ${100 - clampedSlider}% 0 0)`
+			: `clip-path: inset(0 0 ${100 - clampedSlider}% 0)`;
+	$: afterClipStyle =
+		orientation === 'vertical'
+			? `clip-path: inset(0 0 0 ${clampedSlider}%)`
+			: `clip-path: inset(${clampedSlider}% 0 0 0)`;
+	$: sliderStyle =
+		orientation === 'vertical'
+			? `left: ${clampedSlider}%`
+			: `top: ${clampedSlider}%`;
+
 	onMount(() => {
 		const handleMouseMove = (e) => {
 			if (!isDragging || !containerElement) return;
@@ -110,7 +124,7 @@
 >
 	<!-- Before Image -->
 	<div class="before-after__before">
-		<div class="before-after__media before-after__media--before">
+		<div class="before-after__media before-after__media--before" style={beforeClipStyle}>
 			<picture>
 				{#if beforeImageMobile || beforeImage}
 					<source srcset={beforeImageMobile || beforeImage} media="(max-width: 768px)" />
@@ -131,12 +145,7 @@
 
 	<!-- After Image -->
 	<div class="before-after__after">
-		<div
-			class="before-after__media before-after__media--after"
-			style={orientation === 'vertical'
-				? `clip-path: inset(0 0 0 ${sliderPosition}%)`
-				: `clip-path: inset(${sliderPosition}% 0 0 0)`}
-		>
+		<div class="before-after__media before-after__media--after" style={afterClipStyle}>
 			<picture>
 				{#if afterImageMobile || afterImage}
 					<source srcset={afterImageMobile || afterImage} media="(max-width: 768px)" />
@@ -158,14 +167,14 @@
 	<!-- Slider -->
 	<div
 		class="before-after__slider"
-		style={orientation === 'vertical' ? `left: ${sliderPosition}%` : `top: ${sliderPosition}%`}
+		style={sliderStyle}
 		on:mousedown={handleSliderStart}
 		on:touchstart={handleSliderStart}
 		role="slider"
 		tabindex="0"
 		aria-valuemin="0"
 		aria-valuemax="100"
-		aria-valuenow={Math.round(sliderPosition)}
+		aria-valuenow={Math.round(clampedSlider)}
 		aria-label="Comparador antes e depois"
 		on:keydown={handleKey}
 	>

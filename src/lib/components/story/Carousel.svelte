@@ -1,6 +1,6 @@
 <!-- src/lib/components/story/Carousel.svelte -->
 <script>
-	import { onMount } from 'svelte';
+	import { onMount, tick } from 'svelte';
 
 	export let items = [];
 	export let autoplay = false;
@@ -16,6 +16,9 @@
 	let autoplayInterval;
 	const videoElements = new Map();
 	let audioEnabledStates = [];
+	let itemsSignature = '';
+	let isInViewport = false;
+	let viewportObserver;
 
 	$: {
 		const currentStates = audioEnabledStates;
@@ -30,7 +33,34 @@
 	}
 
 	onMount(() => {
-		if (autoplay) {
+		if (typeof IntersectionObserver !== 'undefined') {
+			viewportObserver = new IntersectionObserver(
+				(entries) => {
+					const entry = entries[0];
+					if (!entry) return;
+
+					if (entry.isIntersecting) {
+						isInViewport = true;
+						tick().then(() => {
+							if (!isInViewport) return;
+							playActiveVideo(currentIndex);
+							startAutoplay();
+						});
+					} else {
+						isInViewport = false;
+						stopAutoplay();
+						pauseAllVideos();
+					}
+				},
+				{ threshold: 0.25 }
+			);
+
+			if (carouselElement) {
+				viewportObserver.observe(carouselElement);
+			}
+		} else {
+			isInViewport = true;
+			playActiveVideo(currentIndex);
 			startAutoplay();
 		}
 
@@ -39,6 +69,9 @@
 				clearInterval(autoplayInterval);
 			}
 
+			viewportObserver?.disconnect?.();
+			viewportObserver = null;
+			isInViewport = false;
 			pauseAllVideos();
 			videoElements.clear();
 			audioEnabledStates = [];
@@ -46,6 +79,11 @@
 	});
 
 	function startAutoplay() {
+		if (!autoplay) return;
+		if (!isInViewport) return;
+		if (!items || items.length <= 1) return;
+		if (autoplayInterval) return;
+
 		autoplayInterval = setInterval(() => {
 			next();
 		}, interval);
@@ -59,14 +97,18 @@
 	}
 
 	function next() {
+		if (!items || items.length === 0) return;
 		currentIndex = (currentIndex + 1) % items.length;
 	}
 
 	function prev() {
+		if (!items || items.length === 0) return;
 		currentIndex = (currentIndex - 1 + items.length) % items.length;
 	}
 
 	function goTo(index) {
+		if (!items || items.length === 0) return;
+		if (index < 0 || index >= items.length) return;
 		currentIndex = index;
 	}
 
@@ -76,12 +118,41 @@
 		audioEnabledStates = nextStates;
 	}
 
+	function normalizeItemsSignature(list) {
+		if (!list || !Array.isArray(list)) return '';
+		return list
+			.map((item, index) => {
+				if (item && typeof item === 'object') {
+					return item.id || item.src || item.srcMobile || index;
+				}
+				return `${index}:${item}`;
+			})
+			.join('|');
+	}
+
+	function ensureActiveVideoPlayback(index) {
+		if (index !== currentIndex) return;
+		if (!isInViewport) return;
+
+		tick().then(() => {
+			if (!isInViewport) return;
+			if (!videoElements.get(index)) return;
+			requestAnimationFrame(() => {
+				if (!isInViewport) return;
+				if (index === currentIndex) {
+					playActiveVideo(index);
+				}
+			});
+		});
+	}
+
 	function registerVideo(node, params) {
 		if (!params) return;
 
 		let { index } = params;
 		videoElements.set(index, node);
 		updateAudioState(index, false);
+		ensureActiveVideoPlayback(index);
 
 		return {
 			update(newParams) {
@@ -93,6 +164,7 @@
 				index = newIndex;
 				videoElements.set(index, node);
 				updateAudioState(index, wasEnabled);
+				ensureActiveVideoPlayback(index);
 			},
 			destroy() {
 				node.pause?.();
@@ -126,6 +198,7 @@
 	}
 
 	function playActiveVideo(activeSlide) {
+		if (!isInViewport) return;
 		const video = videoElements.get(activeSlide);
 		if (!video) return;
 
@@ -164,6 +237,26 @@ $: audioButtonStyle = [
 $: {
 	pauseInactiveVideos(currentIndex);
 	playActiveVideo(currentIndex);
+}
+
+$: {
+	const nextSignature = normalizeItemsSignature(items);
+	if (nextSignature !== itemsSignature) {
+		itemsSignature = nextSignature;
+		currentIndex = 0;
+	}
+
+	if (items && currentIndex >= items.length) {
+		currentIndex = 0;
+	}
+}
+
+$: {
+	if (!autoplay) {
+		stopAutoplay();
+	} else if (isInViewport) {
+		startAutoplay();
+	}
 }
 </script>
 
@@ -227,8 +320,28 @@ $: {
 	</div>
 
 	{#if showArrows && items.length > 1}
-		<button class="carousel-arrow carousel-prev" on:click={prev}>‹</button>
-		<button class="carousel-arrow carousel-next" on:click={next}>›</button>
+		<button
+			type="button"
+			class="carousel-arrow carousel-prev"
+			on:click={prev}
+			aria-label="Slide anterior"
+		>
+			<span class="sr-only">Anterior</span>
+			<svg class="carousel-arrow__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+				<path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+			</svg>
+		</button>
+		<button
+			type="button"
+			class="carousel-arrow carousel-next"
+			on:click={next}
+			aria-label="Próximo slide"
+		>
+			<span class="sr-only">Próximo</span>
+			<svg class="carousel-arrow__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+				<path d="M8.59 16.59 13.17 12 8.59 7.41 10 6l6 6-6 6z" />
+			</svg>
+		</button>
 	{/if}
 
 	{#if showDots && items.length > 1}
@@ -352,7 +465,6 @@ $: {
 		border-radius: 50%;
 		width: 50px;
 		height: 50px;
-		font-size: 1.5rem;
 		cursor: pointer;
 		display: flex;
 		align-items: center;
@@ -360,11 +472,29 @@ $: {
 		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 		transition: all 0.3s ease;
 		z-index: 10;
-	}
+		color: var(--carousel-arrow-icon-color, #0f172a);
+}
 
 	.carousel-arrow:hover {
 		background: white;
 		transform: translateY(-50%) scale(1.1);
+	}
+
+	.carousel-arrow__icon {
+		width: 26px;
+		height: 26px;
+		fill: currentColor;
+	}
+
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		border: 0;
 	}
 
 	.carousel-prev {
