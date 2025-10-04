@@ -220,6 +220,10 @@
     "text": ""
   },
   "credits": {
+    "enabled": true,
+    "title": "Créditos",
+    "groups": [],
+    "groupsText": "Design\nGabs\nGuilherme Gomes\n\nDesenvolvimento\nGabs\nGuilherme Gomes\n\nCoordenação de Desenvolvimento\nGuilherme Gomes\n\nEdição\nNome do editor",
     "notes": "",
     "sources": [],
     "authors": [],
@@ -247,19 +251,10 @@
         ]
       }
     ],
-    "layout": "grid",
-    "columnsDesktop": 1,
-    "columnsMobile": 1,
-    "gap": "2rem",
-    "maxWidth": "900px",
-    "textAlign": "left",
-    "backgroundColor": "transparent",
-    "textColor": "",
-    "titleColor": "",
-    "accentColor": "",
-    "borderColor": "",
-    "paddingDesktop": "4rem 2rem 8rem 2rem",
-    "paddingMobile": "2.5rem 1rem 12rem 1rem",
+    "backgroundColor": "#ffffff",
+    "textColor": "#000000",
+    "titleColor": "#000000",
+    "borderColor": "#000000",
     "backgroundImage": "",
     "backgroundImageMobile": "",
     "backgroundVideo": "",
@@ -269,7 +264,17 @@
     "backgroundSize": "cover",
     "backgroundSizeMobile": "",
     "overlay": false,
-    "overlayColor": "rgba(0, 0, 0, 0.4)"
+    "overlayColor": "rgba(0, 0, 0, 0.4)",
+    "maxWidth": "900px",
+    "paddingDesktop": "4rem 2rem 8rem 2rem",
+    "paddingMobile": "2.5rem 1rem 12rem 1rem",
+    "customClass": "",
+    "layout": "grid",
+    "columnsDesktop": 1,
+    "columnsMobile": 1,
+    "gap": "2rem",
+    "textAlign": "left",
+    "accentColor": ""
   },
   "paragraphs": [
     {
@@ -1993,47 +1998,6 @@
       }
     },
     {
-      "type": "intertitulo",
-      "text": "<i>CRÉDITO</i>",
-      "subtitle": "<span style=\"font-weight: normal;\">toda a história da novela</span>",
-      "backgroundColor": "#052730",
-      "textColor": "#ffffff",
-      "fontFamily": "globotipo",
-      "variant": "default",
-      "size": "large",
-      "overlay": false,
-      "textAlign": "center",
-      "textPosition": "center",
-      "titleFontSizeDesktop": "",
-      "titleFontSizeMobile": "",
-      "titleLineHeightDesktop": "",
-      "titleLineHeightMobile": "",
-      "subtitleFontSizeDesktop": "",
-      "subtitleFontSizeMobile": "",
-      "subtitleLineHeightDesktop": "",
-      "subtitleLineHeightMobile": "",
-      "titleFontWeight": "",
-      "titleFontStyle": "",
-      "subtitleFontWeight": "",
-      "subtitleFontStyle": "",
-      "section": {
-        "backgroundSource": "color",
-        "backgroundColor": "#052730",
-        "backgroundImageDesktop": "",
-        "backgroundImageMobile": "",
-        "backgroundVideoDesktop": "",
-        "backgroundVideoMobile": "",
-        "backgroundVideoPosterDesktop": "",
-        "backgroundVideoPosterMobile": "",
-        "textColor": "#bfff39",
-        "paddingTop": "2rem",
-        "paddingBottom": "0rem"
-      },
-      "textAlignMobile": "center",
-      "height": "6vh",
-      "heightMobile": "6vh"
-    },
-    {
       "type": "texto",
       "text": "<p>Veja videos com os ultimos acontecimentos que teve na novela</p>",
       "variant": "body",
@@ -2056,7 +2020,9 @@
         "textColor": "",
         "paddingTop": "0rem",
         "paddingBottom": "0rem"
-      }
+      },
+      "horizontalPosition": "center",
+      "verticalPosition": "top"
     },
     {
       "type": "flourish",

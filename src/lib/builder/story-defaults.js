@@ -188,25 +188,20 @@ export const storyDefaults = {
 		text: ''
 	},
 	credits: {
+		enabled: true,
+		title: 'Créditos',
+		groups: [],
+		groupsText: '',
 		notes: '',
 		sources: [],
 		authors: [],
 		editedBy: [],
 		additionalGraphics: [],
 		sections: [],
-		layout: 'grid',
-		columnsDesktop: 1,
-		columnsMobile: 1,
-		gap: '2rem',
-		maxWidth: '900px',
-		textAlign: 'left',
 		backgroundColor: '',
 		textColor: '',
 		titleColor: '',
-		accentColor: '',
 		borderColor: '',
-		paddingDesktop: '4rem 2rem 8rem 2rem',
-		paddingMobile: '2.5rem 1rem 12rem 1rem',
 		backgroundImage: '',
 		backgroundImageMobile: '',
 		backgroundVideo: '',
@@ -216,7 +211,11 @@ export const storyDefaults = {
 		backgroundSize: 'cover',
 		backgroundSizeMobile: '',
 		overlay: false,
-		overlayColor: 'rgba(0, 0, 0, 0.4)'
+		overlayColor: 'rgba(0, 0, 0, 0.4)',
+		maxWidth: '960px',
+		paddingDesktop: '3rem 1.5rem',
+		paddingMobile: '2.5rem 1.25rem',
+		customClass: ''
 	},
 	paragraphs: []
 };
@@ -604,96 +603,40 @@ export const metadataFields = [
 ];
 
 export const creditsFields = [
-	{ path: 'credits.notes', label: 'Notas finais', type: 'textarea', rows: 3 },
 	{
-		path: 'credits.sources',
-		label: 'Fontes (JSON)',
-		type: 'json',
-		placeholder: '["Fonte 1", "Fonte 2"]',
-		emptyValue: []
+		path: 'credits.enabled',
+		label: 'Exibir créditos',
+		type: 'boolean',
+		helpText: 'Desative apenas se esta história não deve mostrar a seção de créditos.'
+	},
+	{ path: 'credits.title', label: 'Título da seção', type: 'text', placeholder: 'Créditos' },
+	{
+		path: 'credits.groupsText',
+		label: 'Créditos por grupo',
+		type: 'textarea',
+		rows: 8,
+		placeholder: 'Design\nFulana\nCiclana\n\nDesenvolvimento\nBeltrano\nSicrana',
+		description:
+			'Separe cada grupo com uma linha em branco. A primeira linha vira o nome do grupo e as seguintes listam os participantes.'
 	},
 	{
-		path: 'credits.authors',
-		label: 'Autores (JSON)',
-		type: 'json',
-		placeholder: '[{"name":"Repórter","role":"reportagem"}]',
-		emptyValue: []
-	},
-	{
-		path: 'credits.editedBy',
-		label: 'Edição (JSON)',
-		type: 'json',
-		placeholder: '["Editor 1", "Editor 2"]',
-		emptyValue: []
-	},
-	{
-		path: 'credits.additionalGraphics',
-		label: 'Gráficos adicionais (JSON)',
-		type: 'json',
-		placeholder: '[{"name":"Designer","role":"ilustração"}]',
-		emptyValue: []
-	},
-	{
-		path: 'credits.sections',
-		label: 'Seções personalizadas (JSON)',
-		type: 'json',
-		placeholder:
-			'[{"title":"Design","items":[{"name":"Fulana","role":"UI"},{"name":"Ciclano","role":"Ilustração"}]}]',
-		emptyValue: []
-	},
-	{
-		path: 'credits.layout',
-		label: 'Layout',
-		type: 'select',
-		options: [
-			{ label: 'Grade', value: 'grid' },
-			{ label: 'Empilhado', value: 'stacked' }
-		]
-	},
-	{ path: 'credits.columnsDesktop', label: 'Colunas desktop', type: 'number', min: 1, max: 6 },
-	{ path: 'credits.columnsMobile', label: 'Colunas mobile', type: 'number', min: 1, max: 3 },
-	{ path: 'credits.gap', label: 'Espaçamento entre blocos', type: 'text', placeholder: '2rem' },
-	{
-		path: 'credits.maxWidth',
-		label: 'Largura máxima do conteúdo',
-		type: 'text',
-		placeholder: '900px'
-	},
-	{
-		path: 'credits.textAlign',
-		label: 'Alinhamento do texto',
-		type: 'select',
-		options: [
-			{ label: 'Esquerda', value: 'left' },
-			{ label: 'Centro', value: 'center' },
-			{ label: 'Direita', value: 'right' },
-			{ label: 'Justificado', value: 'justify' }
-		]
+		path: 'credits.notes',
+		label: 'Notas adicionais',
+		type: 'textarea',
+		rows: 3,
+		description: 'Opcional: exibido como uma seção “Notas”.'
 	},
 	{ path: 'credits.backgroundColor', label: 'Cor de fundo', type: 'color' },
 	{ path: 'credits.textColor', label: 'Cor do texto', type: 'color' },
 	{ path: 'credits.titleColor', label: 'Cor dos títulos', type: 'color' },
-	{ path: 'credits.accentColor', label: 'Cor de destaque', type: 'color' },
 	{ path: 'credits.borderColor', label: 'Cor da borda superior', type: 'color' },
-	{
-		path: 'credits.paddingDesktop',
-		label: 'Padding desktop',
-		type: 'text',
-		placeholder: '4rem 2rem 8rem 2rem'
-	},
-	{
-		path: 'credits.paddingMobile',
-		label: 'Padding mobile',
-		type: 'text',
-		placeholder: '2.5rem 1rem 12rem 1rem'
-	},
 	{ path: 'credits.backgroundImage', label: 'Imagem de fundo (desktop)', type: 'url' },
 	{ path: 'credits.backgroundImageMobile', label: 'Imagem de fundo (mobile)', type: 'url' },
 	{ path: 'credits.backgroundVideo', label: 'Vídeo de fundo (desktop)', type: 'url' },
 	{ path: 'credits.backgroundVideoMobile', label: 'Vídeo de fundo (mobile)', type: 'url' },
 	{
 		path: 'credits.backgroundPosition',
-		label: 'Posição da mídia (desktop)',
+		label: 'Posição da mídia',
 		type: 'text',
 		placeholder: 'center center'
 	},
@@ -705,7 +648,7 @@ export const creditsFields = [
 	},
 	{
 		path: 'credits.backgroundSize',
-		label: 'Tamanho da mídia (desktop)',
+		label: 'Tamanho da mídia',
 		type: 'text',
 		placeholder: 'cover'
 	},
@@ -715,6 +658,34 @@ export const creditsFields = [
 		type: 'text',
 		placeholder: 'herda do desktop'
 	},
-	{ path: 'credits.overlay', label: 'Aplicar overlay', type: 'boolean' },
-	{ path: 'credits.overlayColor', label: 'Cor do overlay', type: 'color' }
+	{
+		path: 'credits.overlay',
+		label: 'Aplicar overlay',
+		type: 'boolean'
+	},
+	{ path: 'credits.overlayColor', label: 'Cor do overlay', type: 'color' },
+	{
+		path: 'credits.maxWidth',
+		label: 'Largura máxima do conteúdo',
+		type: 'text',
+		placeholder: '960px'
+	},
+	{
+		path: 'credits.paddingDesktop',
+		label: 'Padding desktop',
+		type: 'text',
+		placeholder: '3rem 1.5rem'
+	},
+	{
+		path: 'credits.paddingMobile',
+		label: 'Padding mobile',
+		type: 'text',
+		placeholder: '2.5rem 1.25rem'
+	},
+	{
+		path: 'credits.customClass',
+		label: 'Classe CSS extra',
+		type: 'text',
+		placeholder: 'meus-creditos'
+	}
 ];
