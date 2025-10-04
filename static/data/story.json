@@ -708,13 +708,17 @@
       "type": "carousel",
       "items": [
         {
-          "type": "video",
+          "type": "globo-player",
           "src": "https://s3.glbimg.com/v1/AUTH_8b29beb0cbe247a296f902be2fe084b6/2025/html/gshow/3gracas/CHAMADA - ARMINDA.mp4",
           "srcMobile": "https://s3.glbimg.com/v1/AUTH_8b29beb0cbe247a296f902be2fe084b6/2025/html/gshow/3gracas/CHAMADA - ARMINDA.mp4",
           "alt": "",
           "caption": "",
           "credit": "",
-          "content": ""
+          "content": "",
+          "videoId": "",
+          "videoIdDesktop": "13955154",
+          "videoIdMobile": "13955154",
+          "hasAds": false
         },
         {
           "type": "video",
@@ -723,7 +727,11 @@
           "alt": "",
           "caption": "",
           "credit": "",
-          "content": ""
+          "content": "",
+          "videoId": "",
+          "videoIdDesktop": "",
+          "videoIdMobile": "",
+          "hasAds": false
         },
         {
           "type": "video",
@@ -732,7 +740,11 @@
           "alt": "",
           "caption": "",
           "credit": "",
-          "content": ""
+          "content": "",
+          "videoId": "",
+          "videoIdDesktop": "",
+          "videoIdMobile": "",
+          "hasAds": false
         }
       ],
       "autoplay": true,

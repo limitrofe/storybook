@@ -96,12 +96,105 @@
 	let playerInstance = null;
 	let isLoading = false;
 	let error = null;
+	let isMuted = startMuted;
 	const dispatch = createEventDispatcher();
 
 	// Controle de estado
 	let observer = null;
 	let hasBeenInitialized = false;
 	let isMobile = false;
+	let publicControls;
+	let lastPropStartMuted = startMuted;
+	let isRecreatingForMute = false;
+
+	function buildControls() {
+		publicControls = {
+			play: () => {
+				try {
+					return playerInstance?.play?.();
+				} catch (controlError) {
+					console.warn('GloboPlayer: falha ao dar play via controles públicos', controlError);
+					return undefined;
+				}
+			},
+			pause: () => {
+				try {
+					return playerInstance?.pause?.();
+				} catch (controlError) {
+					console.warn('GloboPlayer: falha ao pausar via controles públicos', controlError);
+					return undefined;
+				}
+			},
+			setMuted: (nextMuted) => setMutedState(!!nextMuted, { allowRecreate: true }),
+			isMuted: () => isMuted,
+			getPlayer: () => playerInstance
+		};
+		return publicControls;
+	}
+
+	function notifyControls(reason = 'update') {
+		const controls = publicControls || buildControls();
+		dispatch('controls', { controls, reason });
+		return controls;
+	}
+
+	function setMutedState(nextMuted, options = {}) {
+		const { allowRecreate = false } = options;
+		isMuted = nextMuted;
+
+		if (!playerInstance) {
+			return false;
+		}
+
+		let applied = false;
+		try {
+			if (typeof playerInstance.setMuted === 'function') {
+				playerInstance.setMuted(nextMuted);
+				applied = true;
+			} else if (typeof playerInstance.setMute === 'function') {
+				playerInstance.setMute(nextMuted);
+				applied = true;
+			} else if (nextMuted && typeof playerInstance.mute === 'function') {
+				playerInstance.mute();
+				applied = true;
+			} else if (!nextMuted && typeof playerInstance.unmute === 'function') {
+				playerInstance.unmute();
+				applied = true;
+			} else if (typeof playerInstance.command === 'function') {
+				try {
+					playerInstance.command('mute', nextMuted);
+					applied = true;
+				} catch (commandError) {
+					console.warn('GloboPlayer: comando mute falhou', commandError);
+				}
+			} else if (typeof playerInstance.setVolume === 'function') {
+				playerInstance.setVolume(nextMuted ? 0 : 1);
+				applied = true;
+			} else if (playerElement) {
+				const inlineVideo = playerElement.querySelector('video');
+				if (inlineVideo) {
+					inlineVideo.muted = nextMuted;
+					inlineVideo.volume = nextMuted ? 0 : 1;
+					applied = true;
+				}
+			}
+		} catch (muteError) {
+			console.warn('GloboPlayer: falha ao alterar estado de mute', muteError);
+		}
+
+		if (!applied && allowRecreate && !nextMuted && !isRecreatingForMute) {
+			// Fallback: recria player para garantir áudio habilitado
+			isRecreatingForMute = true;
+			try {
+				createPlayer(true, { preserveMuteState: true });
+				applied = true;
+			} finally {
+				isRecreatingForMute = false;
+			}
+		}
+
+		return applied;
+	}
 
 	// ✅ LÓGICA MOBILE FIRST - DETERMINA O ID CORRETO
 	function getVideoId() {
@@ -124,7 +217,8 @@
 	}
 
 	// Criar o player
-	function createPlayer(shouldAutoplayOnCreate = false) {
+	function createPlayer(shouldAutoplayOnCreate = false, options = {}) {
+		const { preserveMuteState = false } = options;
 		if (!browser || !window.WM || !window.WM.Player) {
 			error = new Error('A API do player da Globo (WM) não está disponível.');
 			isLoading = false;
@@ -142,11 +236,19 @@
 		if (playerInstance && typeof playerInstance.destroy === 'function') {
 			playerInstance.destroy();
 		}
+		playerInstance = null;
+		publicControls = null;
+		if (!preserveMuteState) {
+			lastPropStartMuted = startMuted;
+			isMuted = !!lastPropStartMuted;
+		}
+		isLoading = true;
+		error = null;
 
 		const config = {
 			source: Number(actualVideoId),
 			autoPlay: shouldAutoplayOnCreate,
-			startMuted,
+			startMuted: isMuted,
 			skipDFP,
 			width: '100%',
 			height: '100%',
@@ -188,7 +290,9 @@
 			onReady: () => {
 				isLoading = false;
 				if (shouldAutoplayOnCreate) playerInstance.play();
-				dispatch('ready');
+				setMutedState(isMuted, { allowRecreate: false });
+				const controls = notifyControls('ready');
+				dispatch('ready', { player: playerInstance, controls });
 			},
 			onEnded: () => {
 				if (loop && playerInstance && typeof playerInstance.seek === 'function') {
@@ -208,8 +312,10 @@
 		};
 
 		try {
-			playerInstance = new window.WM.Player(config);
-			playerInstance.attachTo(playerElement);
+		playerInstance = new window.WM.Player(config);
+		playerInstance.attachTo(playerElement);
+		setMutedState(isMuted, { allowRecreate: false });
+		notifyControls('created');
 		} catch (e) {
 			error = e;
 			isLoading = false;
@@ -254,9 +360,9 @@
 			const shouldPlayVideo = autoPlay || autoplay;
 
 			if (entry.isIntersecting) {
-				if (!hasBeenInitialized) {
-					initializePlayer(shouldPlayVideo);
-				} else if (playerInstance && typeof playerInstance.play === 'function' && shouldPlayVideo) {
+		if (!hasBeenInitialized) {
+			initializePlayer(shouldPlayVideo);
+		} else if (playerInstance && typeof playerInstance.play === 'function' && shouldPlayVideo) {
 					playerInstance.play();
 				}
 			} else {
@@ -284,6 +390,9 @@
 			playerInstance.destroy();
 			console.log('🗑️ GloboPlayer destruído');
 		}
+		dispatch('destroyed', { player: playerInstance, controls: publicControls });
+		playerInstance = null;
+		publicControls = null;
 	});
 
 	// Reativo: recriar player quando IDs mudarem
@@ -293,6 +402,30 @@
 		hasBeenInitialized
 	) {
 		createPlayer(false);
+	}
+
+	$: if (startMuted !== lastPropStartMuted) {
+		lastPropStartMuted = startMuted;
+		isMuted = !!lastPropStartMuted;
+		if (playerInstance) {
+			setMutedState(isMuted, { allowRecreate: false });
+		}
+	}
+
+	export function play() {
+		return publicControls?.play?.();
+	}
+
+	export function pause() {
+		return publicControls?.pause?.();
+	}
+
+	export function setMuted(muted) {
+		return setMutedState(!!muted, { allowRecreate: true });
+}
+
+	export function getMuted() {
+		return isMuted;
 	}
 </script>
 

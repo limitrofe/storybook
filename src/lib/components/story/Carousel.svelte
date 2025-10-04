@@ -1,6 +1,7 @@
 <!-- src/lib/components/story/Carousel.svelte -->
 <script>
 	import { onMount, tick } from 'svelte';
+	import GloboPlayer from './GloboPlayer.svelte';
 
 	export let items = [];
 	export let autoplay = false;
@@ -15,6 +16,7 @@
 	let carouselElement;
 	let autoplayInterval;
 	const videoElements = new Map();
+	const globoPlayerControls = new Map();
 	let audioEnabledStates = [];
 	let itemsSignature = '';
 	let isInViewport = false;
@@ -39,18 +41,18 @@
 					const entry = entries[0];
 					if (!entry) return;
 
-					if (entry.isIntersecting) {
-						isInViewport = true;
-						tick().then(() => {
-							if (!isInViewport) return;
-							playActiveVideo(currentIndex);
-							startAutoplay();
-						});
-					} else {
-						isInViewport = false;
-						stopAutoplay();
-						pauseAllVideos();
-					}
+		if (entry.isIntersecting) {
+			isInViewport = true;
+			tick().then(() => {
+				if (!isInViewport) return;
+				playActiveMedia(currentIndex);
+				startAutoplay();
+			});
+		} else {
+			isInViewport = false;
+			stopAutoplay();
+			pauseAllMedia();
+		}
 				},
 				{ threshold: 0.25 }
 			);
@@ -58,24 +60,25 @@
 			if (carouselElement) {
 				viewportObserver.observe(carouselElement);
 			}
-		} else {
-			isInViewport = true;
-			playActiveVideo(currentIndex);
-			startAutoplay();
-		}
+	} else {
+		isInViewport = true;
+		playActiveMedia(currentIndex);
+		startAutoplay();
+	}
 
 		return () => {
 			if (autoplayInterval) {
 				clearInterval(autoplayInterval);
 			}
 
-			viewportObserver?.disconnect?.();
-			viewportObserver = null;
-			isInViewport = false;
-			pauseAllVideos();
-			videoElements.clear();
-			audioEnabledStates = [];
-		};
+		viewportObserver?.disconnect?.();
+		viewportObserver = null;
+		isInViewport = false;
+		pauseAllMedia();
+		videoElements.clear();
+		globoPlayerControls.clear();
+		audioEnabledStates = [];
+	};
 	});
 
 	function startAutoplay() {
@@ -123,6 +126,20 @@
 		return list
 			.map((item, index) => {
 				if (item && typeof item === 'object') {
+					if (item.type === 'globo-player') {
+						return `globo:${item.videoIdDesktop || ''}:${item.videoIdMobile || ''}:${
+							item.videoId || ''
+						}:${item.hasAds ? 'ads' : 'noads'}`;
+					}
+					if (item.type === 'video') {
+						return `video:${item.src || ''}:${item.srcMobile || ''}`;
+					}
+					if (item.type === 'image') {
+						return `image:${item.src || ''}:${item.srcMobile || ''}`;
+					}
+					if (item.type === 'content') {
+						return `content:${(item.content || '').slice(0, 32)}`;
+					}
 					return item.id || item.src || item.srcMobile || index;
 				}
 				return `${index}:${item}`;
@@ -130,17 +147,16 @@
 			.join('|');
 	}
 
-	function ensureActiveVideoPlayback(index) {
+	function ensureActiveMediaPlayback(index) {
 		if (index !== currentIndex) return;
 		if (!isInViewport) return;
 
 		tick().then(() => {
 			if (!isInViewport) return;
-			if (!videoElements.get(index)) return;
 			requestAnimationFrame(() => {
 				if (!isInViewport) return;
 				if (index === currentIndex) {
-					playActiveVideo(index);
+					playActiveMedia(index);
 				}
 			});
 		});
@@ -152,7 +168,7 @@
 		let { index } = params;
 		videoElements.set(index, node);
 		updateAudioState(index, false);
-		ensureActiveVideoPlayback(index);
+		ensureActiveMediaPlayback(index);
 
 		return {
 			update(newParams) {
@@ -164,7 +180,7 @@
 				index = newIndex;
 				videoElements.set(index, node);
 				updateAudioState(index, wasEnabled);
-				ensureActiveVideoPlayback(index);
+				ensureActiveMediaPlayback(index);
 			},
 			destroy() {
 				node.pause?.();
@@ -175,15 +191,43 @@
 		};
 	}
 
-	function pauseAllVideos() {
-		videoElements.forEach((video) => {
+	function registerGloboPlayer(index, detail) {
+		const controls = detail?.controls;
+		const reason = detail?.reason;
+		if (!controls) return;
+		globoPlayerControls.set(index, controls);
+		ensureActiveMediaPlayback(index);
+	}
+
+	function unregisterGloboPlayer(index) {
+		const controls = globoPlayerControls.get(index);
+		controls?.pause?.();
+		controls?.setMuted?.(true);
+		globoPlayerControls.delete(index);
+		updateAudioState(index, false);
+	}
+
+	function pauseAllMedia() {
+		videoElements.forEach((video, index) => {
 			if (!video) return;
 			video.pause();
 			video.currentTime = 0;
+			video.muted = true;
+			video.autoplay = false;
+			video.removeAttribute('autoplay');
+			video.setAttribute('muted', '');
+			updateAudioState(index, false);
+		});
+
+		globoPlayerControls.forEach((controls, index) => {
+			if (!controls) return;
+			controls.pause?.();
+			controls.setMuted?.(true);
+			updateAudioState(index, false);
 		});
 	}
 
-	function pauseInactiveVideos(activeSlide) {
+	function pauseInactiveMedia(activeSlide) {
 		videoElements.forEach((video, index) => {
 			if (index !== activeSlide && video) {
 				video.pause();
@@ -195,35 +239,67 @@
 				updateAudioState(index, false);
 			}
 		});
+
+		globoPlayerControls.forEach((controls, index) => {
+			if (index !== activeSlide && controls) {
+				controls.pause?.();
+				controls.setMuted?.(true);
+				updateAudioState(index, false);
+			}
+		});
 	}
 
-	function playActiveVideo(activeSlide) {
+	function playActiveMedia(activeSlide) {
 		if (!isInViewport) return;
-		const video = videoElements.get(activeSlide);
-		if (!video) return;
+		const slide = items?.[activeSlide];
+		if (!slide) return;
 
-		video.muted = true;
-		video.autoplay = true;
-		video.setAttribute('muted', '');
-		video.setAttribute('autoplay', '');
-		video.currentTime = 0;
-		video.play?.().catch(() => {
-			// Ignora erros de autoplay (ex.: bloqueio do navegador)
-		});
-		updateAudioState(activeSlide, false);
+		if (slide.type === 'video') {
+			const video = videoElements.get(activeSlide);
+			if (!video) return;
+
+			video.muted = true;
+			video.autoplay = true;
+			video.setAttribute('muted', '');
+			video.setAttribute('autoplay', '');
+			video.currentTime = 0;
+			video.play?.().catch(() => {
+				// Ignora erros de autoplay (ex.: bloqueio do navegador)
+			});
+			updateAudioState(activeSlide, false);
+		} else if (slide.type === 'globo-player') {
+			const controls = globoPlayerControls.get(activeSlide);
+			if (!controls) return;
+
+			controls.setMuted?.(true);
+			controls.play?.();
+			updateAudioState(activeSlide, false);
+		}
 	}
 
 	function toggleAudio(index) {
-		const video = videoElements.get(index);
-		if (!video) return;
-
 		if (audioEnabledStates[index]) return;
+		const item = items?.[index];
+		if (!item) return;
 
-		video.muted = false;
-		video.removeAttribute('muted');
-		video.volume = 1;
-		video.play?.().catch(() => {});
-		updateAudioState(index, true);
+		if (item.type === 'video') {
+			const video = videoElements.get(index);
+			if (!video) return;
+
+			video.muted = false;
+			video.removeAttribute('muted');
+			video.volume = 1;
+			video.play?.().catch(() => {});
+			updateAudioState(index, true);
+		} else if (item.type === 'globo-player') {
+			const controls = globoPlayerControls.get(index);
+			if (!controls) return;
+
+			const mutedResult = controls.setMuted?.(false);
+			if (mutedResult === false) return;
+			controls.play?.();
+			updateAudioState(index, true);
+		}
 	}
 
 $: audioButtonStyle = [
@@ -235,8 +311,8 @@ $: audioButtonStyle = [
 	.join(';');
 
 $: {
-	pauseInactiveVideos(currentIndex);
-	playActiveVideo(currentIndex);
+	pauseInactiveMedia(currentIndex);
+	playActiveMedia(currentIndex);
 }
 
 $: {
@@ -248,6 +324,19 @@ $: {
 
 	if (items && currentIndex >= items.length) {
 		currentIndex = 0;
+	}
+}
+
+$: if (items) {
+	const total = items.length;
+	const toRemove = [];
+	globoPlayerControls.forEach((_, index) => {
+		if (index >= total || items[index]?.type !== 'globo-player') {
+			toRemove.push(index);
+		}
+	});
+	if (toRemove.length) {
+		toRemove.forEach((idx) => unregisterGloboPlayer(idx));
 	}
 }
 
@@ -289,6 +378,35 @@ $: {
 							<source src={item.src} type="video/mp4" />
 						{/if}
 					</video>
+					{#if !(audioEnabledStates[index] ?? false)}
+						<button
+							type="button"
+							class="carousel-audio-button"
+							on:click={() => toggleAudio(index)}
+							aria-label="Ativar áudio do vídeo"
+							style={audioButtonStyle}
+						>
+							Ativar áudio
+						</button>
+					{/if}
+				</div>
+			{:else if item.type === 'globo-player'}
+				<div class="carousel-video-wrapper carousel-video-wrapper--globo">
+					<GloboPlayer
+						videoId={item.videoId || ''}
+						videoIdDesktop={item.videoIdDesktop || ''}
+						videoIdMobile={item.videoIdMobile || ''}
+						autoPlay={autoplay}
+						autoplay={autoplay}
+						startMuted={true}
+						skipDFP={item.hasAds ? false : true}
+						showCaption={false}
+						containerBackgroundColor="transparent"
+						widthDesktop="100%"
+						widthMobile="100%"
+						on:controls={(event) => registerGloboPlayer(index, event.detail)}
+						on:destroyed={() => unregisterGloboPlayer(index)}
+					/>
 					{#if !(audioEnabledStates[index] ?? false)}
 						<button
 							type="button"

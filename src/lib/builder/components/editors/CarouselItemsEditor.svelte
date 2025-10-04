@@ -15,7 +15,11 @@
 		alt: '',
 		caption: '',
 		credit: '',
-		content: ''
+		content: '',
+		videoId: '',
+		videoIdDesktop: '',
+		videoIdMobile: '',
+		hasAds: false
 	});
 
 	$: if (!isUpdating) {
@@ -77,6 +81,7 @@
 	const typeOptions = [
 		{ label: 'Imagem', value: 'image' },
 		{ label: 'Vídeo', value: 'video' },
+		{ label: 'Globo Player', value: 'globo-player' },
 		{ label: 'Conteúdo HTML', value: 'content' }
 	];
 </script>
@@ -174,6 +179,44 @@
 							/>
 						</label>
 					</div>
+				{:else if item.type === 'globo-player'}
+					<div class="grid">
+						<label>
+							<span>ID do vídeo (desktop)</span>
+							<input
+								type="text"
+								value={item.videoIdDesktop}
+								placeholder="Ex.: 1234567"
+								on:input={(event) => updateItem(index, 'videoIdDesktop', event.currentTarget.value)}
+							/>
+						</label>
+						<label>
+							<span>ID do vídeo (mobile)</span>
+							<input
+								type="text"
+								value={item.videoIdMobile}
+								placeholder="Ex.: 1234567"
+								on:input={(event) => updateItem(index, 'videoIdMobile', event.currentTarget.value)}
+							/>
+						</label>
+					</div>
+					<label>
+						<span>ID fallback (opcional)</span>
+						<input
+							type="text"
+							value={item.videoId}
+							placeholder="Usado se desktop/mobile não forem informados"
+							on:input={(event) => updateItem(index, 'videoId', event.currentTarget.value)}
+						/>
+					</label>
+					<label class="checkbox-field">
+						<input
+							type="checkbox"
+							checked={item.hasAds ?? false}
+							on:change={(event) => updateItem(index, 'hasAds', event.currentTarget.checked)}
+						/>
+						<span>Exibir publicidade no player</span>
+					</label>
 				{:else}
 					<label>
 						<span>Conteúdo HTML</span>
@@ -283,6 +326,45 @@
 		gap: 0.35rem;
 		font-size: 0.8rem;
 		color: #334155;
+	}
+
+	label.checkbox-field {
+		flex-direction: row;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	label.checkbox-field input[type='checkbox'] {
+		flex-shrink: 0;
+		width: 1rem;
+		height: 1rem;
+		border: 1px solid #cbd5f5;
+		border-radius: 4px;
+		background: #fff;
+		appearance: none;
+		display: grid;
+		place-items: center;
+		cursor: pointer;
+		transition: border-color 0.15s ease, box-shadow 0.15s ease;
+	}
+
+	label.checkbox-field input[type='checkbox']::after {
+		content: '';
+		width: 0.55rem;
+		height: 0.55rem;
+		border-radius: 2px;
+		background: #2563eb;
+		transform: scale(0);
+		transition: transform 0.1s ease;
+	}
+
+	label.checkbox-field input[type='checkbox']:checked::after {
+		transform: scale(1);
+	}
+
+	label.checkbox-field input[type='checkbox']:focus-visible {
+		outline: 2px solid #2563eb;
+		outline-offset: 2px;
 	}
 
 	input[type='text'],
