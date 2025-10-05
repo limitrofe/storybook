@@ -31,7 +31,10 @@
 		video: '',
 		videoMobile: '',
 		alt: '',
-		caption: ''
+		caption: '',
+		backgroundTransition: 'fade',
+		backgroundTransitionDuration: '600ms',
+		backgroundTransitionEasing: 'cubic-bezier(0.4, 0, 0.2, 1)'
 	});
 
 	$: if (!isUpdating) {
@@ -126,6 +129,17 @@
 		{ label: 'Card visível', value: 'card' },
 		{ label: 'Card transparente', value: 'transparent' },
 		{ label: 'Sem card (apenas mídia)', value: 'hidden' }
+	];
+
+	const backgroundTransitionOptions = [
+		{ label: 'Sem animação', value: 'none' },
+		{ label: 'Fade in/out', value: 'fade' },
+		{ label: 'Zoom in', value: 'zoom-in' },
+		{ label: 'Zoom out', value: 'zoom-out' },
+		{ label: 'Zoom in • Esquerda', value: 'zoom-in-left' },
+		{ label: 'Zoom in • Direita', value: 'zoom-in-right' },
+		{ label: 'Zoom in • Topo', value: 'zoom-in-up' },
+		{ label: 'Zoom in • Base', value: 'zoom-in-down' }
 	];
 </script>
 
@@ -243,6 +257,43 @@
 							on:input={(event) => updateStep(index, 'travelDistance', event.currentTarget.value)}
 						/>
 						<small>Use unidades como px ou vh. Padrão: 45vh.</small>
+					</label>
+				</div>
+
+				<div class="grid transitions">
+					<label>
+						<span>Transição da mídia</span>
+						<select
+							value={step.backgroundTransition || 'fade'}
+							on:change={(event) =>
+								updateStep(index, 'backgroundTransition', event.currentTarget.value)}
+						>
+							{#each backgroundTransitionOptions as option}
+								<option value={option.value}>{option.label}</option>
+							{/each}
+						</select>
+					</label>
+
+					<label>
+						<span>Duração da transição</span>
+						<input
+							type="text"
+							value={step.backgroundTransitionDuration || '600ms'}
+							placeholder="600ms"
+							on:input={(event) =>
+								updateStep(index, 'backgroundTransitionDuration', event.currentTarget.value)}
+						/>
+					</label>
+
+					<label>
+						<span>Easing da transição</span>
+						<input
+							type="text"
+							value={step.backgroundTransitionEasing || 'cubic-bezier(0.4, 0, 0.2, 1)'}
+							placeholder="ease-out"
+							on:input={(event) =>
+								updateStep(index, 'backgroundTransitionEasing', event.currentTarget.value)}
+						/>
 					</label>
 				</div>
 
@@ -555,6 +606,10 @@
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 		gap: 0.75rem;
+	}
+
+	.grid.transitions {
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 	}
 
 	.grid.colors {

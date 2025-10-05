@@ -42,7 +42,10 @@
 		cardVisibility: 'card',
 		stickyTop: undefined,
 		stickyTopMobile: undefined,
-		textConfig: undefined
+		textConfig: undefined,
+		backgroundTransition: 'fade',
+		backgroundTransitionDuration: '600ms',
+		backgroundTransitionEasing: 'cubic-bezier(0.4, 0, 0.2, 1)'
 	};
 
 	const buildStep = (step = {}) => {
@@ -54,8 +57,86 @@
 		};
 	};
 
+	const sanitizeTransitionKey = (value) => {
+		if (typeof value !== 'string') return DEFAULT_STEP.backgroundTransition;
+		return value.trim().toLowerCase().replace(/\s+/g, '-');
+	};
+
+	const TRANSITION_PRESETS = {
+		none: {
+			inactive: 'scale(1) translate3d(0, 0, 0)',
+			active: 'scale(1) translate3d(0, 0, 0)',
+			origin: 'center center',
+			transition: 'none'
+		},
+		fade: {
+			inactive: 'scale(1) translate3d(0, 0, 0)',
+			active: 'scale(1) translate3d(0, 0, 0)',
+			origin: 'center center'
+		},
+		'zoom-in': {
+			inactive: 'scale(1) translate3d(0, 0, 0)',
+			active: 'scale(1.08) translate3d(0, 0, 0)',
+			origin: 'center center'
+		},
+		'zoom-out': {
+			inactive: 'scale(1.12) translate3d(0, 0, 0)',
+			active: 'scale(1) translate3d(0, 0, 0)',
+			origin: 'center center'
+		},
+		'zoom-in-left': {
+			inactive: 'scale(1) translate3d(0, 0, 0)',
+			active: 'scale(1.08) translate3d(-5%, 0, 0)',
+			origin: 'center center'
+		},
+		'zoom-in-right': {
+			inactive: 'scale(1) translate3d(0, 0, 0)',
+			active: 'scale(1.08) translate3d(5%, 0, 0)',
+			origin: 'center center'
+		},
+		'zoom-in-up': {
+			inactive: 'scale(1) translate3d(0, 0, 0)',
+			active: 'scale(1.08) translate3d(0, -5%, 0)',
+			origin: 'center center'
+		},
+		'zoom-in-down': {
+			inactive: 'scale(1) translate3d(0, 0, 0)',
+			active: 'scale(1.08) translate3d(0, 5%, 0)',
+			origin: 'center center'
+		}
+	};
+
+	const DEFAULT_TRANSITION_PRESET = TRANSITION_PRESETS.fade;
+	const DEFAULT_TRANSITION_DURATION = DEFAULT_STEP.backgroundTransitionDuration;
+	const DEFAULT_TRANSITION_EASING = DEFAULT_STEP.backgroundTransitionEasing;
+
+	function cloneTextConfig(config) {
+		if (!config) return undefined;
+		const cloned = { ...config };
+		if (Array.isArray(config.elements)) {
+			cloned.elements = config.elements.map((element) => ({ ...element }));
+		}
+		return cloned;
+	}
+
+	function createIntroStep(step) {
+		if (!step) return null;
+		return {
+			...step,
+			textConfig: cloneTextConfig(step.textConfig),
+			cardVisibility: 'hidden',
+			slideFromBottom: false,
+			travelDistance: '0vh',
+			stickyTop: undefined,
+			stickyTopMobile: undefined,
+			__introStep: true
+		};
+	}
+
 	$: normalizedSteps =
 		Array.isArray(steps) && steps.length ? steps.map((step) => buildStep(step)) : [buildStep()];
+	$: introStep = normalizedSteps.length ? createIntroStep(normalizedSteps[0]) : null;
+	$: renderedSteps = introStep ? [introStep, ...normalizedSteps] : normalizedSteps;
 
 	$: baseStickyTopDesktop = stickyTopDesktop ?? (hasHeaderBefore ? DEFAULT_DESKTOP_STICKY : '0px');
 	$: baseStickyTopMobile = stickyTopMobile ?? (hasHeaderBefore ? DEFAULT_MOBILE_STICKY : '0px');
@@ -81,8 +162,8 @@
 		};
 	});
 
-	$: activeMediaIndex = normalizedSteps.length
-		? Math.max(0, Math.min(currentStepIndex, normalizedSteps.length - 1))
+	$: activeMediaIndex = renderedSteps.length
+		? Math.max(0, Math.min(currentStepIndex, renderedSteps.length - 1))
 		: 0;
 
 	function resolveMedia(step) {
@@ -101,15 +182,32 @@
 		return { type: null, src: null };
 	}
 
-	$: mediaSources = normalizedSteps.map((step) => {
+	$: mediaSources = renderedSteps.map((step) => {
 		const media = resolveMedia(step);
+		const transitionKey = sanitizeTransitionKey(step.backgroundTransition || DEFAULT_STEP.backgroundTransition);
+		const preset = TRANSITION_PRESETS[transitionKey] || DEFAULT_TRANSITION_PRESET;
+		const transitionDuration = step.backgroundTransitionDuration || DEFAULT_TRANSITION_DURATION;
+		const transitionEasing = step.backgroundTransitionEasing || DEFAULT_TRANSITION_EASING;
+		const styleParts = [
+			`background:${step.backgroundColor ?? '#000'}`,
+			`--media-transform-inactive:${preset.inactive}`,
+			`--media-transform-active:${preset.active}`,
+			`--media-transform-origin:${preset.origin || 'center center'}`,
+			`--media-transition-duration:${transitionDuration}`,
+			`--media-transition-easing:${transitionEasing}`,
+			preset.transition ? `--media-transition-enabled:${preset.transition}` : ''
+		];
 		return {
 			...media,
 			backgroundColor: step.backgroundColor,
 			overlayColor: step.overlayColor,
 			caption: step.caption,
 			alt: step.alt || step.title || '',
-			textColor: step.textColor
+			textColor: step.textColor,
+			transitionKey: transitionKey || 'fade',
+			transitionDuration,
+			transitionEasing,
+			style: styleParts.join(';')
 		};
 	});
 
@@ -130,12 +228,13 @@
 		bind:offset={stepOffset}
 	>
 		<div slot="background" class="background-container-fixed">
-			{#each mediaSources as media, i}
-				<div
-					class="media-wrapper"
-					class:active={i === activeMediaIndex}
-					style={`background:${media.backgroundColor ?? '#000'}`}
-				>
+		{#each mediaSources as media, i}
+			<div
+				class={`media-wrapper transition-${media.transitionKey || 'fade'}`}
+				class:active={i === activeMediaIndex}
+				style={media.style}
+				data-transition={media.transitionKey}
+			>
 					{#if media.type === 'image' && media.src}
 						<img src={media.src} alt={media.alt} loading="lazy" />
 					{:else if media.type === 'video' && media.src}
@@ -157,7 +256,7 @@
 
 		<div slot="foreground" class="steps-foreground">
 			<section class="spacer-top"></section>
-			{#each normalizedSteps as step, i}
+	{#each renderedSteps as step, i}
 				<div class="step-wrapper">
 					<!-- 🆕 CONDICIONAL: Usa StepEnhanced se tem textConfig.elements, senão usa Step original -->
 					{#if hasAdvancedConfig(step)}
@@ -165,7 +264,7 @@
 							{step}
 							{isMobile}
 							stepIndex={i}
-							totalSteps={normalizedSteps.length - 1}
+							totalSteps={renderedSteps.length - 1}
 							active={i === currentStepIndex}
 							defaultStickyTopDesktop={getStickyTop(step, false)}
 							defaultStickyTopMobile={getStickyTop(step, true)}
@@ -177,7 +276,7 @@
 						<!-- Mantém o comportamento original para compatibilidade COM POSITION -->
 						<Step
 							stepText={`<h3>${step.title || ''}</h3><div>${step.text || ''}</div>`}
-							length={normalizedSteps.length - 1}
+							length={renderedSteps.length - 1}
 							{i}
 							position={step.position || 'right'}
 							variant={step.variant || ''}
@@ -233,7 +332,14 @@
 		width: 100%;
 		height: 100%;
 		opacity: 0;
-		transition: opacity 0.45s ease-in-out;
+		will-change: opacity, transform;
+		transform: var(--media-transform-inactive, scale(1) translate3d(0, 0, 0));
+		transform-origin: var(--media-transform-origin, center center);
+		transition:
+			var(--media-transition-enabled, opacity var(--media-transition-duration, 0.6s)
+					var(--media-transition-easing, ease)),
+			var(--media-transition-enabled, transform var(--media-transition-duration, 0.6s)
+					var(--media-transition-easing, ease));
 		pointer-events: none;
 		display: flex;
 		flex-direction: column;
@@ -245,6 +351,7 @@
 	.media-wrapper.active {
 		opacity: 1;
 		z-index: 1;
+		transform: var(--media-transform-active, scale(1) translate3d(0, 0, 0));
 	}
 
 	.media-wrapper img,
@@ -290,13 +397,13 @@
 	}
 
 	.spacer-top {
-		height: 40vh;
+		height: var(--scrolly-spacer-top, 0vh);
 	}
 	.spacer-bottom {
-		height: 60vh;
-	}
+		height: var(--scrolly-spacer-bottom, 60vh);
+}
 	.component-spacer {
-		height: 0vh;
+		height: var(--scrolly-component-spacer, 0vh);
 		background: transparent;
 		position: relative;
 		z-index: 5;
@@ -311,13 +418,13 @@
 
 	@media (max-width: 768px) {
 		.spacer-top {
-			height: 30vh;
+			height: var(--scrolly-spacer-top-mobile, var(--scrolly-spacer-top, 0vh));
 		}
 		.spacer-bottom {
-			height: 40vh;
+			height: var(--scrolly-spacer-bottom-mobile, var(--scrolly-spacer-bottom, 40vh));
 		}
 		.component-spacer {
-			height: 15vh;
+			height: var(--scrolly-component-spacer-mobile, var(--scrolly-component-spacer, 15vh));
 		}
 		.media-wrapper {
 			align-items: flex-start;

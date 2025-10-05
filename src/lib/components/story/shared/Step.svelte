@@ -21,19 +21,20 @@
 	$: isTransparentCard = cardVisibility === 'transparent';
 	$: isHiddenCard = cardVisibility === 'hidden';
 	const clamp = (value, min = 0, max = 1) => Math.max(min, Math.min(max, value));
-	$: effectiveTravelDistance = travelDistance || '45vh';
+	$: effectiveTravelDistance = slideFromBottom ? travelDistance || '45vh' : '0vh';
 	$: computedProgress = progress != null ? clamp(progress) : active ? 1 : 0;
 	$: styleVars = [
 		backgroundColor ? `--step-bg-color:${backgroundColor}` : '',
 		textColor ? `--step-text-color:${textColor}` : '',
 		accentColor ? `--step-heading-color:${accentColor}` : '',
+		accentColor ? `--step-accent-color:${accentColor}` : '',
 		borderColor ? `--step-border-color:${borderColor}` : '',
 		padding ? `--step-padding:${padding}` : '',
 		maxWidth ? `--step-max-width:${maxWidth}` : '',
 		maxWidthMobile ? `--step-max-width-mobile:${maxWidthMobile}` : '',
 		stickyTop ? `--step-sticky-top:${stickyTop}` : '',
+		`--step-travel:${effectiveTravelDistance}`,
 		slideFromBottom ? `--step-progress:${computedProgress}` : '',
-		slideFromBottom ? `--step-travel:${effectiveTravelDistance}` : '',
 		slideFromBottom
 			? `--step-transform:translateY(calc((1 - var(--step-progress, 1)) * var(--step-travel, 0px)))`
 			: ''
@@ -65,9 +66,16 @@
 	.step-container {
 		display: flex;
 		align-items: center;
-		min-height: 100vh;
-		padding: 2rem 5vw;
-		padding-bottom: 45vh;
+		min-height: var(
+			--step-container-min-height,
+			calc(100vh + var(--step-travel, 45vh))
+		);
+		padding: 0 5vw;
+		padding-top: var(--step-container-padding-top, 0);
+		padding-bottom: var(
+			--step-container-padding-bottom,
+			calc(var(--step-travel, 45vh) + 15vh)
+		);
 		opacity: 0;
 		pointer-events: none;
 		visibility: hidden;
@@ -136,14 +144,24 @@
 	.last-section {
 		margin-bottom: 0;
 		min-height: 0;
-		padding-bottom: 55vh;
+		padding-bottom: var(
+			--step-container-padding-bottom-last,
+			calc(var(--step-travel, 45vh) + 25vh)
+		);
 	}
 
 	@media (max-width: 768px) {
 		.step-container {
 			justify-content: center !important; /* Mobile sempre centralizado */
-			min-height: 90vh;
-			padding-bottom: 35vh;
+			min-height: var(
+				--step-container-min-height-mobile,
+				calc(100vh + var(--step-travel, 45vh))
+			);
+			padding-top: var(--step-container-padding-top-mobile, 0);
+			padding-bottom: var(
+				--step-container-padding-bottom-mobile,
+				calc(var(--step-travel, 45vh) + 15vh)
+			);
 		}
 
 		.step-content {
@@ -152,24 +170,36 @@
 		}
 
 		.step-container.hidden-card {
-			padding-bottom: 30vh;
+			padding-bottom: var(
+				--step-container-padding-bottom-hidden,
+				calc(var(--step-travel, 45vh) + 10vh)
+			);
 		}
 	}
 	/* Cole no final do <style> em Step.svelte */
 
 	.step-content.destaque {
-		background-color: rgba(255, 255, 255, 0.9); /* Fundo mais claro e opaco */
-		border-left: 5px solid var(--color-primary, #c4170c); /* Borda vermelha à esquerda */
-		color: #1a1a1a; /* Texto escuro para contraste */
-		backdrop-filter: blur(4px);
-		-webkit-backdrop-filter: blur(4px);
+		background-color: var(--step-bg-color, rgba(255, 255, 255, 0.9));
+		border-left:
+			var(--step-destaque-border-width, 5px) solid
+			var(
+				--step-destaque-border-color,
+					var(
+						--step-accent-color,
+						var(--step-border-color, var(--color-primary, #c4170c))
+					)
+				)
+		;
+		color: var(--step-text-color, #1a1a1a);
+		backdrop-filter: var(--step-destaque-backdrop-filter, blur(4px));
+		-webkit-backdrop-filter: var(--step-destaque-backdrop-filter, blur(4px));
 	}
 
 	/* Como o conteúdo vem via {@html}, usamos :global() para estilizar 
   as tags que estão dentro do .step-content.destaque 
 */
 	:global(.step-content.destaque h3) {
-		color: #1a1a1a; /* Título escuro */
+		color: var(--step-heading-color, var(--step-text-color, #1a1a1a));
 		font-size: 1.1rem;
 		font-weight: 600;
 	}
@@ -180,7 +210,7 @@
 		font-size: 1.5rem; /* Fonte um pouco maior */
 		line-height: 1.5;
 		font-style: italic;
-		color: #333;
+		color: var(--step-text-color, #333);
 		border: none;
 		padding: 0;
 		margin: 0;

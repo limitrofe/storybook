@@ -22,7 +22,9 @@
 	// Motion
 	const clamp = (value, min = 0, max = 1) => Math.max(min, Math.min(max, value));
 	$: effectiveSlideFromBottom = textConfig.slideFromBottom ?? slideFromBottom;
-	$: effectiveTravelDistance = textConfig.travelDistance || travelDistance || '45vh';
+	$: effectiveTravelDistance = effectiveSlideFromBottom
+		? textConfig.travelDistance || travelDistance || '45vh'
+		: '0vh';
 	$: stepProgress = progress != null ? clamp(progress) : active ? 1 : 0;
 
 	// Offset sticky respeitando overrides por device
@@ -56,15 +58,17 @@
 		...textConfig.customStyles
 	};
 
-	$: containerStyles = effectiveSlideFromBottom
-		? {
-				...baseContainerStyles,
-				'--step-progress': stepProgress,
-				'--step-travel': effectiveTravelDistance,
-				'--step-transform':
-					'translateY(calc((1 - var(--step-progress, 1)) * var(--step-travel, 0px)))'
+	$: containerStyles = {
+		...baseContainerStyles,
+		'--step-travel': effectiveTravelDistance,
+		...(effectiveSlideFromBottom
+			? {
+					'--step-progress': stepProgress,
+					'--step-transform':
+						'translateY(calc((1 - var(--step-progress, 1)) * var(--step-travel, 0px)))'
 			}
-		: baseContainerStyles;
+			: {})
+	};
 
 	// Função para renderizar elementos tipográficos
 	function renderElement(element) {
@@ -193,9 +197,16 @@
 	.step-container {
 		display: flex;
 		align-items: center;
-		min-height: 120vh;
-		padding: 2rem 5vw;
-		padding-bottom: 45vh;
+		min-height: var(
+			--step-container-min-height,
+			calc(100vh + var(--step-travel, 45vh))
+		);
+		padding: 0 5vw;
+		padding-top: var(--step-container-padding-top, 0);
+		padding-bottom: var(
+			--step-container-padding-bottom,
+			calc(var(--step-travel, 45vh) + 15vh)
+		);
 		opacity: 0;
 		pointer-events: none;
 		visibility: hidden;
@@ -235,14 +246,24 @@
 	.last-section {
 		margin-bottom: 0;
 		min-height: 0;
-		padding-bottom: 55vh;
+		padding-bottom: var(
+			--step-container-padding-bottom-last,
+			calc(var(--step-travel, 45vh) + 25vh)
+		);
 	}
 
 	@media (max-width: 768px) {
 		.step-container {
 			justify-content: center; /* Mobile sempre centralizado por padrão */
-			min-height: 90vh;
-			padding-bottom: 35vh;
+			min-height: var(
+				--step-container-min-height-mobile,
+				calc(100vh + var(--step-travel, 45vh))
+			);
+			padding-top: var(--step-container-padding-top-mobile, 0);
+			padding-bottom: var(
+				--step-container-padding-bottom-mobile,
+				calc(var(--step-travel, 45vh) + 15vh)
+			);
 		}
 
 		/* Posicionamentos Mobile específicos */
@@ -256,7 +277,10 @@
 	}
 
 	.step-container.hidden-card {
-		padding-bottom: 30vh;
+		padding-bottom: var(
+			--step-container-padding-bottom-hidden,
+			calc(var(--step-travel, 45vh) + 10vh)
+		);
 	}
 
 	/* Estilos globais para elementos tipográficos */

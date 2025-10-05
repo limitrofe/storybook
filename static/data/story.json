@@ -605,6 +605,32 @@
       "type": "scrolly",
       "steps": [
         {
+          "title": "",
+          "text": "<p><br></p>",
+          "position": "left",
+          "variant": "default",
+          "backgroundColor": "#f3334a",
+          "overlayColor": "rgba(0, 0, 0, 0.35)",
+          "textColor": "#F9FAFB",
+          "accentColor": "#f6edc4",
+          "borderColor": "rgba(255, 255, 255, 0.12)",
+          "padding": "2rem",
+          "maxWidth": "500px",
+          "maxWidthMobile": "92%",
+          "cardVisibility": "hidden",
+          "slideFromBottom": false,
+          "travelDistance": "45vh",
+          "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/setembro_2021_desktop.png",
+          "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/setembro_2021_desktop.png",
+          "video": "",
+          "videoMobile": "",
+          "alt": "",
+          "caption": "",
+          "backgroundTransition": "none",
+          "backgroundTransitionDuration": "600ms",
+          "backgroundTransitionEasing": "cubic-bezier(0.4, 0, 0.2, 1)"
+        },
+        {
           "title": "DELILA CANTA",
           "text": "<p>Em ‘Três Graças, o público será convidado a embarcar na jornada de Gerluce Maria das Graças (Sophie Charlotte). Moradora de uma favela fictícia na capital paulista, ela integra uma família de mães solo: é filha de Lígia Maria das Graças (Dira Paes) e mãe de Joélly Maria das Graças (Alana Cabral). Criada pela mãe, que engravidou na adolescência e foi abandonada pelo seu pai, Gerluce enfrentou destino parecido com a chegada da filha na fase em que se preparava para entrar na faculdade. Abdicou dos seus sonhos para dar a Joélly uma vida diferente, que tivesse um futuro promissor. Mas, quando a gravidez precoce da terceira geração se confirma, Gerluce fará de tudo para impedir que a filha abra mão de seus projetos e ambições, assim como ela e a mãe foram obrigadas a fazer.</p>",
           "position": "left",
@@ -618,14 +644,17 @@
           "maxWidth": "500px",
           "maxWidthMobile": "92%",
           "cardVisibility": "card",
-          "slideFromBottom": true,
+          "slideFromBottom": false,
           "travelDistance": "45vh",
-          "image": "https://s3.glbimg.com/v1/AUTH_8b29beb0cbe247a296f902be2fe084b6/2025/html/gshow/3gracas/foto.png",
-          "imageMobile": "https://s3.glbimg.com/v1/AUTH_8b29beb0cbe247a296f902be2fe084b6/2025/html/gshow/3gracas/foto.png",
+          "image": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/setembro_2021_desktop.png",
+          "imageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/img/geral/setembro_2021_desktop.png",
           "video": "",
           "videoMobile": "",
           "alt": "",
-          "caption": ""
+          "caption": "",
+          "backgroundTransition": "none",
+          "backgroundTransitionDuration": "600ms",
+          "backgroundTransitionEasing": "cubic-bezier(0.4, 0, 0.2, 1)"
         },
         {
           "title": "GERLUCE VIVE",
@@ -648,7 +677,10 @@
           "video": "",
           "videoMobile": "",
           "alt": "",
-          "caption": ""
+          "caption": "",
+          "backgroundTransition": "fade",
+          "backgroundTransitionDuration": "600ms",
+          "backgroundTransitionEasing": "cubic-bezier(0.4, 0, 0.2, 1)"
         }
       ],
       "fullWidth": false,
