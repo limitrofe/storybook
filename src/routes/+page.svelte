@@ -1,12 +1,11 @@
 <script>
-	import { onMount } from 'svelte';
-	import { browser } from '$app/environment';
 	import StoryRenderer from '$lib/components/StoryRenderer.svelte';
 	import { buildTypographyCSS } from '$lib/builder/utils.js';
 
-	// Variáveis de estado
-	let currentStory = null;
-	let loading = true;
+	export let data;
+
+	let currentStory = data.story;
+	let loading = !currentStory;
 
 	$: appearance = currentStory?.appearance || {};
 	$: share = currentStory?.share || {};
@@ -26,25 +25,14 @@
 	$: paddingMobile = appearance.pagePadding?.mobile || '0';
 	$: typographyCSS = buildTypographyCSS(appearance.typography, '.story-page');
 
-	onMount(async () => {
-		try {
-			let response = await fetch('data/story.json');
-			if (!response.ok) {
-				response = await fetch('data/bolsonaro-condenado.json');
-			}
-			if (response.ok) {
-				currentStory = await response.json();
-				console.log('📖 Story carregada com sucesso!');
-			}
-		} catch (error) {
-			console.error('Erro ao carregar matéria:', error);
-		}
+	$: if (data?.story && data.story !== currentStory) {
+		currentStory = data.story;
 		loading = false;
-	});
+	}
 </script>
 
 <svelte:head>
-	<title>{currentStory ? currentStory.title : 'BOLSONARO CONDENADO'}</title>
+	<title>{currentStory ? currentStory.title : 'Story sem título'}</title>
 	{#if currentStory}
 		<meta
 			name="description"

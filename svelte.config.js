@@ -1,6 +1,8 @@
 // svelte.config.js
 import adapter from '@sveltejs/adapter-static';
 
+const allowDynamicRoutes = process.env.ALLOW_DYNAMIC_ROUTES === 'true';
+
 const config = {
 	kit: {
 		adapter: adapter({
@@ -8,7 +10,7 @@ const config = {
 			assets: 'build',
 			fallback: undefined,
 			precompress: false,
-			strict: true
+			strict: !allowDynamicRoutes
 		}),
 
 		paths: {

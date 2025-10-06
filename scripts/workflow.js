@@ -252,7 +252,7 @@ class ProjectWorkflow {
 		console.log('='.repeat(60));
 
 		// 1. Build normal do SvelteKit
-		const buildSuccess = this.exec('npm run build');
+		const buildSuccess = this.exec('ALLOW_DYNAMIC_ROUTES=true npm run build');
 		if (!buildSuccess) {
 			console.error('❌ Falha no build do SvelteKit');
 			return false;

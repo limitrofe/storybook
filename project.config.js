@@ -1,18 +1,59 @@
 // project.config.js
 // ⚡ CONFIGURAÇÃO CENTRAL - MUDE TUDO APENAS AQUI!
 
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const STORY_JSON_PATH = path.join(__dirname, 'static/data/story.json');
+
+function loadStoryData() {
+	try {
+		const raw = fs.readFileSync(STORY_JSON_PATH, 'utf-8');
+		return JSON.parse(raw);
+	} catch (error) {
+		console.warn(
+			`⚠️  Não foi possível carregar ${STORY_JSON_PATH}. Usando valores padrão. (${error.message})`
+		);
+		return {};
+	}
+}
+
+function sanitizeProjectName(value = '') {
+	return value
+		.toString()
+		.trim()
+		.toLowerCase()
+		.normalize('NFD')
+		.replace(/[\u0300-\u036f]/g, '')
+		.replace(/[^a-z0-9-]+/g, '-')
+		.replace(/-{2,}/g, '-')
+		.replace(/^-|-$/g, '');
+}
+
+const storyData = loadStoryData();
+
+const derivedProjectName = sanitizeProjectName(storyData.slug || storyData.projectName || 'storybook-project');
+const derivedPageTitle = (storyData.title || storyData.pageTitle || 'Story sem título').trim();
+
 /**
  * 🎯 CONFIGURAÇÃO DO PROJETO
  */
 const PROJECT_CONFIG = {
 	// Nome do projeto (será a pasta no CDN)
-	projectName: 'o-julgamento',
+	projectName: derivedProjectName || 'storybook-project',
 
 	// Título da página
-	pageTitle: 'O Julgamento',
+	pageTitle: derivedPageTitle,
 
-	// ID do Google Docs
-	googleDocsId: '16et4bH9GKlYct-zs6kFjA9zlMd86Zf4REAnoT_q9coM', // Cole o ID aqui quando tiver
+	// ID do Google Docs (mantido apenas para compatibilidade)
+	googleDocsId: storyData.googleDocsId || '',
+
+	// Referências ao conteúdo local
+	storyData,
+	storyJsonPath: STORY_JSON_PATH,
 
 	// Performance dos frames
 	frames: {
@@ -61,6 +102,7 @@ PROJECT_CONFIG.localPaths = {
 	videos: 'static/videos',
 	frames: 'static/img/frames',
 	data: 'static/data',
+	storyJson: 'static/data/story.json',
 	build: 'build'
 };
 
@@ -93,6 +135,10 @@ PROJECT_CONFIG.validate = () => {
 		errors.push('❌ projectName não pode ter espaços');
 	}
 
+	if (!PROJECT_CONFIG.storyData || Object.keys(PROJECT_CONFIG.storyData).length === 0) {
+		console.warn('⚠️  story.json não foi encontrado ou está vazio.');
+	}
+
 	if (!PROJECT_CONFIG.vault.password) {
 		errors.push('⚠️  Senha do Vault não configurada');
 	}
@@ -112,6 +158,8 @@ PROJECT_CONFIG.print = () => {
 	console.log('='.repeat(60));
 	console.log(`📁 Nome: ${PROJECT_CONFIG.projectName}`);
 	console.log(`🌐 URL Base: ${PROJECT_CONFIG.baseProjectUrl}`);
+	console.log(`📖 Título: ${PROJECT_CONFIG.pageTitle}`);
+	console.log(`📄 Fonte dos dados: ${PROJECT_CONFIG.storyJsonPath}`);
 	console.log('='.repeat(60));
 };
 
