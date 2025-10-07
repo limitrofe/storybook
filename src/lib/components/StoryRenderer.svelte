@@ -531,6 +531,14 @@
 							posterImageMobile={props.posterMobile}
 							verticalAlign={(props.verticalAlign || props.valign || 'top').toLowerCase()}
 							horizontalAlign={(props.horizontalAlign || props.align || 'left').toLowerCase()}
+							titleFontSizeDesktop={props.titleFontSizeDesktop}
+							titleFontSizeMobile={props.titleFontSizeMobile}
+							titleLineHeightDesktop={props.titleLineHeightDesktop}
+							titleLineHeightMobile={props.titleLineHeightMobile}
+							subtitleFontSizeDesktop={props.subtitleFontSizeDesktop}
+							subtitleFontSizeMobile={props.subtitleFontSizeMobile}
+							subtitleLineHeightDesktop={props.subtitleLineHeightDesktop}
+							subtitleLineHeightMobile={props.subtitleLineHeightMobile}
 							titleColor={props.titleColor}
 							subtitleColor={props.subtitleColor}
 							metaColor={props.metaColor}

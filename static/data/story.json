@@ -8,8 +8,8 @@
   "theme": "dark",
   "tags": [],
   "share": {
-    "title": "",
-    "description": "",
+    "title": "Quem Matou Odete Roitman? Mistério de Vale Tudo - Gshow",
+    "description": "Descubra quem matou Odete Roitman em Vale Tudo, os segredos da personagem, finais dos protagonistas e curiosidades do remake de 2025.",
     "image": "",
     "imageSquare": "",
     "imageTwitter": "",
@@ -47,7 +47,7 @@
           "lineHeight": "1.05"
         },
         "mobile": {
-          "fontSize": "clamp(2.4rem, 8vw, 3rem)",
+          "fontSize": "clamp(2rem, 2vw, 2rem)",
           "lineHeight": "1.12"
         }
       },
@@ -282,7 +282,7 @@
       "title": "<span style=\"color: #bfff39;\">Vale Tudo:&nbsp;</span><p><span style=\"color: #bfff39;\">quem matou Odete Roitman?&nbsp;&nbsp;</span></p>",
       "subtitle": "",
       "author": "",
-      "date": "06/10/2025",
+      "date": "07/10/2025",
       "backgroundImage": "",
       "backgroundImageMobile": "",
       "backgroundVideo": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/gshow/quem_matou_odete_roitman/video/header_desk_v3.mp4",
@@ -291,16 +291,16 @@
       "posterMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/gshow/quem_matou_odete_roitman/img/HeaderMobile.jpg",
       "variant": "hero",
       "overlay": false,
-      "verticalAlign": "bottom",
+      "verticalAlign": "center",
       "horizontalAlign": "center",
       "titleFontSizeDesktop": "",
-      "titleFontSizeMobile": "",
+      "titleFontSizeMobile": "clamp(2rem, 2vw, 2rem)",
       "titleLineHeightDesktop": "",
-      "titleLineHeightMobile": "",
+      "titleLineHeightMobile": "2rem",
       "subtitleFontSizeDesktop": "",
-      "subtitleFontSizeMobile": "",
+      "subtitleFontSizeMobile": "1.5rem",
       "subtitleLineHeightDesktop": "",
-      "subtitleLineHeightMobile": "",
+      "subtitleLineHeightMobile": "1.5rem",
       "section": {
         "backgroundSource": "video",
         "backgroundColor": "",
@@ -565,7 +565,7 @@
             "x": 244.70886736005605,
             "y": 65.92736336816861,
             "width": 260,
-            "height": 71.85628581727008,
+            "height": 120,
             "z": 1,
             "opacity": 1
           },
@@ -617,7 +617,7 @@
             "x": 245.83169975048972,
             "y": 160.58755329510876,
             "width": 260,
-            "height": 119.7604763621168,
+            "height": 120,
             "z": 1,
             "opacity": 1
           },
@@ -721,7 +721,7 @@
             "x": 436.85191155324947,
             "y": 666.2364320046088,
             "width": 300,
-            "height": 71.85628581727008,
+            "height": 120,
             "z": 1,
             "opacity": 1
           },
@@ -773,7 +773,7 @@
             "x": 415.95963734607443,
             "y": 762.73686698414,
             "width": 320,
-            "height": 167.6646669069635,
+            "height": 120,
             "z": 1,
             "opacity": 1
           },
@@ -825,7 +825,7 @@
             "x": 347.68094946086717,
             "y": 498.4375003456779,
             "width": 260,
-            "height": 23.95209527242336,
+            "height": 120,
             "z": 1,
             "opacity": 1
           },
@@ -1070,7 +1070,7 @@
             "x": 231.55230252242598,
             "y": 55.426569679876096,
             "width": 260,
-            "height": 71.85628581727008,
+            "height": 120,
             "z": 1,
             "opacity": 1
           },
@@ -1122,7 +1122,7 @@
             "x": 231.78165530356304,
             "y": 163.57696392280536,
             "width": 300,
-            "height": 167.6646669069635,
+            "height": 120,
             "z": 1,
             "opacity": 1
           },
@@ -1226,7 +1226,7 @@
             "x": 448.40115032168546,
             "y": 768.9966413590572,
             "width": 260,
-            "height": 71.85628581727008,
+            "height": 120,
             "z": 1,
             "opacity": 1
           },
@@ -1278,7 +1278,7 @@
             "x": 406.89044828022674,
             "y": 873.5626413304776,
             "width": 300,
-            "height": 143.71257163454015,
+            "height": 120,
             "z": 1,
             "opacity": 1
           },
@@ -1330,7 +1330,7 @@
             "x": 347.68094946086717,
             "y": 498.4375003456779,
             "width": 260,
-            "height": 23.95209527242336,
+            "height": 120,
             "z": 1,
             "opacity": 1
           },
@@ -1591,7 +1591,7 @@
         {
           "id": "1e6ab1fa-3be5-48d9-a8b1-a590f54856fa",
           "type": "text",
-          "content": "Odete e seu vice-presidente estavam em guerra declara, com direito a tentativas de assassinato.&nbsp;&nbsp;",
+          "content": "Odete e seu vice-presidente estavam em guerra declarada, com direito a tentativas de assassinato.&nbsp;&nbsp;",
           "src": "",
           "srcMobile": "",
           "alt": "",
@@ -2168,7 +2168,7 @@
     },
     {
       "type": "intertitulo",
-      "text": "<b>‘Porque a gente gravou com os cinco suspeitos matando e não matando’&nbsp;</b>",
+      "text": "<b>\"Porque a gente gravou com os cinco suspeitos matando e não matando.\"&nbsp;</b>",
       "subtitle": "",
       "backgroundColor": "",
       "textColor": "#0a1533",
@@ -2250,7 +2250,7 @@
     },
     {
       "type": "citacao",
-      "text": "<p>\"Até esse momento nem os atores têm certeza\"</p>",
+      "text": "<p>\"Até esse momento, nem os atores têm certeza.\"</p>",
       "author": "Manuela Dias",
       "role": "Autora",
       "fontSizeDesktop": "",
