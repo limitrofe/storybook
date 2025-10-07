@@ -66,16 +66,10 @@
 	.step-container {
 		display: flex;
 		align-items: center;
-		min-height: var(
-			--step-container-min-height,
-			calc(100vh + var(--step-travel, 45vh))
-		);
+		min-height: var(--step-container-min-height, calc(100vh + var(--step-travel, 45vh)));
 		padding: 0 5vw;
 		padding-top: var(--step-container-padding-top, 0);
-		padding-bottom: var(
-			--step-container-padding-bottom,
-			calc(var(--step-travel, 45vh) + 15vh)
-		);
+		padding-bottom: var(--step-container-padding-bottom, calc(var(--step-travel, 45vh) + 15vh));
 		opacity: 0;
 		pointer-events: none;
 		visibility: hidden;
@@ -153,10 +147,7 @@
 	@media (max-width: 768px) {
 		.step-container {
 			justify-content: center !important; /* Mobile sempre centralizado */
-			min-height: var(
-				--step-container-min-height-mobile,
-				calc(100vh + var(--step-travel, 45vh))
-			);
+			min-height: var(--step-container-min-height-mobile, calc(100vh + var(--step-travel, 45vh)));
 			padding-top: var(--step-container-padding-top-mobile, 0);
 			padding-bottom: var(
 				--step-container-padding-bottom-mobile,
@@ -180,16 +171,11 @@
 
 	.step-content.destaque {
 		background-color: var(--step-bg-color, rgba(255, 255, 255, 0.9));
-		border-left:
-			var(--step-destaque-border-width, 5px) solid
+		border-left: var(--step-destaque-border-width, 5px) solid
 			var(
 				--step-destaque-border-color,
-					var(
-						--step-accent-color,
-						var(--step-border-color, var(--color-primary, #c4170c))
-					)
-				)
-		;
+				var(--step-accent-color, var(--step-border-color, var(--color-primary, #c4170c)))
+			);
 		color: var(--step-text-color, #1a1a1a);
 		backdrop-filter: var(--step-destaque-backdrop-filter, blur(4px));
 		-webkit-backdrop-filter: var(--step-destaque-backdrop-filter, blur(4px));

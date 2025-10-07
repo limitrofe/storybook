@@ -90,8 +90,7 @@
 			appliedSectionVars.add(name);
 		} else if (appliedSectionVars.has(name)) {
 			const original = originalSectionValues.get(name);
-			if (original)
-				sectionContentElement.style.setProperty(name, original);
+			if (original) sectionContentElement.style.setProperty(name, original);
 			else sectionContentElement.style.removeProperty(name);
 			appliedSectionVars.delete(name);
 			originalSectionValues.delete(name);
@@ -154,8 +153,7 @@
 
 		appliedSectionVars.forEach((name) => {
 			const original = originalSectionValues.get(name);
-			if (original)
-				sectionContentElement.style.setProperty(name, original);
+			if (original) sectionContentElement.style.setProperty(name, original);
 			else sectionContentElement.style.removeProperty(name);
 		});
 
@@ -339,11 +337,11 @@
 		}
 
 		.story-text {
-			margin: var(--story-text-wrapper-margin-mobile, var(--story-text-wrapper-margin-desktop, 2rem auto));
-			width: var(
-				--story-text-wrapper-width-mobile,
-				var(--story-text-wrapper-width-desktop, auto)
+			margin: var(
+				--story-text-wrapper-margin-mobile,
+				var(--story-text-wrapper-margin-desktop, 2rem auto)
 			);
+			width: var(--story-text-wrapper-width-mobile, var(--story-text-wrapper-width-desktop, auto));
 			max-width: var(
 				--story-text-wrapper-max-width-mobile,
 				var(--story-text-wrapper-max-width-desktop, 700px)

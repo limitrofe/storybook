@@ -66,7 +66,7 @@
 					'--step-progress': stepProgress,
 					'--step-transform':
 						'translateY(calc((1 - var(--step-progress, 1)) * var(--step-travel, 0px)))'
-			}
+				}
 			: {})
 	};
 
@@ -197,16 +197,10 @@
 	.step-container {
 		display: flex;
 		align-items: center;
-		min-height: var(
-			--step-container-min-height,
-			calc(100vh + var(--step-travel, 45vh))
-		);
+		min-height: var(--step-container-min-height, calc(100vh + var(--step-travel, 45vh)));
 		padding: 0 5vw;
 		padding-top: var(--step-container-padding-top, 0);
-		padding-bottom: var(
-			--step-container-padding-bottom,
-			calc(var(--step-travel, 45vh) + 15vh)
-		);
+		padding-bottom: var(--step-container-padding-bottom, calc(var(--step-travel, 45vh) + 15vh));
 		opacity: 0;
 		pointer-events: none;
 		visibility: hidden;
@@ -255,10 +249,7 @@
 	@media (max-width: 768px) {
 		.step-container {
 			justify-content: center; /* Mobile sempre centralizado por padrão */
-			min-height: var(
-				--step-container-min-height-mobile,
-				calc(100vh + var(--step-travel, 45vh))
-			);
+			min-height: var(--step-container-min-height-mobile, calc(100vh + var(--step-travel, 45vh)));
 			padding-top: var(--step-container-padding-top-mobile, 0);
 			padding-bottom: var(
 				--step-container-padding-bottom-mobile,

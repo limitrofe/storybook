@@ -42,9 +42,7 @@
 			? `clip-path: inset(0 0 0 ${clampedSlider}%)`
 			: `clip-path: inset(${clampedSlider}% 0 0 0)`;
 	$: sliderStyle =
-		orientation === 'vertical'
-			? `left: ${clampedSlider}%`
-			: `top: ${clampedSlider}%`;
+		orientation === 'vertical' ? `left: ${clampedSlider}%` : `top: ${clampedSlider}%`;
 
 	onMount(() => {
 		const handleMouseMove = (e) => {

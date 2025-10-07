@@ -31,7 +31,11 @@
 	const toArray = (value) => {
 		if (!value) return [];
 		if (Array.isArray(value)) return value.filter(Boolean);
-		if (typeof value === 'string') return value.split(/\r?\n/).map((item) => item.trim()).filter(Boolean);
+		if (typeof value === 'string')
+			return value
+				.split(/\r?\n/)
+				.map((item) => item.trim())
+				.filter(Boolean);
 		return [];
 	};
 
@@ -175,7 +179,9 @@
 	function normalizeExplicitGroups(groupList) {
 		if (!Array.isArray(groupList)) return [];
 
-		return groupList.map((group, index) => normalizeGroup(group, index, 'explicit')).filter(Boolean);
+		return groupList
+			.map((group, index) => normalizeGroup(group, index, 'explicit'))
+			.filter(Boolean);
 	}
 
 	function safeDecode(source) {
@@ -428,4 +434,4 @@
 			display: block;
 		}
 	}
-	</style>
+</style>

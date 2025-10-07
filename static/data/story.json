@@ -4,7 +4,7 @@
   "description": "Descubra quem matou Odete Roitman em Vale Tudo, os segredos da personagem, finais dos protagonistas e curiosidades do remake de 2025.",
   "author": "Juliana Lessa, gshow",
   "date": "06/10/2025",
-  "slug": "quem-matou-a-odete-roitman-gshow2025",
+  "slug": "quem-matou-odete-roitman-gshow-2025",
   "theme": "dark",
   "tags": [],
   "share": {
@@ -223,7 +223,7 @@
     "enabled": true,
     "title": "Créditos",
     "groups": [],
-    "groupsText": "Conteúdo: \nJuliana Lessa\n\nDesign: \nGabs\n\nDesenvolvimento: \nGuilherme Gomes\n\nCoordenação:\n Davi Padovani (conteúdo) e Guilherme Gomes (design e desenvolvimento)\n\nProduto:\nNome sobrenome\n\nSEO:\nnome + sobrenome",
+    "groupsText": "Conteúdo: \nJuliana Lessa\n\nDesign: \nGabs\n\nDesenvolvimento: \nGuilherme Gomes\n\nCoordenação:\nDavi Padovani (conteúdo), Guilherme Gomes (design e desenvolvimento), Rafael Gazzarrini (seo), Amanda Araújo (produto)\n\nProduto:\nLuana Balmas\n\nSEO:\nLaci Farias e Beatriz Fontes",
     "notes": "",
     "sources": [],
     "authors": [],
@@ -283,13 +283,13 @@
       "subtitle": "",
       "author": "",
       "date": "06/10/2025",
-      "backgroundImage": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/gshow/quem_matou_odete_roitman/img/HeaderDesktopV4.jpg",
-      "backgroundImageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/gshow/quem_matou_odete_roitman/img/HeaderMobile.jpg",
-      "backgroundVideo": "",
-      "backgroundVideoMobile": "",
-      "poster": "",
-      "posterMobile": "",
-      "variant": "default",
+      "backgroundImage": "",
+      "backgroundImageMobile": "",
+      "backgroundVideo": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/gshow/quem_matou_odete_roitman/video/header_desk_v3.mp4",
+      "backgroundVideoMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/gshow/quem_matou_odete_roitman/video/header_mob_v3.mp4",
+      "poster": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/gshow/quem_matou_odete_roitman/img/HeaderDesktopV4.jpg",
+      "posterMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/gshow/quem_matou_odete_roitman/img/HeaderMobile.jpg",
+      "variant": "hero",
       "overlay": false,
       "verticalAlign": "bottom",
       "horizontalAlign": "center",
@@ -302,10 +302,10 @@
       "subtitleLineHeightDesktop": "",
       "subtitleLineHeightMobile": "",
       "section": {
-        "backgroundSource": "color",
+        "backgroundSource": "video",
         "backgroundColor": "",
-        "backgroundImageDesktop": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/gshow/quem_matou_odete_roitman/img/odete.jpg",
-        "backgroundImageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/gshow/quem_matou_odete_roitman/img/odete.jpg",
+        "backgroundImageDesktop": "",
+        "backgroundImageMobile": "",
         "backgroundVideoDesktop": "",
         "backgroundVideoMobile": "",
         "backgroundVideoPosterDesktop": "",
@@ -345,6 +345,38 @@
         "textColor": "",
         "paddingTop": "6rem",
         "paddingBottom": "0"
+      }
+    },
+    {
+      "type": "globo-player",
+      "videoIdDesktop": "13991633",
+      "videoIdMobile": "13991633",
+      "videoId": "13991633",
+      "containerBackgroundColor": "transparent",
+      "widthDesktop": "65%",
+      "widthMobile": "100%",
+      "aspectRatio": "16 / 9",
+      "aspectRatioMobile": "16 / 9",
+      "autoPlay": true,
+      "startMuted": true,
+      "skipDFP": false,
+      "controls": true,
+      "showCaption": true,
+      "caption": "",
+      "credit": "",
+      "fullWidth": false,
+      "section": {
+        "backgroundSource": "color",
+        "backgroundColor": "",
+        "backgroundImageDesktop": "",
+        "backgroundImageMobile": "",
+        "backgroundVideoDesktop": "",
+        "backgroundVideoMobile": "",
+        "backgroundVideoPosterDesktop": "",
+        "backgroundVideoPosterMobile": "",
+        "textColor": "",
+        "paddingTop": "",
+        "paddingBottom": ""
       }
     },
     {
@@ -418,12 +450,12 @@
     },
     {
       "type": "free-canvas",
-      "minHeightDesktop": 1000,
-      "maxHeightDesktop": 1000,
-      "minHeightMobile": 1150,
-      "maxHeightMobile": 1150,
-      "baseWidthDesktop": 1198,
-      "baseWidthMobile": 650,
+      "minHeightDesktop": 1300,
+      "maxHeightDesktop": 1300,
+      "minHeightMobile": 900,
+      "maxHeightMobile": 900,
+      "baseWidthDesktop": 1204,
+      "baseWidthMobile": 350,
       "backgroundSource": "color",
       "backgroundColorDesktop": "#081533",
       "backgroundColorMobile": "#081533",
@@ -482,10 +514,10 @@
             "opacity": 1
           },
           "mobile": {
-            "x": 16,
-            "y": 800,
-            "width": 220,
-            "height": 350,
+            "x": 18.631455975715422,
+            "y": 33.7161214183721,
+            "width": 100,
+            "height": 165,
             "z": 1,
             "opacity": 1
           }
@@ -493,7 +525,7 @@
         {
           "id": "6e443522-ec9b-4b71-bf8b-1450fa19aff3",
           "type": "text",
-          "content": "César, <br>o marido  ",
+          "content": "César, <br>o marido",
           "src": "",
           "srcMobile": "",
           "alt": "",
@@ -526,18 +558,18 @@
             "typography": "h3"
           },
           "desktop": {
-            "x": 311.10957752648346,
-            "y": 52.033418575361836,
+            "x": 310.8834672463065,
+            "y": 52.39520975133938,
             "width": 260,
             "height": 120,
             "z": 1,
             "opacity": 1
           },
           "mobile": {
-            "x": 268,
-            "y": 36.1786434023928,
-            "width": 250,
-            "height": 71.85628877192072,
+            "x": 133.05115800132774,
+            "y": 34.529597867339525,
+            "width": 200,
+            "height": 71.85628203806614,
             "z": 1,
             "opacity": 1
           }
@@ -545,7 +577,7 @@
         {
           "id": "1e6ab1fa-3be5-48d9-a8b1-a590f54856fa",
           "type": "text",
-          "content": "Ex-amante de Fátima, descobriu que herdaria metade da fortuna da esposa com a morte dela.  ",
+          "content": "Ex-amante de Fátima, descobriu que herdaria metade da fortuna da esposa com a morte dela.",
           "src": "",
           "srcMobile": "",
           "alt": "",
@@ -578,7 +610,7 @@
             "typography": ""
           },
           "desktop": {
-            "x": 311.10957752648346,
+            "x": 310.86397498077406,
             "y": 123.61291108627951,
             "width": 260,
             "height": 120,
@@ -586,10 +618,10 @@
             "opacity": 1
           },
           "mobile": {
-            "x": 268,
-            "y": 155.3257518075068,
-            "width": 380,
-            "height": 95.80838502922764,
+            "x": 133.49558173437515,
+            "y": 109.99454250385553,
+            "width": 200,
+            "height": 143.71256407613228,
             "z": 1,
             "opacity": 1
           }
@@ -638,10 +670,10 @@
             "opacity": 1
           },
           "mobile": {
-            "x": 16,
-            "y": 30,
-            "width": 220,
-            "height": 350,
+            "x": 237.4750302761019,
+            "y": 454.0503609840793,
+            "width": 100,
+            "height": 165,
             "z": 1,
             "opacity": 1
           }
@@ -671,7 +703,7 @@
             "lineHeight": "",
             "lineHeightMobile": "",
             "textAlign": "right",
-            "textAlignMobile": "left",
+            "textAlignMobile": "right",
             "color": "#b3ff3c",
             "fontWeight": "",
             "fontStyle": "",
@@ -690,10 +722,10 @@
             "opacity": 1
           },
           "mobile": {
-            "x": 268,
-            "y": 800,
-            "width": 250,
-            "height": 71.85628877192072,
+            "x": 25.261189844494346,
+            "y": 457.5364729957115,
+            "width": 200,
+            "height": 71.85629117686909,
             "z": 1,
             "opacity": 1
           }
@@ -723,7 +755,7 @@
             "lineHeight": "",
             "lineHeightMobile": "",
             "textAlign": "right",
-            "textAlignMobile": "left",
+            "textAlignMobile": "right",
             "color": "",
             "fontWeight": "",
             "fontStyle": "",
@@ -734,18 +766,18 @@
             "typography": ""
           },
           "desktop": {
-            "x": 675.1195828543545,
-            "y": 761.535210345219,
+            "x": 675.6302802113057,
+            "y": 723.0496812778661,
             "width": 260,
             "height": 120,
             "z": 1,
             "opacity": 1
           },
           "mobile": {
-            "x": 268,
-            "y": 910,
-            "width": 380,
-            "height": 119.76048128653454,
+            "x": 22.856631636941167,
+            "y": 532.8051532083537,
+            "width": 200,
+            "height": 263.47306764852,
             "z": 1,
             "opacity": 1
           }
@@ -838,18 +870,70 @@
             "typography": ""
           },
           "desktop": {
-            "x": 310.48231723662155,
-            "y": 212.47427057558718,
+            "x": 311.4101490759682,
+            "y": 192.71691023185295,
             "width": 640,
             "height": 360,
             "z": 1,
             "opacity": 1
           },
           "mobile": {
-            "x": 16,
-            "y": 410,
-            "width": 600,
+            "x": 2.25330616768919,
+            "y": 223.76698968040273,
+            "width": 340,
+            "height": 191,
+            "z": 1,
+            "opacity": 1
+          }
+        },
+        {
+          "id": "455b30ad-825b-4514-9907-e14aa773a613",
+          "type": "globo-player",
+          "content": "",
+          "src": "",
+          "srcMobile": "",
+          "alt": "",
+          "poster": "",
+          "posterMobile": "",
+          "autoplay": true,
+          "loop": true,
+          "muted": true,
+          "skipDFP": false,
+          "videoId": "13981435",
+          "videoIdDesktop": "13981435",
+          "videoIdMobile": "13981435",
+          "objectFit": "cover",
+          "autoHeight": false,
+          "textStyles": {
+            "fontFamily": "",
+            "fontSize": "",
+            "fontSizeMobile": "",
+            "lineHeight": "",
+            "lineHeightMobile": "",
+            "textAlign": "left",
+            "textAlignMobile": "left",
+            "color": "",
+            "fontWeight": "",
+            "fontStyle": "",
+            "textDecoration": "",
+            "textTransform": "",
+            "letterSpacing": "",
+            "textShadow": "",
+            "typography": ""
+          },
+          "desktop": {
+            "x": 293.6176090979091,
+            "y": 841.2050922323403,
+            "width": 640,
             "height": 360,
+            "z": 1,
+            "opacity": 1
+          },
+          "mobile": {
+            "x": 5.049620170595607,
+            "y": 729.1937773033112,
+            "width": 340,
+            "height": 191,
             "z": 1,
             "opacity": 1
           }
@@ -871,12 +955,12 @@
     },
     {
       "type": "free-canvas",
-      "minHeightDesktop": 600,
-      "maxHeightDesktop": 600,
-      "minHeightMobile": 1100,
-      "maxHeightMobile": 1100,
+      "minHeightDesktop": 1200,
+      "maxHeightDesktop": 1200,
+      "minHeightMobile": 920,
+      "maxHeightMobile": 920,
       "baseWidthDesktop": 1198,
-      "baseWidthMobile": 650,
+      "baseWidthMobile": 350,
       "backgroundSource": "color",
       "backgroundColorDesktop": "#081533",
       "backgroundColorMobile": "#081533",
@@ -935,10 +1019,10 @@
             "opacity": 1
           },
           "mobile": {
-            "x": 16,
-            "y": 600,
-            "width": 220,
-            "height": 350,
+            "x": 10.089196255605547,
+            "y": 19.14220459951317,
+            "width": 100,
+            "height": 165,
             "z": 1,
             "opacity": 1
           }
@@ -987,10 +1071,10 @@
             "opacity": 1
           },
           "mobile": {
-            "x": 268,
-            "y": 36.1786434023928,
-            "width": 250,
-            "height": 71.85628877192072,
+            "x": 129.80367286480077,
+            "y": 26.276572888776847,
+            "width": 200,
+            "height": 71.85628492400366,
             "z": 1,
             "opacity": 1
           }
@@ -1039,10 +1123,10 @@
             "opacity": 1
           },
           "mobile": {
-            "x": 268,
-            "y": 152,
-            "width": 380,
-            "height": 143.71257754384143,
+            "x": 127.86925702622179,
+            "y": 106.90269618050813,
+            "width": 200,
+            "height": 239.52094974667887,
             "z": 1,
             "opacity": 1
           }
@@ -1083,18 +1167,18 @@
             "typography": ""
           },
           "desktop": {
-            "x": 948.1178573113102,
-            "y": 221.68100470026778,
+            "x": 968.6393144639181,
+            "y": 625.0071661923861,
             "width": 200,
             "height": 330,
             "z": 1,
             "opacity": 1
           },
           "mobile": {
-            "x": 16,
-            "y": 30,
-            "width": 220,
-            "height": 350,
+            "x": 232.4436784842493,
+            "y": 489.58474312453984,
+            "width": 100,
+            "height": 165,
             "z": 1,
             "opacity": 1
           }
@@ -1124,7 +1208,7 @@
             "lineHeight": "",
             "lineHeightMobile": "",
             "textAlign": "right",
-            "textAlignMobile": "left",
+            "textAlignMobile": "right",
             "color": "#b3ff3c",
             "fontWeight": "",
             "fontStyle": "",
@@ -1135,18 +1219,18 @@
             "typography": "h3"
           },
           "desktop": {
-            "x": 674.067000607103,
-            "y": 218.5506602569871,
+            "x": 691.7581808043931,
+            "y": 623.7363838809051,
             "width": 260,
             "height": 120,
             "z": 1,
             "opacity": 1
           },
           "mobile": {
-            "x": 268,
-            "y": 600,
-            "width": 380,
-            "height": 71.85628877192072,
+            "x": 16.237056570555296,
+            "y": 489.4359756548575,
+            "width": 200,
+            "height": 71.85628492400366,
             "z": 1,
             "opacity": 1
           }
@@ -1176,7 +1260,7 @@
             "lineHeight": "",
             "lineHeightMobile": "",
             "textAlign": "right",
-            "textAlignMobile": "left",
+            "textAlignMobile": "right",
             "color": "",
             "fontWeight": "",
             "fontStyle": "",
@@ -1187,18 +1271,18 @@
             "typography": ""
           },
           "desktop": {
-            "x": 675.326226559179,
-            "y": 282.4285060943235,
+            "x": 690.7407101422738,
+            "y": 691.6881132145325,
             "width": 260,
             "height": 120,
             "z": 1,
             "opacity": 1
           },
           "mobile": {
-            "x": 268,
-            "y": 750,
-            "width": 380,
-            "height": 119.76048128653454,
+            "x": 16.662839337269975,
+            "y": 557.6113465169499,
+            "width": 200,
+            "height": 215.56885477201098,
             "z": 1,
             "opacity": 1
           }
@@ -1250,7 +1334,111 @@
             "x": 236.41975919562805,
             "y": 0,
             "width": 380,
-            "height": 23.95209625730691,
+            "height": 23.952094974667887,
+            "z": 1,
+            "opacity": 1
+          }
+        },
+        {
+          "id": "6e8e1bfb-7d06-49fb-b674-ffe93de55af0",
+          "type": "globo-player",
+          "content": "",
+          "src": "",
+          "srcMobile": "",
+          "alt": "",
+          "poster": "",
+          "posterMobile": "",
+          "autoplay": true,
+          "loop": true,
+          "muted": true,
+          "skipDFP": false,
+          "videoId": "13986821",
+          "videoIdDesktop": "13986821",
+          "videoIdMobile": "13986821",
+          "objectFit": "cover",
+          "autoHeight": false,
+          "textStyles": {
+            "fontFamily": "",
+            "fontSize": "",
+            "fontSizeMobile": "",
+            "lineHeight": "",
+            "lineHeightMobile": "",
+            "textAlign": "left",
+            "textAlignMobile": "left",
+            "color": "",
+            "fontWeight": "",
+            "fontStyle": "",
+            "textDecoration": "",
+            "textTransform": "",
+            "letterSpacing": "",
+            "textShadow": "",
+            "typography": ""
+          },
+          "desktop": {
+            "x": 312.2093319628003,
+            "y": 231.43244803248925,
+            "width": 640,
+            "height": 360,
+            "z": 1,
+            "opacity": 1
+          },
+          "mobile": {
+            "x": 14.261664510624938,
+            "y": 293.34673658588457,
+            "width": 320,
+            "height": 180,
+            "z": 1,
+            "opacity": 1
+          }
+        },
+        {
+          "id": "6bba775e-242d-4ef6-bf2f-c2ab7ae92848",
+          "type": "globo-player",
+          "content": "",
+          "src": "",
+          "srcMobile": "",
+          "alt": "",
+          "poster": "",
+          "posterMobile": "",
+          "autoplay": true,
+          "loop": true,
+          "muted": true,
+          "skipDFP": false,
+          "videoId": "13978116",
+          "videoIdDesktop": "13978116",
+          "videoIdMobile": "13978116",
+          "objectFit": "cover",
+          "autoHeight": false,
+          "textStyles": {
+            "fontFamily": "",
+            "fontSize": "",
+            "fontSizeMobile": "",
+            "lineHeight": "",
+            "lineHeightMobile": "",
+            "textAlign": "left",
+            "textAlignMobile": "left",
+            "color": "",
+            "fontWeight": "",
+            "fontStyle": "",
+            "textDecoration": "",
+            "textTransform": "",
+            "letterSpacing": "",
+            "textShadow": "",
+            "typography": ""
+          },
+          "desktop": {
+            "x": 310.4667234241955,
+            "y": 803.8384192065524,
+            "width": 640,
+            "height": 360,
+            "z": 1,
+            "opacity": 1
+          },
+          "mobile": {
+            "x": 14.600829917981077,
+            "y": 727.1977693887557,
+            "width": 320,
+            "height": 180,
             "z": 1,
             "opacity": 1
           }
@@ -1272,12 +1460,12 @@
     },
     {
       "type": "free-canvas",
-      "minHeightDesktop": 600,
-      "maxHeightDesktop": 600,
-      "minHeightMobile": 700,
-      "maxHeightMobile": 700,
+      "minHeightDesktop": 680,
+      "maxHeightDesktop": 680,
+      "minHeightMobile": 450,
+      "maxHeightMobile": 450,
       "baseWidthDesktop": 1198,
-      "baseWidthMobile": 650,
+      "baseWidthMobile": 350,
       "backgroundSource": "color",
       "backgroundColorDesktop": "#081533",
       "backgroundColorMobile": "#081533",
@@ -1338,8 +1526,8 @@
           "mobile": {
             "x": 16,
             "y": 37.210738964986824,
-            "width": 220,
-            "height": 350,
+            "width": 100,
+            "height": 165,
             "z": 1,
             "opacity": 1
           }
@@ -1388,10 +1576,10 @@
             "opacity": 1
           },
           "mobile": {
-            "x": 268,
-            "y": 36.1786434023928,
-            "width": 250,
-            "height": 71.85628877192072,
+            "x": 131.19931902380648,
+            "y": 43.45315662223822,
+            "width": 200,
+            "height": 71.85628492400366,
             "z": 1,
             "opacity": 1
           }
@@ -1440,10 +1628,10 @@
             "opacity": 1
           },
           "mobile": {
-            "x": 268,
-            "y": 200,
-            "width": 378,
-            "height": 95.80838502922764,
+            "x": 130.52020503774102,
+            "y": 118.15198014434371,
+            "width": 200,
+            "height": 167.6646648226752,
             "z": 1,
             "opacity": 1
           }
@@ -1655,6 +1843,58 @@
             "z": 1,
             "opacity": 1
           }
+        },
+        {
+          "id": "7f56a332-77e6-4578-b3ab-3328a1b518e1",
+          "type": "globo-player",
+          "content": "",
+          "src": "",
+          "srcMobile": "",
+          "alt": "",
+          "poster": "",
+          "posterMobile": "",
+          "autoplay": true,
+          "loop": true,
+          "muted": true,
+          "skipDFP": false,
+          "videoId": "13990367",
+          "videoIdDesktop": "13990367",
+          "videoIdMobile": "13990367",
+          "objectFit": "cover",
+          "autoHeight": false,
+          "textStyles": {
+            "fontFamily": "",
+            "fontSize": "",
+            "fontSizeMobile": "",
+            "lineHeight": "",
+            "lineHeightMobile": "",
+            "textAlign": "left",
+            "textAlignMobile": "left",
+            "color": "",
+            "fontWeight": "",
+            "fontStyle": "",
+            "textDecoration": "",
+            "textTransform": "",
+            "letterSpacing": "",
+            "textShadow": "",
+            "typography": ""
+          },
+          "desktop": {
+            "x": 314.8446862627933,
+            "y": 220.68831127097948,
+            "width": 640,
+            "height": 360,
+            "z": 1,
+            "opacity": 1
+          },
+          "mobile": {
+            "x": 12.164296819158253,
+            "y": 235.9810013072,
+            "width": 320,
+            "height": 180,
+            "z": 1,
+            "opacity": 1
+          }
         }
       ],
       "section": {
@@ -1714,49 +1954,200 @@
       "height": "20vh"
     },
     {
-      "type": "carousel",
-      "items": [
+      "type": "globoplayer-grid-slider",
+      "slides": [
         {
-          "type": "video",
-          "src": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/videos/header_desk.mp4",
-          "srcMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/videos/header_desk.mp4",
-          "alt": "",
-          "caption": "Morte de Ana Clara",
-          "credit": "",
-          "content": ""
+          "__internalId": "ma638x8yf8mgfz5qle",
+          "title": "Odete tentar matar Fátima",
+          "description": "",
+          "backgroundColor": "",
+          "gapDesktop": "1rem",
+          "gapMobile": "1rem",
+          "paddingDesktop": "1rem",
+          "paddingMobile": "1rem",
+          "videos": [
+            {
+              "__internalId": "kp0rdh62u6lmgfz5qle",
+              "title": "Odete tentar matar Fátima",
+              "videoIdDesktop": "13986833",
+              "videoIdMobile": "13986833",
+              "videoId": "",
+              "caption": "",
+              "credit": "",
+              "autoPlay": false,
+              "startMuted": false,
+              "showCaption": true,
+              "backgroundColor": "",
+              "spanDesktop": 12,
+              "spanTablet": 12,
+              "spanMobile": 12,
+              "aspectRatio": "16 / 9",
+              "aspectRatioMobile": "16 / 9"
+            }
+          ]
         },
         {
-          "type": "video",
-          "src": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/videos/header_desk.mp4",
-          "srcMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/videos/header_desk.mp4",
-          "alt": "",
-          "caption": "Morte de Mário Sérgio",
-          "credit": "",
-          "content": ""
+          "__internalId": "egy38oxzhlsmgfz5qle",
+          "title": "Odete assume que estava dirigindo o carro com Leonardo",
+          "description": "",
+          "backgroundColor": "",
+          "gapDesktop": "1rem",
+          "gapMobile": "1rem",
+          "paddingDesktop": "1rem",
+          "paddingMobile": "1rem",
+          "videos": [
+            {
+              "__internalId": "0otr0k8ts8dmgfz5qle",
+              "title": "Vídeo vertical",
+              "videoIdDesktop": "13981298",
+              "videoIdMobile": "13981298",
+              "videoId": "",
+              "caption": "",
+              "credit": "",
+              "autoPlay": false,
+              "startMuted": true,
+              "showCaption": true,
+              "backgroundColor": "",
+              "spanDesktop": 12,
+              "spanTablet": 12,
+              "spanMobile": 12,
+              "aspectRatio": "16 / 9",
+              "aspectRatioMobile": "16 / 9"
+            }
+          ]
         },
         {
-          "type": "video",
-          "src": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/videos/header_desk.mp4",
-          "srcMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/videos/header_desk.mp4",
-          "alt": "",
-          "caption": "Atentado contra Odete ",
-          "credit": "",
-          "content": ""
+          "__internalId": "qhnrfry4q4kmgfztm76",
+          "title": "Morte de Ana Clara",
+          "description": "",
+          "backgroundColor": "",
+          "gapDesktop": "1rem",
+          "gapMobile": "1rem",
+          "paddingDesktop": "1rem",
+          "paddingMobile": "1rem",
+          "videos": [
+            {
+              "__internalId": "ao920h02ptsmgfztm76",
+              "title": "",
+              "videoIdDesktop": "13971257 ",
+              "videoIdMobile": "13971257 ",
+              "videoId": "",
+              "caption": "",
+              "credit": "",
+              "autoPlay": false,
+              "startMuted": true,
+              "showCaption": true,
+              "backgroundColor": "",
+              "spanDesktop": 12,
+              "spanTablet": 12,
+              "spanMobile": 12,
+              "aspectRatio": "16 / 9",
+              "aspectRatioMobile": "16 / 9"
+            }
+          ]
         },
         {
-          "type": "video",
-          "src": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/videos/header_desk.mp4",
-          "srcMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/g1/a-trama-do-golpe/videos/header_desk.mp4",
-          "alt": "",
-          "caption": "Atentado contra Marco Aurélio  ",
-          "credit": "",
-          "content": ""
+          "__internalId": "uyyx1coh6umgfzuuke",
+          "title": "Morte de Mário Sérgio",
+          "description": "",
+          "backgroundColor": "",
+          "gapDesktop": "1rem",
+          "gapMobile": "1rem",
+          "paddingDesktop": "1rem",
+          "paddingMobile": "1rem",
+          "videos": [
+            {
+              "__internalId": "b99qzwzyka9mgfzuuke",
+              "title": "",
+              "videoIdDesktop": "13971062",
+              "videoIdMobile": "13971062",
+              "videoId": "",
+              "caption": "",
+              "credit": "",
+              "autoPlay": false,
+              "startMuted": true,
+              "showCaption": true,
+              "backgroundColor": "",
+              "spanDesktop": 12,
+              "spanTablet": 12,
+              "spanMobile": 12,
+              "aspectRatio": "16 / 9",
+              "aspectRatioMobile": "16 / 9"
+            }
+          ]
+        },
+        {
+          "__internalId": "ecpu6cwnnzemgfzvu19",
+          "title": "Atentado contra Odete ",
+          "description": "",
+          "backgroundColor": "",
+          "gapDesktop": "1rem",
+          "gapMobile": "1rem",
+          "paddingDesktop": "1rem",
+          "paddingMobile": "1rem",
+          "videos": [
+            {
+              "__internalId": "3k1ahuha6mbmgfzvu19",
+              "title": "",
+              "videoIdDesktop": "13946887 ",
+              "videoIdMobile": "13946887 ",
+              "videoId": "",
+              "caption": "",
+              "credit": "",
+              "autoPlay": false,
+              "startMuted": true,
+              "showCaption": true,
+              "backgroundColor": "",
+              "spanDesktop": 12,
+              "spanTablet": 12,
+              "spanMobile": 12,
+              "aspectRatio": "16 / 9",
+              "aspectRatioMobile": "16 / 9"
+            }
+          ]
+        },
+        {
+          "__internalId": "jmwa0gs3vdkmgfzx2ep",
+          "title": "Atentado contra Marco Aurélio",
+          "description": "",
+          "backgroundColor": "",
+          "gapDesktop": "1rem",
+          "gapMobile": "1rem",
+          "paddingDesktop": "1rem",
+          "paddingMobile": "1rem",
+          "videos": [
+            {
+              "__internalId": "kdfpn14z6xomgfzx2ep",
+              "title": "",
+              "videoIdDesktop": "13930884",
+              "videoIdMobile": "13930884",
+              "videoId": "",
+              "caption": "",
+              "credit": "",
+              "autoPlay": false,
+              "startMuted": true,
+              "showCaption": true,
+              "backgroundColor": "",
+              "spanDesktop": 12,
+              "spanTablet": 12,
+              "spanMobile": 12,
+              "aspectRatio": "16 / 9",
+              "aspectRatioMobile": "16 / 9"
+            }
+          ]
         }
       ],
-      "autoplay": false,
-      "interval": 4000,
-      "showDots": true,
       "showArrows": true,
+      "showDots": true,
+      "enableDrag": true,
+      "gapDesktop": "1rem",
+      "gapMobile": "1rem",
+      "paddingDesktop": "1rem",
+      "paddingMobile": "1rem",
+      "backgroundColor": "",
+      "borderRadius": "0",
+      "tabletBreakpoint": "1024px",
+      "mobileBreakpoint": "768px",
       "section": {
         "backgroundSource": "color",
         "backgroundColor": "",
@@ -1937,7 +2328,7 @@
     },
     {
       "type": "texto",
-      "text": "<p></p><span style=\"font-size: 0.95rem; text-wrap-mode: initial; color: rgb(179, 255, 59);\"><u style=\"\"><a href=\"https://gshow.globo.com/novelas/vale-tudo/noticia/perucas-brecho-e-looks-exclusivos-saiba-como-foi-construida-imagem-de-odete-roitman-em-vale-tudo.ghtml\" style=\"\"><b>Looks de Odete Roitman</b></a></u></span><p></p>",
+      "text": "<p><span style=\"font-size: 0.95rem; text-wrap-mode: initial; color: rgb(179, 255, 59);\"><b><u><a href=\"https://gshow.globo.com/novelas/vale-tudo/votacao/vale-tudo-quem-voce-acha-que-matou-odete-roitman-MCGKD1j17G.ghtml\">Vale Tudo: Quem você acha que matou Odete Roitman?</a></u></b></span></p><p></p><span style=\"font-size: 0.95rem; text-wrap-mode: initial; color: rgb(179, 255, 59);\"><u style=\"\"><a href=\"https://gshow.globo.com/novelas/vale-tudo/noticia/perucas-brecho-e-looks-exclusivos-saiba-como-foi-construida-imagem-de-odete-roitman-em-vale-tudo.ghtml\" style=\"\"><b>Looks de Odete Roitman</b></a></u></span><p></p>",
       "variant": "body",
       "align": "center",
       "maxWidth": "720px",
@@ -1988,8 +2379,63 @@
           "creditMobile": ""
         },
         {
+          "src": "https://s2-gshow.glbimg.com/qK9OGWaSYHi5G2sLvZbMYSO-3jA=/0x0:1920x1080/1000x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_e84042ef78cb4708aeebdf1c68c6cbd6/internal_photos/bs/2025/V/0/YFyPp9T1amgvBe1rP1PQ/vale-tudo-wc119163-v1.mp4.00-11-08-12.still012.jpg",
+          "srcMobile": "https://s2-gshow.glbimg.com/qK9OGWaSYHi5G2sLvZbMYSO-3jA=/0x0:1920x1080/1000x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_e84042ef78cb4708aeebdf1c68c6cbd6/internal_photos/bs/2025/V/0/YFyPp9T1amgvBe1rP1PQ/vale-tudo-wc119163-v1.mp4.00-11-08-12.still012.jpg",
+          "alt": "",
+          "caption": "",
+          "captionDesktop": "",
+          "captionMobile": "",
+          "credit": "",
+          "creditDesktop": "",
+          "creditMobile": ""
+        },
+        {
           "src": "https://s2-gshow.glbimg.com/CHLlgq8xXTX9crhTgy1ujHtbkKk=/0x0:2362x3150/1000x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_e84042ef78cb4708aeebdf1c68c6cbd6/internal_photos/bs/2025/w/X/AKd9FBQ4A8FoBN0EJa5g/184353.jpg",
           "srcMobile": "https://s2-gshow.glbimg.com/CHLlgq8xXTX9crhTgy1ujHtbkKk=/0x0:2362x3150/1000x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_e84042ef78cb4708aeebdf1c68c6cbd6/internal_photos/bs/2025/w/X/AKd9FBQ4A8FoBN0EJa5g/184353.jpg",
+          "alt": "",
+          "caption": "",
+          "captionDesktop": "",
+          "captionMobile": "",
+          "credit": "",
+          "creditDesktop": "",
+          "creditMobile": ""
+        },
+        {
+          "src": "https://s2-gshow.glbimg.com/vZ4PgKLR8TO-cX9M2pvqqx3OCZY=/0x0:1578x1080/1008x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_e84042ef78cb4708aeebdf1c68c6cbd6/internal_photos/bs/2025/Q/S/8KKzfITR6IuizAQYfoEw/novo-projeto-43-.png",
+          "srcMobile": "https://s2-gshow.glbimg.com/vZ4PgKLR8TO-cX9M2pvqqx3OCZY=/0x0:1578x1080/1008x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_e84042ef78cb4708aeebdf1c68c6cbd6/internal_photos/bs/2025/Q/S/8KKzfITR6IuizAQYfoEw/novo-projeto-43-.png",
+          "alt": "",
+          "caption": "",
+          "captionDesktop": "",
+          "captionMobile": "",
+          "credit": "",
+          "creditDesktop": "",
+          "creditMobile": ""
+        },
+        {
+          "src": "https://s2-gshow.glbimg.com/wAqWjMXcQa7_Uqv55bivFUyeLnw=/0x0:1600x900/1000x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_e84042ef78cb4708aeebdf1c68c6cbd6/internal_photos/bs/2025/m/y/E825TxStWFnnAS3pWPoQ/odete-roitman.jpeg",
+          "srcMobile": "https://s2-gshow.glbimg.com/wAqWjMXcQa7_Uqv55bivFUyeLnw=/0x0:1600x900/1000x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_e84042ef78cb4708aeebdf1c68c6cbd6/internal_photos/bs/2025/m/y/E825TxStWFnnAS3pWPoQ/odete-roitman.jpeg",
+          "alt": "",
+          "caption": "",
+          "captionDesktop": "",
+          "captionMobile": "",
+          "credit": "",
+          "creditDesktop": "",
+          "creditMobile": ""
+        },
+        {
+          "src": "https://s2-gshow.glbimg.com/37DkG7daeJYKMWbWzMJ4ZscPajE=/0x0:2000x1419/1000x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_e84042ef78cb4708aeebdf1c68c6cbd6/internal_photos/bs/2025/z/X/6Bued0S0yzLL5D0rgeHw/odete-roitman.jpg",
+          "srcMobile": "https://s2-gshow.glbimg.com/37DkG7daeJYKMWbWzMJ4ZscPajE=/0x0:2000x1419/1000x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_e84042ef78cb4708aeebdf1c68c6cbd6/internal_photos/bs/2025/z/X/6Bued0S0yzLL5D0rgeHw/odete-roitman.jpg",
+          "alt": "",
+          "caption": "",
+          "captionDesktop": "",
+          "captionMobile": "",
+          "credit": "Globo/Beatriz Damy",
+          "creditDesktop": "Globo/Beatriz Damy",
+          "creditMobile": "Globo/Beatriz Damy"
+        },
+        {
+          "src": "https://s2-gshow.glbimg.com/bWK4CC3c532GB_QmgIixhBEM9yY=/0x0:2362x1576/1000x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_e84042ef78cb4708aeebdf1c68c6cbd6/internal_photos/bs/2025/M/B/cBZKWXS6mZE6cw6saEAA/192053.jpg",
+          "srcMobile": "https://s2-gshow.glbimg.com/bWK4CC3c532GB_QmgIixhBEM9yY=/0x0:2362x1576/1000x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_e84042ef78cb4708aeebdf1c68c6cbd6/internal_photos/bs/2025/M/B/cBZKWXS6mZE6cw6saEAA/192053.jpg",
           "alt": "",
           "caption": "",
           "captionDesktop": "",

@@ -495,18 +495,9 @@
 		top: 0;
 		left: 50%;
 		transform: translateX(-50%);
-		width: var(
-			--section-title-minimal-underline-width-desktop,
-			30%
-		);
-		height: var(
-			--section-title-minimal-underline-height-desktop,
-			2px
-		);
-		background-color: var(
-			--section-title-minimal-underline-color,
-			var(--color-primary)
-		);
+		width: var(--section-title-minimal-underline-width-desktop, 30%);
+		height: var(--section-title-minimal-underline-height-desktop, 2px);
+		background-color: var(--section-title-minimal-underline-color, var(--color-primary));
 	}
 
 	/* Estilo para seções sem mídia (sem fundo) */

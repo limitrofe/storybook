@@ -7,6 +7,8 @@ import VideoPlayer from '$lib/components/story/VideoPlayer.svelte';
 import GloboPlayer from '$lib/components/story/GloboPlayer.svelte';
 import PhotoGallery from '$lib/components/story/PhotoGallery.svelte';
 import Carousel from '$lib/components/story/Carousel.svelte';
+import GloboPlayerCarousel from '$lib/components/story/GloboPlayerCarousel.svelte';
+import GloboPlayerGridSlider from '$lib/components/story/GloboPlayerGridSlider.svelte';
 import Parallax from '$lib/components/story/Parallax.svelte';
 import BeforeAfter from '$lib/components/story/BeforeAfter.svelte';
 import ScrollyTelling from '$lib/components/story/ScrollyTelling.svelte';
@@ -21,6 +23,7 @@ import DocumentViewer from '$lib/components/story/DocumentViewer.svelte';
 import CrimeExplainer from '$lib/components/story/CrimeExplainer.svelte';
 import AnchorPoint from '$lib/components/story/AnchorPoint.svelte';
 import FlexibleLayout from '$lib/components/story/FlexibleLayout.svelte';
+import ContentGrid from '$lib/components/story/ContentGrid.svelte';
 import ResponsiveMediaLayout from '$lib/components/story/ResponsiveMediaLayout.svelte';
 import FreeCanvas from '$lib/components/story/FreeCanvas.svelte';
 
@@ -1088,6 +1091,241 @@ export const componentRegistry = [
 		]
 	},
 	{
+		type: 'globoplayer-carousel',
+		label: 'Carrossel GloboPlay',
+		icon: '📺',
+		category: 'Mídia',
+		description:
+			'Carrossel com reprodução automática e botão de áudio usando vídeos do GloboPlay (2 a 10 itens).',
+		component: GloboPlayerCarousel,
+		defaultData: {
+			type: 'globoplayer-carousel',
+			videos: [
+				{
+					title: 'Destaque 1',
+					videoIdDesktop: '',
+					videoIdMobile: '',
+					videoId: '',
+					caption: '',
+					credit: '',
+					hasAds: false
+				},
+				{
+					title: 'Destaque 2',
+					videoIdDesktop: '',
+					videoIdMobile: '',
+					videoId: '',
+					caption: '',
+					credit: '',
+					hasAds: false
+				}
+			],
+			autoplay: true,
+			interval: 6000,
+			showDots: true,
+			showArrows: true,
+			audioButtonBackground: 'rgba(0, 0, 0, 0.7)',
+			audioButtonHoverBackground: 'rgba(0, 0, 0, 0.85)',
+			audioButtonTextColor: '#ffffff',
+			fallbackTitlePrefix: 'Vídeo'
+		},
+		fields: [
+			{ path: 'videos', label: 'Lista de vídeos', type: 'globoplayer-slides' },
+			{
+				path: 'autoplay',
+				label: 'Girar automaticamente',
+				type: 'boolean',
+				description: 'Ativa a rotação contínua enquanto o bloco estiver visível.'
+			},
+			{
+				path: 'interval',
+				label: 'Intervalo entre slides (ms)',
+				type: 'number',
+				min: 3000,
+				step: 500
+			},
+			{ path: 'showDots', label: 'Mostrar indicadores (bolinhas)', type: 'boolean' },
+			{ path: 'showArrows', label: 'Mostrar setas de navegação', type: 'boolean' },
+			{ path: 'audioButtonBackground', label: 'Cor do botão de áudio', type: 'color' },
+			{ path: 'audioButtonHoverBackground', label: 'Cor do botão de áudio (hover)', type: 'color' },
+			{ path: 'audioButtonTextColor', label: 'Cor do texto do botão de áudio', type: 'color' },
+			{
+				path: 'fallbackTitlePrefix',
+				label: 'Prefixo automático para títulos',
+				type: 'text',
+				placeholder: 'Vídeo'
+			}
+		]
+	},
+	{
+		type: 'globoplayer-grid-slider',
+		label: 'Grade GloboPlay com Slider',
+		icon: '🎞️',
+		category: 'Mídia',
+		description:
+			'Grade horizontal com slides configuráveis usando vídeos do GloboPlay (arraste ou use setas).',
+		component: GloboPlayerGridSlider,
+		defaultData: {
+			type: 'globoplayer-grid-slider',
+			slides: [
+				{
+					title: 'Slide inicial',
+					description: 'Combine vídeos horizontais e verticais no mesmo quadro.',
+					backgroundColor: '',
+					gapDesktop: '1.5rem',
+					gapMobile: '1rem',
+					paddingDesktop: '1.5rem 0',
+					paddingMobile: '1rem 0',
+					videos: [
+						{
+							title: 'Vídeo principal',
+							videoIdDesktop: '',
+							videoIdMobile: '',
+							videoId: '',
+							caption: '',
+							credit: '',
+							autoPlay: false,
+							startMuted: true,
+							showCaption: true,
+							backgroundColor: '',
+							spanDesktop: null,
+							spanTablet: null,
+							spanMobile: null,
+							aspectRatio: '16 / 9',
+							aspectRatioMobile: '9 / 16'
+						},
+						{
+							title: 'Vídeo complementar',
+							videoIdDesktop: '',
+							videoIdMobile: '',
+							videoId: '',
+							caption: '',
+							credit: '',
+							autoPlay: false,
+							startMuted: true,
+							showCaption: true,
+							backgroundColor: '',
+							spanDesktop: null,
+							spanTablet: null,
+							spanMobile: null,
+							aspectRatio: '16 / 9',
+							aspectRatioMobile: '9 / 16'
+						}
+					]
+				},
+				{
+					title: 'Slide vertical',
+					description: '',
+					backgroundColor: '',
+					gapDesktop: '1.5rem',
+					gapMobile: '1rem',
+					paddingDesktop: '1.5rem 0',
+					paddingMobile: '1rem 0',
+					videos: [
+						{
+							title: 'Vídeo vertical',
+							videoIdDesktop: '',
+							videoIdMobile: '',
+							videoId: '',
+							caption: '',
+							credit: '',
+							autoPlay: false,
+							startMuted: true,
+							showCaption: true,
+							backgroundColor: '',
+							spanDesktop: null,
+							spanTablet: null,
+							spanMobile: null,
+							aspectRatio: '9 / 16',
+							aspectRatioMobile: '9 / 16'
+						},
+						{
+							title: 'Vídeo horizontal',
+							videoIdDesktop: '',
+							videoIdMobile: '',
+							videoId: '',
+							caption: '',
+							credit: '',
+							autoPlay: false,
+							startMuted: true,
+							showCaption: true,
+							backgroundColor: '',
+							spanDesktop: null,
+							spanTablet: null,
+							spanMobile: null,
+							aspectRatio: '16 / 9',
+							aspectRatioMobile: '16 / 9'
+						}
+					]
+				}
+			],
+			showArrows: true,
+			showDots: true,
+			enableDrag: true,
+			gapDesktop: '1.5rem',
+			gapMobile: '1rem',
+			paddingDesktop: '1.5rem 0',
+			paddingMobile: '1rem 0',
+			backgroundColor: '',
+			borderRadius: '0',
+			tabletBreakpoint: '1024px',
+			mobileBreakpoint: '768px'
+		},
+		fields: [
+			{ path: 'slides', label: 'Slides', type: 'globoplayer-grid-slides' },
+			{ path: 'showArrows', label: 'Mostrar setas de navegação', type: 'boolean' },
+			{ path: 'showDots', label: 'Mostrar indicadores', type: 'boolean' },
+			{
+				path: 'enableDrag',
+				label: 'Permitir arrastar com mouse/touch',
+				type: 'boolean'
+			},
+			{
+				path: 'gapDesktop',
+				label: 'Espaçamento entre vídeos no desktop',
+				type: 'text',
+				placeholder: '1.5rem'
+			},
+			{
+				path: 'gapMobile',
+				label: 'Espaçamento entre vídeos no mobile',
+				type: 'text',
+				placeholder: '1rem'
+			},
+			{
+				path: 'paddingDesktop',
+				label: 'Padding do slide (desktop)',
+				type: 'text',
+				placeholder: '1.5rem 0'
+			},
+			{
+				path: 'paddingMobile',
+				label: 'Padding do slide (mobile)',
+				type: 'text',
+				placeholder: '1rem 0'
+			},
+			{
+				path: 'backgroundColor',
+				label: 'Cor de fundo geral',
+				type: 'text',
+				placeholder: 'transparent'
+			},
+			{ path: 'borderRadius', label: 'Raio da borda externa', type: 'text', placeholder: '0' },
+			{
+				path: 'tabletBreakpoint',
+				label: 'Breakpoint tablet',
+				type: 'text',
+				placeholder: '1024px'
+			},
+			{
+				path: 'mobileBreakpoint',
+				label: 'Breakpoint mobile',
+				type: 'text',
+				placeholder: '768px'
+			}
+		]
+	},
+	{
 		type: 'parallax',
 		label: 'Parallax',
 		icon: '🪂',
@@ -1839,6 +2077,118 @@ export const componentRegistry = [
 			}
 		]
 	},
+	{
+		type: 'content-grid',
+		label: 'Grid de colunas',
+		icon: '🧩',
+		category: 'Layout',
+		description: 'Grade responsiva com colunas configuraveis (texto, imagem, video ou GloboPlay).',
+		component: ContentGrid,
+		defaultData: {
+			type: 'content-grid',
+			columnsDesktop: 3,
+			gapDesktop: '1.5rem',
+			gapMobile: '1rem',
+			backgroundColor: '',
+			paddingDesktop: '0',
+			paddingMobile: '',
+			borderRadius: '0',
+			itemBackground: '',
+			itemPadding: '0',
+			itemBorderRadius: '0',
+			mobileBreakpoint: '768px',
+			items: [
+				{
+					type: 'text',
+					pretitle: '',
+					title: 'Titulo da coluna',
+					subtitle: '',
+					text: '<p>Insira o conteudo da coluna.</p>',
+					align: 'start',
+					callout: '',
+					spanDesktop: 1,
+					spanTablet: 1,
+					spanMobile: 1,
+					blocks: []
+				},
+				{
+					type: 'image',
+					title: 'Imagem ilustrativa',
+					image: {
+						desktop: '',
+						mobile: '',
+						alt: 'Descricao da imagem',
+						caption: '',
+						credit: ''
+					},
+					callout: '',
+					spanDesktop: 1,
+					spanTablet: 1,
+					spanMobile: 1,
+					blocks: []
+				},
+				{
+					type: 'card',
+					pretitle: '',
+					title: 'Card com midia',
+					subtitle: 'Combine midia e texto flexivel.',
+					text: '<p>Apresente personagens, destaques ou dados ao lado de uma midia vertical.</p>',
+					align: 'start',
+					layout: 'media-left',
+					mediaType: 'image',
+					mediaImage: {
+						desktop: '',
+						mobile: '',
+						alt: 'Descricao da imagem',
+						caption: '',
+						credit: ''
+					},
+					spanDesktop: 2,
+					spanTablet: 2,
+					spanMobile: 1,
+					blocks: []
+				}
+			]
+		},
+		fields: [
+			{
+				path: 'columnsDesktop',
+				label: 'Colunas (desktop)',
+				type: 'number',
+				min: 1,
+				max: 6,
+				required: true
+			},
+			{
+				path: 'gapDesktop',
+				label: 'Espaco entre colunas (desktop)',
+				type: 'text',
+				placeholder: '1.5rem'
+			},
+			{
+				path: 'gapMobile',
+				label: 'Espaco entre colunas (mobile)',
+				type: 'text',
+				placeholder: '1rem'
+			},
+			{ path: 'backgroundColor', label: 'Cor de fundo', type: 'color', allowClear: true },
+			{ path: 'paddingDesktop', label: 'Padding desktop', type: 'text', placeholder: '0' },
+			{ path: 'paddingMobile', label: 'Padding mobile', type: 'text', placeholder: '0' },
+			{ path: 'borderRadius', label: 'Raio do container', type: 'text', placeholder: '0' },
+			{ path: 'itemBackground', label: 'Cor dos itens', type: 'color', allowClear: true },
+			{ path: 'itemPadding', label: 'Padding dos itens', type: 'text', placeholder: '0' },
+			{ path: 'itemBorderRadius', label: 'Raio dos itens', type: 'text', placeholder: '0' },
+			{ path: 'mobileBreakpoint', label: 'Breakpoint mobile', type: 'text', placeholder: '768px' },
+			{
+				path: 'items',
+				label: 'Colunas do grid',
+				type: 'content-grid-items',
+				description: 'Adicione e configure cada coluna (texto, imagem, video, frase ou GloboPlay).',
+				emptyValue: []
+			}
+		]
+	},
+
 	{
 		type: 'responsive-media',
 		label: 'Responsive Media Layout',

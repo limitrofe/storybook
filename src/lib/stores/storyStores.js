@@ -22,7 +22,14 @@ export const currentStoryMeta = derived(currentStory, ($currentStory) => {
 	return {
 		totalComponents: $currentStory.paragraphs?.length || 0,
 		estimatedReadTime: calculateReadTime($currentStory),
-		hasVideo: hasComponentType($currentStory, ['video', 'globoplayer']),
+		hasVideo: hasComponentType($currentStory, [
+			'video',
+			'globoplayer',
+			'globoplayer-carousel',
+			'globoplay-carousel',
+			'globoplayer-grid-slider',
+			'globoplay-grid-slider'
+		]),
 		hasInteractive: hasComponentType($currentStory, ['before-after', 'scrolly', 'parallax']),
 		wordCount: calculateWordCount($currentStory)
 	};

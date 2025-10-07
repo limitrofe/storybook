@@ -13,6 +13,7 @@
 		src: '',
 		srcMobile: '',
 		alt: '',
+		title: '',
 		caption: '',
 		credit: '',
 		content: '',
@@ -92,7 +93,7 @@
 			<header>
 				<div>
 					<strong>Slide {index + 1}</strong>
-					<span>{item.caption || item.alt || item.type}</span>
+					<span>{item.title || item.caption || item.alt || item.type}</span>
 				</div>
 				<div class="actions">
 					<button
@@ -126,6 +127,15 @@
 								<option value={option.value}>{option.label}</option>
 							{/each}
 						</select>
+					</label>
+					<label>
+						<span>Título (opcional)</span>
+						<input
+							type="text"
+							value={item.title}
+							placeholder="Título exibido acima do slide"
+							on:input={(event) => updateItem(index, 'title', event.currentTarget.value)}
+						/>
 					</label>
 				</div>
 
@@ -345,7 +355,9 @@
 		display: grid;
 		place-items: center;
 		cursor: pointer;
-		transition: border-color 0.15s ease, box-shadow 0.15s ease;
+		transition:
+			border-color 0.15s ease,
+			box-shadow 0.15s ease;
 	}
 
 	label.checkbox-field input[type='checkbox']::after {

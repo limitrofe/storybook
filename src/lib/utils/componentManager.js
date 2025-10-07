@@ -277,6 +277,16 @@ export function registerStoryComponents() {
 	);
 
 	componentManager.registerComponent(
+		'globoplayer-carousel',
+		() => import('../components/story/GloboPlayerCarousel.svelte')
+	);
+
+	componentManager.registerComponent(
+		'globoplayer-grid-slider',
+		() => import('../components/story/GloboPlayerGridSlider.svelte')
+	);
+
+	componentManager.registerComponent(
 		'character-presentation',
 		() => import('../components/story/CharacterPresentation.svelte')
 	);
@@ -364,6 +374,19 @@ export const componentTypeMap = {
 	globo: 'globoplayer',
 	galeria: 'gallery',
 	carrossel: 'carousel',
+	'globoplayer-carousel': 'globoplayer-carousel',
+	'globoplay-carousel': 'globoplayer-carousel',
+	'globoplayer-carrossel': 'globoplayer-carousel',
+	'globoplay-carrossel': 'globoplayer-carousel',
+	'globo-carousel': 'globoplayer-carousel',
+	'globo-carrossel': 'globoplayer-carousel',
+	'carrossel-globoplay': 'globoplayer-carousel',
+	'carousel-globoplay': 'globoplayer-carousel',
+	'globoplayer-grid-slider': 'globoplayer-grid-slider',
+	'globoplay-grid-slider': 'globoplayer-grid-slider',
+	'globoplayer-grid': 'globoplayer-grid-slider',
+	'grade-globoplay': 'globoplayer-grid-slider',
+	'grid-globoplay': 'globoplayer-grid-slider',
 	recomendados: 'recommended-items',
 	recommended: 'recommended-items',
 	'itens-recomendados': 'recommended-items',

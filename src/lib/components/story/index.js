@@ -9,6 +9,8 @@ export { default as FlourishScrollyAdvanced } from './FlourishScrollyAdvanced.sv
 export { default as PhotoWithCaption } from './PhotoWithCaption.svelte';
 export { default as VideoPlayer } from './VideoPlayer.svelte';
 export { default as GloboPlayer } from './GloboPlayer.svelte';
+export { default as GloboPlayerCarousel } from './GloboPlayerCarousel.svelte';
+export { default as GloboPlayerGridSlider } from './GloboPlayerGridSlider.svelte';
 export { default as DebugGloboPlayer } from './DebugGloboPlayer.svelte';
 export { default as SectionTitle } from './SectionTitle.svelte';
 export { default as SplitTitle } from './SplitTitle.svelte';
@@ -28,6 +30,7 @@ export { default as SectionWrapper } from './SectionWrapper.svelte';
 export { default as FreeCanvas } from './FreeCanvas.svelte';
 export { default as ResponsiveMediaLayout } from './ResponsiveMediaLayout.svelte';
 export { default as FlexibleLayout } from './FlexibleLayout.svelte';
+export { default as ContentGrid } from './ContentGrid.svelte';
 export { default as Curiosidades } from './Curiosidades.svelte';
 
 // Add other component exports here

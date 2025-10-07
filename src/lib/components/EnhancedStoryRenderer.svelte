@@ -9,6 +9,7 @@
 	import PhotoWithCaption from './story/PhotoWithCaption.svelte';
 	import VideoPlayer from './story/VideoPlayer.svelte';
 	import GloboPlayer from './story/GloboPlayer.svelte';
+	import GloboPlayerGridSlider from './story/GloboPlayerGridSlider.svelte';
 	import { getSectionStyling } from './story/sectionStyle.js';
 
 	// Importar novos componentes (com fallback)
@@ -57,6 +58,28 @@
 			case 'globo-player':
 			case 'globo':
 				return 'globo-player';
+			case 'galeria':
+			case 'gallery':
+				return 'gallery';
+			case 'carousel':
+			case 'carrossel':
+				return 'carousel';
+			case 'globoplayer-carousel':
+			case 'globoplay-carousel':
+			case 'globoplayer-carrossel':
+			case 'globoplay-carrossel':
+			case 'globo-carousel':
+			case 'globo-carrossel':
+			case 'carrossel-globoplay':
+			case 'carousel-globoplay':
+				return 'globoplayer-carousel';
+			case 'globoplayer-grid-slider':
+			case 'globoplay-grid-slider':
+			case 'globoplayer-grid':
+			case 'globoplay-grid':
+			case 'grade-globoplay':
+			case 'grid-globoplay':
+				return 'globoplayer-grid-slider';
 			default:
 				return 'text';
 		}
@@ -385,6 +408,21 @@
 								height={parseInt(paragraph.height) || 450}
 								autoPlay={paragraph.autoplay === 'true'}
 								startMuted={paragraph.startMuted !== 'false'}
+							/>
+						{:else if componentType === 'globoplayer-grid-slider'}
+							<GloboPlayerGridSlider
+								slides={paragraph.slides || []}
+								showArrows={paragraph.showArrows !== 'false' && paragraph.showArrows !== false}
+								showDots={paragraph.showDots !== 'false' && paragraph.showDots !== false}
+								enableDrag={paragraph.enableDrag !== 'false' && paragraph.enableDrag !== false}
+								gapDesktop={paragraph.gapDesktop || '1.5rem'}
+								gapMobile={paragraph.gapMobile || '1rem'}
+								paddingDesktop={paragraph.paddingDesktop || '1.5rem 0'}
+								paddingMobile={paragraph.paddingMobile || '1rem 0'}
+								backgroundColor={paragraph.backgroundColor || ''}
+								borderRadius={paragraph.borderRadius || '0'}
+								tabletBreakpoint={paragraph.tabletBreakpoint || '1024px'}
+								mobileBreakpoint={paragraph.mobileBreakpoint || '768px'}
 							/>
 						{/if}
 					</div>

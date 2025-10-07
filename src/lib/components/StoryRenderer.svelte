@@ -32,9 +32,11 @@
 	// 🌪️ NOVO: Header Caótico
 	import HeaderCaotico from './story/HeaderCaotico.svelte';
 	import FlexibleLayout from './story/FlexibleLayout.svelte';
+	import ContentGrid from './story/ContentGrid.svelte';
 	// 🎨 NOVO: ResponsiveMediaLayout
 	import ResponsiveMediaLayout from './story/ResponsiveMediaLayout.svelte';
 	import FreeCanvas from './story/FreeCanvas.svelte';
+	import GloboPlayerGridSlider from './story/GloboPlayerGridSlider.svelte';
 
 	export let previewDevice = null;
 
@@ -96,6 +98,13 @@
 			case 'layout-personalizado':
 				return 'flexible-layout';
 
+			case 'content-grid':
+			case 'grid':
+			case 'grid-layout':
+			case 'layout-grid':
+			case 'colunas':
+				return 'content-grid';
+
 			// 🎨 NOVO: ResponsiveMediaLayout
 			case 'responsive-media':
 			case 'responsivemedia':
@@ -139,6 +148,24 @@
 			case 'carousel':
 			case 'carrossel':
 				return 'carousel';
+
+			case 'globoplayer-carousel':
+			case 'globoplay-carousel':
+			case 'globoplayer-carrossel':
+			case 'globoplay-carrossel':
+			case 'globo-carousel':
+			case 'globo-carrossel':
+			case 'carrossel-globoplay':
+			case 'carousel-globoplay':
+				return 'globoplayer-carousel';
+
+			case 'globoplayer-grid-slider':
+			case 'globoplay-grid-slider':
+			case 'globoplayer-grid':
+			case 'globoplay-grid':
+			case 'grade-globoplay':
+			case 'grid-globoplay':
+				return 'globoplayer-grid-slider';
 
 			// 🆕 NOVO: Itens Recomendados
 			case 'recomendados':
@@ -674,6 +701,32 @@
 							padding={props.padding || '2rem'}
 							paddingMobile={props.paddingMobile || '1.5rem'}
 						/>
+					{:else if componentType === 'content-grid'}
+						{@const gridItems = Array.isArray(props.items)
+							? props.items
+							: Array.isArray(props.columns)
+								? props.columns
+								: []}
+						{@const gridColumnsDesktop =
+							typeof props.columnsDesktop !== 'undefined'
+								? props.columnsDesktop
+								: typeof props.columns === 'number'
+									? props.columns
+									: (props.columnsCount ?? props.columnCount ?? 3)}
+						<ContentGrid
+							columnsDesktop={gridColumnsDesktop}
+							gapDesktop={props.gapDesktop ?? '1.5rem'}
+							gapMobile={props.gapMobile ?? '1rem'}
+							backgroundColor={props.backgroundColor ?? ''}
+							paddingDesktop={props.paddingDesktop ?? props.padding ?? '0'}
+							paddingMobile={props.paddingMobile ?? props.padding ?? ''}
+							borderRadius={props.borderRadius ?? '0'}
+							itemBackground={props.itemBackground ?? ''}
+							itemPadding={props.itemPadding ?? '0'}
+							itemBorderRadius={props.itemBorderRadius ?? '0'}
+							mobileBreakpoint={props.mobileBreakpoint ?? '768px'}
+							items={gridItems}
+						/>
 
 						<!-- 🎨 NOVO: ResponsiveMediaLayout -->
 					{:else if componentType === 'responsive-media'}
@@ -847,6 +900,23 @@
 							interval={parseInt(props.interval) || 3000}
 							showDots={stringToBoolean(props.showDots, true)}
 							showArrows={stringToBoolean(props.showArrows, true)}
+						/>
+
+						<!-- GloboPlay Grid Slider -->
+					{:else if componentType === 'globoplayer-grid-slider'}
+						<GloboPlayerGridSlider
+							slides={props.slides || []}
+							showArrows={stringToBoolean(props.showArrows, true)}
+							showDots={stringToBoolean(props.showDots, true)}
+							enableDrag={stringToBoolean(props.enableDrag, true)}
+							gapDesktop={props.gapDesktop ?? '1.5rem'}
+							gapMobile={props.gapMobile ?? '1rem'}
+							paddingDesktop={props.paddingDesktop ?? '1.5rem 0'}
+							paddingMobile={props.paddingMobile ?? '1rem 0'}
+							backgroundColor={props.backgroundColor ?? ''}
+							borderRadius={props.borderRadius ?? '0'}
+							tabletBreakpoint={props.tabletBreakpoint ?? '1024px'}
+							mobileBreakpoint={props.mobileBreakpoint ?? '768px'}
 						/>
 
 						<!-- 🆕 NOVO: Recommended Items -->

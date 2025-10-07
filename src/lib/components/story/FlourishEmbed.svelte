@@ -60,9 +60,9 @@
 	$: isDeclaredAuto = ['auto', 'automatic'].includes(normalizedHeight.toLowerCase());
 	$: treatAsAuto =
 		isDeclaredAuto ||
-			normalizedHeight.toLowerCase() === DEFAULT_HEIGHT &&
-				normalizedWidth === '100%' &&
-				normalizedMaxWidth === '800px';
+		(normalizedHeight.toLowerCase() === DEFAULT_HEIGHT &&
+			normalizedWidth === '100%' &&
+			normalizedMaxWidth === '800px');
 	$: dataHeight = treatAsAuto ? undefined : normalizedHeight;
 
 	$: isDeclaredAutoMobile = ['auto', 'automatic'].includes(normalizedHeightMobile.toLowerCase());
@@ -167,10 +167,7 @@
 		.flourish-embed-container {
 			width: var(--flourish-width-mobile, var(--flourish-width, 100%));
 			max-width: var(--flourish-max-width-mobile, var(--flourish-max-width, 100%));
-			min-height: var(
-				--flourish-min-height-mobile,
-				var(--flourish-min-height, 0)
-			);
+			min-height: var(--flourish-min-height-mobile, var(--flourish-min-height, 0));
 		}
 
 		.flourish-embed {

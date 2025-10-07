@@ -24,6 +24,8 @@
 	export let device = 'desktop';
 	export let typography = {};
 
+	const MOBILE_BASE_WIDTH = 350;
+
 	let isMobile;
 	$: isMobile = device === 'mobile';
 
@@ -44,6 +46,11 @@
 	let simulatedScale = 1;
 	let simulatedWidthPx = 0;
 	let simulatedHeightPx = 0;
+	let mobileScale = 1;
+	let scaledViewportWidth = 0;
+	let scaledViewportHeight = 0;
+	let isScaledMobile = false;
+	let mobileTargetWidth = 0;
 
 	function getFrame(item) {
 		return isMobile ? item.mobile : item.desktop;
@@ -244,7 +251,17 @@
 			declarations.push('margin-right:auto');
 		} else {
 			declarations.push('width:100vw');
-			declarations.push(`height:${cssHeight}`);
+			if (isScaledMobile) {
+				const scaledHeight =
+					scaledViewportHeight || cssHeightPx * Math.min(mobileScale || 1, 1);
+				const heightValue =
+					scaledHeight && Number.isFinite(scaledHeight) && scaledHeight > 0
+						? `${scaledHeight}px`
+						: cssHeight;
+				declarations.push(`height:${heightValue}`);
+			} else {
+				declarations.push(`height:${cssHeight}`);
+			}
 			declarations.push('margin-left:calc(50% - 50vw)');
 			declarations.push('margin-right:calc(50% - 50vw)');
 		}
@@ -272,9 +289,39 @@
 			const height = simulatedHeightPx || cssHeightPx;
 			return `width:${width}px;height:${height}px;position:relative;overflow:hidden;`;
 		}
+		if (isScaledMobile) {
+			const width = (baseWidth && baseWidth > 0 ? baseWidth : effectiveBaseWidth) || 1;
+			const height = cssHeightPx;
+			const declarations = [
+				`width:${width}px`,
+				`height:${height}px`,
+				'position:relative',
+				'overflow:hidden',
+				`transform:scale(${mobileScale})`,
+				'transform-origin:top center'
+			];
+			return declarations.join(';');
+		}
 		const widthRatio = baseWidth > 0 ? effectiveBaseWidth / baseWidth : 1;
 		const widthValue = `${Math.max(widthRatio, 1) * 100}vw`;
 		return `width:${widthValue};height:${cssHeight};position:relative;`;
+	}
+
+	function getScaleWrapperStyle() {
+		if (!isScaledMobile) {
+			return 'width:100%;height:100%;position:relative;';
+		}
+		const fallbackWidth = scaledViewportWidth || mobileTargetWidth || MOBILE_BASE_WIDTH;
+		const width = Math.max(fallbackWidth, 1);
+		const height = scaledViewportHeight || cssHeightPx * mobileScale;
+		const declarations = [
+			`width:${width}px`,
+			`height:${height}px`,
+			'margin-left:auto',
+			'margin-right:auto',
+			'position:relative'
+		];
+		return declarations.join(';');
 	}
 
 	$: shouldRenderBackgroundVideo =
@@ -305,6 +352,7 @@
 	}
 
 	$: isSimulatedMobile = isMobile && browserWidth > 768;
+	$: isScaledMobile = isMobile && !isSimulatedMobile;
 
 	$: {
 		const frames = renderableItems.map(({ frame }) => frame);
@@ -341,6 +389,19 @@
 			simulatedWidthPx = 0;
 			simulatedHeightPx = 0;
 		}
+		if (isScaledMobile) {
+			const base = Math.max(baseWidthMobile || effectiveBaseWidth || baseWidth || MOBILE_BASE_WIDTH, 1);
+			const availableWidth = browserWidth > 0 ? browserWidth : MOBILE_BASE_WIDTH;
+			mobileTargetWidth = Math.min(MOBILE_BASE_WIDTH, Math.max(availableWidth, 1));
+			mobileScale = Math.min(1, mobileTargetWidth / base);
+			scaledViewportWidth = base * mobileScale;
+			scaledViewportHeight = baseHeight * mobileScale;
+		} else {
+			mobileScale = 1;
+			scaledViewportWidth = 0;
+			scaledViewportHeight = 0;
+			mobileTargetWidth = 0;
+		}
 	}
 
 	function getStyle(item, frame = null) {
@@ -374,6 +435,20 @@
 		transform-origin:top left;
 	`;
 		}
+		if (isScaledMobile) {
+			return `
+		position:absolute;
+		left:${x}px;
+		top:${y}px;
+		width:${width}px;
+		height:${height}px;
+		z-index:${z};
+		opacity:${opacity};
+		overflow:${overflow};
+		transform:rotate(${rotation}deg);
+		transform-origin:top left;
+	`;
+		}
 		const baseWidth = effectiveBaseWidth || (isMobile ? baseWidthMobile : baseWidthDesktop) || 1;
 		return `
 		position:absolute;
@@ -391,7 +466,7 @@
 
 	function updateScrollMetrics() {
 		if (!viewportRef) return;
-		if (isSimulatedMobile) {
+		if (isSimulatedMobile || isScaledMobile) {
 			hasHorizontalScroll = false;
 			horizontalThumbSize = 100;
 			horizontalThumbOffset = 0;
@@ -400,7 +475,7 @@
 			viewportRef;
 		const horizontalRange = Math.max(scrollWidth - clientWidth, 0);
 		const verticalRange = Math.max(scrollHeight - clientHeight, 0);
-		hasHorizontalScroll = !isSimulatedMobile && horizontalRange > 1;
+		hasHorizontalScroll = !isSimulatedMobile && !isScaledMobile && horizontalRange > 1;
 		hasVerticalScroll = verticalRange > 1;
 
 		if (hasHorizontalScroll) {
@@ -502,10 +577,12 @@
 	<div
 		class="free-canvas__viewport"
 		class:simulated-mobile={isSimulatedMobile}
+		class:scaled-mobile={isScaledMobile}
 		bind:this={viewportRef}
 		on:scroll={handleScroll}
 	>
-		<div class="free-canvas__content" bind:this={contentRef} style={getContentStyle()}>
+		<div class="free-canvas__scale-wrapper" style={getScaleWrapperStyle()}>
+			<div class="free-canvas__content" bind:this={contentRef} style={getContentStyle()}>
 			{#if shouldRenderBackgroundVideo}
 				<video
 					class="free-canvas__background-video"
@@ -581,6 +658,7 @@
 					{/if}
 				</div>
 			{/each}
+			</div>
 		</div>
 	</div>
 	<div
@@ -620,6 +698,18 @@
 
 	.free-canvas__viewport.simulated-mobile {
 		overflow-x: hidden;
+	}
+
+	.free-canvas__viewport.scaled-mobile {
+		display: flex;
+		justify-content: center;
+		align-items: flex-start;
+	}
+
+	.free-canvas__scale-wrapper {
+		position: relative;
+		width: 100%;
+		height: 100%;
 	}
 
 	.free-canvas__viewport::-webkit-scrollbar {

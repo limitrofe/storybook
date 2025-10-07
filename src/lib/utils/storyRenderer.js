@@ -222,6 +222,48 @@ export function parseStoryComponents(paragraphs) {
 				component.lightbox = paragraph.lightbox;
 				break;
 
+			case 'globoplayer-carousel':
+			case 'globoplay-carousel':
+			case 'globoplayer-carrossel':
+			case 'globoplay-carrossel':
+			case 'globo-carousel':
+			case 'globo-carrossel':
+			case 'carrossel-globoplay':
+			case 'carousel-globoplay':
+				component.type = 'globoplayer-carousel';
+				component.videos = paragraph.videos || paragraph.items || [];
+				component.autoplay = paragraph.autoplay !== false;
+				component.interval = paragraph.interval || 6000;
+				component.showDots = paragraph.showDots !== false;
+				component.showArrows = paragraph.showArrows !== false;
+				component.audioButtonBackground = paragraph.audioButtonBackground;
+				component.audioButtonHoverBackground = paragraph.audioButtonHoverBackground;
+				component.audioButtonTextColor = paragraph.audioButtonTextColor;
+				component.fallbackTitlePrefix =
+					paragraph.fallbackTitlePrefix || paragraph.fallbackTituloPrefixo;
+				break;
+
+			case 'globoplayer-grid-slider':
+			case 'globoplay-grid-slider':
+			case 'globoplayer-grid':
+			case 'globoplay-grid':
+			case 'grade-globoplay':
+			case 'grid-globoplay':
+				component.type = 'globoplayer-grid-slider';
+				component.slides = paragraph.slides || [];
+				component.showArrows = paragraph.showArrows !== false;
+				component.showDots = paragraph.showDots !== false;
+				component.enableDrag = paragraph.enableDrag !== false;
+				component.gapDesktop = paragraph.gapDesktop;
+				component.gapMobile = paragraph.gapMobile;
+				component.paddingDesktop = paragraph.paddingDesktop;
+				component.paddingMobile = paragraph.paddingMobile;
+				component.backgroundColor = paragraph.backgroundColor;
+				component.borderRadius = paragraph.borderRadius;
+				component.tabletBreakpoint = paragraph.tabletBreakpoint;
+				component.mobileBreakpoint = paragraph.mobileBreakpoint;
+				break;
+
 			case 'carrossel':
 			case 'carousel':
 				component.type = 'carousel';

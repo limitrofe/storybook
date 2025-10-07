@@ -227,14 +227,8 @@
 	/* Responsive Design */
 	@media (max-width: 768px) {
 		.story-text {
-			width: var(
-				--story-text-width-mobile,
-				var(--story-text-width-desktop, auto)
-			);
-			max-width: var(
-				--story-text-max-width-mobile,
-				var(--story-text-max-width-desktop, 700px)
-			);
+			width: var(--story-text-width-mobile, var(--story-text-width-desktop, auto));
+			max-width: var(--story-text-max-width-mobile, var(--story-text-max-width-desktop, 700px));
 		}
 
 		.story-text--body {

@@ -3,6 +3,9 @@
 	import ScrollyStepsEditor from './editors/ScrollyStepsEditor.svelte';
 	import GalleryItemsEditor from './editors/GalleryItemsEditor.svelte';
 	import CarouselItemsEditor from './editors/CarouselItemsEditor.svelte';
+	import GloboPlayerSlidesEditor from './editors/GloboPlayerSlidesEditor.svelte';
+	import GloboPlayerGridSliderEditor from './editors/GloboPlayerGridSliderEditor.svelte';
+	import ContentGridItemsEditor from './editors/ContentGridItemsEditor.svelte';
 	import ListItemsEditor from './editors/ListItemsEditor.svelte';
 	import RichTextEditor from './RichTextEditor.svelte';
 	import FlourishScrollyStepsEditor from './editors/FlourishScrollyStepsEditor.svelte';
@@ -194,6 +197,14 @@
 					on:change={(event) => dispatch('change', { value: event.detail.value })}
 				/>
 			{/if}
+		{:else if field.type === 'content-grid-items'}
+			{#if field.label}
+				<span class="field-label">{field.label}</span>
+			{/if}
+			<ContentGridItemsEditor
+				value={value ?? []}
+				on:change={(event) => dispatch('change', { value: event.detail.value })}
+			/>
 		{:else}
 			<label>
 				<span>{field.label}</span>
@@ -261,6 +272,16 @@
 						value={value ?? []}
 						on:change={(event) => dispatch('change', { value: event.detail.value })}
 					/>
+				{:else if field.type === 'globoplayer-slides'}
+					<GloboPlayerSlidesEditor
+						value={value ?? []}
+						on:change={(event) => dispatch('change', { value: event.detail.value })}
+					/>
+				{:else if field.type === 'globoplayer-grid-slides'}
+					<GloboPlayerGridSliderEditor
+						value={value ?? []}
+						on:change={(event) => dispatch('change', { value: event.detail.value })}
+					/>
 				{:else if field.type === 'flourish-scrolly-steps'}
 					<FlourishScrollyStepsEditor
 						value={value ?? []}
@@ -302,8 +323,11 @@
 		font-size: 0.75rem;
 	}
 
-	.richtext-field .field-label {
+	.richtext-field .field-label,
+	.field-editor > .field-label {
 		font-weight: 600;
+		font-size: 0.75rem;
+		color: #1e293b;
 	}
 
 	label {

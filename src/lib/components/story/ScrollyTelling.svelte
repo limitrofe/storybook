@@ -184,7 +184,9 @@
 
 	$: mediaSources = renderedSteps.map((step) => {
 		const media = resolveMedia(step);
-		const transitionKey = sanitizeTransitionKey(step.backgroundTransition || DEFAULT_STEP.backgroundTransition);
+		const transitionKey = sanitizeTransitionKey(
+			step.backgroundTransition || DEFAULT_STEP.backgroundTransition
+		);
 		const preset = TRANSITION_PRESETS[transitionKey] || DEFAULT_TRANSITION_PRESET;
 		const transitionDuration = step.backgroundTransitionDuration || DEFAULT_TRANSITION_DURATION;
 		const transitionEasing = step.backgroundTransitionEasing || DEFAULT_TRANSITION_EASING;
@@ -228,13 +230,13 @@
 		bind:offset={stepOffset}
 	>
 		<div slot="background" class="background-container-fixed">
-		{#each mediaSources as media, i}
-			<div
-				class={`media-wrapper transition-${media.transitionKey || 'fade'}`}
-				class:active={i === activeMediaIndex}
-				style={media.style}
-				data-transition={media.transitionKey}
-			>
+			{#each mediaSources as media, i}
+				<div
+					class={`media-wrapper transition-${media.transitionKey || 'fade'}`}
+					class:active={i === activeMediaIndex}
+					style={media.style}
+					data-transition={media.transitionKey}
+				>
 					{#if media.type === 'image' && media.src}
 						<img src={media.src} alt={media.alt} loading="lazy" />
 					{:else if media.type === 'video' && media.src}
@@ -256,7 +258,7 @@
 
 		<div slot="foreground" class="steps-foreground">
 			<section class="spacer-top"></section>
-	{#each renderedSteps as step, i}
+			{#each renderedSteps as step, i}
 				<div class="step-wrapper">
 					<!-- 🆕 CONDICIONAL: Usa StepEnhanced se tem textConfig.elements, senão usa Step original -->
 					{#if hasAdvancedConfig(step)}
@@ -336,10 +338,14 @@
 		transform: var(--media-transform-inactive, scale(1) translate3d(0, 0, 0));
 		transform-origin: var(--media-transform-origin, center center);
 		transition:
-			var(--media-transition-enabled, opacity var(--media-transition-duration, 0.6s)
-					var(--media-transition-easing, ease)),
-			var(--media-transition-enabled, transform var(--media-transition-duration, 0.6s)
-					var(--media-transition-easing, ease));
+			var(
+				--media-transition-enabled,
+				opacity var(--media-transition-duration, 0.6s) var(--media-transition-easing, ease)
+			),
+			var(
+				--media-transition-enabled,
+				transform var(--media-transition-duration, 0.6s) var(--media-transition-easing, ease)
+			);
 		pointer-events: none;
 		display: flex;
 		flex-direction: column;
@@ -401,7 +407,7 @@
 	}
 	.spacer-bottom {
 		height: var(--scrolly-spacer-bottom, 60vh);
-}
+	}
 	.component-spacer {
 		height: var(--scrolly-component-spacer, 0vh);
 		background: transparent;
