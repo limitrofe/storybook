@@ -164,6 +164,34 @@
 		return merged;
 	}
 
+	function bodyPortal(node) {
+		if (typeof document === 'undefined') {
+			return {};
+		}
+
+		const target = document.body;
+		if (!target) {
+			return {};
+		}
+
+		const originalParent = node.parentNode;
+		const placeholder = document.createComment('free-canvas-modal-placeholder');
+		originalParent?.insertBefore(placeholder, node);
+		target.appendChild(node);
+
+		return {
+			destroy() {
+				if (node.parentNode === target) {
+					target.removeChild(node);
+				}
+
+				if (placeholder.parentNode) {
+					placeholder.parentNode.removeChild(placeholder);
+				}
+			}
+		};
+	}
+
 	function ensureItem(item) {
 		if (!item || typeof item !== 'object') return null;
 		const base = DEFAULT_ITEM(item.type || 'text');
@@ -1623,62 +1651,66 @@
 	{#if isCanvasModalOpen}
 		<div class="preview-area__backdrop" on:click={closeCanvasModal}></div>
 	{/if}
-</div>
+	</div>
 
-{#if editingItem}
-	<div class="free-canvas-modal-backdrop" on:click={closeItemModal}>
-		<div class="free-canvas-modal" on:click|stopPropagation>
-			<header>
-				<h2>
-					Editar
+	{#if editingItem}
+		<div
+			class="free-canvas-modal-backdrop"
+			on:click={closeItemModal}
+			use:bodyPortal
+		>
+			<div class="free-canvas-modal" on:click|stopPropagation>
+				<header>
+					<h2>
+						Editar
+						{#if editingItem.type === 'text'}
+							texto
+						{:else if editingItem.type === 'image'}
+							imagem
+						{:else if editingItem.type === 'video'}
+							vídeo
+						{:else if editingItem.type === 'globo-player'}
+							Globo Player
+						{:else}
+							{editingItem.type}
+						{/if}
+					</h2>
+					<button type="button" class="toolbar-button" on:click={closeItemModal} title="Fechar"
+						>✕</button
+					>
+				</header>
+				<div class="modal-body">
 					{#if editingItem.type === 'text'}
-						texto
-					{:else if editingItem.type === 'image'}
-						imagem
-					{:else if editingItem.type === 'video'}
-						vídeo
-					{:else if editingItem.type === 'globo-player'}
-						Globo Player
-					{:else}
-						{editingItem.type}
-					{/if}
-				</h2>
-				<button type="button" class="toolbar-button" on:click={closeItemModal} title="Fechar"
-					>✕</button
-				>
-			</header>
-			<div class="modal-body">
-				{#if editingItem.type === 'text'}
-					<RichTextEditor
-						value={selectedItem?.content || ''}
-						rows={10}
-						on:change={(event) => {
-							const html = event.detail.value;
-							updateItem(selectedItem.id, (draft) => (draft.content = html));
-							emit();
-						}}
-					/>
-					<div class="modal-grid">
-						<label class="color-control">
-							<span>Cor do texto</span>
-							<ColorPicker
-								label={null}
-								value={selectedItem.textStyles?.color ?? ''}
-								showPresets={false}
-								showAlpha={true}
-								allowClear={true}
-								clearValue="transparent"
-								on:change={(event) => setTextValue('color', event.detail.value)}
-							/>
-						</label>
-						<label>
-							Tipografia (usa HTML automático)
-							<select
-								value={selectedItem.textStyles?.typography || ''}
-								on:change={(e) => setTextValue('typography', e.currentTarget.value)}
-							>
-								{#each TYPOGRAPHY_OPTIONS as option}
-									<option value={option.value}>{option.label}</option>
+						<RichTextEditor
+							value={selectedItem?.content || ''}
+							rows={10}
+							on:change={(event) => {
+								const html = event.detail.value;
+								updateItem(selectedItem.id, (draft) => (draft.content = html));
+								emit();
+							}}
+						/>
+						<div class="modal-grid">
+							<label class="color-control">
+								<span>Cor do texto</span>
+								<ColorPicker
+									label={null}
+									value={selectedItem.textStyles?.color ?? ''}
+									showPresets={false}
+									showAlpha={true}
+									allowClear={true}
+									clearValue="transparent"
+									on:change={(event) => setTextValue('color', event.detail.value)}
+								/>
+							</label>
+							<label>
+								Tipografia (usa HTML automático)
+								<select
+									value={selectedItem.textStyles?.typography || ''}
+									on:change={(e) => setTextValue('typography', e.currentTarget.value)}
+								>
+									{#each TYPOGRAPHY_OPTIONS as option}
+										<option value={option.value}>{option.label}</option>
 								{/each}
 							</select>
 						</label>
@@ -2460,7 +2492,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		z-index: 1000;
+		z-index: 999999;
 		backdrop-filter: blur(4px);
 	}
 

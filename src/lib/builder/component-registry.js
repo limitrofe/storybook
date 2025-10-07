@@ -855,6 +855,10 @@ export const componentRegistry = [
 			caption: '',
 			credit: '',
 			fullWidth: false,
+			widthDesktop: 'min(100%, 800px)',
+			widthMobile: '100%',
+			alignDesktop: 'center',
+			alignMobile: 'center',
 			link: '',
 			target: '_blank'
 		},
@@ -871,6 +875,41 @@ export const componentRegistry = [
 			{ path: 'caption', label: 'Legenda (HTML)', type: 'richtext', rows: 3 },
 			{ path: 'credit', label: 'Crédito', type: 'text' },
 			{ path: 'fullWidth', label: 'Ocupar largura total', type: 'boolean' },
+			{
+				path: 'widthDesktop',
+				label: 'Largura desktop',
+				type: 'text',
+				placeholder: 'min(100%, 800px)',
+				description: 'Aceita %, px, vw, clamp, etc.'
+			},
+			{
+				path: 'widthMobile',
+				label: 'Largura mobile',
+				type: 'text',
+				placeholder: '100%'
+			},
+			{
+				path: 'alignDesktop',
+				label: 'Alinhamento desktop',
+				type: 'select',
+				options: [
+					{ label: 'Esquerda', value: 'left' },
+					{ label: 'Centralizado', value: 'center' },
+					{ label: 'Direita', value: 'right' }
+				],
+				description: 'Aplicado quando a largura for menor que 100%.'
+			},
+			{
+				path: 'alignMobile',
+				label: 'Alinhamento mobile',
+				type: 'select',
+				options: [
+					{ label: 'Esquerda', value: 'left' },
+					{ label: 'Centralizado', value: 'center' },
+					{ label: 'Direita', value: 'right' }
+				],
+				description: 'Aplicado quando a largura for menor que 100%.'
+			},
 			{ path: 'link', label: 'Link opcional', type: 'url' },
 			{
 				path: 'target',

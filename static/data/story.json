@@ -345,7 +345,11 @@
         "textColor": "",
         "paddingTop": "6rem",
         "paddingBottom": "0"
-      }
+      },
+      "alignDesktop": "center",
+      "alignMobile": "center",
+      "widthDesktop": "300px",
+      "widthMobile": "70%"
     },
     {
       "type": "globo-player",
@@ -450,11 +454,11 @@
     },
     {
       "type": "free-canvas",
-      "minHeightDesktop": 1300,
-      "maxHeightDesktop": 1300,
+      "minHeightDesktop": 1400,
+      "maxHeightDesktop": 1400,
       "minHeightMobile": 900,
       "maxHeightMobile": 900,
-      "baseWidthDesktop": 1204,
+      "baseWidthDesktop": 980,
       "baseWidthMobile": 350,
       "backgroundSource": "color",
       "backgroundColorDesktop": "#081533",
@@ -506,8 +510,8 @@
             "typography": ""
           },
           "desktop": {
-            "x": 100.2777299815167,
-            "y": 48.91857050218988,
+            "x": 30.30938968264303,
+            "y": 53.44966428806212,
             "width": 200,
             "height": 330,
             "z": 1,
@@ -558,10 +562,10 @@
             "typography": "h3"
           },
           "desktop": {
-            "x": 310.8834672463065,
-            "y": 52.39520975133938,
+            "x": 244.70886736005605,
+            "y": 65.92736336816861,
             "width": 260,
-            "height": 120,
+            "height": 71.85628581727008,
             "z": 1,
             "opacity": 1
           },
@@ -577,7 +581,7 @@
         {
           "id": "1e6ab1fa-3be5-48d9-a8b1-a590f54856fa",
           "type": "text",
-          "content": "Ex-amante de Fátima, descobriu que herdaria metade da fortuna da esposa com a morte dela.",
+          "content": "Ex-amante de Fátima, descobriu que herdaria metade da fortuna da esposa com a morte dela.&nbsp;&nbsp;",
           "src": "",
           "srcMobile": "",
           "alt": "",
@@ -610,10 +614,10 @@
             "typography": ""
           },
           "desktop": {
-            "x": 310.86397498077406,
-            "y": 123.61291108627951,
+            "x": 245.83169975048972,
+            "y": 160.58755329510876,
             "width": 260,
-            "height": 120,
+            "height": 119.7604763621168,
             "z": 1,
             "opacity": 1
           },
@@ -662,8 +666,8 @@
             "typography": ""
           },
           "desktop": {
-            "x": 948,
-            "y": 651.535210345219,
+            "x": 758.1315507332777,
+            "y": 666.1905861990182,
             "width": 200,
             "height": 330,
             "z": 1,
@@ -714,10 +718,10 @@
             "typography": "h3"
           },
           "desktop": {
-            "x": 635.799784913714,
-            "y": 651.535210345219,
+            "x": 436.85191155324947,
+            "y": 666.2364320046088,
             "width": 300,
-            "height": 120,
+            "height": 71.85628581727008,
             "z": 1,
             "opacity": 1
           },
@@ -733,7 +737,7 @@
         {
           "id": "46bee092-1bb9-4cfa-ae9d-35e7ba755487",
           "type": "text",
-          "content": "A revelação de Leonardo foi o ponto final da relação das irmãs. Celina não perdoa Odete por ter deixado Heleninha se sentir culpada pela morte do irmão durante todos estes anos.  ",
+          "content": "A revelação de Leonardo foi o ponto final da relação das irmãs. Celina não perdoa Odete por ter deixado Heleninha se sentir culpada pela morte do irmão durante todos estes anos.&nbsp;",
           "src": "",
           "srcMobile": "",
           "alt": "",
@@ -766,10 +770,10 @@
             "typography": ""
           },
           "desktop": {
-            "x": 675.6302802113057,
-            "y": 723.0496812778661,
-            "width": 260,
-            "height": 120,
+            "x": 415.95963734607443,
+            "y": 762.73686698414,
+            "width": 320,
+            "height": 167.6646669069635,
             "z": 1,
             "opacity": 1
           },
@@ -821,7 +825,7 @@
             "x": 347.68094946086717,
             "y": 498.4375003456779,
             "width": 260,
-            "height": 120,
+            "height": 23.95209527242336,
             "z": 1,
             "opacity": 1
           },
@@ -870,8 +874,8 @@
             "typography": ""
           },
           "desktop": {
-            "x": 311.4101490759682,
-            "y": 192.71691023185295,
+            "x": 243.70353518623145,
+            "y": 274.35300805353756,
             "width": 640,
             "height": 360,
             "z": 1,
@@ -922,8 +926,8 @@
             "typography": ""
           },
           "desktop": {
-            "x": 293.6176090979091,
-            "y": 841.2050922323403,
+            "x": 96.2246726437262,
+            "y": 942.3753237194252,
             "width": 640,
             "height": 360,
             "z": 1,
@@ -955,11 +959,11 @@
     },
     {
       "type": "free-canvas",
-      "minHeightDesktop": 1200,
-      "maxHeightDesktop": 1200,
+      "minHeightDesktop": 1400,
+      "maxHeightDesktop": 1400,
       "minHeightMobile": 920,
       "maxHeightMobile": 920,
-      "baseWidthDesktop": 1198,
+      "baseWidthDesktop": 980,
       "baseWidthMobile": 350,
       "backgroundSource": "color",
       "backgroundColorDesktop": "#081533",
@@ -1011,8 +1015,8 @@
             "typography": ""
           },
           "desktop": {
-            "x": 100.2777299815167,
-            "y": 48.91857050218988,
+            "x": 22.758259071241724,
+            "y": 49.843395521277415,
             "width": 200,
             "height": 330,
             "z": 1,
@@ -1063,10 +1067,10 @@
             "typography": "h3"
           },
           "desktop": {
-            "x": 311.10957752648346,
-            "y": 52.033418575361836,
+            "x": 231.55230252242598,
+            "y": 55.426569679876096,
             "width": 260,
-            "height": 120,
+            "height": 71.85628581727008,
             "z": 1,
             "opacity": 1
           },
@@ -1082,7 +1086,7 @@
         {
           "id": "1e6ab1fa-3be5-48d9-a8b1-a590f54856fa",
           "type": "text",
-          "content": "Antigas aliadas, Fátima e Odete se tornaram inimigas. Grávida de César, Fátima chantageava Odete com o segredo de Leonardo e chegou a ser sequestrada pela empresária.   ",
+          "content": "Antigas aliadas, Fátima e Odete se tornaram inimigas. Grávida de César, Fátima chantageava Odete com o segredo de Leonardo e chegou a ser sequestrada pela empresária.&nbsp; &nbsp;",
           "src": "",
           "srcMobile": "",
           "alt": "",
@@ -1115,10 +1119,10 @@
             "typography": ""
           },
           "desktop": {
-            "x": 311.6124403161221,
-            "y": 118.8105262953438,
-            "width": 260,
-            "height": 120,
+            "x": 231.78165530356304,
+            "y": 163.57696392280536,
+            "width": 300,
+            "height": 167.6646669069635,
             "z": 1,
             "opacity": 1
           },
@@ -1167,8 +1171,8 @@
             "typography": ""
           },
           "desktop": {
-            "x": 968.6393144639181,
-            "y": 625.0071661923861,
+            "x": 719.792291766389,
+            "y": 764.3676943500441,
             "width": 200,
             "height": 330,
             "z": 1,
@@ -1219,10 +1223,10 @@
             "typography": "h3"
           },
           "desktop": {
-            "x": 691.7581808043931,
-            "y": 623.7363838809051,
+            "x": 448.40115032168546,
+            "y": 768.9966413590572,
             "width": 260,
-            "height": 120,
+            "height": 71.85628581727008,
             "z": 1,
             "opacity": 1
           },
@@ -1238,7 +1242,7 @@
         {
           "id": "46bee092-1bb9-4cfa-ae9d-35e7ba755487",
           "type": "text",
-          "content": "A artista descobriu que o irmão que ela passou anos achando ter matado em um acidente de carro está vivo e que tudo foi armação da própria mãe.  ",
+          "content": "A artista descobriu que o irmão que ela passou anos achando ter matado em um acidente de carro está vivo e que tudo foi armação da própria mãe.&nbsp;&nbsp;",
           "src": "",
           "srcMobile": "",
           "alt": "",
@@ -1271,10 +1275,10 @@
             "typography": ""
           },
           "desktop": {
-            "x": 690.7407101422738,
-            "y": 691.6881132145325,
-            "width": 260,
-            "height": 120,
+            "x": 406.89044828022674,
+            "y": 873.5626413304776,
+            "width": 300,
+            "height": 143.71257163454015,
             "z": 1,
             "opacity": 1
           },
@@ -1326,7 +1330,7 @@
             "x": 347.68094946086717,
             "y": 498.4375003456779,
             "width": 260,
-            "height": 120,
+            "height": 23.95209527242336,
             "z": 1,
             "opacity": 1
           },
@@ -1375,8 +1379,8 @@
             "typography": ""
           },
           "desktop": {
-            "x": 312.2093319628003,
-            "y": 231.43244803248925,
+            "x": 232.19283350098902,
+            "y": 350.7093630804613,
             "width": 640,
             "height": 360,
             "z": 1,
@@ -1427,8 +1431,8 @@
             "typography": ""
           },
           "desktop": {
-            "x": 310.4667234241955,
-            "y": 803.8384192065524,
+            "x": 67.48004597711287,
+            "y": 1027.8123413405476,
             "width": 640,
             "height": 360,
             "z": 1,
@@ -1464,7 +1468,7 @@
       "maxHeightDesktop": 680,
       "minHeightMobile": 450,
       "maxHeightMobile": 450,
-      "baseWidthDesktop": 1198,
+      "baseWidthDesktop": 980,
       "baseWidthMobile": 350,
       "backgroundSource": "color",
       "backgroundColorDesktop": "#081533",
@@ -1516,8 +1520,8 @@
             "typography": ""
           },
           "desktop": {
-            "x": 100.2777299815167,
-            "y": 48.91857050218988,
+            "x": 29.3687682448454,
+            "y": 48.4624515004201,
             "width": 200,
             "height": 330,
             "z": 1,
@@ -1568,10 +1572,10 @@
             "typography": "h3"
           },
           "desktop": {
-            "x": 311.10957752648346,
-            "y": 52.033418575361836,
-            "width": 260,
-            "height": 120,
+            "x": 239.8341612071937,
+            "y": 61.54564391141538,
+            "width": 400,
+            "height": 71.85628581727008,
             "z": 1,
             "opacity": 1
           },
@@ -1620,10 +1624,10 @@
             "typography": ""
           },
           "desktop": {
-            "x": 313.5344027455514,
-            "y": 128.84463515520045,
-            "width": 260,
-            "height": 120,
+            "x": 240.4773934022549,
+            "y": 166.65962931901987,
+            "width": 300,
+            "height": 95.80838108969344,
             "z": 1,
             "opacity": 1
           },
@@ -1675,7 +1679,7 @@
             "x": 698.9703190514151,
             "y": 0,
             "width": 260,
-            "height": 120,
+            "height": 23.95209527242336,
             "z": 1,
             "opacity": 1
           },
@@ -1727,7 +1731,7 @@
             "x": 676.1409775682571,
             "y": 55.3627077361368,
             "width": 260,
-            "height": 120,
+            "height": 23.95209527242336,
             "z": 1,
             "opacity": 1
           },
@@ -1779,7 +1783,7 @@
             "x": 347.68094946086717,
             "y": 498.4375003456779,
             "width": 260,
-            "height": 120,
+            "height": 23.95209527242336,
             "z": 1,
             "opacity": 1
           },
@@ -1831,7 +1835,7 @@
             "x": 712.619437178892,
             "y": 34.37343672188439,
             "width": 260,
-            "height": 120,
+            "height": 23.95209527242336,
             "z": 1,
             "opacity": 1
           },
@@ -1880,8 +1884,8 @@
             "typography": ""
           },
           "desktop": {
-            "x": 314.8446862627933,
-            "y": 220.68831127097948,
+            "x": 241.3120656526941,
+            "y": 287.09845823805824,
             "width": 640,
             "height": 360,
             "z": 1,
@@ -2164,7 +2168,7 @@
     },
     {
       "type": "intertitulo",
-      "text": "<b>‘Eu vou matar o Odete Roitman, isso é um fato.’&nbsp;</b>",
+      "text": "<b>‘Porque a gente gravou com os cinco suspeitos matando e não matando’&nbsp;</b>",
       "subtitle": "",
       "backgroundColor": "",
       "textColor": "#0a1533",
@@ -2206,7 +2210,7 @@
     },
     {
       "type": "texto",
-      "text": "<p>Autora da nova versão, Manuela Dias já tinha garantido que teríamos esta morte.&nbsp; &nbsp;</p>",
+      "text": "<p>Ao <u><b><a href=\"https://g1.globo.com/fantastico/\">Fantástico</a></b></u>, Manuela Dias revelou que foram gravados dez finais. A autora contou que apenas duas pessoas sabem a identidade do assassino: ela e Paulo Silvestrini, diretor artístico da novela:&nbsp;&nbsp;</p>",
       "variant": "body",
       "align": "left",
       "maxWidth": "720px",
@@ -2246,9 +2250,9 @@
     },
     {
       "type": "citacao",
-      "text": "<p>‘Acho que eu já sei quem vai matar o Odete na trama. Descobri isso há um tempo, mas não ousei falar em voz alta. Nem a minha equipe sabe. Mas também me reservo o direito de mudar de ideia. Vamos ver.’&nbsp;</p>",
-      "author": "",
-      "role": "",
+      "text": "<p>\"Até esse momento nem os atores têm certeza\"</p>",
+      "author": "Manuela Dias",
+      "role": "Autora",
       "fontSizeDesktop": "",
       "fontSizeMobile": "",
       "lineHeightDesktop": "",

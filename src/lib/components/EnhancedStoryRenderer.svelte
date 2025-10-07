@@ -386,10 +386,18 @@
 						{:else if componentType === 'photo'}
 							<PhotoWithCaption
 								src={paragraph.src || paragraph.url || paragraph.image}
+								srcMobile={paragraph.srcMobile || paragraph.src}
 								alt={paragraph.alt || paragraph.text}
 								caption={paragraph.caption || paragraph.legenda}
 								credit={paragraph.credit || paragraph.credito}
 								fullWidth={paragraph.fullWidth === 'true'}
+								widthDesktop={paragraph.widthDesktop || paragraph.width?.desktop || ''}
+								widthMobile={paragraph.widthMobile || paragraph.width?.mobile || ''}
+								alignDesktop={paragraph.alignDesktop || paragraph.alignmentDesktop || ''}
+								alignMobile={paragraph.alignMobile || paragraph.alignmentMobile || ''}
+								alignment={paragraph.alignment}
+								link={paragraph.link}
+								target={paragraph.target || '_self'}
 							/>
 						{:else if componentType === 'video'}
 							<VideoPlayer

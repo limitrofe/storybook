@@ -6,13 +6,75 @@
 	export let credit = '';
 	export let fullWidth = false;
 	export let link = ''; // Nova prop para o link
-	export let target = '_self'; // Nova prop para o target do link
-</script>
+export let target = '_self'; // Nova prop para o target do link
 
-<figure class="photo-with-caption" class:full-width={fullWidth}>
+const DEFAULT_WIDTH_DESKTOP = 'min(100%, 800px)';
+const DEFAULT_WIDTH_MOBILE = '100%';
+
+export let widthDesktop = DEFAULT_WIDTH_DESKTOP;
+export let widthMobile = DEFAULT_WIDTH_MOBILE;
+
+// Mantém compatibilidade com versões antigas que usavam apenas `alignment`
+export let alignment = undefined;
+export let alignDesktop = undefined;
+export let alignMobile = undefined;
+
+const VALID_ALIGNMENTS = ['left', 'center', 'right'];
+
+function normalizeAlignment(value, fallback = 'center') {
+	if (typeof value !== 'string') {
+		return fallback;
+	}
+	const normalized = value.trim().toLowerCase();
+	return VALID_ALIGNMENTS.includes(normalized) ? normalized : fallback;
+}
+
+function normalizeWidth(value, fallback) {
+	if (typeof value !== 'string') {
+		if (value === 0) {
+			return '0';
+		}
+		return fallback;
+	}
+	const trimmed = value.trim();
+	return trimmed || fallback;
+}
+
+$: normalizedWidthMobile = normalizeWidth(widthMobile, DEFAULT_WIDTH_MOBILE);
+
+$: computedWidthMobile = fullWidth ? '100%' : normalizedWidthMobile;
+
+$: desktopFallback =
+	normalizedWidthMobile === DEFAULT_WIDTH_MOBILE
+		? DEFAULT_WIDTH_DESKTOP
+		: normalizedWidthMobile;
+
+$: computedWidthDesktop = fullWidth
+	? '100%'
+	: normalizeWidth(widthDesktop, desktopFallback);
+
+$: computedAlignMobile = normalizeAlignment(
+	alignMobile ?? alignment,
+	'center'
+);
+
+$: computedAlignDesktop = normalizeAlignment(
+	alignDesktop ?? alignment,
+	computedAlignMobile
+);
+
+$: computedRel = target === '_blank' ? 'noopener noreferrer' : undefined;
+</script>
+<figure
+	class="photo-with-caption"
+	class:full-width={fullWidth}
+	style="--photo-width-mobile: {computedWidthMobile}; --photo-width-desktop: {computedWidthDesktop};"
+	data-align-mobile={computedAlignMobile}
+	data-align-desktop={computedAlignDesktop}
+>
 	<div class="photo-with-caption__image">
 		{#if link}
-			<a href={link} {target} class="photo-link">
+			<a href={link} target={target} rel={computedRel} class="photo-link">
 				{#if srcMobile}
 					<!-- Versão responsiva com picture -->
 					<picture>
@@ -48,13 +110,41 @@
 <style>
 	.photo-with-caption {
 		margin: 2rem auto;
-		max-width: 800px;
+		width: var(--photo-width-mobile, 100%);
+		max-width: 100%;
+	}
+
+	.photo-with-caption[data-align-mobile='left'] {
+		margin-left: 0;
+		margin-right: auto;
+	}
+
+	.photo-with-caption[data-align-mobile='right'] {
+		margin-left: auto;
+		margin-right: 0;
 	}
 
 	.photo-with-caption.full-width {
-		max-width: 100%;
+		width: 100% !important;
+		max-width: none;
 		margin-left: 0;
 		margin-right: 0;
+	}
+
+	@media (min-width: 769px) {
+		.photo-with-caption {
+			width: var(--photo-width-desktop, var(--photo-width-mobile, 100%));
+		}
+
+		.photo-with-caption[data-align-desktop='left'] {
+			margin-left: 0;
+			margin-right: auto;
+		}
+
+		.photo-with-caption[data-align-desktop='right'] {
+			margin-left: auto;
+			margin-right: 0;
+		}
 	}
 
 	.photo-with-caption__image {

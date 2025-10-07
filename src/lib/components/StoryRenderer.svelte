@@ -802,14 +802,20 @@
 							typography={storyData.appearance?.typography || {}}
 						/>
 					{:else if componentType === 'photo'}
-						<PhotoWithCaption
-							src={props.src}
-							srcMobile={props.srcMobile || props.src}
-							alt={props.alt || ''}
-							caption={props.caption || ''}
-							credit={props.credit || ''}
-							fullWidth={stringToBoolean(props.fullWidth, false)}
-							alignment={props.alignment || 'center'}
+							<PhotoWithCaption
+								src={props.src}
+								srcMobile={props.srcMobile || props.src}
+								alt={props.alt || ''}
+								caption={props.caption || ''}
+								credit={props.credit || ''}
+								fullWidth={stringToBoolean(props.fullWidth, false)}
+								widthDesktop={props.widthDesktop || props.width?.desktop || ''}
+								widthMobile={props.widthMobile || props.width?.mobile || ''}
+								alignDesktop={props.alignDesktop || props.alignmentDesktop || ''}
+								alignMobile={props.alignMobile || props.alignmentMobile || ''}
+								alignment={props.alignment}
+								link={props.link}
+								target={props.target || '_self'}
 						/>
 						<!-- Video - ATUALIZADO COM NOVAS PROPS -->
 						<!-- Video - ATUALIZADO COM NOVAS PROPS -->
