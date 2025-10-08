@@ -31,6 +31,7 @@ export { default as FreeCanvas } from './FreeCanvas.svelte';
 export { default as ResponsiveMediaLayout } from './ResponsiveMediaLayout.svelte';
 export { default as FlexibleLayout } from './FlexibleLayout.svelte';
 export { default as ContentGrid } from './ContentGrid.svelte';
+export { default as MediaTextLayout } from './MediaTextLayout.svelte';
 export { default as Curiosidades } from './Curiosidades.svelte';
 
 // Add other component exports here

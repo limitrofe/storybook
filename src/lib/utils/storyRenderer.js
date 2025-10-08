@@ -159,6 +159,157 @@ export function parseStoryComponents(paragraphs) {
 				component.whiteSpaceMobile = paragraph.whiteSpaceMobile;
 				break;
 
+			case 'media-text':
+			case 'media_text':
+			case 'media-copy':
+			case 'media-text-layout':
+			case 'duas-colunas':
+			case 'media-columns':
+				component.type = 'media-text';
+
+				// Media definitions
+				const media = paragraph.media || {};
+				component.mediaType = paragraph.mediaType || media.type || 'image';
+				component.mediaSrc = paragraph.mediaSrc || media.src || media.url || '';
+				component.mediaSrcDesktop =
+					paragraph.mediaSrcDesktop || media.srcDesktop || media.desktop || component.mediaSrc;
+				component.mediaSrcMobile =
+					paragraph.mediaSrcMobile || media.srcMobile || media.mobile || component.mediaSrcDesktop;
+				component.mediaAlt = paragraph.mediaAlt || media.alt || media.description || '';
+				component.mediaPoster = paragraph.mediaPoster || media.poster || '';
+				component.mediaAutoplay =
+					paragraph.mediaAutoplay ??
+					media.autoplay ??
+					media.autoPlay ??
+					component.mediaType === 'video';
+				component.mediaLoop = paragraph.mediaLoop ?? media.loop ?? true;
+				component.mediaMuted = paragraph.mediaMuted ?? media.muted ?? true;
+				component.mediaControls = paragraph.mediaControls ?? media.controls ?? false;
+				component.mediaPlaysInline = paragraph.mediaPlaysInline ?? media.playsInline ?? true;
+				component.mediaAspectRatio =
+					paragraph.mediaAspectRatio || media.aspectRatio || paragraph.aspectRatio || '16 / 9';
+				component.mediaBackground =
+					paragraph.mediaBackground ||
+					media.background ||
+					paragraph.backgroundColor ||
+					'transparent';
+				component.mediaBorderRadius =
+					paragraph.mediaBorderRadius || media.borderRadius || paragraph.borderRadius || '0.75rem';
+				component.mediaHeightDesktop =
+					paragraph.mediaHeightDesktop ||
+					paragraph.mediaHeight ||
+					media.heightDesktop ||
+					media.mediaHeightDesktop ||
+					'';
+				component.mediaHeightMobile =
+					paragraph.mediaHeightMobile ||
+					media.heightMobile ||
+					paragraph.mediaHeight ||
+					media.mediaHeightMobile ||
+					'';
+				component.mediaPadding = paragraph.mediaPadding || media.padding || '0';
+				component.mediaCaption = paragraph.mediaCaption || paragraph.caption || media.caption || '';
+				component.mediaCredit = paragraph.mediaCredit || paragraph.credit || media.credit || '';
+				component.mediaClass = paragraph.mediaClass || '';
+
+				component.media = {
+					type: component.mediaType,
+					src: component.mediaSrc,
+					srcDesktop: component.mediaSrcDesktop,
+					srcMobile: component.mediaSrcMobile,
+					alt: component.mediaAlt,
+					poster: component.mediaPoster,
+					autoplay: component.mediaAutoplay,
+					loop: component.mediaLoop,
+					muted: component.mediaMuted,
+					controls: component.mediaControls,
+					playsInline: component.mediaPlaysInline,
+					aspectRatio: component.mediaAspectRatio,
+					background: component.mediaBackground,
+					borderRadius: component.mediaBorderRadius,
+					heightDesktop: component.mediaHeightDesktop,
+					heightMobile: component.mediaHeightMobile,
+					padding: component.mediaPadding,
+					caption: component.mediaCaption,
+					credit: component.mediaCredit
+				};
+
+				const globoPlayer = paragraph.globoPlayer ||
+					media.globoPlayer || {
+						videoId: paragraph.videoId || paragraph.globoVideoId,
+						videoIdDesktop: paragraph.videoIdDesktop || paragraph.globoVideoIdDesktop,
+						videoIdMobile: paragraph.videoIdMobile || paragraph.globoVideoIdMobile
+					};
+
+				component.globoPlayer = globoPlayer;
+
+				// Textual content
+				component.pretitle = paragraph.pretitle || paragraph.overline || paragraph.kicker || '';
+				component.title = paragraph.title || media.title || '';
+				component.subtitle = paragraph.subtitle || media.subtitle || '';
+				component.text = paragraph.text || paragraph.content || media.text || '';
+				component.blockquote =
+					paragraph.blockquote || paragraph.quote || media.blockquote || media.quote || '';
+				component.blockquoteAuthor =
+					paragraph.blockquoteAuthor ||
+					paragraph.quoteAuthor ||
+					media.blockquoteAuthor ||
+					media.quoteAuthor ||
+					'';
+				component.blockquoteRole =
+					paragraph.blockquoteRole ||
+					paragraph.quoteRole ||
+					media.blockquoteRole ||
+					media.quoteRole ||
+					'';
+				component.textOrder = paragraph.textOrder ||
+					media.textOrder || ['pretitle', 'title', 'subtitle', 'text', 'blockquote'];
+				component.textAlign = paragraph.textAlign || media.textAlign || 'left';
+				component.textColor = paragraph.textColor || media.textColor || '';
+				component.textSpacing = paragraph.textSpacing || media.textSpacing || '1.25rem';
+				component.textMaxWidth =
+					paragraph.textMaxWidth || media.textMaxWidth || paragraph.maxWidth || '560px';
+
+				// Layout
+				component.mediaPosition =
+					paragraph.mediaPosition || paragraph.layout || media.position || 'left';
+				component.verticalAlign =
+					paragraph.verticalAlign || paragraph.align || media.verticalAlign || 'center';
+				component.gapDesktop =
+					paragraph.gapDesktop || paragraph.gap || media.gapDesktop || '2.5rem';
+				component.gapMobile = paragraph.gapMobile || media.gapMobile || paragraph.gap || '1.5rem';
+				component.backgroundColor =
+					paragraph.backgroundColor ||
+					media.backgroundColor ||
+					paragraph.sectionBackground ||
+					'transparent';
+				component.paddingDesktop =
+					paragraph.paddingDesktop || paragraph.padding || media.paddingDesktop || '3rem 0';
+				component.paddingMobile =
+					paragraph.paddingMobile || media.paddingMobile || paragraph.padding || '2rem 1rem';
+				component.containerWidth = paragraph.containerWidth || media.containerWidth || '100%';
+				component.containerMaxWidth =
+					paragraph.containerMaxWidth || paragraph.maxWidth || media.containerMaxWidth || '1200px';
+				component.mediaWidthDesktop =
+					paragraph.mediaWidthDesktop ||
+					paragraph.mediaWidth ||
+					media.widthDesktop ||
+					media.mediaWidthDesktop ||
+					'minmax(0, 48%)';
+				component.textWidthDesktop =
+					paragraph.textWidthDesktop ||
+					paragraph.textWidth ||
+					media.textWidthDesktop ||
+					'minmax(0, 52%)';
+				component.mediaWidthMobile =
+					paragraph.mediaWidthMobile || media.mediaWidthMobile || paragraph.mediaWidth || '100%';
+				component.textWidthMobile =
+					paragraph.textWidthMobile || media.textWidthMobile || paragraph.textWidth || '100%';
+				component.fullWidthOnMobile =
+					paragraph.fullWidthOnMobile ?? media.fullWidthOnMobile ?? false;
+				component.shadow = paragraph.shadow || media.shadow || '';
+				break;
+
 			case 'free-canvas':
 			case 'canvas-livre':
 				component.type = 'free-canvas';

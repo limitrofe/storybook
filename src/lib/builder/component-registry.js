@@ -25,6 +25,7 @@ import AnchorPoint from '$lib/components/story/AnchorPoint.svelte';
 import FlexibleLayout from '$lib/components/story/FlexibleLayout.svelte';
 import ContentGrid from '$lib/components/story/ContentGrid.svelte';
 import ResponsiveMediaLayout from '$lib/components/story/ResponsiveMediaLayout.svelte';
+import MediaTextLayout from '$lib/components/story/MediaTextLayout.svelte';
 import FreeCanvas from '$lib/components/story/FreeCanvas.svelte';
 
 /**
@@ -2224,6 +2225,282 @@ export const componentRegistry = [
 				type: 'content-grid-items',
 				description: 'Adicione e configure cada coluna (texto, imagem, video, frase ou GloboPlay).',
 				emptyValue: []
+			}
+		]
+	},
+	{
+		type: 'media-text',
+		label: 'Mídia + Texto',
+		icon: '🖼️',
+		category: 'Layout',
+		description:
+			'Bloco em duas colunas que combina mídia (imagem, vídeo ou GloboPlayer) com textos flexíveis.',
+		component: MediaTextLayout,
+		defaultData: {
+			type: 'media-text',
+			mediaType: 'image',
+			mediaSrc: '',
+			mediaSrcDesktop: '',
+			mediaSrcMobile: '',
+			mediaAlt: 'Descrição da mídia',
+			mediaPoster: '',
+			mediaAutoplay: true,
+			mediaLoop: true,
+			mediaMuted: true,
+			mediaControls: false,
+			mediaPlaysInline: true,
+			mediaAspectRatio: '16 / 9',
+			mediaBackground: 'transparent',
+			mediaBorderRadius: '0.75rem',
+			mediaHeightDesktop: '',
+			mediaHeightMobile: '',
+			mediaPadding: '0',
+			mediaCaption: '',
+			mediaCredit: '',
+			mediaClass: '',
+			globoPlayer: {
+				videoIdDesktop: '',
+				videoIdMobile: '',
+				videoId: '',
+				containerBackgroundColor: 'transparent',
+				aspectRatio: '16 / 9',
+				aspectRatioMobile: '16 / 9',
+				startMuted: true,
+				autoPlay: false,
+				controls: true,
+				showCaption: false
+			},
+			pretitle: '',
+			title: 'Apresente seu destaque aqui',
+			subtitle: 'Use o subtítulo para complementar a chamada principal.',
+			text: '<p>Estruture o conteúdo com parágrafos, listas ou links para aprofundar a história.</p>',
+			blockquote: '',
+			blockquoteAuthor: '',
+			blockquoteRole: '',
+			textOrder: 'pretitle,title,subtitle,text,blockquote',
+			textAlign: 'left',
+			textColor: '',
+			textSpacing: '1.25rem',
+			textMaxWidth: '560px',
+			mediaPosition: 'left',
+			verticalAlign: 'center',
+			gapDesktop: '2.5rem',
+			gapMobile: '1.5rem',
+			backgroundColor: 'transparent',
+			paddingDesktop: '3rem 0',
+			paddingMobile: '2rem 1rem',
+			containerWidth: '100%',
+			containerMaxWidth: '1200px',
+			mediaWidthDesktop: 'minmax(0, 48%)',
+			textWidthDesktop: 'minmax(0, 52%)',
+			mediaWidthMobile: '100%',
+			textWidthMobile: '100%',
+			fullWidthOnMobile: false,
+			shadow: ''
+		},
+		fields: [
+			{
+				path: 'mediaType',
+				label: 'Tipo de mídia',
+				type: 'select',
+				options: [
+					{ label: 'Imagem (jpg/png/webp/gif)', value: 'image' },
+					{ label: 'Vídeo MP4', value: 'video' },
+					{ label: 'GloboPlayer', value: 'globo-player' }
+				]
+			},
+			{ path: 'mediaSrc', label: 'Mídia principal (desktop)', type: 'url' },
+			{ path: 'mediaSrcDesktop', label: 'Imagem/Vídeo desktop', type: 'url' },
+			{ path: 'mediaSrcMobile', label: 'Imagem/Vídeo mobile', type: 'url' },
+			{ path: 'mediaAlt', label: 'Texto alternativo', type: 'text' },
+			{ path: 'mediaPoster', label: 'Poster do vídeo (jpg/png)', type: 'url' },
+			{ path: 'mediaCaption', label: 'Legenda da mídia', type: 'richtext', rows: 2 },
+			{ path: 'mediaCredit', label: 'Crédito da mídia', type: 'text' },
+			{
+				path: 'mediaAutoplay',
+				label: 'Autoplay (vídeos)',
+				type: 'boolean',
+				helpText: 'Aplica-se apenas quando o tipo for vídeo.'
+			},
+			{ path: 'mediaLoop', label: 'Loop', type: 'boolean' },
+			{ path: 'mediaMuted', label: 'Começar sem áudio', type: 'boolean' },
+			{ path: 'mediaControls', label: 'Exibir controles nativos', type: 'boolean' },
+			{ path: 'mediaPlaysInline', label: 'Plays inline', type: 'boolean' },
+			{
+				path: 'mediaAspectRatio',
+				label: 'Aspect ratio da mídia',
+				type: 'text',
+				placeholder: '16 / 9'
+			},
+			{
+				path: 'mediaHeightDesktop',
+				label: 'Altura da mídia (desktop)',
+				type: 'text',
+				placeholder: 'auto',
+				description: 'Use valores CSS (ex: 420px, 60vh). Quando definido, substitui o aspect ratio.'
+			},
+			{
+				path: 'mediaHeightMobile',
+				label: 'Altura da mídia (mobile)',
+				type: 'text',
+				placeholder: 'auto',
+				description: 'Deixe vazio para herdar a altura de desktop.'
+			},
+			{ path: 'mediaBackground', label: 'Cor de fundo da mídia', type: 'color', allowClear: true },
+			{
+				path: 'mediaBorderRadius',
+				label: 'Raio da borda da mídia',
+				type: 'text',
+				placeholder: '0.75rem'
+			},
+			{ path: 'mediaPadding', label: 'Padding interno da mídia', type: 'text', placeholder: '0' },
+			{ path: 'mediaClass', label: 'Classe CSS extra para a mídia', type: 'text' },
+			{
+				path: 'shadow',
+				label: 'Sombra (box-shadow)',
+				type: 'text',
+				placeholder: '0 20px 40px rgba(15,23,42,0.35)'
+			},
+			{
+				path: 'globoPlayer.videoIdDesktop',
+				label: 'GloboPlayer • videoId desktop',
+				type: 'text',
+				description: 'Preencha quando o tipo de mídia for GloboPlayer.'
+			},
+			{ path: 'globoPlayer.videoIdMobile', label: 'GloboPlayer • videoId mobile', type: 'text' },
+			{
+				path: 'globoPlayer.videoId',
+				label: 'GloboPlayer • videoId fallback',
+				type: 'text',
+				description: 'Opcional, usado quando os IDs específicos não estiverem disponíveis.'
+			},
+			{
+				path: 'globoPlayer.containerBackgroundColor',
+				label: 'GloboPlayer • cor do container',
+				type: 'color',
+				allowClear: true
+			},
+			{
+				path: 'globoPlayer.aspectRatio',
+				label: 'GloboPlayer • aspect ratio desktop',
+				type: 'text'
+			},
+			{
+				path: 'globoPlayer.aspectRatioMobile',
+				label: 'GloboPlayer • aspect ratio mobile',
+				type: 'text'
+			},
+			{ path: 'globoPlayer.startMuted', label: 'GloboPlayer • iniciar sem som', type: 'boolean' },
+			{ path: 'globoPlayer.autoPlay', label: 'GloboPlayer • autoplay', type: 'boolean' },
+			{ path: 'globoPlayer.controls', label: 'GloboPlayer • exibir controles', type: 'boolean' },
+			{
+				path: 'globoPlayer.showCaption',
+				label: 'GloboPlayer • mostrar legenda interna',
+				type: 'boolean'
+			},
+			{ path: 'pretitle', label: 'Pré-título', type: 'text' },
+			{ path: 'title', label: 'Título', type: 'text', required: true },
+			{ path: 'subtitle', label: 'Subtítulo', type: 'textarea', rows: 2 },
+			{ path: 'text', label: 'Texto (HTML)', type: 'richtext', rows: 6 },
+			{ path: 'blockquote', label: 'Citação (HTML)', type: 'richtext', rows: 4 },
+			{ path: 'blockquoteAuthor', label: 'Autor da citação', type: 'text' },
+			{ path: 'blockquoteRole', label: 'Função/descrição do autor', type: 'text' },
+			{
+				path: 'textOrder',
+				label: 'Ordem dos blocos de texto',
+				type: 'text',
+				placeholder: 'pretitle,title,subtitle,text,blockquote',
+				description: 'Informe uma lista separada por vírgulas com os blocos desejados.'
+			},
+			{
+				path: 'textAlign',
+				label: 'Alinhamento do texto',
+				type: 'select',
+				options: [
+					{ label: 'Esquerda', value: 'left' },
+					{ label: 'Centro', value: 'center' },
+					{ label: 'Direita', value: 'right' }
+				]
+			},
+			{ path: 'textColor', label: 'Cor do texto', type: 'color', allowClear: true },
+			{
+				path: 'textSpacing',
+				label: 'Espaçamento entre blocos de texto',
+				type: 'text',
+				placeholder: '1.25rem'
+			},
+			{
+				path: 'textMaxWidth',
+				label: 'Largura máxima do texto',
+				type: 'text',
+				placeholder: '560px'
+			},
+			{
+				path: 'mediaPosition',
+				label: 'Posição da mídia no desktop',
+				type: 'select',
+				options: [
+					{ label: 'Mídia à esquerda', value: 'left' },
+					{ label: 'Mídia à direita', value: 'right' }
+				]
+			},
+			{
+				path: 'verticalAlign',
+				label: 'Alinhamento vertical',
+				type: 'select',
+				options: [
+					{ label: 'Topo', value: 'top' },
+					{ label: 'Centro', value: 'center' },
+					{ label: 'Base', value: 'bottom' },
+					{ label: 'Esticar', value: 'stretch' }
+				]
+			},
+			{
+				path: 'gapDesktop',
+				label: 'Gap entre colunas (desktop)',
+				type: 'text',
+				placeholder: '2.5rem'
+			},
+			{
+				path: 'gapMobile',
+				label: 'Gap entre colunas (mobile)',
+				type: 'text',
+				placeholder: '1.5rem'
+			},
+			{ path: 'backgroundColor', label: 'Cor de fundo', type: 'color', allowClear: true },
+			{ path: 'paddingDesktop', label: 'Padding desktop', type: 'text', placeholder: '3rem 0' },
+			{ path: 'paddingMobile', label: 'Padding mobile', type: 'text', placeholder: '2rem 1rem' },
+			{ path: 'containerWidth', label: 'Largura do container', type: 'text', placeholder: '100%' },
+			{ path: 'containerMaxWidth', label: 'Largura máxima', type: 'text', placeholder: '1200px' },
+			{
+				path: 'mediaWidthDesktop',
+				label: 'Largura da mídia (desktop)',
+				type: 'text',
+				placeholder: 'minmax(0, 48%)'
+			},
+			{
+				path: 'textWidthDesktop',
+				label: 'Largura do texto (desktop)',
+				type: 'text',
+				placeholder: 'minmax(0, 52%)'
+			},
+			{
+				path: 'mediaWidthMobile',
+				label: 'Largura da mídia (mobile)',
+				type: 'text',
+				placeholder: '100%'
+			},
+			{
+				path: 'textWidthMobile',
+				label: 'Largura do texto (mobile)',
+				type: 'text',
+				placeholder: '100%'
+			},
+			{
+				path: 'fullWidthOnMobile',
+				label: 'Forçar largura total no mobile',
+				type: 'boolean',
+				helpText: 'Expande mídia e texto até as bordas (útil para narrativas imersivas).'
 			}
 		]
 	},

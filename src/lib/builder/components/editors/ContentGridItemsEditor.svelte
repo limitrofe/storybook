@@ -1,5 +1,5 @@
 <script>
-    import { createEventDispatcher, tick } from 'svelte';
+	import { createEventDispatcher, tick } from 'svelte';
 	import RichTextEditor from '../RichTextEditor.svelte';
 
 	export let value = [];

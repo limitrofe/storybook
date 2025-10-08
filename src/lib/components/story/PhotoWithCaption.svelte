@@ -6,65 +6,56 @@
 	export let credit = '';
 	export let fullWidth = false;
 	export let link = ''; // Nova prop para o link
-export let target = '_self'; // Nova prop para o target do link
+	export let target = '_self'; // Nova prop para o target do link
 
-const DEFAULT_WIDTH_DESKTOP = 'min(100%, 800px)';
-const DEFAULT_WIDTH_MOBILE = '100%';
+	const DEFAULT_WIDTH_DESKTOP = 'min(100%, 800px)';
+	const DEFAULT_WIDTH_MOBILE = '100%';
 
-export let widthDesktop = DEFAULT_WIDTH_DESKTOP;
-export let widthMobile = DEFAULT_WIDTH_MOBILE;
+	export let widthDesktop = DEFAULT_WIDTH_DESKTOP;
+	export let widthMobile = DEFAULT_WIDTH_MOBILE;
 
-// Mantém compatibilidade com versões antigas que usavam apenas `alignment`
-export let alignment = undefined;
-export let alignDesktop = undefined;
-export let alignMobile = undefined;
+	// Mantém compatibilidade com versões antigas que usavam apenas `alignment`
+	export let alignment = undefined;
+	export let alignDesktop = undefined;
+	export let alignMobile = undefined;
 
-const VALID_ALIGNMENTS = ['left', 'center', 'right'];
+	const VALID_ALIGNMENTS = ['left', 'center', 'right'];
 
-function normalizeAlignment(value, fallback = 'center') {
-	if (typeof value !== 'string') {
-		return fallback;
-	}
-	const normalized = value.trim().toLowerCase();
-	return VALID_ALIGNMENTS.includes(normalized) ? normalized : fallback;
-}
-
-function normalizeWidth(value, fallback) {
-	if (typeof value !== 'string') {
-		if (value === 0) {
-			return '0';
+	function normalizeAlignment(value, fallback = 'center') {
+		if (typeof value !== 'string') {
+			return fallback;
 		}
-		return fallback;
+		const normalized = value.trim().toLowerCase();
+		return VALID_ALIGNMENTS.includes(normalized) ? normalized : fallback;
 	}
-	const trimmed = value.trim();
-	return trimmed || fallback;
-}
 
-$: normalizedWidthMobile = normalizeWidth(widthMobile, DEFAULT_WIDTH_MOBILE);
+	function normalizeWidth(value, fallback) {
+		if (typeof value !== 'string') {
+			if (value === 0) {
+				return '0';
+			}
+			return fallback;
+		}
+		const trimmed = value.trim();
+		return trimmed || fallback;
+	}
 
-$: computedWidthMobile = fullWidth ? '100%' : normalizedWidthMobile;
+	$: normalizedWidthMobile = normalizeWidth(widthMobile, DEFAULT_WIDTH_MOBILE);
 
-$: desktopFallback =
-	normalizedWidthMobile === DEFAULT_WIDTH_MOBILE
-		? DEFAULT_WIDTH_DESKTOP
-		: normalizedWidthMobile;
+	$: computedWidthMobile = fullWidth ? '100%' : normalizedWidthMobile;
 
-$: computedWidthDesktop = fullWidth
-	? '100%'
-	: normalizeWidth(widthDesktop, desktopFallback);
+	$: desktopFallback =
+		normalizedWidthMobile === DEFAULT_WIDTH_MOBILE ? DEFAULT_WIDTH_DESKTOP : normalizedWidthMobile;
 
-$: computedAlignMobile = normalizeAlignment(
-	alignMobile ?? alignment,
-	'center'
-);
+	$: computedWidthDesktop = fullWidth ? '100%' : normalizeWidth(widthDesktop, desktopFallback);
 
-$: computedAlignDesktop = normalizeAlignment(
-	alignDesktop ?? alignment,
-	computedAlignMobile
-);
+	$: computedAlignMobile = normalizeAlignment(alignMobile ?? alignment, 'center');
 
-$: computedRel = target === '_blank' ? 'noopener noreferrer' : undefined;
+	$: computedAlignDesktop = normalizeAlignment(alignDesktop ?? alignment, computedAlignMobile);
+
+	$: computedRel = target === '_blank' ? 'noopener noreferrer' : undefined;
 </script>
+
 <figure
 	class="photo-with-caption"
 	class:full-width={fullWidth}
@@ -74,7 +65,7 @@ $: computedRel = target === '_blank' ? 'noopener noreferrer' : undefined;
 >
 	<div class="photo-with-caption__image">
 		{#if link}
-			<a href={link} target={target} rel={computedRel} class="photo-link">
+			<a href={link} {target} rel={computedRel} class="photo-link">
 				{#if srcMobile}
 					<!-- Versão responsiva com picture -->
 					<picture>

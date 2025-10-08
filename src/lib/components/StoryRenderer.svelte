@@ -35,6 +35,7 @@
 	import ContentGrid from './story/ContentGrid.svelte';
 	// 🎨 NOVO: ResponsiveMediaLayout
 	import ResponsiveMediaLayout from './story/ResponsiveMediaLayout.svelte';
+	import MediaTextLayout from './story/MediaTextLayout.svelte';
 	import FreeCanvas from './story/FreeCanvas.svelte';
 	import GloboPlayerGridSlider from './story/GloboPlayerGridSlider.svelte';
 
@@ -104,6 +105,14 @@
 			case 'layout-grid':
 			case 'colunas':
 				return 'content-grid';
+
+			case 'media-text':
+			case 'media_text':
+			case 'media-copy':
+			case 'media-text-layout':
+			case 'duas-colunas':
+			case 'media-columns':
+				return 'media-text';
 
 			// 🎨 NOVO: ResponsiveMediaLayout
 			case 'responsive-media':
@@ -264,6 +273,99 @@
 			return value.toLowerCase() === 'true' || value === '1';
 		}
 		return defaultValue;
+	}
+
+	function resolveValue(...values) {
+		for (const value of values) {
+			if (value !== undefined && value !== null && value !== '') {
+				return value;
+			}
+		}
+		return undefined;
+	}
+
+	function parseOptionalBoolean(value, defaultValue = undefined) {
+		if (value === undefined || value === null || value === '') return defaultValue;
+		if (typeof value === 'boolean') return value;
+		if (typeof value === 'number') return value !== 0;
+		if (typeof value === 'string') {
+			const normalized = value.trim().toLowerCase();
+			if (['true', '1', 'yes', 'sim'].includes(normalized)) return true;
+			if (['false', '0', 'no', 'não', 'nao'].includes(normalized)) return false;
+		}
+		return Boolean(value);
+	}
+
+	function normalizeGloboPlayerProps(rawProps = {}) {
+		const media = rawProps.media || {};
+		const globo = rawProps.globoPlayer || {};
+		const base = { ...(media.globoPlayer || {}), ...globo };
+
+		const candidateMap = {
+			videoId: [
+				rawProps.videoId,
+				rawProps.videoID,
+				rawProps.globoVideoId,
+				rawProps.mediaVideoId,
+				media.videoId,
+				globo.videoId
+			],
+			videoIdDesktop: [
+				rawProps.videoIdDesktop,
+				rawProps.globoVideoIdDesktop,
+				media.videoIdDesktop,
+				globo.videoIdDesktop
+			],
+			videoIdMobile: [
+				rawProps.videoIdMobile,
+				rawProps.globoVideoIdMobile,
+				media.videoIdMobile,
+				globo.videoIdMobile
+			],
+			widthDesktop: [rawProps.widthDesktop, media.widthDesktop, globo.widthDesktop],
+			widthMobile: [rawProps.widthMobile, media.widthMobile, globo.widthMobile],
+			aspectRatio: [rawProps.aspectRatio, media.aspectRatio, globo.aspectRatio],
+			aspectRatioMobile: [
+				rawProps.aspectRatioMobile,
+				media.aspectRatioMobile,
+				globo.aspectRatioMobile
+			],
+			containerBackgroundColor: [
+				rawProps.containerBackgroundColor,
+				media.containerBackgroundColor,
+				globo.containerBackgroundColor
+			],
+			autoPlay: [rawProps.autoPlay, rawProps.autoplay, media.autoPlay, globo.autoPlay],
+			startMuted: [rawProps.startMuted, media.startMuted, globo.startMuted],
+			skipDFP: [rawProps.skipDFP, media.skipDFP, globo.skipDFP],
+			controls: [rawProps.controls, media.controls, globo.controls],
+			showCaption: [rawProps.showCaption, media.showCaption, globo.showCaption],
+			caption: [rawProps.caption, media.caption, globo.caption],
+			credit: [rawProps.credit, media.credit, globo.credit],
+			fullWidth: [rawProps.fullWidth, media.fullWidth, globo.fullWidth],
+			startTime: [rawProps.startTime, media.startTime, globo.startTime],
+			resumeAt: [rawProps.resumeAt, media.resumeAt, globo.resumeAt],
+			env: [rawProps.env, media.env, globo.env]
+		};
+
+		for (const [key, candidates] of Object.entries(candidateMap)) {
+			const resolved = resolveValue(...candidates);
+			if (resolved !== undefined) {
+				base[key] = [
+					'autoPlay',
+					'autoplay',
+					'startMuted',
+					'skipDFP',
+					'controls',
+					'showCaption',
+					'fullWidth'
+				].includes(key)
+					? parseOptionalBoolean(resolved, base[key])
+					: resolved;
+			}
+		}
+
+		return Object.fromEntries(Object.entries(base).filter(([, value]) => value !== undefined));
 	}
 
 	/**
@@ -758,6 +860,162 @@
 							textos={processTextos(props.textos || props.texts || [])}
 							imagens={processImagens(props.imagens || props.images || [])}
 						/>
+					{:else if componentType === 'media-text'}
+						{@const media = props.media || {}}
+						{@const globoPlayerConfig = normalizeGloboPlayerProps(props)}
+						<MediaTextLayout
+							mediaType={resolveValue(props.mediaType, media.type, 'image')}
+							mediaSrc={resolveValue(props.mediaSrc, media.src, media.url)}
+							mediaSrcDesktop={resolveValue(
+								props.mediaSrcDesktop,
+								media.srcDesktop,
+								media.desktop,
+								media.src,
+								media.url
+							)}
+							mediaSrcMobile={resolveValue(props.mediaSrcMobile, media.srcMobile, media.mobile)}
+							mediaAlt={resolveValue(props.mediaAlt, media.alt, media.description, props.alt)}
+							mediaPoster={resolveValue(props.mediaPoster, media.poster)}
+							mediaAutoplay={parseOptionalBoolean(
+								resolveValue(props.mediaAutoplay, media.autoplay),
+								true
+							)}
+							mediaLoop={parseOptionalBoolean(resolveValue(props.mediaLoop, media.loop), true)}
+							mediaMuted={parseOptionalBoolean(resolveValue(props.mediaMuted, media.muted), true)}
+							mediaControls={parseOptionalBoolean(
+								resolveValue(props.mediaControls, media.controls),
+								false
+							)}
+							mediaPlaysInline={parseOptionalBoolean(
+								resolveValue(props.mediaPlaysInline, media.playsInline),
+								true
+							)}
+							mediaAspectRatio={resolveValue(
+								props.mediaAspectRatio,
+								media.aspectRatio,
+								props.aspectRatio,
+								'16 / 9'
+							)}
+							mediaBackground={resolveValue(props.mediaBackground, media.background, 'transparent')}
+							mediaBorderRadius={resolveValue(
+								props.mediaBorderRadius,
+								media.borderRadius,
+								props.borderRadius,
+								'0.75rem'
+							)}
+							mediaHeightDesktop={resolveValue(
+								props.mediaHeightDesktop,
+								props.mediaHeight,
+								media.heightDesktop,
+								media.mediaHeightDesktop,
+								''
+							)}
+							mediaHeightMobile={resolveValue(
+								props.mediaHeightMobile,
+								media.heightMobile,
+								props.mediaHeight,
+								''
+							)}
+							mediaPadding={resolveValue(props.mediaPadding, media.padding, '0')}
+							mediaCaption={resolveValue(props.mediaCaption, props.caption, media.caption, '')}
+							mediaCredit={resolveValue(props.mediaCredit, props.credit, media.credit, '')}
+							mediaClass={props.mediaClass || ''}
+							globoPlayer={globoPlayerConfig}
+							pretitle={resolveValue(props.pretitle, props.overline, props.kicker, '')}
+							title={props.title || media.title || ''}
+							subtitle={props.subtitle || media.subtitle || ''}
+							text={props.text || props.content || media.text || ''}
+							blockquote={resolveValue(
+								props.blockquote,
+								props.quote,
+								media.blockquote,
+								media.quote,
+								''
+							)}
+							blockquoteAuthor={resolveValue(
+								props.blockquoteAuthor,
+								props.quoteAuthor,
+								media.blockquoteAuthor,
+								media.quoteAuthor,
+								''
+							)}
+							blockquoteRole={resolveValue(
+								props.blockquoteRole,
+								props.quoteRole,
+								media.blockquoteRole,
+								media.quoteRole,
+								''
+							)}
+							textOrder={props.textOrder ||
+								media.textOrder || ['pretitle', 'title', 'subtitle', 'text', 'blockquote']}
+							textAlign={resolveValue(props.textAlign, media.textAlign, 'left')}
+							textColor={resolveValue(props.textColor, media.textColor, undefined)}
+							textSpacing={resolveValue(props.textSpacing, media.textSpacing, '1.25rem')}
+							textMaxWidth={resolveValue(
+								props.textMaxWidth,
+								media.textMaxWidth,
+								props.maxWidth,
+								'560px'
+							)}
+							mediaPosition={resolveValue(
+								props.mediaPosition,
+								props.layout,
+								media.position,
+								'left'
+							)}
+							verticalAlign={resolveValue(
+								props.verticalAlign,
+								props.align,
+								media.verticalAlign,
+								'center'
+							)}
+							gapDesktop={resolveValue(props.gapDesktop, props.gap, media.gapDesktop, '2.5rem')}
+							gapMobile={resolveValue(props.gapMobile, media.gapMobile, props.gap, '1.5rem')}
+							backgroundColor={props.backgroundColor ?? media.backgroundColor ?? 'transparent'}
+							paddingDesktop={resolveValue(
+								props.paddingDesktop,
+								props.padding,
+								media.paddingDesktop,
+								'3rem 0'
+							)}
+							paddingMobile={resolveValue(
+								props.paddingMobile,
+								media.paddingMobile,
+								props.padding,
+								'2rem 1rem'
+							)}
+							containerWidth={resolveValue(props.containerWidth, media.containerWidth, '100%')}
+							containerMaxWidth={resolveValue(
+								props.containerMaxWidth,
+								props.maxWidth,
+								media.containerMaxWidth,
+								'1200px'
+							)}
+							mediaWidthDesktop={resolveValue(
+								props.mediaWidthDesktop,
+								props.mediaWidth,
+								media.widthDesktop,
+								media.mediaWidthDesktop,
+								'minmax(0, 48%)'
+							)}
+							textWidthDesktop={resolveValue(
+								props.textWidthDesktop,
+								props.textWidth,
+								media.textWidthDesktop,
+								'minmax(0, 52%)'
+							)}
+							mediaWidthMobile={resolveValue(
+								props.mediaWidthMobile,
+								media.mediaWidthMobile,
+								'100%'
+							)}
+							textWidthMobile={resolveValue(props.textWidthMobile, media.textWidthMobile, '100%')}
+							fullWidthOnMobile={parseOptionalBoolean(
+								resolveValue(props.fullWidthOnMobile, media.fullWidthOnMobile),
+								false
+							)}
+							shadow={resolveValue(props.shadow, media.shadow, '')}
+						/>
 					{:else if componentType === 'free-canvas'}
 						{@const backgroundColorDesktop =
 							props.backgroundColorDesktop ?? props.backgroundColor ?? '#000000'}
@@ -810,20 +1068,20 @@
 							typography={storyData.appearance?.typography || {}}
 						/>
 					{:else if componentType === 'photo'}
-							<PhotoWithCaption
-								src={props.src}
-								srcMobile={props.srcMobile || props.src}
-								alt={props.alt || ''}
-								caption={props.caption || ''}
-								credit={props.credit || ''}
-								fullWidth={stringToBoolean(props.fullWidth, false)}
-								widthDesktop={props.widthDesktop || props.width?.desktop || ''}
-								widthMobile={props.widthMobile || props.width?.mobile || ''}
-								alignDesktop={props.alignDesktop || props.alignmentDesktop || ''}
-								alignMobile={props.alignMobile || props.alignmentMobile || ''}
-								alignment={props.alignment}
-								link={props.link}
-								target={props.target || '_self'}
+						<PhotoWithCaption
+							src={props.src}
+							srcMobile={props.srcMobile || props.src}
+							alt={props.alt || ''}
+							caption={props.caption || ''}
+							credit={props.credit || ''}
+							fullWidth={stringToBoolean(props.fullWidth, false)}
+							widthDesktop={props.widthDesktop || props.width?.desktop || ''}
+							widthMobile={props.widthMobile || props.width?.mobile || ''}
+							alignDesktop={props.alignDesktop || props.alignmentDesktop || ''}
+							alignMobile={props.alignMobile || props.alignmentMobile || ''}
+							alignment={props.alignment}
+							link={props.link}
+							target={props.target || '_self'}
 						/>
 						<!-- Video - ATUALIZADO COM NOVAS PROPS -->
 						<!-- Video - ATUALIZADO COM NOVAS PROPS -->

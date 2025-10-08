@@ -312,10 +312,10 @@
 		};
 
 		try {
-		playerInstance = new window.WM.Player(config);
-		playerInstance.attachTo(playerElement);
-		setMutedState(isMuted, { allowRecreate: false });
-		notifyControls('created');
+			playerInstance = new window.WM.Player(config);
+			playerInstance.attachTo(playerElement);
+			setMutedState(isMuted, { allowRecreate: false });
+			notifyControls('created');
 		} catch (e) {
 			error = e;
 			isLoading = false;
@@ -360,9 +360,9 @@
 			const shouldPlayVideo = autoPlay || autoplay;
 
 			if (entry.isIntersecting) {
-		if (!hasBeenInitialized) {
-			initializePlayer(shouldPlayVideo);
-		} else if (playerInstance && typeof playerInstance.play === 'function' && shouldPlayVideo) {
+				if (!hasBeenInitialized) {
+					initializePlayer(shouldPlayVideo);
+				} else if (playerInstance && typeof playerInstance.play === 'function' && shouldPlayVideo) {
 					playerInstance.play();
 				}
 			} else {
@@ -422,7 +422,7 @@
 
 	export function setMuted(muted) {
 		return setMutedState(!!muted, { allowRecreate: true });
-}
+	}
 
 	export function getMuted() {
 		return isMuted;

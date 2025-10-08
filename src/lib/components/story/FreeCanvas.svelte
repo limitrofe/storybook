@@ -252,8 +252,7 @@
 		} else {
 			declarations.push('width:100vw');
 			if (isScaledMobile) {
-				const scaledHeight =
-					scaledViewportHeight || cssHeightPx * Math.min(mobileScale || 1, 1);
+				const scaledHeight = scaledViewportHeight || cssHeightPx * Math.min(mobileScale || 1, 1);
 				const heightValue =
 					scaledHeight && Number.isFinite(scaledHeight) && scaledHeight > 0
 						? `${scaledHeight}px`
@@ -390,7 +389,10 @@
 			simulatedHeightPx = 0;
 		}
 		if (isScaledMobile) {
-			const base = Math.max(baseWidthMobile || effectiveBaseWidth || baseWidth || MOBILE_BASE_WIDTH, 1);
+			const base = Math.max(
+				baseWidthMobile || effectiveBaseWidth || baseWidth || MOBILE_BASE_WIDTH,
+				1
+			);
 			const availableWidth = browserWidth > 0 ? browserWidth : MOBILE_BASE_WIDTH;
 			mobileTargetWidth = Math.min(MOBILE_BASE_WIDTH, Math.max(availableWidth, 1));
 			mobileScale = Math.min(1, mobileTargetWidth / base);
@@ -583,81 +585,81 @@
 	>
 		<div class="free-canvas__scale-wrapper" style={getScaleWrapperStyle()}>
 			<div class="free-canvas__content" bind:this={contentRef} style={getContentStyle()}>
-			{#if shouldRenderBackgroundVideo}
-				<video
-					class="free-canvas__background-video"
-					src={getBackgroundVideoValue(isMobile ? 'mobile' : 'desktop')}
-					poster={getBackgroundPosterValue(isMobile ? 'mobile' : 'desktop')}
-					autoplay={videoAutoplay}
-					loop={videoLoop}
-					muted={videoMuted ?? true}
-					playsinline
-					preload="auto"
-				></video>
-			{/if}
-			{#each renderableItems as renderable (renderable.key)}
-				{@const item = renderable.item}
-				<div class="canvas-item" style={getStyle(item, renderable.frame)}>
-					{#if item.type === 'text'}
-						{@const tag = getTypographyTag(item)}
-						{@const contentHasHtml = hasHtml(item.content)}
-						{@const textStyle = getTextContentStyle(item, tag)}
-						<div class="text" style={getTextContainerStyle(item, tag)}>
-							{#if contentHasHtml}
-								<div
-									class={`text-content ${tag ? `typography-${tag}` : ''}`.trim()}
-									style={textStyle}
-								>
-									{@html item.content || ''}
-								</div>
-							{:else}
-								<svelte:element
-									this={tag || 'p'}
-									class={`text-content ${tag ? `typography-${tag}` : ''}`.trim()}
-									style={textStyle}
-								>
-									{@html item.content || ''}
-								</svelte:element>
+				{#if shouldRenderBackgroundVideo}
+					<video
+						class="free-canvas__background-video"
+						src={getBackgroundVideoValue(isMobile ? 'mobile' : 'desktop')}
+						poster={getBackgroundPosterValue(isMobile ? 'mobile' : 'desktop')}
+						autoplay={videoAutoplay}
+						loop={videoLoop}
+						muted={videoMuted ?? true}
+						playsinline
+						preload="auto"
+					></video>
+				{/if}
+				{#each renderableItems as renderable (renderable.key)}
+					{@const item = renderable.item}
+					<div class="canvas-item" style={getStyle(item, renderable.frame)}>
+						{#if item.type === 'text'}
+							{@const tag = getTypographyTag(item)}
+							{@const contentHasHtml = hasHtml(item.content)}
+							{@const textStyle = getTextContentStyle(item, tag)}
+							<div class="text" style={getTextContainerStyle(item, tag)}>
+								{#if contentHasHtml}
+									<div
+										class={`text-content ${tag ? `typography-${tag}` : ''}`.trim()}
+										style={textStyle}
+									>
+										{@html item.content || ''}
+									</div>
+								{:else}
+									<svelte:element
+										this={tag || 'p'}
+										class={`text-content ${tag ? `typography-${tag}` : ''}`.trim()}
+										style={textStyle}
+									>
+										{@html item.content || ''}
+									</svelte:element>
+								{/if}
+							</div>
+						{:else if item.type === 'image'}
+							{#if getMediaSource(item)}
+								<img
+									src={getMediaSource(item)}
+									alt={item.alt || ''}
+									style="width:100%;height:100%;object-fit:${item.objectFit || 'cover'};"
+								/>
 							{/if}
-						</div>
-					{:else if item.type === 'image'}
-						{#if getMediaSource(item)}
-							<img
-								src={getMediaSource(item)}
-								alt={item.alt || ''}
-								style="width:100%;height:100%;object-fit:${item.objectFit || 'cover'};"
+						{:else if item.type === 'video'}
+							{@const videoSrc = getMediaSource(item)}
+							{#if videoSrc}
+								<video
+									src={videoSrc}
+									poster={getMediaPoster(item)}
+									autoplay={getPlaybackFlag(item, 'autoplay', true)}
+									loop={getPlaybackFlag(item, 'loop', true)}
+									muted={getPlaybackFlag(item, 'muted', true)}
+									playsinline
+									style="width:100%;height:100%;object-fit:${item.objectFit || 'cover'};"
+								></video>
+							{/if}
+						{:else if item.type === 'globo-player'}
+							<GloboPlayer
+								videoId={item.videoId || ''}
+								videoIdDesktop={item.videoIdDesktop || ''}
+								videoIdMobile={item.videoIdMobile || ''}
+								autoPlay={item.autoplay ?? false}
+								autoplay={item.autoplay ?? false}
+								startMuted={item.muted ?? true}
+								skipDFP={item.skipDFP ?? false}
+								loop={item.loop ?? false}
+								containerBackgroundColor="transparent"
+								widthDesktop="100%"
+								widthMobile="100%"
 							/>
 						{/if}
-					{:else if item.type === 'video'}
-						{@const videoSrc = getMediaSource(item)}
-						{#if videoSrc}
-							<video
-								src={videoSrc}
-								poster={getMediaPoster(item)}
-								autoplay={getPlaybackFlag(item, 'autoplay', true)}
-								loop={getPlaybackFlag(item, 'loop', true)}
-								muted={getPlaybackFlag(item, 'muted', true)}
-								playsinline
-								style="width:100%;height:100%;object-fit:${item.objectFit || 'cover'};"
-							></video>
-						{/if}
-					{:else if item.type === 'globo-player'}
-						<GloboPlayer
-							videoId={item.videoId || ''}
-							videoIdDesktop={item.videoIdDesktop || ''}
-							videoIdMobile={item.videoIdMobile || ''}
-							autoPlay={item.autoplay ?? false}
-							autoplay={item.autoplay ?? false}
-							startMuted={item.muted ?? true}
-							skipDFP={item.skipDFP ?? false}
-							loop={item.loop ?? false}
-							containerBackgroundColor="transparent"
-							widthDesktop="100%"
-							widthMobile="100%"
-						/>
-					{/if}
-				</div>
-			{/each}
+					</div>
+				{/each}
 			</div>
 		</div>
 	</div>
