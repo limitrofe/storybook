@@ -2296,7 +2296,8 @@ export const componentRegistry = [
 			mediaWidthMobile: '100%',
 			textWidthMobile: '100%',
 			fullWidthOnMobile: false,
-			shadow: ''
+			shadow: '',
+			mediaOrderMobile: 'auto'
 		},
 		fields: [
 			{
@@ -2355,6 +2356,17 @@ export const componentRegistry = [
 			},
 			{ path: 'mediaPadding', label: 'Padding interno da mídia', type: 'text', placeholder: '0' },
 			{ path: 'mediaClass', label: 'Classe CSS extra para a mídia', type: 'text' },
+			{
+				path: 'mediaOrderMobile',
+				label: 'Ordem da mídia no mobile',
+				type: 'select',
+				options: [
+					{ label: 'Seguir layout desktop', value: 'auto' },
+					{ label: 'Mídia antes do texto', value: 'media-first' },
+					{ label: 'Mídia depois do texto', value: 'text-first' }
+				],
+				description: 'Controle independente da ordem vertical quando empilha no mobile.'
+			},
 			{
 				path: 'shadow',
 				label: 'Sombra (box-shadow)',

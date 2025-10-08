@@ -920,6 +920,11 @@
 							mediaCaption={resolveValue(props.mediaCaption, props.caption, media.caption, '')}
 							mediaCredit={resolveValue(props.mediaCredit, props.credit, media.credit, '')}
 							mediaClass={props.mediaClass || ''}
+							mediaOrderMobile={resolveValue(
+								props.mediaOrderMobile,
+								media.mediaOrderMobile,
+								'auto'
+							)}
 							globoPlayer={globoPlayerConfig}
 							pretitle={resolveValue(props.pretitle, props.overline, props.kicker, '')}
 							title={props.title || media.title || ''}

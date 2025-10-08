@@ -14,17 +14,18 @@
 	export let mediaControls = false;
 	export let mediaPlaysInline = true;
 	export let mediaAspectRatio = '16 / 9';
-	export let mediaBackground = 'transparent';
-	export let mediaBorderRadius = '0.75rem';
-	export let mediaHeightDesktop = '';
-	export let mediaHeightMobile = '';
-	export let mediaPadding = '0';
-	export let mediaCaption = '';
-	export let mediaCredit = '';
-	export let mediaClass = '';
+export let mediaBackground = 'transparent';
+export let mediaBorderRadius = '0.75rem';
+export let mediaHeightDesktop = '';
+export let mediaHeightMobile = '';
+export let mediaPadding = '0';
+export let mediaCaption = '';
+export let mediaCredit = '';
+export let mediaClass = '';
+export let mediaOrderMobile = 'auto'; // auto | media-first | text-first
 
-	// Globo Player specific configuration
-	export let globoPlayer = {};
+// Globo Player specific configuration
+export let globoPlayer = {};
 
 	// Text content
 	export let pretitle = '';
@@ -84,16 +85,28 @@
 	].filter((key, index, self) => self.indexOf(key) === index && blockMap[key]);
 
 	// Layout helpers
-	let mediaIsRight;
-	$: mediaIsRight = mediaPosition === 'right';
-	$: mediaSideClass = mediaIsRight ? 'media-text--media-right' : 'media-text--media-left';
-	$: alignClass = `media-text--align-${verticalAlign}`;
-	$: textAlignClass = `media-text__text--${textAlign}`;
-	$: resolvedAspectDesktop = mediaHeightDesktop ? 'auto' : mediaAspectRatio;
-	$: resolvedAspectMobile =
-		mediaHeightMobile || mediaHeightDesktop ? 'auto' : mediaAspectRatio;
+let mediaIsRight;
+$: mediaIsRight = mediaPosition === 'right';
+$: mediaSideClass = mediaIsRight ? 'media-text--media-right' : 'media-text--media-left';
+$: alignClass = `media-text--align-${verticalAlign}`;
+$: textAlignClass = `media-text__text--${textAlign}`;
+$: resolvedAspectDesktop = mediaHeightDesktop ? 'auto' : mediaAspectRatio;
+$: resolvedAspectMobile =
+	mediaHeightMobile || mediaHeightDesktop ? 'auto' : mediaAspectRatio;
+$: computedMediaOrderMobile =
+	mediaOrderMobile === 'media-first'
+		? 1
+		: mediaOrderMobile === 'text-first'
+			? 2
+			: mediaIsRight ? 2 : 1;
+$: computedTextOrderMobile =
+	mediaOrderMobile === 'media-first'
+		? 2
+		: mediaOrderMobile === 'text-first'
+			? 1
+			: mediaIsRight ? 1 : 2;
 
-	$: containerStyle = `
+$: containerStyle = `
 		--media-text-bg: ${backgroundColor};
 		--media-text-gap-desktop: ${gapDesktop};
 		--media-text-gap-mobile: ${gapMobile};
@@ -118,8 +131,8 @@
 		--media-text-shadow: ${shadow || 'none'};
 		--media-text-order-media-desktop: ${mediaIsRight ? 2 : 1};
 		--media-text-order-text-desktop: ${mediaIsRight ? 1 : 2};
-		--media-text-order-media-mobile: ${mediaIsRight ? 2 : 1};
-		--media-text-order-text-mobile: ${mediaIsRight ? 1 : 2};
+		--media-text-order-media-mobile: ${computedMediaOrderMobile};
+		--media-text-order-text-mobile: ${computedTextOrderMobile};
 	`;
 
 	// Determine effective media sources

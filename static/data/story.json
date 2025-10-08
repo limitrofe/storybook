@@ -2543,7 +2543,8 @@
         "paddingBottom": ""
       },
       "mediaHeightDesktop": "50vh",
-      "mediaHeightMobile": "50vh"
+      "mediaHeightMobile": "50vh",
+      "mediaOrderMobile": "media-first"
     }
   ]
 }
