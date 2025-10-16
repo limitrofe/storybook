@@ -10,23 +10,40 @@
 	import VideoPlayer from './story/VideoPlayer.svelte';
 	import GloboPlayer from './story/GloboPlayer.svelte';
 	import GloboPlayerGridSlider from './story/GloboPlayerGridSlider.svelte';
-	import { getSectionStyling } from './story/sectionStyle.js';
+import { getSectionStyling } from './story/sectionStyle.js';
+import { gsapAnimator } from '$lib/utils/gsapAnimator.js';
+import { extractGsapOptions } from '$lib/utils/gsapConfig.js';
 
-	// Importar novos componentes (com fallback)
-	let ReadingProgress;
-	// let SocialShare;
+// Importar novos componentes (com fallback)
+let ReadingProgress;
+// let SocialShare;
 
-	export let storyData = {};
+export let storyData = {};
 	export let enableAnalytics = true;
 	// export let enableSharing = false;
 	export let enableReadingProgress = true;
-	export let enableThemeSwitcher = true;
-	export let autoOptimize = true;
+export let enableThemeSwitcher = true;
+export let autoOptimize = true;
+
+const KEYHOLE_CLIP_CLOSED =
+ 'polygon(0% 0%, 0% 100%, 0% 100%, 0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 100%, 100% 100%, 100% 0%)';
 
 	let mounted = false;
 	let progress = 0;
 	let scrollY = 0;
-	let innerHeight = 0;
+let innerHeight = 0;
+
+$: keyholeSettings = storyData?.overlays?.keyhole || {};
+$: keyholeEnabled = Boolean(keyholeSettings.enabled);
+$: keyholeColor = keyholeSettings.color || '#fdcb6e';
+$: keyholeZIndex =
+	keyholeSettings.zIndex !== undefined && keyholeSettings.zIndex !== null
+		? keyholeSettings.zIndex
+		: 120;
+$: keyholeArrowEnabled = keyholeSettings.arrowEnabled !== false;
+$: keyholeArrowTop = keyholeSettings.arrowTop || '75vh';
+$: keyholeArrowColor = keyholeSettings.arrowColor || '#2d3436';
+$: keyholeArrowAnimate = keyholeSettings.arrowAnimation !== false;
 
 	// Função para mapear tipos (igual ao StoryRenderer original)
 	function getComponentType(paragraph) {
@@ -197,6 +214,26 @@
 	<meta property="og:type" content="article" />
 </svelte:head>
 
+{#if keyholeEnabled}
+	<span
+		class="keyhole"
+		aria-hidden="true"
+		style={`--keyhole-bg:${keyholeColor}; --keyhole-z:${keyholeZIndex}; --keyhole-clip:${KEYHOLE_CLIP_CLOSED};`}
+	></span>
+	{#if keyholeArrowEnabled}
+		<span
+			class:arrow--animate={keyholeArrowAnimate}
+			class="arrow"
+			aria-hidden="true"
+			style={`--keyhole-arrow-top:${keyholeArrowTop}; --keyhole-arrow-color:${keyholeArrowColor}; --keyhole-z:${keyholeZIndex};`}
+		>
+			<svg width="32" height="32" viewBox="-5 -5 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M0 10H20L10 0M20 10L10 20" stroke-width="4" stroke-linecap="square" stroke-linejoin="round" />
+			</svg>
+		</span>
+	{/if}
+{/if}
+
 <!-- Barra de progresso simples -->
 {#if enableReadingProgress && progress > 5}
 	<div class="reading-progress-bar">
@@ -260,6 +297,7 @@
 		{#each storyData.paragraphs as paragraph, index}
 			{@const componentType = getComponentType(paragraph)}
 			{@const sectionStyling = getSectionStyling(paragraph)}
+			{@const animationOptions = extractGsapOptions(paragraph, { componentType })}
 
 			<section
 				class={sectionStyling.className}
@@ -303,7 +341,7 @@
 					</video>
 				{/if}
 
-				<div class="story-section__inner">
+				<div class="story-section__inner" use:gsapAnimator={animationOptions}>
 					<div class="story-component">
 						{#if componentType === 'text'}
 							<StoryText
@@ -476,6 +514,50 @@
 {/if}
 
 <style>
+	:global(.keyhole) {
+		position: fixed;
+		inset: 0;
+		pointer-events: none;
+		clip-path: var(
+			--keyhole-clip,
+			polygon(0% 0%, 0% 100%, 0% 100%, 0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 100%, 100% 100%, 100% 0%)
+		);
+		background: var(--keyhole-bg, #fdcb6e);
+		z-index: var(--keyhole-z, 120);
+		transition: none;
+	}
+
+	:global(.arrow) {
+		position: fixed;
+		left: 50%;
+		top: var(--keyhole-arrow-top, 75vh);
+		transform: translate(-50%, -50%);
+		pointer-events: none;
+		color: var(--keyhole-arrow-color, #2d3436);
+		z-index: calc(var(--keyhole-z, 120) + 1);
+	}
+
+	:global(.arrow svg) {
+		display: block;
+		width: 2rem;
+		height: auto;
+		stroke: currentColor;
+		transform: rotate(90deg);
+	}
+
+	:global(.arrow--animate) {
+		animation: keyhole-arrow-float 1s ease-in-out infinite alternate;
+	}
+
+	@keyframes keyhole-arrow-float {
+		from {
+			transform: translate(-50%, -50%);
+		}
+		to {
+			transform: translate(-50%, 50%);
+		}
+	}
+
 	.enhanced-story {
 		background: var(--color-background);
 		color: var(--color-text);

@@ -22,11 +22,32 @@ import TimelineInteractive from '$lib/components/story/TimelineInteractive.svelt
 import DocumentViewer from '$lib/components/story/DocumentViewer.svelte';
 import CrimeExplainer from '$lib/components/story/CrimeExplainer.svelte';
 import AnchorPoint from '$lib/components/story/AnchorPoint.svelte';
+import ChartBar from '$lib/components/story/ChartBar.svelte';
 import FlexibleLayout from '$lib/components/story/FlexibleLayout.svelte';
 import ContentGrid from '$lib/components/story/ContentGrid.svelte';
 import ResponsiveMediaLayout from '$lib/components/story/ResponsiveMediaLayout.svelte';
 import MediaTextLayout from '$lib/components/story/MediaTextLayout.svelte';
 import FreeCanvas from '$lib/components/story/FreeCanvas.svelte';
+import ChartLine from '$lib/components/story/ChartLine.svelte';
+import { DEFAULT_BAR_CHART_DATA } from '$lib/utils/chartData.js';
+import { DEFAULT_LINE_CHART_DATA } from '$lib/utils/lineChartData.js';
+
+const BAR_CHART_SAMPLE_CSV = `label,value
+Categoria A,32
+Categoria B,45
+Categoria C,28
+Categoria D,54
+Categoria E,18`;
+
+const LINE_CHART_SAMPLE_CSV = `date,value,min,max
+1994-01-01,23.4,18.1,28.6
+1998-01-01,27.4,22.0,33.7
+2002-01-01,29.4,24.2,36.2
+2006-01-01,31.3,26.0,38.9
+2010-01-01,33.2,27.6,41.0
+2014-01-01,35.2,29.3,43.6
+2018-01-01,37.2,30.9,45.8
+2022-01-01,39.2,32.7,47.9`;
 
 /**
  * Catálogo centralizado de blocos disponíveis no builder.
@@ -1999,6 +2020,732 @@ export const componentRegistry = [
 				]
 			},
 			{ path: 'autoAdvance', label: 'Avançar automaticamente', type: 'boolean' }
+		]
+	},
+	{
+		type: 'chart-bar',
+		label: 'Gráfico de barras',
+		icon: '📊',
+		category: 'Charts',
+		description: 'Comparativo simples de categorias utilizando barras verticais.',
+		component: ChartBar,
+		defaultData: {
+			type: 'chart-bar',
+			title: 'Vendas por categoria',
+			titleTag: 'h3',
+			titleColor: '',
+			description: 'Distribuição de vendas por canal no último trimestre.',
+			descriptionColor: '',
+			notes: [],
+			noteColor: '',
+			footnote: '',
+			footnoteColor: '',
+			sourceLabel: '',
+			sourceUrl: '',
+			sourceColor: '',
+			barColor: '#0ea5e9',
+			highlightColor: '#facc15',
+			highlights: [],
+			dimOpacity: 0.35,
+			annotations: [],
+			annotationColor: '',
+			tooltipEnabled: true,
+			tooltipShowOriginalValue: true,
+			valueLabelsMode: 'hover',
+			valueLabelColor: '',
+			valueLabelStroke: '',
+			valueLabelStrokeWidth: 0,
+			valueDivisor: 1,
+			valueUnit: '',
+			height: 400,
+			showGrid: true,
+			yTicks: 4,
+			csvData: BAR_CHART_SAMPLE_CSV,
+			csvUrl: '',
+			sheetId: '',
+			sheetGid: '',
+			autoRefreshMinutes: 0,
+			labelKey: 'label',
+			valueKey: 'value',
+			data: DEFAULT_BAR_CHART_DATA,
+			enableTransitions: true,
+			animationDuration: 450,
+			animationDelay: 30,
+			enableWheelZoom: false,
+			wheelZoomIntensity: 0.25,
+			enableBrush: false
+		},
+		fields: [
+			{ path: 'title', label: 'Título', type: 'text', placeholder: 'Título do gráfico' },
+			{
+				path: 'titleTag',
+				label: 'Nível do título',
+				type: 'select',
+				options: [
+					{ label: 'H2', value: 'h2' },
+					{ label: 'H3', value: 'h3' },
+					{ label: 'H4', value: 'h4' }
+				]
+			},
+			{ path: 'titleColor', label: 'Cor do título', type: 'color', allowClear: true },
+			{
+				path: 'description',
+				label: 'Descrição',
+				type: 'textarea',
+				rows: 3,
+				placeholder: 'Resumo que contextualiza o dado apresentado.'
+			},
+			{ path: 'descriptionColor', label: 'Cor da descrição', type: 'color', allowClear: true },
+			{
+				path: 'notes',
+				label: 'Notas adicionais',
+				type: 'textarea',
+				rows: 3,
+				placeholder: 'Use quebras de linha para múltiplas notas.'
+			},
+			{ path: 'noteColor', label: 'Cor das notas', type: 'color', allowClear: true },
+			{ path: 'sourceLabel', label: 'Fonte (texto)', type: 'text', placeholder: 'Instituto...' },
+			{ path: 'sourceUrl', label: 'Fonte (link)', type: 'text', placeholder: 'https://...' },
+			{ path: 'sourceColor', label: 'Cor da fonte', type: 'color', allowClear: true },
+			{
+				path: 'footnote',
+				label: 'Rodapé',
+				type: 'textarea',
+				rows: 2,
+				placeholder: 'Ex.: Pesquisa realizada entre 1º e 15 de março.'
+			},
+			{ path: 'footnoteColor', label: 'Cor do rodapé', type: 'color', allowClear: true },
+			{
+				path: 'barColor',
+				label: 'Cor das barras',
+				type: 'color',
+				showAlpha: false,
+				allowClear: false
+			},
+			{
+				path: 'highlightColor',
+				label: 'Cor dos destaques',
+				type: 'color',
+				showAlpha: false
+			},
+			{
+				path: 'highlights',
+				label: 'Destacar rótulos',
+				type: 'textarea',
+				rows: 2,
+				placeholder: 'Categoria A, Categoria C',
+				description: 'Separe por vírgulas ou informe um array JSON de rótulos.'
+			},
+			{
+				path: 'dimOpacity',
+				label: 'Opacidade dos itens não destacados',
+				type: 'number',
+				min: 0,
+				max: 1,
+				step: 0.05
+			},
+			{
+				path: 'annotations',
+				label: 'Anotações (JSON)',
+				type: 'textarea',
+				rows: 6,
+				placeholder: '[{"label":"Categoria A","text":"Maior crescimento","offsetY":-24}]',
+				description: 'Use label/text e, opcionalmente, offsetX, offsetY, color.'
+			},
+			{
+				path: 'annotationColor',
+				label: 'Cor padrão das anotações',
+				type: 'color',
+				allowClear: true
+			},
+			{
+				path: 'tooltipEnabled',
+				label: 'Exibir tooltip ao passar o mouse',
+				type: 'boolean',
+				defaultValue: true
+			},
+			{
+				path: 'tooltipShowOriginalValue',
+				label: 'Mostrar valor original no tooltip',
+				type: 'boolean',
+				defaultValue: true
+			},
+			{
+				path: 'valueLabelsMode',
+				label: 'Exibir valores',
+				type: 'select',
+				options: [
+					{ label: 'Apenas ao interagir', value: 'hover' },
+					{ label: 'Sempre visíveis', value: 'always' },
+					{ label: 'Ocultar valores', value: 'never' }
+				]
+			},
+			{ path: 'valueLabelColor', label: 'Cor dos valores', type: 'color', allowClear: true },
+			{
+				path: 'valueLabelStroke',
+				label: 'Contorno dos valores',
+				type: 'color',
+				allowClear: true
+			},
+			{
+				path: 'valueLabelStrokeWidth',
+				label: 'Espessura do contorno (px)',
+				type: 'number',
+				placeholder: '0'
+			},
+			{
+				path: 'valueDivisor',
+				label: 'Divisor dos valores',
+				type: 'number',
+				placeholder: '1',
+				min: 1
+			},
+			{
+				path: 'valueUnit',
+				label: 'Sufixo / unidade',
+				type: 'text',
+				placeholder: 'mil, milhões, R$'
+			},
+			{
+				path: 'height',
+				label: 'Altura (px)',
+				type: 'number',
+				placeholder: '400'
+			},
+			{
+				path: 'yTicks',
+				label: 'Divisões no eixo Y',
+				type: 'number',
+				placeholder: '4'
+			},
+			{
+				path: 'showGrid',
+				label: 'Mostrar linhas de grade',
+				type: 'boolean',
+				defaultValue: true
+			},
+			{
+				path: 'csvUrl',
+				label: 'URL CSV externa',
+				type: 'text',
+				placeholder: 'https://docs.google.com/.../export?format=csv',
+				description: 'Link direto para CSV (Google Sheets, S3, etc.).'
+			},
+			{
+				path: 'sheetId',
+				label: 'Google Sheets ID',
+				type: 'text',
+				placeholder: '1AbC...'
+			},
+			{ path: 'sheetGid', label: 'Sheet GID', type: 'text', placeholder: '0' },
+			{
+				path: 'autoRefreshMinutes',
+				label: 'Atualizar a cada (minutos)',
+				type: 'number',
+				placeholder: '0',
+				description: 'Defina 0 para manter um snapshot fixo.'
+			},
+			{
+				path: 'labelKey',
+				label: 'Coluna de rótulos',
+				type: 'text',
+				placeholder: 'label'
+			},
+			{
+				path: 'valueKey',
+				label: 'Coluna de valores',
+				type: 'text',
+				placeholder: 'value'
+			},
+			{
+				path: 'csvData',
+				label: 'Dados (CSV)',
+				type: 'textarea',
+				rows: 8,
+				placeholder: 'label,value\nCategoria A,32\nCategoria B,45',
+				description: 'Cole dados do Google Sheets ou CSV com as colunas label e value.'
+			},
+			{
+				path: 'data',
+				label: 'Dados em JSON (fallback)',
+				type: 'json',
+				rows: 6,
+				placeholder: '[{"label":"Categoria","value":10}]',
+				emptyValue: []
+			},
+			{
+				path: 'enableTransitions',
+				label: 'Transições animadas',
+				type: 'boolean',
+				defaultValue: true
+			},
+			{
+				path: 'animationDuration',
+				label: 'Duração das transições (ms)',
+				type: 'number',
+				placeholder: '450'
+			},
+			{
+				path: 'animationDelay',
+				label: 'Delay entre barras (ms)',
+				type: 'number',
+				placeholder: '30'
+			},
+			{
+				path: 'enableWheelZoom',
+				label: 'Ativar zoom com a roda do mouse',
+				type: 'boolean',
+				defaultValue: false
+			},
+			{
+				path: 'wheelZoomIntensity',
+				label: 'Intensidade do zoom',
+				type: 'number',
+				step: 0.05,
+				min: 0.05,
+				placeholder: '0.25'
+			},
+			{
+				path: 'enableBrush',
+				label: 'Permitir seleção por arrasto (brush)',
+				type: 'boolean',
+				defaultValue: false
+			}
+		]
+	},
+	{
+		type: 'chart-line',
+		label: 'Gráfico de linha',
+		icon: '📈',
+		category: 'Charts',
+		description:
+			'Série temporal ou sequencial com zoom, tooltip personalizável e banda min/máx opcional.',
+		component: ChartLine,
+		defaultData: {
+			type: 'chart-line',
+			title: 'Evolução anual de temperaturas globais',
+			titleTag: 'h3',
+			titleColor: '',
+			description: 'Médias anuais com intervalo mínimo e máximo estimado.',
+			descriptionColor: '',
+			notes: [],
+			noteColor: '',
+			footnote: '',
+			footnoteColor: '',
+			sourceLabel: '',
+			sourceUrl: '',
+			sourceColor: '',
+			csvData: LINE_CHART_SAMPLE_CSV,
+			csvUrl: '',
+			sheetId: '',
+			sheetGid: '',
+			autoRefreshMinutes: 0,
+			xKey: 'date',
+			yKey: 'value',
+			yLowKey: 'min',
+			yHighKey: 'max',
+			data: DEFAULT_LINE_CHART_DATA,
+			height: 360,
+			margin: { top: 40, right: 32, bottom: 64, left: 80 },
+			backgroundColor: '',
+			fontFamily: 'inherit',
+			fontSize: '0.85rem',
+			lineColor: '#0ea5e9',
+			lineWidth: 2.5,
+			lineOpacity: 0.95,
+			curveType: 'monotone',
+			showArea: true,
+			areaColor: 'rgba(14, 165, 233, 0.18)',
+			areaOpacity: 1,
+			gradientStops: '',
+			showGrid: true,
+			showXAxis: true,
+			showYAxis: true,
+			gridColor: 'rgba(148, 163, 184, 0.25)',
+			gridDashArray: '3,3',
+			axisColor: '',
+			axisLineColor: '',
+			pointColor: '#0f172a',
+			pointRadius: 3.5,
+			pointStroke: '#ffffff',
+			pointStrokeWidth: 1.5,
+			showPoints: false,
+			pointFocusRadius: 5.5,
+			xAxisLabel: '',
+			yAxisLabel: '',
+			axisLabelColor: '',
+			axisLabelFontSize: '0.78rem',
+			axisLabelOffset: { x: 36, y: 42 },
+			valueLabels: false,
+			valueLabelColor: '',
+			valueLabelAnchor: 'middle',
+			tooltipEnabled: true,
+			tooltipShowOriginalValue: true,
+			tooltipOffsetX: 0,
+			tooltipOffsetY: -16,
+			enableZoom: true,
+			zoomMode: 'x',
+			zoomScaleMin: 1,
+			zoomScaleMax: 32,
+			enableCrosshair: true,
+			enableTransitions: true,
+			animationType: 'draw',
+			animationDuration: 600,
+			animationEasing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+			yDomainPadding: 0.08,
+			yNice: true,
+			maxXTicks: 8,
+			maxYTicks: 6
+		},
+		fields: [
+			{ path: 'title', label: 'Título', type: 'text', placeholder: 'Título do gráfico' },
+			{
+				path: 'titleTag',
+				label: 'Nível do título',
+				type: 'select',
+				options: [
+					{ label: 'H2', value: 'h2' },
+					{ label: 'H3', value: 'h3' },
+					{ label: 'H4', value: 'h4' }
+				]
+			},
+			{ path: 'titleColor', label: 'Cor do título', type: 'color', allowClear: true },
+			{
+				path: 'description',
+				label: 'Descrição',
+				type: 'textarea',
+				rows: 3,
+				placeholder: 'Resumo que contextualiza o dado apresentado.'
+			},
+			{ path: 'descriptionColor', label: 'Cor da descrição', type: 'color', allowClear: true },
+			{
+				path: 'notes',
+				label: 'Notas adicionais',
+				type: 'textarea',
+				rows: 3,
+				placeholder: 'Use quebras de linha para múltiplas notas.'
+			},
+			{ path: 'noteColor', label: 'Cor das notas', type: 'color', allowClear: true },
+			{ path: 'sourceLabel', label: 'Fonte (texto)', type: 'text', placeholder: 'Instituto...' },
+			{ path: 'sourceUrl', label: 'Fonte (link)', type: 'text', placeholder: 'https://...' },
+			{ path: 'sourceColor', label: 'Cor da fonte', type: 'color', allowClear: true },
+			{
+				path: 'footnote',
+				label: 'Rodapé',
+				type: 'textarea',
+				rows: 2,
+				placeholder: 'Ex.: Dados sujeitos a revisão.'
+			},
+			{ path: 'footnoteColor', label: 'Cor do rodapé', type: 'color', allowClear: true },
+			{ path: 'backgroundColor', label: 'Cor de fundo', type: 'color', allowClear: true },
+			{ path: 'fontFamily', label: 'Fonte', type: 'text', placeholder: 'inherit' },
+			{
+				path: 'fontSize',
+				label: 'Tamanho base',
+				type: 'text',
+				placeholder: '0.85rem'
+			},
+			{ path: 'lineColor', label: 'Cor da linha', type: 'color' },
+			{
+				path: 'lineWidth',
+				label: 'Espessura da linha',
+				type: 'number',
+				min: 0.5,
+				step: 0.1,
+				placeholder: '2.5'
+			},
+			{
+				path: 'lineOpacity',
+				label: 'Opacidade da linha',
+				type: 'number',
+				min: 0,
+				max: 1,
+				step: 0.05
+			},
+			{
+				path: 'curveType',
+				label: 'Curva',
+				type: 'select',
+				options: [
+					{ label: 'Linear', value: 'linear' },
+					{ label: 'Monotônica', value: 'monotone' },
+					{ label: 'Suave (Basis)', value: 'basis' },
+					{ label: 'Degrau', value: 'step' }
+				]
+			},
+			{
+				path: 'showArea',
+				label: 'Preencher área sob a curva',
+				type: 'boolean',
+				defaultValue: true
+			},
+			{ path: 'areaColor', label: 'Cor da área', type: 'color', allowClear: true },
+			{
+				path: 'areaOpacity',
+				label: 'Opacidade da área',
+				type: 'number',
+				min: 0,
+				max: 1,
+				step: 0.05
+			},
+			{
+				path: 'gradientStops',
+				label: 'Gradiente (JSON opcional)',
+				type: 'textarea',
+				rows: 4,
+				placeholder:
+					'[{"offset":"0%","color":"#0ea5e9","opacity":0.9},{"offset":"100%","color":"#38bdf8","opacity":0.1}]',
+				description: 'Informe um array JSON com offset, color, opacity para personalizar a área.'
+			},
+			{
+				path: 'showGrid',
+				label: 'Mostrar linhas de grade',
+				type: 'boolean',
+				defaultValue: true
+			},
+			{ path: 'gridColor', label: 'Cor da grade', type: 'color', allowClear: true },
+			{
+				path: 'gridDashArray',
+				label: 'Tracejado da grade',
+				type: 'text',
+				placeholder: '3,3'
+			},
+			{
+				path: 'showXAxis',
+				label: 'Exibir eixo X',
+				type: 'boolean',
+				defaultValue: true
+			},
+			{
+				path: 'showYAxis',
+				label: 'Exibir eixo Y',
+				type: 'boolean',
+				defaultValue: true
+			},
+			{ path: 'axisColor', label: 'Cor dos rótulos dos eixos', type: 'color', allowClear: true },
+			{ path: 'axisLineColor', label: 'Cor das linhas dos eixos', type: 'color', allowClear: true },
+			{ path: 'xAxisLabel', label: 'Legenda eixo X', type: 'text' },
+			{ path: 'yAxisLabel', label: 'Legenda eixo Y', type: 'text' },
+			{ path: 'axisLabelColor', label: 'Cor das legendas', type: 'color', allowClear: true },
+			{
+				path: 'axisLabelFontSize',
+				label: 'Tamanho das legendas',
+				type: 'text',
+				placeholder: '0.78rem'
+			},
+			{
+				path: 'axisLabelOffset',
+				label: 'Offset das legendas (JSON)',
+				type: 'json',
+				rows: 3,
+				placeholder: '{"x":36,"y":42}'
+			},
+			{
+				path: 'showPoints',
+				label: 'Exibir marcadores',
+				type: 'boolean',
+				defaultValue: false
+			},
+			{ path: 'pointColor', label: 'Cor dos pontos', type: 'color', allowClear: true },
+			{
+				path: 'pointRadius',
+				label: 'Raio dos pontos',
+				type: 'number',
+				min: 0,
+				step: 0.5
+			},
+			{ path: 'pointStroke', label: 'Borda dos pontos', type: 'color', allowClear: true },
+			{
+				path: 'pointStrokeWidth',
+				label: 'Espessura da borda',
+				type: 'number',
+				min: 0,
+				step: 0.5
+			},
+			{
+				path: 'pointFocusRadius',
+				label: 'Raio ao focar/hover',
+				type: 'number',
+				min: 0,
+				step: 0.5
+			},
+			{
+				path: 'valueLabels',
+				label: 'Exibir valores sobre a linha',
+				type: 'boolean',
+				defaultValue: false
+			},
+			{ path: 'valueLabelColor', label: 'Cor dos valores', type: 'color', allowClear: true },
+			{
+				path: 'valueLabelAnchor',
+				label: 'Alinhamento dos valores',
+				type: 'select',
+				options: [
+					{ label: 'Esquerda', value: 'start' },
+					{ label: 'Centro', value: 'middle' },
+					{ label: 'Direita', value: 'end' }
+				]
+			},
+			{
+				path: 'tooltipEnabled',
+				label: 'Exibir tooltip ao interagir',
+				type: 'boolean',
+				defaultValue: true
+			},
+			{
+				path: 'tooltipShowOriginalValue',
+				label: 'Mostrar valor original no tooltip',
+				type: 'boolean',
+				defaultValue: true
+			},
+			{
+				path: 'tooltipOffsetX',
+				label: 'Deslocamento tooltip X',
+				type: 'number',
+				step: 1
+			},
+			{
+				path: 'tooltipOffsetY',
+				label: 'Deslocamento tooltip Y',
+				type: 'number',
+				step: 1
+			},
+			{
+				path: 'enableZoom',
+				label: 'Habilitar zoom',
+				type: 'boolean',
+				defaultValue: true
+			},
+			{
+				path: 'zoomMode',
+				label: 'Direção do zoom',
+				type: 'select',
+				options: [
+					{ label: 'Horizontal (X)', value: 'x' },
+					{ label: 'Vertical (Y)', value: 'y' },
+					{ label: 'Ambos', value: 'xy' }
+				]
+			},
+			{
+				path: 'zoomScaleMin',
+				label: 'Zoom mínimo',
+				type: 'number',
+				min: 1,
+				step: 0.5
+			},
+			{
+				path: 'zoomScaleMax',
+				label: 'Zoom máximo',
+				type: 'number',
+				min: 1,
+				step: 0.5
+			},
+			{
+				path: 'enableCrosshair',
+				label: 'Exibir crosshair',
+				type: 'boolean',
+				defaultValue: true
+			},
+			{
+				path: 'enableTransitions',
+				label: 'Transições animadas',
+				type: 'boolean',
+				defaultValue: true
+			},
+			{
+				path: 'animationType',
+				label: 'Tipo de animação',
+				type: 'select',
+				options: [
+					{ label: 'Desenhar linha', value: 'draw' },
+					{ label: 'Fade-in', value: 'fade' },
+					{ label: 'Sem animação', value: 'none' }
+				]
+			},
+			{
+				path: 'animationDuration',
+				label: 'Duração da animação (ms)',
+				type: 'number',
+				placeholder: '600'
+			},
+			{
+				path: 'animationEasing',
+				label: 'Easing CSS',
+				type: 'text',
+				placeholder: 'cubic-bezier(0.22, 1, 0.36, 1)'
+			},
+			{
+				path: 'yDomainPadding',
+				label: 'Padding vertical (fração)',
+				type: 'number',
+				step: 0.01,
+				placeholder: '0.08'
+			},
+			{
+				path: 'yNice',
+				label: 'Arredondar domínio Y',
+				type: 'boolean',
+				defaultValue: true
+			},
+			{
+				path: 'maxXTicks',
+				label: 'Máx. ticks no eixo X',
+				type: 'number',
+				placeholder: '8'
+			},
+			{
+				path: 'maxYTicks',
+				label: 'Máx. ticks no eixo Y',
+				type: 'number',
+				placeholder: '6'
+			},
+			{
+				path: 'height',
+				label: 'Altura (px)',
+				type: 'number',
+				placeholder: '360'
+			},
+			{
+				path: 'margin',
+				label: 'Margens (JSON)',
+				type: 'json',
+				rows: 3,
+				placeholder: '{"top":40,"right":32,"bottom":64,"left":80}'
+			},
+			{
+				path: 'csvUrl',
+				label: 'URL CSV externa',
+				type: 'text',
+				placeholder: 'https://docs.google.com/.../export?format=csv'
+			},
+			{ path: 'sheetId', label: 'Google Sheets ID', type: 'text', placeholder: '1AbC...' },
+			{ path: 'sheetGid', label: 'Sheet GID', type: 'text', placeholder: '0' },
+			{
+				path: 'autoRefreshMinutes',
+				label: 'Atualizar a cada (minutos)',
+				type: 'number',
+				placeholder: '0',
+				description: 'Defina 0 para manter um snapshot fixo.'
+			},
+			{ path: 'xKey', label: 'Coluna eixo X', type: 'text', placeholder: 'date' },
+			{ path: 'yKey', label: 'Coluna valor', type: 'text', placeholder: 'value' },
+			{ path: 'yLowKey', label: 'Coluna valor mínimo', type: 'text', placeholder: 'min' },
+			{ path: 'yHighKey', label: 'Coluna valor máximo', type: 'text', placeholder: 'max' },
+			{
+				path: 'csvData',
+				label: 'Dados (CSV)',
+				type: 'textarea',
+				rows: 8,
+				placeholder: 'date,value,min,max\n2020-01-01,30,22,36\n2021-01-01,32,24,38'
+			},
+			{
+				path: 'data',
+				label: 'Dados em JSON (fallback)',
+				type: 'json',
+				rows: 6,
+				placeholder: '[{"date":"2020-01-01","value":30,"min":22,"max":36}]',
+				emptyValue: []
+			}
 		]
 	},
 	{

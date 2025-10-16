@@ -1,6 +1,8 @@
 <!-- StoryRenderer.svelte - COMPLETO com ResponsiveMediaLayout -->
 <script>
 	import { onMount } from 'svelte';
+	import { gsapAnimator } from '$lib/utils/gsapAnimator.js';
+	import { extractGsapOptions, stripGsapProps } from '$lib/utils/gsapConfig.js';
 	// Importação dos componentes da história
 	import Header from './story/Header.svelte';
 	import StoryText from './story/StoryText.svelte';
@@ -38,10 +40,14 @@
 	import MediaTextLayout from './story/MediaTextLayout.svelte';
 	import FreeCanvas from './story/FreeCanvas.svelte';
 	import GloboPlayerGridSlider from './story/GloboPlayerGridSlider.svelte';
+	import ChartBar from './story/ChartBar.svelte';
+	import ChartLine from './story/ChartLine.svelte';
 
 	export let previewDevice = null;
 
 	let device = 'desktop';
+	const KEYHOLE_CLIP_CLOSED =
+		'polygon(0% 0%, 0% 100%, 0% 100%, 0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 100%, 100% 100%, 100% 0%)';
 
 	function determineDevice() {
 		if (previewDevice && typeof previewDevice === 'string') return previewDevice;
@@ -63,6 +69,17 @@
 	});
 
 	export let storyData = {};
+	$: keyholeSettings = storyData?.overlays?.keyhole || {};
+	$: keyholeEnabled = Boolean(keyholeSettings.enabled);
+	$: keyholeColor = keyholeSettings.color || '#fdcb6e';
+	$: keyholeZIndex =
+		keyholeSettings.zIndex !== undefined && keyholeSettings.zIndex !== null
+			? keyholeSettings.zIndex
+			: 120;
+	$: keyholeArrowEnabled = keyholeSettings.arrowEnabled !== false;
+	$: keyholeArrowTop = keyholeSettings.arrowTop || '75vh';
+	$: keyholeArrowColor = keyholeSettings.arrowColor || '#2d3436';
+	$: keyholeArrowAnimate = keyholeSettings.arrowAnimation !== false;
 
 	/**
 	 * Mapeia os tipos de parágrafo para os nomes dos componentes.
@@ -208,6 +225,25 @@
 				return 'scrollyframes';
 
 			// Visualizações
+			case 'chart-bar':
+			case 'bar-chart':
+			case 'grafico-barra':
+			case 'gráfico-barra':
+			case 'grafico-coluna':
+			case 'gráfico-coluna':
+			case 'chart':
+				return 'chart-bar';
+
+			case 'chart-line':
+			case 'line-chart':
+			case 'linechart':
+			case 'grafico-linha':
+			case 'gráfico-linha':
+			case 'serie-temporal':
+			case 'série-temporal':
+			case 'timeline-chart':
+				return 'chart-line';
+
 			case 'flourish':
 				return 'flourish';
 
@@ -261,7 +297,7 @@
 	function getComponentProps(paragraph) {
 		// Retorna todas as propriedades exceto 'type'
 		const { type, ...props } = paragraph;
-		return props;
+		return stripGsapProps(props);
 	}
 
 	/**
@@ -562,6 +598,26 @@
 	}
 </script>
 
+{#if keyholeEnabled}
+	<span
+		class="keyhole"
+		aria-hidden="true"
+		style={`--keyhole-bg:${keyholeColor}; --keyhole-z:${keyholeZIndex}; --keyhole-clip:${KEYHOLE_CLIP_CLOSED};`}
+	></span>
+	{#if keyholeArrowEnabled}
+		<span
+			class:arrow--animate={keyholeArrowAnimate}
+			class="arrow"
+			aria-hidden="true"
+			style={`--keyhole-arrow-top:${keyholeArrowTop}; --keyhole-arrow-color:${keyholeArrowColor}; --keyhole-z:${keyholeZIndex};`}
+		>
+			<svg width="32" height="32" viewBox="-5 -5 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path d="M0 10H20L10 0M20 10L10 20" stroke-width="4" stroke-linecap="square" stroke-linejoin="round" />
+			</svg>
+		</span>
+	{/if}
+{/if}
+
 <article class="story-content">
 	<!-- Renderizar intro se existir -->
 	{#if storyData.intro}
@@ -576,6 +632,7 @@
 			{@const componentType = getComponentType(paragraph)}
 			{@const props = getComponentProps(paragraph)}
 			{@const sectionStyling = getSectionStyling(paragraph)}
+			{@const animationOptions = extractGsapOptions(paragraph, { componentType })}
 
 			<section class={sectionStyling.className} style={sectionStyling.style}>
 				{#if sectionStyling.background.source === 'image'}
@@ -614,7 +671,7 @@
 					</video>
 				{/if}
 
-				<div class="story-section__inner">
+				<div class="story-section__inner" use:gsapAnimator={animationOptions}>
 					<!-- Header -->
 					{#if componentType === 'header'}
 						<Header
@@ -1333,6 +1390,125 @@
 							autoAdvance={stringToBoolean(props.autoAdvance, false)}
 						/>
 
+						<!-- 📊 CHART BAR -->
+					{:else if componentType === 'chart-bar'}
+						<ChartBar
+							title={props.title}
+							titleTag={props.titleTag}
+							titleColor={props.titleColor}
+							description={props.description}
+							descriptionColor={props.descriptionColor}
+							notes={props.notes}
+							noteColor={props.noteColor}
+							footnote={props.footnote}
+							footnoteColor={props.footnoteColor}
+							sourceLabel={props.sourceLabel || props.source}
+							sourceUrl={props.sourceUrl}
+							sourceColor={props.sourceColor}
+							csvData={props.csvData || props.csv || props.dataCsv || ''}
+							csvUrl={props.csvUrl || props.dataUrl}
+							sheetId={props.sheetId}
+							sheetGid={props.sheetGid}
+							autoRefreshMinutes={props.autoRefreshMinutes}
+							labelKey={props.labelKey}
+							valueKey={props.valueKey}
+							data={props.data}
+							barColor={props.barColor || props.color || '#0ea5e9'}
+							highlightColor={props.highlightColor}
+							highlights={props.highlights}
+							dimOpacity={props.dimOpacity}
+							annotations={props.annotations}
+							annotationColor={props.annotationColor}
+							tooltipEnabled={stringToBoolean(props.tooltipEnabled, true)}
+							valueLabelsMode={props.valueLabelsMode}
+							valueLabelColor={props.valueLabelColor}
+							height={props.height ?? 400}
+							showGrid={stringToBoolean(props.showGrid, true)}
+							yTicks={props.yTicks ?? 4}
+							margin={props.margin}
+							enableTransitions={stringToBoolean(props.enableTransitions, true)}
+							animationDuration={props.animationDuration}
+							animationDelay={props.animationDelay}
+						/>
+
+						<!-- 📈 CHART LINE -->
+					{:else if componentType === 'chart-line'}
+						<ChartLine
+							title={props.title}
+							titleTag={props.titleTag}
+							titleColor={props.titleColor}
+							description={props.description}
+							descriptionColor={props.descriptionColor}
+							notes={props.notes}
+							noteColor={props.noteColor}
+							footnote={props.footnote}
+							footnoteColor={props.footnoteColor}
+							sourceLabel={props.sourceLabel || props.source}
+							sourceUrl={props.sourceUrl}
+							sourceColor={props.sourceColor}
+							csvData={props.csvData || props.csv || ''}
+							csvUrl={props.csvUrl || props.dataUrl}
+							sheetId={props.sheetId}
+							sheetGid={props.sheetGid}
+							autoRefreshMinutes={props.autoRefreshMinutes}
+							xKey={props.xKey || 'date'}
+							yKey={props.yKey || 'value'}
+							yLowKey={props.yLowKey || 'min'}
+							yHighKey={props.yHighKey || 'max'}
+							data={props.data}
+							backgroundColor={props.backgroundColor}
+							fontFamily={props.fontFamily}
+							fontSize={props.fontSize}
+							lineColor={props.lineColor || '#0ea5e9'}
+							lineWidth={props.lineWidth}
+							lineOpacity={props.lineOpacity}
+							curveType={props.curveType}
+							showArea={props.showArea}
+							areaColor={props.areaColor}
+							areaOpacity={props.areaOpacity}
+							gradientStops={props.gradientStops}
+							showGrid={props.showGrid}
+							showXAxis={props.showXAxis}
+							showYAxis={props.showYAxis}
+							gridColor={props.gridColor}
+							gridDashArray={props.gridDashArray}
+							axisColor={props.axisColor}
+							axisLineColor={props.axisLineColor}
+							pointColor={props.pointColor}
+							pointRadius={props.pointRadius}
+							pointStroke={props.pointStroke}
+							pointStrokeWidth={props.pointStrokeWidth}
+							showPoints={props.showPoints}
+							pointFocusRadius={props.pointFocusRadius}
+							xAxisLabel={props.xAxisLabel}
+							yAxisLabel={props.yAxisLabel}
+							axisLabelColor={props.axisLabelColor}
+							axisLabelFontSize={props.axisLabelFontSize}
+							axisLabelOffset={props.axisLabelOffset}
+							valueLabels={props.valueLabels}
+							valueLabelColor={props.valueLabelColor}
+							valueLabelAnchor={props.valueLabelAnchor}
+							tooltipEnabled={props.tooltipEnabled}
+							tooltipShowOriginalValue={props.tooltipShowOriginalValue}
+							tooltipOffsetX={props.tooltipOffsetX}
+							tooltipOffsetY={props.tooltipOffsetY}
+							enableZoom={props.enableZoom}
+							zoomMode={props.zoomMode}
+							zoomScaleMin={props.zoomScaleMin}
+							zoomScaleMax={props.zoomScaleMax}
+							enableCrosshair={props.enableCrosshair}
+							enableTransitions={props.enableTransitions}
+							animationType={props.animationType}
+							animationDuration={props.animationDuration}
+							animationEasing={props.animationEasing}
+							yDomainPadding={props.yDomainPadding}
+							yNice={props.yNice}
+							maxXTicks={props.maxXTicks}
+							maxYTicks={props.maxYTicks}
+							height={props.height ?? 360}
+							margin={props.margin}
+						/>
+
 						<!-- Flourish Embed -->
 					{:else if componentType === 'flourish'}
 						<FlourishEmbed
@@ -1402,6 +1578,50 @@
 </article>
 
 <style>
+	:global(.keyhole) {
+		position: fixed;
+		inset: 0;
+		pointer-events: none;
+		clip-path: var(
+			--keyhole-clip,
+			polygon(0% 0%, 0% 100%, 0% 100%, 0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 100%, 100% 100%, 100% 0%)
+		);
+		background: var(--keyhole-bg, #fdcb6e);
+		z-index: var(--keyhole-z, 120);
+		transition: none;
+	}
+
+	:global(.arrow) {
+		position: fixed;
+		left: 50%;
+		top: var(--keyhole-arrow-top, 75vh);
+		transform: translate(-50%, -50%);
+		pointer-events: none;
+		color: var(--keyhole-arrow-color, #2d3436);
+		z-index: calc(var(--keyhole-z, 120) + 1);
+	}
+
+	:global(.arrow svg) {
+		display: block;
+		width: 2rem;
+		height: auto;
+		stroke: currentColor;
+		transform: rotate(90deg);
+	}
+
+	:global(.arrow--animate) {
+		animation: keyhole-arrow-float 1s ease-in-out infinite alternate;
+	}
+
+	@keyframes keyhole-arrow-float {
+		from {
+			transform: translate(-50%, -50%);
+		}
+		to {
+			transform: translate(-50%, 50%);
+		}
+	}
+
 	.story-content {
 		max-width: none;
 		width: 100%;

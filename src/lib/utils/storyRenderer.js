@@ -207,8 +207,7 @@ export function parseStoryComponents(paragraphs) {
 					paragraph.mediaHeight ||
 					media.mediaHeightMobile ||
 					'';
-				component.mediaOrderMobile =
-					paragraph.mediaOrderMobile || media.mediaOrderMobile || 'auto';
+				component.mediaOrderMobile = paragraph.mediaOrderMobile || media.mediaOrderMobile || 'auto';
 				component.mediaPadding = paragraph.mediaPadding || media.padding || '0';
 				component.mediaCaption = paragraph.mediaCaption || paragraph.caption || media.caption || '';
 				component.mediaCredit = paragraph.mediaCredit || paragraph.credit || media.credit || '';

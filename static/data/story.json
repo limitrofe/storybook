@@ -211,6 +211,17 @@
       }
     }
   },
+  "overlays": {
+    "keyhole": {
+      "enabled": false,
+      "color": "#fdcb6e",
+      "zIndex": 120,
+      "arrowEnabled": true,
+      "arrowColor": "#2d3436",
+      "arrowAnimation": true,
+      "arrowTop": "75vh"
+    }
+  },
   "analytics": {
     "ga4": "",
     "gtm": "",
@@ -321,6 +332,191 @@
         "blur": "18px",
         "spread": "",
         "color": "rgba(15, 23, 42, 0.55)"
+      },
+      "gsap": {
+        "enabled": true,
+        "autoRefresh": true,
+        "mobileQuery": "(max-width: 768px)",
+        "animations": [
+          {
+            "id": "anim-1760576953353-0acbd5",
+            "label": "Keyhole reveal",
+            "targets": ".keyhole",
+            "once": false,
+            "immediate": false,
+            "duration": 1,
+            "delay": 0,
+            "ease": "none",
+            "preset": "custom",
+            "mobilePreset": "custom",
+            "mobileOverride": false,
+            "from": {
+              "clipPath": "polygon(0% 0%, 0% 100%, 0% 100%, 0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 100%, 100% 100%, 100% 0%)"
+            },
+            "to": {
+              "clipPath": "polygon(0% 0%, 0% 100%, 25% 100%, 25% 25%, 75% 25%, 75% 75%, 25% 75%, 25% 100%, 100% 100%, 100% 0%)",
+              "duration": 1,
+              "ease": "none"
+            },
+            "scrollTrigger": {
+              "trigger": ".story-section:first-of-type",
+              "start": "top top",
+              "end": "bottom bottom",
+              "scrub": true
+            },
+            "autoScroll": false,
+            "mask": {
+              "property": "clipPath",
+              "value": "polygon(0% 0%, 0% 100%, 25% 100%, 25% 25%, 75% 25%, 75% 75%, 25% 75%, 25% 100%, 100% 100%, 100% 0%)",
+              "animate": false
+            }
+          },
+          {
+            "id": "anim-1760576953353-v6qsj4",
+            "label": "Arrow fade",
+            "targets": ".arrow",
+            "once": false,
+            "immediate": false,
+            "duration": 0.6,
+            "delay": 0,
+            "ease": "sine.out",
+            "preset": "custom",
+            "mobilePreset": "custom",
+            "mobileOverride": false,
+            "from": {
+              "autoAlpha": 1
+            },
+            "to": {
+              "autoAlpha": 0,
+              "duration": 0.6,
+              "ease": "sine.out"
+            },
+            "scrollTrigger": {
+              "trigger": ".story-section:first-of-type",
+              "start": "top top",
+              "end": "+=200",
+              "scrub": true
+            },
+            "autoScroll": false
+          }
+        ]
+      }
+    },
+    {
+      "type": "texto",
+      "text": "<p>Escreasfapsoifm upaosiufmpoasiudfmopasiudfmopaisudfmopasiudfmpoaisudfmpoasiudfm poasiudfmopasdfva aqui o texto do parágrafo.</p>",
+      "variant": "body",
+      "align": "left",
+      "maxWidth": "720px",
+      "maxWidthDesktop": "",
+      "maxWidthMobile": "",
+      "widthDesktop": "",
+      "widthMobile": "",
+      "containerWidth": "",
+      "containerWidthDesktop": "",
+      "containerWidthMobile": "",
+      "containerMaxWidth": "",
+      "containerMaxWidthDesktop": "",
+      "containerMaxWidthMobile": "",
+      "containerMinHeight": "",
+      "containerMinHeightDesktop": "",
+      "containerMinHeightMobile": "",
+      "horizontalPosition": "center",
+      "verticalPosition": "top",
+      "fontSizeDesktop": "",
+      "fontSizeMobile": "",
+      "lineHeightDesktop": "",
+      "lineHeightMobile": "",
+      "textColor": "",
+      "section": {
+        "backgroundSource": "color",
+        "backgroundColor": "",
+        "backgroundImageDesktop": "",
+        "backgroundImageMobile": "",
+        "backgroundVideoDesktop": "",
+        "backgroundVideoMobile": "",
+        "backgroundVideoPosterDesktop": "",
+        "backgroundVideoPosterMobile": "",
+        "textColor": "",
+        "paddingTop": "",
+        "paddingBottom": ""
+      },
+      "gsap": {
+        "enabled": true,
+        "autoRefresh": true,
+        "mobileQuery": "(max-width: 768px)",
+        "animations": [
+          {
+            "id": "anim-1760496497460-effsz2",
+            "label": "Animação 2",
+            "once": false,
+            "immediate": false,
+            "duration": 2,
+            "delay": 0,
+            "ease": "power3.out",
+            "preset": "fade",
+            "mobilePreset": "fade-up",
+            "mobileOverride": false,
+            "from": {
+              "autoAlpha": 0
+            },
+            "to": {
+              "autoAlpha": 1
+            }
+          },
+          {
+            "id": "anim-1760496489391-77bcjg",
+            "label": "Animação 1",
+            "once": false,
+            "immediate": false,
+            "duration": 3,
+            "delay": 1,
+            "ease": "power3.out",
+            "stagger": 0.08,
+            "preset": "fade-up",
+            "mobilePreset": "fade-down",
+            "mobileOverride": true,
+            "from": {
+              "autoAlpha": 0,
+              "y": 40
+            },
+            "to": {
+              "autoAlpha": 1,
+              "y": 0
+            },
+            "mobile": {
+              "from": {
+                "autoAlpha": 0,
+                "y": -40
+              },
+              "to": {
+                "autoAlpha": 1,
+                "y": 0
+              }
+            }
+          },
+          {
+            "id": "anim-1760497905267-byizgb",
+            "label": "Animação 3",
+            "targets": ".story-section__inner > *",
+            "once": false,
+            "immediate": false,
+            "duration": 4,
+            "delay": 2,
+            "ease": "power3.out",
+            "preset": "fade-right",
+            "mobilePreset": "fade-up",
+            "mobileOverride": false,
+            "from": {
+              "autoAlpha": 0,
+              "x": 40
+            },
+            "to": {
+              "autoAlpha": 1,
+              "x": 0
+            }
+          }
+        ]
       }
     },
     {
@@ -349,7 +545,76 @@
       "alignDesktop": "center",
       "alignMobile": "center",
       "widthDesktop": "300px",
-      "widthMobile": "70%"
+      "widthMobile": "70%",
+      "gsap": {
+        "enabled": true,
+        "autoRefresh": true,
+        "mobileQuery": "(max-width: 768px)",
+        "animations": [
+          {
+            "id": "anim-1760557187123-dt8raj",
+            "label": "Foto com Legenda · Reveal #1",
+            "targets": [
+              ".story-section__inner .photo-with-caption img",
+              ".story-section__inner figure img",
+              ".story-section__inner picture img"
+            ],
+            "once": false,
+            "immediate": false,
+            "duration": 3,
+            "delay": 1,
+            "ease": "power3.out",
+            "preset": "blur-up",
+            "mobilePreset": "custom",
+            "mobileOverride": false,
+            "from": {
+              "autoAlpha": 0,
+              "scale": 1.08,
+              "rotate": -1.5,
+              "y": 42,
+              "filter": "blur(12px)"
+            },
+            "to": {
+              "autoAlpha": 1,
+              "scale": 1,
+              "rotate": 0,
+              "y": 0,
+              "filter": "blur(0px)",
+              "duration": 0.85,
+              "ease": "power3.out"
+            }
+          },
+          {
+            "id": "anim-1760557187123-cj670q",
+            "label": "Foto com Legenda · Reveal #2",
+            "targets": [
+              ".story-section__inner .photo-with-caption figcaption",
+              ".story-section__inner .photo-with-caption .caption"
+            ],
+            "once": false,
+            "immediate": false,
+            "duration": 0.6,
+            "delay": 0.12,
+            "ease": "power2.out",
+            "preset": "blur-up",
+            "mobilePreset": "custom",
+            "mobileOverride": false,
+            "from": {
+              "autoAlpha": 0,
+              "y": 24,
+              "filter": "blur(6px)"
+            },
+            "to": {
+              "autoAlpha": 1,
+              "y": 0,
+              "filter": "blur(0px)",
+              "duration": 0.6,
+              "ease": "power2.out",
+              "delay": 0.12
+            }
+          }
+        ]
+      }
     },
     {
       "type": "globo-player",
@@ -357,7 +622,7 @@
       "videoIdMobile": "13991633",
       "videoId": "13991633",
       "containerBackgroundColor": "transparent",
-      "widthDesktop": "65%",
+      "widthDesktop": "100%",
       "widthMobile": "100%",
       "aspectRatio": "16 / 9",
       "aspectRatioMobile": "16 / 9",
@@ -381,6 +646,95 @@
         "textColor": "",
         "paddingTop": "",
         "paddingBottom": ""
+      },
+      "gsap": {
+        "enabled": true,
+        "autoRefresh": true,
+        "mobileQuery": "(max-width: 768px)",
+        "animations": [
+          {
+            "id": "anim-1760577003492-awjb3g",
+            "label": "Keyhole reveal",
+            "targets": ".keyhole",
+            "once": false,
+            "immediate": false,
+            "duration": 2,
+            "delay": 1,
+            "ease": "none",
+            "preset": "custom",
+            "mobilePreset": "custom",
+            "mobileOverride": false,
+            "from": {
+              "clipPath": "polygon(0% 0%, 0% 100%, 0% 100%, 0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 100%, 100% 100%, 100% 0%)"
+            },
+            "to": {
+              "clipPath": "polygon(0% 0%, 0% 100%, 25% 100%, 25% 25%, 75% 25%, 75% 75%, 25% 75%, 25% 100%, 100% 100%, 100% 0%)",
+              "duration": 1,
+              "ease": "none"
+            },
+            "scrollTrigger": {
+              "trigger": ".story-section:first-of-type",
+              "start": "top top",
+              "end": "bottom bottom",
+              "scrub": true
+            },
+            "autoScroll": false,
+            "mask": {
+              "property": "clipPath",
+              "value": "polygon(0% 0%, 0% 100%, 25% 100%, 25% 25%, 75% 25%, 75% 75%, 25% 75%, 25% 100%, 100% 100%, 100% 0%)",
+              "animate": false
+            }
+          },
+          {
+            "id": "anim-1760577003492-j6fhu9",
+            "label": "Arrow fade",
+            "targets": ".arrow",
+            "once": false,
+            "immediate": false,
+            "duration": 2,
+            "delay": 1,
+            "ease": "sine.out",
+            "preset": "custom",
+            "mobilePreset": "custom",
+            "mobileOverride": false,
+            "from": {
+              "autoAlpha": 1
+            },
+            "to": {
+              "autoAlpha": 0,
+              "duration": 0.6,
+              "ease": "sine.out"
+            },
+            "scrollTrigger": {
+              "trigger": ".story-section:first-of-type",
+              "start": "top top",
+              "end": "+=200",
+              "scrub": true
+            },
+            "autoScroll": false
+          },
+          {
+            "id": "anim-1760578164577-aw0zjl",
+            "label": "Animação 3",
+            "targets": ".story-section__inner > *",
+            "once": true,
+            "immediate": false,
+            "duration": 5,
+            "delay": 1,
+            "ease": "power3.out",
+            "preset": "fade",
+            "mobilePreset": "fade-up",
+            "mobileOverride": false,
+            "from": {
+              "autoAlpha": 0,
+              "scale": 0.35
+            },
+            "to": {
+              "autoAlpha": 1,
+              "scale": 1
+            }
+          }
+        ]
       }
     },
     {
@@ -408,7 +762,76 @@
         "paddingBottom": "2rem"
       },
       "horizontalPosition": "center",
-      "verticalPosition": "top"
+      "verticalPosition": "top",
+      "gsap": {
+        "enabled": true,
+        "autoRefresh": true,
+        "mobileQuery": "(max-width: 768px)",
+        "animations": [
+          {
+            "id": "anim-1760557229877-auroou",
+            "label": "Headline Mask Split #1",
+            "targets": [
+              ".story-section__inner h1",
+              ".story-section__inner h2",
+              ".story-section__inner h3",
+              ".story-section__inner .headline"
+            ],
+            "once": true,
+            "immediate": false,
+            "duration": 0.85,
+            "delay": 0,
+            "ease": "power4.out",
+            "preset": "custom",
+            "mobilePreset": "custom",
+            "mobileOverride": false,
+            "from": {
+              "clipPath": "inset(0% 0% 100% 0%)",
+              "y": 40,
+              "autoAlpha": 0.6,
+              "skewY": 5
+            },
+            "to": {
+              "clipPath": "inset(0% 0% 0% 0%)",
+              "y": 0,
+              "skewY": 0,
+              "autoAlpha": 1,
+              "duration": 0.85,
+              "ease": "power4.out"
+            }
+          },
+          {
+            "id": "anim-1760557229877-lp1m6q",
+            "label": "Headline Mask Split #2",
+            "targets": [
+              ".story-section__inner p",
+              ".story-section__inner .rich-text > *"
+            ],
+            "once": true,
+            "immediate": false,
+            "duration": 0.7,
+            "delay": 0,
+            "ease": "power3.out",
+            "stagger": 0.08,
+            "preset": "fade-up",
+            "mobilePreset": "custom",
+            "mobileOverride": false,
+            "from": {
+              "autoAlpha": 0,
+              "y": 40,
+              "filter": "blur(8px)"
+            },
+            "to": {
+              "autoAlpha": 1,
+              "y": 0,
+              "filter": "blur(0px)",
+              "duration": 0.7,
+              "ease": "power3.out",
+              "stagger": 0.08
+            }
+          }
+        ]
+      }
     },
     {
       "type": "intertitulo",
@@ -1955,7 +2378,48 @@
       "textAlignMobile": "center",
       "backgroundImage": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/gshow/quem_matou_odete_roitman/img/BgIntertituloDesk.jpg",
       "backgroundImageMobile": "https://s3.glbimg.com/v1/AUTH_e03f7a1106bb438e970511f892f07c35/gshow/quem_matou_odete_roitman/img/BgIntertituloDesk.jpg",
-      "height": "20vh"
+      "height": "20vh",
+      "gsap": {
+        "enabled": true,
+        "autoRefresh": true,
+        "mobileQuery": "(max-width: 768px)",
+        "animations": [
+          {
+            "id": "anim-1760533868884-2h5jkg",
+            "label": "Parallax Drift #1",
+            "targets": [
+              ".story-section__inner [data-parallax]",
+              ".story-section__inner img",
+              ".story-section__inner figure"
+            ],
+            "once": true,
+            "immediate": false,
+            "duration": 5,
+            "delay": 0,
+            "ease": "none",
+            "preset": "fade",
+            "mobilePreset": "custom",
+            "mobileOverride": false,
+            "from": {
+              "autoAlpha": 0,
+              "yPercent": 15,
+              "scale": 1.05
+            },
+            "to": {
+              "autoAlpha": 1,
+              "yPercent": -10,
+              "scale": 1,
+              "duration": 1.2,
+              "ease": "none",
+              "scrollTrigger": {
+                "start": "top 90%",
+                "end": "bottom top",
+                "scrub": true
+              }
+            }
+          }
+        ]
+      }
     },
     {
       "type": "globoplayer-grid-slider",
@@ -2545,6 +3009,432 @@
       "mediaHeightDesktop": "50vh",
       "mediaHeightMobile": "50vh",
       "mediaOrderMobile": "media-first"
+    },
+    {
+      "type": "chart-bar",
+      "title": "Vendas por categoria",
+      "description": "Distribuição de vendas por canal no último trimestre.",
+      "barColor": "#e70d5a",
+      "height": 400,
+      "showGrid": true,
+      "yTicks": 4,
+      "csvData": "label,value\nCategoria A,32\nCategoria B,45\nCategoria C,28\nCategoria D,54\nCategoria E,18",
+      "data": [
+        {
+          "label": "Categoria A",
+          "value": 32
+        },
+        {
+          "label": "Categoria B",
+          "value": 45
+        },
+        {
+          "label": "Categoria C",
+          "value": 28
+        },
+        {
+          "label": "Categoria D",
+          "value": 54
+        },
+        {
+          "label": "Categoria E",
+          "value": 18
+        }
+      ],
+      "section": {
+        "backgroundSource": "color",
+        "backgroundColor": "",
+        "backgroundImageDesktop": "",
+        "backgroundImageMobile": "",
+        "backgroundVideoDesktop": "",
+        "backgroundVideoMobile": "",
+        "backgroundVideoPosterDesktop": "",
+        "backgroundVideoPosterMobile": "",
+        "textColor": "",
+        "paddingTop": "",
+        "paddingBottom": ""
+      },
+      "titleTag": "h2",
+      "valueLabelsMode": "always",
+      "footnoteColor": "#ffffff",
+      "highlightColor": "#0dc52b78",
+      "titleColor": "#ffffff",
+      "descriptionColor": "#ffffff",
+      "noteColor": "#ffffff",
+      "sourceColor": "#ffffff",
+      "footnote": "ih a;lkj ;lasdkfj ;alskjd f;laskj df;lasj df;lkjas ;dlfkja s;ldfkj a;lskdjf l;aksjdfl;asj ;flkajs;ldfk jas;lkfjdl ;askjdf ;laksjdf l;",
+      "annotationColor": "#99ffeb",
+      "valueLabelColor": "#fff700",
+      "sourceLabel": "sfdasdf asdfasd fasf asf",
+      "tooltipEnabled": true,
+      "csvUrl": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTyqiwNUyJfnuPVaOEiuZ-2fALdrUCegNmmp0NEQXNb7yap713N9vWMywEAL1_maRUbcxHbhh_rRScU/pub?gid=437660817&single=true&output=csv",
+      "dimOpacity": 0.3,
+      "enableTransitions": true,
+      "labelKey": "label",
+      "valueKey": "value",
+      "highlights": "Categoria A, Categoria B",
+      "notes": "efwalkdsja ;ldkfjas\nf\n;laksdjf ;laskjdf l;askdf\nal;kjfpoqiwefo\nqpfoijwqpofje",
+      "tooltipShowOriginalValue": true,
+      "valueLabelStrokeWidth": 3,
+      "valueUnit": "mi",
+      "enableWheelZoom": true,
+      "enableBrush": true,
+      "wheelZoomIntensity": 0.5,
+      "animationDelay": 102
+    },
+    {
+      "type": "chart-bar",
+      "title": "Vendas por categoria",
+      "titleTag": "h3",
+      "titleColor": "",
+      "description": "Distribuição de vendas por canal no último trimestre.",
+      "descriptionColor": "",
+      "notes": "safeasdf\nasdfasdf",
+      "noteColor": "",
+      "footnote": "weafawfasadvf",
+      "footnoteColor": "",
+      "sourceLabel": "asdfasdf",
+      "sourceUrl": "",
+      "sourceColor": "",
+      "barColor": "#0ea5e9",
+      "highlightColor": "#facc15",
+      "highlights": [],
+      "dimOpacity": 0.35,
+      "annotations": [],
+      "annotationColor": "#ff9500",
+      "tooltipEnabled": true,
+      "valueLabelsMode": "hover",
+      "valueLabelColor": "#000000",
+      "height": 400,
+      "showGrid": true,
+      "yTicks": 4,
+      "csvData": "label,value\nCategoria A,32\nCategoria B,45\nCategoria C,28\nCategoria D,54\nCategoria E,18",
+      "csvUrl": "",
+      "sheetId": "",
+      "sheetGid": "",
+      "autoRefreshMinutes": 0,
+      "labelKey": "label",
+      "valueKey": "value",
+      "data": [
+        {
+          "label": "Categoria A",
+          "value": 32
+        },
+        {
+          "label": "Categoria B",
+          "value": 45
+        },
+        {
+          "label": "Categoria C",
+          "value": 28
+        },
+        {
+          "label": "Categoria D",
+          "value": 54
+        },
+        {
+          "label": "Categoria E",
+          "value": 18
+        }
+      ],
+      "enableTransitions": true,
+      "animationDuration": 450,
+      "animationDelay": 30,
+      "section": {
+        "backgroundSource": "color",
+        "backgroundColor": "",
+        "backgroundImageDesktop": "",
+        "backgroundImageMobile": "",
+        "backgroundVideoDesktop": "",
+        "backgroundVideoMobile": "",
+        "backgroundVideoPosterDesktop": "",
+        "backgroundVideoPosterMobile": "",
+        "textColor": "",
+        "paddingTop": "",
+        "paddingBottom": ""
+      },
+      "enableBrush": true,
+      "enableWheelZoom": true,
+      "wheelZoomIntensity": 0.8,
+      "tooltipShowOriginalValue": true
+    },
+    {
+      "type": "chart-line",
+      "title": "Evolução anual de temperaturas globais",
+      "titleTag": "h3",
+      "titleColor": "#ffffff",
+      "description": "Médias anuais com intervalo mínimo e máximo estimado.",
+      "descriptionColor": "#ffffff",
+      "notes": [],
+      "noteColor": "#ffffff",
+      "footnote": "",
+      "footnoteColor": "#ffffff",
+      "sourceLabel": "scdasdfasa ",
+      "sourceUrl": "",
+      "sourceColor": "#ffffff",
+      "csvData": "date,value,min,max\n1994-01-01,23.4,18.1,28.6\n1998-01-01,27.4,22.0,33.7\n2002-01-01,29.4,24.2,36.2\n2006-01-01,31.3,26.0,38.9\n2010-01-01,33.2,27.6,41.0\n2014-01-01,35.2,29.3,43.6\n2018-01-01,37.2,30.9,45.8\n2022-01-01,39.2,32.7,47.9",
+      "csvUrl": "",
+      "sheetId": "",
+      "sheetGid": "",
+      "autoRefreshMinutes": 0,
+      "xKey": "date",
+      "yKey": "value",
+      "yLowKey": "min",
+      "yHighKey": "max",
+      "data": [
+        {
+          "date": "1994-01-01",
+          "value": 23.4,
+          "min": 18.1,
+          "max": 28.6
+        },
+        {
+          "date": "1995-01-01",
+          "value": 24.1,
+          "min": 19.4,
+          "max": 29.8
+        },
+        {
+          "date": "1996-01-01",
+          "value": 25.6,
+          "min": 20.8,
+          "max": 31.2
+        },
+        {
+          "date": "1997-01-01",
+          "value": 26.2,
+          "min": 21.1,
+          "max": 32.5
+        },
+        {
+          "date": "1998-01-01",
+          "value": 27.4,
+          "min": 22,
+          "max": 33.7
+        },
+        {
+          "date": "1999-01-01",
+          "value": 26.8,
+          "min": 21.5,
+          "max": 32.9
+        },
+        {
+          "date": "2000-01-01",
+          "value": 27.9,
+          "min": 22.4,
+          "max": 34.3
+        },
+        {
+          "date": "2001-01-01",
+          "value": 28.5,
+          "min": 23.1,
+          "max": 35.1
+        },
+        {
+          "date": "2002-01-01",
+          "value": 29.4,
+          "min": 24.2,
+          "max": 36.2
+        },
+        {
+          "date": "2003-01-01",
+          "value": 29.9,
+          "min": 24.7,
+          "max": 36.9
+        },
+        {
+          "date": "2004-01-01",
+          "value": 30.4,
+          "min": 25.1,
+          "max": 37.6
+        },
+        {
+          "date": "2005-01-01",
+          "value": 30.9,
+          "min": 25.6,
+          "max": 38.2
+        },
+        {
+          "date": "2006-01-01",
+          "value": 31.3,
+          "min": 26,
+          "max": 38.9
+        },
+        {
+          "date": "2007-01-01",
+          "value": 31.8,
+          "min": 26.4,
+          "max": 39.5
+        },
+        {
+          "date": "2008-01-01",
+          "value": 32.1,
+          "min": 26.8,
+          "max": 39.9
+        },
+        {
+          "date": "2009-01-01",
+          "value": 32.7,
+          "min": 27.2,
+          "max": 40.4
+        },
+        {
+          "date": "2010-01-01",
+          "value": 33.2,
+          "min": 27.6,
+          "max": 41
+        },
+        {
+          "date": "2011-01-01",
+          "value": 33.8,
+          "min": 28,
+          "max": 41.7
+        },
+        {
+          "date": "2012-01-01",
+          "value": 34.1,
+          "min": 28.4,
+          "max": 42.2
+        },
+        {
+          "date": "2013-01-01",
+          "value": 34.6,
+          "min": 28.9,
+          "max": 42.9
+        },
+        {
+          "date": "2014-01-01",
+          "value": 35.2,
+          "min": 29.3,
+          "max": 43.6
+        },
+        {
+          "date": "2015-01-01",
+          "value": 35.8,
+          "min": 29.8,
+          "max": 44.2
+        },
+        {
+          "date": "2016-01-01",
+          "value": 36.4,
+          "min": 30.2,
+          "max": 44.8
+        },
+        {
+          "date": "2017-01-01",
+          "value": 36.9,
+          "min": 30.6,
+          "max": 45.3
+        },
+        {
+          "date": "2018-01-01",
+          "value": 37.2,
+          "min": 30.9,
+          "max": 45.8
+        },
+        {
+          "date": "2019-01-01",
+          "value": 37.6,
+          "min": 31.3,
+          "max": 46.2
+        },
+        {
+          "date": "2020-01-01",
+          "value": 38.1,
+          "min": 31.8,
+          "max": 46.8
+        },
+        {
+          "date": "2021-01-01",
+          "value": 38.5,
+          "min": 32.2,
+          "max": 47.3
+        },
+        {
+          "date": "2022-01-01",
+          "value": 39.2,
+          "min": 32.7,
+          "max": 47.9
+        },
+        {
+          "date": "2023-01-01",
+          "value": 39.8,
+          "min": 33.1,
+          "max": 48.5
+        }
+      ],
+      "height": 360,
+      "margin": {
+        "top": 40,
+        "right": 32,
+        "bottom": 64,
+        "left": 80
+      },
+      "backgroundColor": "#ff00008c",
+      "fontFamily": "inherit",
+      "fontSize": "0.85rem",
+      "lineColor": "#0ea5e9",
+      "lineWidth": 2.5,
+      "lineOpacity": 0.95,
+      "curveType": "monotone",
+      "showArea": true,
+      "areaColor": "rgba(14, 165, 233, 0.18)",
+      "areaOpacity": 1,
+      "gradientStops": "",
+      "showGrid": true,
+      "showXAxis": true,
+      "showYAxis": true,
+      "gridColor": "rgba(148, 163, 184, 0.25)",
+      "gridDashArray": "3,3",
+      "axisColor": "",
+      "axisLineColor": "",
+      "pointColor": "#0f172a",
+      "pointRadius": 3.5,
+      "pointStroke": "#ffffff",
+      "pointStrokeWidth": 1.5,
+      "showPoints": true,
+      "pointFocusRadius": 5.5,
+      "xAxisLabel": "",
+      "yAxisLabel": "",
+      "axisLabelColor": "",
+      "axisLabelFontSize": "0.78rem",
+      "axisLabelOffset": {
+        "x": 36,
+        "y": 42
+      },
+      "valueLabels": true,
+      "valueLabelColor": "",
+      "valueLabelAnchor": "middle",
+      "tooltipEnabled": true,
+      "tooltipShowOriginalValue": true,
+      "tooltipOffsetX": 0,
+      "tooltipOffsetY": -16,
+      "enableZoom": true,
+      "zoomMode": "xy",
+      "zoomScaleMin": 1,
+      "zoomScaleMax": 32,
+      "enableCrosshair": true,
+      "enableTransitions": true,
+      "animationType": "draw",
+      "animationDuration": 600,
+      "animationEasing": "cubic-bezier(0.22, 1, 0.36, 1)",
+      "yDomainPadding": 0.08,
+      "yNice": true,
+      "maxXTicks": 8,
+      "maxYTicks": 6,
+      "section": {
+        "backgroundSource": "color",
+        "backgroundColor": "",
+        "backgroundImageDesktop": "",
+        "backgroundImageMobile": "",
+        "backgroundVideoDesktop": "",
+        "backgroundVideoMobile": "",
+        "backgroundVideoPosterDesktop": "",
+        "backgroundVideoPosterMobile": "",
+        "textColor": "",
+        "paddingTop": "",
+        "paddingBottom": ""
+      }
     }
   ]
 }

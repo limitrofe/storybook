@@ -118,18 +118,151 @@ Tenha certeza de que as credenciais no `project.config.js` (ou `.env`) estão co
 └── vite.config.js           # Configuração Vite/SvelteKit
 ```
 
-## 9. Solução de problemas
+## 9. Animações com GSAP
+
+- Todos os componentes de história (exceto os gráficos) aceitam animações GSAP configuráveis bloco a bloco.
+- Adicione, no builder, um campo `gsap`, `gsapAnimations` ou `gsapConfig` em cada parágrafo para controlar as animações do trecho.
+- Propriedades principais suportadas:
+  - `enabled`: ativa/desativa GSAP para o bloco (padrão automático quando existe alguma animação definida).
+  - `mobileQuery`: breakpoint para diferenciar animações mobile/desktop (default: `(max-width: 768px)`).
+  - `animations`: array de objetos contendo `targets` (seletor CSS relativo ao bloco), `from`, `to`, `duration`, `delay`, `ease`, `stagger`, além de blocos específicos `desktop`/`mobile`.
+  - `defaultAnimation`: fallback aplicado quando `animations` estiver vazio.
+  - `scrollTrigger`: configurações compatíveis com o plugin oficial (start, end, scrub, markers etc.).
+- Exemplo de configuração para um bloco de texto:
+
+```json
+{
+	"enabled": true,
+	"mobileQuery": "(max-width: 600px)",
+	"animations": [
+		{
+			"targets": [".story-section__inner h2"],
+			"from": { "autoAlpha": 0, "y": 40 },
+			"to": { "autoAlpha": 1, "y": 0, "duration": 0.6, "ease": "power3.out" },
+			"mobile": {
+				"from": { "autoAlpha": 0, "y": 24 },
+				"to": { "autoAlpha": 1, "y": 0, "duration": 0.45 }
+			}
+		},
+		{
+			"targets": ".story-section__inner p",
+			"from": { "autoAlpha": 0, "y": 32 },
+			"to": { "autoAlpha": 1, "y": 0, "duration": 0.5, "stagger": 0.08 }
+		}
+	]
+}
+```
+
+- Cada objeto `from`/`to` aceita qualquer propriedade GSAP (`x`, `y`, `opacity`, `scale`, `rotation`, `transformOrigin`, etc.).
+- Para animações baseadas em scroll basta incluir `scrollTrigger` (o plugin é registrado automaticamente quando presente).
+- Após atualizar o repositório, execute `npm install` para garantir a instalação da dependência `gsap`.
+
+### 9.1 Biblioteca premium de presets
+
+- No inspetor do builder há uma biblioteca de presets avançados (“Hero Rise Timeline”, “Cards Cascade”, “Parallax Drift”, “Mask Reveal Gallery”, “Cards 3D Tilt”, “Scroll Pin Reveal”, “Neon Glow Pulse” etc.).
+- Cada cartão aplica uma ou mais animações prontas (incluindo timelines, efeitos 3D, parallax com `scrollTrigger` e loops). Se precisar, edite os seletores depois de aplicar para adequar ao markup do bloco.
+- Os presets continuam sendo configs GSAP normais, então você pode mesclar com animações manuais, alterar durações, adicionar `stagger`, trocar easings, incluir novas etapas na timeline e salvar variações personalizadas.
+
+### 9.2 Máscaras SVG em animações
+
+- Nas animações de qualquer bloco, use a seção **Máscara (SVG)** para aplicar `clip-path` ou `mask` sem editar JSON manualmente.
+- Passos básicos:
+  1. Insira o SVG (com `clipPath`/`mask`) no conteúdo da seção ou reutilize um `<defs>` global hospedado no projeto.
+  2. No editor, escolha o campo _Aplicar em_: `clip-path`, `mask`, `mask-image`, `mask-border` ou `-webkit-mask-image` (para compatibilidade).
+  3. Informe o valor da máscara (`url(#maskId)` ou um link remoto com SVG). Opcionalmente selecione um alvo específico (ex.: `.photo-with-caption img`).
+  4. Marque **Animar máscara** para transicionar entre dois valores (`from`/`to`). É possível definir duração, ease e posição na timeline.
+- O GSAP aplica a máscara automaticamente quando o bloco entra na viewport; o comportamento de replay fica ativado por padrão (desative com “Executar apenas uma vez” caso necessário).
+- Exemplo rápido (imagens com `mask` animada):
+  - Valor: `url(#maskLogo)`
+  - Valor inicial: `url(#maskStart)`
+  - Valor final: `url(#maskLogo)`
+  - Duração: `0.8`
+  - Ease: `power3.out`
+- Para reutilizar a mesma máscara em vários blocos, mantenha o mesmo `id` no `<clipPath>`/`<mask>` e aplique o preset em cada bloco desejado.
+
+### 9.3 Efeito “keyhole” rolável
+
+- O preset **Scroll Keyhole Reveal** replica o efeito do CodePen (overlay abrindo enquanto a seta some). Para usá-lo:
+  - Nas configurações do projeto, ative **Overlay keyhole (efeito CodePen)** e ajuste cor/posição da seta se necessário.
+  - Insira no topo da página (pode ser via bloco Livre ou Snippet global) os elementos:
+     ```html
+     <span class="keyhole" aria-hidden="true"></span>
+     <span class="arrow" aria-hidden="true">
+     	<svg
+     		width="20"
+     		height="20"
+     		viewBox="-5 -5 30 30"
+     		fill="none"
+     		xmlns="http://www.w3.org/2000/svg"
+     	>
+     		<path
+     			d="M0 10H20L10 0M20 10L10 20"
+     			stroke-width="4"
+     			stroke-linecap="square"
+     			stroke-linejoin="round"
+     		/>
+     	</svg>
+     </span>
+     ```
+  - Adicione o CSS (ajuste cores/tamanhos conforme a matéria):
+     ```css
+     .keyhole {
+     	position: fixed;
+     	inset: 0;
+     	pointer-events: none;
+     	background: #fdcb6e; /* cor do overlay */
+     	clip-path: polygon(
+     		0% 0%,
+     		0% 100%,
+     		0% 100%,
+     		0% 0%,
+     		100% 0%,
+     		100% 100%,
+     		0% 100%,
+     		0% 100%,
+     		100% 100%,
+     		100% 0%
+     	);
+     	z-index: 50;
+     }
+     .arrow {
+     	position: fixed;
+     	top: 75vh;
+     	left: 50%;
+     	transform: translateX(-50%);
+     	z-index: 51;
+     	animation: keyhole-arrow-float 1s ease-in-out infinite alternate;
+     }
+     .arrow svg {
+     	width: 2rem;
+     	height: auto;
+     	transform: rotate(90deg);
+     	stroke: #2d3436;
+     }
+     @keyframes keyhole-arrow-float {
+     	from {
+     		transform: translate(-50%, -50%);
+     	}
+     	to {
+     		transform: translate(-50%, 50%);
+     	}
+     }
+     ```
+  - Aplique o preset **Scroll Keyhole Reveal** ao primeiro bloco da página e ajuste os seletores `trigger` (por padrão ele usa `.story-section:first-of-type`).
+- O preset já configura o `clip-path` animado e a seta com `scrub`. Caso a página tenha outra estrutura, edite os campos `targets` e `scrollTrigger` após aplicar o preset.
+
+## 10. Solução de problemas
 
 - **Erro em deploy (401/403)**: verifique usuário/senha em `project.config.js` ou `.env`. Garante que o `projectName` não tem espaços.
 - **ffmpeg não encontrado**: instale via `brew install ffmpeg` (macOS) ou `sudo apt install ffmpeg` (Linux). No Windows, use o pacote oficial e adicione ao PATH.
 - **Builder sem estilos**: confirme que `npm install` foi executado e que o modo builder (`npm run builder`) está ativo.
 - **Problemas com `npm install`**: limpe com `rm -rf node_modules package-lock.json` e instale novamente.
 
-## 10. Anexo – Implementação VideoScrolly
+## 11. Anexo – Implementação VideoScrolly
 
 As instruções a seguir detalham como registrar o componente `ScrollyFrames` e mapear novos tipos no renderer. Elas são úteis quando você estiver montando histórias com scrollytelling avançado.
 
-### 10.1 Criar o componente
+### 11.1 Criar o componente
 
 Copie o arquivo `ScrollyFrames.svelte` (artifact) para o caminho:
 
@@ -137,7 +270,7 @@ Copie o arquivo `ScrollyFrames.svelte` (artifact) para o caminho:
 src/lib/components/story/ScrollyFrames.svelte
 ```
 
-### 10.2 Atualizar `StoryRenderer.svelte`
+### 11.2 Atualizar `StoryRenderer.svelte`
 
 ```javascript
 import ScrollyFrames from './story/ScrollyFrames.svelte';
@@ -162,7 +295,7 @@ import ScrollyFrames from './story/ScrollyFrames.svelte';
   />
 ```
 
-### 10.3 Atualizar `getComponentType`
+### 11.3 Atualizar `getComponentType`
 
 ```javascript
 // VideoScrollytelling NOVO
@@ -172,7 +305,7 @@ import ScrollyFrames from './story/ScrollyFrames.svelte';
 'video-scrolly': 'video-scrolly-new',
 ```
 
-### 10.4 Ajustar `storyRenderer.js`
+### 11.4 Ajustar `storyRenderer.js`
 
 ```javascript
 case 'videoscrollytelling':
@@ -196,7 +329,7 @@ case 'video-scrolly':
   break;
 ```
 
-### 10.5 Teste rápido
+### 11.5 Teste rápido
 
 Crie um JSON de teste e sirva com `npm run dev` para validar o comportamento, conforme instruções do trecho acima.
 

@@ -179,6 +179,17 @@ export const storyDefaults = {
 			}
 		}
 	},
+	overlays: {
+		keyhole: {
+			enabled: false,
+			color: '#fdcb6e',
+			zIndex: 120,
+			arrowEnabled: true,
+			arrowColor: '#2d3436',
+			arrowAnimation: true,
+			arrowTop: '75vh'
+		}
+	},
 	analytics: {
 		ga4: '',
 		gtm: '',
@@ -276,6 +287,36 @@ const baseMetadataFields = [
 		placeholder: '0 0 0 0'
 	},
 	{ path: 'appearance.customCSS', label: 'CSS adicional (inline)', type: 'textarea', rows: 3 },
+	{
+		path: 'overlays.keyhole.enabled',
+		label: 'Overlay keyhole (efeito CodePen)',
+		type: 'boolean',
+		helpText: 'Ativa o overlay fixo com máscara animada sobre a primeira seção.'
+	},
+	{ path: 'overlays.keyhole.color', label: 'Cor do overlay', type: 'color' },
+	{
+		path: 'overlays.keyhole.zIndex',
+		label: 'z-index do overlay',
+		type: 'text',
+		placeholder: '120'
+	},
+	{
+		path: 'overlays.keyhole.arrowEnabled',
+		label: 'Exibir seta indicativa',
+		type: 'boolean'
+	},
+	{ path: 'overlays.keyhole.arrowColor', label: 'Cor da seta', type: 'color' },
+	{
+		path: 'overlays.keyhole.arrowTop',
+		label: 'Posição vertical da seta',
+		type: 'text',
+		placeholder: '75vh'
+	},
+	{
+		path: 'overlays.keyhole.arrowAnimation',
+		label: 'Animar seta (flutuar)',
+		type: 'boolean'
+	},
 	// Compartilhamento
 	{ path: 'share.title', label: 'Título para compartilhamento', type: 'text' },
 	{

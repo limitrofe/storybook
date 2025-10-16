@@ -1,6 +1,7 @@
 <script>
 	import { get } from 'svelte/store';
 	import FieldEditor from './FieldEditor.svelte';
+	import AnimationsEditor from './AnimationsEditor.svelte';
 	import { storyStore, selectedBlock, selectedBlockId } from '../stores/storyStore.js';
 	import { metadataFields, creditsFields } from '../story-defaults.js';
 	import { getComponentDefinition } from '../component-registry.js';
@@ -44,6 +45,10 @@
 		if (!blockId) return;
 		storyStore.updateBlockField(blockId, path, event.detail.value);
 	};
+
+	const gsapDisabledTypes = new Set(['chart-bar', 'chart-line', 'chart']);
+	const isGsapSupported = (block) =>
+		block && !gsapDisabledTypes.has((block.type || '').toLowerCase());
 
 	const handleBlockJsonBlur = () => {
 		const blockId = get(selectedBlockId);
@@ -224,6 +229,23 @@
 						{/each}
 					</div>
 
+					{#if isGsapSupported(block)}
+						<div class="fields card card--gsap">
+							<div class="card-headline">
+								<h4>Animações (GSAP)</h4>
+								<p>
+									Defina como elementos deste bloco entram na tela com presets ou JSON avançado.
+									Seletores são relativos à própria seção.
+								</p>
+							</div>
+							<AnimationsEditor
+								value={block.gsap}
+								on:change={(event) =>
+									storyStore.updateBlockField(block.__id, 'gsap', event.detail.value)}
+							/>
+						</div>
+					{/if}
+
 					<details class="advanced" open>
 						<summary>JSON completo do bloco</summary>
 						<textarea
@@ -391,6 +413,28 @@
 		margin: 0 0 0.5rem;
 		font-size: 0.85rem;
 		color: #334155;
+	}
+
+	.card-headline {
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.card-headline h4 {
+		margin: 0;
+	}
+
+	.card-headline p {
+		margin: 0;
+		color: #64748b;
+		font-size: 0.75rem;
+		line-height: 1.4;
+	}
+
+	.card--gsap {
+		gap: 0.75rem;
 	}
 
 	.info-card {
