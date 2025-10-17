@@ -107,6 +107,24 @@ function ensureBlockShadows(block) {
 	return block;
 }
 
+function applyBlockDefaults(block) {
+	if (!block || typeof block !== 'object') return block;
+	const type = block.type || block.kind;
+	if (!type) return block;
+	const definition = getComponentDefinition(type);
+	if (!definition?.defaultData) return block;
+
+	const { section: _section, ...defaults } = structuredClone(definition.defaultData);
+
+	for (const [key, value] of Object.entries(defaults)) {
+		if (block[key] === undefined) {
+			block[key] = value;
+		}
+	}
+
+	return block;
+}
+
 function mergeTypography(defaultValue = {}, incoming = {}) {
 	const result = {};
 	const keys = new Set([...Object.keys(defaultValue || {}), ...Object.keys(incoming || {})]);
@@ -406,8 +424,15 @@ export function normalizeStory(value = {}) {
 	const paragraphs = Array.isArray(value?.paragraphs) ? value.paragraphs : [];
 	story.paragraphs = paragraphs.map((paragraph) => ({
 		__id: paragraph.__id || `${paragraph.type || 'block'}-${Date.now()}-${blockCounter++}`,
-		...ensureBlockShadows(structuredClone(paragraph)),
-		section: ensureSectionDefaults(paragraph?.section)
+		...(() => {
+			const clone = ensureBlockShadows(structuredClone(paragraph));
+			const withDefaults = applyBlockDefaults(clone);
+			const { section: blockSection, ...rest } = withDefaults || {};
+			return {
+				...rest,
+				section: ensureSectionDefaults(paragraph?.section ?? blockSection)
+			};
+		})()
 	}));
 
 	return story;

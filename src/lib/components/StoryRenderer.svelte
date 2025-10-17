@@ -611,8 +611,19 @@
 			aria-hidden="true"
 			style={`--keyhole-arrow-top:${keyholeArrowTop}; --keyhole-arrow-color:${keyholeArrowColor}; --keyhole-z:${keyholeZIndex};`}
 		>
-			<svg width="32" height="32" viewBox="-5 -5 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-				<path d="M0 10H20L10 0M20 10L10 20" stroke-width="4" stroke-linecap="square" stroke-linejoin="round" />
+			<svg
+				width="32"
+				height="32"
+				viewBox="-5 -5 30 30"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<path
+					d="M0 10H20L10 0M20 10L10 20"
+					stroke-width="4"
+					stroke-linecap="square"
+					stroke-linejoin="round"
+				/>
 			</svg>
 		</span>
 	{/if}
@@ -1313,6 +1324,12 @@
 						<ScrollyTelling
 							steps={props.steps || []}
 							fullWidth={stringToBoolean(props.fullWidth, false)}
+							activationMode={props.activationMode || props.advanceMode}
+							activationLine={props.activationLine ??
+								props.activationRatio ??
+								props.activationPoint ??
+								props.activationPosition}
+							exitLine={props.exitLine ?? props.exitRatio ?? props.exitPoint ?? props.exitPosition}
 						/>
 
 						<!-- ✅ SCROLLY FRAMES - NOVO COMPONENTE -->
@@ -1525,7 +1542,16 @@
 
 						<!-- Flourish Scrolly -->
 					{:else if componentType === 'flourish-scrolly'}
-						<FlourishScrolly src={props.src} steps={props.steps || []} />
+						<FlourishScrolly
+							src={props.src}
+							steps={props.steps || []}
+							activationMode={props.activationMode || props.advanceMode}
+							activationLine={props.activationLine ??
+								props.activationRatio ??
+								props.activationPoint ??
+								props.activationPosition}
+							exitLine={props.exitLine ?? props.exitRatio ?? props.exitPoint ?? props.exitPosition}
+						/>
 
 						<!-- Anchor Point -->
 					{:else if componentType === 'anchor'}
@@ -1584,7 +1610,18 @@
 		pointer-events: none;
 		clip-path: var(
 			--keyhole-clip,
-			polygon(0% 0%, 0% 100%, 0% 100%, 0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 100%, 100% 100%, 100% 0%)
+			polygon(
+				0% 0%,
+				0% 100%,
+				0% 100%,
+				0% 0%,
+				100% 0%,
+				100% 100%,
+				0% 100%,
+				0% 100%,
+				100% 100%,
+				100% 0%
+			)
 		);
 		background: var(--keyhole-bg, #fdcb6e);
 		z-index: var(--keyhole-z, 120);

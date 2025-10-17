@@ -10,6 +10,9 @@
 	export let threshold;
 	export let stickyTopDesktop;
 	export let stickyTopMobile;
+	export let activationMode = 'exit';
+	export let activationLine = 0;
+	export let exitLine = 0;
 
 	let currentStepIndex = 0;
 	let isMobile = false;
@@ -38,7 +41,7 @@
 		alt: '',
 		caption: '',
 		slideFromBottom: true,
-		travelDistance: '45vh',
+		travelDistance: 'auto',
 		cardVisibility: 'card',
 		stickyTop: undefined,
 		stickyTopMobile: undefined,
@@ -48,12 +51,21 @@
 		backgroundTransitionEasing: 'cubic-bezier(0.4, 0, 0.2, 1)'
 	};
 
+	const normalizeTravelDistance = (value) => {
+		if (value == null) return DEFAULT_STEP.travelDistance;
+		if (typeof value === 'string') {
+			const trimmed = value.trim();
+			return trimmed ? trimmed : DEFAULT_STEP.travelDistance;
+		}
+		return value;
+	};
+
 	const buildStep = (step = {}) => {
 		const merged = { ...DEFAULT_STEP, ...step };
 		return {
 			...merged,
 			slideFromBottom: step.slideFromBottom ?? DEFAULT_STEP.slideFromBottom,
-			travelDistance: step.travelDistance || DEFAULT_STEP.travelDistance
+			travelDistance: normalizeTravelDistance(step.travelDistance)
 		};
 	};
 
@@ -142,6 +154,17 @@
 	$: baseStickyTopMobile = stickyTopMobile ?? (hasHeaderBefore ? DEFAULT_MOBILE_STICKY : '0px');
 
 	$: effectiveThreshold = typeof threshold === 'number' ? threshold : 0;
+	const clampRatio = (value, fallback = 0) => {
+		if (value === null || value === undefined || value === '') return fallback;
+		const numeric = typeof value === 'string' ? parseFloat(value) : value;
+		if (Number.isNaN(numeric)) return fallback;
+		return Math.min(1, Math.max(0, numeric));
+	};
+
+	$: resolvedActivationMode =
+		(activationMode || 'exit').toString().toLowerCase() === 'enter' ? 'enter' : 'exit';
+	$: resolvedActivationLine = clampRatio(activationLine, 0);
+	$: resolvedExitLine = clampRatio(exitLine, 0);
 
 	function getStickyTop(step, mobile) {
 		if (!step) return mobile ? baseStickyTopMobile : baseStickyTopDesktop;
@@ -225,6 +248,9 @@
 		top={0}
 		bottom={1}
 		threshold={effectiveThreshold}
+		activationRatio={resolvedActivationLine}
+		exitRatio={resolvedExitLine}
+		advanceMode={resolvedActivationMode}
 		bind:index={currentStepIndex}
 		bind:progress={scrollProgress}
 		bind:offset={stepOffset}
@@ -272,7 +298,7 @@
 							defaultStickyTopMobile={getStickyTop(step, true)}
 							progress={i === currentStepIndex ? stepOffset : i < currentStepIndex ? 1 : 0}
 							slideFromBottom={step.slideFromBottom ?? true}
-							travelDistance={step.travelDistance || '45vh'}
+							travelDistance={step.travelDistance}
 						/>
 					{:else}
 						<!-- Mantém o comportamento original para compatibilidade COM POSITION -->
@@ -292,7 +318,7 @@
 							maxWidth={step.maxWidth}
 							maxWidthMobile={step.maxWidthMobile}
 							slideFromBottom={step.slideFromBottom ?? true}
-							travelDistance={step.travelDistance || '45vh'}
+							travelDistance={step.travelDistance}
 							progress={i === currentStepIndex ? stepOffset : i < currentStepIndex ? 1 : 0}
 							cardVisibility={step.cardVisibility}
 						/>

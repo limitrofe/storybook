@@ -9,6 +9,9 @@
 	export let flourishUrl = ''; // Alias para src
 	export let flourishHeight = '500px';
 	export let layout = 'split';
+	export let activationMode = 'exit';
+	export let activationLine = 0;
+	export let exitLine = 0;
 
 	// Resolver src
 	$: actualSrc = src || flourishUrl;
@@ -16,6 +19,16 @@
 	let currentStepIndex = 0;
 	let previousStepIndex = 0;
 	let stepOffset = 0;
+
+	const DEFAULT_TRAVEL_DISTANCE = 'auto';
+	const normalizeTravelDistance = (value) => {
+		if (value == null) return DEFAULT_TRAVEL_DISTANCE;
+		if (typeof value === 'string') {
+			const trimmed = value.trim();
+			return trimmed ? trimmed : DEFAULT_TRAVEL_DISTANCE;
+		}
+		return value;
+	};
 
 	const normalizeStep = (step = {}) => ({
 		slide: typeof step.slide === 'number' ? step.slide : Number.parseInt(step.slide ?? 0, 10) || 0,
@@ -31,7 +44,7 @@
 		maxWidthMobile: step.maxWidthMobile || '',
 		variant: step.variant || '',
 		slideFromBottom: step.slideFromBottom ?? true,
-		travelDistance: step.travelDistance || '45vh',
+		travelDistance: normalizeTravelDistance(step.travelDistance),
 		cardVisibility: step.cardVisibility || 'card'
 	});
 
@@ -63,6 +76,18 @@
 			stepsLength: normalizedSteps.length
 		});
 	}
+
+	const clampRatio = (value, fallback = 0) => {
+		if (value === null || value === undefined || value === '') return fallback;
+		const numeric = typeof value === 'string' ? parseFloat(value) : value;
+		if (Number.isNaN(numeric)) return fallback;
+		return Math.min(1, Math.max(0, numeric));
+	};
+
+	$: resolvedActivationMode =
+		(activationMode || 'exit').toString().toLowerCase() === 'enter' ? 'enter' : 'exit';
+	$: resolvedActivationLine = clampRatio(activationLine, 0);
+	$: resolvedExitLine = clampRatio(exitLine, 0);
 </script>
 
 {#if actualSrc && normalizedSteps.length > 0}
@@ -71,6 +96,9 @@
 			top={0}
 			bottom={1}
 			threshold={0}
+			activationRatio={resolvedActivationLine}
+			exitRatio={resolvedExitLine}
+			advanceMode={resolvedActivationMode}
 			bind:index={currentStepIndex}
 			bind:offset={stepOffset}
 		>
@@ -96,7 +124,7 @@
 						maxWidth={normalizedSteps[i]?.maxWidth || ''}
 						maxWidthMobile={normalizedSteps[i]?.maxWidthMobile || ''}
 						slideFromBottom={normalizedSteps[i]?.slideFromBottom ?? true}
-						travelDistance={normalizedSteps[i]?.travelDistance || '45vh'}
+						travelDistance={normalizedSteps[i]?.travelDistance}
 						progress={i === currentStepIndex ? stepOffset : i < currentStepIndex ? 1 : 0}
 						cardVisibility={normalizedSteps[i]?.cardVisibility || 'card'}
 						active={i === currentStepIndex}

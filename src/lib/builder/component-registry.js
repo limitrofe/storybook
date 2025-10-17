@@ -1569,7 +1569,7 @@ export const componentRegistry = [
 					maxWidthMobile: '92%',
 					cardVisibility: 'card',
 					slideFromBottom: true,
-					travelDistance: '45vh',
+					travelDistance: 'auto',
 					image: '',
 					imageMobile: '',
 					video: '',
@@ -1578,7 +1578,10 @@ export const componentRegistry = [
 					caption: ''
 				}
 			],
-			fullWidth: false
+			fullWidth: false,
+			activationMode: 'exit',
+			activationLine: 0,
+			exitLine: 0
 		},
 		fields: [
 			{
@@ -1586,7 +1589,35 @@ export const componentRegistry = [
 				label: 'Passos do scrollytelling',
 				type: 'scrolly-steps'
 			},
-			{ path: 'fullWidth', label: 'Ocupar largura total', type: 'boolean' }
+			{ path: 'fullWidth', label: 'Ocupar largura total', type: 'boolean' },
+			{
+				path: 'activationMode',
+				label: 'Trocar passo quando',
+				type: 'select',
+				options: [
+					{ label: 'Quando o próximo card encosta no topo', value: 'enter' },
+					{ label: 'Quando o card atual sai da tela', value: 'exit' }
+				],
+				description: 'Defina o momento em que o fundo e os passos avançam.'
+			},
+			{
+				path: 'activationLine',
+				label: 'Linha de ativação (0-1)',
+				type: 'number',
+				min: 0,
+				max: 1,
+				step: 0.05,
+				description: 'Posição vertical usada como linha-guia. 0 = topo da viewport.'
+			},
+			{
+				path: 'exitLine',
+				label: 'Linha de saída (0-1)',
+				type: 'number',
+				min: 0,
+				max: 1,
+				step: 0.05,
+				description: 'Para o modo "sair da tela", define onde o card precisa passar. 0 = topo.'
+			}
 		]
 	},
 	{
@@ -1693,7 +1724,10 @@ export const componentRegistry = [
 		defaultData: {
 			type: 'flourish-scrolly',
 			src: 'https://flo.uri.sh/story/12345/embed',
-			steps: []
+			steps: [],
+			activationMode: 'exit',
+			activationLine: 0,
+			exitLine: 0
 		},
 		fields: [
 			{ path: 'src', label: 'URL do story Flourish', type: 'url', required: true },
@@ -1703,6 +1737,31 @@ export const componentRegistry = [
 				type: 'flourish-scrolly-steps',
 				description: 'Adicione cards de texto e associe a um slide do story Flourish.',
 				emptyValue: []
+			},
+			{
+				path: 'activationMode',
+				label: 'Trocar passo quando',
+				type: 'select',
+				options: [
+					{ label: 'Quando o próximo card encosta no topo', value: 'enter' },
+					{ label: 'Quando o card atual sai da tela', value: 'exit' }
+				]
+			},
+			{
+				path: 'activationLine',
+				label: 'Linha de ativação (0-1)',
+				type: 'number',
+				min: 0,
+				max: 1,
+				step: 0.05
+			},
+			{
+				path: 'exitLine',
+				label: 'Linha de saída (0-1)',
+				type: 'number',
+				min: 0,
+				max: 1,
+				step: 0.05
 			}
 		]
 	},

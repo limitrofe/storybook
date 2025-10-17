@@ -30,7 +30,7 @@
 		backgroundColor: overrides.backgroundColor || '',
 		textColor: overrides.textColor || '',
 		slideFromBottom: overrides.slideFromBottom ?? true,
-		travelDistance: overrides.travelDistance || '45vh',
+		travelDistance: overrides.travelDistance || 'auto',
 		cardVisibility: overrides.cardVisibility || 'card',
 		...clone(overrides)
 	});
@@ -191,11 +191,14 @@
 						<span>Distância da animação</span>
 						<input
 							type="text"
-							value={step.travelDistance || '45vh'}
-							placeholder="ex: 45vh"
+							value={step.travelDistance || 'auto'}
+							placeholder="ex: fixed:85vh"
 							on:input={(event) => updateStep(index, 'travelDistance', event.currentTarget.value)}
 						/>
-						<small>Use unidades como px ou vh. Padrão: 45vh.</small>
+						<small>
+							Padrão: <code>auto</code>. Para definir um deslocamento fixo, use
+							<code>fixed:80vh</code>, <code>fixed:500px</code> etc.
+						</small>
 					</label>
 				</div>
 

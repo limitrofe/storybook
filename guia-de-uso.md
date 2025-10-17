@@ -159,6 +159,24 @@ Tenha certeza de que as credenciais no `project.config.js` (ou `.env`) estão co
 
 ### 9.1 Biblioteca premium de presets
 
+## 10. Templates prontos (estilo Awwwards)
+
+Os novos modelos ficam em `static/data/templates/`. Para usar no builder:
+
+1. Copie o JSON desejado para `static/data/story.json` (ou utilize o botão **Importar story** no builder e cole o conteúdo).
+2. Atualize mídias, textos e animações conforme a pauta.
+3. Gere os assets necessários (frames, imagens otimizadas, vídeos) antes de publicar.
+
+Modelos disponíveis (sem uso de gráficos D3):
+
+- `static/data/templates/awwwards-aurora-imersiva.json`: hero em vídeo + scrollytelling com cards de vidro e parallax, ideal para grandes especiais multimídia.
+- `static/data/templates/awwwards-grid-modular.json`: hero minimalista, grid responsivo, carrossel e bloco de itens relacionados para matérias multi-capítulos.
+- `static/data/templates/awwwards-chronicle-timeline.json`: linha do tempo dramática combinada com visualizador de documentos anotados.
+- `static/data/templates/awwwards-retratos-imersivos.json`: header caótico com collage, apresentação de personagens e curiosidades animadas.
+- `static/data/templates/awwwards-scrolly-frames.json`: sequência de frames controlada pelo scroll, bloco híbrido e comparador antes/depois.
+
+> Dica: o template de scrolly frames espera arquivos nomeados como `frame_0001.jpg` em `static/img/frames/desktop/` e `static/img/frames/mobile/`. Gere esses frames com `npm run extract:all` ou carregue seus próprios assets no CDN.
+
 - No inspetor do builder há uma biblioteca de presets avançados (“Hero Rise Timeline”, “Cards Cascade”, “Parallax Drift”, “Mask Reveal Gallery”, “Cards 3D Tilt”, “Scroll Pin Reveal”, “Neon Glow Pulse” etc.).
 - Cada cartão aplica uma ou mais animações prontas (incluindo timelines, efeitos 3D, parallax com `scrollTrigger` e loops). Se precisar, edite os seletores depois de aplicar para adequar ao markup do bloco.
 - Os presets continuam sendo configs GSAP normais, então você pode mesclar com animações manuais, alterar durações, adicionar `stagger`, trocar easings, incluir novas etapas na timeline e salvar variações personalizadas.
@@ -185,84 +203,84 @@ Tenha certeza de que as credenciais no `project.config.js` (ou `.env`) estão co
 - O preset **Scroll Keyhole Reveal** replica o efeito do CodePen (overlay abrindo enquanto a seta some). Para usá-lo:
   - Nas configurações do projeto, ative **Overlay keyhole (efeito CodePen)** e ajuste cor/posição da seta se necessário.
   - Insira no topo da página (pode ser via bloco Livre ou Snippet global) os elementos:
-     ```html
-     <span class="keyhole" aria-hidden="true"></span>
-     <span class="arrow" aria-hidden="true">
-     	<svg
-     		width="20"
-     		height="20"
-     		viewBox="-5 -5 30 30"
-     		fill="none"
-     		xmlns="http://www.w3.org/2000/svg"
-     	>
-     		<path
-     			d="M0 10H20L10 0M20 10L10 20"
-     			stroke-width="4"
-     			stroke-linecap="square"
-     			stroke-linejoin="round"
-     		/>
-     	</svg>
-     </span>
-     ```
+    ```html
+    <span class="keyhole" aria-hidden="true"></span>
+    <span class="arrow" aria-hidden="true">
+    	<svg
+    		width="20"
+    		height="20"
+    		viewBox="-5 -5 30 30"
+    		fill="none"
+    		xmlns="http://www.w3.org/2000/svg"
+    	>
+    		<path
+    			d="M0 10H20L10 0M20 10L10 20"
+    			stroke-width="4"
+    			stroke-linecap="square"
+    			stroke-linejoin="round"
+    		/>
+    	</svg>
+    </span>
+    ```
   - Adicione o CSS (ajuste cores/tamanhos conforme a matéria):
-     ```css
-     .keyhole {
-     	position: fixed;
-     	inset: 0;
-     	pointer-events: none;
-     	background: #fdcb6e; /* cor do overlay */
-     	clip-path: polygon(
-     		0% 0%,
-     		0% 100%,
-     		0% 100%,
-     		0% 0%,
-     		100% 0%,
-     		100% 100%,
-     		0% 100%,
-     		0% 100%,
-     		100% 100%,
-     		100% 0%
-     	);
-     	z-index: 50;
-     }
-     .arrow {
-     	position: fixed;
-     	top: 75vh;
-     	left: 50%;
-     	transform: translateX(-50%);
-     	z-index: 51;
-     	animation: keyhole-arrow-float 1s ease-in-out infinite alternate;
-     }
-     .arrow svg {
-     	width: 2rem;
-     	height: auto;
-     	transform: rotate(90deg);
-     	stroke: #2d3436;
-     }
-     @keyframes keyhole-arrow-float {
-     	from {
-     		transform: translate(-50%, -50%);
-     	}
-     	to {
-     		transform: translate(-50%, 50%);
-     	}
-     }
-     ```
+    ```css
+    .keyhole {
+    	position: fixed;
+    	inset: 0;
+    	pointer-events: none;
+    	background: #fdcb6e; /* cor do overlay */
+    	clip-path: polygon(
+    		0% 0%,
+    		0% 100%,
+    		0% 100%,
+    		0% 0%,
+    		100% 0%,
+    		100% 100%,
+    		0% 100%,
+    		0% 100%,
+    		100% 100%,
+    		100% 0%
+    	);
+    	z-index: 50;
+    }
+    .arrow {
+    	position: fixed;
+    	top: 75vh;
+    	left: 50%;
+    	transform: translateX(-50%);
+    	z-index: 51;
+    	animation: keyhole-arrow-float 1s ease-in-out infinite alternate;
+    }
+    .arrow svg {
+    	width: 2rem;
+    	height: auto;
+    	transform: rotate(90deg);
+    	stroke: #2d3436;
+    }
+    @keyframes keyhole-arrow-float {
+    	from {
+    		transform: translate(-50%, -50%);
+    	}
+    	to {
+    		transform: translate(-50%, 50%);
+    	}
+    }
+    ```
   - Aplique o preset **Scroll Keyhole Reveal** ao primeiro bloco da página e ajuste os seletores `trigger` (por padrão ele usa `.story-section:first-of-type`).
 - O preset já configura o `clip-path` animado e a seta com `scrub`. Caso a página tenha outra estrutura, edite os campos `targets` e `scrollTrigger` após aplicar o preset.
 
-## 10. Solução de problemas
+## 11. Solução de problemas
 
 - **Erro em deploy (401/403)**: verifique usuário/senha em `project.config.js` ou `.env`. Garante que o `projectName` não tem espaços.
 - **ffmpeg não encontrado**: instale via `brew install ffmpeg` (macOS) ou `sudo apt install ffmpeg` (Linux). No Windows, use o pacote oficial e adicione ao PATH.
 - **Builder sem estilos**: confirme que `npm install` foi executado e que o modo builder (`npm run builder`) está ativo.
 - **Problemas com `npm install`**: limpe com `rm -rf node_modules package-lock.json` e instale novamente.
 
-## 11. Anexo – Implementação VideoScrolly
+## 12. Anexo – Implementação VideoScrolly
 
 As instruções a seguir detalham como registrar o componente `ScrollyFrames` e mapear novos tipos no renderer. Elas são úteis quando você estiver montando histórias com scrollytelling avançado.
 
-### 11.1 Criar o componente
+### 12.1 Criar o componente
 
 Copie o arquivo `ScrollyFrames.svelte` (artifact) para o caminho:
 
@@ -270,7 +288,7 @@ Copie o arquivo `ScrollyFrames.svelte` (artifact) para o caminho:
 src/lib/components/story/ScrollyFrames.svelte
 ```
 
-### 11.2 Atualizar `StoryRenderer.svelte`
+### 12.2 Atualizar `StoryRenderer.svelte`
 
 ```javascript
 import ScrollyFrames from './story/ScrollyFrames.svelte';
@@ -295,7 +313,7 @@ import ScrollyFrames from './story/ScrollyFrames.svelte';
   />
 ```
 
-### 11.3 Atualizar `getComponentType`
+### 12.3 Atualizar `getComponentType`
 
 ```javascript
 // VideoScrollytelling NOVO
@@ -305,7 +323,7 @@ import ScrollyFrames from './story/ScrollyFrames.svelte';
 'video-scrolly': 'video-scrolly-new',
 ```
 
-### 11.4 Ajustar `storyRenderer.js`
+### 12.4 Ajustar `storyRenderer.js`
 
 ```javascript
 case 'videoscrollytelling':
@@ -329,7 +347,7 @@ case 'video-scrolly':
   break;
 ```
 
-### 11.5 Teste rápido
+### 12.5 Teste rápido
 
 Crie um JSON de teste e sirva com `npm run dev` para validar o comportamento, conforme instruções do trecho acima.
 

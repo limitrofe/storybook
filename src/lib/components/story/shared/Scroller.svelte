@@ -68,6 +68,9 @@
 	export let threshold = 0.1;
 	export let query = 'section';
 	export let parallax = false;
+	export let activationRatio = 0;
+	export let exitRatio = 0;
+	export let advanceMode = 'enter'; // 'enter' | 'exit'
 	// bindings
 	export let index = 0;
 	export let count = 0;
@@ -80,6 +83,7 @@
 	let background;
 	let left;
 	let sections;
+	let sectionContents = [];
 	let wh = 0;
 	let fixed;
 	let offset_top = 0;
@@ -89,7 +93,7 @@
 	$: top_px = Math.round(top * wh);
 	$: bottom_px = Math.round(bottom * wh);
 	$: threshold_px = Math.round(threshold * wh);
-	$: (top, bottom, threshold, parallax, update());
+	$: (top, bottom, threshold, parallax, activationRatio, exitRatio, advanceMode, update());
 
 	$: style = `
         position: ${fixed ? 'fixed' : 'absolute'};
@@ -101,6 +105,9 @@
 	$: widthStyle = fixed ? `width:${width}px;` : '';
 	onMount(() => {
 		sections = foreground.querySelectorAll(query);
+		sectionContents = Array.from(sections).map((section) =>
+			section.querySelector('[data-step-content]')
+		);
 		count = sections.length;
 
 		update();
@@ -112,6 +119,30 @@
 	});
 	function update() {
 		if (!foreground) return;
+		if (!sections || !sections.length) return;
+		if (sectionContents.length !== sections.length) {
+			sectionContents = Array.from(sections).map((section) =>
+				section.querySelector('[data-step-content]')
+			);
+		}
+
+		const normalizeRatio = (value, fallback = 0) => {
+			if (value === null || value === undefined) return fallback;
+			const numeric = typeof value === 'string' ? parseFloat(value) : value;
+			if (Number.isNaN(numeric)) return fallback;
+			return Math.min(1, Math.max(0, numeric));
+		};
+
+		const activationRatioValue = normalizeRatio(activationRatio, 0);
+
+		const getRects = (idx) => {
+			const section = sections?.[idx];
+			if (!section) return null;
+			const containerRect = section.getBoundingClientRect();
+			const contentEl = sectionContents[idx];
+			const contentRect = contentEl ? contentEl.getBoundingClientRect() : containerRect;
+			return { containerRect, contentRect };
+		};
 
 		const bcr = outer.getBoundingClientRect();
 		left = bcr.left;
@@ -152,23 +183,51 @@
 
 		if (!sections.length) return;
 
-		const activationLine = top_px + threshold_px;
-		let activeIndex = 0;
-		let activeRect = null;
+		const available_space_safe = Math.max(0, bottom_px - top_px);
+		const activationLineRaw = top_px + threshold_px + activationRatioValue * available_space_safe;
+		const activationLine = Math.round(Math.min(bottom_px, Math.max(top_px, activationLineRaw)));
+
+		let candidateIndex = 0;
+		let candidateRects = getRects(0);
 
 		for (let i = 0; i < sections.length; i++) {
-			const rect = sections[i].getBoundingClientRect();
-			if (rect.top <= activationLine) {
-				activeIndex = i;
-				activeRect = rect;
+			const rects = getRects(i);
+			if (!rects) continue;
+			const targetRect = rects.contentRect || rects.containerRect;
+			if (targetRect.bottom <= activationLine && targetRect.top <= activationLine) {
+				candidateIndex = i;
+				candidateRects = rects;
 			}
 		}
 
-		index = activeIndex;
+		const viewportHeight = wh || (typeof window !== 'undefined' ? window.innerHeight || 0 : 0);
 
-		if (activeRect) {
-			const height = activeRect.height || 1;
-			const progressRaw = (activationLine - activeRect.top) / height;
+		let nextIndex = candidateIndex;
+
+		const currentRects = getRects(index);
+		const currentContentRect = currentRects?.contentRect || currentRects?.containerRect || null;
+		let rectForOffset = candidateRects?.contentRect || candidateRects?.containerRect || null;
+
+		if (!rectForOffset) {
+			rectForOffset = currentContentRect;
+		}
+
+		const contentStillVisible =
+			currentContentRect &&
+			viewportHeight > 0 &&
+			currentContentRect.bottom > 0 &&
+			currentContentRect.top < viewportHeight;
+
+		if (advanceMode === 'exit' && contentStillVisible) {
+			nextIndex = index;
+			rectForOffset = currentContentRect || rectForOffset;
+		}
+
+		index = nextIndex;
+
+		if (rectForOffset) {
+			const height = rectForOffset.height || 1;
+			const progressRaw = (activationLine - rectForOffset.top) / height;
 			offset = Math.max(0, Math.min(1, progressRaw));
 		}
 	}

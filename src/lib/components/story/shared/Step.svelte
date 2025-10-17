@@ -1,4 +1,9 @@
 <script>
+	import { onDestroy, onMount } from 'svelte';
+
+	const DYNAMIC_TOKENS = new Set(['auto', 'dynamic', 'viewport', 'full', '45vh', 'default']);
+	const FALLBACK_DYNAMIC_TRAVEL = '80vh';
+
 	export let stepText;
 	export let i;
 	export let length;
@@ -16,12 +21,95 @@
 	export let cardVisibility = 'card'; // card | transparent | hidden
 	export let progress = null;
 	export let slideFromBottom = true;
-	export let travelDistance = '45vh';
+	export let travelDistance = 'auto';
+
+	let stepContent;
+	let resizeObserver;
+	let dynamicTravelDistance = null;
+
+	const parsePx = (value) => {
+		if (!value) return 0;
+		const parsed = parseFloat(value);
+		return Number.isNaN(parsed) ? 0 : parsed;
+	};
+
+	const clamp = (value, min = 0, max = 1) => Math.max(min, Math.min(max, value));
+
+	const resolveFixedTravel = (value) => {
+		if (typeof value !== 'string') return value;
+		const trimmed = value.trim();
+		if (!trimmed) return FALLBACK_DYNAMIC_TRAVEL;
+
+		if (trimmed.startsWith('fixed:')) {
+			const extracted = trimmed.slice(6).trim();
+			return extracted || FALLBACK_DYNAMIC_TRAVEL;
+		}
+
+		if (trimmed.startsWith('fixed(') && trimmed.endsWith(')')) {
+			const extracted = trimmed.slice(6, -1).trim();
+			return extracted || FALLBACK_DYNAMIC_TRAVEL;
+		}
+
+		return value;
+	};
+
+	$: normalizedTravel =
+		typeof travelDistance === 'string' ? travelDistance.trim().toLowerCase() : travelDistance;
+	$: shouldUseDynamicTravel =
+		slideFromBottom && (!travelDistance || DYNAMIC_TOKENS.has(normalizedTravel));
+
+	const getViewportHeight = () => (typeof window !== 'undefined' ? window.innerHeight || 0 : 0);
+
+	const computeDynamicTravel = () => {
+		if (!stepContent || !shouldUseDynamicTravel) return;
+
+		const viewportHeight = getViewportHeight();
+		const rect = stepContent.getBoundingClientRect();
+		const styles = getComputedStyle(stepContent);
+		const stickyTopPx = parsePx(styles.top);
+		const safetyGap = viewportHeight >= 768 ? 32 : 20;
+		const available = viewportHeight - stickyTopPx - rect.height - safetyGap;
+		const travelPx = Math.max(0, Math.round(available));
+		dynamicTravelDistance = `${travelPx}px`;
+	};
+
+	const handleResize = () => computeDynamicTravel();
+
+	onMount(() => {
+		if (typeof ResizeObserver !== 'undefined') {
+			resizeObserver = new ResizeObserver(() => computeDynamicTravel());
+			if (stepContent) {
+				resizeObserver.observe(stepContent);
+			}
+		}
+
+		if (typeof window !== 'undefined') {
+			window.addEventListener('resize', handleResize);
+		}
+		computeDynamicTravel();
+	});
+
+	onDestroy(() => {
+		if (typeof window !== 'undefined') {
+			window.removeEventListener('resize', handleResize);
+		}
+		if (resizeObserver) {
+			resizeObserver.disconnect();
+			resizeObserver = null;
+		}
+	});
+
+	$: if (shouldUseDynamicTravel) {
+		computeDynamicTravel();
+	}
 
 	$: isTransparentCard = cardVisibility === 'transparent';
 	$: isHiddenCard = cardVisibility === 'hidden';
-	const clamp = (value, min = 0, max = 1) => Math.max(min, Math.min(max, value));
-	$: effectiveTravelDistance = slideFromBottom ? travelDistance || '45vh' : '0vh';
+	$: effectiveTravelDistance = slideFromBottom
+		? shouldUseDynamicTravel
+			? dynamicTravelDistance || FALLBACK_DYNAMIC_TRAVEL
+			: resolveFixedTravel(travelDistance) || FALLBACK_DYNAMIC_TRAVEL
+		: '0px';
 	$: computedProgress = progress != null ? clamp(progress) : active ? 1 : 0;
 	$: styleVars = [
 		backgroundColor ? `--step-bg-color:${backgroundColor}` : '',
@@ -53,8 +141,10 @@
 	{#if !isHiddenCard}
 		<div
 			class="step-content"
+			bind:this={stepContent}
 			class:destaque={variant === 'destaque'}
 			class:transparent-card={isTransparentCard}
+			data-step-content
 			style={styleVars}
 		>
 			{@html stepText}
@@ -66,10 +156,10 @@
 	.step-container {
 		display: flex;
 		align-items: center;
-		min-height: var(--step-container-min-height, calc(100vh + var(--step-travel, 45vh)));
+		min-height: var(--step-container-min-height, calc(100vh + var(--step-travel, 80vh)));
 		padding: 0 5vw;
 		padding-top: var(--step-container-padding-top, 0);
-		padding-bottom: var(--step-container-padding-bottom, calc(var(--step-travel, 45vh) + 15vh));
+		padding-bottom: var(--step-container-padding-bottom, calc(var(--step-travel, 80vh) + 15vh));
 		opacity: 0;
 		pointer-events: none;
 		visibility: hidden;
@@ -140,18 +230,18 @@
 		min-height: 0;
 		padding-bottom: var(
 			--step-container-padding-bottom-last,
-			calc(var(--step-travel, 45vh) + 25vh)
+			calc(var(--step-travel, 80vh) + 25vh)
 		);
 	}
 
 	@media (max-width: 768px) {
 		.step-container {
 			justify-content: center !important; /* Mobile sempre centralizado */
-			min-height: var(--step-container-min-height-mobile, calc(100vh + var(--step-travel, 45vh)));
+			min-height: var(--step-container-min-height-mobile, calc(100vh + var(--step-travel, 80vh)));
 			padding-top: var(--step-container-padding-top-mobile, 0);
 			padding-bottom: var(
 				--step-container-padding-bottom-mobile,
-				calc(var(--step-travel, 45vh) + 15vh)
+				calc(var(--step-travel, 80vh) + 15vh)
 			);
 		}
 
@@ -163,7 +253,7 @@
 		.step-container.hidden-card {
 			padding-bottom: var(
 				--step-container-padding-bottom-hidden,
-				calc(var(--step-travel, 45vh) + 10vh)
+				calc(var(--step-travel, 80vh) + 10vh)
 			);
 		}
 	}

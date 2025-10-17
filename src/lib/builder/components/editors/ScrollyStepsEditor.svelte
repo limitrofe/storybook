@@ -25,7 +25,7 @@
 		maxWidthMobile: '92%',
 		cardVisibility: 'card',
 		slideFromBottom: true,
-		travelDistance: '45vh',
+		travelDistance: 'auto',
 		image: '',
 		imageMobile: '',
 		video: '',
@@ -252,11 +252,14 @@
 						<span>Distância da animação</span>
 						<input
 							type="text"
-							value={step.travelDistance || '45vh'}
-							placeholder="ex: 45vh"
+							value={step.travelDistance || 'auto'}
+							placeholder="ex: fixed:85vh"
 							on:input={(event) => updateStep(index, 'travelDistance', event.currentTarget.value)}
 						/>
-						<small>Use unidades como px ou vh. Padrão: 45vh.</small>
+						<small>
+							Padrão: <code>auto</code> (card cruza a viewport inteira). Para travar um valor
+							específico, use <code>fixed:80vh</code> ou <code>fixed:480px</code>.
+						</small>
 					</label>
 				</div>
 
