@@ -42,6 +42,10 @@
 		imageMobile: '',
 		video: '',
 		videoMobile: '',
+		backgroundImage: '',
+		backgroundImageMobile: '',
+		backgroundVideo: '',
+		backgroundVideoMobile: '',
 		alt: '',
 		caption: '',
 		slideFromBottom: true,
@@ -250,8 +254,17 @@
 		const preset = TRANSITION_PRESETS[transitionKey] || DEFAULT_TRANSITION_PRESET;
 		const transitionDuration = step.backgroundTransitionDuration || DEFAULT_TRANSITION_DURATION;
 		const transitionEasing = step.backgroundTransitionEasing || DEFAULT_TRANSITION_EASING;
+		const backgroundMedia = isMobile
+			? step.backgroundImageMobile || step.backgroundImage
+			: step.backgroundImage || step.backgroundImageMobile;
+		const backgroundVideoSource = isMobile
+			? step.backgroundVideoMobile || step.backgroundVideo
+			: step.backgroundVideo || step.backgroundVideoMobile;
 		const styleParts = [
 			`background:${step.backgroundColor ?? '#000'}`,
+			backgroundMedia ? `background-image:url(${backgroundMedia})` : '',
+			backgroundMedia ? 'background-size:cover' : '',
+			backgroundMedia ? 'background-position:center center' : '',
 			`--media-transform-inactive:${preset.inactive}`,
 			`--media-transform-active:${preset.active}`,
 			`--media-transform-origin:${preset.origin || 'center center'}`,
@@ -269,6 +282,8 @@
 			transitionKey: transitionKey || 'fade',
 			transitionDuration,
 			transitionEasing,
+			backgroundMedia,
+			backgroundVideoSource,
 			style: styleParts.join(';')
 		};
 	});
@@ -302,6 +317,16 @@
 					style={media.style}
 					data-transition={media.transitionKey}
 				>
+					{#if media.backgroundVideoSource}
+						<video
+							class="media-background-video"
+							src={media.backgroundVideoSource}
+							autoplay
+							muted
+							loop
+							playsinline
+						></video>
+					{/if}
 					{#if media.type === 'image' && media.src}
 						<img src={media.src} alt={media.alt} loading="lazy" />
 					{:else if media.type === 'video' && media.src}
@@ -434,6 +459,15 @@
 		height: 100%;
 		object-fit: cover;
 		z-index: 1;
+	}
+
+	.media-background-video {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		z-index: 0;
 	}
 
 	.media-wrapper video {

@@ -1574,6 +1574,10 @@ export const componentRegistry = [
 					imageMobile: '',
 					video: '',
 					videoMobile: '',
+					backgroundImage: '',
+					backgroundImageMobile: '',
+					backgroundVideo: '',
+					backgroundVideoMobile: '',
 					alt: '',
 					caption: ''
 				}
