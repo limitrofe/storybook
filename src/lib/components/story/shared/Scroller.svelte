@@ -187,16 +187,35 @@
 		const activationLineRaw = top_px + threshold_px + activationRatioValue * available_space_safe;
 		const activationLine = Math.round(Math.min(bottom_px, Math.max(top_px, activationLineRaw)));
 
-		let candidateIndex = 0;
-		let candidateRects = getRects(0);
+		const normalizedIndex = Math.max(0, Math.min(index, sections.length - 1));
+		const previousIndex = normalizedIndex;
+		let candidateIndex = previousIndex;
+		let candidateRects = getRects(previousIndex);
+		if (!candidateRects) {
+			candidateIndex = 0;
+			candidateRects = getRects(0);
+		}
 
 		for (let i = 0; i < sections.length; i++) {
 			const rects = getRects(i);
 			if (!rects) continue;
-			const targetRect = rects.contentRect || rects.containerRect;
-			if (targetRect.bottom <= activationLine && targetRect.top <= activationLine) {
-				candidateIndex = i;
-				candidateRects = rects;
+			if (i > normalizedIndex) {
+				const nextRect = rects.contentRect || rects.containerRect;
+				if (candidateRects) {
+					const currentTop =
+						candidateRects.contentRect?.top ?? candidateRects.containerRect?.top ?? 0;
+					const nextTop = nextRect?.top ?? 0;
+					if (Math.abs(nextTop - activationLine) < Math.abs(currentTop - activationLine)) {
+						candidateIndex = i;
+						candidateRects = rects;
+					}
+				}
+			} else {
+				const targetRect = rects.contentRect || rects.containerRect;
+				if (targetRect.top <= activationLine) {
+					candidateIndex = i;
+					candidateRects = rects;
+				}
 			}
 		}
 
@@ -204,7 +223,7 @@
 
 		let nextIndex = candidateIndex;
 
-		const currentRects = getRects(index);
+		const currentRects = getRects(normalizedIndex);
 		const currentContentRect = currentRects?.contentRect || currentRects?.containerRect || null;
 		let rectForOffset = candidateRects?.contentRect || candidateRects?.containerRect || null;
 

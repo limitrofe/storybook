@@ -17,6 +17,10 @@
 	let currentStepIndex = 0;
 	let isMobile = false;
 	let scrollProgress = 0;
+	let containerElement;
+	let resizeObserver;
+	let viewportWidth = 0;
+	let containerWidth = 0;
 
 	const DEFAULT_DESKTOP_STICKY = 'min(0, 0px)';
 	const DEFAULT_MOBILE_STICKY = '4vh';
@@ -174,16 +178,49 @@
 		return step.stickyTop ?? baseStickyTopDesktop;
 	}
 
+	const computeIsMobile = () => {
+		const effectiveWidth = containerWidth || viewportWidth || 0;
+		isMobile = effectiveWidth > 0 ? effectiveWidth <= 768 : false;
+	};
+
 	onMount(() => {
-		const checkScreenSize = () => {
-			isMobile = window.innerWidth <= 768;
-		};
-		checkScreenSize();
-		window.addEventListener('resize', checkScreenSize);
+		if (typeof ResizeObserver !== 'undefined') {
+			resizeObserver = new ResizeObserver((entries) => {
+				if (!entries?.length) return;
+				const width = entries[0].contentRect?.width;
+				if (width !== undefined) {
+					containerWidth = width;
+					computeIsMobile();
+				}
+			});
+			if (containerElement) {
+				resizeObserver.observe(containerElement);
+			}
+		} else {
+			containerWidth = containerElement ? containerElement.clientWidth || 0 : 0;
+		}
+
+		computeIsMobile();
+
 		return () => {
-			window.removeEventListener('resize', checkScreenSize);
+			if (resizeObserver) {
+				resizeObserver.disconnect();
+				resizeObserver = undefined;
+			}
 		};
 	});
+
+	$: if (containerElement) {
+		if (resizeObserver) {
+			resizeObserver.observe(containerElement);
+		} else {
+			const width = containerElement.clientWidth || 0;
+			if (width !== containerWidth) {
+				containerWidth = width;
+			}
+		}
+	}
+	$: computeIsMobile();
 
 	$: activeMediaIndex = renderedSteps.length
 		? Math.max(0, Math.min(currentStepIndex, renderedSteps.length - 1))
@@ -243,7 +280,9 @@
 	let stepOffset = 0;
 </script>
 
-<div class="scrolly-container" class:fullWidth>
+<svelte:window bind:innerWidth={viewportWidth} />
+
+<div class="scrolly-container" class:fullWidth bind:this={containerElement}>
 	<Scroller
 		top={0}
 		bottom={1}

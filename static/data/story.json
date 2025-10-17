@@ -312,6 +312,35 @@
       "subtitleFontSizeMobile": "",
       "subtitleLineHeightDesktop": "",
       "subtitleLineHeightMobile": "",
+      "titleShadow": {
+        "enabled": false,
+        "offsetX": "0px",
+        "offsetY": "10px",
+        "blur": "18px",
+        "spread": "",
+        "color": "rgba(15, 23, 42, 0.55)"
+      },
+      "titleColor": "#5a0e3c",
+      "subtitleColor": "#5a0e3c",
+      "overlayGradient": "top-to-bottom",
+      "metaColor": "",
+      "onMediaColor": "",
+      "subtitleShadow": {
+        "enabled": false,
+        "offsetX": "0px",
+        "offsetY": "2px",
+        "blur": "12px",
+        "spread": "",
+        "color": "rgba(15, 23, 42, 0.45)"
+      },
+      "metaShadow": {
+        "enabled": false,
+        "offsetX": "0px",
+        "offsetY": "2px",
+        "blur": "10px",
+        "spread": "",
+        "color": "rgba(15, 23, 42, 0.35)"
+      },
       "section": {
         "backgroundSource": "image",
         "backgroundColor": "",
@@ -324,17 +353,7 @@
         "textColor": "",
         "paddingTop": "0",
         "paddingBottom": "0"
-      },
-      "titleShadow": {
-        "enabled": false,
-        "offsetX": "0px",
-        "offsetY": "10px",
-        "blur": "18px",
-        "spread": "",
-        "color": "rgba(15, 23, 42, 0.55)"
-      },
-      "titleColor": "#5a0e3c",
-      "subtitleColor": "#5a0e3c"
+      }
     },
     {
       "type": "globo-player",
@@ -388,6 +407,34 @@
       "subtitleFontSizeMobile": "",
       "subtitleLineHeightDesktop": "",
       "subtitleLineHeightMobile": "",
+      "textAlignMobile": "center",
+      "height": "6vh",
+      "heightMobile": "6vh",
+      "minimalAccentColor": "",
+      "minimalAccentWidthDesktop": "",
+      "minimalAccentWidthMobile": "",
+      "minimalAccentHeightDesktop": "",
+      "minimalAccentHeightMobile": "",
+      "titleShadow": {
+        "enabled": false,
+        "offsetX": "0px",
+        "offsetY": "3px",
+        "blur": "18px",
+        "spread": "",
+        "color": "rgba(15, 23, 42, 0.55)"
+      },
+      "subtitleShadow": {
+        "enabled": false,
+        "offsetX": "0px",
+        "offsetY": "2px",
+        "blur": "12px",
+        "spread": "",
+        "color": "rgba(15, 23, 42, 0.45)"
+      },
+      "titleFontWeight": "",
+      "titleFontStyle": "",
+      "subtitleFontWeight": "",
+      "subtitleFontStyle": "",
       "section": {
         "backgroundSource": "color",
         "backgroundColor": "#f3334a",
@@ -400,10 +447,7 @@
         "textColor": "#bfff39",
         "paddingTop": "2rem",
         "paddingBottom": "0rem"
-      },
-      "textAlignMobile": "center",
-      "height": "6vh",
-      "heightMobile": "6vh"
+      }
     },
     {
       "type": "texto",
@@ -416,6 +460,21 @@
       "lineHeightDesktop": "",
       "lineHeightMobile": "",
       "textColor": "",
+      "horizontalPosition": "center",
+      "verticalPosition": "top",
+      "maxWidthDesktop": "",
+      "maxWidthMobile": "",
+      "widthDesktop": "",
+      "widthMobile": "",
+      "containerWidth": "",
+      "containerWidthDesktop": "",
+      "containerWidthMobile": "",
+      "containerMaxWidth": "",
+      "containerMaxWidthDesktop": "",
+      "containerMaxWidthMobile": "",
+      "containerMinHeight": "",
+      "containerMinHeightDesktop": "",
+      "containerMinHeightMobile": "",
       "section": {
         "backgroundSource": "color",
         "backgroundColor": "#f3334a",
@@ -428,9 +487,7 @@
         "textColor": "#ffffff",
         "paddingTop": "2rem",
         "paddingBottom": "2rem"
-      },
-      "horizontalPosition": "center",
-      "verticalPosition": "top"
+      }
     },
     {
       "type": "flourish-scrolly",
@@ -455,7 +512,7 @@
           "backgroundColor": "#ef374d",
           "textColor": "#ffffff",
           "slideFromBottom": true,
-          "travelDistance": "45vh",
+          "travelDistance": "a",
           "cardVisibility": "card"
         },
         {
@@ -569,6 +626,109 @@
           "cardVisibility": "hidden"
         }
       ],
+      "activationMode": "exit",
+      "activationLine": 0,
+      "exitLine": 0,
+      "section": {
+        "backgroundSource": "color",
+        "backgroundColor": "",
+        "backgroundImageDesktop": "",
+        "backgroundImageMobile": "",
+        "backgroundVideoDesktop": "",
+        "backgroundVideoMobile": "",
+        "backgroundVideoPosterDesktop": "",
+        "backgroundVideoPosterMobile": "",
+        "textColor": "",
+        "paddingTop": "",
+        "paddingBottom": ""
+      }
+    },
+    {
+      "type": "scrolly",
+      "steps": [
+        {
+          "title": "Título do passo teste",
+          "text": "<p>Descreva o momento desta passagem.sadf asdfalksdjf;laksdjf;lakjsdf;lkajsdfl;kajdfs</p>",
+          "position": "right",
+          "variant": "default",
+          "backgroundColor": "rgba(15, 23, 42, 0.82)",
+          "overlayColor": "rgba(0, 0, 0, 0.35)",
+          "textColor": "#F9FAFB",
+          "accentColor": "#C4170C",
+          "borderColor": "rgba(255, 255, 255, 0.12)",
+          "padding": "2rem",
+          "maxWidth": "460px",
+          "maxWidthMobile": "92%",
+          "cardVisibility": "card",
+          "slideFromBottom": true,
+          "travelDistance": "auto",
+          "image": "https://public.flourish.studio/uploads/1148125/dba2a01a-da46-427c-a92e-49c36f3e6bf0.webp",
+          "imageMobile": "https://public.flourish.studio/uploads/1148125/dba2a01a-da46-427c-a92e-49c36f3e6bf0.webp",
+          "video": "",
+          "videoMobile": "",
+          "alt": "",
+          "caption": "",
+          "backgroundTransition": "fade",
+          "backgroundTransitionDuration": "600ms",
+          "backgroundTransitionEasing": "cubic-bezier(0.4, 0, 0.2, 1)"
+        },
+        {
+          "title": "Título do passo",
+          "text": "<p>Descreva o momento desta passagem.sadf asdfalksdjf;laksdjf;lakjsdf;lkajsdfl;kajdfs</p>",
+          "position": "right",
+          "variant": "default",
+          "backgroundColor": "rgba(15, 23, 42, 0.82)",
+          "overlayColor": "rgba(0, 0, 0, 0.35)",
+          "textColor": "#F9FAFB",
+          "accentColor": "#C4170C",
+          "borderColor": "rgba(255, 255, 255, 0.12)",
+          "padding": "2rem",
+          "maxWidth": "460px",
+          "maxWidthMobile": "92%",
+          "cardVisibility": "card",
+          "slideFromBottom": true,
+          "travelDistance": "auto",
+          "image": "https://s3.glbimg.com/v1/AUTH_8b29beb0cbe247a296f902be2fe084b6/2025/html/gshow/3gracas/logo-3-gracas-desk.png",
+          "imageMobile": "https://s3.glbimg.com/v1/AUTH_8b29beb0cbe247a296f902be2fe084b6/2025/html/gshow/3gracas/logo-3-gracas-mob.png",
+          "video": "",
+          "videoMobile": "",
+          "alt": "",
+          "caption": "",
+          "backgroundTransition": "fade",
+          "backgroundTransitionDuration": "600ms",
+          "backgroundTransitionEasing": "cubic-bezier(0.4, 0, 0.2, 1)"
+        },
+        {
+          "title": "",
+          "text": "",
+          "position": "right",
+          "variant": "default",
+          "backgroundColor": "rgba(15, 23, 42, 0.82)",
+          "overlayColor": "rgba(0, 0, 0, 0.35)",
+          "textColor": "#F9FAFB",
+          "accentColor": "#C4170C",
+          "borderColor": "rgba(255, 255, 255, 0.12)",
+          "padding": "2rem",
+          "maxWidth": "460px",
+          "maxWidthMobile": "92%",
+          "cardVisibility": "card",
+          "slideFromBottom": true,
+          "travelDistance": "auto",
+          "image": "https://s3.glbimg.com/v1/AUTH_8b29beb0cbe247a296f902be2fe084b6/2025/html/gshow/3gracas/logo-3-gracas-desk.png",
+          "imageMobile": "https://s3.glbimg.com/v1/AUTH_8b29beb0cbe247a296f902be2fe084b6/2025/html/gshow/3gracas/logo-3-gracas-mob.png",
+          "video": "",
+          "videoMobile": "",
+          "alt": "",
+          "caption": "",
+          "backgroundTransition": "fade",
+          "backgroundTransitionDuration": "600ms",
+          "backgroundTransitionEasing": "cubic-bezier(0.4, 0, 0.2, 1)"
+        }
+      ],
+      "fullWidth": false,
+      "activationMode": "exit",
+      "activationLine": 0,
+      "exitLine": 0,
       "section": {
         "backgroundSource": "color",
         "backgroundColor": "",
@@ -607,6 +767,32 @@
       "titleFontStyle": "",
       "subtitleFontWeight": "",
       "subtitleFontStyle": "",
+      "textAlignMobile": "center",
+      "height": "4vh",
+      "heightMobile": "4vh",
+      "backgroundImage": "",
+      "backgroundImageMobile": "",
+      "minimalAccentColor": "",
+      "minimalAccentWidthDesktop": "",
+      "minimalAccentWidthMobile": "",
+      "minimalAccentHeightDesktop": "",
+      "minimalAccentHeightMobile": "",
+      "titleShadow": {
+        "enabled": false,
+        "offsetX": "0px",
+        "offsetY": "3px",
+        "blur": "18px",
+        "spread": "",
+        "color": "rgba(15, 23, 42, 0.55)"
+      },
+      "subtitleShadow": {
+        "enabled": false,
+        "offsetX": "0px",
+        "offsetY": "2px",
+        "blur": "12px",
+        "spread": "",
+        "color": "rgba(15, 23, 42, 0.45)"
+      },
       "section": {
         "backgroundSource": "color",
         "backgroundColor": "#d7ceaf",
@@ -619,12 +805,7 @@
         "textColor": "#bfff39",
         "paddingTop": "2rem",
         "paddingBottom": "0rem"
-      },
-      "textAlignMobile": "center",
-      "height": "4vh",
-      "heightMobile": "4vh",
-      "backgroundImage": "",
-      "backgroundImageMobile": ""
+      }
     },
     {
       "type": "carousel",
@@ -699,6 +880,30 @@
       "titleFontStyle": "",
       "subtitleFontWeight": "",
       "subtitleFontStyle": "",
+      "textAlignMobile": "center",
+      "height": "6vh",
+      "heightMobile": "6vh",
+      "minimalAccentColor": "",
+      "minimalAccentWidthDesktop": "",
+      "minimalAccentWidthMobile": "",
+      "minimalAccentHeightDesktop": "",
+      "minimalAccentHeightMobile": "",
+      "titleShadow": {
+        "enabled": false,
+        "offsetX": "0px",
+        "offsetY": "3px",
+        "blur": "18px",
+        "spread": "",
+        "color": "rgba(15, 23, 42, 0.55)"
+      },
+      "subtitleShadow": {
+        "enabled": false,
+        "offsetX": "0px",
+        "offsetY": "2px",
+        "blur": "12px",
+        "spread": "",
+        "color": "rgba(15, 23, 42, 0.45)"
+      },
       "section": {
         "backgroundSource": "color",
         "backgroundColor": "#bd0558",
@@ -711,10 +916,7 @@
         "textColor": "#bfff39",
         "paddingTop": "2rem",
         "paddingBottom": "0rem"
-      },
-      "textAlignMobile": "center",
-      "height": "6vh",
-      "heightMobile": "6vh"
+      }
     },
     {
       "type": "intertitulo",
@@ -740,6 +942,30 @@
       "titleFontStyle": "",
       "subtitleFontWeight": "",
       "subtitleFontStyle": "",
+      "textAlignMobile": "center",
+      "height": "6vh",
+      "heightMobile": "6vh",
+      "minimalAccentColor": "",
+      "minimalAccentWidthDesktop": "",
+      "minimalAccentWidthMobile": "",
+      "minimalAccentHeightDesktop": "",
+      "minimalAccentHeightMobile": "",
+      "titleShadow": {
+        "enabled": false,
+        "offsetX": "0px",
+        "offsetY": "3px",
+        "blur": "18px",
+        "spread": "",
+        "color": "rgba(15, 23, 42, 0.55)"
+      },
+      "subtitleShadow": {
+        "enabled": false,
+        "offsetX": "0px",
+        "offsetY": "2px",
+        "blur": "12px",
+        "spread": "",
+        "color": "rgba(15, 23, 42, 0.45)"
+      },
       "section": {
         "backgroundSource": "color",
         "backgroundColor": "#84283c",
@@ -752,10 +978,7 @@
         "textColor": "#bfff39",
         "paddingTop": "2rem",
         "paddingBottom": "0rem"
-      },
-      "textAlignMobile": "center",
-      "height": "6vh",
-      "heightMobile": "6vh"
+      }
     },
     {
       "type": "free-canvas",
@@ -1775,6 +1998,9 @@
       "titleFontStyle": "",
       "subtitleFontWeight": "",
       "subtitleFontStyle": "",
+      "textAlignMobile": "center",
+      "height": "6vh",
+      "heightMobile": "6vh",
       "section": {
         "backgroundSource": "color",
         "backgroundColor": "#84283c",
@@ -1787,10 +2013,7 @@
         "textColor": "#bfff39",
         "paddingTop": "2rem",
         "paddingBottom": "0rem"
-      },
-      "textAlignMobile": "center",
-      "height": "6vh",
-      "heightMobile": "6vh"
+      }
     },
     {
       "type": "free-canvas",
@@ -2342,6 +2565,9 @@
       "titleFontStyle": "",
       "subtitleFontWeight": "",
       "subtitleFontStyle": "",
+      "textAlignMobile": "center",
+      "height": "6vh",
+      "heightMobile": "6vh",
       "section": {
         "backgroundSource": "color",
         "backgroundColor": "#84283c",
@@ -2354,10 +2580,7 @@
         "textColor": "#bfff39",
         "paddingTop": "2rem",
         "paddingBottom": "0rem"
-      },
-      "textAlignMobile": "center",
-      "height": "6vh",
-      "heightMobile": "6vh"
+      }
     },
     {
       "type": "free-canvas",
@@ -3044,6 +3267,30 @@
       "titleFontStyle": "",
       "subtitleFontWeight": "",
       "subtitleFontStyle": "",
+      "textAlignMobile": "center",
+      "height": "6vh",
+      "heightMobile": "6vh",
+      "minimalAccentColor": "",
+      "minimalAccentWidthDesktop": "",
+      "minimalAccentWidthMobile": "",
+      "minimalAccentHeightDesktop": "",
+      "minimalAccentHeightMobile": "",
+      "titleShadow": {
+        "enabled": false,
+        "offsetX": "0px",
+        "offsetY": "3px",
+        "blur": "18px",
+        "spread": "",
+        "color": "rgba(15, 23, 42, 0.55)"
+      },
+      "subtitleShadow": {
+        "enabled": false,
+        "offsetX": "0px",
+        "offsetY": "2px",
+        "blur": "12px",
+        "spread": "",
+        "color": "rgba(15, 23, 42, 0.45)"
+      },
       "section": {
         "backgroundSource": "color",
         "backgroundColor": "#84283c",
@@ -3056,10 +3303,7 @@
         "textColor": "#bfff39",
         "paddingTop": "2rem",
         "paddingBottom": "0rem"
-      },
-      "textAlignMobile": "center",
-      "height": "6vh",
-      "heightMobile": "6vh"
+      }
     },
     {
       "type": "free-canvas",
@@ -3590,6 +3834,30 @@
       "titleFontStyle": "",
       "subtitleFontWeight": "",
       "subtitleFontStyle": "",
+      "textAlignMobile": "center",
+      "height": "6vh",
+      "heightMobile": "6vh",
+      "minimalAccentColor": "",
+      "minimalAccentWidthDesktop": "",
+      "minimalAccentWidthMobile": "",
+      "minimalAccentHeightDesktop": "",
+      "minimalAccentHeightMobile": "",
+      "titleShadow": {
+        "enabled": false,
+        "offsetX": "0px",
+        "offsetY": "3px",
+        "blur": "18px",
+        "spread": "",
+        "color": "rgba(15, 23, 42, 0.55)"
+      },
+      "subtitleShadow": {
+        "enabled": false,
+        "offsetX": "0px",
+        "offsetY": "2px",
+        "blur": "12px",
+        "spread": "",
+        "color": "rgba(15, 23, 42, 0.45)"
+      },
       "section": {
         "backgroundSource": "color",
         "backgroundColor": "#84283c",
@@ -3602,10 +3870,7 @@
         "textColor": "#bfff39",
         "paddingTop": "2rem",
         "paddingBottom": "0rem"
-      },
-      "textAlignMobile": "center",
-      "height": "6vh",
-      "heightMobile": "6vh"
+      }
     },
     {
       "type": "free-canvas",
@@ -4469,6 +4734,9 @@
       "titleFontStyle": "",
       "subtitleFontWeight": "",
       "subtitleFontStyle": "",
+      "textAlignMobile": "center",
+      "height": "6vh",
+      "heightMobile": "6vh",
       "section": {
         "backgroundSource": "color",
         "backgroundColor": "#84283c",
@@ -4481,10 +4749,7 @@
         "textColor": "#bfff39",
         "paddingTop": "2rem",
         "paddingBottom": "0rem"
-      },
-      "textAlignMobile": "center",
-      "height": "6vh",
-      "heightMobile": "6vh"
+      }
     },
     {
       "type": "free-canvas",
@@ -5504,6 +5769,9 @@
       "titleFontStyle": "",
       "subtitleFontWeight": "",
       "subtitleFontStyle": "",
+      "textAlignMobile": "center",
+      "height": "6vh",
+      "heightMobile": "6vh",
       "section": {
         "backgroundSource": "color",
         "backgroundColor": "#84283c",
@@ -5516,10 +5784,7 @@
         "textColor": "#bfff39",
         "paddingTop": "2rem",
         "paddingBottom": "0rem"
-      },
-      "textAlignMobile": "center",
-      "height": "6vh",
-      "heightMobile": "6vh"
+      }
     },
     {
       "type": "free-canvas",
@@ -6227,6 +6492,9 @@
       "titleFontStyle": "",
       "subtitleFontWeight": "",
       "subtitleFontStyle": "",
+      "textAlignMobile": "center",
+      "height": "6vh",
+      "heightMobile": "6vh",
       "section": {
         "backgroundSource": "color",
         "backgroundColor": "#84283c",
@@ -6239,10 +6507,7 @@
         "textColor": "#bfff39",
         "paddingTop": "2rem",
         "paddingBottom": "0rem"
-      },
-      "textAlignMobile": "center",
-      "height": "6vh",
-      "heightMobile": "6vh"
+      }
     },
     {
       "type": "free-canvas",
@@ -7085,6 +7350,30 @@
       "titleFontStyle": "",
       "subtitleFontWeight": "",
       "subtitleFontStyle": "",
+      "textAlignMobile": "center",
+      "height": "6vh",
+      "heightMobile": "6vh",
+      "minimalAccentColor": "",
+      "minimalAccentWidthDesktop": "",
+      "minimalAccentWidthMobile": "",
+      "minimalAccentHeightDesktop": "",
+      "minimalAccentHeightMobile": "",
+      "titleShadow": {
+        "enabled": false,
+        "offsetX": "0px",
+        "offsetY": "3px",
+        "blur": "18px",
+        "spread": "",
+        "color": "rgba(15, 23, 42, 0.55)"
+      },
+      "subtitleShadow": {
+        "enabled": false,
+        "offsetX": "0px",
+        "offsetY": "2px",
+        "blur": "12px",
+        "spread": "",
+        "color": "rgba(15, 23, 42, 0.45)"
+      },
       "section": {
         "backgroundSource": "color",
         "backgroundColor": "#68172e",
@@ -7097,10 +7386,7 @@
         "textColor": "#bfff39",
         "paddingTop": "2rem",
         "paddingBottom": "0rem"
-      },
-      "textAlignMobile": "center",
-      "height": "6vh",
-      "heightMobile": "6vh"
+      }
     },
     {
       "type": "flourish-scrolly",
@@ -7195,6 +7481,9 @@
           "cardVisibility": "card"
         }
       ],
+      "activationMode": "exit",
+      "activationLine": 0,
+      "exitLine": 0,
       "section": {
         "backgroundSource": "color",
         "backgroundColor": "",

@@ -19,19 +19,21 @@
 
 {#if src}
 	<div class="embed-container">
-		<div class="w-full flex items-center">
-			<figure class="w-full" in:fade={{ duration: 1000 }}>
-				<iframe
-					src={embedUrl}
-					title="Interactive visual content"
-					class="flourish-embed-iframe"
-					frameborder="0"
-					scrolling="no"
-					style="width:100%;height:100%;"
-					sandbox="allow-same-origin allow-forms allow-scripts allow-downloads allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"
-				/>
-			</figure>
-		</div>
+		{#key embedUrl}
+			<div class="w-full flex items-center">
+				<figure class="w-full" in:fade={{ duration: 400 }}>
+					<iframe
+						src={embedUrl}
+						title="Interactive visual content"
+						class="flourish-embed-iframe"
+						frameborder="0"
+						scrolling="no"
+						style="width:100%;height:100%;"
+						sandbox="allow-same-origin allow-forms allow-scripts allow-downloads allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"
+					/>
+				</figure>
+			</div>
+		{/key}
 	</div>
 {:else}
 	<div class="embed-fallback">
