@@ -225,7 +225,8 @@
 
 		const currentRects = getRects(normalizedIndex);
 		const currentContentRect = currentRects?.contentRect || currentRects?.containerRect || null;
-		let rectForOffset = candidateRects?.contentRect || candidateRects?.containerRect || null;
+		const currentContainerRect = currentRects?.containerRect || currentRects?.contentRect || null;
+		let rectForOffset = candidateRects?.containerRect || candidateRects?.contentRect || null;
 
 		if (!rectForOffset) {
 			rectForOffset = currentContentRect;
@@ -237,9 +238,10 @@
 			currentContentRect.bottom > 0 &&
 			currentContentRect.top < viewportHeight;
 
-		if (advanceMode === 'exit' && contentStillVisible) {
-			nextIndex = index;
-			rectForOffset = currentContentRect || rectForOffset;
+		const isCandidateAhead = candidateIndex >= normalizedIndex;
+		if (advanceMode === 'exit' && contentStillVisible && isCandidateAhead) {
+			nextIndex = normalizedIndex;
+			rectForOffset = currentContainerRect || rectForOffset;
 		}
 
 		index = nextIndex;

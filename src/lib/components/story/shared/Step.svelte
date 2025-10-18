@@ -20,7 +20,7 @@
 	export let stickyTop = '';
 	export let cardVisibility = 'card'; // card | transparent | hidden
 	export let progress = null;
-	export let slideFromBottom = true;
+export let slideFromBottom = false;
 	export let travelDistance = 'auto';
 
 	let stepContent;
@@ -35,10 +35,10 @@
 
 	const clamp = (value, min = 0, max = 1) => Math.max(min, Math.min(max, value));
 
-	const resolveFixedTravel = (value) => {
-		if (typeof value !== 'string') return value;
-		const trimmed = value.trim();
-		if (!trimmed) return FALLBACK_DYNAMIC_TRAVEL;
+const resolveFixedTravel = (value) => {
+	if (typeof value !== 'string') return value;
+	const trimmed = value.trim();
+	if (!trimmed) return FALLBACK_DYNAMIC_TRAVEL;
 
 		if (trimmed.startsWith('fixed:')) {
 			const extracted = trimmed.slice(6).trim();
@@ -50,8 +50,22 @@
 			return extracted || FALLBACK_DYNAMIC_TRAVEL;
 		}
 
-		return value;
-	};
+	return value;
+};
+
+const ensureFullOpacity = (value) => {
+	if (typeof value !== 'string') return value;
+	const trimmed = value.trim();
+	const rgbaMatch = trimmed.match(/^rgba\(\s*([^)]+)\)$/i);
+	if (!rgbaMatch) return trimmed;
+	const channels = rgbaMatch[1]
+		.split(',')
+		.map((channel) => channel.trim())
+		.filter(Boolean);
+	if (channels.length < 3) return trimmed;
+	const [r, g, b] = channels;
+	return `rgba(${r}, ${g}, ${b}, 1)`;
+};
 
 	$: normalizedTravel =
 		typeof travelDistance === 'string' ? travelDistance.trim().toLowerCase() : travelDistance;
@@ -67,9 +81,10 @@
 		const rect = stepContent.getBoundingClientRect();
 		const styles = getComputedStyle(stepContent);
 		const stickyTopPx = parsePx(styles.top);
-		const safetyGap = viewportHeight >= 768 ? 32 : 20;
-		const available = viewportHeight - stickyTopPx - rect.height - safetyGap;
-		const travelPx = Math.max(0, Math.round(available));
+		const safetyGap = viewportHeight >= 768 ? 48 : 32;
+		const availableAboveSticky = Math.max(0, viewportHeight - stickyTopPx);
+		const overflow = Math.max(0, rect.height - availableAboveSticky);
+		const travelPx = Math.max(availableAboveSticky + overflow + safetyGap, availableAboveSticky);
 		dynamicTravelDistance = `${travelPx}px`;
 	};
 
@@ -111,8 +126,12 @@
 			: resolveFixedTravel(travelDistance) || FALLBACK_DYNAMIC_TRAVEL
 		: '0px';
 	$: computedProgress = progress != null ? clamp(progress) : active ? 1 : 0;
+	$: resolvedBackgroundColor =
+		typeof backgroundColor === 'string' && backgroundColor.trim()
+			? ensureFullOpacity(backgroundColor)
+			: backgroundColor;
 	$: styleVars = [
-		backgroundColor ? `--step-bg-color:${backgroundColor}` : '',
+		resolvedBackgroundColor ? `--step-bg-color:${resolvedBackgroundColor}` : '',
 		textColor ? `--step-text-color:${textColor}` : '',
 		accentColor ? `--step-heading-color:${accentColor}` : '',
 		accentColor ? `--step-accent-color:${accentColor}` : '',
@@ -160,18 +179,11 @@
 		padding: 0 5vw;
 		padding-top: var(--step-container-padding-top, 0);
 		padding-bottom: var(--step-container-padding-bottom, calc(var(--step-travel, 80vh) + 15vh));
-		opacity: 0;
-		pointer-events: none;
-		visibility: hidden;
-	}
-
-	.step-container.active {
-		opacity: 1;
 		pointer-events: auto;
 		visibility: visible;
 	}
 
-	.step-container.hidden-card.active {
+	.step-container.hidden-card {
 		pointer-events: none;
 	}
 	/* NOVO: Posicionamentos baseados na classe */
@@ -200,12 +212,12 @@
 		box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
 		position: sticky;
 		top: var(--step-sticky-top, min(0vh, 0px));
-		transform: var(--step-transform, none);
-		transition: transform 0.45s ease-out;
+		transform: none;
+		will-change: auto;
 	}
 
 	.step-content.transparent-card {
-		background-color: transparent !important;
+		/* background-color: transparent !important; */
 		border: none;
 		box-shadow: none;
 		backdrop-filter: none;
@@ -248,6 +260,7 @@
 		.step-content {
 			max-width: var(--step-max-width-mobile, 90%);
 			top: var(--step-sticky-top, 12vh);
+			will-change: transform;
 		}
 
 		.step-container.hidden-card {

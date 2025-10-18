@@ -190,15 +190,16 @@
 					/>
 				</label>
 
-				<label>
-					<span>Texto (HTML permitido)</span>
+				<div class="field rich-text">
+					<label id={`scrolly-step-text-label-${index}`}>Texto (HTML permitido)</label>
 					<RichTextEditor
 						value={step.text || ''}
 						rows={4}
 						placeholder="Conteúdo do step"
+						ariaLabelledby={`scrolly-step-text-label-${index}`}
 						on:change={(event) => updateStep(index, 'text', event.detail.value)}
 					/>
-				</label>
+				</div>
 
 				<div class="grid">
 					<label>
@@ -567,12 +568,23 @@
 		gap: 0.75rem;
 	}
 
-	label {
+	label,
+	.field {
 		display: flex;
 		flex-direction: column;
 		gap: 0.35rem;
 		font-size: 0.8rem;
 		color: #334155;
+	}
+
+	.field.rich-text {
+		gap: 0.5rem;
+	}
+
+	.field.rich-text > label {
+		font-weight: 600;
+		font-size: 0.8rem;
+		color: #1e293b;
 	}
 
 	label.color-control > span {

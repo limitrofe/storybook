@@ -1,5 +1,5 @@
 <script>
-	import { onMount } from 'svelte';
+	import { onMount, tick } from 'svelte';
 	import Scroller from './shared/Scroller.svelte';
 	import Step from './shared/Step.svelte';
 	import StepEnhanced from './shared/StepEnhanced.svelte';
@@ -17,6 +17,8 @@
 	let currentStepIndex = 0;
 	let isMobile = false;
 	let scrollProgress = 0;
+let previousMediaIndex = -1;
+let disableAutoVideoControl = false;
 	let containerElement;
 	let resizeObserver;
 	let viewportWidth = 0;
@@ -48,7 +50,7 @@
 		backgroundVideoMobile: '',
 		alt: '',
 		caption: '',
-		slideFromBottom: true,
+		slideFromBottom: false,
 		travelDistance: 'auto',
 		cardVisibility: 'card',
 		stickyTop: undefined,
@@ -72,7 +74,7 @@
 		const merged = { ...DEFAULT_STEP, ...step };
 		return {
 			...merged,
-			slideFromBottom: step.slideFromBottom ?? DEFAULT_STEP.slideFromBottom,
+			slideFromBottom: false,
 			travelDistance: normalizeTravelDistance(step.travelDistance)
 		};
 	};
@@ -130,33 +132,9 @@
 	const DEFAULT_TRANSITION_DURATION = DEFAULT_STEP.backgroundTransitionDuration;
 	const DEFAULT_TRANSITION_EASING = DEFAULT_STEP.backgroundTransitionEasing;
 
-	function cloneTextConfig(config) {
-		if (!config) return undefined;
-		const cloned = { ...config };
-		if (Array.isArray(config.elements)) {
-			cloned.elements = config.elements.map((element) => ({ ...element }));
-		}
-		return cloned;
-	}
-
-	function createIntroStep(step) {
-		if (!step) return null;
-		return {
-			...step,
-			textConfig: cloneTextConfig(step.textConfig),
-			cardVisibility: 'hidden',
-			slideFromBottom: false,
-			travelDistance: '0vh',
-			stickyTop: undefined,
-			stickyTopMobile: undefined,
-			__introStep: true
-		};
-	}
-
 	$: normalizedSteps =
 		Array.isArray(steps) && steps.length ? steps.map((step) => buildStep(step)) : [buildStep()];
-	$: introStep = normalizedSteps.length ? createIntroStep(normalizedSteps[0]) : null;
-	$: renderedSteps = introStep ? [introStep, ...normalizedSteps] : normalizedSteps;
+	$: renderedSteps = normalizedSteps;
 
 	$: baseStickyTopDesktop = stickyTopDesktop ?? (hasHeaderBefore ? DEFAULT_DESKTOP_STICKY : '0px');
 	$: baseStickyTopMobile = stickyTopMobile ?? (hasHeaderBefore ? DEFAULT_MOBILE_STICKY : '0px');
@@ -188,6 +166,14 @@
 	};
 
 	onMount(() => {
+		if (typeof window !== 'undefined') {
+			disableAutoVideoControl = window.location?.pathname?.includes('/builder');
+			if (!disableAutoVideoControl) {
+				window.addEventListener('pointerdown', handlePointerDown, true);
+				window.addEventListener('pointerup', handlePointerUp, true);
+			}
+		}
+
 		if (typeof ResizeObserver !== 'undefined') {
 			resizeObserver = new ResizeObserver((entries) => {
 				if (!entries?.length) return;
@@ -207,6 +193,11 @@
 		computeIsMobile();
 
 		return () => {
+			if (typeof window !== 'undefined' && !disableAutoVideoControl) {
+				window.removeEventListener('pointerdown', handlePointerDown, true);
+				window.removeEventListener('pointerup', handlePointerUp, true);
+			}
+
 			if (resizeObserver) {
 				resizeObserver.disconnect();
 				resizeObserver = undefined;
@@ -293,6 +284,99 @@
 	}
 
 	let stepOffset = 0;
+
+const isFormElement = (element) => {
+	if (!element) return false;
+	let current = element;
+	while (current) {
+		if (current instanceof HTMLInputElement) return true;
+		if (current instanceof HTMLTextAreaElement) return true;
+		if (current instanceof HTMLSelectElement) return true;
+		if (current instanceof HTMLButtonElement) return true;
+		if (current.getAttribute?.('role') === 'textbox') return true;
+		if (current.isContentEditable) return true;
+		current = current.parentElement;
+	}
+	return false;
+};
+
+const getStepVideoElement = (index) => {
+	if (disableAutoVideoControl) return null;
+	if (index == null || index < 0) return null;
+	return containerElement?.querySelector(
+		`.media-wrapper[data-step-index="${index}"] video[data-step-video]`
+	);
+};
+
+	let pointerDownOnForm = false;
+
+const isFormElementActive = () => {
+	if (typeof document === 'undefined') return false;
+	return isFormElement(document.activeElement);
+};
+
+const handlePointerDown = (event) => {
+	if (disableAutoVideoControl) return;
+	pointerDownOnForm = isFormElement(event?.target);
+};
+
+const handlePointerUp = () => {
+	if (disableAutoVideoControl) return;
+	pointerDownOnForm = false;
+};
+
+	async function handleMediaIndexChange(previousIndex, nextIndex) {
+		if (disableAutoVideoControl) return;
+		if (pointerDownOnForm || isFormElementActive()) return;
+
+		if (previousIndex !== undefined && previousIndex !== -1) {
+			const previousMedia = mediaSources?.[previousIndex];
+			if (previousMedia?.type === 'video') {
+				const previousVideo = getStepVideoElement(previousIndex);
+				if (previousVideo) {
+					try {
+						previousVideo.pause?.();
+						previousVideo.currentTime = 0;
+					} catch {
+						// ignore reset errors
+					}
+				}
+			}
+		}
+
+		await tick();
+
+		if (nextIndex === undefined || nextIndex === -1) return;
+		const nextMedia = mediaSources?.[nextIndex];
+		if (nextMedia?.type !== 'video') return;
+
+		const nextVideo = getStepVideoElement(nextIndex);
+		if (!nextVideo) return;
+
+		try {
+			nextVideo.currentTime = 0;
+			if (!pointerDownOnForm && !isFormElementActive()) {
+				const playPromise = nextVideo.play?.();
+				if (playPromise?.catch) {
+					playPromise.catch(() => {});
+				}
+			}
+		} catch {
+			// ignore playback errors (autoplay restrictions, etc.)
+		}
+	}
+
+	$: {
+		if (activeMediaIndex !== previousMediaIndex) {
+			if (disableAutoVideoControl || pointerDownOnForm || isFormElementActive()) {
+				previousMediaIndex = activeMediaIndex;
+			} else {
+				const prev = previousMediaIndex;
+				previousMediaIndex = activeMediaIndex;
+				handleMediaIndexChange(prev, activeMediaIndex);
+			}
+		}
+	}
 </script>
 
 <svelte:window bind:innerWidth={viewportWidth} />
@@ -315,6 +399,7 @@
 					class={`media-wrapper transition-${media.transitionKey || 'fade'}`}
 					class:active={i === activeMediaIndex}
 					style={media.style}
+					data-step-index={i}
 					data-transition={media.transitionKey}
 				>
 					{#if media.backgroundVideoSource}
@@ -330,7 +415,15 @@
 					{#if media.type === 'image' && media.src}
 						<img src={media.src} alt={media.alt} loading="lazy" />
 					{:else if media.type === 'video' && media.src}
-						<video src={media.src} autoplay loop muted playsinline key={media.src}></video>
+						{@key `${media.src}-${i}`}
+							<video
+								src={media.src}
+								autoplay
+								loop
+								muted
+								playsinline
+								data-step-video
+							></video>
 					{/if}
 
 					{#if media.overlayColor}

@@ -6,6 +6,7 @@
 	export let value = '';
 	export let placeholder = '';
 	export let rows = 6;
+	export let ariaLabelledby;
 
 	const dispatch = createEventDispatcher();
 	let editorEl;
@@ -438,7 +439,8 @@
 		contenteditable
 		role="textbox"
 		aria-multiline="true"
-		aria-label={placeholder}
+	aria-label={ariaLabelledby ? undefined : placeholder}
+	aria-labelledby={ariaLabelledby}
 		bind:this={editorEl}
 		data-placeholder={placeholder}
 		style={`min-height: calc(${sanitizedRows} * 1.4rem);`}

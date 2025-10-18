@@ -13,7 +13,7 @@
 	export let defaultStickyTopDesktop = 'min( 0px)';
 	export let defaultStickyTopMobile = '12vh';
 	export let progress = null;
-	export let slideFromBottom = true;
+export let slideFromBottom = false;
 	export let travelDistance = 'auto';
 
 	let stepContentElement;
@@ -53,9 +53,10 @@
 		const rect = stepContentElement.getBoundingClientRect();
 		const styles = getComputedStyle(stepContentElement);
 		const stickyTopPx = parsePx(styles.top);
-		const safetyGap = viewportHeight >= 768 ? 32 : 20;
-		const available = viewportHeight - stickyTopPx - rect.height - safetyGap;
-		const travelPx = Math.max(0, Math.round(available));
+		const safetyGap = viewportHeight >= 768 ? 48 : 32;
+		const availableAboveSticky = Math.max(0, viewportHeight - stickyTopPx);
+		const overflow = Math.max(0, rect.height - availableAboveSticky);
+		const travelPx = Math.max(availableAboveSticky + overflow + safetyGap, availableAboveSticky);
 		dynamicTravelDistance = `${travelPx}px`;
 	};
 
@@ -93,27 +94,11 @@
 	$: isTransparentCard = cardVisibility === 'transparent';
 	$: isHiddenCard = cardVisibility === 'hidden';
 
-	// Motion
+	// Motion desativado: mantém o card estático sem animação
 	const clamp = (value, min = 0, max = 1) => Math.max(min, Math.min(max, value));
-	$: effectiveSlideFromBottom = textConfig.slideFromBottom ?? slideFromBottom;
-	$: rawTravelDistance = textConfig.travelDistance ?? travelDistance;
-	$: normalizedTravel =
-		typeof rawTravelDistance === 'string'
-			? rawTravelDistance.trim().toLowerCase()
-			: rawTravelDistance;
-	$: shouldUseDynamicTravel =
-		effectiveSlideFromBottom && (!rawTravelDistance || DYNAMIC_TOKENS.has(normalizedTravel));
-
-	$: resolvedTravelDistance = effectiveSlideFromBottom
-		? shouldUseDynamicTravel
-			? dynamicTravelDistance || FALLBACK_DYNAMIC_TRAVEL
-			: resolveFixedTravel(rawTravelDistance) || FALLBACK_DYNAMIC_TRAVEL
-		: '0px';
-
-	$: if (shouldUseDynamicTravel) {
-		computeDynamicTravel();
-	}
-
+	$: effectiveSlideFromBottom = false;
+	$: shouldUseDynamicTravel = false;
+	$: resolvedTravelDistance = '0px';
 	$: stepProgress = progress != null ? clamp(progress) : active ? 1 : 0;
 
 	// Offset sticky respeitando overrides por device
@@ -149,14 +134,7 @@
 
 	$: containerStyles = {
 		...baseContainerStyles,
-		'--step-travel': resolvedTravelDistance,
-		...(effectiveSlideFromBottom
-			? {
-					'--step-progress': stepProgress,
-					'--step-transform':
-						'translateY(calc((1 - var(--step-progress, 1)) * var(--step-travel, 0px)))'
-				}
-			: {})
+		'--step-travel': resolvedTravelDistance
 	};
 
 	// Função para renderizar elementos tipográficos
@@ -292,13 +270,6 @@
 		padding: 0 5vw;
 		padding-top: var(--step-container-padding-top, 0);
 		padding-bottom: var(--step-container-padding-bottom, calc(var(--step-travel, 80vh) + 15vh));
-		opacity: 0;
-		pointer-events: none;
-		visibility: hidden;
-	}
-
-	.step-container.active {
-		opacity: 1;
 		pointer-events: auto;
 		visibility: visible;
 	}
@@ -319,8 +290,8 @@
 	.step-content {
 		width: 100%;
 		/* Backdrop filter já aplicado via style inline */
-		transform: var(--step-transform, none);
-		transition: transform 0.45s ease-out;
+		transform: none;
+		will-change: auto;
 	}
 
 	.step-content.transparent-card {
@@ -355,6 +326,7 @@
 
 		.step-content {
 			max-width: 95%;
+			will-change: transform;
 		}
 	}
 
@@ -363,6 +335,7 @@
 			--step-container-padding-bottom-hidden,
 			calc(var(--step-travel, 80vh) + 10vh)
 		);
+		pointer-events: none;
 	}
 
 	/* Estilos globais para elementos tipográficos */
