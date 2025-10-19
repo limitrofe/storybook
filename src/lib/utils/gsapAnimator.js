@@ -398,12 +398,15 @@ function applyAnimation({ gsap, ScrollTrigger, node, entry, isMobile }) {
 	}
 
 	const fromVars = mergeConfigs(resolved.from);
-	const toVars = mergeConfigs(resolved.to, {
+	const rawToVars = mergeConfigs(resolved.to);
+	const toVars = mergeConfigs(rawToVars, {
 		duration: baseDuration,
 		delay: baseDelay,
 		ease: baseEase,
 		stagger: baseStagger
 	});
+	const hasFromProps = Object.keys(fromVars).length > 0;
+	const hasToProps = Object.keys(rawToVars).length > 0;
 
 	if (maskProperty && maskValue && maskTargets.length) {
 		if (maskAnimate) {
@@ -425,7 +428,7 @@ function applyAnimation({ gsap, ScrollTrigger, node, entry, isMobile }) {
 		}
 	}
 
-	if (!Object.keys(fromVars).length && !Object.keys(toVars).length) {
+	if (!hasFromProps && !hasToProps) {
 		applyStaticMasks();
 		return null;
 	}
@@ -455,7 +458,23 @@ function applyAnimation({ gsap, ScrollTrigger, node, entry, isMobile }) {
 
 	const useObserver = shouldDefer && !ScrollTrigger && !resolved.scrollTrigger && targets.length;
 	if (useObserver) {
-		toVars.paused = true;
+		if (toVars.paused === undefined) {
+			toVars.paused = true;
+		}
+		if (hasFromProps && !hasToProps && fromVars.paused === undefined) {
+			fromVars.paused = true;
+		}
+	}
+
+	const usesScrollTrigger = Boolean(toVars.scrollTrigger);
+	if (usesScrollTrigger && hasFromProps) {
+		if (hasToProps) {
+			if (toVars.immediateRender === undefined) {
+				toVars.immediateRender = true;
+			}
+		} else if (fromVars.immediateRender === undefined) {
+			fromVars.immediateRender = true;
+		}
 	}
 
 	if (resolved.once && !resolved.scrollTrigger) {
@@ -467,9 +486,9 @@ function applyAnimation({ gsap, ScrollTrigger, node, entry, isMobile }) {
 	}
 
 	let animationInstance;
-	if (Object.keys(fromVars).length && Object.keys(toVars).length) {
+	if (hasFromProps && hasToProps) {
 		animationInstance = gsap.fromTo(targets, fromVars, toVars);
-	} else if (Object.keys(fromVars).length) {
+	} else if (hasFromProps) {
 		animationInstance = gsap.from(targets, fromVars);
 	} else {
 		animationInstance = gsap.to(targets, toVars);
